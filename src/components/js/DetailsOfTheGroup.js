@@ -209,10 +209,10 @@ root.methods.re_getTeamDetails = function (data) {
   if (this.idType == 1) {
     this.quantData = data.quantData
     console.log("拼团展示团队详情=====",this.quantData)
-    this.quantCumulative = data.data.quantData.quantCumulative,//挖矿区手续费累计
-    this.commCumulative = data.data.quantData.commCumulative,//普通区交易手续费累计
-    this.quantRecommission= data.data.quantData.quantRecommission,//挖矿区团长返佣累计
-    this.commRecommission= data.data.quantData.commRecommission//普通区团长返佣累计
+    this.quantCumulative = data.data.quantData.latestCommAmt,//挖矿区手续费累计
+    this.commCumulative = data.data.quantData.sumCommAmt,//普通区交易手续费累计
+    this.quantRecommission= data.data.quantData.latestQuantAmt,//挖矿区团长返佣累计
+    this.commRecommission= data.data.quantData.sumQuantAmt//普通区团长返佣累计
   }
 
 
