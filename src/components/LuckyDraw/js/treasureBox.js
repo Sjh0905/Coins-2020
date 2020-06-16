@@ -92,7 +92,7 @@ root.created = function () {
   }, 3000);
 
 
-  if (this.iosQuery) {
+  if (this.$route.query.isIOS) {
 
     // var postFunc = function(){
     //
