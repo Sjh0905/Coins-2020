@@ -380,7 +380,7 @@ root.orderPage.reset = '重置'
 root.orderPage.onlyCompleted = '僅完成'
 root.orderPage.currentEntrust = '當前委託'
 root.orderPage.historicalEntrust = '歷史委託'
-root.orderPage.order = '訂單'
+root.orderPage.order = '幣幣訂單'
 
 
 // 當前訂單
