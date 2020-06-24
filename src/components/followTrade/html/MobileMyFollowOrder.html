@@ -104,13 +104,15 @@
 
   <div v-if="delFollowOpen" class="forecast-activity-toast">
     <div class="forecast-activity-toast-box">
-      <div class="forecast-activity-toast-title">取消跟随 <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
-              <img class="forecast-activity-toast-close-btn-img" src="../../../components/LuckyDraw/assets/mobileForecastHomePage/close_btn.png" alt="">
-            </span>
+      <div class="forecast-activity-toast-title">取消跟随
+        <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
+          <img class="forecast-activity-toast-close-btn-img" src="../../../components/LuckyDraw/assets/mobileForecastHomePage/close_btn.png" alt="">
+        </span>
       </div>
       <div class="del-follow-text">是否取消对
         <span class="text_blue">{{followId}}</span>
-        的跟随</div>
+        的跟随
+      </div>
       <div class="forecast-activity-toast-btn" @click='delFollowList'>确 定</div>
     </div>
   </div>

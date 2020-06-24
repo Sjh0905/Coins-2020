@@ -21,29 +21,29 @@
 
       <div class="flex">
         <div class="flex follow-buw">
+          <!--累计交易量-->
           <div class="follow-wi">
             <div class="follow-bink">{{toFixed(godInfo.sum,2) || '0'}}</div>
-            <!--累计交易量-->
             <div class="follow-gru2">{{$t('totalTransactionVolume')}}</div>
           </div>
+          <!--交易笔数-->
           <div class="follow-wi">
             <div class="follow-bink">{{godInfo.count ? godInfo.count : '0'}}</div>
-            <!--交易笔数-->
             <div class="follow-gru2">{{$t('numberOfTransactions')}}</div>
           </div>
+          <!--累计跟单人数-->
           <div class="follow-wi">
             <div class="follow-bink">{{godInfo.followCount ? godInfo.followCount : '0'}}</div>
-            <!--累计跟单人数-->
             <div class="follow-gru2">{{$t('totalDocumentaryNumber')}}</div>
           </div>
+          <!--累计收益率-->
           <div class="follow-wi">
             <div class="follow-gru">{{godInfo.rate ? godInfo.rate * 10 * 10 : '0'}} %</div>
-            <!--累计收益率-->
             <div class="follow-gru2">{{$t('totalIncomeRate')}}</div>
           </div>
-
-
         </div>
+
+
         <div class="follow-btn-box">
           <div class="follow-gde">{{$route.query.fee || '0'}} USDT / {{$route.query.days  || '0'}}{{$t('days')}}</div>
           <!--跟单-->
