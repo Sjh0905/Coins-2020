@@ -60,7 +60,7 @@
           <div class="mobile-trade-item-follower-info flex-row">
             <img src="../assets/big-brother.png" class="mobile-trade-item-follower-avatar">
             <div class="mobile-trade-item-follower-uid">{{item.followId}}
-              <div class="mobile-trade-item-top-right">{{formatDateUitl(item.createdAt)}}</div>
+              <div class="mobile-trade-item-top-right">{{formatDateUitl(item.followTime)}}</div>
             </div>
           </div>
           <div class="mobile-trade-item-follower-cancle-btn" @click="delFollow(item)">取消跟随</div>
@@ -91,9 +91,9 @@
             <div class="mobile-trade-money">累计收益</div>
           </div>
           <div class="mobile-trade-item-content-container flex">
-            <div class="mobile-trade-price">{{item.amount || '--'}}</div>
-            <div class="mobile-trade-amount">{{item.count || '--'}}</div>
-            <div class="mobile-trade-money">{{item.profit || '--'}}</div>
+            <div class="mobile-trade-price">{{toFixed(item.amount,2) || '--'}}</div>
+            <div class="mobile-trade-amount">{{toFixed(item.count,2) || '--'}}</div>
+            <div class="mobile-trade-money">{{toFixed(item.profit,2) || '--'}}</div>
           </div>
         </div>
       </div>

@@ -69,7 +69,7 @@
 
       <div class="follow-asset-topic-content flex" v-for="(item,index) in followUserList" :key="index">
         <div class="UID">{{item.followId}}</div>
-        <div class="time">{{formatDateUitl(item.createdAt)}}</div>
+        <div class="time">{{formatDateUitl(item.followTime)}}</div>
         <div class="exchange-pair">{{item.symbol.replace('_','/')}}</div>
         <!--现货-->
         <div class="type">{{item.type == 'SPOT'? $t('spot'):'--'}}</div>

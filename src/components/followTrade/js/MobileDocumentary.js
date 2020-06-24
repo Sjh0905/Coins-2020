@@ -190,13 +190,14 @@ root.methods.re_commitModify = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if(data.errorCode == 0) {
     this.openPop('修改跟单成功',1)
+    setTimeout(() => {
+      this.$router.go(-1)
+    }, 2000)
   }
   if(data.errorCode == 1) {
     this.openPop('系统错误',0)
   }
-  setTimeout(() => {
-    this.$router.go(-1)
-  }, 2000)
+
 }
 root.methods.error_commitModify = function (err) {
   console.log('err======',err)
