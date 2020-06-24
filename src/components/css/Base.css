@@ -640,19 +640,19 @@ input {
   }
   .mobile-status-bar-ios {
     width: 100%;
-    height: 0.4rem;
+    height: 0.3rem;
     position: fixed;
     background: #fff;
     z-index: 100;
   }
   .mobile-status-bar-bg-ios {
     width: 100%;
-    height: 0.4rem;
+    height: 0.3rem;
     background: #fff;
     z-index: 100;
   }
   .mobile-main-content-app{
-    padding-top: 1.28rem;
+    padding-top: 1.18rem;
   }
   /*app头部 样式End*/
 }
