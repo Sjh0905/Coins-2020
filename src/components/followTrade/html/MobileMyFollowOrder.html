@@ -91,9 +91,9 @@
             <div class="mobile-trade-money">累计收益</div>
           </div>
           <div class="mobile-trade-item-content-container flex">
-            <div class="mobile-trade-price">{{toFixed(item.amount,2) || '--'}}</div>
-            <div class="mobile-trade-amount">{{toFixed(item.count,2) || '--'}}</div>
-            <div class="mobile-trade-money">{{toFixed(item.profit,2) || '--'}}</div>
+            <div class="mobile-trade-price">{{toFixed(item.count,0) || '0'}}</div>
+            <div class="mobile-trade-amount">{{toFixed(item.amount,2) || '0'}}</div>
+            <div class="mobile-trade-money">{{toFixed(item.profit,2) || '0'}}</div>
           </div>
         </div>
       </div>

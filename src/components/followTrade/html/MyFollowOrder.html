@@ -75,9 +75,9 @@
         <div class="type">{{item.type == 'SPOT'? $t('spot'):'--'}}</div>
         <!--固定金额/固定比例-->
         <div class="follow-type">{{item.followType == 'LOT'? $t('fixedAmount') +'：' + item.lot || 0 +'USDT' :$t('fixedProportion')}}</div>
-        <div class="total-acount">{{item.amount || '--'}}</div>
-        <div class="total-money">{{item.count || '--'}}</div>
-        <div class="total-income">{{item.profit || '--'}}</div>
+        <div class="total-acount">{{toFixed(item.count,0) || '0'}}</div>
+        <div class="total-money">{{toFixed(item.amount,2) || '0'}}</div>
+        <div class="total-income">{{toFixed(item.profit,2) || '0'}}</div>
         <div class="operation">
           <!--修改策略-->
           <span class="btn-size update pointer" @click="openFollowWindow(item)">{{$t('modifyPolicy')}}</span>
