@@ -91,9 +91,9 @@
             <div class="mobile-trade-money">累计收益</div>
           </div>
           <div class="mobile-trade-item-content-container flex">
-            <div class="mobile-trade-price">{{toFixed(item.amount,2) || '--'}}</div>
-            <div class="mobile-trade-amount">{{toFixed(item.count,2) || '--'}}</div>
-            <div class="mobile-trade-money">{{toFixed(item.profit,2) || '--'}}</div>
+            <div class="mobile-trade-price">{{toFixed(item.count,0) || '0'}}</div>
+            <div class="mobile-trade-amount">{{toFixed(item.amount,2) || '0'}}</div>
+            <div class="mobile-trade-money">{{toFixed(item.profit,2) || '0'}}</div>
           </div>
         </div>
       </div>
@@ -104,13 +104,15 @@
 
   <div v-if="delFollowOpen" class="forecast-activity-toast">
     <div class="forecast-activity-toast-box">
-      <div class="forecast-activity-toast-title">取消跟随 <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
-              <img class="forecast-activity-toast-close-btn-img" src="../../../components/LuckyDraw/assets/mobileForecastHomePage/close_btn.png" alt="">
-            </span>
+      <div class="forecast-activity-toast-title">取消跟随
+        <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
+          <img class="forecast-activity-toast-close-btn-img" src="../../../components/LuckyDraw/assets/mobileForecastHomePage/close_btn.png" alt="">
+        </span>
       </div>
       <div class="del-follow-text">是否取消对
         <span class="text_blue">{{followId}}</span>
-        的跟随</div>
+        的跟随
+      </div>
       <div class="forecast-activity-toast-btn" @click='delFollowList'>确 定</div>
     </div>
   </div>
