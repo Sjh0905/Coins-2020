@@ -1,0 +1,49 @@
+<div class="lock-house-record-container">
+  <div class="border_box border_radius" >
+
+    <div class="lock-house">
+      <div class="margin-balance">保证金余额</div>
+      <div class="flex">
+        <div class="margin-balance-usdt">0.000000000 <span class="margin-balance-usdt-span">USDT</span></div>
+        <div class="margin-balance-is-about"> ≈ 0.0000 CNY </div>
+      </div>
+
+      <div class="flex">
+        <div>
+          <div class="account-balance">账户余额</div>
+          <div class="flex">
+            <div class="margin-balance-usdt-balance">0.000000000 <span class="margin-balance-usdt-span-balance">USDT</span></div>
+            <div class="margin-balance-is-about-balance"> ≈ 0.0000 CNY </div>
+          </div>
+        </div>
+        <div class="account-balance2">
+          <div class="account-balance">账户余额</div>
+          <div class="flex">
+            <div class="margin-balance-usdt-balance color-gre">0.000000000 <span class="margin-balance-usdt-span-balance color-gre">USDT</span></div>
+            <div class="margin-balance-is-about-balance color-gre"> ≈ 0.0000 CNY </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lock-house-sel flex">
+      <router-link to="/index/asset/contractRecord/currentLockHouse" class="title-tab flex-center tab-item-first" active-class="selected text_blue-7">
+        {{$t('仓位')}}
+      </router-link>
+
+      <router-link to="/index/asset/contractRecord/historyLockHouse" class="title-tab flex-center margin-a-little tab-item-last"
+                   active-class="selected text_blue-7">
+        {{$t('资产')}}
+      </router-link>
+    </div>
+
+    <div class="detail-container">
+      <router-view></router-view>
+    </div>
+
+  </div>
+
+
+</div>
+
+
