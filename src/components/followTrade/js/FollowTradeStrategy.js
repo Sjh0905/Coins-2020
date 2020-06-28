@@ -21,6 +21,14 @@ root.data = function () {
     popOpen: false,
     waitTime: 2000,
 
+    godInfoList:{},
+    countFollower:'',
+    sumFee :'',
+    todayFee:'',
+    userFollowFees:[],
+
+    followDay :'',
+
     // 信息弹框
     popWindowOpen:false,
   }
@@ -40,6 +48,7 @@ root.created = function () {
       }
     }))
   }
+  this.postManage()
   this.isOpenFollow()
   this.postPersonalFollowUser()
   this.postPersonalrHistory()
@@ -50,7 +59,7 @@ root.beforeDestroy = function () {}
 root.computed = {}
 
 root.computed.isHasItem = function () {
-  if(JSON.stringify(this.godInfo) == '{}') {
+  if(JSON.stringify(this.godInfoList) == '{}') {
     return false
   }
   return true
@@ -71,6 +80,27 @@ root.computed.isAndroid = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+//个人带单管理
+root.methods.postManage = function () {
+  this.$http.send('POST_MANAGE', {
+    bind: this,
+    // params: params,
+    callBack: this.re_postManage,
+    errorHandler: this.error_postManage
+  })
+}
+root.methods.re_postManage = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  this.countFollower = data.dataMap.countFollower || '0'
+  this.sumFee = data.dataMap.sumFee || '0'
+  this.todayFee = data.dataMap.todayFee || '0'
+  this.userFollowFees = data.dataMap.userFollowFees || []
+  this.godInfoList = data.dataMap.godInfo || {}
+  this.followDay = data.dataMap.days || '0'
+}
+root.methods.error_postManage = function (err) {
+  console.log("this.err=====",err)
+}
 // 成为大神弹框
 root.methods.openTapeList = function () {
   this.popWindowOpen =true

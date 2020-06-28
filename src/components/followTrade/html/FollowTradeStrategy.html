@@ -191,6 +191,7 @@
         <div class="follow-order-pair">{{$t('subscriptionFee')}}(USDT)</div>
         <div class="follow-order-currency">
           <input v-model="currencyPair" v-if="!isHasItem" class="currency-account" onkeyup="value = value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''">
+          / {{followDay}}天
         </div>
       </div>
       <div class="mobile-open-tape-pop-window-content-text">

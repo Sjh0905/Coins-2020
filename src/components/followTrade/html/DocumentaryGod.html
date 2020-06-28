@@ -38,7 +38,7 @@
           </div>
           <!--累计收益率-->
           <div class="follow-wi">
-            <div class="follow-gru">{{godInfo.rate ? godInfo.rate * 10 * 10 : '0'}} %</div>
+            <div class="follow-gru">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0 , 2) : '0'}} %</div>
             <div class="follow-gru2">{{$t('totalIncomeRate')}}</div>
           </div>
         </div>
