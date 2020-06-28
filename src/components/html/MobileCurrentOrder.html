@@ -38,7 +38,7 @@
                 <span >{{$globalFunc.accFixed(order.filledAmount, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}}</span>
                 <span class="txt_40">{{$globalFunc.accFixed(order.amount, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}}</span>
             </div>
-            <div class=" flex-center" :class="[{_m_co_l4:canceling!==order.id},{_m_co_l5:canceling===order.id}]" @click="cancelOrder(order)">
+            <div class="" :class="[{_m_co_l4:canceling!==order.id},{_m_co_l5:canceling===order.id}]" @click="cancelOrder(order)">
                 <span>{{canceling==order.id&&'撤单中'||'撤单'}}</span>
             </div>
           </div>
