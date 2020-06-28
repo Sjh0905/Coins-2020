@@ -12,7 +12,8 @@ root.data = function () {
     isAutomatic:false,
     isAutomaticing:false,
     followUserList:[],
-    profit:{}, // 总金额+总收益
+    profit:'', // 总金额+总收益
+    total:'',
     followId:'',
 
     // 弹框
@@ -114,7 +115,8 @@ root.methods.postMyDocumentary = function () {
 root.methods.re_postMyDocumentary = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   this.followUserList = data.dataMap.list || []
-  this.profit = data.dataMap.profit || {}
+  this.profit = data.dataMap.profit || ''
+  this.total = data.dataMap.total || ''
   if(data.dataMap.followSetting.autoType=="YES"){
     this.isAutomatic = true
     return
