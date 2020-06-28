@@ -1976,7 +1976,6 @@ root.routes.push({
           meta: {
             requireLogin: true,
             templateClose: false,
-            templatePath: '/index/assetPageT',
             requireLoginOff: false,
           },
           component: resolve => require(['@/components/Contract/vue/ContractRecord'], resolve),
@@ -1986,48 +1985,41 @@ root.routes.push({
               meta: {
                 requireLogin: true,
                 templateClose: false,
-                templatePath: '/index/assetPageT',
                 requireLoginOff: false,
               },
-              redirect: 'currentLockHouse',
+              redirect: 'warehousePosition',
               caseSensitive: true,
             },
 
-            // 当前锁仓记录
+            // 仓位记录
             {
-              path: 'currentLockHouse',
-              name: 'currentLockHouse',
+              path: 'warehousePosition',
+              name: 'warehousePosition',
               meta: {
-                pcname: 'currentLockHouse',
-                h5name: 'MobileCurrentLockHouse',
+                pcname: 'warehousePosition',
+                h5name: '',
                 requireLogin: true,
-                // 临时关闭
                 templateClose: false,
-                templatePath: '/index/asset/rechargeAndWithdrawals',
-                // templatePath: '/index/assetPageT',
                 requireLoginOff: false,
               },
               caseSensitive: true,
-              component: resolve => require(['@/components/vue/currentLockHouse'], resolve),
+              component: resolve => require(['@/components/Contract/vue/WarehousePosition'], resolve),
             },
 
 
-            // 历史锁仓记录
+            // 合约资产记录
             {
-              path: 'historyLockHouse',
-              name: 'historyLockHouse',
+              path: 'propertyAssets',
+              name: 'propertyAssets',
               meta: {
-                pcname: 'historyLockHouse',
-                h5name: 'MobileHistoryLockHouse',
+                pcname: 'propertyAssets',
+                h5name: '',
                 requireLogin: true,
-                // 临时关闭
                 templateClose: false,
-                templatePath: '/index/asset/rechargeAndWithdrawals',
-                // templatePath: '/index/assetPageT',
                 requireLoginOff: false,
               },
               caseSensitive: true,
-              component: resolve => require(['@/components/vue/historyLockHouse'], resolve),
+              component: resolve => require(['@/components/Contract/vue/PropertyAssets'], resolve),
             },
           ]
         },
