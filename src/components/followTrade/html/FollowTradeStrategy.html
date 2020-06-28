@@ -70,7 +70,7 @@
         <!--历史持仓-->
         <div class="record_div pointer" @click="toggleType(1)" :class="{'selected_cardType':followType == 1}">{{$t('historicalPosition')}}</div>
         <!--跟随者-->
-        <div class="record_div selected_cardTypeML pointer" @click="toggleType(2)" :class="{'selected_cardType':followType == 2}">{{$t('henchman')}}</div>
+        <div class="record_div selected_cardTypeML pointer" @click="toggleType(2)" :class="{'selected_cardType':followType == 2}">{{$t('henchmaner')}}</div>
       </div>
       <!-- 当前持仓 -->
       <ul class="recordUl" v-if="followType == 1">
@@ -103,7 +103,7 @@
                 {{item.type == 'BUY_LIMIT'? $t('buyIn'):$t('selllOut')}}
               </div>
               <!--价格-->
-              <div class="application_header_div">{{item.price}}</div>
+              <div class="application_header_div">{{toFixed(item.price,2)}}</div>
               <!--数量-->
               <div class="application_header_div">{{toFixed(item.amount,2)}}</div>
               <!--金额-->
@@ -150,9 +150,9 @@
                 <!--账号-->
                 <div class="application_header_div ">{{item.userId}}</div>
                 <!--跟单总额-->
-                <div class="application_header_div ">{{item.amount || '0'}}</div>
+                <div class="application_header_div ">{{toFixed(item.amount,2) || '0'}}</div>
                 <!--跟随收益-->
-                <div class="application-header-div-box ">{{item.profit || '0'}}</div>
+                <div class="application-header-div-box ">{{toFixed(item.profit,2) || '0'}}</div>
 
               </div>
             </li>
