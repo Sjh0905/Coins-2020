@@ -136,7 +136,7 @@
         <li class="application_header">
           <!--          账号-->
           <div class="application_header_div">{{$t('accountNumber')}}</div>
-          <!--          跟单总额-->
+          <!--          跟单总成交额-->
           <div class="application_header_div">{{$t('totalDocumentaryAmount')}}（USDT）</div>
           <!--          跟随收益-->
           <div class="application-header-div-box">{{$t('followUpIncome')}}（USDT）</div>
@@ -149,7 +149,7 @@
               <div class="flex application_li">
                 <!--账号-->
                 <div class="application_header_div ">{{item.userId}}</div>
-                <!--跟单总额-->
+                <!--跟单总成交额-->
                 <div class="application_header_div ">{{toFixed(item.amount,2) || '0'}}</div>
                 <!--跟随收益-->
                 <div class="application-header-div-box ">{{toFixed(item.profit,2) || '0'}}</div>
