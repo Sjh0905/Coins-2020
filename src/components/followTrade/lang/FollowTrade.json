@@ -89,8 +89,16 @@
     "followDetails_2": "转账不能为负值",
     "followDetails_3": "转账币种限额不存在",
     "followDetails_4": "超出单比额度限制",
-    "followDetails_5": "24小时转账金额必须要在范围内"
+    "followDetails_5": "24小时转账金额必须要在范围内",
 
+
+
+    "cancel":"取消",
+    "beBinding": "去绑定",
+    "verification": "前往验证",
+    "popWindowTitleWithdrawals": "镜像交易提示",
+    "popWindowPromptWithdrawals": "您尚未通过实名认证",
+    "popWindowTitleBindGaWithdrawals": "请先绑定谷歌验证或手机"
   },
   "EN": {},
   "CA": {},
@@ -184,6 +192,13 @@
     "followDetails_2": "轉帳不能為負值",
     "followDetails_3": "轉帳幣種限額不存在",
     "followDetails_4": "超出單比額度限制",
-    "followDetails_5": "24小時轉帳金額必須要在範圍內"
+    "followDetails_5": "24小時轉帳金額必須要在範圍內",
+
+    "cancel":"取消",
+    "beBinding": "去綁定",
+    "verification": "前往驗證",
+    "popWindowTitleWithdrawals": "鏡像交易提示",
+    "popWindowPromptWithdrawals": "您尚未通過實名認證",
+    "popWindowTitleBindGaWithdrawals": "請先綁定谷歌驗證或手機"
   }
 }
