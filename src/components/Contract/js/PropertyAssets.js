@@ -177,31 +177,31 @@ root.methods.changeTransferCurrency = function (currency){
 root.methods.openTransfer = function (index, item) {
 
   // 如果没有实名认证不允许打开划转
-  if (!this.bindIdentify) {
-    this.popWindowTitle = this.$t('popWindowTitleTransfer')
-    this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
-    this.popWindowStyle = '0'
-    this.popWindowOpen = true
-    return
-  }
+  // if (!this.bindIdentify) {
+  //   this.popWindowTitle = this.$t('popWindowTitleTransfer')
+  //   this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
+  //   this.popWindowStyle = '0'
+  //   this.popWindowOpen = true
+  //   return
+  // }
 
   // 如果没有绑定邮箱，不允许打开划转
-  if (!this.bindEmail) {
-    this.popWindowTitle = this.$t('bind_email_pop_title')
-    this.popWindowPrompt = this.$t('bind_email_pop_article')
-    this.popWindowStyle = '3'
-    this.popWindowOpen = true
-    return
-  }
+  // if (!this.bindEmail) {
+  //   this.popWindowTitle = this.$t('bind_email_pop_title')
+  //   this.popWindowPrompt = this.$t('bind_email_pop_article')
+  //   this.popWindowStyle = '3'
+  //   this.popWindowOpen = true
+  //   return
+  // }
 
   // 如果没有绑定谷歌或手机，不允许打开划转
-  if (!this.bindGA && !this.bindMobile) {
-    this.popWindowTitle = this.$t('popWindowTitleTransfer')
-    this.popWindowPrompt = this.$t('popWindowTitleBindGaWithdrawals')
-    this.popWindowStyle = '1'
-    this.popWindowOpen = true
-    return
-  }
+  // if (!this.bindGA && !this.bindMobile) {
+  //   this.popWindowTitle = this.$t('popWindowTitleTransfer')
+  //   this.popWindowPrompt = this.$t('popWindowTitleBindGaWithdrawals')
+  //   this.popWindowStyle = '1'
+  //   this.popWindowOpen = true
+  //   return
+  // }
 
 
   //todo 修改密码后不能提现
@@ -209,14 +209,14 @@ root.methods.openTransfer = function (index, item) {
   this.popWindowOpen1 = true
 
   // 法币可用余额
-  this.transferCurrencyOTCAvailable = item.otcAvailable
-  // 我的钱包可用余额
-  this.transferCurrencyAvailable = item.available
-  this.itemInfo = item
-  this.currencyValue = this.itemInfo.currency
-  // 再次打开清空输入框
-  this.amountInput = ''
-  this.transferAmountWA = ''
+  // this.transferCurrencyOTCAvailable = item.otcAvailable
+  // // 我的钱包可用余额
+  // this.transferCurrencyAvailable = item.available
+  // this.itemInfo = item
+  // this.currencyValue = this.itemInfo.currency
+  // // 再次打开清空输入框
+  // this.amountInput = ''
+  // this.transferAmountWA = ''
 
 }
 

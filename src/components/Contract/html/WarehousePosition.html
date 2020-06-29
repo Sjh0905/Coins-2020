@@ -11,11 +11,33 @@
       <!--数量-->
       <div class="currency">{{$t('数量')}}</div>
       <!--开仓价格-->
-      <div class="total"><span class="total-span">{{$t('开仓价格')}}</span></div>
+      <div class="total">
+        <span class="totaler">
+          <div class="total-span">{{$t('开仓价格')}}</div>
+          <div class="detail-header-box">
+            你的持仓的平均买入/卖出成交价格。
+          </div>
+        </span>
+
+      </div>
       <!--标记价格-->
-      <div class="lock-house-time"><span class="lock-house-time-span">{{$t('标记价格')}}</span></div>
+      <div class="lock-house-time">
+        <span class="lock-house-timeer">
+          <div class="lock-house-time-span">{{$t('标记价格')}}</div>
+          <div class="lock-house-time-box">
+            该合约的实时标记价格。此标记价格将用于计算盈亏及保证金，可能与合约最新成交价格有所偏差，以避免价格操纵。
+          </div>
+        </span>
+      </div>
       <!--未实现盈亏(回报率)-->
-      <div class="income-yesterday"><span class="income-yesterday-span">{{$t('未实现盈亏 (回报率)')}}</span></div>
+      <div class="income-yesterday">
+        <span class="income-yesterdayer">
+          <div class="income-yesterday-span">{{$t('未实现盈亏 (回报率)')}}</div>
+          <div class="income-yesterday-box">
+            "采用标记价格计算得出的未实现盈亏，以及回报率。
+          </div>
+        </span>
+      </div>
       <!-- 操作-->
       <div class="operation">{{$t('操作')}}</div>
 

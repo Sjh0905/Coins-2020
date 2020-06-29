@@ -281,3 +281,87 @@
   opacity: 0.8;
   border-bottom: 1px dashed #6B7DA2;
 }
+
+
+
+
+
+.detail-header-box {
+  position: absolute;
+  left: 30%;
+  display: none;
+  /*width: 250px;*/
+  padding: 10px;
+  color: #0D0E23;
+  font-size: 12px;
+  background:rgba(250,250,250,1);
+  box-shadow:0px 0px 16px 0px rgba(0,0,0,0.1);
+  border-radius:1px;
+}
+
+.total-span {
+  display: inline-block;
+  border-bottom: 1px dashed #6B7DA2;
+  cursor: pointer;
+}
+.total-span:hover {
+  display: inline-block;
+  opacity: 0.8;
+  border-bottom: 1px dashed #6B7DA2;
+}
+.totaler:hover .detail-header-box {
+  display: block;
+}
+
+
+.lock-house-time-span {
+  display: inline-block;
+  border-bottom: 1px dashed #6B7DA2;
+  cursor: pointer;
+}
+.lock-house-time-span:hover {
+  display: inline-block;
+  opacity: 0.8;
+  border-bottom: 1px dashed #6B7DA2;
+}
+.lock-house-timeer:hover .lock-house-time-box {
+  display: block;
+}
+.lock-house-time-box {
+  position: absolute;
+  right: 32%;
+  display: none;
+  width: 250px;
+  padding: 10px;
+  color: #0D0E23;
+  font-size: 12px;
+  background:rgba(250,250,250,1);
+  box-shadow:0px 0px 16px 0px rgba(0,0,0,0.1);
+  border-radius:1px;
+}
+
+.income-yesterday-span {
+  display: inline-block;
+  border-bottom: 1px dashed #6B7DA2;
+  cursor: pointer;
+}
+.income-yesterday-span:hover {
+  display: inline-block;
+  opacity: 0.8;
+  border-bottom: 1px dashed #6B7DA2;
+}
+.income-yesterdayer:hover .income-yesterday-box {
+  display: block;
+}
+.income-yesterday-box {
+  position: absolute;
+  right: 14%;
+  display: none;
+  width: 250px;
+  padding: 10px;
+  color: #0D0E23;
+  font-size: 12px;
+  background:rgba(250,250,250,1);
+  box-shadow:0px 0px 16px 0px rgba(0,0,0,0.1);
+  border-radius:1px;
+}
