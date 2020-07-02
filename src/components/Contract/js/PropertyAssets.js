@@ -120,6 +120,30 @@ root.watch.loading = function (newVal, oldVal) {
 }
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+/*---------------------- 账户余额 begin ---------------------*/
+root.methods.closeAccountBalance= function () {
+  $(".currencyer-header-box").attr("style","display:none");
+}
+root.methods.openAccountBalance = function () {
+  $(".currencyer-header-box").attr("style","display:block");
+}
+/*---------------------- 账户余额 end ---------------------*/
+/*---------------------- 未实现盈亏 begin ---------------------*/
+root.methods.closeUnrealizedLooses= function () {
+  $(".detail-header-box").attr("style","display:none");
+}
+root.methods.openUnrealizedLooses = function () {
+  $(".detail-header-box").attr("style","display:block");
+}
+/*---------------------- 未实现盈亏 end ---------------------*/
+/*---------------------- 未实现盈亏 begin ---------------------*/
+root.methods.closeAvailableOrderBalance= function () {
+  $(".lock-house-time-box").attr("style","display:none");
+}
+root.methods.openAvailableOrderBalance = function () {
+  $(".lock-house-time-box").attr("style","display:block");
+}
+/*---------------------- 未实现盈亏 end ---------------------*/
 
 // 划转弹窗关闭
 root.methods.popWindowClose1 = function () {

@@ -10,32 +10,24 @@
       <div class="order-number">{{$t('资产')}}</div>
       <!--账户余额-->
       <div class="currency">
-        <span class="currencyer">
-          <div class="currency-span">{{$t('账户余额')}}</div>
-          <div class="currencyer-header-box">
-            账户余额 ＝ 总共净划入+ 总共已实现盈亏 + 总共净资金费用 - 总共手续费
-          </div>
-        </span>
-
+        <div class="currency-span" @mouseenter="openAccountBalance()" @mouseleave="closeAccountBalance()">{{$t('账户余额')}}</div>
+        <div class="currencyer-header-box">
+          账户余额 ＝ 总共净划入+ 总共已实现盈亏 + 总共净资金费用 - 总共手续费
+        </div>
       </div>
       <!--未实现盈亏-->
       <div class="total">
-        <span class="totaler">
-          <div class="total-span">{{$t('未实现盈亏')}}</div>
-          <div class="detail-header-box">
-            采用标记价格计算得出的未实现盈亏。
-          </div>
-        </span>
+        <div class="total-span" @mouseenter="openUnrealizedLooses()" @mouseleave="closeUnrealizedLooses()">{{$t('未实现盈亏')}}</div>
+        <div class="detail-header-box">
+          采用标记价格计算得出的未实现盈亏。
+        </div>
       </div>
       <!--可用下单余额-->
       <div class="lock-house-time">
-        <span class="lock-house-timeer">
-          <div class="lock-house-time-span">{{$t('可用下单余额')}}</div>
-          <div class="lock-house-time-box">
-            可用下单余额 = 保证金余额 - 开仓保证金，代表你可用于开新仓的金额。
-          </div>
-        </span>
-
+        <div class="lock-house-time-span" @mouseenter="openAvailableOrderBalance()" @mouseleave="closeAvailableOrderBalance()">{{$t('可用下单余额')}}</div>
+        <div class="lock-house-time-box">
+          可用下单余额 = 保证金余额 - 开仓保证金，代表你可用于开新仓的金额。
+        </div>
       </div>
       <!-- 操作-->
       <div class="operation">{{$t('操作')}}</div>

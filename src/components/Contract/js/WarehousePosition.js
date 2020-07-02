@@ -47,6 +47,32 @@ root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
 
+/*---------------------- 开仓价格 begin ---------------------*/
+root.methods.closeOpeningPrice = function () {
+  $(".detail-header-box").attr("style","display:none");
+}
+root.methods.openOpeningPrice = function () {
+  $(".detail-header-box").attr("style","display:block");
+}
+/*---------------------- 开仓价格 end ---------------------*/
+/*---------------------- 标记价格 begin ---------------------*/
+root.methods.closeMarkedPrice = function () {
+  $(".lock-house-time-box").attr("style","display:none");
+}
+root.methods.openMarkedPrice = function () {
+  $(".lock-house-time-box").attr("style","display:block");
+}
+/*---------------------- 标记价格 end ---------------------*/
+/*---------------------- 未实现盈亏 (回报率) begin ---------------------*/
+root.methods.closeRateOfReturn = function () {
+  $(".income-yesterday-box").attr("style","display:none");
+}
+root.methods.openRateOfReturn = function () {
+  $(".income-yesterday-box").attr("style","display:block");
+}
+/*---------------------- 未实现盈亏 (回报率) end ---------------------*/
+
+
 // 解锁锁仓
 root.methods.unLockHouse = function (item) {
   // console.log(item.id)

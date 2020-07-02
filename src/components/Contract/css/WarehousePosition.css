@@ -309,9 +309,6 @@
   opacity: 0.8;
   border-bottom: 1px dashed #6B7DA2;
 }
-.totaler:hover .detail-header-box {
-  display: block;
-}
 
 
 .lock-house-time-span {
@@ -324,9 +321,7 @@
   opacity: 0.8;
   border-bottom: 1px dashed #6B7DA2;
 }
-.lock-house-timeer:hover .lock-house-time-box {
-  display: block;
-}
+
 .lock-house-time-box {
   position: absolute;
   right: 32%;
@@ -350,9 +345,7 @@
   opacity: 0.8;
   border-bottom: 1px dashed #6B7DA2;
 }
-.income-yesterdayer:hover .income-yesterday-box {
-  display: block;
-}
+
 .income-yesterday-box {
   position: absolute;
   right: 14%;
