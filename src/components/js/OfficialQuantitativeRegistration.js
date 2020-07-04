@@ -145,22 +145,7 @@ root.methods.RE_GET_AUTH_STATE = function (res) {
   typeof res === 'string' && (res = JSON.parse(res));
   if (!res) return
   this.$store.commit('SET_AUTH_STATE', res.dataMap)
-  // let data = res.dataMap;
-  // this.identity_type = data;
-  // if (res.result == 'SUCCESS' && (data.sms || data.ga)) {
-  //   this.bindIdentify = data.identity;
-  // }
-  // 两者都验证了
-  // this.bindGA = data.ga;
-  // this.bindMobile = data.sms;
-  // this.bindEmail = data.email;
-  // this.bindMobile && (this.picked = 'bindMobile');
-  // this.bindGA && (this.picked = 'bindGA');
-  // if (this.bindGA && this.bindMobile) {
-  //   this.showPicker = true;
-  // }
-  //
-  // this.loading = false
+
 }
 
 
