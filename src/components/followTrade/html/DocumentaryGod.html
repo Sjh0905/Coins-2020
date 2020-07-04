@@ -57,7 +57,7 @@
     <div class="record">
       <!--   当前持仓/跟随者-->
       <div class="recordMining borbot">
-        <!--历史持仓-->
+        <!--操作记录-->
         <div class="record_div pointer" @click="toggleType(1)" :class="{'selected_cardType':fixedFollow == 1}">{{$t('historicalPosition')}}</div>
         <!--跟随者-->
         <div class="record_div selected_cardTypeML pointer" @click="toggleType(2)" :class="{'selected_cardType':fixedFollow == 2}">{{$t('henchmaner')}}</div>
@@ -80,7 +80,7 @@
           <div class="application_header_div_right">{{$t('money')}}</div>
         </li>
         <template>
-          <!-- 历史持仓 -->
+          <!-- 操作记录 -->
           <template v-if="godHistorList.length !== 0">
             <li class="flex application_li" v-for="(item,index) in godHistorList">
               <!--时间-->

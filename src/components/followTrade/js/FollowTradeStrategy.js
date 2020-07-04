@@ -180,7 +180,7 @@ root.methods.re_isOpenFollow = function (data) {
 root.methods.error_isOpenFollow = function (err) {
   console.log("this.err=====",err)
 }
-//个人历史持仓
+//个人操作记录
 root.methods.postPersonalrHistory = function () {
   let params = {
     followId: this.userId,

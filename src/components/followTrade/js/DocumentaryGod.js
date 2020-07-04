@@ -193,7 +193,7 @@ root.methods.error_postDocumentaryImmediately = function (err) {
 
 
 
-//大神历史持仓
+//大神操作记录
 root.methods.postBigBrotherHistory = function () {
   let params = {
     followId: this.$route.query.userId,
