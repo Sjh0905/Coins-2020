@@ -112,23 +112,23 @@
             <div class="cumulative_div">
           <!-- 普通区累计（USDT）-->
               <div class="information_div div_border div_s">
-                <p class="color_e2">{{$t('ordinaryAccumulation')}}(USDT）</p>
-                <p class="color_e9">{{commCumulative}}</p>
+                <p class="color_e2">{{$t('ordinaryAccumulation')}}(KK）</p>
+                <p class="color_e9">{{toFixed(commCumulative,4)}}</p>
               </div>
 <!--              普通区返佣-->
               <div class="information_div div_border div_s">
-                <p class="color_e2">{{$t('ordinaryRebates')}}(USDT）</p>
-                <p class="color_e9">{{commRecommission}}</p>
+                <p class="color_e2">{{$t('ordinaryRebates')}}(KK）</p>
+                <p class="color_e9">{{toFixed(commRecommission,4)}}</p>
               </div>
 <!--              量化区累计-->
               <div class="information_div div_border div_s">
-                <p class="color_e2">{{$t('quantizationAccumulation')}}(USDT）</p>
-                <p class="color_e9">{{quantCumulative}}</p>
+                <p class="color_e2">{{$t('quantizationAccumulation')}}(KK）</p>
+                <p class="color_e9">{{toFixed(quantCumulative,4)}}</p>
               </div>
 <!--              量化区返佣-->
               <div class="information_div border-ling div_border">
-                <p class="color_e2">{{$t('quantificationRebates')}}(USDT）</p>
-                <p class="color_e9">{{quantRecommission}}</p>
+                <p class="color_e2">{{$t('quantificationRebates')}}(KK）</p>
+                <p class="color_e9">{{toFixed(quantRecommission,4)}}</p>
               </div>
 
             </div>
@@ -320,22 +320,22 @@
     <div class="mobileliangtuan" v-if="idType=='1'">
     <div class="mobileliang" >
       <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">普通区累计折合</span>
-        <span class="mobileFoldSapnF18">{{commCumulative}} USDT</span>
+        <span class="mobileFoldSapnB7">普通区团级工资累计</span>
+        <span class="mobileFoldSapnF18">{{toFixed(commCumulative,4)}} KK</span>
       </div>
       <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">普通区返佣折合</span>
-        <span class="mobileFoldSapnF18">{{commRecommission}} USDT</span>
+        <span class="mobileFoldSapnB7">挖矿区团级工资累计</span>
+        <span class="mobileFoldSapnF18">{{toFixed(commRecommission,4)}} KK</span>
       </div>
     </div>
     <div class="mobileliang mt">
       <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">挖矿区累计折合</span>
-        <span class="mobileFoldSapnF18">{{quantCumulative}} USDT</span>
+        <span class="mobileFoldSapnB7">普通区团级工资最新</span>
+        <span class="mobileFoldSapnF18">{{toFixed(quantCumulative,4)}} KK</span>
       </div>
       <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">挖矿区返佣折合</span>
-        <span class="mobileFoldSapnF18">{{quantRecommission}} USDT</span>
+        <span class="mobileFoldSapnB7">挖矿区团级工资最新</span>
+        <span class="mobileFoldSapnF18">{{toFixed(quantRecommission,4)}} KK</span>
       </div>
     </div>
     </div>

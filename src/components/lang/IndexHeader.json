@@ -56,8 +56,8 @@
     "OfficialQuantitativeRegistration": "KK交易挖矿",
     "lockHouseRecord": "锁仓记录",
     "celebration": "百日庆之百宝箱",
-    "blockLove": "区块恋",
-    "mirrorTransaction": "镜像交易"
+    "mirrorTransaction": "镜像交易",
+    "blockLove": "区块安"
 
   },
   "EN": {
@@ -223,7 +223,7 @@
     "OfficialQuantitativeRegistration": "KK交易挖礦",
     "lockHouseRecord": "鎖倉記錄",
     "celebration": "百日慶之百寶箱",
-    "blockLove": "區塊戀",
+    "blockLove": "區塊安",
     "mirrorTransaction": "鏡像交易"
   },
   "JP": {

@@ -377,7 +377,7 @@ root.orderPage.reset = '重置'
 root.orderPage.onlyCompleted = '仅完成'
 root.orderPage.currentEntrust = '当前委托'
 root.orderPage.historicalEntrust = '历史委托'
-root.orderPage.order = '订单'
+root.orderPage.order = '币币订单'
 
 
 // 当前订单
