@@ -25,6 +25,8 @@ root.data = function () {
     popWindowPrompt: '',//弹出样式提示
     popWindowStyle: 0,//跳转 0表示实名认证，1表示手机或谷歌，2只有确定
 
+    currentInterval:null
+
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
