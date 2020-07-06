@@ -115,7 +115,7 @@ root.methods.re_postCommitFee = function (data) {
   if(data.errorCode == 0) {
     this.openMaskWindow = false
     this.isTapeList = true
-    this.openPop('订阅成功',1)
+    this.openPop('操作成功',1)
     this.postManage()
   }
   if(data.errorCode != 0) {
