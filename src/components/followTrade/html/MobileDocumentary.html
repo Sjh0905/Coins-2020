@@ -94,7 +94,8 @@
           将扣除 <span class="text_blue">{{$route.query.fee}} USDT</span> 订阅费用
         </div>
       </div>
-      <div class="forecast-activity-toast-btn" @click="postDocumentaryImmediately">确 定</div>
+      <div class="forecast-activity-toast-btn" v-if="follow" @click="postDocumentaryImmediately">确 定</div>
+      <div class="forecast-activity-toast-btn" v-if="!follow">确 定 中</div>
     </div>
   </div>
 </div>

@@ -124,7 +124,7 @@
   box-sizing: border-box;
 }
 .mobile-trade-center-title-line {
-  width: 0.01rem;
+  width: 1px;
   height: 0.52rem;
   background:#3576F5;
 }

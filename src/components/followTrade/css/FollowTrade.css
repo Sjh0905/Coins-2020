@@ -10,14 +10,14 @@
 .follow-trade-img-box {
   position: relative;
   width: 100%;
-  height: 206px;
+  height: 200px;
   background: black;
 }
 .follow-trade-img {
   position:absolute;
   top:50%;
   left:50%;
-  height: 206px;
+  height: 200px;
   -webkit-transform: translate(-50%,-50%);
   -moz-transform: translate(-50%,-50%);
   transform:translate(-50%,-50%);
