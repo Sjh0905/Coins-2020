@@ -36,7 +36,7 @@ root.created = function () {
 
   this.getBigBrotherList()
   this.currentInterval && clearInterval(this.currentInterval)
-  this.currentInterval = setInterval(() => {this.getBigBrotherList()}, 4000)
+  this.currentInterval = setInterval(() => { this.getBigBrotherList() }, 4000)
 
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({
@@ -232,7 +232,6 @@ root.methods.goToMyFollowOrder = function () {
 root.methods.getBigBrotherList = function () {
   this.$http.send('BIG_BROTHER_LIST', {
     bind: this,
-    // query:{},
     callBack: this.re_getBigBrotherList,
     errorHandler:this.error_getBigBrotherList
   })
