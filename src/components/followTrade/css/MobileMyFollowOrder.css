@@ -69,6 +69,12 @@
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
 }
+.open-automatic-renew-text-grew {
+  color: #3576F5;
+  font-size:0.24rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+}
 /*------------ 打开自动续费  end -------------*/
 
 /*------------ 跟单统计  -------------*/

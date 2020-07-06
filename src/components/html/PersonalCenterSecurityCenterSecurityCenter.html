@@ -217,10 +217,12 @@
             <div class="allinfo11_update">
 <!--              关闭按钮 -->
               <div @click="clickToggle" v-if="!BDBInfo">
+                <span class="closed">已关闭</span>
                 <img src="../../assets/personalCenter/personal_center_close.png" alt="">
               </div>
 <!--              打开按钮-->
               <div @click="clickToggle" v-if="BDBInfo">
+                <span class="opened">已开启</span>
                 <img src="../../assets/personalCenter/personal_center_open.png" alt="">
               </div>
             </div>

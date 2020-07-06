@@ -18,14 +18,16 @@
   <div class="mobile-trade-header-null"></div>
   <div class="open-automatic-renew">
     <div class="open-automatic-renew-top flex">
-      <div class="open-automatic-renew-title">自动续费</div>
+      <div class="open-automatic-renew-title">跟单到期自动续费</div>
       <div class="open-automatic-renew-img">
         <!--关闭按钮-->
         <div @click="clickToggle" v-if="!isAutomatic">
+          <span class="open-automatic-renew-text">已关闭</span>
           <img src="../../../assets/personalCenter/personal_center_close.png" alt="">
         </div>
-        <!--              打开按钮-->
+        <!--打开按钮-->
         <div @click="clickToggle" v-if="isAutomatic">
+          <span class="open-automatic-renew-text-grew">已开启</span>
           <img src="../../../assets/personalCenter/personal_center_open.png" alt="">
         </div>
       </div>
