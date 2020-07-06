@@ -20,6 +20,8 @@ root.data = function () {
     waitTime: 2000,
 
     popIdenOpen: false,
+
+    currentInterval:'null'
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -41,6 +43,8 @@ root.created = function () {
   this.GET_AUTH_STATE()
 
   this.getBigBrotherList()
+  this.currentInterval && clearInterval(this.currentInterval)
+  this.currentInterval = setInterval(this.getBigBrotherList(), 4000)
 
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({

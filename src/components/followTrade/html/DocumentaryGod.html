@@ -93,11 +93,11 @@
                 {{item.type == 'BUY_LIMIT'? $t('buyIn'):$t('selllOut')}}
               </div>
               <!--价格-->
-              <div class="application_header_div">{{toFixed(item.price,2) || '0'}}</div>
+              <div class="application_header_div">{{toFixed(item.price,4) || '0'}}</div>
               <!--数量-->
-              <div class="application_header_div">{{toFixed(item.amount,2) || '0'}}</div>
+              <div class="application_header_div">{{toFixed(item.amount,4) || '0'}}</div>
               <!--金额-->
-              <div class="application_header_div_right">{{toFixed(item.price * item.amount,2)}}</div>
+              <div class="application_header_div_right">{{toFixed(item.price * item.amount,4)}}</div>
             </li>
           </template>
 

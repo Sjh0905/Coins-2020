@@ -24,6 +24,7 @@ root.data = function () {
     popWindowTitle: '', //弹出提示标题
     popWindowPrompt: '',//弹出样式提示
     popWindowStyle: 0,//跳转 0表示实名认证，1表示手机或谷歌，2只有确定
+
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -32,6 +33,8 @@ root.created = function () {
   this.GET_AUTH_STATE()
 
   this.getBigBrotherList()
+  this.currentInterval && clearInterval(this.currentInterval)
+  this.currentInterval = setInterval(() => {this.getBigBrotherList()}, 4000)
 
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({
