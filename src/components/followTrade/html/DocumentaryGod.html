@@ -240,7 +240,8 @@
     </div>
     <div slot="footer" class="pop-recharge-bottom">
       <!--立即跟单-->
-      <div class="documentary-button pointer" @click="postDocumentaryImmediately">{{$t('documentaryImmediately')}}</div>
+      <div class="documentary-button pointer" v-if="follow" @click="postDocumentaryImmediately">{{$t('documentaryImmediately')}}</div>
+      <div class="documentary-button pointer" v-if="!follow">{{$t('正在跟单')}}</div>
     </div>
 
   </PopupWindow>

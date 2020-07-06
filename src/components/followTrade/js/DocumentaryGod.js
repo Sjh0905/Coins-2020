@@ -24,7 +24,7 @@ root.data = function () {
 
     fixedAmountLot:'',
 
-
+    follow:true,
     popWindowOpen: false
   }
 }
