@@ -46,7 +46,7 @@
         </div>
 
         <div class="trade-data-item">
-          <div class="trade-data text-green">{{toFixed(godInfo.rate || '0',2)}} %</div>
+          <div class="trade-data text-green">{{toFixed(godInfo.rate * 10 * 10 || '0',2)}}%</div>
           <!--收益率-->
           <div>{{$t('totalIncomeRate')}}</div>
         </div>
