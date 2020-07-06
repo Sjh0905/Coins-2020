@@ -15,33 +15,45 @@
 
       <div class="follow-asset-total-data flex">
         <div class="follow-asset-total">
-          <div>累计跟单总金额（USDT）</div>
+          <div class="follow-monery">累计跟单总金额（USDT）</div>
           <div class="follow-asset-acount">{{toFixed(total ||'0',2)}}</div>
         </div>
         <div class="follow-asset-total">
-          <div>跟单总收益（USDT）</div>
+          <div class="follow-monery">跟单总收益（USDT）</div>
           <div class="follow-asset-acount">{{toFixed(profit || '0',2)}}</div>
         </div>
       </div>
-      <div class="follow-asset-renewal flex">
-        <div class="follow-asset-remind pointer" @mouseenter="openRenew()" @mouseleave="closeRenew()">
-          <img src="../assets/remind_icon.png" alt="" >
+
+
+      <div class="follow-asset-renewal">
+<!--        <div class="follow-asset-remind pointer" @mouseenter="openRenew()" @mouseleave="closeRenew()">-->
+<!--          <img src="../assets/remind_icon.png" alt="" >-->
+<!--        </div>-->
+<!--        <div class="line"></div>-->
+        <div class="right-switch flex">
+          <div>跟单到期自动续费</div>
+          <!--关闭按钮-->
+          <div class="follow-asset-close-open flex pointer" @click="clickToggle" v-if="!isAutomatic">
+            <span class="open-automatic-renew-text-grew">已关闭</span>
+            <img src="../../../assets/personalCenter/personal_center_close.png" alt="">
+          </div>
+          <!--打开按钮-->
+          <div class="follow-asset-close-open flex pointer" @click="clickToggle" v-if="isAutomatic">
+            <span class="open-automatic-renew-text">已开启</span>
+            <img src="../../../assets/personalCenter/personal_center_open.png" alt="">
+          </div>
         </div>
-        <div>跟单到期自动续费</div>
-        <!--关闭按钮-->
-        <div class="follow-asset-close-open pointer" @click="clickToggle" v-if="!isAutomatic">
-          <img src="../../../assets/personalCenter/personal_center_close.png" alt="">
-        </div>
-        <!--打开按钮-->
-        <div class="follow-asset-close-open pointer" @click="clickToggle" v-if="isAutomatic">
-          <img src="../../../assets/personalCenter/personal_center_open.png" alt="">
+        <!--隐藏的方块-->
+        <div class="descript">
+          订阅到期后，将自动续费原带单员，带单员的订阅费用可能会随时调整，自动续费金额以带单员最新订阅费用为准，请随时关注，如不想自动续费，请关闭自动续费功能。
         </div>
       </div>
-      <!--隐藏的方块-->
-      <div class="descript">
-        订阅到期后，将自动续费原带单员，带单员的订阅费用可能会随时调整，自动续费金额以带单员最新订阅费用为准，请随时关注，如不想自动续费，请关闭自动续费功能。
-      </div>
+
+
     </div>
+
+
+
     <div class="follow-asset-content" v-if="followUserList.length != 0">
       <!--正在跟随-->
       <div class="follow-asset-content-title">{{$t('Followed')}}</div>
