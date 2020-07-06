@@ -21,7 +21,7 @@ root.data = function () {
 
     popIdenOpen: false,
 
-    currentInterval:'null'
+    currentInterval:null
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
