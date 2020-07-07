@@ -8,7 +8,7 @@
     "bringTheBill": "我的带单",
     "totalTransactionVolume": "累计交易量",
     "numberOfTransactions": "交易笔数",
-    "totalDocumentaryNumber": "累计跟单人数",
+    "totalDocumentaryNumber": "当前跟单人数",
     "totalIncomeRate": "收益率",
     "days": "天",
     "documentary": "跟单",
@@ -92,8 +92,6 @@
     "followDetails_4": "超出单比额度限制",
     "followDetails_5": "24小时转账金额必须要在范围内",
 
-
-
     "cancel":"取消",
     "beBinding": "去绑定",
     "verification": "前往验证",
@@ -112,7 +110,7 @@
     "bringTheBill": "我的帶單",
     "totalTransactionVolume": "累計交易量",
     "numberOfTransactions": "交易筆數",
-    "totalDocumentaryNumber": "累計跟單人數",
+    "totalDocumentaryNumber": "目前跟單人數",
     "totalIncomeRate": "收益率",
     "days": "天",
     "documentary": "跟單",
