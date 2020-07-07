@@ -12,8 +12,8 @@ root.data = function () {
     openMaskWindow:false,
     // 是否开启带单
     isTapeList: false,
-    currencyPair:'', //订阅费用
-    currencyPairFee:'', //修改订阅费用
+    currencyPair:'', //跟单费用
+    currencyPairFee:'', //修改跟单费用
 
 
     // 弹框
@@ -110,7 +110,7 @@ root.methods.postCommitFee = function () {
     return
   }
   // if(this.currencyPair == 0){
-  //   this.openPop ('订阅费用不能为0')
+  //   this.openPop ('跟单费用不能为0')
   //   return
   // }
   let params = {

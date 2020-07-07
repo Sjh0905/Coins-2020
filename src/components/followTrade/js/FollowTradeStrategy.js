@@ -118,7 +118,7 @@ root.methods.postCommitFee = function () {
     return
   }
   // if(this.currencyPair == 0){
-  //   this.openPop ('订阅费用不能为0')
+  //   this.openPop ('跟单费用不能为0')
   //   return
   // }
   let params = {

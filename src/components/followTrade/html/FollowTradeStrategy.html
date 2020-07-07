@@ -30,7 +30,7 @@
         <div class="trade-data-item">
           <div class="trade-data">{{toFixed(godInfo.sum || '0',2)}}</div>
           <!--累计交易量-->
-          <div>{{$t('totalTransactionVolume')}}</div>
+          <div>{{$t('totalTransactionVolume')}} (USDT)</div>
         </div>
 
         <div class="trade-data-item">
@@ -187,7 +187,7 @@
         <div class="follow-order-data">BTC/USDT</div>
       </div>
       <div class="follow-order-item flex">
-        <!--订阅费用-->
+        <!--跟单费用-->
         <div class="follow-order-pair">{{$t('subscriptionFee')}}(USDT)</div>
         <div class="follow-order-currency">
           <input v-model="currencyPair" v-if="!isHasItem" class="currency-account" onkeyup="value = value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''">
@@ -195,7 +195,7 @@
         </div>
       </div>
       <div class="mobile-open-tape-pop-window-content-text">
-        <!--开启后，如您收益率靠前，您将可能出现在带单龙虎榜榜单中，同时可被用户跟单，零成本获得额外的带单收益，双重盈利。-->
+        <!--开启后，如您收益率靠前，您将可能出现在带单收益榜榜单中，同时可被用户跟单，零成本获得额外的带单收益，双重盈利。-->
         {{$t('openInterpretation')}}
       </div>
     </div>

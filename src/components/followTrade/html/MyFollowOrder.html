@@ -15,7 +15,7 @@
 
       <div class="follow-asset-total-data flex">
         <div class="follow-asset-total">
-          <div class="follow-monery">累计跟单总金额（USDT）</div>
+          <div class="follow-monery">累计跟单交易量（USDT）</div>
           <div class="follow-asset-acount">{{toFixed(total ||'0',2)}}</div>
         </div>
         <div class="follow-asset-total">
@@ -45,7 +45,8 @@
         </div>
         <!--隐藏的方块-->
         <div class="descript">
-          订阅到期后，将自动续费原带单员，带单员的订阅费用可能会随时调整，自动续费金额以带单员最新订阅费用为准，请随时关注，如不想自动续费，请关闭自动续费功能。
+          <div>若此开关开启，跟单到期时，将自动续费；若此开关关闭，跟单到期后，跟单将停止。</div>
+          <div>由于跟单费用可以随时调整，自动续费金额以将以最新设定费用为准，敬请保持关注。</div>
         </div>
       </div>
 
@@ -158,9 +159,9 @@
         <!--3、当交易员撤掉时，您同步跟随的该笔订单将同步被撤销；-->
         <div>{{$t('fixedAmountOrders_detail3')}}</div>
         <!--4、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作；-->
-        <div>{{$t('fixedAmountOrders_detail4')}}</div>
-        <!--5、买入、卖出均已USDT进行核算，例：以一个BTC10000美金为例，100USDT固定金额相当于 0.01BTC。-->
-        <div>{{$t('fixedAmountOrders_detail5')}}</div>
+<!--        <div>{{$t('fixedAmountOrders_detail4')}}</div>-->
+<!--        &lt;!&ndash;5、买入、卖出均已USDT进行核算，例：以一个BTC10000美金为例，100USDT固定金额相当于 0.01BTC。&ndash;&gt;-->
+<!--        <div>{{$t('fixedAmountOrders_detail5')}}</div>-->
       </div>
       <div class="remind" v-if="followType == 'RATE'">
         <!--固定比例跟单：-->
@@ -174,9 +175,9 @@
         <!--4、跟单时将与带单交易员相同的价格进行下单，直至您的可用资金不足为止；-->
         <div>{{$t('fixedProportionOrders_detail4')}}</div>
         <!--5、当交易员撤掉时，您同步跟随的该笔订单将同步被撤销；-->
-        <div>{{$t('fixedProportionOrders_detail5')}}</div>
-        <!--6、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作。-->
-        <div>{{$t('fixedProportionOrders_detail6')}}</div>
+<!--        <div>{{$t('fixedProportionOrders_detail5')}}</div>-->
+<!--        &lt;!&ndash;6、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作。&ndash;&gt;-->
+<!--        <div>{{$t('fixedProportionOrders_detail6')}}</div>-->
       </div>
     </div>
     <div slot="footer" class="pop-recharge-bottom">
