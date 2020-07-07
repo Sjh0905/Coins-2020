@@ -96,7 +96,7 @@
               <!--时间-->
               <div class="application_header_div">{{$globalFunc.formatDateUitl(Number(item.createdAt),'YYYY-MM-DD hh:mm:ss')}}</div>
               <!--交易对-->
-              <div class="application_header_div">{{item.feeCurrency}}</div>
+              <div class="application_header_div">{{item.symbol.replace('_','/')}}</div>
               <!--类型-->
               <div class="application_header_div" :class="item.type=='BUY_LIMIT'?'text-green':'text-red'">
                 <!--买入/卖出-->

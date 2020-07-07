@@ -17,12 +17,12 @@
 
     <div class="fund-description-info">
       <div class="fund-description-info-item">
-        <div class="fund-description-info-left">跟单大神</div>
+        <div class="fund-description-info-left">带单者</div>
         <div class="fund-description-info-right" v-if="!isHasItem">{{$route.query.userId || '--'}}</div>
         <div class="fund-description-info-right" v-if="isHasItem">{{queryItem.followId || '--'}}</div>
       </div>
       <div class="fund-description-info-item">
-        <div class="fund-description-info-left">跟单币对</div>
+        <div class="fund-description-info-left">带单交易对</div>
         <div class="fund-description-info-right">BTC/USDT</div>
       </div>
       <div class="fund-description-felx">
