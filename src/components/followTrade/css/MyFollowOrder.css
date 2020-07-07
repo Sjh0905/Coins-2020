@@ -63,7 +63,7 @@
   width: 100%;
 }
 .follow-asset-total {
-  width: 100%;
+  width: 50%;
   margin-right: 14%;
   font-size:12px;
   font-family:PingFangSC-Semibold,PingFang SC;
@@ -81,9 +81,9 @@
   color: #0D0E23;
 }
 .follow-asset-renewal {
-  width: 550px;
+  width: 50%;
   border-left: 1px solid #F5F6FA;
-  padding-left: 35px;
+  padding-left: 4%;
   height: 63px;
   /*line-height: 30px;*/
 }
