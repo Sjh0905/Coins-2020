@@ -59,8 +59,12 @@
   margin-bottom: 15px;
   justify-content: space-between;
 }
+.follow-asset-total-data {
+  width: 100%;
+}
 .follow-asset-total {
-  margin-right: 167px;
+  width: 100%;
+  margin-right: 14%;
   font-size:12px;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
@@ -101,7 +105,7 @@
 }
 .follow-asset-close-open img {
   vertical-align: text-bottom;
-  width: 48px;
+  width: 40px;
   margin-left: 10px;
 }
 .descript {
@@ -122,7 +126,7 @@
 }
 .open-automatic-renew-text {
   color: #3576F5;
-  font-size:0.24rem;
+  font-size:12px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
 }
@@ -132,7 +136,7 @@
 .open-automatic-renew-text-grew {
 
   color: #6A83A8;
-  font-size:0.24rem;
+  font-size:12px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
 }

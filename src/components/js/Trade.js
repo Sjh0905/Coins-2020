@@ -21,7 +21,7 @@ root.data = function () {
     istoday: true
 	}
 }
-
+myFollowOrder
 root.props = {}
 root.props.topic_bar = {
 	type: Object,
