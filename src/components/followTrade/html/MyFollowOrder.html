@@ -15,7 +15,7 @@
 
       <div class="follow-asset-total-data flex">
         <div class="follow-asset-total">
-          <div class="follow-monery">累计跟单交易量（USDT）</div>
+          <div class="follow-monery">累计跟单总交易量（USDT）</div>
           <div class="follow-asset-acount">{{toFixed(total ||'0',2)}}</div>
         </div>
         <div class="follow-asset-total">
@@ -45,7 +45,8 @@
         </div>
         <!--隐藏的方块-->
         <div class="descript">
-          <div>若此开关开启，跟单到期时，将自动续费；若此开关关闭，跟单到期后，跟单将停止。</div>
+          <div>若此开关开启，跟单到期时，将自动续费，若因账户余额不足无法续费，跟单将停止。</div>
+          <div>若此开关关闭，跟单到期后，跟单将停止。</div>
           <div>由于跟单费用可以随时调整，自动续费金额以将以最新设定费用为准，敬请保持关注。</div>
         </div>
       </div>
