@@ -1,11 +1,11 @@
 {
   "CH": {
     "followOrder": "镜像交易",
-    "myFollowOrder": "我的镜像交易",
+    "myFollowOrder": "我的跟单",
     "myHomePage": "我的主页",
     "listOfDragonsAndTigers": "带单龙虎榜",
     "updatedEveryHour": "数据每小时更新一次",
-    "bringTheBill": "我要带单",
+    "bringTheBill": "我的带单",
     "totalTransactionVolume": "累计交易量",
     "numberOfTransactions": "交易笔数",
     "totalDocumentaryNumber": "累计跟单人数",
@@ -109,7 +109,7 @@
     "myHomePage": "我的主頁",
     "listOfDragonsAndTigers": "帶單龍虎榜",
     "updatedEveryHour": "數據每小時更新一次",
-    "bringTheBill": "我要帶單",
+    "bringTheBill": "我的帶單",
     "totalTransactionVolume": "累計交易量",
     "numberOfTransactions": "交易筆數",
     "totalDocumentaryNumber": "累計跟單人數",
