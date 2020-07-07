@@ -59,8 +59,12 @@
   margin-bottom: 15px;
   justify-content: space-between;
 }
+.follow-asset-total-data {
+  width: 100%;
+}
 .follow-asset-total {
-  margin-right: 167px;
+  width: 50%;
+  margin-right: 14%;
   font-size:12px;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
@@ -77,9 +81,9 @@
   color: #0D0E23;
 }
 .follow-asset-renewal {
-  width: 550px;
+  width: 50%;
   border-left: 1px solid #F5F6FA;
-  padding-left: 35px;
+  padding-left: 4%;
   height: 63px;
   /*line-height: 30px;*/
 }
@@ -101,7 +105,7 @@
 }
 .follow-asset-close-open img {
   vertical-align: text-bottom;
-  width: 48px;
+  width: 40px;
   margin-left: 10px;
 }
 .descript {
@@ -122,7 +126,7 @@
 }
 .open-automatic-renew-text {
   color: #3576F5;
-  font-size:0.24rem;
+  font-size:12px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
 }
@@ -132,7 +136,7 @@
 .open-automatic-renew-text-grew {
 
   color: #6A83A8;
-  font-size:0.24rem;
+  font-size:12px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
 }
