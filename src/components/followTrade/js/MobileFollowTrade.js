@@ -56,7 +56,9 @@ root.created = function () {
   }
 }
 
-root.mounted = function () {}
+root.mounted = function () {
+  this.currentInterval && clearInterval(this.currentInterval)
+}
 root.beforeDestroy = function () {}
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
