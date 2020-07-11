@@ -141,15 +141,15 @@ root.methods.re_postCommitFee = function (data) {
     this.postManage()
   }
   if(data.errorCode == 1) {
-    this.openPop('systemError')
+    this.openPop(this.$t('systemError'))
     return;
   }
   if(data.errorCode == 2) {
-    this.openPop('insufficient')
+    this.openPop(this.$t('insufficient'))
     return;
   }
   if(data.errorCode == 3) {
-    this.openPop('securityDeposit')
+    this.openPop(this.$t('securityDeposit'))
     return;
   }
   if(data.errorCode != 0) {
