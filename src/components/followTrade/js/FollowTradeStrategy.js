@@ -140,9 +140,19 @@ root.methods.re_postCommitFee = function (data) {
     this.popWindowClose()
     this.postManage()
   }
+  if(data.errorCode == 1) {
+    this.openPop('systemError')
+    return;
+  }
+  if(data.errorCode == 2) {
+    this.openPop('insufficient')
+    return;
+  }
+  if(data.errorCode == 3) {
+    this.openPop('securityDeposit')
+    return;
+  }
   if(data.errorCode != 0) {
-    this.openMaskWindow = false
-    this.isTapeList = true
     this.openPop(this.$t('systemError'))
   }
 }

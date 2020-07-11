@@ -103,45 +103,6 @@ root.methods.testCurrencyPair = function () {
   }
 }
 
-//成为大神
-root.methods.postCommitFee = function () {
-  if(this.currencyPair == ''){
-    this.openPop (this.$t('cannotBeBlank'))
-    return
-  }
-  // if(this.currencyPair == 0){
-  //   this.openPop ('跟单费用不能为0')
-  //   return
-  // }
-  let params = {
-    fee: this.currencyPair,
-  }
-  this.$http.send('POST_GOD', {
-    bind: this,
-    params: params,
-    callBack: this.re_postCommitFee,
-    errorHandler: this.error_postCommitFee
-  })
-}
-root.methods.re_postCommitFee = function (data) {
-  typeof data === 'string' && (data = JSON.parse(data))
-  if(data.errorCode == 0) {
-    this.openMaskWindow = false
-    this.isTapeList = true
-    this.openPop(this.$t('subscriptionSuccessful'),1)
-    this.postManage()
-  }
-  if(data.errorCode != 0) {
-    this.openMaskWindow = false
-    this.isTapeList = true
-    this.openPop(this.$t('systemError'))
-  }
-}
-root.methods.error_postCommitFee = function (err) {
-  console.log("this.err=====",err)
-}
-
-
 
 //修改大神
 root.methods.postRevisionFee = function () {
