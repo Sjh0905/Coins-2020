@@ -195,11 +195,17 @@
         </div>
       </div>
       <div class="mobile-open-tape-pop-window-content-text">
+        <div>{{$t('openInterpretation_1')}}</div>
+        <div>{{$t('openInterpretation_2')}}</div>
         <!--开启后，如您收益率靠前，您将可能出现在带单收益榜榜单中，同时可被用户跟单，零成本获得额外的带单收益，双重盈利。-->
-        {{$t('openInterpretation')}}
+        <div>{{$t('openInterpretation_3')}}</div>
       </div>
     </div>
     <div slot="footer" class="pop-recharge-bottom">
+      <div class="documentary-text flex">
+        <div>所需保证金</div>
+        <div class="text-blue-documentary">{{godFee}} TT</div>
+      </div>
       <!--确认开启-->
       <div class="documentary-button pointer" @click="postCommitFee">{{$t('commitOpen')}}</div>
     </div>

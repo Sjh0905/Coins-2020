@@ -267,7 +267,7 @@
   padding-left: 25px;
 }
 .update-follow-article {
-  padding: 30px 25px 22px 25px;
+  padding: 30px 25px 25px;
 }
 .follow-order {
   color: #193662;
@@ -281,6 +281,20 @@
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
   color: #A2B5D9;
+}
+.documentary-text {
+  justify-content: space-between;
+  font-size:14px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #8994A5;
+  margin-bottom: 12px;
+}
+.text-blue-documentary {
+  font-size:14px;
+  font-family:Roboto-Medium,Roboto;
+  font-weight:500;
+  color:#3576F5;
 }
 .documentary-button {
   width:410px;
@@ -320,6 +334,11 @@
   box-sizing: border-box;
 }
 .mobile-open-tape-pop-window-content-text {
+  width: 100%;
+  height: auto;
+  padding: 15px;
+  background:#F5F6FA;
+  border-radius:1px;
   margin-top: 10px;
   min-height: 16px;
   color: #6A83A8;
