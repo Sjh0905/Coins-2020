@@ -135,6 +135,26 @@ root.methods.re_postCommitFee = function (data) {
     this.isTapeList = true
     this.openPop('操作成功',1)
     this.postManage()
+    return;
+  }
+
+  if(data.errorCode == 1) {
+    this.openMaskWindow = false
+    this.isTapeList = true
+    this.openPop('系统有误')
+    return;
+  }
+  if(data.errorCode == 2) {
+    this.openMaskWindow = false
+    this.isTapeList = true
+    this.openPop('保证金不足')
+    return;
+  }
+  if(data.errorCode == 3) {
+    this.openMaskWindow = false
+    this.isTapeList = true
+    this.openPop('冻结保证金失败')
+    return;
   }
   if(data.errorCode != 0) {
     this.openMaskWindow = false
