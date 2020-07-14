@@ -28,6 +28,7 @@ root.data = function () {
     userFollowFees:[], //收益明细
     followDay:'', // 跟单天数
     godInfo:{}, //是否开启带单
+    godFee: '', //跟单保证金
 
     // 信息弹框
     popWindowOpen:false,
@@ -38,6 +39,7 @@ root.data = function () {
 root.created = function () {
 
   this.postManage()
+  this.postGodFee()
   if(this.$route.query.isApp) {
     // window.postMessage(JSON.stringify({
     //     method: 'setTitle',
@@ -75,6 +77,22 @@ root.computed.isAndroid = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+// 跟单保证金
+root.methods.postGodFee = function () {
+  this.$http.send('POST_GOD_FEE', {
+    bind: this,
+    callBack: this.re_postGodFee,
+    errorHandler: this.error_postGodFee
+  })
+}
+root.methods.re_postGodFee = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data && !data.dataMap) return
+  this.godFee = data.dataMap.godFee || 0
+}
+root.methods.error_postGodFee = function (err) {
+  console.log('err===',err)
+}
 //修改跟单
 root.methods.goToModify = function (fee) {
   this.currencyPairFee = fee
