@@ -44,7 +44,7 @@ root.created = function () {
 
   this.getBigBrotherList()
   this.currentInterval1 && clearInterval(this.currentInterval1)
-  this.currentInterval1 = setInterval(this.getBigBrotherList, 4000)
+  this.currentInterval1 = setInterval(this.getBigBrotherList, 5000)
 
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({
