@@ -234,7 +234,7 @@ root.methods.goToMyFollowOrder = function () {
 
 // 大佬列表
 root.methods.getBigBrotherList = function () {
-  console.info('掉接口啦===',new Date() )
+  // console.info('掉接口啦===',new Date() )
   this.$http.send('BIG_BROTHER_LIST', {
     bind: this,
     callBack: this.re_getBigBrotherList,
