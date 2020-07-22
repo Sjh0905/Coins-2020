@@ -65,8 +65,8 @@
         <div class="UID">UID</div>
         <!--时间-->
         <div class="time">{{$t('time')}}</div>
-        <!--交易对-->
-        <div class="exchange-pair">{{$t('transactionPair')}}</div>
+<!--        &lt;!&ndash;交易对&ndash;&gt;-->
+<!--        <div class="exchange-pair">{{$t('transactionPair')}}</div>-->
         <!--类型-->
         <div class="type">{{$t('type')}}</div>
         <!--交易方式-->
@@ -84,7 +84,7 @@
       <div class="follow-asset-topic-content flex" v-for="(item,index) in followUserList" :key="index">
         <div class="UID">{{item.followId}}</div>
         <div class="time">{{formatDateUitl(item.followTime)}}</div>
-        <div class="exchange-pair">{{item.symbol.replace('_','/')}}</div>
+<!--        <div class="exchange-pair">{{item.symbol.replace('_','/')}}</div>-->
         <!--现货-->
         <div class="type">{{item.type == 'SPOT'? $t('spot'):'--'}}</div>
         <!--固定金额/固定比例-->
@@ -122,7 +122,7 @@
       <div class="follow-order flex">
         <!--跟单币对-->
         <div>{{$t('documentaryPair')}}</div>
-        <div class="follow-order-data">BTC/USDT</div>
+        <div class="follow-order-data">BTC ETH LTC BCH</div>
       </div>
       <div class="follow-order">
         <!--跟单方式-->
