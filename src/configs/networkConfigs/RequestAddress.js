@@ -519,4 +519,14 @@ requestAddress.POST_GOD_BY_USERID= {url: urlHead+'/follow/godByUserId', method: 
 requestAddress.POST_REVISION_FEE= {url: urlHead+'/follow/updateFee', method: 'post'}  //修改带单费用
 requestAddress.POST_MANAGE = {url: urlHead+'/follow/followManage', method: 'post'}  //修改带单费用
 
+//2020-7-22  合约账户相关接口
+// requestAddress.GET_BALAN = {url: urlHead+'/future/account/userBalance', method: 'get'}  //账户余额
+// requestAddress.GET_BALAN1 = {url: urlHead+'/future/account/userAccount', method: 'get'}  //账户余额
+// requestAddress.GET_BALAN_ACCOUNT = {url: urlHead+'/binance/future/api/getUserBalance', method: 'get'}  //账户余额
+requestAddress.GET_BALAN_ACCOUNT = {url: urlHead+'/binance/future/api/getAccount', method: 'get'}  //账户余额
+requestAddress.GET_BALAN_POSITIONRISK = {url: urlHead+'/binance/future/api/positionRisk', method: 'get'}  //仓位
+requestAddress.GET_BALAN_FUTURE = {url: urlHead+'/user/transfer/future', method: 'post'}  //合约划转
+
+
+
 export default requestAddress

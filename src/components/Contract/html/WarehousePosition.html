@@ -44,19 +44,19 @@
           <div class="li-container flex">
             <!--合约-->
             <div class="order-number">
-              <div class="order-number-box">{{item.id}}</div>
+              <div class="order-number-box" :class="item.positionAmt > 0 ? 'order-number-box' : 'order-number-box-fu'">{{item.symbol}}</div>
             </div>
             <!--数量-->
             <div class="currency">
-              <div class="currency-box">{{item.currency}}</div>
+              <div class="" :class="item.positionAmt > 0 ? 'currency-box' : 'currency-box-fu'">{{item.positionAmt}}</div>
             </div>
             <!--开仓价格-->
-            <div class="total">{{toFixed(item.amount,8)}}</div>
+            <div class="total">{{toFixed(item.entryPrice,8)}}</div>
             <!--标记价格 -->
-            <div class="lock-house-time">{{item.updatedAt}}</div>
+            <div class="lock-house-time">{{item.markPrice}}</div>
             <!--未实现盈亏(回报率)-->
             <div class="lock-house-time">
-              <div class="currency-box-fu">{{item.updatedAt}} (-0.5%)</div>
+              <div class="" :class="item.unrealizedProfit > 0 ? 'currency-box' : 'currency-box-fu'">{{item.unrealizedProfit}} (-0.5%)</div>
             </div>
             <!-- 操作-->
             <div class="operation">

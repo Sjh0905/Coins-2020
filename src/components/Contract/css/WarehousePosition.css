@@ -49,6 +49,13 @@
   padding-left: 8px;
 }
 
+.order-number-box-fu {
+  height: 30px;
+  line-height: 30px;
+  border-left: 2px solid #EF5656;
+  padding-left: 8px;
+}
+
 .currency-box {
   color: #08D0AC;
 }
