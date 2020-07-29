@@ -245,8 +245,6 @@
                   >{{$t('quotes')}}
 <!--                                      {{$t('currencyQuotation')}}-->
                   </router-link>
-                  <!--隐藏的标签 法币交易 begin-->
-                  <!--隐藏的标签 end-->
                 </li>
 
                 <!--币币交易 begin-->
@@ -259,9 +257,6 @@
                     {{$t('currencyExchange')}}
 
                   </router-link>
-                  <!--隐藏的标签 币币交易 begin-->
-
-                  <!--隐藏的标签 end-->
                 </li>
 
                 <!--法币交易 begin-->
@@ -272,12 +267,17 @@
                   >
                     {{$t('fiatDeal')}}
                   </div>
-                  <!--隐藏的标签 法币交易 begin-->
-
-                  <!--隐藏的标签 end-->
                 </li>
 
                 <!--合约交易 begin-->
+                <li class="navigation-item-container flex">
+                  <div @click="goToFranchExchange"
+                       class="navigation-item-router flex pointer"
+                       active-class="navigation-item-router-selected"
+                  >
+                    {{$t('contractExchange')}}
+                  </div>
+                </li>
 
 
 <!--                &lt;!&ndash; 法币交易 &ndash;&gt;-->
