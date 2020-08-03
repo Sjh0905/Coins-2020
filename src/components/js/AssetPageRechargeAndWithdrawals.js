@@ -235,7 +235,7 @@ root.watch.currencyChange = function (newVal, oldVal) {
     otcAccounts.push(item)
   })
   this.accounts = otcAccounts
-  console.log('this.accounts zpy============== ',this.accounts)
+  // console.log('this.accounts zpy============== ',this.accounts)
 }
 
 root.watch.loading = function (newVal, oldVal) {

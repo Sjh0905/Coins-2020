@@ -214,7 +214,7 @@ root.methods.isERC20 = function () {
 
 // 获取币种回调
 root.methods.re_getCurrency = function (data) {
-  console.log(data)
+  // console.log(data)
   typeof (data) === 'string' && (data = JSON.parse(data))
   if (!data.dataMap || !data.dataMap.currencys) {
     return
@@ -223,7 +223,7 @@ root.methods.re_getCurrency = function (data) {
 
   let object = this.$store.state.currency.get(this.title)
 
-  console.log('object', object)
+  // console.log('object', object)
   if(object.memo === 'yes') {
     this.isMemo = true
     this.memoToastShow = true
@@ -270,7 +270,7 @@ root.methods.re_getAccounts = function (data) {
 
 // 获取币种出错
 root.methods.error_getAccounts = function (err) {
-  console.log('获取账户信息出错！', err)
+  // console.log('获取账户信息出错！', err)
 }
 
 
@@ -318,7 +318,7 @@ root.methods.error_getAuthState = function (err) {
 
 // 获取转账邮箱验证码
 root.methods.getMailVerificationCode = function () {
-  console.log(this.serverT)
+  // console.log(this.serverT)
   if (this.getTransferMailCode) {
     return
   }
@@ -360,7 +360,7 @@ root.methods.getMailVerificationCode = function () {
 root.methods.re_getEmailVerification = function (data) {
 
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log('data', data)
+  // console.log('data', data)
   if (data.errorCode) {
     if (data.errorCode == 1) {
       this.mailCodeWA = '用户未登录'
@@ -392,7 +392,7 @@ root.methods.re_getEmailVerification = function (data) {
 }
 // 获取转账邮箱验证码出错
 root.methods.error_getEmailVerification = function (err) {
-  console.warn('获取邮箱验证码出错', err)
+  // console.warn('获取邮箱验证码出错', err)
 }
 // 再点击邮箱，把错误提示关闭
 root.methods.closeMailWrong = function () {
@@ -540,7 +540,7 @@ root.methods.submitStepThree = function () {
 root.methods.re_commitStep2Verification = function (data) {
 
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log('dataguge=====',data)
+  // console.log('dataguge=====',data)
   // this.submitStepThreeFlag = true
 
   this.googleCodeWA = ''
@@ -757,7 +757,7 @@ root.methods.gotoTransfer = function (){
 
 // 显示邮箱验证码页面
 root.methods.gotoTransferSuccess = function () {
-  console.log(this.emailInput)
+  // console.log(this.emailInput)
   this.mobileToastTwoFlag = true
   // this.$router.push({name:'MobileAssetWithdrawDetail',query:{currency:'USDT'}})
 }
