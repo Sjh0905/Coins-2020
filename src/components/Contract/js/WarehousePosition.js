@@ -120,6 +120,12 @@ root.methods.popClose = function () {
   this.popOpen = false
 }
 
+root.methods.goToContractTransaction = function () {
+  // window.location.replace(this.$store.state.domain_url + 'index/sign/login?ani=1&toUrl=c2c_url');
+  window.location.replace( process.env.CONTRACT_URL +'index/tradingHall?symbol=BTC_USDT');
+
+}
+
 /*---------------------- 保留小数 begin ---------------------*/
 root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)

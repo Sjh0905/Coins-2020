@@ -523,10 +523,9 @@ requestAddress.POST_MANAGE = {url: urlHead+'/follow/followManage', method: 'post
 // requestAddress.GET_BALAN = {url: urlHead+'/future/account/userBalance', method: 'get'}  //账户余额
 // requestAddress.GET_BALAN1 = {url: urlHead+'/future/account/userAccount', method: 'get'}  //账户余额
 // requestAddress.GET_BALAN_ACCOUNT = {url: urlHead+'/binance/future/api/getUserBalance', method: 'get'}  //账户余额
-requestAddress.GET_BALAN_ACCOUNT = {url: urlHead+'/binance/future/api/getAccount', method: 'get'}  //账户余额
-requestAddress.GET_BALAN_POSITIONRISK = {url: urlHead+'/binance/future/api/positionRisk', method: 'get'}  //仓位
-requestAddress.GET_BALAN_FUTURE = {url: urlHead+'/user/transfer/future', method: 'post'}  //合约划转
-
+requestAddress.GET_BALAN_ACCOUNT = {url: urlHead+'/future/account/userAccountv2', method: 'get'}  //账户余额
+requestAddress.GET_BALAN_POSITIONRISK = {url: urlHead+'/future/account/positionRiskv2', method: 'get'}  //仓位
+requestAddress.GET_BALAN_FUTURE = {url: urlHead+'/user/transfer/future', method: 'post'}  //合约划转 转账
 
 
 export default requestAddress
