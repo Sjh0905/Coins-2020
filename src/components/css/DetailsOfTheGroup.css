@@ -511,7 +511,12 @@ ul {
 
 
 /*H5样式*/
-
+.consequencesSpanH5 {
+  font-size: 0.32rem;
+  color: #3576F5;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:500;
+}
 .mobileOf {
   width: 100%;
 }
@@ -862,7 +867,7 @@ ul {
   color: #333;
   font-size: 13px;
   line-height: 18px;
-  text-align: center;
+  text-align: left;
 }
 .confirm-nobind-email-btn {
   height: 36px;

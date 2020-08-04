@@ -263,6 +263,9 @@ root.methods.re_postWithdraw = function (data) {
       data.errorCode == 1 && (this.popText = this.$t('not_group')) ||//成员未加入拼团
       data.errorCode == 2 && (this.popText = this.$t('member_type')) || // 成员类型错误
       data.errorCode == 3 && (this.popText = this.$t('withdrawal')) || // 退团异常
+      data.errorCode == 'n_8' && (this.popText = this.$t('Insufficient-succ')) || // 余额不足，退团失败
+      data.errorCode == 'n_10' && (this.popText = this.$t('退团失败')) || // 余额不足，退团失败
+      data.errorCode == 'n_18' && (this.popText = this.$t('退团失败')) || // 余额不足，退团失败
       data.errorCode == 400 && (this.popText = this.$t('parameter_error')) //参数有误
     ) {
       this.popOpen = true

@@ -23,10 +23,12 @@
           <span class="time">{{$t('日期')}}</span>
 
           <!--币种-->
-          <span class="currency">{{$t('日均资产（USDT）')}}</span>
+          <span class="currency">{{$t('日累计资产（USDT）')}}</span>
 
           <!--数量-->
-          <span class="total">{{$t('月均资产（USDT）')}}</span>
+          <span class="type">{{$t('月累计资产（USDT）')}}</span>
+          <span class="type">{{$t('日累计交易量（USDT）')}}X</span>
+          <span class="total">{{$t('月累计交易量（USDT）')}}X</span>
 
           <!--说明-->
           <span class="address">{{$t('热度')}}</span>
@@ -47,7 +49,9 @@
                   <!--              <span class="type">数据</span>-->
                   <!--              formatDateUitl-->
                   <!--              数量-->
-                  <span class="total">{{toFixed(item.monthAvg,2)}}</span>
+                  <span class="type">{{toFixed(item.monthAvg,2)}}</span>
+                  <span class="type">{{toFixed(item.monthAvg,2)}}X</span>
+                  <span class="total">{{toFixed(item.monthAvg,2)}}X</span>
                   <!--              说明-->
                   <span class="address address-detail">{{toFixed(item.hotVal,2)}}</span>
 
