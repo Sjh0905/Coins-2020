@@ -47,16 +47,16 @@
 }
 
 .detail {
-  flex: 26;
+  flex: 20;
   /*text-align: right*/
 }
 
 .num {
-  flex: 26;
+  flex: 20;
   /*text-align: right;*/
 }
 .num1 {
-  flex: 26;
+  flex: 20;
   text-align: right;
 }
 
