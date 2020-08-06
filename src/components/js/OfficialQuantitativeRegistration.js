@@ -72,6 +72,10 @@ root.computed.computedRecord = function (item,index) {
   // console.log('jjjjjjjjjjj',item,'kkkkkkkk',index,'pppppp',this.records)
   return this.records
 }
+//热度值
+root.computed.authHotVal = function () {
+  return this.$store.state.authHotVal
+}
 
 // 判断是否是手机
 root.computed.isMobile = function () {
@@ -148,7 +152,14 @@ root.methods.RE_GET_AUTH_STATE = function (res) {
 
 }
 
-
+//跳转热度
+root.methods.checkTheHeat = function () {
+  this.$router.push({name: 'heatList'})
+}
+//跳转热度
+root.methods.checkTheHeatH5 = function () {
+  this.$router.push({name: 'mobileHeatList'})
+}
 
 // 显示详情
 root.methods.showDetail = function () {

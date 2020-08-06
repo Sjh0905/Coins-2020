@@ -125,6 +125,19 @@
   font-weight:500;
   color:rgba(13,14,35,1);
 }
+.detall-color {
+  color:rgba(13,14,35,1);
+}
+.detall-color-blu {
+  padding-left: 5px;
+  color:#3576F5;
+  cursor: pointer;
+}
+.uidHeatQian {
+  width: 10px;
+  vertical-align: sub;
+  margin-bottom: 2px;
+}
 .exchange_button {
   width: 100%;
   height:44px;
@@ -154,10 +167,11 @@
 }
 .notice_div {
   width: 100%;
-  height:71px;
+  /*height:71px;*/
   background:rgba(255,249,242,1);
   border:1px solid rgba(255,197,139,1);
   padding: 10px;
+  margin-bottom: 30px;
   box-sizing: border-box;
   font-size:12px;
   font-family:PingFangSC-Regular,PingFang SC;
@@ -715,4 +729,17 @@
 .img-on {
   width: 16px;
   vertical-align: sub;
+}
+.bound-p {
+  padding-top: 0.05rem;
+}
+.detall-color-blu-h {
+  padding-left: 0.1rem;
+  color:#3576F5;
+  cursor: pointer;
+}
+.uidHeatQian-h {
+  width: 0.2rem;
+  vertical-align: sub;
+  margin-bottom: 0.04rem;
 }
