@@ -77,7 +77,7 @@
 <!--            USDT估值-->
             <span class="valuation">
 <!--              <font class="valuation_font">{{(priceReady || initReady) && item.appraisement > 0 ? USDTAppraisement(item) : '&#45;&#45;'}}</font>-->
-              <font class="valuation_font">{{(priceReady || initReady) && item.available != 0 ? USDTAppraisement(item) : '--'}}</font>
+              <font class="valuation_font">{{(priceReady || initReady) && item.total != 0 ? USDTAppraisement(item) : '--'}}</font>
 <!--              <span class="show_tips" :class="show_key == index ? 'show' : ''">-->
 <!--                {{change_price}}-->
 <!--                <font></font>-->
@@ -86,7 +86,7 @@
 <!--            BTC估值-->
             <span class="valuation">
               <font class="valuation_font" @mouseenter="get_now_price(index, item.appraisement, $event)"
-                    @mouseleave="hide_now_price">{{(priceReady || initReady) && item.available!=0 ? toFixed(item.appraisement,8) : '--'}}</font>
+                    @mouseleave="hide_now_price">{{(priceReady || initReady) && item.total!=0 ? toFixed(item.appraisement,8) : '--'}}</font>
 <!--              <span class="show_tips" :class="show_key == index ? 'show' : ''">-->
 <!--                {{change_price}}-->
 <!--                <font></font>-->
