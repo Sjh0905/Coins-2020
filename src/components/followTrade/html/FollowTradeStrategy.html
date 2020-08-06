@@ -105,7 +105,7 @@
               <!--价格-->
               <div class="application_header_div">{{toFixed(item.price,2)}}</div>
               <!--数量-->
-              <div class="application_header_div">{{toFixed(item.amount,2)}}</div>
+              <div class="application_header_div">{{toFixed(item.amount,4)}}</div>
               <!--金额-->
               <div class="application_header_div_right">{{toFixed(item.price * item.amount,2)}}</div>
             </li>
@@ -163,7 +163,7 @@
           <!-- 如果没加载完成、没登录、没数据，则显示'--' begin -->
           <template v-else>
             <li class="weit">
-              <div class="nhtu"><img src="">
+              <div class="nhtu"><img src="../assets/no_list.png">
                 <p class="nhtu_p">{{$t('orderPageCurrentEntrustment.close_9')}}</p>
               </div>
             </li>
@@ -184,7 +184,7 @@
       <div class="follow-order flex">
         <!--跟单币对-->
         <div>{{$t('documentaryCurrencyPair')}}</div>
-        <div class="follow-order-data">BTC/USDT</div>
+        <div class="follow-order-data">BTC ETH LTC BCH</div>
       </div>
       <div class="follow-order-item flex">
         <!--跟单费用-->
@@ -195,11 +195,17 @@
         </div>
       </div>
       <div class="mobile-open-tape-pop-window-content-text">
+        <div>{{$t('openInterpretation_1',{godFee})}}</div>
+        <div>{{$t('openInterpretation_2')}}</div>
         <!--开启后，如您收益率靠前，您将可能出现在带单收益榜榜单中，同时可被用户跟单，零成本获得额外的带单收益，双重盈利。-->
-        {{$t('openInterpretation')}}
+        <div>{{$t('openInterpretation_3')}}</div>
       </div>
     </div>
     <div slot="footer" class="pop-recharge-bottom">
+      <div class="documentary-text flex">
+        <div>所需保证金</div>
+        <div class="text-blue-documentary">{{godFee}} TT</div>
+      </div>
       <!--确认开启-->
       <div class="documentary-button pointer" @click="postCommitFee">{{$t('commitOpen')}}</div>
     </div>

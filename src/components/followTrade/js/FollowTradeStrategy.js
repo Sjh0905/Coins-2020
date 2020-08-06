@@ -28,6 +28,7 @@ root.data = function () {
     userFollowFees:[],
 
     followDay :'',
+    godFee: '', //跟单保证金
 
     // 信息弹框
     popWindowOpen:false,
@@ -52,6 +53,7 @@ root.created = function () {
   this.isOpenFollow()
   this.postPersonalFollowUser()
   this.postPersonalrHistory()
+  this.postGodFee()
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
@@ -80,6 +82,23 @@ root.computed.isAndroid = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+// 跟单保证金
+root.methods.postGodFee = function () {
+  this.$http.send('POST_GOD_FEE', {
+    bind: this,
+    callBack: this.re_postGodFee,
+    errorHandler: this.error_postGodFee
+  })
+}
+root.methods.re_postGodFee = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data && !data.dataMap) return
+  this.godFee = data.dataMap.godFee || 0
+}
+root.methods.error_postGodFee = function (err) {
+  console.log('err===',err)
+}
+
 //个人带单管理
 root.methods.postManage = function () {
   this.$http.send('POST_MANAGE', {
@@ -140,9 +159,19 @@ root.methods.re_postCommitFee = function (data) {
     this.popWindowClose()
     this.postManage()
   }
+  if(data.errorCode == 1) {
+    this.openPop(this.$t('systemError'))
+    return;
+  }
+  if(data.errorCode == 2) {
+    this.openPop(this.$t('insufficient'))
+    return;
+  }
+  if(data.errorCode == 3) {
+    this.openPop(this.$t('securityDeposit'))
+    return;
+  }
   if(data.errorCode != 0) {
-    this.openMaskWindow = false
-    this.isTapeList = true
     this.openPop(this.$t('systemError'))
   }
 }

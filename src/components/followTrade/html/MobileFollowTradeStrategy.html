@@ -80,7 +80,7 @@
           </div>
           <div class="mobile-trade-item-content-container flex">
             <div class="mobile-trade-price">{{item.price}}</div>
-            <div class="mobile-trade-amount">{{item.amount}}</div>
+            <div class="mobile-trade-amount">{{toFixed(item.amount,4)}}</div>
             <div class="mobile-trade-money">{{toFixed(item.price * item.amount,2)}}</div>
           </div>
         </div>

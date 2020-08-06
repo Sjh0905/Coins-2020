@@ -417,7 +417,7 @@ root.methods.getScaleConfig = function () {
 
 // 设置当前price
 root.methods.RE_SET_PRICE = function (price) {
-  console.log('comparePriceNow===============',price)
+  // console.log('comparePriceNow===============',price)
   this.price = price
   this.priceNow = price;
 }
@@ -559,11 +559,11 @@ root.methods.popIdenComfirms = function () {
 }
 
 root.methods.comparePriceNow = function () {
-  console.log(this.priceNow)
+  // console.log(this.priceNow)
 
   if (this.priceNow <= 0 || this.price <=0)return true
   let multiple = this.accDiv(this.price,Number(this.priceNow));
-  console.log('wwwww===========',this.price,this.priceNow)
+  // console.log('wwwww===========',this.price,this.priceNow)
 
 
   let priceCont = ''

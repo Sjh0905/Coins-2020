@@ -476,7 +476,7 @@ ul {
 
 .pop-recharge {
   padding: 35px 25px;
-  font-size:16px;
+  font-size:14px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color: #0D0E23;
@@ -503,6 +503,7 @@ ul {
 }
 
 .consequencesSpan {
+  font-size: 16px;
   color: #3576F5;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:500;
@@ -510,7 +511,12 @@ ul {
 
 
 /*H5样式*/
-
+.consequencesSpanH5 {
+  font-size: 0.32rem;
+  color: #3576F5;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:500;
+}
 .mobileOf {
   width: 100%;
 }
@@ -861,7 +867,7 @@ ul {
   color: #333;
   font-size: 13px;
   line-height: 18px;
-  text-align: center;
+  text-align: left;
 }
 .confirm-nobind-email-btn {
   height: 36px;

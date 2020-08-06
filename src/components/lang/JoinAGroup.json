@@ -151,7 +151,8 @@
   "does":"该账户不存在于本团",
   "deleted":"团长职位不可删除",
   "joint-head":"联席团长职位不可删除",
-  "Removal-successful":"移除成功"
+  "Removal-successful":"移除成功",
+  "Insufficient-succ": "余额不足，退团失败!"
 },
 "EN": {
   "dissolve":"Dissolve the regiment",
@@ -331,6 +332,7 @@
   "does":"該帳戶不存在於本團",
   "deleted":"團長職位不可刪除",
   "joint-head":"聯席團長職位不可刪除",
-  "Removal-successful":"移除成功"
+  "Removal-successful":"移除成功",
+  "Insufficient-succ": "餘額不足,退團失敗!"
 }
 }
