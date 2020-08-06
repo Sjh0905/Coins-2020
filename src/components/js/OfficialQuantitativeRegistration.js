@@ -513,6 +513,14 @@ root.methods.re_postActivities = function (data) {
         this.popOpen = true
       }, 100)
     }
+    if (data.errorCode == "9") {
+      this.popOpen = true
+      this.popType = 0
+      this.popText = this.$t('register') //热度值小于1，暂不能报名！
+      setTimeout(() => {
+        this.popOpen = true
+      }, 100)
+    }
     if (data.errorCode == "400") {
       this.popOpen = true
       this.popType = 0
