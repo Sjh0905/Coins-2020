@@ -12,8 +12,8 @@
 
     <div class="mobile-forecast-record-title col-list">
       <div class="mobile-forecast-record-title-type type">热度</div>
-      <div class="mobile-forecast-record-title-detail detail">资产(U)</div>
-      <div class="mobile-forecast-record-title-num num1">交易量(U)</div>
+      <div class="mobile-forecast-record-title-detail detail">资产(USDT)</div>
+      <div class="mobile-forecast-record-title-num num1">交易量(USDT)</div>
     </div>
     <div  class="mobile-forecast-record-list " v-for="(item,index) in heatList">
       <div class="flex col-list">
@@ -27,7 +27,7 @@
         </div>
 
         <div class="num">
-          <div class="mobile-forecast mobile-forecast1">日 {{toFixed(item.dayTransCounts,2)}}</div>
+          <div class="mobile-forecast mobile-forecast1">日累计 {{toFixed(item.dayTransCounts,2)}}</div>
           <div class="mobile-forecast mobile-forecast1">月累计 {{toFixed(item.monthTransCounts,2)}}</div>
         </div>
       </div>
