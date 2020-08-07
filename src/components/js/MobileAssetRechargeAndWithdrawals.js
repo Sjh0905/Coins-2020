@@ -527,7 +527,7 @@ root.methods.hideZeroItem = function () {
 
 /*---------------------- 点击item，跳转detail页start ---------------------*/
 root.methods.jumpToDetail = function (name) {
-  this.$router.push({name: 'MobileAssetRechargeAndWithdrawalsDetail',query:{currency: name},
+  this.$router.push({name: 'MobileAssetRechargeAndWithdrawalsDetail',query:{currency: name,assetAccountType:this.assetAccountType},
     params:{assetAccountType:this.assetAccountType}})
 }
 
