@@ -181,8 +181,6 @@ root.data = function () {
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
-  // 获取锁仓挖矿字典数据
-  this.getMiningDict()
   this.getProhibitAll()
   this.$store.commit('changeJoinus', false);
   this.getInitData()
@@ -2496,6 +2494,7 @@ root.methods.selectLockTime = function (lockTime) {
 // 打开锁仓
 root.methods.openLockHouse = function (index,item) {
   // console.info(new Date().getDate())
+  this.getMiningDict()
   this.lockCount()
   this.lockHouseNowTime
   // 锁仓币
