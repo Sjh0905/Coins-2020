@@ -181,7 +181,6 @@ root.data = function () {
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
-  // this.getMiningDict()
   this.getProhibitAll()
   this.$store.commit('changeJoinus', false);
   this.getInitData()
@@ -216,8 +215,6 @@ root.created = function () {
   }
 
   this.re_transferDisabled()
-
-
 }
 
 root.mounted = function () {}
@@ -405,7 +402,7 @@ root.computed.lockHouseMining = function () {
   this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'YYYY-MM-DD');
   if(this.lockCurrencys == '2500KK') {
     if(this.lockTimeTwo.days == 1) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp,'YYYY-MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + dayTimeStep ,'YYYY-MM-DD');
     }
     if(this.lockTimeTwo.days == 5) {
       this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + fiveTimeStamp,'YYYY-MM-DD');
@@ -470,6 +467,9 @@ root.watch.lockCurrencys = function (newVal,oldVal) {
     this.lockCurrency  ='KK'
     this.rewCurrency = 'FF'
     this.days = 1
+    this.lockTimeTwo = {
+      days: '1'
+    }
     return
   }
   if(newVal == '500KK') {
@@ -478,6 +478,9 @@ root.watch.lockCurrencys = function (newVal,oldVal) {
     this.lockCurrency  ='KK'
     this.rewCurrency = 'FF'
     this.days = 5
+    this.lockTime = {
+      days: '5'
+    }
   }
 }
 
