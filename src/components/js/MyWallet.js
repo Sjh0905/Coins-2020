@@ -382,8 +382,8 @@ root.computed.lockHouseStudy = function () {
     nowTimeStamp += dayTimeStep
     dividendTimeStamp += dayTimeStep
   }
-  this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'MM-DD');
-  this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'MM-DD');
+  this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'YYYY-MM-DD');
+  this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'YYYY-MM-DD');
   let timeObj = {openDateTime:this.openDateTime, closeDateTime:this.closeDateTime}
   return timeObj
 }
@@ -402,34 +402,34 @@ root.computed.lockHouseMining = function () {
     nowTimeStamp += dayTimeStep
     dividendTimeStamp += dayTimeStep
   }
-  this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'MM-DD');
+  this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'YYYY-MM-DD');
   if(this.lockCurrencys == '2500KK') {
     if(this.lockTimeTwo.days == 1) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp,'MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp,'YYYY-MM-DD');
     }
     if(this.lockTimeTwo.days == 5) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + fiveTimeStamp,'MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + fiveTimeStamp,'YYYY-MM-DD');
     }
     if(this.lockTimeTwo.days == 30) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + thirtyTimeStamp,'MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + thirtyTimeStamp,'YYYY-MM-DD');
     }
     if(this.lockTimeTwo.days == 90) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'YYYY-MM-DD');
     }
   }
 
   if(this.lockCurrencys == '500KK') {
     if(this.lockTime.days == 5) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp +( 5 * dayTimeStep),'MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp +( 5 * dayTimeStep),'YYYY-MM-DD');
     }
     if(this.lockTime.days == 25) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 5),'MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 5),'YYYY-MM-DD');
     }
     if(this.lockTime.days == 150) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 5),'MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 5),'YYYY-MM-DD');
     }
     if(this.lockTime.days == 450) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp *5),'MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp *5),'YYYY-MM-DD');
     }
   }
   let timeObj = {openDateTime:this.openDateTime, closeDateTime:this.closeDateTime}
@@ -447,8 +447,8 @@ root.computed.lockHouseNowTime = function () {
      nowTimeStamp += dayTimeStep
      dividendTimeStamp += dayTimeStep
   }
-  this.nowDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'MM-DD');
-  this.dividendTime = this.$globalFunc.formatDateUitl(dividendTimeStamp,'MM-DD');
+  this.nowDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'YYYY-MM-DD');
+  this.dividendTime = this.$globalFunc.formatDateUitl(dividendTimeStamp,'YYYY-MM-DD');
   let timeObj = {nowDateTime:this.nowDateTime,dividendTime:this.dividendTime}
   return timeObj
 }
