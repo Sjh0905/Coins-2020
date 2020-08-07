@@ -181,6 +181,7 @@ root.data = function () {
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
+  // 获取锁仓挖矿字典数据
   this.getMiningDict()
   this.getProhibitAll()
   this.$store.commit('changeJoinus', false);
@@ -216,8 +217,6 @@ root.created = function () {
   }
 
   this.re_transferDisabled()
-
-
 }
 
 root.mounted = function () {}
@@ -405,7 +404,7 @@ root.computed.lockHouseMining = function () {
   this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'MM-DD');
   if(this.lockCurrencys == '2500KK') {
     if(this.lockTimeTwo.days == 1) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp,'MM-DD');
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + dayTimeStep ,'MM-DD');
     }
     if(this.lockTimeTwo.days == 5) {
       this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + fiveTimeStamp,'MM-DD');
