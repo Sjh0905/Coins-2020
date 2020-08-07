@@ -18,29 +18,56 @@
         <!--</span>-->
         {{rechargeDetailData.currency == 'USDT2'?'USDT':rechargeDetailData.currency}}
       </div>
+      <!--地址-->
+      <div class=" header-box-num">
+        <span class="container-box-address-title">订单编号</span>
+        <span class="container-box-address-container">{{rechargeDetailData.id}}</span>
+      </div>
 
       <!--数量-->
-      <div class="header-box-num">
+      <div class="container-box-address">
         <span class="header-box-num-title">数量</span>
         <span class="header-box-num-container">{{toFixed(rechargeDetailData.amount,8)}}</span>
       </div>
 
       <!--昨日收益-->
 
-      <div class="header-box-state">
-        <span class="header-box-state-title">昨日收益</span>
-        <!--<span v-if="rechargeDetailData.depositOk === true && rechargeDetailData.depositCancelled === false" class="header-box-state-container">成功</span>-->
-        <span class="header-box-state-container">{{toFixed(rechargeDetailData.lastAmount,8)}}</span>
-        <!--<span v-if="rechargeDetailData.depositOk === false && rechargeDetailData.depositCancelled === false" class="header-box-state-container">充值中({{rechargeDetailData.confirms}}/{{rechargeDetailData.minimumConfirms}})</span>-->
-      </div>
+<!--      <div class="header-box-state">-->
+<!--        <span class="header-box-state-title">昨日收益</span>-->
+<!--        &lt;!&ndash;<span v-if="rechargeDetailData.depositOk === true && rechargeDetailData.depositCancelled === false" class="header-box-state-container">成功</span>&ndash;&gt;-->
+<!--        <span class="header-box-state-container">{{toFixed(rechargeDetailData.lastAmount,8)}}</span>-->
+<!--        &lt;!&ndash;<span v-if="rechargeDetailData.depositOk === false && rechargeDetailData.depositCancelled === false" class="header-box-state-container">充值中({{rechargeDetailData.confirms}}/{{rechargeDetailData.minimumConfirms}})</span>&ndash;&gt;-->
+<!--      </div>-->
 
       <!--累计收益-->
       <div class="header-box-state">
-        <span class="header-box-state-title">累计收益</span>
+        <span class="header-box-state-title">累计分红</span>
         <!--<span v-if="rechargeDetailData.depositOk === true && rechargeDetailData.depositCancelled === false" class="header-box-state-container">成功</span>-->
         <span class="header-box-state-container">{{toFixed(rechargeDetailData.totalAmount,8)}}</span>
         <!--<span v-if="rechargeDetailData.depositOk === false && rechargeDetailData.depositCancelled === false" class="header-box-state-container">充值中({{rechargeDetailData.confirms}}/{{rechargeDetailData.minimumConfirms}})</span>-->
 
+      </div>
+
+      <!--锁仓时间-->
+      <div class="container-box-txid">
+        <span class="container-box-txid-title">锁仓时间</span>
+        <span class="container-box-txid-container">
+          {{$globalFunc.formatDateUitl(rechargeDetailData.createdAt,'YYYY-MM-DD hh:mm:ss')}}
+        </span>
+      </div>
+
+      <!--分红时间-->
+      <div class="container-box-txid">
+        <span class="container-box-txid-title">计算分红时间</span>
+        <span class="container-box-txid-container">{{rechargeDetailData.dateTime}}</span>
+      </div>
+
+      <!--锁仓时间-->
+      <div class="container-box-txid">
+        <span class="container-box-txid-title">解锁时间</span>
+        <span class="container-box-txid-container">
+          {{$globalFunc.formatDateUitl(rechargeDetailData.updatedAt,'YYYY-MM-DD hh:mm:ss')}}
+        </span>
       </div>
 
       <!--<div class="header-box-time">{{$globalFunc.formatDateUitl(rechargeDetailData.updatedAt,'MM-DD hh:mm:ss')}}</div>-->
@@ -50,51 +77,51 @@
       <!--<div v-if="rechargeDetailData.depositOk === false && rechargeDetailData.depositCancelled === false" class="header-box-state">充值中({{rechargeDetailData.confirms}}/{{rechargeDetailData.minimumConfirms}})</div>-->
       <!--<div class="header-box-state">成功</div>-->
     </div>
-    <div class="container-box">
-      <!--地址-->
-      <div class="container-box-address">
-        <span class="container-box-address-title">订单编号</span>
-        <span class="container-box-address-container">{{rechargeDetailData.id}}</span>
-      </div>
-
-      <!--锁仓时间-->
-      <div class="container-box-txid">
-        <span class="container-box-txid-title">锁仓时间</span>
-        <span class="container-box-txid-container">
-          {{$globalFunc.formatDateUitl(rechargeDetailData.updatedAt,'YYYY-MM-DD hh:mm:ss')}}
-        </span>
-      </div>
-
-      <!--分红时间-->
-      <div class="container-box-txid">
-        <span class="container-box-txid-title">分红时间</span>
-        <span class="container-box-txid-container">{{rechargeDetailData.dateTime}}</span>
-      </div>
-
-      <!--      &lt;!&ndash;日期&ndash;&gt;-->
-      <!--      <div class="container-box-time">-->
-      <!--        <span class="container-box-time-title">计算分红时间</span>-->
-      <!--        <span class="container-box-time-container">{{$globalFunc.formatDateUitl(rechargeDetailData.updatedAt,'YYYY-MM-DD hh:mm:ss')}}</span>-->
-      <!--      </div>-->
-
-      <!--复制和跳转txid按钮-->
-<!--      <div class="container-box-btn">-->
-<!--        <div class="container-box-address-btn">解锁</div>-->
-<!--        &lt;!&ndash;        <div class="container-box-copy-btn" data-clipboard-target=".container-box-txid-container" @click="copyValue">复制Txid</div>&ndash;&gt;-->
+<!--    <div class="container-box">-->
+<!--      &lt;!&ndash;地址&ndash;&gt;-->
+<!--      <div class="container-box-address">-->
+<!--        <span class="container-box-address-title">订单编号</span>-->
+<!--        <span class="container-box-address-container">{{rechargeDetailData.id}}</span>-->
 <!--      </div>-->
 
-      <!--<div class="container-box-title">-->
-      <!--充值地址-->
-      <!--</div>-->
-      <!--<div class="container-box-address">{{rechargeDetailData.toAddress}}</div>-->
+<!--      &lt;!&ndash;锁仓时间&ndash;&gt;-->
+<!--      <div class="container-box-txid">-->
+<!--        <span class="container-box-txid-title">锁仓时间</span>-->
+<!--        <span class="container-box-txid-container">-->
+<!--          {{$globalFunc.formatDateUitl(rechargeDetailData.updatedAt,'YYYY-MM-DD hh:mm:ss')}}-->
+<!--        </span>-->
+<!--      </div>-->
 
-      <!--<div class="container-box-title">TXID</div>-->
-      <!--<div class="container-box-txid">-->
-      <!--<textarea readonly class="container-box-txid-text">{{rechargeDetailData.uniqueId}}</textarea>-->
-      <!--<div class="container-box-copy-btn" data-clipboard-target=".container-box-txid-text" @click="copyValue">复制</div>-->
-      <!--<div class="container-box-address-btn" @click="jumpToCheckAddress">检查</div>-->
-      <!--</div>-->
-    </div>
+<!--      &lt;!&ndash;分红时间&ndash;&gt;-->
+<!--      <div class="container-box-txid">-->
+<!--        <span class="container-box-txid-title">分红时间</span>-->
+<!--        <span class="container-box-txid-container">{{rechargeDetailData.dateTime}}</span>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash;      &lt;!&ndash;日期&ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;      <div class="container-box-time">&ndash;&gt;-->
+<!--      &lt;!&ndash;        <span class="container-box-time-title">计算分红时间</span>&ndash;&gt;-->
+<!--      &lt;!&ndash;        <span class="container-box-time-container">{{$globalFunc.formatDateUitl(rechargeDetailData.updatedAt,'YYYY-MM-DD hh:mm:ss')}}</span>&ndash;&gt;-->
+<!--      &lt;!&ndash;      </div>&ndash;&gt;-->
+
+<!--      &lt;!&ndash;复制和跳转txid按钮&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="container-box-btn">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="container-box-address-btn">解锁</div>&ndash;&gt;-->
+<!--&lt;!&ndash;        &lt;!&ndash;        <div class="container-box-copy-btn" data-clipboard-target=".container-box-txid-container" @click="copyValue">复制Txid</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+
+<!--      &lt;!&ndash;<div class="container-box-title">&ndash;&gt;-->
+<!--      &lt;!&ndash;充值地址&ndash;&gt;-->
+<!--      &lt;!&ndash;</div>&ndash;&gt;-->
+<!--      &lt;!&ndash;<div class="container-box-address">{{rechargeDetailData.toAddress}}</div>&ndash;&gt;-->
+
+<!--      &lt;!&ndash;<div class="container-box-title">TXID</div>&ndash;&gt;-->
+<!--      &lt;!&ndash;<div class="container-box-txid">&ndash;&gt;-->
+<!--      &lt;!&ndash;<textarea readonly class="container-box-txid-text">{{rechargeDetailData.uniqueId}}</textarea>&ndash;&gt;-->
+<!--      &lt;!&ndash;<div class="container-box-copy-btn" data-clipboard-target=".container-box-txid-text" @click="copyValue">复制</div>&ndash;&gt;-->
+<!--      &lt;!&ndash;<div class="container-box-address-btn" @click="jumpToCheckAddress">检查</div>&ndash;&gt;-->
+<!--      &lt;!&ndash;</div>&ndash;&gt;-->
+<!--    </div>-->
   </div>
   <PopupPrompt :popOpen="popOpen" :popClose="popClose" :popType="popType" :popText="popText"/>
 

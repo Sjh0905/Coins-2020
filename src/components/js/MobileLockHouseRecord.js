@@ -86,6 +86,7 @@ root.methods = {}
 
 root.methods.gotoZichan = function () {
   this.$router.push({name:'MobileAssetRechargeAndWithdrawalsDetail',query:{currency:this.$route.query.name}})
+  // this.$router.go(-1)
 }
 
 root.methods.changeOpenTypeQuery = function () {

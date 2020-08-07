@@ -22,7 +22,7 @@ root.components = {
 
 root.created = function () {
   // this.$store.commit('changeMobileHeaderTitle', this.$store.state.mobileRechargeRecordData.currency + '充值详情')
-  if(!this.$store.state.changemobileLockRecordData.currency) {
+  if(this.$store.state.changemobileLockRecordData && !this.$store.state.changemobileLockRecordData.currency) {
     this.$router.push({name: 'MobileLockHouseRecord'})
   }
 }
@@ -63,13 +63,51 @@ root.methods.unLockHouse = function (item) {
 root.methods.re_unLockHouse = function ( data ) {
   typeof (data) === 'string' && (data = JSON.parse(data))
   this.popOpen = true
-  if(data.result == 'SUCCESS') {
-    this.popType = 1
-    this.popText = '解锁成功'
+  if(data.errorCode){
+    if(data.errorCode == 1 ) {
+      this.popType = 0
+      this.popText = this.$t('用户未登录')
+      return
+    }
+    if(data.errorCode == 2 ) {
+      this.popType = 0
+      this.popText = this.$t('解锁失败')
+      return
+    }
+    if(data.errorCode == 3 ) {
+      this.popType = 0
+      this.popText = this.$t('用户已解锁')
+      return
+    }
+    if(data.errorCode == 4 ) {
+      this.popType = 0
+      this.popText = this.$t('解锁失败')
+      return
+    }
+    if(data.errorCode == 5 ) {
+      this.popType = 0
+      this.popText = this.$t('不能解锁，未满90天解锁日期')
+      return
+    }
+
+    this.popType = 0
+    this.popText = this.$t('解锁失败')
     return
   }
-  this.popType = 0
-  this.popText = '解锁失败'
+  if(data.result == 'SUCCESS') {
+    this.popType = 1
+    this.popText = this.$t('解锁成功')
+    // this.$eventBus.notify({key: 'UN_LOCK'})
+    // this.getLockCur()
+    return
+  }
+  // if(data.result == 'SUCCESS') {
+  //   this.popType = 1
+  //   this.popText = '解锁成功'
+  //   return
+  // }
+  // this.popType = 0
+  // this.popText = '解锁失败'
 }
 root.methods.error_unLockHouse = function ( err ) {
   console.log(err)

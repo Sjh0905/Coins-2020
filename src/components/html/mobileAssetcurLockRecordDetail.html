@@ -3,23 +3,22 @@
   <!--顶部标题-->
   <div class="header-title">
     <div class="asset-header-title">
-      当前锁仓
+      详情
       <span class="backgo" @click="gotoLockHouse">
           <img src="../../assets/H5img/back.png">
       </span>
     </div>
+
   </div>
   <div class="recharge-box">
-    <div class="header-box" v-if="rechargeDetailData.currency == 'KK'">
+    <div class="header-box">
 <!--      顶部标题及logo-->
-      <div class="header-box-title">
-        KK锁仓挖矿
-      </div>
+      <div class="header-box-title" v-if="rechargeDetailData.currency == 'KK'">KK</div>
       <div class="header-box-title" v-if="rechargeDetailData.currency == 'TT'">
-        TT锁仓分红
+        TT
       </div>
-      <div class="header-box-title" v-if="rechargeDetailData.currency == 'TT'">
-        USDT锁仓学习
+      <div class="header-box-title" v-if="rechargeDetailData.currency == 'USDT'">
+        USDT
       </div>
 
 
@@ -31,21 +30,30 @@
 
       <!--昨日收益-->
 
-      <div class="header-box-state" v-if="rechargeDetailData.currency == 'TT'">
-        <span class="header-box-state-title">昨日收益</span>
+      <div class="header-box-state" v-if="rechargeDetailData.status">
+        <span class="header-box-state-title">最新分红</span>
         <!--<span v-if="rechargeDetailData.depositOk === true && rechargeDetailData.depositCancelled === false" class="header-box-state-container">成功</span>-->
         <span class="header-box-state-container">{{toFixed(rechargeDetailData.lastAmount,8)}}</span>
         <!--<span v-if="rechargeDetailData.depositOk === false && rechargeDetailData.depositCancelled === false" class="header-box-state-container">充值中({{rechargeDetailData.confirms}}/{{rechargeDetailData.minimumConfirms}})</span>-->
       </div>
 
       <!--累计收益-->
-      <div class="header-box-state" v-if="rechargeDetailData.currency == 'TT'">
+      <div class="header-box-state" v-if="rechargeDetailData.status">
         <span class="header-box-state-title">累计收益</span>
         <!--<span v-if="rechargeDetailData.depositOk === true && rechargeDetailData.depositCancelled === false" class="header-box-state-container">成功</span>-->
         <span class="header-box-state-container">{{toFixed(rechargeDetailData.totalAmount,8)}}</span>
         <!--<span v-if="rechargeDetailData.depositOk === false && rechargeDetailData.depositCancelled === false" class="header-box-state-container">充值中({{rechargeDetailData.confirms}}/{{rechargeDetailData.minimumConfirms}})</span>-->
 
       </div>
+      <!--计算分红时间-->
+      <div class="header-box-state" v-if="rechargeDetailData.status">
+        <span class="header-box-state-title">计算分红时间</span>
+        <!--<span v-if="rechargeDetailData.depositOk === true && rechargeDetailData.depositCancelled === false" class="header-box-state-container">成功</span>-->
+        <span class="header-box-state-container">{{$globalFunc.formatDateUitl((rechargeDetailData.dateTime),'YYYY-MM-DD')}}</span>
+        <!--<span v-if="rechargeDetailData.depositOk === false && rechargeDetailData.depositCancelled === false" class="header-box-state-container">充值中({{rechargeDetailData.confirms}}/{{rechargeDetailData.minimumConfirms}})</span>-->
+
+      </div>
+
 
       <!--<div class="header-box-time">{{$globalFunc.formatDateUitl(rechargeDetailData.updatedAt,'MM-DD hh:mm:ss')}}</div>-->
 
@@ -54,26 +62,44 @@
       <!--<div v-if="rechargeDetailData.depositOk === false && rechargeDetailData.depositCancelled === false" class="header-box-state">充值中({{rechargeDetailData.confirms}}/{{rechargeDetailData.minimumConfirms}})</div>-->
       <!--<div class="header-box-state">成功</div>-->
     </div>
-    <div class="container-box">
-      <!--地址-->
-      <div class="container-box-address">
-        <span class="container-box-address-title">订单编号</span>
-        <span class="container-box-address-container">{{rechargeDetailData.id}}</span>
-      </div>
+    <div class="container-box-address">
+      <span class="container-box-address-title">订单编号</span>
+      <span class="container-box-address-container">{{rechargeDetailData.id}}</span>
+    </div>
 
-      <!--锁仓时间-->
-      <div class="container-box-txid">
-        <span class="container-box-txid-title">锁仓时间</span>
-        <span class="container-box-txid-container">
+    <!--锁仓时间-->
+    <div class="container-box-txid">
+      <span class="container-box-txid-title">锁仓时间</span>
+      <span class="container-box-txid-container">
           {{$globalFunc.formatDateUitl(Number(rechargeDetailData.createdAt),'YYYY-MM-DD hh:mm:ss')}}
         </span>
-      </div>
+    </div>
+
+    <!--分红时间-->
+    <div class="container-box-txid">
+      <span class="container-box-txid-title">到期时间</span>
+      <span class="container-box-txid-container">{{$globalFunc.formatDateUitl(Number(rechargeDetailData.expireTime),'YYYY-MM-DD hh:mm:ss')}}</span>
+    </div>
+    <div class="container-box">
+      <!--地址-->
+<!--      <div class="container-box-address">-->
+<!--        <span class="container-box-address-title">订单编号</span>-->
+<!--        <span class="container-box-address-container">{{rechargeDetailData.id}}</span>-->
+<!--      </div>-->
+
+      <!--锁仓时间-->
+<!--      <div class="container-box-txid">-->
+<!--        <span class="container-box-txid-title">锁仓时间</span>-->
+<!--        <span class="container-box-txid-container">-->
+<!--          {{$globalFunc.formatDateUitl(Number(rechargeDetailData.createdAt),'YYYY-MM-DD hh:mm:ss')}}-->
+<!--        </span>-->
+<!--      </div>-->
 
       <!--分红时间-->
-      <div class="container-box-txid">
-        <span class="container-box-txid-title">分红时间</span>
-        <span class="container-box-txid-container">{{$globalFunc.formatDateUitl(Number(rechargeDetailData.expireTime),'YYYY-MM-DD hh:mm:ss')}}</span>
-      </div>
+<!--      <div class="container-box-txid">-->
+<!--        <span class="container-box-txid-title">分红时间</span>-->
+<!--        <span class="container-box-txid-container">{{$globalFunc.formatDateUitl(Number(rechargeDetailData.expireTime),'YYYY-MM-DD hh:mm:ss')}}</span>-->
+<!--      </div>-->
 
 <!--      &lt;!&ndash;日期&ndash;&gt;-->
 <!--      <div class="container-box-time">-->
