@@ -39,6 +39,10 @@ root.computed = {}
 root.computed.rechargeDetailData = function () {
   return this.$store.state.mobileLockRecordData
 }
+// 获取userId
+root.computed.userId = function () {
+  return this.$store.state.authMessage.userId
+}
 
 
 root.methods = {};
@@ -53,7 +57,8 @@ root.methods.unLockHouse = function (item) {
   this.$http.send("UNLOCK_ASSET_RECODE", {
     bind: this,
     params: {
-      lockId: this.rechargeDetailData.id
+      userId:this.userId,
+      lockId: Number(this.rechargeDetailData.id)
     },
     callBack: this.re_unLockHouse,
     errorHandler: this.error_unLockHouse
@@ -110,6 +115,61 @@ root.methods.re_unLockHouse = function ( data ) {
   // this.popText = '解锁失败'
 }
 root.methods.error_unLockHouse = function ( err ) {
+  console.log(err)
+}
+
+// 解锁锁仓
+root.methods.unLockHouseCC = function (item) {
+  this.$http.send("UNLOCK_MINING", {
+    bind: this,
+    params: {
+      userId:this.userId,
+      lockId:  Number(this.rechargeDetailData.id)
+    },
+    callBack: this.re_unLockHouseCC,
+    errorHandler: this.error_unLockHouseCC
+  })
+}
+
+root.methods.re_unLockHouseCC = function ( data ) {
+  typeof (data) === 'string' && (data = JSON.parse(data))
+  this.popOpen = true
+  if(data.errorCode){
+    if(data.errorCode == 2 ) {
+      this.popType = 0
+      this.popText = this.$t('未找到记录')
+      return
+    }
+    if(data.errorCode == 3 ) {
+      this.popType = 0
+      this.popText = this.$t('用户已解锁')
+      return
+    }
+    if(data.errorCode == 4 ) {
+      this.popType = 0
+      this.popText = this.$t('解锁失败')
+      return
+    }
+    if(data.errorCode == 5 ) {
+      this.popType = 0
+      this.popText = this.$t('未满锁仓到期日')
+      return
+    }
+    this.popType = 0
+    this.popText = this.$t('unLockTips_3')
+    return
+  }
+  if(data.success == true) {
+    this.popType = 1
+    this.popText = this.$t('lockSuccess')
+    this.$eventBus.notify({key: 'UN_LOCK'})
+    // this.getLockLearning()
+    return
+  }
+
+  // console.log(data)
+}
+root.methods.error_unLockHouseCC = function ( err ) {
   console.log(err)
 }
 
