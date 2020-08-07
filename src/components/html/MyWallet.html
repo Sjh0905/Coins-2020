@@ -361,9 +361,12 @@
       </div>
     </div>
     <div slot="footer" class="lock-house-footer">
-      <button v-if="lockHouseCurrency =='TT'" class="ensure-button btn_blue pointer" @click="commitLockHouse()">{{$t('lock_house_ensure')}}</button>
-      <button v-if="lockHouseCurrency =='KK'" class="ensure-button btn_blue pointer" @click="commitLockMining()">{{$t('lock_house_ensure ')}}</button>
-      <button v-if="lockHouseCurrency =='USDT'" class="ensure-button btn_blue pointer" @click="commitLockLearing()">{{$t('lock_house_ensure')}}</button>
+      <button v-if="lockHouseCurrency =='TT' && !sending1" class="ensure-button btn_blue pointer" @click="commitLockHouse()">{{$t('lock_house_ensure')}}</button>
+      <button v-if="lockHouseCurrency =='TT' && sending1" class="ensure-button btn_blue pointer">{{$t('锁仓中')}}</button>
+      <button v-if="lockHouseCurrency =='KK' && !sending2" class="ensure-button btn_blue pointer" @click="commitLockMining()">{{$t('lock_house_ensure ')}}</button>
+      <button v-if="lockHouseCurrency =='KK' && sending2" class="ensure-button btn_blue pointer">{{$t('锁仓中 ')}}</button>
+      <button v-if="lockHouseCurrency =='USDT' && !sending3" class="ensure-button btn_blue pointer" @click="commitLockLearing()">{{$t('lock_house_ensure')}}</button>
+      <button v-if="lockHouseCurrency =='USDT' && sending3" class="ensure-button btn_blue pointer">{{$t('锁仓中')}}</button>
       <div class="day-surplus" v-if="lockHouseCurrency =='TT'">
         {{$t('lock_house_surplus')}}
         <span>{{lockNum}}</span>
