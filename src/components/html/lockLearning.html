@@ -54,7 +54,8 @@
             <!--到期时间 end-->
             <!--      操作-->
             <span class="operation">
-              <button class="pointer" @click="unLockHouse(item)">{{$t('un_lock')}}</button>
+              <button class="pointer operationButtonBlue" v-if="item.isLock == 0" @click="unLockHouse(item)">{{$t('un_lock')}}</button>
+              <button class="pointer operationButton" v-if="item.isLock == 1">{{$t('un_lock')}}</button>
             </span>
 
           </div>

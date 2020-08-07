@@ -371,7 +371,7 @@ root.computed.lockHouseStudy = function () {
   let severDate = new Date(this.serverTime)
   let dayTimeStep = 24 * 60 * 60 * 1000//一天的时间差 毫秒
   let nowTimeStamp = this.serverTime//起息日，默认当天
-  let dividendTimeStamp = this.serverTime + dayTimeStep//分红日，默认第二天
+  let dividendTimeStamp = this.serverTime //分红日，默认第二天
   let nineTyTimeStamp = 90 * 24 * 60 * 60 * 1000  // 90天
   //如果超过12点，时间分别加一天
   if (severDate.getHours() >= 12){
@@ -388,7 +388,7 @@ root.computed.lockHouseMining = function () {
   let severDate = new Date(this.serverTime)
   let dayTimeStep = 24 * 60 * 60 * 1000//一天的时间差 毫秒
   let nowTimeStamp = this.serverTime//起息日，默认当天
-  let dividendTimeStamp = this.serverTime + dayTimeStep//分红日，默认第二天
+  let dividendTimeStamp = this.serverTime//分红日，默认第二天
 
   let fiveTimeStamp = 5 * dayTimeStep  // 5天
   let thirtyTimeStamp = 30 * dayTimeStep  // 30天
