@@ -39,7 +39,7 @@
     <div v-if="computedRecord.length !== 0" class="recharge-list">
       <div v-for="(item,index) in computedRecord" :key="item.id" class="recharge-item" @click="toRechargeDetailPath(item)">
         <div class="recharge-item-title">{{item.currency== 'USDT2' ? 'USDT' :item.currency}}</div>
-        <div class="recharge-item-time">{{$globalFunc.formatDateUitl(Number(item.expireTime),'YYYY-MM-DD hh:mm:ss')}}</div>
+        <div class="recharge-item-time">{{$globalFunc.formatDateUitl(Number(item.createdAt),'YYYY-MM-DD hh:mm:ss')}}</div>
         <div class="recharge-item-num">
           <span class="recharge-item-num-detail">{{toFixed(item.amount,8)}}</span>
         </div>
@@ -81,7 +81,7 @@
       <div v-for="(item,index) in computedWithdraw" :key="item.id" class="withdraw-item" @click="toWithdrawDetailPath(item)">
         <div>
           <div class="withdraw-item-title">{{item.currency== 'USDT2' ? 'USDT' :item.currency}}</div>
-          <div class="withdraw-item-time">{{$globalFunc.formatDateUitl(item.updatedAt,'YYYY-MM-DD hh:mm:ss')}}</div>
+          <div class="withdraw-item-time">{{$globalFunc.formatDateUitl(Number(item.createdAt),'YYYY-MM-DD hh:mm:ss')}}</div>
           <div class="withdraw-item-num">
             <!--<span class="withdraw-item-num-title">数量</span>-->
             <span class="withdraw-item-num-detail">{{toFixed(item.amount,8)}}</span>
@@ -112,7 +112,7 @@
     <div v-if="computedRecord.length !== 0" class="recharge-list">
       <div v-for="(item,index) in computedRecord" :key="item.id" class="recharge-item" @click="toRechargeDetailPath(item)">
         <div class="recharge-item-title">{{item.currency== 'USDT2' ? 'USDT' :item.currency}}</div>
-        <div class="recharge-item-time">{{$globalFunc.formatDateUitl(Number(item.expireTime),'YYYY-MM-DD hh:mm:ss')}}</div>
+        <div class="recharge-item-time">{{$globalFunc.formatDateUitl(Number(item.createdAt),'YYYY-MM-DD hh:mm:ss')}}</div>
         <div class="recharge-item-num">
           <!--<span class="recharge-item-num-title">数量</span>-->
           <span class="recharge-item-num-detail">{{toFixed(item.amount,8)}}</span>
@@ -158,7 +158,7 @@
       <div v-for="(item,index) in computedWithdraw" :key="item.id" class="withdraw-item" @click="toWithdrawDetailPath(item)">
         <div>
           <div class="withdraw-item-title">{{item.currency== 'USDT2' ? 'USDT' :item.currency}}</div>
-          <div class="withdraw-item-time">{{$globalFunc.formatDateUitl(item.updatedAt,'YYYY-MM-DD hh:mm:ss')}}</div>
+          <div class="withdraw-item-time">{{$globalFunc.formatDateUitl(Number(item.createdAt),'YYYY-MM-DD hh:mm:ss')}}</div>
           <div class="withdraw-item-num">
             <!--<span class="withdraw-item-num-title">数量</span>-->
             <span class="withdraw-item-num-detail">{{toFixed(item.amount,8)}}</span>
@@ -189,7 +189,7 @@
     <div v-if="computedRecord.length !== 0" class="recharge-list">
       <div v-for="(item,index) in computedRecord" :key="item.id" class="recharge-item" @click="toRechargeDetailPath(item)">
         <div class="recharge-item-title">{{item.currency== 'USDT2' ? 'USDT' :item.currency}}</div>
-        <div class="recharge-item-time">{{$globalFunc.formatDateUitl(item.updatedAt,'YYYY-MM-DD hh:mm:ss')}}</div>
+        <div class="recharge-item-time">{{$globalFunc.formatDateUitl(Number(item.createdAt),'YYYY-MM-DD hh:mm:ss')}}</div>
         <div class="recharge-item-num">
           <!--<span class="recharge-item-num-title">数量</span>-->
           <span class="recharge-item-num-detail">{{toFixed(item.amount,8)}}</span>
@@ -235,7 +235,7 @@
       <div v-for="(item,index) in computedWithdraw" :key="item.id" class="withdraw-item" @click="toWithdrawDetailPath(item)">
         <div>
           <div class="withdraw-item-title">{{item.currency== 'USDT2' ? 'USDT' :item.currency}}</div>
-          <div class="withdraw-item-time">{{$globalFunc.formatDateUitl(item.updatedAt,'YYYY-MM-DD hh:mm:ss')}}</div>
+          <div class="withdraw-item-time">{{$globalFunc.formatDateUitl(Number(item.createdAt),'YYYY-MM-DD hh:mm:ss')}}</div>
           <div class="withdraw-item-num">
             <!--<span class="withdraw-item-num-title">数量</span>-->
             <span class="withdraw-item-num-detail">{{toFixed(item.amount,8)}}</span>

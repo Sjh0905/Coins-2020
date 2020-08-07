@@ -467,6 +467,9 @@ root.watch.lockCurrencys = function (newVal,oldVal) {
     this.lockCurrency  ='KK'
     this.rewCurrency = 'FF'
     this.days = 1
+    this.lockTimeTwo = {
+      days: '1'
+    }
     return
   }
   if(newVal == '500KK') {
@@ -475,6 +478,9 @@ root.watch.lockCurrencys = function (newVal,oldVal) {
     this.lockCurrency  ='KK'
     this.rewCurrency = 'FF'
     this.days = 5
+    this.lockTime = {
+      days: '5'
+    }
   }
 }
 
