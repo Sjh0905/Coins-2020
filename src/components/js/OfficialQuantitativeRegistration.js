@@ -47,6 +47,7 @@ root.data = () => {
     popIdenOpen: false,
     fstatus:'', //审核的状态
     remark:'',
+    fdesc:'',
     complete:'',  //挖矿已完成或进行中
     clickThis:1,
     sending1:false,
@@ -313,6 +314,7 @@ root.methods.re_getRegistrationRecord = function (data) {
   let E2 = this.records[0]
   this.fstatus = E2.fstatus
   this.complete = E2.complete
+  this.fdesc = E2.fdesc
   // this.fstatus = data.data.fstatus
   // this.remark = this.records.getArrayIndex(5)
   if ((this.records.length !== 0) && (this.matchDataKey[this.matchingAmount].indexOf('y') > -1)) {
@@ -513,14 +515,14 @@ root.methods.re_postActivities = function (data) {
         this.popOpen = true
       }, 100)
     }
-    if (data.errorCode == "9") {
-      this.popOpen = true
-      this.popType = 0
-      this.popText = this.$t('register') //热度值小于1，暂不能报名！
-      setTimeout(() => {
-        this.popOpen = true
-      }, 100)
-    }
+    // if (data.errorCode == "9") {
+    //   this.popOpen = true
+    //   this.popType = 0
+    //   this.popText = this.$t('register') //热度值小于1，暂不能报名！
+    //   setTimeout(() => {
+    //     this.popOpen = true
+    //   }, 100)
+    // }
     if (data.errorCode == "400") {
       this.popOpen = true
       this.popType = 0
