@@ -178,6 +178,7 @@ root.data = function () {
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
+  this.getMiningDict()
   this.getProhibitAll()
   this.$store.commit('changeJoinus', false);
   this.getInitData()
@@ -213,7 +214,7 @@ root.created = function () {
 
   this.re_transferDisabled()
 
-  this.getMiningDict()
+
 }
 
 root.mounted = function () {}

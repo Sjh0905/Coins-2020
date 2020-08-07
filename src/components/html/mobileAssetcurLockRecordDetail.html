@@ -10,14 +10,18 @@
     </div>
   </div>
   <div class="recharge-box">
-    <div class="header-box">
+    <div class="header-box" v-if="rechargeDetailData.currency == 'KK'">
 <!--      顶部标题及logo-->
       <div class="header-box-title">
-        <!--<span  class="header-box-title-logo-box">-->
-        <!--<img class="header-box-title-logo" :src="'http://logo.2020.exchange/' + (rechargeDetailData.currency == 'USDT2'?'USDT':rechargeDetailData.currency) +'.png'" alt="">-->
-        <!--</span>-->
-        {{rechargeDetailData.currency == 'USDT2'?'USDT':rechargeDetailData.currency}}
+        KK锁仓挖矿
       </div>
+      <div class="header-box-title" v-if="rechargeDetailData.currency == 'TT'">
+        TT锁仓分红
+      </div>
+      <div class="header-box-title" v-if="rechargeDetailData.currency == 'TT'">
+        USDT锁仓学习
+      </div>
+
 
       <!--数量-->
       <div class="header-box-num">
@@ -27,7 +31,7 @@
 
       <!--昨日收益-->
 
-      <div class="header-box-state">
+      <div class="header-box-state" v-if="rechargeDetailData.currency == 'TT'">
         <span class="header-box-state-title">昨日收益</span>
         <!--<span v-if="rechargeDetailData.depositOk === true && rechargeDetailData.depositCancelled === false" class="header-box-state-container">成功</span>-->
         <span class="header-box-state-container">{{toFixed(rechargeDetailData.lastAmount,8)}}</span>
@@ -35,7 +39,7 @@
       </div>
 
       <!--累计收益-->
-      <div class="header-box-state">
+      <div class="header-box-state" v-if="rechargeDetailData.currency == 'TT'">
         <span class="header-box-state-title">累计收益</span>
         <!--<span v-if="rechargeDetailData.depositOk === true && rechargeDetailData.depositCancelled === false" class="header-box-state-container">成功</span>-->
         <span class="header-box-state-container">{{toFixed(rechargeDetailData.totalAmount,8)}}</span>
@@ -61,14 +65,14 @@
       <div class="container-box-txid">
         <span class="container-box-txid-title">锁仓时间</span>
         <span class="container-box-txid-container">
-          {{$globalFunc.formatDateUitl(rechargeDetailData.updatedAt,'YYYY-MM-DD hh:mm:ss')}}
+          {{$globalFunc.formatDateUitl(Number(rechargeDetailData.createdAt),'YYYY-MM-DD hh:mm:ss')}}
         </span>
       </div>
 
       <!--分红时间-->
       <div class="container-box-txid">
         <span class="container-box-txid-title">分红时间</span>
-        <span class="container-box-txid-container">{{rechargeDetailData.dateTime}}</span>
+        <span class="container-box-txid-container">{{$globalFunc.formatDateUitl(Number(rechargeDetailData.expireTime),'YYYY-MM-DD hh:mm:ss')}}</span>
       </div>
 
 <!--      &lt;!&ndash;日期&ndash;&gt;-->

@@ -111,7 +111,6 @@ root.methods.getLockMining = function () {
 root.methods.re_getLockMining = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) return
-  console.info('data===',data)
   this.records = data.data || []
   if (this.records.length < this.limit) {
     this.loadingMoreShow = false

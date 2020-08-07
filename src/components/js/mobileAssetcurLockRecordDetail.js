@@ -29,24 +29,6 @@ root.created = function () {
 }
 
 root.mounted = function () {
-  // var that = this
-  // this.btn = new Clipboard('.container-box-copy-btn');
-  // this.btn.on('success', function (e) {
-  //   console.info('Text:', e.text);
-  //   e.clearSelection();
-  //   console.log('成功')
-  //
-  //   that.popOpen = true
-  //   that.popType = 1
-  //   that.popText = '复制成功'
-  //
-  // });
-  // this.btn.on('error', function (e) {
-  //   console.log('失败')
-  //   that.popOpen = true
-  //   that.popType = 0
-  //   that.popText = '复制失败'
-  // });
 }
 root.beforeDestroy = function () {
   // this.btn && this.btn.off('success')
@@ -89,7 +71,6 @@ root.methods.re_unLockHouse = function ( data ) {
   }
   this.popType = 0
   this.popText = '解锁失败'
-  // console.log(data)
 }
 root.methods.error_unLockHouse = function ( err ) {
   console.log(err)
