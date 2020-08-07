@@ -1928,7 +1928,7 @@ root.routes.push({
               caseSensitive: true,
             },
 
-            // 当前锁仓记录
+            // 锁仓分红记录
             {
               path: 'currentLockHouse',
               name: 'currentLockHouse',
@@ -1945,9 +1945,61 @@ root.routes.push({
               caseSensitive: true,
               component: resolve => require(['@/components/vue/currentLockHouse'], resolve),
             },
+            // 锁仓挖矿
+            {
+              path: 'lockAndMine',
+              name: 'lockAndMine',
+              meta: {
+                pcname: 'lockAndMine',
+                h5name: 'MobilelockAndMine',
+                requireLogin: true,
+                // 临时关闭
+                templateClose: false,
+                templatePath: '/index/asset/rechargeAndWithdrawals',
+                // templatePath: '/index/assetPageT',
+                requireLoginOff: false,
+              },
+              caseSensitive: true,
+              component: resolve => require(['@/components/vue/LockAndMine'], resolve),
+            },
+            // 锁仓学习
+            {
+              path: 'lockLearning',
+              name: 'lockLearning',
+              meta: {
+                pcname: 'lockLearning',
+                h5name: 'MobileLockLearning',
+                requireLogin: true,
+                // 临时关闭
+                templateClose: false,
+                templatePath: '/index/asset/rechargeAndWithdrawals',
+                // templatePath: '/index/assetPageT',
+                requireLoginOff: false,
+              },
+              caseSensitive: true,
+              component: resolve => require(['@/components/vue/lockLearning'], resolve),
+            },
 
 
-            // 历史锁仓记录
+            // 历史锁仓分红记录
+            {
+              path: 'historyLockAndMine',
+              name: 'historyLockAndMine',
+              meta: {
+                pcname: 'historyLockAndMine',
+                h5name: 'MobileHistoryLockAndMine',
+                requireLogin: true,
+                // 临时关闭
+                templateClose: false,
+                templatePath: '/index/asset/rechargeAndWithdrawals',
+                // templatePath: '/index/assetPageT',
+                requireLoginOff: false,
+              },
+              caseSensitive: true,
+              component: resolve => require(['@/components/vue/HistoryLockAndMine'], resolve),
+            },
+
+            // 历史锁仓挖矿记录
             {
               path: 'historyLockHouse',
               name: 'historyLockHouse',
@@ -1963,6 +2015,23 @@ root.routes.push({
               },
               caseSensitive: true,
               component: resolve => require(['@/components/vue/historyLockHouse'], resolve),
+            },
+            // 历史锁仓学习记录
+            {
+              path: 'historyLockLearning',
+              name: 'historyLockLearning',
+              meta: {
+                pcname: 'historyLockLearning',
+                h5name: 'MobileHistoryLockLearning',
+                requireLogin: true,
+                // 临时关闭
+                templateClose: false,
+                templatePath: '/index/asset/rechargeAndWithdrawals',
+                // templatePath: '/index/assetPageT',
+                requireLoginOff: false,
+              },
+              caseSensitive: true,
+              component: resolve => require(['@/components/vue/historyLockLearning'], resolve),
             },
           ]
         },

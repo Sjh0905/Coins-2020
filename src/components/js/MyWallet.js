@@ -140,6 +140,29 @@ root.data = function () {
     lockHouseAvailable:'',  // 锁仓可用
     lockNum:0,  //锁仓数量
 
+
+    lockReward: 1, // FF 奖励个数
+    openDateTime:'', // 锁仓挖矿开始时间
+    closeDateTime:'', // 锁仓挖矿到期时间
+    // lockAvailable: '500KK', // KK 所需个数
+    // lockAvailable1:'2500KK',
+    lockCurrencys: '500KK', // 锁仓钱数 1 :500 2:2500
+    lockTime: {
+      days:'5'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockTimeTwo: {
+      days:'1'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockIndex:0,
+    miningDate:[], // 币种数组
+    lockDaysOne:[],  //'500KK'对应的值
+    lockDaysTwo:[], //'2500KK'对应的值
+    amt : 500,
+    days: 5,
+    lockCurrency : 'KK',
+    rewAmt : 1,
+    rewCurrency :'FF',
+
     step2VerificationCode: '', //第二步
     step2VerificationCodeWA: '', //第二步验证
     step2VerificationSending: false,//第二步验证发送中
@@ -149,7 +172,7 @@ root.data = function () {
     picked:1,
     nowDateTime:'',
     dividendTime:'',
-    prohibitAll:false
+    prohibitAll:false,
 
   }
 }
@@ -189,6 +212,8 @@ root.created = function () {
   }
 
   this.re_transferDisabled()
+
+  this.getMiningDict()
 }
 
 root.mounted = function () {}
@@ -199,6 +224,10 @@ root.computed = {}
 // 获取userId
 root.computed.userId = function () {
   return this.$store.state.authMessage.userId
+}
+root.computed.computedMiningDate = function () {
+  console.info('computedMiningDate',this.miningDate)
+  return this.miningDate || []
 }
 // 验证类型
 root.computed.showPicker = function () {
@@ -337,6 +366,72 @@ root.computed.btc_rate = function () {
 //   let timeObj = {nowDateTime:this.nowDateTime,dividendTime:this.dividendTime}
 //   return timeObj
 // }
+//计算锁仓挖矿开始时间
+root.computed.lockHouseStudy = function () {
+  let severDate = new Date(this.serverTime)
+  let dayTimeStep = 24 * 60 * 60 * 1000//一天的时间差 毫秒
+  let nowTimeStamp = this.serverTime//起息日，默认当天
+  let dividendTimeStamp = this.serverTime + dayTimeStep//分红日，默认第二天
+  let nineTyTimeStamp = 90 * 24 * 60 * 60 * 1000  // 90天
+  //如果超过12点，时间分别加一天
+  if (severDate.getHours() >= 12){
+    nowTimeStamp += dayTimeStep
+    dividendTimeStamp += dayTimeStep
+  }
+  this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'MM-DD');
+  this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'MM-DD');
+  let timeObj = {openDateTime:this.openDateTime, closeDateTime:this.closeDateTime}
+  return timeObj
+}
+//计算锁仓挖矿开始时间
+root.computed.lockHouseMining = function () {
+  let severDate = new Date(this.serverTime)
+  let dayTimeStep = 24 * 60 * 60 * 1000//一天的时间差 毫秒
+  let nowTimeStamp = this.serverTime//起息日，默认当天
+  let dividendTimeStamp = this.serverTime + dayTimeStep//分红日，默认第二天
+
+  let fiveTimeStamp = 5 * dayTimeStep  // 5天
+  let thirtyTimeStamp = 30 * dayTimeStep  // 30天
+  let nineTyTimeStamp = 90 * dayTimeStep  // 90天
+  //如果超过12点，时间分别加一天
+  if (severDate.getHours() >= 12){
+    nowTimeStamp += dayTimeStep
+    dividendTimeStamp += dayTimeStep
+  }
+  this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'MM-DD');
+  if(this.lockCurrencys == '2500KK') {
+    if(this.lockTimeTwo.days == 1) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp,'MM-DD');
+    }
+    if(this.lockTimeTwo.days == 5) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + fiveTimeStamp,'MM-DD');
+    }
+    if(this.lockTimeTwo.days == 30) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + thirtyTimeStamp,'MM-DD');
+    }
+    if(this.lockTimeTwo.days == 90) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'MM-DD');
+    }
+  }
+
+  if(this.lockCurrencys == '500KK') {
+    if(this.lockTime.days == 5) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp +( 5 * dayTimeStep),'MM-DD');
+    }
+    if(this.lockTime.days == 25) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 5),'MM-DD');
+    }
+    if(this.lockTime.days == 150) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 5),'MM-DD');
+    }
+    if(this.lockTime.days == 450) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp *5),'MM-DD');
+    }
+  }
+  let timeObj = {openDateTime:this.openDateTime, closeDateTime:this.closeDateTime}
+  return timeObj
+}
+
 //计算锁仓起息日和分红日
 root.computed.lockHouseNowTime = function () {
   let severDate = new Date(this.serverTime)
@@ -354,6 +449,7 @@ root.computed.lockHouseNowTime = function () {
   return timeObj
 }
 
+
 root.computed.lockHouseDividendTime = function () {
   let date = new Date();
   let severDate = new Date(this.serverTime)
@@ -361,6 +457,25 @@ root.computed.lockHouseDividendTime = function () {
 
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
+//
+root.watch.lockCurrencys = function (newVal,oldVal) {
+  if (oldVal == newVal) return
+  if(newVal == '2500KK') {
+    this.amt = '2500'
+    this.rewAmt = 1
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 1
+    return
+  }
+  if(newVal == '500KK') {
+    this.amt = 500
+    this.rewAmt =  1
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 5
+  }
+}
 
 // 监听vuex中的变化
 root.watch.currencyChange = function (newVal, oldVal) {
@@ -469,8 +584,8 @@ root.methods.re_getProhibitAll = function (data) {
   }
   this.prohibitAll = data.dataMap.prohibitAll
 
-  console.info('this.re_getProhibitAll',this.getProhibitAll)
-  console.info('this.re_getProhibitAll++++++++++++',data)
+  // console.info('this.re_getProhibitAll',this.getProhibitAll)
+  // console.info('this.re_getProhibitAll++++++++++++',data)
   // this.getCheckGroupDetails()
 }
 
@@ -2276,19 +2391,6 @@ root.methods.beginVerificationStep2 = function () {
   if (!this.showPicker && this.picked == 2) {
     this.getMobileVerification()
   }
-
-  // if (this.picker == 0) {
-  //   this.popText = this.$t('popText_3')
-  //   this.popType = 0
-  //   this.popOpen = true
-  //   this.sending = false
-  //   return
-  // }
-  // this.popWindowStep = 2
-  // this.step2Error = false
-  // if (!this.showPicker && this.picker == 2) {
-  //   this.getMobileVerification()
-  // }
 }
 
 
@@ -2354,6 +2456,39 @@ root.methods.closeLockHouse = function () {
   this.popWindowOpenLockHouse = false
 }
 
+root.methods.selectLockCurrencys = function (lockCurrencys) {
+  this.lockCurrencys = lockCurrencys
+  if(this.lockCurrencys == '500KK') {
+    return this.lockDaysOne
+  }
+  if(this.lockCurrencys == '2500KK') {
+    return this.lockDaysTwo
+  }
+}
+root.methods.selectLockTime = function (lockTime) {
+  if(this.lockCurrencys == '500KK') {
+    this.lockTime = lockTime
+    this.amt = this.lockTime.amt || 0
+    this.days = this.lockTime.days || 0
+    this.lockCurrency = this.lockTime.lockCurrency || ''
+    this.rewAmt = this.lockTime.rewAmt || 0
+    this.rewCurrency = this.lockTime.rewCurrency || ''
+    return
+  }
+  if(this.lockCurrencys == '2500KK'){
+    this.lockTimeTwo = lockTime
+    this.amt = this.lockTimeTwo.amt || 0
+    this.days = this.lockTimeTwo.days || 0
+    this.lockCurrency = this.lockTimeTwo.lockCurrency || ''
+    this.rewAmt = this.lockTimeTwo.rewAmt || 0
+    this.rewCurrency = this.lockTimeTwo.rewCurrency || ''
+  }
+
+}
+
+// root.methods.selectLockTimeTwo = function (lockTime) {
+//   this.lockTimeTwo = lockTime
+// }
 
 // 打开锁仓
 root.methods.openLockHouse = function (index,item) {
@@ -2372,10 +2507,6 @@ root.methods.openLockHouse = function (index,item) {
 root.methods.lockCount = function () {
   this.$http.send('LOCK_COUNT', {
     bind: this,
-    // params: {
-    //   currency: this.lockHouseCurrency,
-    //   amount: this.lockHomeNum,
-    // },
     callBack: this.re_lockCount,
     errorHandler: this.error_lockCount,
   })
@@ -2429,6 +2560,100 @@ root.methods.canCommitLock = function () {
   return canSend
 }
 
+// 获取锁仓字典数据
+root.methods.getMiningDict = function () {
+  this.$http.send('LOCK_GET_MINING_DICT', {
+    bind: this,
+    callBack: this.re_getMiningDict,
+    errorHandler: this.error_getMiningDict,
+  })
+}
+root.methods.re_getMiningDict = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data) return
+  this.miningDate = Object.keys(data.data) || []
+  this.lockDaysOne = data.data['500KK'] || []
+  this.lockDaysTwo = data.data['2500KK'] || []
+
+
+
+}
+root.methods.error_getMiningDict = function (err) {}
+
+// 锁仓挖矿
+root.methods.commitLockMining = function () {
+  if(this.days == 0) {
+    this.popOpen = true
+    this.popType = 0
+    this.popText = this.$t('请确认锁仓时间')
+    return
+  }
+  this.$http.send('LOCK_MINING', {
+    bind: this,
+    params: {
+      userId:this.userId,
+      days: this.days,
+      amt:this.amt,
+      rewAmt:this.rewAmt
+    },
+    callBack: this.re_commitLockMining,
+    errorHandler: this.error_commitLockMining,
+  })
+}
+root.methods.re_commitLockMining = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data) return
+  if(data.errorCode) {
+    this.popOpen = true
+    if(data.errorCode == 2){
+      this.popType = 0
+      this.popText = this.$t('可用币种余额不足')
+      return
+    }
+    this.popType = 1
+    this.popText = this.$t('lock_house_success')
+    // 关闭锁仓弹框
+    this.closeLockHouse()
+    return
+  }
+
+}
+root.methods.error_commitLockMining = function (err) {
+  console.error('err=',err)
+}
+// 锁仓学习
+root.methods.commitLockLearing = function () {
+  this.$http.send('LOCK_STUDY', {
+    bind: this,
+    params: {
+      userId:this.userId,
+    },
+    callBack: this.re_commitLockLearing,
+    errorHandler: this.error_commitLockLearing,
+  })
+}
+root.methods.re_commitLockLearing = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data) return
+  this.popOpen = true
+  if(data.errorCode) {
+    if(data.errorCode == 2){
+      this.popType = 0
+      this.popText = this.$t('可用币种余额不足')
+      return
+    }
+    this.popType = 1
+    this.popText = this.$t('lock_house_success')
+    // 关闭锁仓弹框
+    this.closeLockHouse()
+    return
+  }
+}
+root.methods.error_commitLockLearing = function (err) {
+  console.error('err=',err)
+}
+
+// 锁仓分红
 root.methods.commitLockHouse = function () {
   if (this.sending) return
   if (!this.canCommitLock()) {

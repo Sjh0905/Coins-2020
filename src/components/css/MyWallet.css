@@ -479,6 +479,20 @@
 .wrong-msg {
   color: #C43E4E;
 }
+.lock-house-mining {
+
+}
+.lock-house-mining-box {
+  justify-content: space-between;
+  font-size:14px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #6B7DA2;
+  margin-bottom: 16px;
+}
+.lock-house-mining-content {
+  color: #0D0E23;
+}
 .Internal_siding_email {
   justify-content: space-between;
   padding:0 25px;
@@ -1083,7 +1097,7 @@
  /*padding: 10px 0 0;*/
 }
 
-.RiskAlert {
+.riskAlert {
   height:36px;
   line-height: 36px;
   background:rgba(255,249,242,1);
@@ -1097,10 +1111,77 @@
   margin-left: 10px;
   margin-right: 4px;
 }
+/*锁仓时间*/
+.lock-time {
 
+  margin-top: 10px;
 
-
-
+}
+.lock-time-currency {
+  height: 36px;
+  line-height: 36px;
+  /*flex-direction: row;*/
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.lock-time-currency-content {
+  width: 200px;
+  height: 100%;
+  text-align: center;
+  font-size:16px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #0D0E23;
+  border-radius:2px;
+  /*border:1px solid #3576F5;*/
+  border:1px solid #E0E1F4;
+  box-sizing: border-box;
+}
+.lock-time-currency-content-select {
+  width: 200px;
+  height: 100%;
+  text-align: center;
+  font-size:16px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #0D0E23;
+  border-radius:2px;
+  /*border:1px solid #3576F5;*/
+  background: rgba(53,118,245,0.1);
+  border:1px solid #3576F5;
+  box-sizing: border-box;
+}
+.lock-time-days {
+  height: 36px;
+  line-height: 36px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.lock-time-input {
+  width: 90px;
+  height: 100%;
+  text-align: center;
+  font-size:16px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #0D0E23;
+  border-radius:2px;
+  /*border:1px solid #3576F5;*/
+  border:1px solid #E0E1F4;
+  box-sizing: border-box;
+}
+.lock-time-input-selected {
+  width: 90px;
+  height: 100%;
+  text-align: center;
+  font-size:16px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #0D0E23;
+  border-radius:2px;
+  border:1px solid #3576F5;
+  box-sizing: border-box;
+}
 
 .lock-house-article {
   height: 87px;
