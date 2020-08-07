@@ -173,6 +173,9 @@ root.data = function () {
     nowDateTime:'',
     dividendTime:'',
     prohibitAll:false,
+    sending1:false,
+    sending2:false,
+    sending3:false,
 
   }
 }
@@ -2588,6 +2591,7 @@ root.methods.commitLockMining = function () {
     this.popText = this.$t('请确认锁仓时间')
     return
   }
+  this.sending2 = true
   this.$http.send('LOCK_MINING', {
     bind: this,
     params: {
@@ -2603,6 +2607,7 @@ root.methods.commitLockMining = function () {
 root.methods.re_commitLockMining = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if(!data) return
+  this.sending2 = false
   if(data.errorCode) {
     this.popOpen = true
     if(data.errorCode == 2){
@@ -2623,6 +2628,7 @@ root.methods.error_commitLockMining = function (err) {
 }
 // 锁仓学习
 root.methods.commitLockLearing = function () {
+  this.sending3 = true
   this.$http.send('LOCK_STUDY', {
     bind: this,
     params: {
@@ -2635,6 +2641,7 @@ root.methods.commitLockLearing = function () {
 root.methods.re_commitLockLearing = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if(!data) return
+  this.sending3 = false
   this.popOpen = true
   if(data.errorCode) {
     if(data.errorCode == 2){
@@ -2655,11 +2662,11 @@ root.methods.error_commitLockLearing = function (err) {
 
 // 锁仓分红
 root.methods.commitLockHouse = function () {
-  if (this.sending) return
+  if (this.sending1) return
   if (!this.canCommitLock()) {
     return
   }
-  this.sending = true
+  this.sending1 = true
 
   this.$http.send('LOCK_ASSET', {
     bind: this,
@@ -2673,7 +2680,7 @@ root.methods.commitLockHouse = function () {
 }
 
 root.methods.re_commitLockHouse = function (data) {
-  this.sending = false
+  this.sending1 = false
   typeof data === 'string' && (data = JSON.parse(data))
   if(!data) return
 
