@@ -86,7 +86,7 @@ root.methods.re_unLockHouse = function ( data ) {
     }
     if(data.errorCode == 5 ) {
       this.popType = 0
-      this.popText = this.$t('不能解锁，未满90天解锁日期')
+      this.popText = this.$t('不能解锁，未到解锁日期')
       return
     }
 
