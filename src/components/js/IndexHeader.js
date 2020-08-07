@@ -336,7 +336,7 @@ root.methods.re_getCheck = function (data) {
 
   this.data = data.data
   this.$store.commit('IS_VIP', data.data || {});
-  console.log('是否是会员get-----',this.data)
+  // console.log('是否是会员get-----',this.data)
 }
 
 root.methods.error_getCheck = function (err) {
@@ -885,7 +885,6 @@ root.methods.GET_NOTICE = function () {
 // 渲染通告列表
 root.methods.RE_GET_NOTICE = function (res) {
   this.noticelength = res.length;
-  console.log(res)
   this.noticeList = res;
   // console.log(this.noticeList)
 }

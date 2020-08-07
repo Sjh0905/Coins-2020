@@ -126,6 +126,13 @@ body {
   flex-direction: row;
 }
 
+.flex-row-reverse {
+  display: flex;
+  display: -moz-flex;
+  display: -webkit-flex;
+  flex-direction: row-reverse;
+}
+
 .flex-colum {
   display: flex;
   display: -moz-flex;

@@ -152,7 +152,7 @@ root.methods.getAuthState = function () {
 root.methods.re_getAuthState = function (data) {
   typeof (data) === 'string' && (data = JSON.parse(data))
   if (!data.dataMap) return
-  console.log('获取状态', data)
+  // console.log('获取状态', data)
   this.authType = data.dataMap.status
 
 }

@@ -44,12 +44,12 @@ root.data = function () {
 /*------------------------------ 计算 -------------------------------*/
 
 root.computed = {}
-// 人民币汇率,由于后台接口返回了0.001，所以前端改为price接口获取，
-// 直接由本地仓库计算好拿过来就行啦,这里其实返回的是btcExchangeRate，
-// 为了和之前的变量名一致，叫exchangeRate
-root.computed.exchangeRate = function () {
-  return this.$store.state.exchange_rate.btcExchangeRate
-}
+// // 人民币汇率,由于后台接口返回了0.001，所以前端改为price接口获取，
+// // 直接由本地仓库计算好拿过来就行啦,这里其实返回的是btcExchangeRate，
+// // 为了和之前的变量名一致，叫exchangeRate
+// root.computed.exchangeRate = function () {
+//   return this.$store.state.exchange_rate.btcExchangeRate
+// }
 // 计算account是否
 root.computed.accountChange = function () {
   return this.$store.state.currencyChange

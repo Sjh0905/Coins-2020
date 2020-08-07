@@ -93,10 +93,16 @@ root.methods.changeOpenTypeQuery = function () {
   let num = this.$route.query.id || 1
   this.openType = num
 
-  if(num == 1) {
+  if(num == 1){
     this.getLockCur()
   }
-  if (num == 2){
+  if(num == 2){
+    this.getLockHistory()
+  }
+  if(num == 3){
+    this.getLockCur()
+  }
+  if(num == 4){
     this.getLockHistory()
   }
 }
@@ -111,18 +117,18 @@ root.methods.changeOpenType = function(num){
     // this.$store.commit('changeMobileHeaderTitle', '');
     this.getLockCur()
   }
-
   if(num===2){
     this.$router.push({'path':'/index/mobileAsset/MobileLockHouseRecord',query:{id:2,name:this.$route.query.name}})
-
-    // this.$store.commit('changeMobileHeaderTitle', '');
-    // 获取withdraw值
-    // if(this.isFirstGetWithdrawFlag === true ){
-      this.getLockHistory()
-    // }
-    // return
+    this.getLockHistory()
   }
-
+  if(num === 3){
+    this.$router.push({'path':'/index/mobileAsset/MobileLockHouseRecord',query:{id:3,name:this.$route.query.name}})
+    this.getLockCur()
+  }
+  if(num === 4){
+    this.$router.push({'path':'/index/mobileAsset/MobileLockHouseRecord',query:{id:4,name:this.$route.query.name}})
+    this.getLockCur()
+  }
 }
 
 // 获取当前锁仓记录
