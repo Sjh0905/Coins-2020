@@ -1118,8 +1118,8 @@
 
 }
 .lock-time-currency {
-  height: 36px;
-  line-height: 36px;
+  height: 40px;
+  line-height: 40px;
   /*flex-direction: row;*/
   justify-content: space-between;
   margin-bottom: 20px;
