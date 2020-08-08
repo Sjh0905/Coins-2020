@@ -2648,22 +2648,18 @@ root.methods.error_lockCount = function (err) {
 
 // 判断锁仓数量
 root.methods.testLockAmount  = function () {
-  if (this.$globalFunc.testSpecial(this.lockHomeNum)) {
+  if (!this.$globalFunc.testNumber(this.lockHomeNum)) {
     this.lockHomeNum_WA = this.$t('lock_house_prompt_1')
-    return false
+    return
   }
-  // if (this.amountInput == '0') {
-  //   this.transferAmountWA = this.$t('transferAmountWA2')
-  //   return false
-  // }
   if (Number(this.lockHomeNum) > Number(this.lockHouseAvailable)) {
     this.lockHomeNum_WA = this.$t('lock_house_prompt_2')
-    return false
+    return
   }
-  if (Number(this.lockHomeNum) <= 500) {
-    this.lockHomeNum = 500
+  if (Number(this.lockHomeNum) < 500) {
+    // this.lockHomeNum = 500
     this.lockHomeNum_WA = this.$t('lock_house_prompt_3')
-    return false
+    return
   }
   this.lockHomeNum_WA = ''
   return true
@@ -2671,19 +2667,19 @@ root.methods.testLockAmount  = function () {
 }
 
 // 可以提交
-root.methods.canCommitLock = function () {
-  let canSend = true
-  canSend = this.testLockAmount() && canSend
-  if (this.lockHomeNum === '') {
-    this.lockHomeNum_WA = this.$t('lock_house_prompt_1')
-    return canSend = false
-  }
-  // if (this.amountInput === '0') {
-  //   this.transferAmountWA = this.$t('transferAmountWA2')
-  //   canSend = false
-  // }
-  return canSend
-}
+// root.methods.canCommitLock = function () {
+//   let canSend = true
+//   canSend = this.testLockAmount() && canSend
+//   if (this.lockHomeNum === '') {
+//     this.lockHomeNum_WA = this.$t('lock_house_prompt_1')
+//     return canSend = false
+//   }
+//   // if (this.amountInput === '0') {
+//   //   this.transferAmountWA = this.$t('transferAmountWA2')
+//   //   canSend = false
+//   // }
+//   return canSend
+// }
 
 // 获取锁仓字典数据
 root.methods.getMiningDict = function () {
@@ -2817,8 +2813,9 @@ root.methods.error_commitLockLearing = function (err) {
 
 // 锁仓分红
 root.methods.commitLockHouse = function () {
-  if (this.sending1) return
-  if (!this.canCommitLock()) {
+  // if (this.sending1) return
+
+  if (!this.testLockAmount()) {
     return
   }
   this.sending1 = true
