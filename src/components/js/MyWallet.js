@@ -146,21 +146,33 @@ root.data = function () {
     closeDateTime:'', // 锁仓挖矿到期时间
     // lockAvailable: '500KK', // KK 所需个数
     // lockAvailable1:'2500KK',
-    lockCurrencys: '500KK', // 锁仓钱数 1 :500 2:2500
+    lockCurrencys: '500', // 锁仓钱数 1 :500 2:2500
     lockTime: {
-      days:'5'
+      days:'25'
     }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
     lockTimeTwo: {
-      days:'1'
+      days:'20'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockTimeThree: {
+      days:'15'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockTimeFour: {
+      days:'10'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockTimeFive: {
+      days:'5'
     }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
     lockIndex:0,
     miningDate:[], // 币种数组
     lockDaysOne:[],  //'500KK'对应的值
     lockDaysTwo:[], //'2500KK'对应的值
+    lockDaysThree:[], //'2500KK'对应的值
+    lockDaysFour:[], //'2500KK'对应的值
+    lockDaysFive:[], //'2500KK'对应的值
     amt : 500,
-    days: 5,
+    days: 25,
     lockCurrency : 'KK',
-    rewAmt : 1,
+    rewAmt : 5,
     rewCurrency :'FF',
 
     step2VerificationCode: '', //第二步
@@ -229,6 +241,7 @@ root.computed.userId = function () {
 root.computed.computedMiningDate = function () {
   console.info('computedMiningDate',this.miningDate)
   return this.miningDate || []
+  // return this.miningDate
 }
 // 验证类型
 root.computed.showPicker = function () {
@@ -400,25 +413,10 @@ root.computed.lockHouseMining = function () {
     dividendTimeStamp += dayTimeStep
   }
   this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'YYYY-MM-DD');
-  if(this.lockCurrencys == '2500KK') {
-    if(this.lockTimeTwo.days == 1) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + dayTimeStep ,'YYYY-MM-DD');
-    }
-    if(this.lockTimeTwo.days == 5) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + fiveTimeStamp,'YYYY-MM-DD');
-    }
-    if(this.lockTimeTwo.days == 30) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + thirtyTimeStamp,'YYYY-MM-DD');
-    }
-    if(this.lockTimeTwo.days == 90) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'YYYY-MM-DD');
-    }
-  }
-
-  if(this.lockCurrencys == '500KK') {
-    if(this.lockTime.days == 5) {
-      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp +( 5 * dayTimeStep),'YYYY-MM-DD');
-    }
+  if(this.lockCurrencys == '500') {
+    // if(this.lockTime.days == 5) {
+    //   this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp +( 5 * dayTimeStep),'YYYY-MM-DD');
+    // }
     if(this.lockTime.days == 25) {
       this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 5),'YYYY-MM-DD');
     }
@@ -427,6 +425,56 @@ root.computed.lockHouseMining = function () {
     }
     if(this.lockTime.days == 450) {
       this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp *5),'YYYY-MM-DD');
+    }
+  }
+  if(this.lockCurrencys == '1000') {
+
+    if(this.lockTimeTwo.days == 20) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 4),'YYYY-MM-DD');
+    }
+    if(this.lockTimeTwo.days == 120) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 4),'YYYY-MM-DD');
+    }
+    if(this.lockTimeTwo.days == 360) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp *6),'YYYY-MM-DD');
+    }
+  }
+  if(this.lockCurrencys == '1500') {
+
+    if(this.lockTimeThree.days == 15) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 3),'YYYY-MM-DD');
+    }
+    if(this.lockTimeThree.days == 90) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 3),'YYYY-MM-DD');
+    }
+    if(this.lockTimeThree.days == 270) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp * 3),'YYYY-MM-DD');
+    }
+  }
+  if(this.lockCurrencys == '2000') {
+
+    if(this.lockTimeFour.days == 10) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 2),'YYYY-MM-DD');
+    }
+    if(this.lockTimeFour.days == 60) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 2),'YYYY-MM-DD');
+    }
+    if(this.lockTimeFour.days == 180) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp * 2),'YYYY-MM-DD');
+    }
+  }
+  if(this.lockCurrencys == '2500') {
+    // if(this.lockTimeFive.days == 1) {
+    //   this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + dayTimeStep ,'YYYY-MM-DD');
+    // }
+    if(this.lockTimeFive.days == 5) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + fiveTimeStamp,'YYYY-MM-DD');
+    }
+    if(this.lockTimeFive.days == 30) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + thirtyTimeStamp,'YYYY-MM-DD');
+    }
+    if(this.lockTimeFive.days == 90) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'YYYY-MM-DD');
     }
   }
   let timeObj = {openDateTime:this.openDateTime, closeDateTime:this.closeDateTime}
@@ -461,25 +509,58 @@ root.watch = {}
 //
 root.watch.lockCurrencys = function (newVal,oldVal) {
   if (oldVal == newVal) return
-  if(newVal == '2500KK') {
+  if(newVal == '2500') {
     this.amt = '2500'
-    this.rewAmt = 1
-    this.lockCurrency  ='KK'
-    this.rewCurrency = 'FF'
-    this.days = 1
-    this.lockTimeTwo = {
-      days: '1'
-    }
-    return
-  }
-  if(newVal == '500KK') {
-    this.amt = 500
-    this.rewAmt =  1
+    this.rewAmt = 5
     this.lockCurrency  ='KK'
     this.rewCurrency = 'FF'
     this.days = 5
-    this.lockTime = {
+    this.lockTimeFive = {
       days: '5'
+    }
+    return
+  }
+  if(newVal == '2000') {
+    this.amt = '2000'
+    this.rewAmt = 5
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 10
+    this.lockTimeFour = {
+      days: '10'
+    }
+    return
+  }
+  if(newVal == '1500') {
+    this.amt = '1500'
+    this.rewAmt = 5
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 15
+    this.lockTimeThree = {
+      days: '15'
+    }
+    return
+  }
+  if(newVal == '1000') {
+    this.amt = '1000'
+    this.rewAmt = 5
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 20
+    this.lockTimeTwo = {
+      days: '20'
+    }
+    return
+  }
+  if(newVal == '500') {
+    this.amt = 500
+    this.rewAmt =  5
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 25
+    this.lockTime = {
+      days: '25'
     }
   }
 }
@@ -2465,15 +2546,24 @@ root.methods.closeLockHouse = function () {
 
 root.methods.selectLockCurrencys = function (lockCurrencys) {
   this.lockCurrencys = lockCurrencys
-  if(this.lockCurrencys == '500KK') {
+  if(this.lockCurrencys == '500') {
     return this.lockDaysOne
   }
-  if(this.lockCurrencys == '2500KK') {
+  if(this.lockCurrencys == '1000') {
     return this.lockDaysTwo
+  }
+  if(this.lockCurrencys == '1500') {
+    return this.lockDaysThree
+  }
+  if(this.lockCurrencys == '2000') {
+    return this.lockDaysFour
+  }
+  if(this.lockCurrencys == '2500') {
+    return this.lockDaysFive
   }
 }
 root.methods.selectLockTime = function (lockTime) {
-  if(this.lockCurrencys == '500KK') {
+  if(this.lockCurrencys == '500') {
     this.lockTime = lockTime
     this.amt = this.lockTime.amt || 0
     this.days = this.lockTime.days || 0
@@ -2482,13 +2572,40 @@ root.methods.selectLockTime = function (lockTime) {
     this.rewCurrency = this.lockTime.rewCurrency || ''
     return
   }
-  if(this.lockCurrencys == '2500KK'){
+  if(this.lockCurrencys == '1000') {
     this.lockTimeTwo = lockTime
     this.amt = this.lockTimeTwo.amt || 0
     this.days = this.lockTimeTwo.days || 0
     this.lockCurrency = this.lockTimeTwo.lockCurrency || ''
     this.rewAmt = this.lockTimeTwo.rewAmt || 0
     this.rewCurrency = this.lockTimeTwo.rewCurrency || ''
+    return
+  }
+  if(this.lockCurrencys == '1500') {
+    this.lockTimeThree = lockTime
+    this.amt = this.lockTimeThree.amt || 0
+    this.days = this.lockTimeThree.days || 0
+    this.lockCurrency = this.lockTimeThree.lockCurrency || ''
+    this.rewAmt = this.lockTimeThree.rewAmt || 0
+    this.rewCurrency = this.lockTimeThree.rewCurrency || ''
+    return
+  }
+  if(this.lockCurrencys == '2000') {
+    this.lockTimeFour = lockTime
+    this.amt = this.lockTimeFour.amt || 0
+    this.days = this.lockTimeFour.days || 0
+    this.lockCurrency = this.lockTimeFour.lockCurrency || ''
+    this.rewAmt = this.lockTimeFour.rewAmt || 0
+    this.rewCurrency = this.lockTimeFour.rewCurrency || ''
+    return
+  }
+  if(this.lockCurrencys == '2500'){
+    this.lockTimeFive = lockTime
+    this.amt = this.lockTimeFive.amt || 0
+    this.days = this.lockTimeFive.days || 0
+    this.lockCurrency = this.lockTimeFive.lockCurrency || ''
+    this.rewAmt = this.lockTimeFive.rewAmt || 0
+    this.rewCurrency = this.lockTimeFive.rewCurrency || ''
   }
 
 }
@@ -2543,8 +2660,8 @@ root.methods.testLockAmount  = function () {
     this.lockHomeNum_WA = this.$t('lock_house_prompt_2')
     return false
   }
-  if (Number(this.lockHomeNum) <= 0) {
-    this.lockHomeNum = 0
+  if (Number(this.lockHomeNum) <= 500) {
+    this.lockHomeNum = 500
     this.lockHomeNum_WA = this.$t('lock_house_prompt_3')
     return false
   }
@@ -2570,6 +2687,7 @@ root.methods.canCommitLock = function () {
 
 // 获取锁仓字典数据
 root.methods.getMiningDict = function () {
+
   this.$http.send('LOCK_GET_MINING_DICT', {
     bind: this,
     callBack: this.re_getMiningDict,
@@ -2579,9 +2697,41 @@ root.methods.getMiningDict = function () {
 root.methods.re_getMiningDict = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if(!data) return
-  this.miningDate = Object.keys(data.data) || []
-  this.lockDaysOne = data.data['500KK'] || []
-  this.lockDaysTwo = data.data['2500KK'] || []
+  // var data = {
+  //   data :  {
+  //     '500KK': [
+  //       {rewCurrency: "FF", amt: 500, days: 25, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 150, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 450, rewAmt: 90, lockCurrency: "KK"},
+  //     ],
+  //     '1000KK': [
+  //       {rewCurrency: "FF", amt: 500, days: 20, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 120, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 360, rewAmt: 90, lockCurrency: "KK"},
+  //     ],
+  //     '1500KK': [
+  //       {rewCurrency: "FF", amt: 500, days: 15, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 90, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 270, rewAmt: 90, lockCurrency: "KK"},
+  //     ],
+  //     '2000KK': [
+  //       {rewCurrency: "FF", amt: 500, days: 10, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 60, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 180, rewAmt: 90, lockCurrency: "KK"},
+  //     ],
+  //     '2500KK': [
+  //       {rewCurrency: "FF", amt: 2500, days: 5, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 2500, days: 30, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 2500, days: 90, rewAmt: 90, lockCurrency: "KK"},
+  //     ]
+  //   }
+  // }
+  this.miningDate = Object.keys(data.data).reverse() || []
+  this.lockDaysOne = data.data['500'] || []
+  this.lockDaysTwo = data.data['1000'] || []
+  this.lockDaysThree = data.data['1500'] || []
+  this.lockDaysFour = data.data['2000'] || []
+  this.lockDaysFive = data.data['2500'] || []
 
 
 

@@ -229,18 +229,39 @@
       </div>
       <div>
         <div class="lock-time " v-if="lockHouseCurrency == 'KK'">
+          <div class="lock-number">锁仓数量 (KK)</div>
           <div class="lock-time-currency flex-row-reverse" >
-            <div v-for="(v,index) in computedMiningDate" :key="index" class="pointer lock-time-currency-content"
+<!--            <div v-for="(v,index) in computedMiningDate" :key="index" class="pointer lock-time-currency-content"-->
+<!--                 :class="{'lock-time-currency-content-select':(lockCurrencys == v)}" @click="selectLockCurrencys(v)">{{v}}</div>-->
+            <div v-for="(v,index) in computedMiningDate" :key="index" class="pointer lock-time-input1"
                  :class="{'lock-time-currency-content-select':(lockCurrencys == v)}" @click="selectLockCurrencys(v)">{{v}}</div>
+<!--            <div class="lock-time-input1">500</div>-->
+<!--            <div class="lock-time-input1">1000</div>-->
+<!--            <div class="lock-time-input1">1500</div>-->
+<!--            <div class="lock-time-input1">2000</div>-->
+<!--            <div class="lock-time-input1">2500</div>-->
 <!--            <div class="pointer" :class="lockCurrencys == 2 ?'lock-time-currency-content-select':'lock-time-currency-content'" @click="selectLockCurrencys(2)">{{lockAvailable1}}</div>-->
           </div>
-          <div class="lock-time-days flex" v-if="lockCurrencys == '500KK'">
+          <div class="lock-number">锁仓天数</div>
+          <div class="lock-time-days flex" v-if="lockCurrencys == '500'">
             <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysOne" :key="dex"
-                 :class="{'lock-time-input-selected':(lockTime.days == v.days)}" @click="selectLockTime(v)"> {{v.days}} {{$t('days')}}</div>
+                 :class="{'lock-time-input-selected':(lockTime.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
           </div>
-          <div class="lock-time-days flex" v-if="lockCurrencys == '2500KK'">
+          <div class="lock-time-days flex" v-if="lockCurrencys == '1000'">
             <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysTwo" :key="dex"
-                 :class="{'lock-time-input-selected':(lockTimeTwo.days == v.days)}" @click="selectLockTime(v)"> {{v.days}} {{$t('days')}}</div>
+                 :class="{'lock-time-input-selected':(lockTimeTwo.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
+          </div>
+          <div class="lock-time-days flex" v-if="lockCurrencys == '1500'">
+            <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysThree" :key="dex"
+                 :class="{'lock-time-input-selected':(lockTimeThree.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
+          </div>
+          <div class="lock-time-days flex" v-if="lockCurrencys == '2000'">
+            <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysFour" :key="dex"
+                 :class="{'lock-time-input-selected':(lockTimeFour.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
+          </div>
+          <div class="lock-time-days flex" v-if="lockCurrencys == '2500'">
+            <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysFive" :key="dex"
+                 :class="{'lock-time-input-selected':(lockTimeFive.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
           </div>
           <!--      锁仓挖矿显示-->
           <div class="lock-house-mining">
