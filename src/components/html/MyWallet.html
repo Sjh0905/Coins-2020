@@ -362,9 +362,9 @@
           </div>
         </div>
         <div class="flex">
-          <div class="lock-house-rules-left">
+          <div class="lock-house-rules-left" >
             <div class="step-circular step-color-grew"></div>
-<!--            <div class="step-line step-color-grew"></div>-->
+            <div class="step-line13 step-color-grew" v-if="lockHouseCurrency == 'TT'"></div>
           </div>
           <div class="lock-house-rules-right-last" v-if="lockHouseCurrency == 'TT'">
             <div class="lock-house-day">{{lockHouseNowTime.dividendTime}} 12:00</div>
@@ -376,6 +376,16 @@
           </div>
           <div class="lock-house-rules-right-last" v-if="lockHouseCurrency == 'KK'">
             <div class="lock-house-day">{{lockHouseMining.closeDateTime}} 12:00</div>
+            <div class="lock-house-day">{{$t('closeTime')}}</div>
+          </div>
+        </div>
+        <div class="flex "  v-if="lockHouseCurrency == 'TT'">
+          <div class="lock-house-rules-left">
+            <div class="step-circular step-color-grew"></div>
+<!--            <div class="step-line step-color-grew"></div>-->
+          </div>
+          <div class="lock-house-rules-right-last" v-if="lockHouseCurrency == 'TT'">
+            <div class="lock-house-day">{{lockHouseStudy.closeDateTime}} 20:45</div>
             <div class="lock-house-day">{{$t('closeTime')}}</div>
           </div>
         </div>
