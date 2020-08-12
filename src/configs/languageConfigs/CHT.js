@@ -563,7 +563,7 @@ root.personalCenterRecommend.myqrcodeposter = '我的專屬海報'
 root.personalCenterRecommend.zhuansyaoqm = '專屬邀請碼'
 root.personalCenterRecommend.copyyaoqm = '複製邀請碼UID'
 root.personalCenterRecommend.copyyaoqingurl = '複製邀請連結'
-root.personalCenterRecommend.yiyaoqdhaoy = '已邀請好友（人）'
+root.personalCenterRecommend.yiyaoqdhaoy = '已直接邀請(人)'
 root.personalCenterRecommend.yihuorenshu = '已實名人數（人）'
 
 root.personalCenterRecommend.jiaoyirenshu = '首次交易人數(人)'
