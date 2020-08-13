@@ -89,14 +89,16 @@
             <!--市场 end -->
 
             <!--类别 begin -->
-            <div class="td td-category" :class="order.type==='BUY_LIMIT'?'text_blue-3':'text_red-4'" v-if="!order.isFollow">
-              {{order.type === 'BUY_LIMIT' && $t('orderPageHistoricalEntrustment.buy') ||
-              $t('orderPageHistoricalEntrustment.sale') }}
+            <div class="td td-category" :class="(order.type==='BUY_LIMIT' || order.type==='BUY_MARKET')?'text_blue-3':'text_red-4'">
+              {{changeType(order)}}
             </div>
-            <div class="td td-category" :class="order.type==='BUY_LIMIT'?'text_blue-3':'text_red-4'" v-if="order.isFollow">
-              {{order.type === 'BUY_LIMIT' && $t('orderPageHistoricalEntrustment.followBuy') ||
-              $t('orderPageHistoricalEntrustment.followSale') }}
-            </div>
+<!--              {{order.type === 'BUY_LIMIT' && $t('orderPageHistoricalEntrustment.buy') ||-->
+<!--              $t('orderPageHistoricalEntrustment.sale') }}-->
+
+<!--            <div class="td td-category" :class="order.type==='BUY_LIMIT'?'text_blue-3':'text_red-4'" v-if="order.isFollow">-->
+<!--              {{order.type === 'BUY_LIMIT' && $t('orderPageHistoricalEntrustment.followBuy') ||-->
+<!--              $t('orderPageHistoricalEntrustment.followSale') }}-->
+<!--            </div>-->
             <!--类别 end -->
 
             <!--单价 begin -->

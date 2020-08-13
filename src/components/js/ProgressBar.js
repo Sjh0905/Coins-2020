@@ -13,7 +13,6 @@ root.watch = {}
 // 观察货币对是否更改
 root.computed.symbol = function () {
   return this.$store.state.symbol;
-  console.info('this.$store.state.symbol;',this.$store.state.symbol)
 }
 // 观察账户信息是否更改
 root.computed.watchCurrency = function () {
@@ -144,6 +143,10 @@ root.props.symbol_config_times = {
     return []
   }
 }
+root.props.pendingOrderType = {
+  type: String,
+  default:'limitPrice'
+}
 
 /*----------------------------- 组件 ------------------------------*/
 
@@ -235,6 +238,7 @@ root.data = function () {
 /*----------------------------- 生命周期 ------------------------------*/
 
 root.created = function () {
+  console.info('this.$store.state.depth_price')
   // 左侧price变化时更改当前price
   this.$eventBus.listen(this, 'SET_PRICE', this.RE_SET_PRICE);
   //  根据买卖设置买卖amount，买对应卖，卖对应买
@@ -254,17 +258,18 @@ root.created = function () {
 root.mounted = function () {
   this.dragWidth = $('.dragbox').width();
   // console.log(this.dragWidth)
-
 }
 
 /*----------------------------- 监测属性 ------------------------------*/
-
+root.watch.pendingOrderType = function (newValue, oldValue){
+  if (newValue == oldValue) return;
+  this.value = 0
+}
 
 root.watch.value = function (newValue, oldValue) {
   if (newValue == oldValue) return;
   // console.log(newValue)
   this.sectionSelect(newValue/100);
-
 }
 
 // root.watch.KKPriceRange = function (val,oldVal) {
@@ -382,6 +387,7 @@ root.methods.get_rate = function () {
 
 // 换算当前价格
 root.methods.get_now_price = function () {
+
   let lang = this.$store.state.lang;
   let price = this.price;
   let rate = this.get_rate() || 0;
@@ -495,9 +501,7 @@ root.methods.scientificToNumber = function (num) {
 
 // 获取当前价格
 root.methods.show_now_price = function () {
-  this.price = this.$store.state.depth_price;
-  // console.log("this.price--------"+this.price);
-
+  this.price = this.$store.state.depth_price
 }
 
 // 关闭提示信息
@@ -580,7 +584,7 @@ root.methods.comparePriceNow = function () {
 
 // 买卖提交
 root.methods.tradeMarket = function (popWindowOpen1,type) {
-  console.log(this.priceNow)
+  console.log(this.$store.state.depth_price)
 
   this.orderType1 = type;
   // this.popWindowOpen = false;
@@ -678,15 +682,29 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
     this.promptOpen = true;
     return
   }
+  let params = {};
+  if(this.pendingOrderType == 'limitPrice') {
+    params = {
+      symbol: this.$store.state.symbol,
+      price: this.price,  // 未输入,传市价; 输入,传输入价
+      amount: this.amount,
+      type: !this.orderType ? 'BUY_LIMIT':'SELL_LIMIT',
+      source: 'WEB', //访问来源
+      // customFeatures: this.fee ? 65536 : 0
+    };
+  }
+  if(this.pendingOrderType == 'marketPrice') {
+    params = {
+      symbol: this.$store.state.symbol,
+      price: this.priceNow, // 传当前市价
+      amount: this.amount,
+      type: !this.orderType ? 'BUY_MARKET':'SELL_MARKET',
+      source: 'WEB', //访问来源
+      // customFeatures: this.fee ? 65536 : 0
+    };
+  }
 
-  let params = {
-    symbol: this.$store.state.symbol,
-    price: this.price,
-    amount: this.amount,
-    type: this.orderType,
-    source: 'WEB', //访问来源
-    // customFeatures: this.fee ? 65536 : 0
-  };
+
   //燃烧抵扣不再需要
   if (this.fee) {
     Object.assign(params, {customFeatures: 65536});

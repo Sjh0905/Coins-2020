@@ -51,12 +51,12 @@
 
       <div class="trading-wrap">
         <div class="progress-bar-title traddinghall-border-bottom relative ">
-          <div class="progress-bar-title-brand ">
+          <div class="" :class="pendingOrderType == 'limitPrice' ? 'progress-bar-title-brand':'progress-bar-title-brand-default'" @click="changePendingOrderType('limitPrice')">
             {{$t("fixedPrice")}}
           </div>
-<!--          <div class="progress-bar-title-brand-default">-->
-<!--            市价-->
-<!--          </div>-->
+          <div class="" :class="pendingOrderType == 'marketPrice' ? 'progress-bar-title-brand':'progress-bar-title-brand-default'" @click="changePendingOrderType('marketPrice')">
+            市价
+          </div>
 <!--          <div class="progress-bar-title-brand-default">-->
 <!--            止损-->
 <!--          </div>-->
@@ -94,13 +94,13 @@
           <div class="ProgressBar-wrap">
             <!--买-->
             <ProgressBar :orderType='0' :fee="BDBInfo" :btc_eth_rate="btc_eth_rate" :socket_price="socket_price"
-                         :symbol_config_times="symbol_config_times"/>
+                         :symbol_config_times="symbol_config_times" :pendingOrderType="pendingOrderType"/>
           </div>
 
           <div class="ProgressBar-wrap">
             <!--卖-->
             <ProgressBar :orderType='1' :fee="BDBInfo" :btc_eth_rate="btc_eth_rate" :socket_price="socket_price"
-                         :symbol_config_times="symbol_config_times"/>
+                         :symbol_config_times="symbol_config_times" :pendingOrderType="pendingOrderType"/>
           </div>
         </div>
       </div>
