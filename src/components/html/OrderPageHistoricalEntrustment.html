@@ -147,7 +147,7 @@
           </div>
           <div v-if="clickThis === order.id" class="tr-hidden">
             <HiddenDetail :orderId="order.id" :symbol="order.symbol"
-                          :orderType="order.type ==='BUY_LIMIT'?0:1"
+                          :orderType="(order.type ==='BUY_LIMIT' || order.type ==='BUY_MARKET')?0:1"
             />
           </div>
 
