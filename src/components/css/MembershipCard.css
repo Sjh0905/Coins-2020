@@ -178,6 +178,9 @@
   font-weight:500;
   color: #0D0E23;
 }
+.bonus-title {
+  width: 88px;
+}
 .mobileBonus {
   display: inline-block;
   text-align: center;
