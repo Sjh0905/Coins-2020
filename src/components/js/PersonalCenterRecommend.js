@@ -205,10 +205,7 @@ root.computed.btReward = function () {
 root.computed.btActivity = function () {
   return this.$store.state.btActivity;
 }
-// 获取userId
-root.computed.userId = function () {
-  return this.$store.state.authMessage.userId
-}
+
 
 root.watch = {};
 
@@ -245,10 +242,10 @@ root.methods.error_FFMiningDetails = function () {
 }
 
 // 查看KK明细
-root.methods.KKMiningDetails = function () {
+root.methods.KKMiningDetails = function (item) {
   this.$http.send('GET_KK_REWARD_FOR_INVITES', {
     bind: this,
-    urlFragment: this.userId,
+    urlFragment:item.beInvitedUserId,
     callBack: this.RE_KKMiningDetails,
     errorHandler: this.error_KKMiningDetails
   })
