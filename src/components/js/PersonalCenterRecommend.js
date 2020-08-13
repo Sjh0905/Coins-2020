@@ -81,10 +81,12 @@ root.data = function () {
     // 邀请明细弹框
     popWindowOpen:false,
     popWindowOpenFF:false,
+    popWindowOpenJian:false,
 
     // 分分明细
     FFMining:[],
-    KKMining:[]
+    KKMining:[],
+    sun:0
   }
 }
 
@@ -264,9 +266,20 @@ root.methods.openFFMining = function (item) {
   console.info(item)
   this.popWindowOpenFF = true
 }
+// 打开间接邀请明细弹框
+root.methods.openMiningJian = function (item) {
+  this.FFMiningDetails(item)
+  console.info(item)
+  this.popWindowOpenJian = true
+}
 // 关闭FF弹窗
 root.methods.popWindowCloseFF  =function (){
   this.popWindowOpenFF = false
+}
+
+// 关闭FF弹窗
+root.methods.popWindowCloseJian  =function (){
+  this.popWindowOpenJian = false
 }
 
 // 打开KK明细弹框
@@ -465,6 +478,7 @@ root.methods.re_getMyInvitesForBT = function (data) {
   let res = data.dataMap
   console.log('res=======', res)
   this.size = res.size
+  // this.indirectInviteNum  = res.indirectInviteNum
   this.totalRegister = res.totalRegister
   this.totalChangeStr = res.totalChangeStr
   this.allKKAmount = res.allKKAmount
@@ -476,6 +490,12 @@ root.methods.re_getMyInvitesForBT = function (data) {
       this.realNums++;
     }
   }
+   let sun = 0;
+  for(var s = 0;s<res.myInvites.length;s++){
+    sun += res.myInvites[s].indirectInviteNum;
+    this.sun = sun
+  }
+  console.info('sun===========',sun)
   this.records.push(...res.myInvites)
   // this.records = this.myInvites;
   if (res.myInvites.length < this.maxResults) {

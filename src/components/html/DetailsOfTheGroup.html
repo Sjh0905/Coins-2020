@@ -51,10 +51,10 @@
               <div class="color_bik_9">{{toFixed(accMul(commonDiscount || 0,100),0) }}%</div>
             </div>
 <!--            量化区折扣-->
-            <div class=" color_hui_s">
-              <div>{{$t('quantifiedDiscount')}}</div>
-              <div class="color_bik_9">{{toFixed(accMul(quantDiscount || 0,100),0) }}%</div>
-            </div>
+<!--            <div class=" color_hui_s">-->
+<!--              <div>{{$t('quantifiedDiscount')}}</div>-->
+<!--              <div class="color_bik_9">{{toFixed(accMul(quantDiscount || 0,100),0) }}%</div>-->
+<!--            </div>-->
           </li>
 <!--          团长，副团长 建团时间-->
           <li class="information_li m-to">
@@ -116,20 +116,20 @@
                 <p class="color_e9">{{toFixed(commCumulative,4)}}</p>
               </div>
 <!--              普通区返佣-->
-              <div class="information_div div_border div_s">
-                <p class="color_e2">{{$t('ordinaryRebates')}}(KK）</p>
-                <p class="color_e9">{{toFixed(commRecommission,4)}}</p>
-              </div>
+<!--              <div class="information_div div_border div_s">-->
+<!--                <p class="color_e2">{{$t('ordinaryRebates')}}(KK）</p>-->
+<!--                <p class="color_e9">{{toFixed(commRecommission,4)}}</p>-->
+<!--              </div>-->
 <!--              量化区累计-->
-              <div class="information_div div_border div_s">
+              <div class="information_div">
                 <p class="color_e2">{{$t('quantizationAccumulation')}}(KK）</p>
                 <p class="color_e9">{{toFixed(quantCumulative,4)}}</p>
               </div>
 <!--              量化区返佣-->
-              <div class="information_div border-ling div_border">
-                <p class="color_e2">{{$t('quantificationRebates')}}(KK）</p>
-                <p class="color_e9">{{toFixed(quantRecommission,4)}}</p>
-              </div>
+<!--              <div class="information_div border-ling div_border">-->
+<!--                <p class="color_e2">{{$t('quantificationRebates')}}(KK）</p>-->
+<!--                <p class="color_e9">{{toFixed(quantRecommission,4)}}</p>-->
+<!--              </div>-->
 
             </div>
 
@@ -286,15 +286,15 @@
 
         <div class="mobileFoldL">
 <!--          <div class="mobileFoldLdiv">-->
-          <span class="mobileFoldSapn">普通区折扣</span>
-          <span class="mobileFoldSapnF">{{toFixed(accMul(commonDiscount || 0,100),0) }}%</span>
+          <span class="mobileFoldSapn">主流区折扣 <span class="mobileFoldSapnF"> {{toFixed(accMul(commonDiscount || 0,100),0) }}%</span></span>
+
 <!--        </div>-->
         </div>
-        <div class="mobileX"></div>
-        <div class="mobileFoldLw">
-          <span class="mobileFoldSapn">挖矿区折扣</span>
-          <span class="mobileFoldSapnF">{{toFixed(accMul(quantDiscount || 0,100),0) }}%</span>
-        </div>
+<!--        <div class="mobileX"></div>-->
+<!--        <div class="mobileFoldLw">-->
+<!--          <span class="mobileFoldSapn">挖矿区折扣</span>-->
+<!--          <span class="mobileFoldSapnF">{{toFixed(accMul(quantDiscount || 0,100),0) }}%</span>-->
+<!--        </div>-->
       </div>
       <!--      账号-->
       <div class="mobileNumber flex">
@@ -320,24 +320,28 @@
     <div class="mobileliangtuan" v-if="idType=='1'">
     <div class="mobileliang" >
       <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">普通区团级工资累计</span>
+        <span class="mobileFoldSapnB7">主流区团级工资累计</span>
         <span class="mobileFoldSapnF18">{{toFixed(commCumulative,4)}} KK</span>
       </div>
+<!--      <div class="mobileliangdiv">-->
+<!--        <span class="mobileFoldSapnB7">挖矿区团级工资累计</span>-->
+<!--        <span class="mobileFoldSapnF18">{{toFixed(commRecommission,4)}} KK</span>-->
+<!--      </div>-->
       <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">挖矿区团级工资累计</span>
-        <span class="mobileFoldSapnF18">{{toFixed(commRecommission,4)}} KK</span>
-      </div>
-    </div>
-    <div class="mobileliang mt">
-      <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">普通区团级工资最新</span>
+        <span class="mobileFoldSapnB7">主流区团级工资最新</span>
         <span class="mobileFoldSapnF18">{{toFixed(quantCumulative,4)}} KK</span>
       </div>
-      <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">挖矿区团级工资最新</span>
-        <span class="mobileFoldSapnF18">{{toFixed(quantRecommission,4)}} KK</span>
-      </div>
     </div>
+<!--    <div class="mobileliang mt">-->
+<!--      <div class="mobileliangdiv">-->
+<!--        <span class="mobileFoldSapnB7">主流区团级工资最新</span>-->
+<!--        <span class="mobileFoldSapnF18">{{toFixed(quantCumulative,4)}} KK</span>-->
+<!--      </div>-->
+<!--      <div class="mobileliangdiv">-->
+<!--        <span class="mobileFoldSapnB7">挖矿区团级工资最新</span>-->
+<!--        <span class="mobileFoldSapnF18">{{toFixed(quantRecommission,4)}} KK</span>-->
+<!--      </div>-->
+<!--    </div>-->
     </div>
 
     <!--    团员列表-->

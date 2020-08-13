@@ -640,7 +640,7 @@ root.personalCenterRecommend.qrcodeposter = 'Exclusive qr code poster'
 root.personalCenterRecommend.myqrcodeposter = 'My own poster'
 root.personalCenterRecommend.zhuansyaoqm = 'Exclusive invitation code'
 root.personalCenterRecommend.copyyaoqm = 'Copy code'
-root.personalCenterRecommend.yiyaoqdhaoy = 'Invited friend (person)'
+root.personalCenterRecommend.yiyaoqdhaoy = 'Invite (people) directly'
 root.personalCenterRecommend.yihuorenshu = 'Real-name number (person)'
 root.personalCenterRecommend.yihuodejinbi = 'Rebate earned'
 

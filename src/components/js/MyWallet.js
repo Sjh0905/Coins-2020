@@ -380,7 +380,7 @@ root.computed.btc_rate = function () {
 //   let timeObj = {nowDateTime:this.nowDateTime,dividendTime:this.dividendTime}
 //   return timeObj
 // }
-//计算锁仓挖矿开始时间
+//计算锁仓学习开始时间
 root.computed.lockHouseStudy = function () {
   let severDate = new Date(this.serverTime)
   let dayTimeStep = 24 * 60 * 60 * 1000//一天的时间差 毫秒

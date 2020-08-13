@@ -559,6 +559,9 @@
 .Payees_b {
   padding-bottom: 30px;
 }
+.alse-flex {
+  margin-top: 15px;
+}
 .gray {
   font-size: 14px;
   color: #8994A5;
@@ -1301,6 +1304,11 @@
 
 .step-line1 {
   min-height: 46px;
+  width: 1px;
+  margin-left: 5px;
+}
+.step-line13 {
+  min-height: 60px;
   width: 1px;
   margin-left: 5px;
 }
