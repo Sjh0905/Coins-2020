@@ -205,7 +205,10 @@ root.computed.btReward = function () {
 root.computed.btActivity = function () {
   return this.$store.state.btActivity;
 }
-
+// 获取userId
+root.computed.userId = function () {
+  return this.$store.state.authMessage.userId
+}
 
 root.watch = {};
 
@@ -242,10 +245,10 @@ root.methods.error_FFMiningDetails = function () {
 }
 
 // 查看KK明细
-root.methods.KKMiningDetails = function (item) {
+root.methods.KKMiningDetails = function () {
   this.$http.send('GET_KK_REWARD_FOR_INVITES', {
     bind: this,
-    urlFragment:item.beInvitedUserId,
+    urlFragment:this.userId,
     callBack: this.RE_KKMiningDetails,
     errorHandler: this.error_KKMiningDetails
   })
@@ -283,9 +286,8 @@ root.methods.popWindowCloseJian  =function (){
 }
 
 // 打开KK明细弹框
-root.methods.openKKMining = function (item) {
-  this.KKMiningDetails(item)
-  console.info(item)
+root.methods.openKKMining = function () {
+  this.KKMiningDetails()
   this.popWindowOpen = true
 }
 
