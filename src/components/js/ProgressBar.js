@@ -790,7 +790,6 @@ root.methods.Callback = function (data) {
       this.promptOpen = true;
       return;
   }
-
 }
 
 root.methods.RE_ERROR = function (err) {
