@@ -20,7 +20,7 @@ root.data = function () {
     popWindowOpen: false, //弹窗开关
     popWindowOpenShiM: false, //弹窗开关
     cardType: 1,
-    transferFee:1,
+    transferFee:5,
 
     popType: 0,
     popOpen: false,
