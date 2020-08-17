@@ -280,12 +280,12 @@ root.methods.getCheck= function () {
 }
 
 root.methods.re_getCheck = function (data) {
-  console.log('是否是会员get-----',123)
-  console.info('GlobalFunction.comparedWithGreenwichTime==========', this.$globalFunc.comparedWithGreenwichTime(Number(this.createdAt)))
+  // console.log('是否是会员get-----',123)
+  // console.info('GlobalFunction.comparedWithGreenwichTime==========', this.$globalFunc.comparedWithGreenwichTime(Number(this.createdAt)))
 
   //检测data数据是JSON字符串转换JS字符串
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log('是否是会员get-----',123)
+  // console.log('是否是会员get-----',123)
   this.expires = data.data.expires
   this.expires_timestamp = data.data.expires_timestamp
   this.flag = data.data.flag
@@ -321,13 +321,13 @@ root.methods.re_getBuyRecords = function (data) {
   if (!data) {return}
 
   this.records  = data.data
-  console.log('会员购买记录get', this.records)
+  // console.log('会员购买记录get', this.records)
 
   let E2 = this.records[0]
   this.createdAt =  E2.createdAt
   this.createdAt =  this.$globalFunc.formatDateUitl(Number(this.createdAt), 'hh')
 
-  console.info('this.createdAt',this.createdAt)
+  // console.info('this.createdAt',this.createdAt)
 
 }
 
@@ -377,7 +377,7 @@ root.methods.error_getBuyRecords = function (err) {
 root.methods.postWithd1 = function (cardType) {
   this.cardType = cardType
 
-  console.log("cardType  ===== ",this.cardType)
+  // console.log("cardType  ===== ",this.cardType)
 
   // this.postBuyCard(cardType)
 }
@@ -422,7 +422,7 @@ root.methods.postBuyCard = function () {
     account: this.userName, //账号
     cardType: this.cardType  //1:月卡，2:年卡
   }
-  console.log("会员卡购买post  ===== ",params)
+  // console.log("会员卡购买post  ===== ",params)
 
   // this.getVerificationCode = true
   // this.clickVerificationCodeButton = true
@@ -452,7 +452,7 @@ root.methods.re_postBuyCard = function (data) {
 
 
   this.success = data.data.flag
-  console.log("会员卡购买post=====", data)
+  // console.log("会员卡购买post=====", data)
 
 
   if (data.errorCode == "0" && this.success == true) {
@@ -563,7 +563,7 @@ root.methods.postGoToTransferVIP = function () {
 }
 root.methods.re_postGoToTransferVIP = function(data){
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log("会员卡转让",data.data,data.errorCode)
+  // console.log("会员卡转让",data.data,data.errorCode)
   this.success = data.data.success
 
   if (data.errorCode == 0) {
