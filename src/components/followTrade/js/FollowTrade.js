@@ -35,8 +35,8 @@ root.created = function () {
   this.GET_AUTH_STATE()
 
   this.getBigBrotherList()
-  this.currentInterval && clearInterval(this.currentInterval)
-  this.currentInterval = setInterval(() => { this.getBigBrotherList() }, 4000)
+  this.currentInterval1 && clearInterval(this.currentInterval1)
+  this.currentInterval1 = setInterval(() => { this.getBigBrotherList() }, 4000)
 
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({
@@ -48,8 +48,12 @@ root.created = function () {
   }
 }
 
-root.mounted = function () {}
-root.beforeDestroy = function () {}
+root.mounted = function () {
+  // this.currentInterval1 && clearInterval(this.currentInterval1)
+}
+root.beforeDestroy = function () {
+  this.currentInterval1 && clearInterval(this.currentInterval1)
+}
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
 // root.computed.isFollow = function () {
@@ -230,6 +234,7 @@ root.methods.goToMyFollowOrder = function () {
 
 // 大佬列表
 root.methods.getBigBrotherList = function () {
+  // console.info('掉接口啦===',new Date().getTime())
   this.$http.send('BIG_BROTHER_LIST', {
     bind: this,
     callBack: this.re_getBigBrotherList,

@@ -33,20 +33,32 @@
   height: 0.88rem;
   line-height: 0.88rem;
   /*background: #081724;*/
+  padding: 0 0.3rem;
   background: #172841;
+  overflow-x: scroll;
+  white-space: nowrap;
   display: flex;
-  justify-content: space-around;
+  /*justify-content: space-around;*/
 }
-
+/*去除滚动条*/
+.header-title-list::-webkit-scrollbar {
+  display: none;
+}
+.header-title-list ::-webkit-scrollbar {
+  display: none;
+}
 .header-title-item{
-  /*width: 1.6rem;*/
+  width: 1.6rem;
   height: 0.88rem;
   line-height: 0.88rem;
   box-sizing: border-box;
-  /*margin: 0 1rem;*/
+  margin-right: 0.3rem;
   text-align: center;
   /*border-bottom: 2px solid #131F30;*/
   color: #6A83A8;
+}
+.header-title-item:last-child {
+  padding-right: 0.3rem;
 }
 
 .header-title-item-active{

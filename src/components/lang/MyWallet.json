@@ -170,29 +170,35 @@
 
   "lock_house": "锁仓分红",
   "lock_house_amount": "锁仓数量",
-  "lock_house_input": "单笔最小数量 100",
+  "lock_house_input": "单笔最小数量 500",
   "lock_house_all": "全部",
   "lock_house_day": "锁仓日",
   "lock_house_rules": "查看锁仓细则",
   "lock_house_income": "您的锁仓分红开始产生收益",
-  "lock_house_income1": "分红每日发放，分红周期每日12:00-次日12:00，未在12点之前锁仓不参与本期分红。",
+  "lock_house_income1": "分红每日发放，分红周期每日中午12:00-次日中午12:00，未在中午12点之前锁仓不参与本期分红。",
   "lock_house_ensure": "确认锁仓",
   "lock_house_surplus": "每日剩余次数",
   "lock_house_prompt_1": "请输入正确的锁仓数额",
-  "lock_house_prompt_2": "超过可用锁仓数额",
-  "lock_house_prompt_3": "低于锁仓最小额",
+  "lock_house_prompt_2": "可用余额不足",
+  "lock_house_prompt_3": "低于锁仓最小额500",
   "lock_house_success": "锁仓成功",
   "lock_house_tips": "用户未登录",
   "lock_house_tips_1": "参数错误",
   "lock_house_tips_2": "本个交易日锁仓次数已达上限",
-  "lock_house_tips_3": "锁仓数量需大于 100",
-
+  "lock_house_tips_3": "锁仓数量至少为 500",
   "lock_house_failed": "锁仓失败",
   "exceed": "转账不可以超过500",
   "exceed2": "转账数量不能小于0",
   "exceed3": "同账号不可内部转账",
-  "exceed4": "超出该币种可用余额"
+  "exceed4": "超出该币种可用余额",
 
+  "openTime": "锁仓时间",
+  "closeTime": "到期时间",
+  "lockAndMine": "锁仓挖矿",
+  "days": "天",
+  "required": "所需",
+  "availableCurrecy": "可用",
+  "rewardCurrency": "奖励"
 
 
 
@@ -435,17 +441,17 @@
     "transfer_describe3": "B. 資產提現：需將資產從幣幣帳戶劃轉到我的錢包。 ",
     "lock_house": "鎖倉分紅",
     "lock_house_amount": "鎖倉數量",
-    "lock_house_input": "單筆最小數量 100",
+    "lock_house_input": "單筆最小數量 500",
     "lock_house_all": "全部",
     "lock_house_day": "鎖倉日",
     "lock_house_rules": "查看鎖倉細則",
     "lock_house_income": "您的鎖倉分紅開始產生收益",
-    "lock_house_income1": "分紅每日發放，分紅週期每日12:00-次日12:00，未在12點之前鎖倉不參與本期分紅。 ",
+    "lock_house_income1": "分紅每日發放，分紅週期每日中午12:00-次日中午12:00，未在中午12點之前鎖倉不參與本期分紅。 ",
     "lock_house_ensure": "確認鎖倉",
     "lock_house_surplus": "每日剩餘次數",
     "lock_house_prompt_1": "請輸入正確的鎖倉數額",
-    "lock_house_prompt_2": "超過可用鎖倉數額",
-    "lock_house_prompt_3": "低於鎖倉最小額",
+    "lock_house_prompt_2": "可用餘額不足",
+    "lock_house_prompt_3": "低於鎖倉最小額500",
     "lock_house_success": "鎖倉成功",
     "lock_house_failed": "鎖倉失敗",
     "exceed": "轉帳不可以超過500",
@@ -453,12 +459,19 @@
     "lock_house_tips": "使用者未登錄",
     "lock_house_tips_1": "參數錯誤",
     "lock_house_tips_2": "本個交易日鎖倉次數已達上限",
-    "lock_house_tips_3": "鎖倉數量需大於100",
-
+    "lock_house_tips_3": "鎖倉數量至少為 500",
     "iKnowtheq":"超出當日限額",
     "exceed2": "轉帳數量不能小於0",
     "exceed3": "同帳號不可內部轉帳",
-    "exceed4": "超出該幣種可用餘額"
+    "exceed4": "超出該幣種可用餘額",
+
+    "openTime": "鎖倉時間",
+    "closeTime": "到期時間",
+    "lockAndMine": "鎖倉挖礦",
+    "days": "天",
+    "required": "所需",
+    "availableCurrecy": "可用",
+    "rewardCurrency": "獎勵"
 
   }
 }

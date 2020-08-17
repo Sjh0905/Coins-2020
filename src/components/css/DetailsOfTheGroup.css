@@ -32,8 +32,9 @@ ul {
 }
 .information_div {
   /*display: flex;*/
-  width: 24%;
+  width: 49%;
   height: 25px;
+  text-align: center;
   /*line-height: 30px;*/
   /*padding-left: 25px;*/
   display: inline-block;
@@ -65,6 +66,7 @@ ul {
 .color_bik {
   width: 59%;
   font-size:20px;
+  text-align: left;
   font-family:PingFangSC-Medium,PingFang SC;
   font-weight:500;
   color: #F5F6FA;
@@ -476,7 +478,7 @@ ul {
 
 .pop-recharge {
   padding: 35px 25px;
-  font-size:16px;
+  font-size:14px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color: #0D0E23;
@@ -503,6 +505,7 @@ ul {
 }
 
 .consequencesSpan {
+  font-size: 16px;
   color: #3576F5;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:500;
@@ -510,13 +513,18 @@ ul {
 
 
 /*H5样式*/
-
+.consequencesSpanH5 {
+  font-size: 0.32rem;
+  color: #3576F5;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:500;
+}
 .mobileOf {
   width: 100%;
 }
 .mobileOfThe {
   width: 100%;
-  height: 232px;
+  height: 194px;
   /*margin-top: 10px;*/
   /*padding-top: 20px;*/
   /*height:161px;*/
@@ -569,12 +577,13 @@ ul {
 .mobileFold {
   width: 100%;
   padding: 0 15px;
-  margin-top: 28px;
+  margin-top: 8px;
 }
 .mobileFoldL {
   display: inline-block;
-  width: 48.5%;
-  text-align: center;
+  /*width: 48.5%;*/
+  width: 100%;
+  /*text-align: center;*/
   justify-content:space-between;
 }
 .mobileFoldLdiv {
@@ -710,7 +719,9 @@ ul {
   display: inline-block;
   width: 49%;
   text-align: center;
-  margin-top: 20px;
+  /*margin-top: 20px;*/
+  margin-top: 0.16rem;
+  margin-bottom: 0.3rem;
 }
 .mobileFoldSapnB7 {
   display: block;
@@ -861,7 +872,7 @@ ul {
   color: #333;
   font-size: 13px;
   line-height: 18px;
-  text-align: center;
+  text-align: left;
 }
 .confirm-nobind-email-btn {
   height: 36px;

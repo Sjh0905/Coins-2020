@@ -489,6 +489,13 @@ requestAddress.LOCK_ASSET_RECODE = {url: urlHead+'/asset/user/assets', method: '
 requestAddress.UNLOCK_ASSET_RECODE = {url: urlHead+'/asset/user/unlock/asset', method: 'post'} // 解锁锁仓
 requestAddress.TOTAL_LOCK_REWARD = {url: urlHead+'/asset/user/total/reward', method: 'get'} // 锁仓累计
 requestAddress.LOCK_COUNT = {url: urlHead+'/asset/user/lock/count', method: 'get'} // 锁仓次数
+requestAddress.UNLOCK_MINING = {url: urlHead+'/lock/unlockMining', method: 'post'} // 解锁锁仓挖矿和锁仓学习
+requestAddress.LOCK_GET_MINING_DICT = {url: urlHead+'/lock/getMiningDict', method: 'get'} // 锁仓字典数据
+requestAddress.LOCK_MINING = {url: urlHead+'/lock/lockMining', method: 'post'} // 锁仓挖矿
+requestAddress.LOCK_STUDY = {url: urlHead+'/lock/lockStudy', method: 'post'} // 锁仓学习
+requestAddress.LOCK_LOCK_LIST = {url: urlHead+'/lock/lockList/', method: 'get'} // 锁仓挖矿学习列表
+requestAddress.LOCK_HIS_LOCK_LIST = {url: urlHead+'/lock/hisLockList/', method: 'get'} // 锁仓挖矿学习列表
+
 
 //2020-05-28TKF理财相关接口
 requestAddress.GET_PROJECT_LIST = {url: urlHead+'/tkf/projectList', method: 'get'} // TKF产品简介
@@ -517,6 +524,7 @@ requestAddress.POST_UPDATE_RATEORLOT= {url: urlHead+'/follow/user/updateFollowRa
 requestAddress.POST_GOD= {url: urlHead+'/follow/god', method: 'post'}  //自动续费
 requestAddress.POST_GOD_BY_USERID= {url: urlHead+'/follow/godByUserId', method: 'post'}  //是否开启带单
 requestAddress.POST_REVISION_FEE= {url: urlHead+'/follow/updateFee', method: 'post'}  //修改带单费用
-requestAddress.POST_MANAGE = {url: urlHead+'/follow/followManage', method: 'post'}  //开启带单费用
+requestAddress.POST_MANAGE = {url: urlHead+'/follow/followManage', method: 'post'}  //修改带单费用
+requestAddress.POST_GOD_FEE = {url: urlHead+'/follow/godFee', method: 'post'}  //跟单保证金
 
 export default requestAddress

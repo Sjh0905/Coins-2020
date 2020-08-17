@@ -400,12 +400,14 @@ ul {
   margin-top: 0.1rem;
 }
 .mobilecommon {
-  display: inline-block;
-  width: 3.3rem;
-  text-align: center;
+  /*display: inline-block;*/
+  /*width: 3.3rem;*/
+  padding: 0 0.3rem;
+  /*text-align: center;*/
   margin-top: 0.06rem;
 }
 .mobileCol {
+  line-height: 0.8rem;
   font-size:0.24rem;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
@@ -417,7 +419,7 @@ ul {
   font-size:0.48rem;
   font-family:PingFangSC-Medium,PingFang SC;
   font-weight:500;
-  margin-bottom: 0.4rem;
+  /*margin-bottom: 0.4rem;*/
 }
 .mobileSpan {
   display: inline-block;
@@ -657,7 +659,7 @@ remul {
   color: #6B7DA2;
 }
 .mobilemargin-bottom16 {
-  margin-bottom: 0.4rem;
+  /*margin-bottom: 0.4rem;*/
 }
 .mobileRules_p {
   font-size:0.32rem;

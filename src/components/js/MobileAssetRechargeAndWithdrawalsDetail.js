@@ -121,7 +121,7 @@ root.mounted = function () {
 // 计算
 root.computed = {}
 root.computed.isMyWallet = function () {
-  if(this.$route.params.assetAccountType == 'wallet'){
+  if(this.$route.params.assetAccountType == 'wallet' || this.$route.query.assetAccountType == 'wallet'){
     return true
   }
   return false//现在只开放钱包

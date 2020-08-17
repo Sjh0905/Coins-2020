@@ -77,7 +77,7 @@
 <!--            USDT估值-->
             <span class="valuation">
 <!--              <font class="valuation_font">{{(priceReady || initReady) && item.appraisement > 0 ? USDTAppraisement(item) : '&#45;&#45;'}}</font>-->
-              <font class="valuation_font">{{(priceReady || initReady) && item.available != 0 ? USDTAppraisement(item) : '--'}}</font>
+              <font class="valuation_font">{{(priceReady || initReady) && item.total != 0 ? USDTAppraisement(item) : '--'}}</font>
 <!--              <span class="show_tips" :class="show_key == index ? 'show' : ''">-->
 <!--                {{change_price}}-->
 <!--                <font></font>-->
@@ -86,7 +86,7 @@
 <!--            BTC估值-->
             <span class="valuation">
               <font class="valuation_font" @mouseenter="get_now_price(index, item.appraisement, $event)"
-                    @mouseleave="hide_now_price">{{(priceReady || initReady) && item.available!=0 ? toFixed(item.appraisement,8) : '--'}}</font>
+                    @mouseleave="hide_now_price">{{(priceReady || initReady) && item.total!=0 ? toFixed(item.appraisement,8) : '--'}}</font>
 <!--              <span class="show_tips" :class="show_key == index ? 'show' : ''">-->
 <!--                {{change_price}}-->
 <!--                <font></font>-->
@@ -145,13 +145,13 @@
               <!--sss打开转账 begin-->
 
               <span class="withdrawals-button button"
-                    v-if="!prohibitAll"
+                    v-if="!prohibitAll && item.currency != 'TKF' && item.currency != 'FF'"
                   @click="internalTransfer(index,item)"
                   :class="{'recharge-button-select-transfer':activeIndex===index  && transferss}"
                   >
                 {{$t('internalTransfer')}}
               </span>
-            <span class=" can-not-withdrawals" v-if="prohibitAll">{{$t('internalTransfer')}}</span>
+            <span class="can-not-withdrawals" v-else>{{$t('internalTransfer')}}</span>
 
 <!-- v-if="serverT >= item.withdrawOpenTime"-->
 <!--              内部转账灰色按钮 begin-->
@@ -175,7 +175,7 @@
 
               <span class="withdrawals-button button"
                    @click="openLockHouse(index,item)"
-                   v-if="item.currency === 'KK'|| item.currency === 'TT'"
+                   v-if="item.currency === 'KK'|| item.currency === 'TT' || item.currency === 'USDT'"
                   >
                {{$t('lockWarehouse')}}
               </span>
@@ -206,32 +206,89 @@
         </li>
       </ul>
     </template>
-
   </div>
 
 <!--  锁仓弹框-->
   <PopupT :switch="popWindowOpenLockHouse" @close="popWindowClose_LockHouse" >
     <div slot="header">
-      <div>{{lockHouseCurrency}}{{$t('lock_house')}}</div>
+      <div v-if="lockHouseCurrency == 'TT'">{{lockHouseCurrency}}{{$t('lock_house')}}</div>
+      <div v-if="lockHouseCurrency == 'KK'">{{lockHouseCurrency}}{{$t('lockAndMine')}}</div>
+      <div v-if="lockHouseCurrency == 'USDT'">{{lockHouseCurrency}}{{$t('锁仓学习')}}</div>
     </div>
     <div slot="article"class="pop-lock-house">
-      <div class="RiskAlert">
+      <div class="riskAlert" v-if="lockHouseCurrency == 'TT' || lockHouseCurrency == 'USDT'">
         <span style="display:inline-block">
           <img class="RiskAlertImg" src="../../assets/pinchakan.png" alt="">
         </span>
-
         <span style="color: #6B7DA2; font-size:12px">锁仓周期</span>
         <span style="color: #FD5555; font-size:12px">90</span>
         <span style="color: #6B7DA2; font-size:12px">天，</span>
         <span style="color: #FD5555; font-size:12px">90</span>
         <span style="color: #6B7DA2; font-size:12px">天内不可解锁</span>
+        <span style="color: #6B7DA2; font-size:12px" v-if="lockHouseCurrency == 'USDT'">(可学习90天)</span>
       </div>
+      <div>
+        <div class="lock-time " v-if="lockHouseCurrency == 'KK'">
+          <div class="lock-number">锁仓数量 (KK)</div>
+          <div class="lock-time-currency flex-row-reverse" >
+<!--            <div v-for="(v,index) in computedMiningDate" :key="index" class="pointer lock-time-currency-content"-->
+<!--                 :class="{'lock-time-currency-content-select':(lockCurrencys == v)}" @click="selectLockCurrencys(v)">{{v}}</div>-->
+            <div v-for="(v,index) in computedMiningDate" :key="index" class="pointer lock-time-input1"
+                 :class="{'lock-time-currency-content-select':(lockCurrencys == v)}" @click="selectLockCurrencys(v)">{{v}}</div>
+<!--            <div class="lock-time-input1">500</div>-->
+<!--            <div class="lock-time-input1">1000</div>-->
+<!--            <div class="lock-time-input1">1500</div>-->
+<!--            <div class="lock-time-input1">2000</div>-->
+<!--            <div class="lock-time-input1">2500</div>-->
+<!--            <div class="pointer" :class="lockCurrencys == 2 ?'lock-time-currency-content-select':'lock-time-currency-content'" @click="selectLockCurrencys(2)">{{lockAvailable1}}</div>-->
+          </div>
+          <div class="lock-number">锁仓天数</div>
+          <div class="lock-time-days flex" v-if="lockCurrencys == '500'">
+            <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysOne" :key="dex"
+                 :class="{'lock-time-input-selected':(lockTime.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
+          </div>
+          <div class="lock-time-days flex" v-if="lockCurrencys == '1000'">
+            <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysTwo" :key="dex"
+                 :class="{'lock-time-input-selected':(lockTimeTwo.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
+          </div>
+          <div class="lock-time-days flex" v-if="lockCurrencys == '1500'">
+            <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysThree" :key="dex"
+                 :class="{'lock-time-input-selected':(lockTimeThree.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
+          </div>
+          <div class="lock-time-days flex" v-if="lockCurrencys == '2000'">
+            <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysFour" :key="dex"
+                 :class="{'lock-time-input-selected':(lockTimeFour.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
+          </div>
+          <div class="lock-time-days flex" v-if="lockCurrencys == '2500'">
+            <div class="pointer lock-time-input" v-for="(v,dex) in lockDaysFive" :key="dex"
+                 :class="{'lock-time-input-selected':(lockTimeFive.days == v.days)}" @click="selectLockTime(v)"> {{v.days}}</div>
+          </div>
+          <!--      锁仓挖矿显示-->
+          <div class="lock-house-mining">
+            <div class="lock-house-mining-box flex">
+              <!--所需-->
+              <div class="lock-house-mining-title">{{$t('required')}}</div>
+              <div class="lock-house-mining-content">{{amt}} {{lockCurrency}}</div>
+            </div>
+            <div class="lock-house-mining-box flex">
+              <!--可用-->
+              <div class="lock-house-mining-title">{{$t('availableCurrecy')}}</div>
+              <div class="lock-house-mining-content">{{toFixed(lockHouseAvailable,4)}} {{lockHouseCurrency}}</div>
+            </div>
+            <div class="lock-house-mining-box flex">
+              <!--奖励-->
+              <div class="lock-house-mining-title">{{$t('rewardCurrency')}}</div>
+              <div class="lock-house-mining-content">{{rewAmt}} {{rewCurrency}}</div>
+            </div>
+          </div>
+        </div>
 
-<!--      锁仓输入框-->
-      <div class="lock-house-article">
+      </div>
+<!--      锁仓分红输入框-->
+      <div class="lock-house-article" v-if="lockHouseCurrency == 'TT'">
         <div class="lock-house-title flex">
           <div>{{$t('lock_house_amount')}}</div>
-          <div>{{$t('available')}}：{{lockHouseAvailable}}{{lockHouseCurrency}}</div>
+          <div>{{$t('available')}}：{{lockHouseAvailable}} {{lockHouseCurrency}}</div>
         </div>
         <div class="lock-house-input flex">
           <input type="text" :placeholder='$t("lock_house_input")' v-model="lockHomeNum" @blur="testLockAmount">
@@ -239,6 +296,27 @@
         </div>
         <div class="wrong-content">
           <span class="wrong-msg">{{lockHomeNum_WA}}</span>
+        </div>
+      </div>
+
+
+
+<!--      锁仓学习-->
+      <div class="lock-house-learning" v-if="lockHouseCurrency =='USDT'">
+        <div class="lock-house-mining-box flex">
+          <!--所需-->
+          <div class="lock-house-mining-title">{{$t('required')}}</div>
+          <div class="lock-house-mining-content">500 USDT</div>
+        </div>
+        <div class="lock-house-mining-box flex">
+          <!--可用-->
+          <div class="lock-house-mining-title">{{$t('availableCurrecy')}}</div>
+          <div class="lock-house-mining-content">{{toFixed(lockHouseAvailable,4)}} {{lockHouseCurrency}}</div>
+        </div>
+        <div class="lock-house-mining-box flex">
+          <!--奖励-->
+          <div class="lock-house-mining-title">{{$t('可学')}}</div>
+          <div class="lock-house-mining-content">90 天</div>
         </div>
       </div>
 
@@ -270,26 +348,57 @@
             <div class="step-circular step-color-grew"></div>
             <div class="step-line1 step-color-grew"></div>
           </div>
-          <div class="lock-house-rules-right">
-            <div class="lock-house-day">{{lockHouseNowTime.nowDateTime}} 12:00</div>
+          <div class="lock-house-rules-right" v-if="lockHouseCurrency == 'TT'">
+            <div class="lock-house-day">{{lockHouseNowTime.nowDateTime}} 中午  12:00 (GMT+8)</div>
             <div class="lock-house-day">{{$t('lock_house_income')}}</div>
+          </div>
+          <div class="lock-house-rules-right" v-if="lockHouseCurrency == 'USDT'">
+            <div class="lock-house-day">{{lockHouseStudy.openDateTime}} 中午  12:00 (GMT+8)</div>
+            <div class="lock-house-day">{{$t('openTime')}}</div>
+          </div>
+          <div class="lock-house-rules-right" v-if="lockHouseCurrency == 'KK'">
+            <div class="lock-house-day">{{lockHouseMining.openDateTime}} 中午  12:00 (GMT+8)</div>
+            <div class="lock-house-day">{{$t('openTime')}}</div>
           </div>
         </div>
         <div class="flex">
+          <div class="lock-house-rules-left" >
+            <div class="step-circular step-color-grew"></div>
+            <div class="step-line13 step-color-grew" v-if="lockHouseCurrency == 'TT'"></div>
+          </div>
+          <div class="lock-house-rules-right-last" v-if="lockHouseCurrency == 'TT'">
+            <div class="lock-house-day">{{lockHouseNowTime.dividendTime}} 中午  12:00 (GMT+8)</div>
+            <div class="lock-house-day">{{$t('lock_house_income1')}}</div>
+          </div>
+          <div class="lock-house-rules-right-last" v-if="lockHouseCurrency == 'USDT'">
+            <div class="lock-house-day">{{lockHouseStudy.closeDateTime}} 中午  12:00 (GMT+8)</div>
+            <div class="lock-house-day">{{$t('closeTime')}}</div>
+          </div>
+          <div class="lock-house-rules-right-last" v-if="lockHouseCurrency == 'KK'">
+            <div class="lock-house-day">{{lockHouseMining.closeDateTime}} 中午  12:00 (GMT+8)</div>
+            <div class="lock-house-day">{{$t('closeTime')}}</div>
+          </div>
+        </div>
+        <div class="flex "  v-if="lockHouseCurrency == 'TT'">
           <div class="lock-house-rules-left">
             <div class="step-circular step-color-grew"></div>
 <!--            <div class="step-line step-color-grew"></div>-->
           </div>
-          <div class="lock-house-rules-right-last">
-            <div class="lock-house-day">{{lockHouseNowTime.dividendTime}} 12:00</div>
-            <div class="lock-house-day">{{$t('lock_house_income1')}}</div>
+          <div class="lock-house-rules-right-last" v-if="lockHouseCurrency == 'TT'">
+            <div class="lock-house-day">{{lockHouseStudy.closeDateTime}} 晚上 20:45（GMT+8）</div>
+            <div class="lock-house-day">{{$t('closeTime')}}</div>
           </div>
         </div>
       </div>
     </div>
     <div slot="footer" class="lock-house-footer">
-      <button class="ensure-button btn_blue pointer" @click="commitLockHouse()">{{$t('lock_house_ensure')}}</button>
-      <div class="day-surplus">
+      <button v-if="lockHouseCurrency =='TT' && !sending1" class="ensure-button btn_blue pointer" @click="commitLockHouse()">{{$t('lock_house_ensure')}}</button>
+      <button v-if="lockHouseCurrency =='TT' && sending1" class="ensure-button btn_blue pointer">{{$t('锁仓中')}}</button>
+      <button v-if="lockHouseCurrency =='KK' && !sending2" class="ensure-button btn_blue pointer" @click="commitLockMining()">{{$t('lock_house_ensure ')}}</button>
+      <button v-if="lockHouseCurrency =='KK' && sending2" class="ensure-button btn_blue pointer">{{$t('锁仓中 ')}}</button>
+      <button v-if="lockHouseCurrency =='USDT' && !sending3" class="ensure-button btn_blue pointer" @click="commitLockLearing()">{{$t('lock_house_ensure')}}</button>
+      <button v-if="lockHouseCurrency =='USDT' && sending3" class="ensure-button btn_blue pointer">{{$t('锁仓中')}}</button>
+      <div class="day-surplus" v-if="lockHouseCurrency =='TT'">
         {{$t('lock_house_surplus')}}
         <span>{{lockNum}}</span>
       </div>
@@ -644,7 +753,7 @@
 
       <button @click="goToTransferRecord" class="pointer btn_simple ssss2 rig16 ">{{$t('deletePopConfirm8')}}</button>
 
-      <dev @click="buyConfirmSuccessClose" class=" pointer ssss12">{{$t('确定')}}</dev>
+      <dev @click="buyConfirmSuccessClose" class=" pointer ssss12">{{$t('ensure')}}</dev>
 
     </div>
 

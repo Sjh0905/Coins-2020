@@ -43,20 +43,20 @@
 }
 
 .type {
-  flex: 20;
+  flex: 18;
 }
 
 .detail {
-  flex: 24;
+  flex: 20;
   /*text-align: right*/
 }
 
 .num {
-  flex: 24;
+  flex: 20;
   /*text-align: right;*/
 }
 .num1 {
-  flex: 17;
+  flex: 20;
   text-align: right;
 }
 
@@ -64,6 +64,10 @@
   width: 0.1rem;
   /*height: 0.18rem;*/
   /*margin-left: 0.12rem;*/
+}
+.mobile-forecast-size {
+  font-family:Roboto-Regular,Roboto;
+  font-size: 0.32rem;
 }
 
 .mobile-forecast-record-list {
@@ -80,8 +84,19 @@
 }
 
 .col-list {
-  height: 0.8rem;
-  line-height: 0.8rem;
+  height: 1.16rem;
+  line-height: 1.16rem;
+}
+.mobile-forecast {
+  height: 0.4rem;
+  line-height: 0.4rem;
+}
+.mobile-forecast-time {
+  font-size:0.2rem;
+  color: #A2B5D9;
+}
+.mobile-forecast1 {
+  text-align: right;
 }
 
 .mobile-forecast-record-item {

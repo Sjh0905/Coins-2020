@@ -81,10 +81,12 @@ root.data = function () {
     // 邀请明细弹框
     popWindowOpen:false,
     popWindowOpenFF:false,
+    popWindowOpenJian:false,
 
     // 分分明细
     FFMining:[],
-    KKMining:[]
+    KKMining:[],
+    sun:0
   }
 }
 
@@ -203,7 +205,10 @@ root.computed.btReward = function () {
 root.computed.btActivity = function () {
   return this.$store.state.btActivity;
 }
-
+// 获取userId
+root.computed.userId = function () {
+  return this.$store.state.authMessage.userId
+}
 
 root.watch = {};
 
@@ -240,10 +245,10 @@ root.methods.error_FFMiningDetails = function () {
 }
 
 // 查看KK明细
-root.methods.KKMiningDetails = function (item) {
+root.methods.KKMiningDetails = function () {
   this.$http.send('GET_KK_REWARD_FOR_INVITES', {
     bind: this,
-    urlFragment:item.beInvitedUserId,
+    urlFragment:this.userId,
     callBack: this.RE_KKMiningDetails,
     errorHandler: this.error_KKMiningDetails
   })
@@ -264,15 +269,25 @@ root.methods.openFFMining = function (item) {
   console.info(item)
   this.popWindowOpenFF = true
 }
+// 打开间接邀请明细弹框
+root.methods.openMiningJian = function (item) {
+  this.FFMiningDetails(item)
+  console.info(item)
+  this.popWindowOpenJian = true
+}
 // 关闭FF弹窗
 root.methods.popWindowCloseFF  =function (){
   this.popWindowOpenFF = false
 }
 
+// 关闭FF弹窗
+root.methods.popWindowCloseJian  =function (){
+  this.popWindowOpenJian = false
+}
+
 // 打开KK明细弹框
-root.methods.openKKMining = function (item) {
-  this.KKMiningDetails(item)
-  console.info(item)
+root.methods.openKKMining = function () {
+  this.KKMiningDetails()
   this.popWindowOpen = true
 }
 
@@ -465,6 +480,7 @@ root.methods.re_getMyInvitesForBT = function (data) {
   let res = data.dataMap
   console.log('res=======', res)
   this.size = res.size
+  // this.indirectInviteNum  = res.indirectInviteNum
   this.totalRegister = res.totalRegister
   this.totalChangeStr = res.totalChangeStr
   this.allKKAmount = res.allKKAmount
@@ -476,6 +492,12 @@ root.methods.re_getMyInvitesForBT = function (data) {
       this.realNums++;
     }
   }
+   let sun = 0;
+  for(var s = 0;s<res.myInvites.length;s++){
+    sun += res.myInvites[s].indirectInviteNum;
+    this.sun = sun
+  }
+  console.info('sun===========',sun)
   this.records.push(...res.myInvites)
   // this.records = this.myInvites;
   if (res.myInvites.length < this.maxResults) {

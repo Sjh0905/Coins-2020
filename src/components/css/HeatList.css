@@ -80,30 +80,30 @@
 }
 
 .time {
-  flex: 13;
+  flex: 8;
   /*flex:9.3;*/
   text-align: left;
 }
 
 .currency {
-  flex: 13;
+  flex: 8;
   text-align: left;
   /*flex:19.9;*/
 }
 
 .type {
-  flex: 12;
+  flex: 10;
   text-align: left;
 }
 
 
 .total {
-  flex: 8;
+  flex: 7;
   text-align: left;
 }
 
 .address {
-  flex: 8;
+  flex: 7;
   text-align: right;
 }
 

@@ -34,7 +34,9 @@
       <div class="mobile-open-tape-list-button" @click="openMask">开启</div>
     </div>
     <div class="mobile-open-tape-list-text">
-      开启后，如您收益率靠前，您将可能出现在带单收益榜榜单中，同时可被用户跟单，零成本获得额外的带单收益，双重盈利。
+      <div>1. 带单开启：需抵押{{godFee}}枚平台币TT作为带单保证金，请预存资产；</div>
+      <div>2. 带单期间：跟随者的跟单费将被冻结；</div>
+      <div>3. 带单结束：请联系客服，释放保证金，解冻跟单费。</div>
     </div>
     </div>
     <!--带单收益-->
@@ -95,11 +97,16 @@
           <div class="cancel" @click="closeMaskWindow">取消</div>
         </div>
       </div>
-
+      <!--保证金 begin-->
+      <div class="security-deposit flex" v-if="!isHasItem">
+        <div>所需保证金</div>
+        <div class="text-blue-documentary">{{godFee}} TT</div>
+      </div>
+      <!--保证金 end-->
       <div class="mobile-open-tape-pop-window-content">
         <div class="mobile-open-tape-pop-window-content-item flex">
           <div class="mobile-open-tape-pop-window-content-currency-pair">带单币对</div>
-          <div class="mobile-open-tape-pop-window-content-currency">BTC/USDT</div>
+          <div class="mobile-open-tape-pop-window-content-currency">BTC ETH LTC BCH</div>
         </div>
         <div class="mobile-open-tape-pop-window-content-item flex">
           <div class="mobile-open-tape-pop-window-content-currency-pair">带单费用(USDT)</div>
@@ -110,7 +117,9 @@
           </div>
         </div>
         <div class="mobile-open-tape-pop-window-content-text">
-          开启后，如您收益率靠前，您将可能出现在带单收益榜榜单中，同时可被用户跟单，零成本获得额外的带单收益，双重盈利。
+          <div>1. 带单开启：需抵押{{godFee}}枚平台币TT作为带单保证金，请预存资产；</div>
+          <div>2. 带单期间：跟随者的跟单费将被冻结；</div>
+          <div>3. 带单结束：请联系客服，释放保证金，解冻跟单费。</div>
         </div>
       </div>
     </div>
