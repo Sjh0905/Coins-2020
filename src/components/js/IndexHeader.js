@@ -916,6 +916,11 @@ root.methods.goToFrenchCurrecy = function (){
   window.location.replace(process.env.DOMAIN+'index/Order/OrderConduct')
 }
 
+// 跳转合约订单
+root.methods.goToContractCurrecy = function (){
+  // window.location.replace(process.env.DOMAIN+'index/Order/OrderConduct')
+}
+
 // 跳转法币交易
 root.methods.goToFranchExchange = function (){
   console.info(process.env.DOMAIN)
