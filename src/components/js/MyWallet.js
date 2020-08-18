@@ -1954,7 +1954,7 @@ root.methods.commitEmailVerification = function (data) {
 
 // 提交邮箱验证成功
 root.methods.re_commitEmailVerification = function (data) {
-  console.log('...........',data)
+  // console.log('...........',data)
   // typeof data === 'string' && (data = JSON.parse(data))
 
   // let resDataMap = data.dataMap;
