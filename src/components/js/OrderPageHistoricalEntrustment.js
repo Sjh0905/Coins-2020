@@ -63,6 +63,25 @@ root.created = function () {
 
 
 root.methods = {}
+root.methods.changeType = function (order) {
+  if(!order.isFollow && (order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')){
+    let type = order.type === 'BUY_LIMIT' ? this.$t('orderPageHistoricalEntrustment.buy') : this. $t('orderPageHistoricalEntrustment.sale')
+    return type
+  }
+  if(!order.isFollow && (order.type === 'BUY_MARKET' || order.type === 'SELL_MARKET')){
+    let type = order.type === 'BUY_MARKET' ? this.$t('orderPageHistoricalEntrustment.marketBuy') : this. $t('orderPageHistoricalEntrustment.marketSale')
+    return type
+  }
+  if(order.isFollow && (order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')){
+    let type = order.type === 'BUY_LIMIT' ?  this.$t('orderPageHistoricalEntrustment.followBuy') : this.$t('orderPageHistoricalEntrustment.followSale')
+    return type
+  }
+  if(order.isFollow && (order.type === 'BUY_MARKET' || order.type === 'SELL_MARKET')){
+    let type = order.type === 'BUY_MARKET' ? this.$t('orderPageHistoricalEntrustment.followMarketBuy') : this.$t('orderPageHistoricalEntrustment.followMarketSale')
+    return type
+  }
+}
+
 // 发送请求获取
 root.methods.getOrder = function () {
   if (!this.$store.state.authMessage.userId) {
