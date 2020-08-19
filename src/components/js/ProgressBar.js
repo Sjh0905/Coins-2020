@@ -161,7 +161,8 @@ root.data = function () {
   return {
     price: this.depth_price,
     priceNow: '0',
-    amount: '',
+    amount: '', // 限价数量
+    marketAmount: '', // 市价数量
     currentSymbol: {
       balance: '--',
       balance_order: '--'
@@ -231,7 +232,9 @@ root.data = function () {
     // 弹框提示信息
     priceCont:'',
     // 弹框打开/关闭
-    popWindowOpen1:false
+    popWindowOpen1:false,
+    // minQuantity:'',
+    symbolsInfo:['TT_USDT','KK_USDT']
   }
 }
 
@@ -252,7 +255,7 @@ root.created = function () {
 
   this.getKKPriceRange();
   // this.tradeMarket()
-
+  // this.getBaseMinimum()
 }
 
 root.mounted = function () {
@@ -293,6 +296,25 @@ root.methods.formatTooltip=(val)=>{
 root.methods.createSlider = () =>{
 
 }
+// root.methods.getBaseMinimum = function () {
+//   this.$http.send('COMMON_SYMBOLS',
+//     {
+//       bind: this,
+//       callBack: this.re_getBaseMinimum,
+//       errorHandler: this.error_getBaseMinimum
+//     })
+// }
+// root.methods.re_getBaseMinimum = function (data){
+//   typeof (data) === 'string' && (data = JSON.parse(data))
+//   this.symbolsInfo = data.symbols || []
+//   this.symbolsInfo.forEach(v=>{
+//     v.name === this.$store.state.symbol && (this.minQuantity = v.baseMinimum)
+//   })
+//   console.info('this.minQuantity ==',this.minQuantity )
+// }
+// root.methods.error_getBaseMinimum = function (err){
+//
+// }
 // 判断当前币是否可交易
 root.methods.SYMBOL_ENTRANSACTION = function () {
   let self = this;
@@ -363,8 +385,13 @@ root.methods.reduceNum = function (type) {
 root.methods.get_rate = function () {
   if (!this.btc_eth_rate.dataMap) return;
   let rate;
+  let type
   let rateObj = this.btc_eth_rate.dataMap.exchangeRate;
-  let type = this.symbol.split('_')[1];
+  if(this.orderType && this.pendingOrderType == 'marketPrice'){
+    type = this.symbol.split('_')[0];
+  }else{
+    type = this.symbol.split('_')[1];
+  }
   switch (type) {
     case 'BTC':
       rate = rateObj.btcExchangeRate;
@@ -403,6 +430,7 @@ root.methods.turnover_money = function (currency) {
   let lang = this.$store.state.lang;
   let price = currency;
   let rate = this.get_rate() || 0;
+  // console.info('rate',rate)
   let currency_money;
   if (lang === 'CH') {
     currency_money = ('￥' + this.$globalFunc.accFixedCny(this.$store.state.exchange_rate_dollar * (price * rate), 2));
@@ -438,8 +466,12 @@ root.methods.RE_SET_AMOUNT = function (obj) {
 // 切换买卖百分比时候自动计算数量
 root.methods.sectionSelect = function (num) {
   if (!this.isLogin) return;
-  if (this.orderType) {
+  if (this.pendingOrderType == 'marketPrice') {
     // this.amount = (this.available * num).toFixed(this.baseScale);
+    this.marketAmount = this.$globalFunc.accFixed(this.available * num, this.baseScale);
+    return
+  }
+  if(this.orderType && this.pendingOrderType == 'limitPrice'){
     this.amount = this.$globalFunc.accFixed(this.available * num, this.baseScale);
     return
   }
@@ -526,6 +558,7 @@ root.methods.BTN_CLICK = function () {
 
 //检测币对交易价格，false 不通过 true 通过
 root.methods.checkPriceRange = function () {
+  // if(this.pendingOrderType == 'marketPrice') return false
   let len = this.KKPriceRange.length;
   if(len == 0)return true
 
@@ -584,7 +617,6 @@ root.methods.comparePriceNow = function () {
 
 // 买卖提交
 root.methods.tradeMarket = function (popWindowOpen1,type) {
-  console.log(this.$store.state.depth_price)
 
   this.orderType1 = type;
   // this.popWindowOpen = false;
@@ -625,7 +657,6 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
     this.promptOpen = true;
     return
   }
-
   // if (this.orderType && Number(this.amount) > Number(this.available)) {
   //   // alert('您的持仓不足')
   //   this.popText = this.lang == 'CH' ? '您的余额不足,请充值' : 'Insufficient funds. Please make a deposit first.';
@@ -635,20 +666,42 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
   // }
 
   if (this.orderType && Number(this.amount) > Number(this.available)) {
-    // alert('您的持仓不足')
+    this.popText = this.lang == 'CH' ? '您的余额不足,请充值' : 'Insufficient funds. Please make a deposit first.';
+    this.popType = 0;
+    this.promptOpen = true;
+    return
+  }
+  if(this.marketAmount > Number(this.available)){
     this.popText = this.lang == 'CH' ? '您的余额不足,请充值' : 'Insufficient funds. Please make a deposit first.';
     this.popType = 0;
     this.promptOpen = true;
     return
   }
   // 添加price、amount不为数字和为0时的校验
-  if (!this.orderType && this.price == 0) {
+  if (!this.orderType && Number(this.price) == 0 && this.pendingOrderType == 'limitPrice') {
     this.popText = this.lang == 'CH' ? '请输入正确的' + txt + '价' : 'Invalid price';
     this.popType = 0;
     this.promptOpen = true;
     return
   }
-
+  if (!this.orderType && Number(this.marketAmount) == 0) {
+    this.popText = this.lang == 'CH' ? '请输入正确的交易额' : 'Invalid amount';
+    this.popType = 0;
+    this.promptOpen = true;
+    return
+  }
+  if ((!this.orderType) && this.symbolsInfo.indexOf(symbol) >= 0 && (Number(this.marketAmount) < 1)) {
+    this.popText = this.lang == 'CH' ? '交易额不能低于 1 ' : 'Invalid amount';
+    this.popType = 0;
+    this.promptOpen = true;
+    return
+  }
+  if (!this.orderType && this.symbolsInfo.indexOf(symbol) < 0 && (Number(this.marketAmount) < 10)) {
+    this.popText = this.lang == 'CH' ? '交易额不能低于 10 ' : 'Invalid amount';
+    this.popType = 0;
+    this.promptOpen = true;
+    return
+  }
   if(!this.orderType && popWindowOpen1){
     this.popWindowOpen1 = !this.comparePriceNow();
     if(this.popWindowOpen1)return;
@@ -656,12 +709,19 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
 
   if(symbol == 'KK_USDT' && !this.orderType && !this.checkPriceRange())return;
 
-  if (!this.orderType && this.amount == 0) {
+  if (!this.orderType && this.amount == 0 && this.pendingOrderType == 'limitPrice')  {
     this.popText = this.lang == 'CH' ? '请输入正确的' + txt + '量' : 'Invalid amount';
     this.popType = 0;
     this.promptOpen = true;
     return
   }
+  if (this.orderType && Number(this.marketAmount) == 0) {
+    this.popText = this.lang == 'CH' ? '请输入正确的' + txt + '量' : 'Invalid amount';
+    this.popType = 0;
+    this.promptOpen = true;
+    return
+  }
+
   if (this.orderType && this.price == 0) {
     this.popText = this.lang == 'CH' ? '请输入正确的' + txt + '价' : 'Invalid price';
     this.popType = 0;
@@ -682,6 +742,8 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
     this.promptOpen = true;
     return
   }
+
+
   let params = {};
   if(this.pendingOrderType == 'limitPrice') {
     params = {
@@ -696,8 +758,8 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
   if(this.pendingOrderType == 'marketPrice') {
     params = {
       symbol: this.$store.state.symbol,
-      price: this.priceNow, // 传当前市价
-      amount: this.amount,
+      price: !this.orderType ? this.marketAmount : 0, // 传当前市价
+      amount: this.orderType? this.marketAmount : 0,
       type: !this.orderType ? 'BUY_MARKET':'SELL_MARKET',
       source: 'WEB', //访问来源
       // customFeatures: this.fee ? 65536 : 0
@@ -774,6 +836,7 @@ root.methods.Callback = function (data) {
   this.promptOpen = true;
   // 清空数量
   this.amount = '';
+  this.marketAmount = '';
   this.$http.send('ACCOUNTS', {bind: this, callBack: this.RE_ACCOUNTS})
 
   // setTimeout(()=>{
@@ -839,7 +902,6 @@ root.methods.RE_ERROR = function (err) {
 }
 
 root.methods.RE_ACCOUNTS = function (data) {
-  console.log('ACCOUNTS=====ProgressBar.js====', data)
   typeof (data) === 'string' && (data = JSON.parse(data))
   if (!data || !data.accounts) {
     return

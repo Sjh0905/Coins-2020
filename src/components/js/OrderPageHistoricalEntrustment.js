@@ -16,7 +16,7 @@ root.data = () => {
     historyOrder: [],
     clickThis: -1,
 
-    limit: 100, //一次获取多少条数据
+    limit: 50, //一次获取多少条数据
     offsetId: 0, //最后的订单id
     updatedAt:1,//最后的订单更新时间,默认为1
     showLoadingMore: true,//是否显示加载更多
