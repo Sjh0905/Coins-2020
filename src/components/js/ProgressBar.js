@@ -270,7 +270,7 @@ root.mounted = function () {
 root.watch.pendingOrderType = function (newValue, oldValue){
   if (newValue == oldValue) return;
   this.value = 0
-  console.log("=========",this.pendingOrderType)
+  // console.log("=========",this.pendingOrderType)
 }
 
 root.watch.value = function (newValue, oldValue) {
@@ -669,7 +669,7 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
   //   return
   // }
 
-  if (this.orderType && Number(this.amount) > Number(this.available)) {
+  if (this.orderType && Number(this.amount) > Number(this.available) && this.pendingOrderType == 'limitPrice') {
     this.popText = this.lang == 'CH' ? '您的余额不足,请充值' : 'Insufficient funds. Please make a deposit first.';
     this.popType = 0;
     this.promptOpen = true;
@@ -726,7 +726,7 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
     return
   }
 
-  if (this.orderType && this.price == 0) {
+  if (this.orderType && this.price == 0 && this.pendingOrderType == 'limitPrice') {
     this.popText = this.lang == 'CH' ? '请输入正确的' + txt + '价' : 'Invalid price';
     this.popType = 0;
     this.promptOpen = true;
@@ -740,7 +740,7 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
 
   if(symbol == 'KK_USDT' && this.orderType && !this.checkPriceRange())return;
 
-  if (this.orderType && this.amount == 0) {
+  if (this.orderType && this.amount == 0 && this.pendingOrderType == 'limitPrice') {
     this.popText = this.lang == 'CH' ? '请输入正确的' + txt + '量' : 'Invalid amount';
     this.popType = 0;
     this.promptOpen = true;

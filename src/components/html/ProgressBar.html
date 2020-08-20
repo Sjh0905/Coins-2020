@@ -242,7 +242,7 @@
     <div class="progress-bar-tips flex" v-if="pendingOrderType == 'marketPrice'">
             <span>
               <span class="txt-light jiaoyie">{{$t("progressBar.volume")}}</span>
-              <span :class="!orderType ? 'txt_green jiaoyie2' : 'txt_red jiaoyie2'">{{ accMul(available * value)}}</span>
+              <span :class="!orderType ? 'txt_green jiaoyie2' : 'txt_red jiaoyie2'">{{marketAmount}}</span>
               <span class="txt-light jiaoyie2">{{orderType === 0 ? this.symbol.split('_')[1] : this.symbol.split('_')[0]}}</span>
             </span>
       <!-- 显示买入持仓不足 start -->

@@ -1200,7 +1200,7 @@ root.watch.symbol = function (newValue, oldValue) {
   this.getScaleConfig();
   if(newValue == 'KK_USDT'){
     this.pendingOrderType = 'limitPrice'
-    this.priceCont = ''
+    this.priceCont = '限价单'
   }
 
 
