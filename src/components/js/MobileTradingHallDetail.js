@@ -595,7 +595,7 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
     return
   }
   if (this.pendingOrderType == 'marketPrice' && !type && (Number(this.transactionVolume) == 0)) {
-    this.popText = '请输入正确的' + txt + '量22';
+    this.popText = '请输入正确的' + txt + '量';
     this.popType = 0;
     this.promptOpen = true;
     return
@@ -753,6 +753,7 @@ root.methods.successCallback = function (data) {
   this.promptOpen = true;
   // 清空数量
   this.transaction_amount = '';
+  this.transactionVolume = ''
   // console.log('TRADE_ORDERS', data)
   this.$http.send('ACCOUNTS', {
     bind: this,
@@ -1052,6 +1053,7 @@ root.methods.changeType = function (typeNum) {
   }
   // 切换买入卖出时候需要清空数量
   this.transaction_amount = '';
+  this.transactionVolume = ''
 }
 
 // 切换左右结构
@@ -1165,6 +1167,10 @@ root.computed.transactionPrice = function () {
 
 
 root.watch = {};
+// 切换 市价/限价单 市价的交易量清空
+root.watch.pendingOrderType = function (newValue, oldValue) {
+  this.transactionVolume=''
+}
 root.watch.transactionAmount = function (newValue, oldValue) {
   let value = newValue.toString();
   // 限制输入位数

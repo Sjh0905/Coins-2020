@@ -156,8 +156,7 @@
         </div>
 
         <div class="mobile-exchange-price" v-if="pendingOrderType == 'marketPrice'">
-          {{!transaction_price || !transactionVolume? '交易额' :
-          accMul(transaction_price,transactionVolume)}}（{{this.$store.state.symbol.split('_')[1]}}）
+          {{transactionVolume}}（{{this.$store.state.symbol.split('_')[1]}}）
         </div>
 
 
@@ -327,8 +326,7 @@
 
         <div class="mobile-exchange-price txt_40" v-if="pendingOrderType == 'marketPrice'">
           <!-- 市价成交金额（BNB） -->
-          {{!transaction_price || !transactionVolume ? '交易额' :
-          accMul(transaction_price,transactionVolume)}}（{{this.$store.state.symbol.split('_')[1]}}）
+          {{transactionVolume}}（{{this.$store.state.symbol.split('_')[0]}}）
         </div>
 
 
