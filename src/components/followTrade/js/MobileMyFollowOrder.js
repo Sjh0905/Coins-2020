@@ -86,7 +86,7 @@ root.watch = {}
 root.methods = {}
 
 root.methods.isFollowId = function (item) {
-  console.info('item====','执行啦几次呢？？?')
+  // console.info('item====','执行啦几次呢？？?')
   return this.followId = item.followId
 }
 // 取消跟随
@@ -234,7 +234,7 @@ root.methods.removeEventPopstate = function () {
 }
 // 个人设置
 root.methods.personalSetting = function () {
-  console.info('personalSetting=======个人设置',)
+  // console.info('personalSetting=======个人设置',)
 }
 
 /*---------------------- 保留小数 begin ---------------------*/

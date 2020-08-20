@@ -13,7 +13,7 @@ root.watch = {}
 // 观察货币对是否更改
 root.computed.symbol = function () {
   return this.$store.state.symbol;
-  console.info('this.$store.state.symbol;',this.$store.state.symbol)
+  // console.info('this.$store.state.symbol;',this.$store.state.symbol)
 }
 // 观察账户信息是否更改
 root.computed.watchCurrency = function () {
@@ -749,7 +749,7 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
 }
 
 root.methods.Callback = function (data) {
-  console.info('data,',data)
+  // console.info('data,',data)
 
   this.popType = 1;
   this.popText = this.lang == 'CH' ? '挂单成功' : 'Order has been made';

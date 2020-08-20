@@ -104,7 +104,7 @@ root.methods = {}
 root.methods.postWithd1 = function (cardType) {
   this.cardType = cardType
 
-  console.log("cardType  ===== ",this.cardType)
+  // console.log("cardType  ===== ",this.cardType)
 
   // this.postBuyCard(cardType)
 }
@@ -142,7 +142,7 @@ root.methods.re_getRegistrationRecord = function (data) {
 
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) {return}
-  console.log("this.re_getRegistrationRecord查询报名记录get=====",data)
+  // console.log("this.re_getRegistrationRecord查询报名记录get=====",data)
   this.records = data.data || {}
 
 
@@ -186,16 +186,16 @@ root.methods.re_getHistoryRecord = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) {return}
   this.historyRecords = data.data
-  console.log("this.re_getHistoryRecord查询历史挖矿记录=====",this.historyRecords)
+  // console.log("this.re_getHistoryRecord查询历史挖矿记录=====",this.historyRecords)
   data.data.forEach((v,index)=> {
     if (v.id) {
-      console.log('查询历史挖矿记录id  index', index)
-      console.log('查询历史挖矿记录id  index', v.id)
+      // console.log('查询历史挖矿记录id  index', index)
+      // console.log('查询历史挖矿记录id  index', v.id)
       this.id = Number(v.id)
     }
   })
 
-  console.log('this.id=========',this.id)
+  // console.log('this.id=========',this.id)
 
 }
 root.methods.error_getHistoryRecord = function (err) {
@@ -230,7 +230,7 @@ root.methods.re_getHistoricalDetails = function (data) {
 
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) {return}
-  console.log("this.re_getHistoricalDetails查询历史挖矿记录详情=====",data)
+  // console.log("this.re_getHistoricalDetails查询历史挖矿记录详情=====",data)
   this.historicalDetails = data.data.data
 
   // this.transaction = data.data.data
@@ -290,7 +290,7 @@ root.methods.getQuantifyransactions = function () {
 root.methods.re_getQuantifyransactions = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) {return}
-  console.log("量化展示_量化交易记录get=====",data)
+  // console.log("量化展示_量化交易记录get=====",data)
 
   // this.transaction = data.data.data
   this.transaction.push(...data.data.data )
@@ -348,12 +348,12 @@ root.methods.getQuantifyBasicInformation = function () {
     callBack: this.re_getQuantifyBasicInformation,
     errorHandler: this.error_getQuantifyBasicInformation
   })
-  console.info('this,userid===============ß',this.userId)
+  // console.info('this,userid===============ß',this.userId)
 }
 root.methods.re_getQuantifyBasicInformation = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) {return}
-  console.log("量化展示_量化基本信息get=====",data)
+  // console.log("量化展示_量化基本信息get=====",data)
 
   this.totalAmount = data.data.recode.totalAmount //挖矿总数
   this.reward = data.data.recode.reward     //挖矿奖励
@@ -368,7 +368,7 @@ root.methods.re_getQuantifyBasicInformation = function (data) {
 
   // this.recode2 == data.data.recode
   // console.log('this.numminingProgress======',this.$globalFunc.accFixed((0.9999 * 100),2))
-  console.info('this.recode2=========',this.currentMaxMining)
+  // console.info('this.recode2=========',this.currentMaxMining)
 }
 root.methods.error_getQuantifyBasicInformation = function (err) {
   console.log("this.error_getQuantifyBasicInformation=====",err)

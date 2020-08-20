@@ -42,6 +42,7 @@ root.data = function () {
     EventRewards:[], // 活动奖励
 
     fundListLists:[], //基金奖励
+    fundHeatReward:[], //基金奖励
 
 
 
@@ -153,6 +154,9 @@ root.methods.changeOpenTypeQuery = function () {
   if(num == 7) {
     this.getFundList()
   }
+  if(num == 8) {
+    this.getHeatReward()
+  }
 
 }
 
@@ -173,7 +177,7 @@ root.methods.changeOpenType = function(num){
     this.$store.commit('changeMobileHeaderTitle', '');
     // 获取withdraw值
     if(this.isFirstGetWithdrawFlag === true ){
-      console.log('进入此',this.isFirstGetWithdrawFlag)
+      // console.log('进入此',this.isFirstGetWithdrawFlag)
       this.getWithdraw()
     }
     return
@@ -206,6 +210,11 @@ root.methods.changeOpenType = function(num){
     this.$router.push({'path':'/index/mobileAsset/MobileAssetRechargeAndWithdrawRecord',query:{id:7}})
     this.$store.commit('changeMobileHeaderTitle', '');
     this.getFundList()
+  }
+  if(num === 8) {
+    this.$router.push({'path':'/index/mobileAsset/MobileAssetRechargeAndWithdrawRecord',query:{id:8}})
+    this.$store.commit('changeMobileHeaderTitle', '');
+    this.getHeatReward()
   }
 
 }
@@ -306,7 +315,7 @@ root.methods.re_getWithdraw = function (data) {
     this.withdrawsLimit += 10;
   }
 
-  console.log('data有', data)
+  // console.log('data有', data)
   this.withdraws = data.dataMap.requests
 
   // if(this.ajaxWithdrawFlag === true){
@@ -364,7 +373,7 @@ root.methods.re_getRewardRecord = function (data) {
     this.pageSize += 10;
   }
 
-  console.log('data有', data)
+  // console.log('data有', data)
   this.ActivityRecord = data.dataMap.kkActivityRewardList
 
   // if(this.ajaxWithdrawFlag === true){
@@ -435,7 +444,7 @@ root.methods.re_getEventRewards = function (data) {
     this.pageSize += 10;
   }
 
-  console.log('data有', data)
+  // console.log('data有', data)
   this.EventRewards = data.dataMap.registerInviteRewards
 
   // if(this.ajaxWithdrawFlag === true){
@@ -540,7 +549,7 @@ root.methods.re_getCapitalTransferList = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
 
   if (!data) return
-  console.log('获取划转记录', data)
+  // console.log('获取划转记录', data)
   this.capitalTransferLists = data.dataMap.userTransferRecordList
 
 
@@ -634,7 +643,7 @@ root.methods.re_getInternalTransferList = function (data) {
   this.ajaxInternalTransferFlag = false
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) return
-  console.log('获取内部转账记录', data)
+  // console.log('获取内部转账记录', data)
   this.internalTransferLists = data.dataMap.userTransferRecordList
 
   if (this.internalTransferLists.length < this.internalTransferLimit){
@@ -694,7 +703,7 @@ root.methods.error_getFundList = function (err) {
 
 // 点击跳转充值详情页
 root.methods.toRechargeDetailPath = function (type) {
-  console.log(123123123,type)
+  // console.log(123123123,type)
   this.$store.commit('changeMobileRechargeRecordData',type)
   this.$router.push("/index/mobileAsset/mobileAssetRechargeRecordDetail/")
 }
@@ -732,7 +741,39 @@ root.methods.tofundDetailsPath = function (item) {
   this.$store.commit('changeMobileRechargeRecordData',item)
   this.$router.push("/index/mobileAsset/mobileAssetInternalTransferRecordDetail/?openType=7")
 }
+// 点击跳进基金详情页
+root.methods.tofundDetailsPath1 = function (item) {
+  this.$store.commit('changeMobileRechargeRecordData',item)
+  this.$router.push("/index/mobileAsset/mobileAssetInternalTransferRecordDetail/?openType=8")
+}
+// 获取周热度记录
+root.methods.getHeatReward = function (limit) {
+  this.$http.send('GET_HEATREWARD', {
+    bind: this,
+    callBack: this.re_getHeatReward,
+    errorHandler: this.error_getHeatReward,
+  })
+}
+// 获取周热度记录回调
+root.methods.re_getHeatReward = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  this.loading = false
+  this.firstLoad = true
+  this.loadingNext = false
+  // console.log('this is data', data.dataMap.lists)
+  if (data.errorCode) return
 
+  this.fundHeatReward = data.dataMap.lists
+  this.fundHeatReward.length < this.limit && (this.loadingMoreShow = false)
+  this.fundHeatReward.length >= this.limit && (this.loadingMoreShow = true)
+  this.loadingMoreShowing = false
+  this.loading = false
+  // this.page_size = data.dataMap.size   // 总页数
+}
+// 获取周热度记录出错
+root.methods.error_getHeatReward = function (err) {
+  console.warn('获取平台奖励出错', err)
+}
 
 // 关闭pop提示
 root.methods.popClose = function () {

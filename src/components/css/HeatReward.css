@@ -38,7 +38,10 @@
   flex: 12;
   text-align: left;
 }
-
+.rewCycle {
+  flex: 20;
+  text-align: left;
+ }
 
 .total {
   flex: 12;

@@ -6,7 +6,7 @@
     <div class="detail-header flex">
 
       <!--时间-->
-      <span class="time">{{$t('assetPagePlatformReward.time')}}</span>
+      <span class="time">{{$t('发放时间')}}</span>
 
       <!--币种-->
       <span class="currency">{{$t('assetPagePlatformReward.currency')}}</span>
@@ -16,6 +16,7 @@
 
       <!--数量-->
       <span class="total">{{$t('assetPagePlatformReward.amount')}}</span>
+      <span class="rewCycle">{{$t('周期')}}</span>
 
       <!--说明-->
       <span class="address">{{$t('assetPagePlatformReward.type')}}</span>
@@ -34,14 +35,15 @@
           <li class="detail-li" v-for="(item,index) in computedRecord" :key="item.id">
             <div class="li-container flex">
               <!--时间-->
-              <span class="time">{{$globalFunc.formatDateUitl(item.updatedAt,'YYYY-MM-DD hh:mm:ss')}}</span>
+              <span class="time">{{$globalFunc.formatDateUitl(Number(item.sendTime),'YYYY-MM-DD hh:mm:ss')}}</span>
               <!--币种-->
               <span class="currency">{{item.currency}}</span>
               <!--数量-->
               <span class="total">{{toFixed(item.amount,8)}}</span>
+              <span class="rewCycle"> {{item.weekOfMonth}} ({{$globalFunc.formatDateUitl(Number(rewSplit),'MM.DD')}} - {{$globalFunc.formatDateUitl(Number(rewTow),'MM.DD')}})</span>
               <!--类型-->
-              <span class="address address-detail" >{{item.fromUserId == userId? $t('walletToFund'):$t('fundToWallet')}}</span>
-              <span class="state">{{item.orderStatus == 'SUCCESS'? $t('success'):$t('failed')}}</span>
+              <span class="address address-detail" >{{item.rewType == 2 ? '双周热度奖' : '单周热度奖'}}</span>
+              <span class="state">{{item.status == 'DONE'? $t('已发放'):'--'}}</span>
             </div>
           </li>
         </template>

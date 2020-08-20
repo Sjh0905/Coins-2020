@@ -93,7 +93,7 @@ root.data = function () {
 /*------------------------------ 生命周期 ------------------------------*/
 
 root.created = function () {
-  console.log("uuid=2222=="+this.$store.state.authMessage.uuid)
+  // console.log("uuid=2222=="+this.$store.state.authMessage.uuid)
   let uuiid = ''
   // if(this.$store.state.authMessage.uuid == undefined){
     uuiid = this.$store.state.authMessage.userId;
@@ -113,7 +113,7 @@ root.created = function () {
   this.uId = this.$store.state.authMessage.userId;
 
   this.value = this.shareUrl;
-  console.log("value=2222=="+this.shareUrl)
+  // console.log("value=2222=="+this.shareUrl)
 
   // this.getMyInvites();
   // 获取奖励比率
@@ -128,7 +128,7 @@ root.created = function () {
   // 获取分享文案显示usdt数量请求
   // this.getPlatformData()
 
-  console.log('root=======',root)
+  // console.log('root=======',root)
   // this.getBTFunc()
 
   //sss 屏蔽 3.11
@@ -238,7 +238,7 @@ root.methods.RE_FFMiningDetails = function (data) {
   typeof (data) === 'string' && (data = JSON.parse(data))
   if (!data) return
   this.FFMining = data.dataMap.ffLists
-  console.info(data)
+  // console.info(data)
 }
 root.methods.error_FFMiningDetails = function () {
 
@@ -257,7 +257,7 @@ root.methods.RE_KKMiningDetails = function (data) {
   typeof (data) === 'string' && (data = JSON.parse(data))
   if (!data) return
   this.KKMining = data.dataMap.kkLists
-  console.info(data)
+  // console.info(data)
 }
 root.methods.error_KKMiningDetails = function () {
 
@@ -266,13 +266,13 @@ root.methods.error_KKMiningDetails = function () {
 // 打开FF明细弹框
 root.methods.openFFMining = function (item) {
   this.FFMiningDetails(item)
-  console.info(item)
+  // console.info(item)
   this.popWindowOpenFF = true
 }
 // 打开间接邀请明细弹框
 root.methods.openMiningJian = function (item) {
   this.FFMiningDetails(item)
-  console.info(item)
+  // console.info(item)
   this.popWindowOpenJian = true
 }
 // 关闭FF弹窗
@@ -312,7 +312,7 @@ root.methods.GET_POSTER_URL = function () {
 }
 root.methods.RE_GET_POSTER_URL = function (res) {
   let urls = res.dataMap;
-  console.log(urls)
+  // console.log(urls)
   if (res.errorCode > 0) return;
   this.poster_url = urls.inviteUrl;
 }
@@ -478,7 +478,7 @@ root.methods.re_getMyInvitesForBT = function (data) {
     return
   }
   let res = data.dataMap
-  console.log('res=======', res)
+  // console.log('res=======', res)
   this.size = res.size
   // this.indirectInviteNum  = res.indirectInviteNum
   this.totalRegister = res.totalRegister
@@ -497,7 +497,7 @@ root.methods.re_getMyInvitesForBT = function (data) {
     sun += res.myInvites[s].indirectInviteNum;
     this.sun = sun
   }
-  console.info('sun===========',sun)
+  // console.info('sun===========',sun)
   this.records.push(...res.myInvites)
   // this.records = this.myInvites;
   if (res.myInvites.length < this.maxResults) {

@@ -26,6 +26,7 @@ root.data = function () {
     toIndex: 10,
 
     fundListLists: [],
+    rewCycle: [],
 
 
     popType: 0,
@@ -46,7 +47,8 @@ root.data = function () {
 
     loadingMoreShow:true,
     loadingMoreShowing: false,
-
+    rewTow:'',
+    rewSplit:''
   }
 }
 
@@ -78,31 +80,37 @@ root.created = function () {
 /*-------------------------- 方法 begin------------------------------*/
 root.methods = {}
 
-// 获取基金奖励记录
+// 获取周热度记录
 root.methods.getFundList = function (limit) {
-  this.$http.send('FUND_RECORDS_LISTS', {
+  this.$http.send('GET_HEATREWARD', {
     bind: this,
     callBack: this.re_getFundList,
     errorHandler: this.error_getFundList,
   })
 }
-// 获取平台奖励记录回调
+// 获取周热度记录回调
 root.methods.re_getFundList = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   this.loading = false
   this.firstLoad = true
   this.loadingNext = false
-  console.log('this is data', data)
+  // console.log('this is data', data.dataMap.lists)
   if (data.errorCode) return
 
-  this.fundListLists = data.dataMap.list
+  this.fundListLists = data.dataMap.lists
+  // this.rewCycle = this.fundListLists.rewCycle.split('_')
+  this.fundListLists.map(v=>{
+    let rewCycleSplit = v.rewCycle.split('_');
+    this.rewSplit = rewCycleSplit[0]
+    this.rewTow = rewCycleSplit[1]
+  })
   this.fundListLists.length < this.limit && (this.loadingMoreShow = false)
   this.fundListLists.length >= this.limit && (this.loadingMoreShow = true)
   this.loadingMoreShowing = false
   this.loading = false
   // this.page_size = data.dataMap.size   // 总页数
 }
-// 获取平台奖励记录出错
+// 获取周热度记录出错
 root.methods.error_getFundList = function (err) {
   console.warn('获取平台奖励出错', err)
 }

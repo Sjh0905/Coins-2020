@@ -527,4 +527,10 @@ requestAddress.POST_REVISION_FEE= {url: urlHead+'/follow/updateFee', method: 'po
 requestAddress.POST_MANAGE = {url: urlHead+'/follow/followManage', method: 'post'}  //修改带单费用
 requestAddress.POST_GOD_FEE = {url: urlHead+'/follow/godFee', method: 'post'}  //跟单保证金
 
+
+
+//2020-08-20   周热度接口
+requestAddress.GET_HEATREWARD = {url: urlHead+'/user/getWeekReward', method: 'get'}  //跟单保证金
+
+
 export default requestAddress

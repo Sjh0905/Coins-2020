@@ -14,7 +14,7 @@ root.data = function () {
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
   this.getHeatList()
-  console.info('this.getHeatList',)
+  // console.info('this.getHeatList',)
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
@@ -43,10 +43,10 @@ root.methods.getHeatList = function () {
 
 root.methods.re_getHeatList = function (data) {
   typeof(data) == 'string' && (data = JSON.parse(data));
-  console.info('data======sssss',)
+  // console.info('data======sssss',)
   this.heatList = data.data || []
   this.loading = false
-  console.info('data======sssss',this.heatList)
+  // console.info('data======sssss',this.heatList)
 }
 
 root.methods.error_getHeatList = function (err) {

@@ -765,7 +765,7 @@ root.methods.re_getBuyRecords = function (data) {
   this.createdAt =  E2.createdAt
   this.createdAt =  this.$globalFunc.formatDateUitl(Number(this.createdAt), 'hh')
 
-  console.info('this.createdAt',this.createdAt)
+  // console.info('this.createdAt',this.createdAt)
 
 }
 

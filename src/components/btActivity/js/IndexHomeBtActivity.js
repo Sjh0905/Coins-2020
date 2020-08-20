@@ -96,7 +96,7 @@ root.methods.getPlatformYesterdayMiningProduce = function () {
 }
 root.methods.re_getPlatformYesterdayMiningProduce = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  console.warn('获取昨日挖矿产出', data)
+  // console.warn('获取昨日挖矿产出', data)
   this.platformYesterdayMiningProduceLoading = false
   if (data.errorCode) {
     return

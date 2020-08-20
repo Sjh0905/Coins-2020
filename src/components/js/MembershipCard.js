@@ -636,7 +636,7 @@ root.methods.re_postGoToTransferVIP = function(data){
 }
 
 root.methods.error_postGoToTransferVIP = function(data){
-  console.log('resDataMap=========rrrrr=========ggggggggg=',data)
+  // console.log('resDataMap=========rrrrr=========ggggggggg=',data)
 }
 
 

@@ -23,7 +23,9 @@ root.data = function () {
 
     // ajax请求撤销
     ajaxCancelFlag: false,
-
+    rewSplit:'',
+    rewTow:'',
+    rechargeDet:[]
   }
 }
 
@@ -36,7 +38,8 @@ root.created = function () {
   if(!this.$store.state.mobileRechargeRecordData.currency) {
     this.$router.push({name: 'MobileAssetRechargeAndWithdrawRecord'})
   }
-  console.info(this.rechargeDetailData)
+  this.recharge()
+  // console.info(this.rechargeDetailData)
 }
 
 root.computed = {}
@@ -48,6 +51,13 @@ root.computed.userId = function () {
 }
 root.methods = {};
 
+
+root.methods.recharge = function () {
+  this.rechargeDet = this.$store.state.mobileRechargeRecordData
+  let rewCycleSplit = this.rechargeDet.rewCycle.split('_')
+    this.rewSplit = rewCycleSplit[0]
+    this.rewTow = rewCycleSplit[1]
+}
 
 root.methods.yesClick = function () {
   // if (this.ajaxCancelFlag === true) {

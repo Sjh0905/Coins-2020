@@ -87,7 +87,7 @@ root.methods.re_postGodFee = function (data) {
   this.godFee = data.dataMap.godFee || 0
 }
 root.methods.error_postGodFee = function (err) {
-  console.log('err===',err)
+  // console.log('err===',err)
 }
 // 返回个人页面
 root.methods.jumpToFollowTradeStrategy = function () {
