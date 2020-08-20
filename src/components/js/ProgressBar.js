@@ -833,7 +833,7 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
 }
 
 root.methods.Callback = function (data) {
-  console.info('data,',data)
+  // console.info('data,',data)
 
   this.popType = 1;
   this.popText = this.lang == 'CH' ? '挂单成功' : 'Order has been made';

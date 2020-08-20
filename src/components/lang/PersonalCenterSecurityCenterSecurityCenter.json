@@ -10,8 +10,8 @@
     "other": "其他",
     "prompt_reason": "驳回原因：",
 
-    "paymentFees": "使用TT支付手续费",
-    "feeDeductions": "设置TT抵扣手续费，享受抵扣优惠",
+    "paymentFees": "TT锁仓返现手续费",
+    "feeDeductions": "参与TT锁仓分红，同时享受非挖矿区交易手续费月度返现",
     "inviteFriends": "邀请好友",
     "inviteFriends_reward": "邀请好友获得奖励",
     "immediateInvitation": "立即邀请",

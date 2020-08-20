@@ -310,7 +310,7 @@ root.methods.re_getCurrency = function (data) {
 
   let object = this.$store.state.currency.get(this.title)
 
-  console.log('object', object)
+  // console.log('object', object)
   if(object.memo === 'yes') {
     this.isMemo = true
     this.memoToastShow = true
@@ -585,7 +585,7 @@ root.methods.changeAppraisement = function (dataObj) {
 // 切换状态
 root.methods.toggleStatus= function (tab) {
   this.selectTab = tab
-  console.log('this.selectTab===========',this.selectTab);
+  // console.log('this.selectTab===========',this.selectTab);
   // if(this.selectTab === 2){
 
   // }
@@ -674,7 +674,7 @@ root.methods.postTransferSpot = function () {
 // 划转提交
 root.methods.re_postTransferSpot = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log('data', data)
+  // console.log('data', data)
 
   if (data.errorCode) {
     data.errorCode === 1 && (this.popText = '用户未登录')

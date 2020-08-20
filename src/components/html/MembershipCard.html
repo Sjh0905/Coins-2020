@@ -67,7 +67,7 @@
            <!--        交易费折扣-->
            <div class="bonus">
              <img src="../../assets/Transaction.png" alt="">
-             {{$t('discount')}}
+             <div class="bonus-title">{{$t('discount')}}</div>
            </div>
            <!--        管家式客服-->
            <div class="bonus">
@@ -85,7 +85,7 @@
        <div class="year_month flex">
          <div class="month pointer" @click="postWithd1(1)" :class="{'selected_cardType':cardType == 1}">
            <!--        月-->
-           <p class="month_p1">100 USDT/{{$t('month')}}</p>
+           <p class="month_p1">15 USDT/{{$t('month')}}</p>
            <!--        月卡-->
            <p class="month_p0">{{$t('monthly')}}</p>
          </div>
@@ -93,7 +93,7 @@
            <!--        约8.33折-->
            <span class="month_span">{{$t('discountAbout')}}</span>
            <!--       年 -->
-           <p class="month_p">1000 USDT/{{$t('year')}}</p>
+           <p class="month_p">150 USDT/{{$t('year')}}</p>
            <!--        年卡-->
            <p class="month_p0">{{$t('yearCard')}}</p>
          </div>

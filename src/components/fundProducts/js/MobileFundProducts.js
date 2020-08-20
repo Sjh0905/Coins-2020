@@ -151,7 +151,7 @@ root.methods.re_getProductList = function (data) {
     // this.endTime1 = num.startTime
     // console.info('this.periodList1=====wwwwwwww',this.periodList1,this.endTime1);
   })
-  console.info('this.periodList1=====wwwwwwww',this.periodList1,this.endTime1);
+  // console.info('this.periodList1=====wwwwwwww',this.periodList1,this.endTime1);
 
 
 

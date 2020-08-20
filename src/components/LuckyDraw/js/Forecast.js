@@ -234,7 +234,7 @@ root.methods.RE_GET_GUESS_INDEX = function (res) {
 	let data = res.dataMap;
 	this.forecast_list = data;
 	// this.forecast_list = data.honourGuessList;
-  console.info('datassssssss======',this.forecast_list)
+  // console.info('datassssssss======',this.forecast_list)
 	if (!this.forecast_name) {
 		if (!!data.honourGuessList) {
 			this.forecast_name = 'honourGuessList';
@@ -379,7 +379,7 @@ root.methods.RE_GET_LOOTERY_RECORD = function (res) {
 	if (res.result != 'FAIL') {
 
 		this.prize_list = !!res.dataMap && res.dataMap.lotteryRecordList;
-    console.info('1,prize_list========',this.prize_list)
+    // console.info('1,prize_list========',this.prize_list)
 	}
 }
 
@@ -644,7 +644,7 @@ root.methods.re_getInitPage = function (res) {
     this.show_prize = false
     this.show_lotteryt = true
     this.dataList = res.dataMap.lotteryRecordList
-    console.info(' this.show_prize = false',this.dataList)
+    // console.info(' this.show_prize = false',this.dataList)
   }
 
   this.loading = false

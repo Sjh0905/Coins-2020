@@ -239,7 +239,7 @@ root.computed.userId = function () {
   return this.$store.state.authMessage.userId
 }
 root.computed.computedMiningDate = function () {
-  console.info('computedMiningDate',this.miningDate)
+  // console.info('computedMiningDate',this.miningDate)
   return this.miningDate || []
   // return this.miningDate
 }
@@ -714,7 +714,7 @@ root.methods.changeAssetAccountType = function () {
 
 // 打开划转
 root.methods.openTransfer = function (index, item) {
-  console.log(item)
+  // console.log(item)
   // if (item.currency !=='USDT' && this.serverT < item.withdrawOpenTime) {
   //   this.popOpen = true
   //   this.popText = this.$t('TransferIsNotOpen')
@@ -787,7 +787,7 @@ root.methods.errorHandler = function (err, state, text) {
 }
 
 root.methods.changeTransferCurrency = function (currency){
-  console.log('changeTransferCurrency==============',currency)
+  // console.log('changeTransferCurrency==============',currency)
   // this.itemInfo = val
   this.transferCurrencyAvailable = this.transferCurrencyObj[currency].available || 0;
 }
@@ -896,10 +896,10 @@ root.methods.transferCommit = function () {
 }
 // 划转回调
 root.methods.re_transferCommit = function (data){
-  console.log('发送成功====================')
+  // console.log('发送成功====================')
   this.sending = false
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log(data.errorCode)
+  // console.log(data.errorCode)
 
   if( data.errorCode ){
     data.errorCode == 1 &&  (this.popText = '用户未登录')
@@ -1199,9 +1199,9 @@ root.methods.internalTransfer = function (index, item) {
   this.transferDisabledss(item.currency)
 
 
-  console.log('item.currency=========================', item)
-  console.info('item.currency=========================', item.currency)
-  console.info('item.currency=========================', item.available)
+  // console.log('item.currency=========================', item)
+  // console.info('item.currency=========================', item.currency)
+  // console.info('item.currency=========================', item.available)
   this.transferCurrency = item.currency
 
   //sss屏蔽 2020.20.20 S
@@ -1388,7 +1388,7 @@ root.methods.GoToConfirmTransfer = function () {
 root.methods.re_GoToConfirmTransfer = function(data){
   typeof data === 'string' && (data = JSON.parse(data))
 
-  console.log(data)
+  // console.log(data)
   // console.log('data==================',data.dataMap.UserProfile.name)
   // console.log(this.name_0,this.testUID_0)
   // console.log('resDataMap==================ggggggggg=',data)
@@ -1455,7 +1455,7 @@ root.methods.re_GoToConfirmTransfer = function(data){
 }
 
 root.methods.error_GoToConfirmTransfer = function(data){
-  console.log('resDataMap=========rrrrr=========ggggggggg=',data)
+  // console.log('resDataMap=========rrrrr=========ggggggggg=',data)
 }
 
 // //提交谷歌或手机验证码
@@ -1697,13 +1697,13 @@ root.methods.commitStep2Verification = function () {
 
 // 提交谷歌或手机验证码成功
 root.methods.re_commitStep2Verification = function (data) {
-  console.log(data)
+  // console.log(data)
   typeof data === 'string' && (data = JSON.parse(data))
   // this.popWindowLoading = false
   // this.step2VerificationSending = true
 
   let resDataMap = data.dataMap
-  console.log('resDataMap==================ggggggggg=',resDataMap)
+  // console.log('resDataMap==================ggggggggg=',resDataMap)
 
   if (data.errorCode) {
 
@@ -1935,7 +1935,7 @@ root.methods.commitEmailVerification = function (data) {
   // this.step2VerificationSending = false
 
   // let resDataMap = data.dataMap
-  console.log('resDataMap==================ggggggggg=',data)
+  // console.log('resDataMap==================ggggggggg=',data)
 
 
   //
@@ -1954,7 +1954,7 @@ root.methods.commitEmailVerification = function (data) {
 
 // 提交邮箱验证成功
 root.methods.re_commitEmailVerification = function (data) {
-  console.log('...........',data)
+  // console.log('...........',data)
   // typeof data === 'string' && (data = JSON.parse(data))
 
   // let resDataMap = data.dataMap;

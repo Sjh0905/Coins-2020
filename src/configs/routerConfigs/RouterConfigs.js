@@ -2178,6 +2178,21 @@ root.routes.push({
               caseSensitive: true,
               component: resolve => require(['@/components/fundProducts/vue/fundAward'], resolve),
             },
+            // 热度奖励
+            {
+              path: 'heatReward',
+              name: 'heatReward',
+              meta: {
+                pcname: 'heatReward',
+                h5name: '',
+                requireLogin: true,
+                templateClose: false,
+                // templatePath: '/index/assetPageT',
+                requireLoginOff: false,
+              },
+              caseSensitive: true,
+              component: resolve => require(['@/components/vue/HeatReward'], resolve),
+            },
           ]
         },
 

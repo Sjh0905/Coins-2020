@@ -55,7 +55,7 @@ root.data = function () {
 root.created = function () {
   // 修改顶部标题
   this.$store.commit('changeMobileHeaderTitle', '充提记录');
-  console.log(this.$route)
+  // console.log(this.$route)
   // if(this.)
   this.changeOpenTypeQuery()
   // 获取record值
@@ -73,7 +73,7 @@ root.computed.computedRecord = function () {
 }
 
 root.computed.computedWithdraw = function () {
-  console.log(this.historyRecords)
+  // console.log(this.historyRecords)
   return this.historyRecords
 }
 
@@ -408,7 +408,7 @@ root.methods.getLockHistory = function () {
 // 获取记录返回，类型为{}
 root.methods.re_getLockHistory = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log('提现记录',data)
+  // console.log('提现记录',data)
   this.ajaxWithdrawFlag = false
   this.isFirstGetWithdrawFlag = false
   if (!data || data.length === 0) {
@@ -426,7 +426,7 @@ root.methods.re_getLockHistory = function (data) {
     this.historyLockLimit += 10;
   }
 
-  console.log('data有', data)
+  // console.log('data有', data)
   this.historyRecords = data
 
   // if(this.ajaxWithdrawFlag === true){

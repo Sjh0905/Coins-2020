@@ -96,7 +96,7 @@ root.methods.re_getTransferList = function (data) {
   // }
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) return
-  console.log('获取记录', data)
+  // console.log('获取记录', data)
   this.transferLists = data.dataMap.userTransferRecordList
 
   this.transferLists.forEach(v=>{

@@ -505,7 +505,7 @@ root.methods.re_getActivityInfo = function (res) {
   this.pageInfoList = pageInfoList
 
   this.containerList = pageInfoList[this.selectedIndex]
-  console.info('页面数据',this.containerList)
+  // console.info('页面数据',this.containerList)
 
   this.headerTitle = this.titleList[this.selectedIndex]
 

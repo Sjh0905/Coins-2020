@@ -70,13 +70,13 @@ root.created = function () {
   this.getFuzzyQuery()
   this.isAppQuery()
   this.isIOSQuery()
-  console.log("this.$route.query.path========",this.$route.query.path,this.$route.fullPath)
+  // console.log("this.$route.query.path========",this.$route.query.path,this.$route.fullPath)
 }
 
 root.beforeRouteEnter = function (to, from, next) {
-  console.log('beforeRouteEnter第一个参数to',to);
-  console.log('beforeRouteEnter第二个参数from',from);
-  console.log('beforeRouteEnter第三个参数next',next);
+  // console.log('beforeRouteEnter第一个参数to',to);
+  // console.log('beforeRouteEnter第二个参数from',from);
+  // console.log('beforeRouteEnter第三个参数next',next);
   next(vm => {
     if(from.name === 'detailsOfTheGroup'){
       // vm.$router.push({name:'index/indexHomeMarket'})
@@ -147,7 +147,7 @@ root.watch.searchResult = function (newVal, oldVal){
   if(newVal == oldVal)return
   let groupId = this.citiesMap[newVal];
   this.getCheckGroupDetails(groupId);
-  console.log("searchResult + newVal, oldVal",newVal, oldVal,groupId)
+  // console.log("searchResult + newVal, oldVal",newVal, oldVal,groupId)
 }
 
 root.watch.searchCities = function(v){

@@ -210,34 +210,34 @@ root.methods.getBalance = function () {
   })
 }
 root.methods.re_getBalance = function (data) {
-  console.log('查询用户余额get  index',data)
+  // console.log('查询用户余额get  index',data)
   typeof data === 'string' && (data = JSON.parse(data))
   data.data.forEach((v,index)=>{
     this.currency = v.currency
     if (v.currency == 'YY') {
-      console.log('查询用户余额get  index',index)
-      console.log('查询用户余额get  index',v.balance)
+      // console.log('查询用户余额get  index',index)
+      // console.log('查询用户余额get  index',v.balance)
       this.balanceYY = v.balance
       this.type = v.type
       this.currency = v.currency
     }
     if (v.currency == 'TT') {
-      console.log('查询用户余额get  index',index)
-      console.log('查询用户余额get  index',v.balance)
+      // console.log('查询用户余额get  index',index)
+      // console.log('查询用户余额get  index',v.balance)
       this.balanceTT = v.balance
       this.type = v.type
       this.currency = v.currency
     }
     if (v.currency == 'XX') {
-      console.log('查询用户余额get  index',index)
-      console.log('查询用户余额get  index',v.balance)
+      // console.log('查询用户余额get  index',index)
+      // console.log('查询用户余额get  index',v.balance)
       this.balanceXX = v.balance
       this.type = v.type
       this.currency = v.currency
     }
     if (v.currency == 'FF') {
-      console.log('查询用户余额get  index',index)
-      console.log('查询用户余额get  index',v.balance)
+      // console.log('查询用户余额get  index',index)
+      // console.log('查询用户余额get  index',v.balance)
       this.balanceFF = v.balance
       this.type = v.type
       this.currency = v.currency
@@ -278,14 +278,14 @@ root.methods.re_getSupporting = function (data) {
     // this.matchDataKey[v.fdesc]=YTX.substr(0,1)
 
 
-    console.log('v,key======',this.matchDataObj[v.fdesc])
-    console.log('v,key======',this.matchDataKey[v.fdesc])
-    console.log('v,key======',this.YTX)
+    // console.log('v,key======',this.matchDataObj[v.fdesc])
+    // console.log('v,key======',this.matchDataKey[v.fdesc])
+    // console.log('v,key======',this.YTX)
   })
 
   this.getBalance()
 
-  console.log("this.data查询配套数据get=====",data)
+  // console.log("this.data查询配套数据get=====",data)
 }
 root.methods.error_getSupporting = function (err) {
   console.log("this.err=====",err)
@@ -308,7 +308,7 @@ root.methods.re_getRegistrationRecord = function (data) {
 
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) {return}
-  console.log("this.re_getRegistrationRecord查询报名记录get=====",data)
+  // console.log("this.re_getRegistrationRecord查询报名记录get=====",data)
   this.records = data.data
 
   let E2 = this.records[0]
@@ -345,8 +345,8 @@ root.methods.goToDelails = function () {
 
 //活动报名post(params:{})
 root.methods.postActivities = function () {
-  console.log(' this.balance', this.balance + ' KK')
-  console.log(' this.matchingAmount', this.matchingAmount)
+  // console.log(' this.balance', this.balance + ' KK')
+  // console.log(' this.matchingAmount', this.matchingAmount)
   // this.matchDataList
 
   // // 如果没有实名认证不允许报名
@@ -424,7 +424,7 @@ root.methods.postActivities = function () {
     fcode: this.matchDataKey[this.matchingAmount],
     // amount: this.matchDataObj[this.matchingAmount]//所需数额
   }
-  console.log("postActivities + params ===== ",params)
+  // console.log("postActivities + params ===== ",params)
 
   //
   // this.getVerificationCode = true
@@ -453,7 +453,7 @@ root.methods.re_postActivities = function (data) {
   // this.sending1 = false
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) {return}
-  console.log("this.re_postActivities活动报名=====",data)
+  // console.log("this.re_postActivities活动报名=====",data)
 
   // this.re_getRegistrationRecord()
   this.success = data.data.success

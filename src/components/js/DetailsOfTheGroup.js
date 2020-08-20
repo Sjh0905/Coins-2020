@@ -169,10 +169,10 @@ root.watch = {}
 root.methods = {}
 
 root.methods.changeIdTypeValue = function (value){
-  console.info('changeidTypeCurrency==============',value)
+  // console.info('changeidTypeCurrency==============',value)
   // this.itemInfo = val
   this.idTypeValue = value
-  console.log('this.idTypeValue=======',this.idTypeValue)
+  // console.log('this.idTypeValue=======',this.idTypeValue)
 }
 
 //拼团展示团队详情get (query:{})  不知道对不对
@@ -191,7 +191,7 @@ root.methods.getTeamDetails= function () {
   this.loading = false
 }
 root.methods.re_getTeamDetails = function (data) {
-  console.log("this.data=====",data)
+  // console.log("this.data=====",data)
   typeof data === 'string' && (data = JSON.parse(data))
   this.deputyAccount = data.data.deputyAccount
   this.idType = data.data.idType
@@ -208,7 +208,7 @@ root.methods.re_getTeamDetails = function (data) {
   this.account = data.data.account
   if (this.idType == 1) {
     this.quantData = data.quantData
-    console.log("拼团展示团队详情=====",this.quantData)
+    // console.log("拼团展示团队详情=====",this.quantData)
     this.quantCumulative = data.data.quantData.latestCommAmt,//挖矿区手续费累计
     this.commCumulative = data.data.quantData.sumCommAmt,//普通区交易手续费累计
     this.quantRecommission= data.data.quantData.latestQuantAmt,//挖矿区团长返佣累计
@@ -240,7 +240,7 @@ root.methods.postWithdraw = function (idType) {
     glevel: this.glevel,
     idType: idType
   }
-  console.log("postJoinGroup + params ===== ",params)
+  // console.log("postJoinGroup + params ===== ",params)
   /* TODO : 调试接口需要屏蔽 S*/
   // this.re_postJoinGroup()
   /* TODO : 调试接口需要屏蔽 E*/
@@ -252,11 +252,11 @@ root.methods.postWithdraw = function (idType) {
   })
 }
 root.methods.re_postWithdraw = function (data) {
-  console.log("this.res=====",data)
+  // console.log("this.res=====",data)
   typeof data === 'string' && (data = JSON.parse(data))
 
   this.success = data.data.success
-  console.log("re_postJoinGroup + data=====",data)
+  // console.log("re_postJoinGroup + data=====",data)
 
   if (data.errorCode) {
     if (
@@ -378,7 +378,7 @@ root.methods.getMemberList= function (groupId) {
   })
 }
 root.methods.re_getMemberList = function (data) {
-  console.log("团员列表this.data=====",data)
+  // console.log("团员列表this.data=====",data)
 
   typeof data === 'string' && (data = JSON.parse(data))
   // this.records = data.data.data
@@ -415,7 +415,7 @@ root.methods.getImportantMembers= function (groupId) {
   })
 }
 root.methods.re_getImportantMembers = function (data) {
-  console.info("显示重要团成员信息this.data=====",data)
+  // console.info("显示重要团成员信息this.data=====",data)
 
   typeof data === 'string' && (data = JSON.parse(data))
   // this.records = data.data.data
@@ -439,7 +439,7 @@ root.methods.getGroupDiscount= function (groupId) {
   })
 }
 root.methods.re_getGroupDiscount = function (data) {
-  console.info("获取团长剩余折扣get.data=====",data)
+  // console.info("获取团长剩余折扣get.data=====",data)
 
   typeof data === 'string' && (data = JSON.parse(data))
   // this.records = data.data.data
@@ -561,7 +561,7 @@ root.methods.postSetMember = function () {
     disCount: this.proportion / 100,
     idType: this.idTypeValue
   }
-  console.log("postJoinGroup + params ===== ",params)
+  // console.log("postJoinGroup + params ===== ",params)
   /* TODO : 调试接口需要屏蔽 S*/
   // this.re_postJoinGroup()
   /* TODO : 调试接口需要屏蔽 E*/
@@ -573,11 +573,11 @@ root.methods.postSetMember = function () {
   })
 }
 root.methods.re_postSetMember = function (data) {
-  console.log("this.res=====",data)
+  // console.log("this.res=====",data)
   typeof data === 'string' && (data = JSON.parse(data))
 
   this.success = data.data.success
-  console.log("re_postJoinGroup + data=====",data)
+  // console.log("re_postJoinGroup + data=====",data)
 
   if (data.errorCode) {
     if (
@@ -641,7 +641,7 @@ root.methods.postModifyMember = function () {
     disCount: this.proportionModify / 100,
     idType: this.ModifyidType
   }
-  console.log("postJoinGroup + params ===== ",params)
+  // console.log("postJoinGroup + params ===== ",params)
   /* TODO : 调试接口需要屏蔽 S*/
   // this.re_postJoinGroup()
   /* TODO : 调试接口需要屏蔽 E*/
@@ -653,11 +653,11 @@ root.methods.postModifyMember = function () {
   })
 }
 root.methods.re_postModifyMember = function (data) {
-  console.log("this.res=====",data)
+  // console.log("this.res=====",data)
   typeof data === 'string' && (data = JSON.parse(data))
 
   this.success = data.data.success
-  console.log("re_postJoinGroup + data=====",data)
+  // console.log("re_postJoinGroup + data=====",data)
 
   if (data.errorCode) {
     if (
@@ -712,7 +712,7 @@ root.methods.postModifyDiscount = function () {
     userId: this.delItem.userId,
     // userId: this.delItem.id,
   }
-  console.log("postJoinGroup + params ===== ",params)
+  // console.log("postJoinGroup + params ===== ",params)
   /* TODO : 调试接口需要屏蔽 S*/
   // this.re_postJoinGroup()
   /* TODO : 调试接口需要屏蔽 E*/
@@ -724,11 +724,11 @@ root.methods.postModifyDiscount = function () {
   })
 }
 root.methods.re_postModifyDiscount = function (data) {
-  console.log("this.res=====",data)
+  // console.log("this.res=====",data)
   typeof data === 'string' && (data = JSON.parse(data))
 
   this.success = data.data.success
-  console.log("re_postJoinGroup + data=====",data)
+  // console.log("re_postJoinGroup + data=====",data)
 
   if (data.errorCode) {
     if (
@@ -780,7 +780,7 @@ root.methods.getEditMember= function (id) {
   this.organizationModifyComponent = true
 }
 root.methods.re_getEditMember = function (data) {
-  console.info("获取团长剩余折扣get.data=====",data)
+  // console.info("获取团长剩余折扣get.data=====",data)
 
   typeof data === 'string' && (data = JSON.parse(data))
   // this.records = data.data.data

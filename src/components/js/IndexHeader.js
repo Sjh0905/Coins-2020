@@ -917,7 +917,7 @@ root.methods.goToFrenchCurrecy = function (){
 
 // 跳转法币交易
 root.methods.goToFranchExchange = function (){
-  console.info(process.env.DOMAIN)
+  // console.info(process.env.DOMAIN)
   if(!this.isLogin){
     this.$router.push('/index/sign/login')
     return;

@@ -57,7 +57,7 @@ root.methods.getLockCur = function () {
 root.methods.re_getLockCur = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) return
-  console.log('获取记录', data)
+  // console.log('获取记录', data)
   this.records = data.data || []
 
   if (this.records.length < this.limit) {

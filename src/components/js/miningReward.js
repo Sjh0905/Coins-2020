@@ -112,7 +112,7 @@ root.methods.re_getRecord = function (data) {
   this.loading = false
   this.firstLoad = true
   this.loadingNext = false
-  console.log('this is data', data)
+  // console.log('this is data', data)
   if (data.errorCode) return
 
   this.records = data.dataMap.kkActivityRewardList
@@ -211,12 +211,12 @@ root.methods.clickChangePage = function (index) {
 
 
 root.methods.handleSizeChange = function (val) {
-  console.log(`每页 ${val} 条`)
+  // console.log(`每页 ${val} 条`)
   this.activePage = 1
 }
 
 root.methods.handleCurrentChange = function (val) {
-  console.log(`当前页: ${val}`);
+  // console.log(`当前页: ${val}`);
 }
 
 export default root

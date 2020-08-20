@@ -157,7 +157,7 @@ root.computed.available = function () {
   let available = 0
   for (let i = 0; i < this.accounts.length; i++) {
     available = this.accAdd(available, this.accMul(this.accounts[i].available, this.accounts[i].rate))
-    console.info(this.accounts[i].rate)
+    // console.info(this.accounts[i].rate)
   }
   return this.toFixed(available)
 }
@@ -168,7 +168,7 @@ root.computed.accountsComputed = function () {
   if (this.hideZeroAsset) {
     return this.accounts.filter((val,inx) => {
       val.currencyKey = val.currency+'-'+inx;
-      console.info('val',val)
+      // console.info('val',val)
       // this.transferCurrencyObj[val.currency] = val;
       return val.mainTotal !== 0
     })
@@ -555,7 +555,7 @@ root.methods.click_rel_em = function () {
 
 root.methods.changeTransferCurrency = function (currency){
 
-  console.info('changeTransferCurrency==============',currency)
+  // console.info('changeTransferCurrency==============',currency)
   // this.itemInfo = val
   this.transferCurrencyAvailable = this.transferCurrencyObj[currency].available || 0;
 }
