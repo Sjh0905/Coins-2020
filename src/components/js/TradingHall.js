@@ -922,6 +922,9 @@ root.watch.symbol = function (newValue, oldValue) {
   if (newValue == oldValue) return;
   // this.getScaleConfig();
   // this.init();
+  if(newValue == 'KK_USDT'){
+    this.pendingOrderType = 'limitPrice'
+  }
 }
 root.watch.listenSymbol = function (newValue, oldValue) {
   if (newValue == oldValue) return;

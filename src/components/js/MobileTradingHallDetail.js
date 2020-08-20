@@ -1198,6 +1198,10 @@ root.watch.symbol = function (newValue, oldValue) {
 
   this.getDepthInfo();
   this.getScaleConfig();
+  if(newValue == 'KK_USDT'){
+    this.pendingOrderType = 'limitPrice'
+    this.priceCont = ''
+  }
 
 
 }

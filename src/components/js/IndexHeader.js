@@ -340,7 +340,7 @@ root.methods.re_getCheck = function (data) {
 }
 
 root.methods.error_getCheck = function (err) {
-  console.log("this.err=====",err)
+  // console.log("this.err=====",err)
 }
 root.methods.reFresh  = function () {
   if (this.$route.name == 'home') {

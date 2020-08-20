@@ -61,7 +61,7 @@ root.created = function () {
   this.currentInterval && clearInterval(this.currentInterval)
   this.currentInterval = setInterval(this.getOrder, 5000)
 
-  console.log('this.$route=======',this.$route.name)
+  // console.log('this.$route=======',this.$route.name)
   // console.log(('this.$router==========第四季',this.$router))
 }
 
@@ -164,7 +164,7 @@ root.methods.re_getOrder = function (data) {
   })
   this.$store.commit('GET_OPEN_ORDER', open_order);
 
-  console.log('this.currentOrder',this.currentOrder)
+  // console.log('this.currentOrder',this.currentOrder)
   // this.loading = false
   // // 加载更多中
   // this.loadingMoreIng = false
