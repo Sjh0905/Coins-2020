@@ -79,7 +79,7 @@
       <!--左侧部分-->
       <div class="left-container" :class="{'left-container-default' : is_right}">
 
-        <el-select class="inputInner" value-key="currencyKey"
+        <el-select v-if="symbol!='KK_USDT'" class="inputInner" value-key="currencyKey"
                    v-model="priceCont"
                    filterable placeholder=""
                    @change="changeOptionData">
@@ -106,7 +106,7 @@
         </div>
 
         <div class="mobile-change-num-market" v-if="pendingOrderType == 'marketPrice'">
-          以市场最优价卖出
+          以市场最优价买入
         </div>
 
         <div class="mobile-container-title flex-between" v-if="pendingOrderType == 'limitPrice'">
@@ -115,12 +115,24 @@
           <span>≈{{cny_valuation}}CNY</span>
         </div>
 
-        <div class="mobile-change-num">
+        <!--限价数量-->
+        <div class="mobile-change-num" v-if="pendingOrderType == 'limitPrice'">
 
           <input class="mobile-change-num-input shuliannum" :placeholder="`数量`" type="number" v-model="transaction_amount">
           <!--          <span class="mobile-change-num-max" @click="plusNum('amount')">-->
           <span class="mobile-change-num-max mobile-change-num-symbol">
             {{symbol.split('_')[0]}}
+            <!--            <img class="mobile-change-num-max-img" src="" alt="">-->
+          </span>
+
+        </div>
+       <!--市价数量-->
+        <div class="mobile-change-num" v-if="pendingOrderType == 'marketPrice'">
+
+          <input class="mobile-change-num-input shuliannum" :placeholder="`交易额`" type="number" v-model="transactionVolume">
+          <!--          <span class="mobile-change-num-max" @click="plusNum('amount')">-->
+          <span class="mobile-change-num-max mobile-change-num-symbol">
+            {{symbol.split('_')[1] || symbol.split('_')[0]}}
             <!--            <img class="mobile-change-num-max-img" src="" alt="">-->
           </span>
 
@@ -138,9 +150,14 @@
           <span class="mobile-select-num-item txt_80"  @click="sectionSelect(1)">100%</span>
         </div>
 
-        <div class="mobile-exchange-price">
+        <div class="mobile-exchange-price" v-if="pendingOrderType == 'limitPrice'">
           {{!transaction_price || !transaction_amount? '交易额' :
           accMul(transaction_price,transaction_amount)}}（{{this.$store.state.symbol.split('_')[1]}}）
+        </div>
+
+        <div class="mobile-exchange-price" v-if="pendingOrderType == 'marketPrice'">
+          {{!transaction_price || !transactionVolume? '交易额' :
+          accMul(transaction_price,transactionVolume)}}（{{this.$store.state.symbol.split('_')[1]}}）
         </div>
 
 
@@ -226,7 +243,7 @@
       <!--左侧部分-->
       <div class="left-container" :class="{'left-container-default' : is_right}">
 
-        <el-select class="inputInner" value-key="currencyKey"
+        <el-select v-if="symbol!='KK_USDT'" class="inputInner" value-key="currencyKey"
                    v-model="priceCont"
                    filterable placeholder=""
                    @change="changeOptionData">
@@ -266,7 +283,7 @@
           <!--            <span class="txt_40">估值</span>-->
           <span>≈{{cny_valuation}}CNY</span>
         </div>
-        <div class="mobile-change-num">
+        <div class="mobile-change-num" v-if="pendingOrderType == 'limitPrice'">
           <input class="mobile-change-num-input shuliannum" :placeholder="`数量`" type="number" v-model="transaction_amount">
           <!--          <span class="mobile-change-num-max" @click="plusNum('amount')">-->
           <span class="mobile-change-num-max mobile-change-num-symbol">
@@ -280,6 +297,13 @@
           <!--          <span class="mobile-change-num-max" @click="plusNum('amount')">-->
           <!--            <img class="mobile-change-num-max-img" src="" alt="">-->
           <!--          </span>-->
+        </div>
+<!--        市价-->
+        <div class="mobile-change-num" v-if="pendingOrderType == 'marketPrice'">
+          <input class="mobile-change-num-input shuliannum" :placeholder="`数量`" type="number" v-model="transactionVolume">
+          <span class="mobile-change-num-max mobile-change-num-symbol">
+            {{symbol.split('_')[0]}}
+          </span>
         </div>
 
         <div class="mobile-container-useable">
@@ -295,10 +319,16 @@
           <span class="mobile-select-num-item txt_80" @click="sectionSelect(1)">100%</span>
         </div>
 
-        <div class="mobile-exchange-price txt_40">
+        <div class="mobile-exchange-price txt_40" v-if="pendingOrderType == 'limitPrice'">
           <!-- 成交金额（BNB） -->
           {{!transaction_price || !transaction_amount ? '交易额' :
           accMul(transaction_price,transaction_amount)}}（{{this.$store.state.symbol.split('_')[1]}}）
+        </div>
+
+        <div class="mobile-exchange-price txt_40" v-if="pendingOrderType == 'marketPrice'">
+          <!-- 市价成交金额（BNB） -->
+          {{!transaction_price || !transactionVolume ? '交易额' :
+          accMul(transaction_price,transactionVolume)}}（{{this.$store.state.symbol.split('_')[1]}}）
         </div>
 
 
