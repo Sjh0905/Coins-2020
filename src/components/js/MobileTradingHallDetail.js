@@ -595,7 +595,7 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
     return
   }
   if (this.pendingOrderType == 'marketPrice' && !type && (Number(this.transactionVolume) == 0)) {
-    this.popText = '请输入正确的' + txt + '量';
+    this.popText = '请输入正确的交易额';
     this.popType = 0;
     this.promptOpen = true;
     return
@@ -620,7 +620,7 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
   }
   //交易额
   if (this.pendingOrderType == 'marketPrice' && type && Number(this.transactionVolume) == 0) {
-    this.popText = '请输入正确数量3';
+    this.popText = '请输入正确的数量';
     this.popType = 0;
     this.promptOpen = true;
     return
