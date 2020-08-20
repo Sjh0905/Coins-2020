@@ -54,7 +54,7 @@
           <div class="" :class="pendingOrderType == 'limitPrice' ? 'progress-bar-title-brand':'progress-bar-title-brand-default'" @click="changePendingOrderType('limitPrice')">
             {{$t("fixedPrice")}}
           </div>
-          <div class="" :class="pendingOrderType == 'marketPrice' ? 'progress-bar-title-brand':'progress-bar-title-brand-default'" @click="changePendingOrderType('marketPrice')">
+          <div class="" v-if="this.$store.state.symbol != 'KK_USDT'" :class="pendingOrderType == 'marketPrice' ? 'progress-bar-title-brand':'progress-bar-title-brand-default'" @click="changePendingOrderType('marketPrice')">
             市价
           </div>
 <!--          <div class="progress-bar-title-brand-default">-->
