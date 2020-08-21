@@ -1602,6 +1602,7 @@ root.basePageBar.index = '首頁'
 root.assetPage.platformReward = '活動獎勵'
 root.assetPage.fundManagement = '基金獎勵'
 root.assetPage.miningReward = '挖礦獎勵'
+root.assetPage.miningHeat = '熱度獎勵'
 
 root.assetPagePlatformReward = {}
 root.assetPagePlatformReward.state1 = '說明'

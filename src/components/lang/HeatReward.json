@@ -1,5 +1,20 @@
 {
-"CH": {},
+"CH": {
+  "issuingTime": "发放时间",
+  "cycle": "周期",
+  "Biweekly": "双周热度奖",
+  "Weekly": "单周热度奖",
+  "issued": "已发放",
+  "standard": "未达标"
+},
 "EN": {},
-"CA": {}
+"CA": {},
+"CHT": {
+  "issuingTime": "發放時間",
+  "cycle": "週期",
+  "Biweekly": "雙周熱度獎",
+  "Weekly": "單周熱度獎",
+  "issued": "已發放",
+  "standard": "未達標"
+}
 }
