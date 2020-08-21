@@ -337,17 +337,16 @@
     <div v-if="fundHeatReward.length !== 0" class="withdraw-list">
       <div v-for="(item,index) in fundHeatReward" :key="item.id" class="withdraw-item" @click="tofundDetailsPath1(item)">
         <div>
-          <div class="withdraw-item-title">{{$globalFunc.formatDateUitl(Number(item.sendTime),'YYYY-MM-DD hh:mm:ss')}}
-          </div>
+          <div class="withdraw-item-title">{{item.currency}}</div>
 
-          <div class="withdraw-item-time">{{item.currency}}</div>
+          <div class="withdraw-item-time">{{$globalFunc.formatDateUitl(Number(item.sendTime),'YYYY-MM-DD hh:mm:ss')}}</div>
           <div class="withdraw-item-num">
             <span class="withdraw-item-num-detail">{{toFixed(item.amount,4)}}</span>
           </div>
         </div>
         <div class="withdraw-item-state">{{item.weekOfMonth}}</div>
-        <div class="withdraw-item-state">{{item.weekOfMonth}}</div>
-        <div class="withdraw-item-state">{{item.status == 'DONE'? $t('已发放'):'--'}}</div>
+<!--        <div class="withdraw-item-state">{{item.weekOfMonth}}</div>-->
+<!--        <div class="withdraw-item-state">{{item.status == 'DONE'? $t('已发放'):'&#45;&#45;'}}</div>-->
       </div>
 
       <div v-if="ajaxWithdrawFlag" class="recharge-list-loading">
