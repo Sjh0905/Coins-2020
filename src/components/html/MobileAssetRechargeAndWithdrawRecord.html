@@ -344,9 +344,9 @@
             <span class="withdraw-item-num-detail">{{toFixed(item.amount,4)}}</span>
           </div>
         </div>
-        <div class="withdraw-item-state">{{item.weekOfMonth}}</div>
 <!--        <div class="withdraw-item-state">{{item.weekOfMonth}}</div>-->
-<!--        <div class="withdraw-item-state">{{item.status == 'DONE'? $t('已发放'):'&#45;&#45;'}}</div>-->
+<!--        <div class="withdraw-item-state">{{item.weekOfMonth}}</div>-->
+        <div class="withdraw-item-state">{{item.status == 'DONE'? '已发放' : '未达标'}}</div>
       </div>
 
       <div v-if="ajaxWithdrawFlag" class="recharge-list-loading">
