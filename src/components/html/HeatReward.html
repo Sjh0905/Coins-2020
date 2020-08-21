@@ -43,7 +43,7 @@
               <span class="rewCycle"> {{item.weekOfMonth}} ({{$globalFunc.formatDateUitl(Number(rewSplit),'MM.DD')}} - {{$globalFunc.formatDateUitl(Number(rewTow),'MM.DD')}})</span>
               <!--类型-->
               <span class="address address-detail" >{{item.rewType == 2 ? '双周热度奖' : '单周热度奖'}}</span>
-              <span class="state">{{item.status == 'DONE'? $t('已发放'):'放弃'}}</span>
+              <span class="state">{{item.status == 'DONE'? $t('已发放'):'未达标'}}</span>
             </div>
           </li>
         </template>
