@@ -36,7 +36,7 @@
             </div>
             <div class="_m_co_l3 flex-colum">
                 <span >{{$globalFunc.accFixed(order.filledAmount, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}}</span>
-                <span class="txt_40">{{$globalFunc.accFixed(order.amount, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}}</span>
+                <span class="txt_40">{{$globalFunc.accFixed((order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')? order.amount : order.filledAmount , !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}}</span>
             </div>
           </div>
           <div class="_m_high"></div>

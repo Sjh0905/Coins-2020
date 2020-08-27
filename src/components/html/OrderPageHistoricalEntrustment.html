@@ -106,7 +106,7 @@
             <!--单价 end -->
 
             <!--数量 begin -->
-            <div class="td td-market">{{toFixed(order.amount, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}} {{order.symbol.split('_')[0]}}</div>
+            <div class="td td-market">{{toFixed((order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT') ? order.amount : order.filledAmount , !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}} {{order.symbol.split('_')[0]}}</div>
             <!--数量 end -->
 
             <!--成交数量 begin -->
