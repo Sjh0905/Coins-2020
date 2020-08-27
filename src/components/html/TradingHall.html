@@ -57,6 +57,10 @@
           <div class="" v-if="this.$store.state.symbol != 'KK_USDT'" :class="pendingOrderType == 'marketPrice' ? 'progress-bar-title-brand':'progress-bar-title-brand-default'" @click="changePendingOrderType('marketPrice')">
             市价
           </div>
+          <div class="progress-bar-title-brand-default-robot" @click="createRobotChoose">
+            <img class="robot-img" src="../../assets/Robot.png" alt="">
+            创建机器人
+          </div>
 <!--          <div class="progress-bar-title-brand-default">-->
 <!--            止损-->
 <!--          </div>-->
@@ -140,18 +144,30 @@
 
   <div class="traddinghall-order-wrap">
 
-    <div class="flex-row traddinghall-order-wrap-title">
+    <div class=" traddinghall-order-wrap-title">
 <!--      <div class="tradinghall-order-tab tab-item-first  tradinghall-order-tab-first">{{$t("now")}}111-->
 <!--      </div>-->
 
-      <div class="tradinghall-order-tab txt-bold"
+      <div class="tradinghall-order-tab"
            :class="isNow==0?'tradinghall-order-activetab':'tradinghall-order-tab3'"
-           @click="clickTab(0)">{{$t("now")}}
+           @click="clickTab(0)">{{$t("机器人订单")}}
       </div>
-      <div class="tradinghall-order-tab txt-bold"
+      <div class="tradinghall-order-tab"
            :class="isNow==1?'tradinghall-order-activetab':'tradinghall-order-tab3'"
-           @click="clickTab(1)">{{$t("history")}}
+           @click="clickTab(1)">{{$t("手动委托")}}
       </div>
+      <div class="tradinghall-order-tab-robot robot-order tradinghall-order-tab3" v-if="isNow==0" @click="robotOrder">
+        <img src="" alt="">
+        {{$t("查看机器人历史委托")}}
+      </div>
+      <div class="tradinghall-order-tab-robot robot-order tradinghall-order-tab3" v-if="isNow==1" @click="historyOrder">
+        <img src="" alt="">
+        {{$t("查看历史委托")}}
+      </div>
+<!--      <div class="tradinghall-order-tab txt-bold"-->
+<!--           :class="isNow==1?'tradinghall-order-activetab':'tradinghall-order-tab3'"-->
+<!--           @click="clickTab(1)">{{$t("history")}}-->
+<!--      </div>-->
 <!--      <div class="tradinghall-order-tab txt-bold"-->
 <!--           :class="isNow==2?'text_blue tradinghall-order-activetab':''"-->
 <!--           @click="clickTab(2)">-->
@@ -167,10 +183,10 @@
       <!--</div>-->
     </div>
 
-    <div v-if="isNow === 0" class="trading-hall-order-box-detail">
+    <div v-if="isNow === 1" class="trading-hall-order-box-detail">
       <orderCurrent :tradinghallLimit="tradinghallLimit"/>
     </div>
-    <div v-if="isNow === 1" class="trading-hall-order-box-detail">
+    <div v-if="isNow === 0" class="trading-hall-order-box-detail">
       <orderHistory :tradinghallLimit="tradinghallLimit"/>
     </div>
 <!--    <div v-if="isNow === 2" class="trading-hall-order-box-detail">-->
@@ -212,8 +228,194 @@
 <!--    &lt;!&ndash;    </div>&ndash;&gt;-->
 <!--  </div>-->
 
+
+<!--选择网格类型-->
+  <PositionModeBulletBox :switch="popSelectRobot" @close="popCloseSelectRobot" >
+    <div slot="header">
+      <div class="position-mode-tit">选择机器人</div>
+    </div>
+    <div slot="article"class="pop-lock-house">
+     <div class="grid-Wireless">
+      <div class="flex grid-conter">
+        <div class="grid-img-conter"><img class="grid-img" src="../robot/assets/GridTransaction.png" alt=""></div>
+        <div class="grid-title-conter">
+          <div class="grid-title">网格交易</div>
+          <div class="grid-explanation">7*24小时自动底买高卖</div>
+        </div>
+        <div class="create">
+          <div class="create-dev" @click="gridClick">创建订单</div>
+        </div>
+      </div>
+       <div class="flex grid-conter">
+         <div class="grid-img-conter"><img class="grid-img" src="../robot/assets/Wireless.png" alt=""></div>
+         <div class="grid-title-conter">
+           <div class="grid-title">无线网络</div>
+           <div class="grid-explanation">套利、趋势收益两不误</div>
+         </div>
+         <div class="create">
+           <div class="create-dev">创建订单</div>
+         </div>
+       </div>
+     </div>
+    </div>
+  </PositionModeBulletBox>
+<!--  网格交易-->
+  <PositionModeBulletBox :switch="popGridTransaction" @close="popCloseGridTransaction" >
+    <div slot="header">
+      <img class="grid-img-grid" src="../robot/assets/GridTransaction.png" alt="">
+      <div class="position-mode-tit-grid">网格交易</div>
+    </div>
+    <div slot="article"class="pop-lock-house">
+     <div class="grid-Wireless">
+       <div class="flex ">
+         <div class="minimum">
+           <div class="minimum-title">最低价格</div>
+           <div>
+             <input type="text" placeholder='' class="minimum-input">
+
+           </div>
+         </div>
+         <div class="highest">
+           <div class="minimum-title">最高价格</div>
+           <div>
+             <input class="minimum-input" type="text">
+           </div>
+         </div>
+       </div>
+       <div class="flex margin-top-grid">
+         <div class="minimum">
+           <div class="minimum-title">最低价格</div>
+           <div class="flex">
+             <div class="isodyne grid-common" :class="checkPrice==1?'select-grid-common':''" @click="isodyneCommon(1)">等差网格</div>
+             <div class="geometricProportion grid-common" :class="checkPrice==2?'select-grid-common':''" @click="isodyneCommon(2)">等比网格</div>
+           </div>
+         </div>
+         <div class="highest">
+           <div class="minimum-title">网格数量</div>
+           <div>
+             <input class="minimum-input" type="text">
+           </div>
+         </div>
+       </div>
+       <div class="flex word-color word-bottom">
+         <div class="word-flex">使用我的BTC</div>
+         <div class="word-flex word-lift">
+           <img class="word-flex-img" src="../robot/assets/on.png" alt="" @click="useBTC">
+<!--           <img src="../robot/assets/off.png" alt="">-->
+           每格利润:</div>
+         <div class="word-flex word-lift">0.37%——0.62%</div>
+       </div>
+       <div>
+         <input class="total-investment" type="text" placeholder="总投资额">
+       </div>
+       <div class="flex word-color">
+         <div class="word-flex">可用资金:</div>
+         <div class="word-flex word-lift">≈ 0 USDT</div>
+       </div>
+     </div>
+      <!--高级设置-->
+      <div class="flex word-color advanced-bac">
+        <div class="word-flex">高级设置</div>
+        <div class="word-flex word-lift">
+          <img src="../../assets/jcdown.png" alt="" v-if="!advancedSettings" @click="advancedSettingsClick">
+          <img src="../../assets/jtup.png" alt="" v-if="advancedSettings" @click="advancedSettingsClickOn">
+        </div>
+      </div>
+      <div class="chufa" v-if="advancedSettings">
+        <div>
+          <div class="word-pcick">触发价格</div>
+          <input class="chufa-input" type="text" placeholder="选填 (USDT)">
+        </div>
+        <div>
+          <div class="word-pcick">自动止盈</div>
+          <input class="chufa-input" type="text" placeholder="选填 (USDT)">
+        </div>
+        <div>
+          <div class="word-pcick">自动止损</div>
+          <input class="chufa-input" type="text" placeholder="选填 (USDT)">
+        </div>
+      </div>
+      <div class="grid-create" @click="createOrder">创建订单</div>
+    </div>
+  </PositionModeBulletBox>
+<!--  网格交易二次确认-->
+  <PositionModeBulletBox :switch="popConfirmationRobot" @close="popCloseConfirmationRobot" >
+    <div slot="header">
+      <div class="position-mode-tit">网格交易二次确认</div>
+    </div>
+    <div slot="article"class="pop-lock-house">
+      <div class="grid-Wireless">
+        <!--交易对-->
+        <div class="flex hight-confirmation">
+          <div class="word-flex confirmation-size confirmation-color">交易对</div>
+          <div class="word-flex word-lift confirmation-size confir-color">BTC/USDT</div>
+        </div>
+        <!--投什么赚什么-->
+        <div class="flex hight-confirmation">
+          <div class="word-flex confirmation-size confirmation-color">投什么赚什么</div>
+          <div class="word-flex word-lift confirmation-size confir-color">USDT</div>
+        </div>
+        <!--价格区间-->
+        <div class="flex hight-confirmation">
+          <div class="word-flex confirmation-size confirmation-color">价格区间</div>
+          <div class="word-flex word-lift confirmation-size confir-color">100000/1200000</div>
+        </div>
+        <!--网格数量-->
+        <div class="flex hight-confirmation">
+          <div class="word-flex confirmation-size confirmation-color">网格数量</div>
+          <div class="word-flex word-lift confirmation-size confir-color">100000/1200000</div>
+        </div>
+        <!--每格利润-->
+        <div class="flex hight-confirmation">
+          <div class="word-flex confirmation-size confirmation-color">每格利润</div>
+          <div class="word-flex word-lift confirmation-size confir-color">100000/1200000</div>
+        </div>
+        <!--投资额-->
+        <div class="flex hight-confirmation">
+          <div class="word-flex confirmation-size confirmation-color">投资额</div>
+          <div class="word-flex word-lift confirmation-size confir-color">100000/1200000</div>
+        </div>
+        <!--触发价格-->
+        <div class="flex hight-confirmation">
+          <div class="word-flex confirmation-size confirmation-color">触发价格</div>
+          <div class="word-flex word-lift confirmation-size confir-color">100000/1200000</div>
+        </div>
+        <!--止损价格-->
+        <div class="flex hight-confirmation">
+          <div class="word-flex confirmation-size confirmation-color">止损价格</div>
+          <div class="word-flex word-lift confirmation-size confir-color">100000/1200000</div>
+        </div>
+        <!--止赢价格-->
+        <div class="flex hight-confirmation">
+          <div class="word-flex confirmation-size confirmation-color">止赢价格</div>
+          <div class="word-flex word-lift confirmation-size confir-color">100000/1200000</div>
+        </div>
+        <div class="flex hight-conce">
+          <div class="create confirmation-size cancel-color"> <span class="cursor" @click="confirmationRobotCancel">取消</span></div>
+          <div class="cancel-flex  confirmation-size cancel-color-f" @click="confirmationRobotConfirm">确认</div>
+        </div>
+      </div>
+    </div>
+  </PositionModeBulletBox>
+<!-- 网格交易取消的二次确认 -->
+  <PositionModeBulletBox :switch="popTransactionCancellation" @close="popCloseTransactionCancellation" >
+    <div slot="header">
+      <div class="position-mode-tit">网格交易取消</div>
+    </div>
+    <div slot="article"class="pop-lock-house">
+      <div class="grid-Wireless">
+        <div class="confirmation-size confirmation-color onfirm">您确认想要终止 <span class="confirmation-size confir-color">BTC/USDT</span> 网格机器人么</div>
+      </div>
+      <div class="flex hight-conce">
+        <div class="create confirmation-size cancel-color"> <span class="cursor" @click="popCloseTransactionCancellation">取消</span></div>
+        <div class="cancel-flex  confirmation-size cancel-color-f" @click="transactionCancellationConfirm">确认</div>
+      </div>
+    </div>
+  </PositionModeBulletBox>
+
   <PopupPrompt :popType="popType" :popText="popText" :popOpen="promptOpen" :popClose="closePrompt"></PopupPrompt>
   <!-- 提示信息 end -->
+
 
 </div>
 

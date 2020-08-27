@@ -3255,6 +3255,78 @@ root.routes.push({
 
       ]
     },
+    // 机器人订单
+    {
+      path: 'robotOrder',
+      caseSensitive: true,
+      meta: {
+        requireLogin: true,
+      },
+      component: resolve => require(['@/components/robot/vue/RobotOrder'], resolve),
+      children: [
+        // 默认网格交易订单
+        {
+          path: '',
+          redirect: 'gridTransaction',
+
+          caseSensitive: true,
+          meta: {
+            pcname: 'gridTransaction',
+            h5name: '',
+            requireLogin: true,
+            templateClose: false,
+            templatePath: '/index/orderPageT',
+            requireLoginOff: false,
+          },
+        },
+        // 当前网格交易订单
+        {
+          path: 'gridTransaction',
+          name: 'gridTransaction',
+          caseSensitive: true,
+          component: resolve => require(['@/components/robot/vue/GridTransaction'], resolve),
+          meta: {
+            pcname: 'gridTransaction',
+            h5name: '',
+            requireLogin: true,
+            templateClose: false,
+            templatePath: '/index/orderPageT',
+            requireLoginOff: false,
+          },
+        },
+        // 无线网格
+        {
+          path: 'wirelessNetwork',
+          name: 'wirelessNetwork',
+          caseSensitive: true,
+          component: resolve => require(['@/components/robot/vue/WirelessNetwork'], resolve),
+          meta: {
+            pcname: 'wirelessNetwork',
+            h5name: '',
+            requireLogin: true,
+            templateClose: false,
+            templatePath: '/index/orderPageT',
+            requireLoginOff: false,
+          },
+        },
+        // 机器人历史委托
+        {
+          path: 'robotHistoricalEntrustment',
+          name: 'robotHistoricalEntrustment',
+          caseSensitive: true,
+          component: resolve => require(['@/components/robot/vue/RobotHistoricalEntrustment'], resolve),
+          meta: {
+            pcname: 'robotHistoricalEntrustment',
+            h5name: '',
+            requireLogin: true,
+            templateClose: false,
+            templatePath: '/index/orderPageT',
+            requireLoginOff: false,
+          },
+        },
+
+      ]
+    },
 
     // TODO:要删除 check
     // {

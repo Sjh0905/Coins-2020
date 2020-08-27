@@ -1,0 +1,235 @@
+.grid-transaction {
+  width: 1200px;
+  margin:  0 auto;
+}
+.grid-conter {
+  margin-top: 35px;
+  padding: 15px 25px;
+  border: 1px solid #EFF0FF;
+}
+.grid-conter-img {
+  width: 22px;
+  vertical-align: text-top;
+  margin-right: 12px;
+}
+.grid-conter-title {
+  flex: 1;
+  width: 80%;
+  height:22px;
+  font-size:16px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(13,14,35,1);
+  line-height:22px;
+}
+.grid-conter-span {
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(107,125,162,1);
+  padding-left: 12px;
+}
+.grid-conter-stop {
+  float: right;
+  height:28px;
+  line-height: 28px;
+  text-align: center;
+  background:rgba(255,255,255,1);
+  border-radius:1px;
+  border:1px solid rgba(53,118,245,1);
+  padding: 0px 10px;
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(53,118,245,1);
+}
+.grid-duration {
+  height:17px;
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(13,14,35,1);
+  line-height:17px;
+}
+.grid-chang {
+  width: 30%;
+  height: 58px;
+  background-color: #0D0E23;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.grid-investment-div {
+  width: 48%;
+  padding: 10px 20px;
+}
+
+.grid-trapezoid {
+  height:60px;
+  width:52%;
+  border-top:58px solid #39B496;
+  border-left:50px solid transparent;
+  border-right:0px solid transparent;
+  position: relative;
+
+
+}
+.grid-margin-top {
+  margin-top: 20px;
+  margin-bottom: 13px;
+}
+.grid-investment {
+  font-size:14px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(245,246,250,.6);
+}
+.grid-font-size {
+  font-size: 12px;
+}
+.grid-trapezoid-ding {
+  position: absolute;
+  top:-50px;
+  right: 20px;
+  text-align: right;
+}
+.grid-investment-number {
+  height:25px;
+  font-size:14px;
+  font-family:Roboto-Regular,Roboto;
+  font-weight:400;
+  color:rgba(245,246,250,1);
+  line-height:25px;
+}
+.grid-profit {
+  height:17px;
+  font-size:14px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  line-height:17px;
+}
+.grid-profit-14 {
+  margin-bottom: 3px;
+  font-size: 14px;
+  color:rgba(162,181,217,1);
+}
+.grid-profit-num {
+  font-size:12px;
+  color:rgba(239,86,86,1);
+}
+.grid-profit-num-blick {
+  font-size:12px;
+  color:#0D0E23;
+}
+.grid-margin-left {
+  margin-left: 5.5%;
+}
+.grid-details {
+  height: 45px;
+  line-height: 45px;
+  border-left: 1px solid #EFF0FF;
+  border-right: 1px solid #EFF0FF;
+  padding-left: 25px;
+}
+.grid-pending {
+  font-size:14px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(162,181,217,1);
+  margin-right: 40px;
+}
+.grid-pending-class {
+  font-size:14px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(13,14,35,1);
+  border-bottom: 2px solid #3576F5;
+}
+.grid-pending-del {
+  height: 259px;
+  padding: 15px 25px;
+  border: 1px solid #EFF0FF;
+}
+.positions-number {
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(162,181,217,1);
+}
+.positions-font {
+  font-size: 10px;
+  padding-right: 50px;
+}
+.positions-color {
+  padding-left: 10px;
+  color: #0D0E23;
+}
+.positions-explanation {
+  height:32px;
+  line-height:32px;
+  background:rgba(53,118,245,0.1);
+  border-radius:4px;
+  border:1px solid rgba(53,118,245,1);
+  margin-top: 10px;
+  text-align: center;
+}
+.border-50 {
+  width: 100%;
+  height:30px;
+  line-height: 30px;
+  padding-right: 20px;
+  text-align: right;
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(245,246,250,1);
+  background:#39B496;
+  border-radius:8px;
+  box-sizing: border-box;
+  margin-top: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.border-49 {
+  width: 20%;
+  height:30px;
+  line-height: 30px;
+  padding-left: 20px;
+  background:#EF5656;
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(245,246,250,1);
+  box-sizing: border-box;
+  margin-top: 4px;
+  border-radius: 4px 0px 0px 4px;
+  position: absolute;
+  top:64.5%
+}
+.border-50-sell {
+  margin-left: 20px;
+}
+.buy {
+  flex: 1;
+}
+.text-al {
+  text-align: right;
+}
+.margin-left {
+  margin-left: 40px;
+}
+.positions-height {
+  height: 30px;
+  line-height: 30px;
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(162,181,217,1);
+}
+.positions-height-zong {
+  width: 100.5%;
+  height: 150px;
+  overflow: scroll;
+}
+.margin-right {
+  margin-right: 10px;
+}

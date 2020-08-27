@@ -25,6 +25,8 @@ root.components = {
 
   // 为蜜简介
   'SuperBeeIntroduction': resolve => require(['../vue/SuperBeeIntroduction'], resolve),
+  //机器人弹框
+  'PositionModeBulletBox': resolve => require(['../vue/PositionModeBulletBox'], resolve),
 
   // 移动端
   'MobileTradingHall': resolve => require(['../mobileVue/MobileTradingHall'], resolve)
@@ -93,6 +95,12 @@ root.data = function () {
 
     tradinghallLimit:10,
     pendingOrderType:'limitPrice', // 限价 limitPrice 市价 marketPrice
+    popSelectRobot:false, // 选择机器人
+    popGridTransaction:false, // 选择机器人
+    checkPrice:1,
+    advancedSettings: false, //网格交易高级设置
+    popConfirmationRobot: false, //网格交易二次确认
+    popTransactionCancellation: false, //网格交易取消二次确认
 
   }
 }
@@ -664,8 +672,18 @@ root.methods.re_getExchangeRate = function (data) {
 root.methods.clickTab = function (num) {
   this.isNow = num
   console.warn('this is num', this.isNow)
-
 }
+
+//跳转到历史委托
+root.methods.historyOrder = function () {
+  this.$router.push('/index/order/historicalEntrust')
+}
+
+//跳转到历史委托
+root.methods.robotOrder = function () {
+  this.$router.push('/index/robotOrder/gridTransaction')
+}
+
 
 // 提示信息
 root.methods.closePrompt = function () {
@@ -763,6 +781,78 @@ root.methods.showInfo = function(data){
 root.methods.closeInfo = function(data){
   this.showinfo = false;
 }
+
+
+//选择机器人
+root.methods.popCloseSelectRobot = function () {
+  this.popSelectRobot = false
+}
+//网格交易弹框
+root.methods.popCloseGridTransaction = function () {
+  this.popGridTransaction = false
+}
+
+root.methods.gridClick = function () {
+  this.popSelectRobot = false
+  this.popGridTransaction = true
+}
+//打开机器人交易
+root.methods.createRobotChoose = function () {
+  this.popSelectRobot = true
+}
+root.methods.isodyneCommon = function (type) {
+    this.checkPrice = type
+
+}
+//使用我的BTC
+root.methods.useBTC = function () {
+
+}
+//网格交易高级设置
+root.methods.advancedSettingsClick = function () {
+  this.advancedSettings = true
+}
+//网格交易高级设置
+root.methods.advancedSettingsClickOn = function () {
+  this.advancedSettings = false
+}
+
+//网格交易创建订单
+root.methods.createOrder = function () {
+  this.popGridTransaction = false
+  this.popConfirmationRobot = true
+}
+
+
+//网格交易创建订单二次确认
+root.methods.popCloseConfirmationRobot = function () {
+  this.popConfirmationRobot = false
+}
+
+//网格交易创建订单二次取消
+root.methods.confirmationRobotCancel = function () {
+  this.popConfirmationRobot = false
+}
+
+//网格交易创建订单二次确认
+root.methods.confirmationRobotConfirm = function () {
+  this.popConfirmationRobot = false
+}
+
+
+//网格交易取消二次确认--取消
+root.methods.popCloseTransactionCancellation = function () {
+  this.popTransactionCancellation = false
+}
+
+//网格交易取消二次确认--确认
+root.methods.transactionCancellationConfirm = function () {
+  this.popTransactionCancellation = false
+}
+
+
+
+
 
 
 root.props = {}

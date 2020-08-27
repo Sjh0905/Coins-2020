@@ -1,0 +1,78 @@
+<div>
+  <div class="grid-transaction">
+    <div class="grid-conter">
+      <div class="flex">
+        <div class="grid-conter-title">
+          <img class="grid-conter-img" src="../assets/GridTransaction.png" alt="">网格交易
+          <span class="grid-conter-span">BTC/USDT (BTC震荡, 赚取USDT)</span>
+        </div>
+        <div class="grid-conter-stop">停止机器人</div>
+      </div>
+      <div class="grid-duration">运行时长 0日19时43分03秒 (2020/08/18 19:39:49 创建)</div>
+      <div class="flex grid-margin-top">
+        <div class="grid-chang flex">
+          <div class="grid-investment-div">
+            <div class="grid-investment">投资额 <span class="grid-font-size"> USDT</span></div>
+            <div class="grid-investment-number">58</div>
+          </div>
+          <div class="grid-trapezoid">
+            <div class="grid-trapezoid-ding">
+              <div class="grid-investment">总利润 <span class="grid-font-size"> USDT</span></div>
+              <div class="grid-investment-number">-0.492 (-8.86%)</div>
+            </div>
+          </div>
+        </div>
+        <div class="grid-margin-left">
+          <div class="grid-profit grid-profit-14">网格利润 <span class="grid-font-size">USDT</span></div>
+          <div class="grid-profit-num grid-profit">58</div>
+          <div class="grid-profit-num grid-profit">0.86%</div>
+        </div>
+        <div class="grid-margin-left">
+          <div class="grid-profit grid-profit-14">浮动盈亏 <span class="grid-font-size">USDT</span></div>
+          <div class="grid-profit-num grid-profit">58</div>
+          <div class="grid-profit-num grid-profit">0.86%</div>
+        </div>
+        <div class="grid-margin-left ">
+          <div class="grid-profit grid-profit-14">网格年化/总年化</div>
+          <div class="grid-profit-num grid-profit">58</div>
+          <div class="grid-profit-num grid-profit">0.86%</div>
+        </div>
+        <div class="grid-margin-left ">
+          <div class="grid-profit grid-profit-14">当前价</div>
+          <div class="grid-profit-num-blick grid-profit">58</div>
+        </div>
+        <div class="grid-margin-left ">
+          <div class="grid-profit grid-profit-14">价格区间</div>
+          <div class="grid-profit-num-blick grid-profit">58</div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-details flex">
+      <div class="grid-pending" :class="detailsType == 1 ? 'grid-pending-class' :''" @click="gridDetails(1)">挂单详情</div>
+      <div class="grid-pending" :class="detailsType == 2 ? 'grid-pending-class' :''" @click="gridDetails(2)">订单参数</div>
+      <div class="grid-pending" :class="detailsType == 3 ? 'grid-pending-class' :''" @click="gridDetails(3)">订单详情</div>
+    </div>
+    <div class="grid-pending-del" v-if="detailsType == 1">
+      <div class="flex positions-number">
+        <div>BTC持仓数量 <span class="positions-color">58</span> <span class="positions-font"> BTC</span></div>
+        <div>USDT持仓数量 <span class="positions-color">58</span> <span class="positions-font"> USDT</span></div>
+        <div>平均持仓成本 <span class="positions-color">58</span> <span class="positions-font"> USDT</span></div>
+      </div>
+      <div class="positions-explanation">每格买卖数量: 0.0001 BTC 当前价格: BTC/USDT = 11820.68</div>
+      <div class="border-50">+0.31% <span class="border-50-sell">卖一价</span></div>
+      <div class="border-49">买一价 <span class="border-50-sell">-0.70%</span></div>
+      <div class="positions-height-zong">
+        <div class="flex positions-height">
+          <div class="flex buy">
+            <div class="buy">买1</div>
+            <div class="buy text-al">11740</div>
+          </div>
+          <div class="flex buy margin-left">
+            <div class="buy">11750</div>
+            <div class="buy text-al margin-right">卖1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
