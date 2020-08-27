@@ -18,6 +18,10 @@ root.data = function () {
     popText: '',
     popOpen: false,
     waitTime: 2000,
+
+    popIdenOpen: false,
+
+    currentInterval:null
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -36,7 +40,11 @@ root.data = function () {
 // }
 root.created = function () {
 
+  this.GET_AUTH_STATE()
+
   this.getBigBrotherList()
+  this.currentInterval1 && clearInterval(this.currentInterval1)
+  this.currentInterval1 = setInterval(this.getBigBrotherList, 4000)
 
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({
@@ -48,8 +56,12 @@ root.created = function () {
   }
 }
 
-root.mounted = function () {}
-root.beforeDestroy = function () {}
+root.mounted = function () {
+  // this.currentInterval1 && clearInterval(this.currentInterval1)
+}
+root.beforeDestroy = function () {
+  this.currentInterval1 && clearInterval(this.currentInterval1)
+}
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
 // root.computed.isFollow = function () {
@@ -91,10 +103,49 @@ root.computed.iosLogin = function () {
 root.computed.windowWidth = function () {
   return window.innerWidth
 }
+
+
+// 是否绑定手机
+root.computed.bindMobile = function () {
+  return this.$store.state.authState.sms
+}
+// 是否绑定谷歌验证码
+root.computed.bindGA = function () {
+  return this.$store.state.authState.ga
+}
+// 是否绑定邮箱
+root.computed.bindEmail = function () {
+  return this.$store.state.authState.email
+}
+// 是否实名认证
+root.computed.bindIdentify = function () {
+  return this.$store.state.authState.identity
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+
+// 认证状态
+root.methods.GET_AUTH_STATE = function () {
+  this.$http.send("GET_AUTH_STATE", {
+    bind: this,
+    callBack: this.RE_GET_AUTH_STATE,
+    errorHandler: this.error_getCurrency
+  })
+}
+root.methods.RE_GET_AUTH_STATE = function (res) {
+  typeof res === 'string' && (res = JSON.parse(res));
+  if (!res) return
+  this.$store.commit('SET_AUTH_STATE', res.dataMap)
+
+}
+
+// 关闭弹窗
+root.methods.popIdenClose = function () {
+  this.popIdenOpen = false
+}
 //跳转首页
 root.methods.jumpToBack = function () {
 
@@ -110,10 +161,39 @@ root.methods.jumpToBack = function () {
 }
 //跳转个人镜像交易
 root.methods.goToMobileFollowTradeStrategy = function () {
+  if (!this.bindIdentify) {
+    this.popIdenOpen = true
+    return
+  }
+
+  // H5判断是否绑定谷歌或手机，如果都没绑定
+  if (!this.bindGA && !this.bindMobile) {
+    // this.$eventBus.notify({key: 'BIND_AUTH_POP'})
+    this.popText = '请绑定谷歌或手机';
+    this.popType = 0;
+    this.popOpen = true;
+    return
+  }
+
   this.$router.push({'path':'/index/mobileFollowTradeStrategy'})
 }
 // 跳转我的镜像交易
 root.methods.goToDocumentary = function (item) {
+
+  if (!this.bindIdentify) {
+    this.popIdenOpen = true
+    return
+  }
+
+  // H5判断是否绑定谷歌或手机，如果都没绑定
+  if (!this.bindGA && !this.bindMobile) {
+    // this.$eventBus.notify({key: 'BIND_AUTH_POP'})
+    this.popText = '请绑定谷歌或手机';
+    this.popType = 0;
+    this.popOpen = true;
+    return
+  }
+
   if(this.userId == item.userId){
     this.openPop('不能跟随自己哦')
     return
@@ -127,6 +207,20 @@ root.methods.goToDocumentary = function (item) {
 // }
 // 返回我的镜像交易，正在跟随
 root.methods.goToMobileMyFollowOrder = function () {
+  if (!this.bindIdentify) {
+    this.popIdenOpen = true
+    return
+  }
+
+  // H5判断是否绑定谷歌或手机，如果都没绑定
+  if (!this.bindGA && !this.bindMobile) {
+    // this.$eventBus.notify({key: 'BIND_AUTH_POP'})
+    this.popText = '请绑定谷歌或手机';
+    this.popType = 0;
+    this.popOpen = true;
+    return
+  }
+
   this.$router.push({name:'mobileMyFollowOrder'})
 }
 

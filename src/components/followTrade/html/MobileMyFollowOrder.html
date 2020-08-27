@@ -12,39 +12,43 @@
     </div>
     <!--标题-->
     <!--我的镜像交易-->
-    <div class="mobile-trade-header-title-text">我的镜像交易</div>
+    <div class="mobile-trade-header-title-text">我的跟单</div>
   </div>
 
   <div class="mobile-trade-header-null"></div>
   <div class="open-automatic-renew">
     <div class="open-automatic-renew-top flex">
-      <div class="open-automatic-renew-title">自动续费</div>
+      <div class="open-automatic-renew-title">跟单到期自动续费</div>
       <div class="open-automatic-renew-img">
         <!--关闭按钮-->
         <div @click="clickToggle" v-if="!isAutomatic">
+          <span class="open-automatic-renew-text">已关闭</span>
           <img src="../../../assets/personalCenter/personal_center_close.png" alt="">
         </div>
-        <!--              打开按钮-->
+        <!--打开按钮-->
         <div @click="clickToggle" v-if="isAutomatic">
+          <span class="open-automatic-renew-text-grew">已开启</span>
           <img src="../../../assets/personalCenter/personal_center_open.png" alt="">
         </div>
       </div>
     </div>
 
     <div class="open-automatic-renew-text">
-      订阅到期后，将自动续费原带单员，带单员的订阅费用可能会随时调整，自动续费金额以带单员最新订阅费用为准，请随时关注，如不想自动续费，请关闭自动续费功能。
+      <div>若此开关开启，跟单到期时，将自动续费，若因账户余额不足无法续费，跟单将停止。</div>
+       <div>若此开关关闭，跟单到期后，跟单将停止。</div>
+      <div>由于跟单费用可以随时调整，自动续费金额以将以最新设定费用为准，敬请保持关注。</div>
     </div>
   </div>
 
   <!--跟单统计-->
   <div class="follow-statistics flex-around">
     <div class="follow-statistics-item">
-      <div class="follow-statistics-item-title">累计跟单总金额(USDT)</div>
-      <div class="follow-statistics-item-money">{{toFixed(profit.amount||'0',2)}}</div>
+      <div class="follow-statistics-item-title">累计跟单总交易量 (USDT)</div>
+      <div class="follow-statistics-item-money">{{toFixed(total ||'0',2)}}</div>
     </div>
     <div class="follow-statistics-item">
       <div class="follow-statistics-item-title">跟单总收益(USDT)</div>
-      <div class="follow-statistics-item-money">{{toFixed(profit.profit|| '0',2)}}</div>
+      <div class="follow-statistics-item-money">{{toFixed(profit  || '0',2)}}</div>
     </div>
   </div>
   <!--跟单统计end-->
@@ -68,9 +72,9 @@
 
         <div class="mobile-trade-item-top flex">
           <div class="mobile-trade-item-top-left flex">
-            <div class="mobile-trade-item-currency">
+            <div class="mobile-trade-item-currency flex">
               <div class="mobile-trade-item-currency-label">
-                <div>{{item.symbol.replace('_','/')}}</div>
+<!--                <div>{{item.symbol.replace('_','/')}}</div>-->
                 <span class="mobile-trade-item-currency-bgd" v-if="item.followType == 'LOT'">固定金额：{{item.lot}}USDT</span>
                 <span class="mobile-trade-item-currency-bgd" v-if="item.followType == 'RATE'">固定比例</span>
                 <span class="mobile-trade-item-currency-bgd">{{item.type == 'SPOT'?'现货':'--'}}</span>
@@ -78,7 +82,7 @@
             </div>
             <div class="modify" @click="modifyDocumentary(item)">
               修改
-              <img src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
+              <img class="modify-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
             </div>
 <!--            <span class="mobile-trade-buy text-green">买入</span>-->
           </div>
@@ -87,7 +91,7 @@
         <div class="mobile-trade-item-content">
           <div class="mobile-trade-item-content-title flex">
             <div class="mobile-trade-price">累计笔数</div>
-            <div class="mobile-trade-amount">累计金额</div>
+            <div class="mobile-trade-amount">累计跟单交易量 (USDT)</div>
             <div class="mobile-trade-money">累计收益</div>
           </div>
           <div class="mobile-trade-item-content-container flex">

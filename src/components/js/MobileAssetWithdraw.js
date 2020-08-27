@@ -97,7 +97,7 @@ root.methods.re_getCurrency = function (data) {
     // console.warn("拿回了奇怪的东西！", data)
     return
   }
-  console.warn("这是currency", data)
+  // console.warn("这是currency", data)
   this.$store.commit('CHANGE_CURRENCY', data.dataMap.currencys)
   this.accounts = data.dataMap.currencys
   // // 获取账户信息
@@ -127,7 +127,7 @@ root.methods.re_getAuthState = function (data) {
   if (!data) return
   this.$store.commit('SET_AUTH_STATE', data.dataMap)
   // 获取认证状态成功
-  console.log('获取验证状态成功', data)
+  // console.log('获取验证状态成功', data)
   this.authStateReady = true
 }
 // 判断验证状态出错

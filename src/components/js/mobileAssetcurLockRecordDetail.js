@@ -22,31 +22,12 @@ root.components = {
 
 root.created = function () {
   // this.$store.commit('changeMobileHeaderTitle', this.$store.state.mobileRechargeRecordData.currency + '充值详情')
-
-  if(!this.$store.state.changemobileLockRecordData.currency) {
+  if(this.$store.state.changemobileLockRecordData && !this.$store.state.changemobileLockRecordData.currency) {
     this.$router.push({name: 'MobileLockHouseRecord'})
   }
 }
 
 root.mounted = function () {
-  // var that = this
-  // this.btn = new Clipboard('.container-box-copy-btn');
-  // this.btn.on('success', function (e) {
-  //   console.info('Text:', e.text);
-  //   e.clearSelection();
-  //   console.log('成功')
-  //
-  //   that.popOpen = true
-  //   that.popType = 1
-  //   that.popText = '复制成功'
-  //
-  // });
-  // this.btn.on('error', function (e) {
-  //   console.log('失败')
-  //   that.popOpen = true
-  //   that.popType = 0
-  //   that.popText = '复制失败'
-  // });
 }
 root.beforeDestroy = function () {
   // this.btn && this.btn.off('success')
@@ -57,6 +38,10 @@ root.beforeDestroy = function () {
 root.computed = {}
 root.computed.rechargeDetailData = function () {
   return this.$store.state.mobileLockRecordData
+}
+// 获取userId
+root.computed.userId = function () {
+  return this.$store.state.authMessage.userId
 }
 
 
@@ -72,7 +57,8 @@ root.methods.unLockHouse = function (item) {
   this.$http.send("UNLOCK_ASSET_RECODE", {
     bind: this,
     params: {
-      lockId: this.rechargeDetailData.id
+      userId:this.userId,
+      lockId: Number(this.rechargeDetailData.id)
     },
     callBack: this.re_unLockHouse,
     errorHandler: this.error_unLockHouse
@@ -82,16 +68,108 @@ root.methods.unLockHouse = function (item) {
 root.methods.re_unLockHouse = function ( data ) {
   typeof (data) === 'string' && (data = JSON.parse(data))
   this.popOpen = true
-  if(data.result == 'SUCCESS') {
-    this.popType = 1
-    this.popText = '解锁成功'
+  if(data.errorCode){
+    if(data.errorCode == 1 ) {
+      this.popType = 0
+      this.popText = this.$t('用户未登录')
+      return
+    }
+    if(data.errorCode == 2 ) {
+      this.popType = 0
+      this.popText = this.$t('解锁失败')
+      return
+    }
+    if(data.errorCode == 3 ) {
+      this.popType = 0
+      this.popText = this.$t('用户已解锁')
+      return
+    }
+    if(data.errorCode == 4 ) {
+      this.popType = 0
+      this.popText = this.$t('解锁失败')
+      return
+    }
+    if(data.errorCode == 5 ) {
+      this.popType = 0
+      this.popText = this.$t('未到解锁日期')
+      return
+    }
+
+    this.popType = 0
+    this.popText = this.$t('解锁失败')
     return
   }
-  this.popType = 0
-  this.popText = '解锁失败'
-  // console.log(data)
+  if(data.result == 'SUCCESS') {
+    this.popType = 1
+    this.popText = this.$t('解锁成功')
+    // this.$eventBus.notify({key: 'UN_LOCK'})
+    // this.getLockCur()
+    return
+  }
+  // if(data.result == 'SUCCESS') {
+  //   this.popType = 1
+  //   this.popText = '解锁成功'
+  //   return
+  // }
+  // this.popType = 0
+  // this.popText = '解锁失败'
 }
 root.methods.error_unLockHouse = function ( err ) {
+  console.log(err)
+}
+
+// 解锁锁仓
+root.methods.unLockHouseCC = function (item) {
+  this.$http.send("UNLOCK_MINING", {
+    bind: this,
+    params: {
+      userId:this.userId,
+      lockId:  Number(this.rechargeDetailData.id)
+    },
+    callBack: this.re_unLockHouseCC,
+    errorHandler: this.error_unLockHouseCC
+  })
+}
+
+root.methods.re_unLockHouseCC = function ( data ) {
+  typeof (data) === 'string' && (data = JSON.parse(data))
+  this.popOpen = true
+  if(data.errorCode){
+    if(data.errorCode == 2 ) {
+      this.popType = 0
+      this.popText = this.$t('未找到记录')
+      return
+    }
+    if(data.errorCode == 3 ) {
+      this.popType = 0
+      this.popText = this.$t('用户已解锁')
+      return
+    }
+    if(data.errorCode == 4 ) {
+      this.popType = 0
+      this.popText = this.$t('解锁失败')
+      return
+    }
+    if(data.errorCode == 5 ) {
+      this.popType = 0
+      this.popText = this.$t('未满锁仓到期日')
+      return
+    }
+    this.popType = 0
+    this.popText = this.$t('unLockTips_3')
+    return
+  }
+  if(data.success == true) {
+    this.popType = 1
+    this.popText = this.$t('lockSuccess')
+    this.$eventBus.notify({key: 'UN_LOCK'})
+    // this.getLockLearning()
+    return
+  }
+
+  // console.log(data)
+}
+root.methods.error_unLockHouseCC = function ( err ) {
   console.log(err)
 }
 

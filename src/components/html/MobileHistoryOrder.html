@@ -17,13 +17,13 @@
           <div class="_m_co_l flex-row">
             <div class="_m_co_l1 flex-colum flex-between ">
                 <div class="_m_co_l1i flex-row">
-                    <i :style="order.type==='BUY_LIMIT'?'background:#39B496':'background:#EF5656'" v-if="!order.isFollow">
-                        {{order.type === 'BUY_LIMIT' && "买" || "卖"}}
+                    <i :style="(order.type==='BUY_LIMIT' || order.type==='BUY_MARKET')?'color:#39B496':'color:#EF5656'">
+                      {{changeType(order)}}
                     </i>
 
-                    <i :style="order.type==='BUY_LIMIT'?'background:#39B496':'background:#EF5656'" v-if="order.isFollow">
-                      {{order.type === 'BUY_LIMIT' && "跟买" || "跟卖"}}
-                    </i>
+<!--                    <i :style="order.type==='BUY_LIMIT'?'background:#39B496':'background:#EF5656'" v-if="order.isFollow">-->
+<!--                      {{order.type === 'BUY_LIMIT' && "跟买" || "跟卖"}}-->
+<!--                    </i>-->
                     <span>{{order.symbol.split('_')[0]}}</span><span class="txt_40">&nbsp;/&nbsp;{{order.symbol.split('_')[1]}}</span>
                 </div>
                 <div class="txt_40">
@@ -36,7 +36,7 @@
             </div>
             <div class="_m_co_l3 flex-colum">
                 <span >{{$globalFunc.accFixed(order.filledAmount, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}}</span>
-                <span class="txt_40">{{$globalFunc.accFixed(order.amount, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}}</span>
+                <span class="txt_40">{{$globalFunc.accFixed((order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')? order.amount : order.filledAmount , !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}}</span>
             </div>
           </div>
           <div class="_m_high"></div>

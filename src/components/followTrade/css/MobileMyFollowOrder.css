@@ -60,11 +60,17 @@
   margin-bottom: 0.34rem;
 }
 .open-automatic-renew-img img {
-  width: 1.16rem;
-  vertical-align: middle;
+  width: 0.9rem;
+  vertical-align: text-bottom;
 }
 .open-automatic-renew-text {
   color: #6A83A8;
+  font-size:0.24rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+}
+.open-automatic-renew-text-grew {
+  color: #3576F5;
   font-size:0.24rem;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
@@ -123,7 +129,7 @@
   border-bottom: 0.02rem solid #F7F8FA;
 }
 .mobile-trade-item-follower{
-  margin-bottom:0.42rem;
+  margin-bottom:0.28rem;
   align-items: center;
 }
 .mobile-trade-item-follower-info{
@@ -164,11 +170,14 @@
 }
 .mobile-trade-item-top-left {
   width: 100%;
-  height: 1.08rem;
+  /*height: 0.92rem;*/
   justify-content: space-between;
 }
+.mobile-trade-item-currency {
+  align-items: center;
+}
 .mobile-trade-item-currency-label {
-  margin-top: 0.06rem;
+  /*margin-top: 0.06rem;*/
   font-size:0.2rem;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
@@ -190,6 +199,12 @@
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   line-height: 1.08rem;
+}
+.modify-img {
+  width: 0.2rem;
+  height: 0.2rem;
+  vertical-align: sub;
+  margin-bottom: 2px;
 }
 .mobile-trade-buy {
   font-size:0.3rem;
@@ -214,6 +229,7 @@
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color: #6A83A8;
+  margin-bottom: 0.08rem;
 }
 .mobile-trade-item-content-container {
   font-size:0.32rem;
@@ -225,7 +241,7 @@
   flex: 4;
 }
 .mobile-trade-amount {
-  flex: 2;
+  flex: 5;
 }
 .mobile-trade-money {
   flex: 3;

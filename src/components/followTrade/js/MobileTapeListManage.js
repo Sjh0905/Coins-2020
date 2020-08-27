@@ -11,8 +11,8 @@ root.data = function () {
     openMaskWindow:false,
     // 是否开启带单
     isTapeList: false,
-    currencyPair:'', //订阅费用
-    currencyPairFee:'', //修改订阅费用
+    currencyPair:'', //跟单费用
+    currencyPairFee:'', //修改跟单费用
 
 
     // 弹框
@@ -26,7 +26,8 @@ root.data = function () {
     todayFee:0, //今日收益
     userFollowFees:[], //收益明细
     followDay:'', // 跟单天数
-    godInfo:{} //是否开启带单
+    godInfo:{}, //是否开启带单
+    godFee: '' //跟单保证金
 
   }
 }
@@ -47,6 +48,7 @@ root.created = function () {
       }
     }))
   }
+  this.postGodFee()
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
@@ -71,6 +73,22 @@ root.computed.isAndroid = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+// 跟单保证金
+root.methods.postGodFee = function () {
+  this.$http.send('POST_GOD_FEE', {
+    bind: this,
+    callBack: this.re_postGodFee,
+    errorHandler: this.error_postGodFee
+  })
+}
+root.methods.re_postGodFee = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data && !data.dataMap) return
+  this.godFee = data.dataMap.godFee || 0
+}
+root.methods.error_postGodFee = function (err) {
+  // console.log('err===',err)
+}
 // 返回个人页面
 root.methods.jumpToFollowTradeStrategy = function () {
   this.$router.go(-1)
@@ -85,7 +103,7 @@ root.methods.closeMaskWindow = function () {
 }
 root.methods.testCurrencyPair = function () {
   if(this.currencyPair == ''){
-    this.currencyPairText = '订阅费用不能为空'
+    this.currencyPairText = '跟单费用不能为空'
     return
   }
 }
@@ -93,11 +111,11 @@ root.methods.testCurrencyPair = function () {
 //成为大神
 root.methods.postCommitFee = function () {
   if(this.currencyPair == ''){
-    this.openPop ('订阅费用不能为空')
+    this.openPop ('跟单费用不能为空')
     return
   }
   // if(this.currencyPair == 0){
-  //   this.openPop ('订阅费用不能为0')
+  //   this.openPop ('跟单费用不能为0')
   //   return
   // }
   let params = {
@@ -115,8 +133,28 @@ root.methods.re_postCommitFee = function (data) {
   if(data.errorCode == 0) {
     this.openMaskWindow = false
     this.isTapeList = true
-    this.openPop('订阅成功',1)
+    this.openPop('操作成功',1)
     this.postManage()
+    return;
+  }
+
+  if(data.errorCode == 1) {
+    this.openMaskWindow = false
+    this.isTapeList = true
+    this.openPop('系统有误')
+    return;
+  }
+  if(data.errorCode == 2) {
+    this.openMaskWindow = false
+    this.isTapeList = true
+    this.openPop('保证金不足')
+    return;
+  }
+  if(data.errorCode == 3) {
+    this.openMaskWindow = false
+    this.isTapeList = true
+    this.openPop('冻结保证金失败')
+    return;
   }
   if(data.errorCode != 0) {
     this.openMaskWindow = false

@@ -17,13 +17,15 @@
           <span class="Account_number_">{{$t('number')}}</span>
           <div class="Account_number_input">{{$globalFunc.formatUserName(userName)}}</div>
         </div>
+
          <!--        配套-->
         <div class="supporting">
           <span class="Account_number_">{{$t('supporting')}}</span>
           <template>
-            <el-select v-model="matchingAmount" name="gender" placeholder="请选择配套" popper-class="selectstyle">
+            <el-select v-if="((computedRecord.length == 0) && !sending1) || (fstatus == '驳回' && !sending1) || (complete == 'YES' && fstatus == '已报名' && !sending1)" v-model="matchingAmount" name="gender" placeholder="请选择配套" popper-class="selectstyle">
               <el-option v-for="item in matchDataList" :key="item.fcode" :label="item.fdesc" :value="item.fdesc"></el-option>
             </el-select>
+            <div class="Account_number_input" v-else>{{fdesc}}</div>
           </template>
           <span v-if="matchingAmountMsg_0 !=''" class="m-t wrong-msg">{{matchingAmountMsg_0}}</span>
 
@@ -167,6 +169,7 @@
           <p>{{$t('passed')}}</p>
           <p>{{$t('bound')}}</p>
           <p>{{$t('sufficient')}}</p>
+<!--          <p>{{$t('PleaseEnsure')}}（<span class="detall-color">当前热度值: {{authHotVal}}<span class="detall-color-blu" @click="checkTheHeat"> 查看<img class="uidHeatQian" src="../../assets/qiangicon.png" alt=""></span></span>) </p>-->
         </div>
       </div>
 
@@ -262,11 +265,12 @@
           <span class="Account_number_">{{$t('number')}}</span>
           <div class="mobileAccount_number_input">{{$globalFunc.formatUserName(userName)}}</div>
         </div>
-        <!--        配套-->
+
         <div class="mobileSupporting">
           <span class="mobileAccount_number_">{{$t('supporting')}}</span>
           <template>
-            <el-select v-model="matchingAmount" name="gender" placeholder="请选择配套" popper-class="selectstyle" @blur="testMatchingAmount">
+            <el-select v-if="((computedRecord.length == 0) && !sending1) || (fstatus == '驳回' && !sending1) || (complete == 'YES' && fstatus == '已报名' && !sending1)"
+                       v-model="matchingAmount" name="gender" placeholder="请选择配套" popper-class="selectstyle" @blur="testMatchingAmount">
               <el-option
                 v-for="item in matchDataList"
                 :key="item.fcode"
@@ -275,6 +279,7 @@
               >
               </el-option>
             </el-select>
+            <div class="mobileAccount_number_input" v-else>{{fdesc}}</div>
           </template>
           <span v-if="matchingAmountMsg_0 !=''" class="m-t wrong-msg">{{matchingAmountMsg_0}}</span>
 
@@ -415,6 +420,8 @@
           <p>{{$t('passed')}}</p>
           <p>{{$t('bound')}}</p>
           <p>{{$t('sufficient')}}</p>
+<!--          <p>{{$t('PleaseEnsure')}}</p>-->
+<!--          <p class="bound-p"><span class="detall-color">当前热度值: {{authHotVal}}<span class="detall-color-blu-h" @click="checkTheHeatH5"> 查看<img class="uidHeatQian-h" src="../../assets/qiangicon.png" alt=""></span></span></p>-->
         </div>
       </div>
 

@@ -47,6 +47,7 @@ root.data = () => {
     popIdenOpen: false,
     fstatus:'', //审核的状态
     remark:'',
+    fdesc:'',
     complete:'',  //挖矿已完成或进行中
     clickThis:1,
     sending1:false,
@@ -71,6 +72,10 @@ root.computed = {}
 root.computed.computedRecord = function (item,index) {
   // console.log('jjjjjjjjjjj',item,'kkkkkkkk',index,'pppppp',this.records)
   return this.records
+}
+//热度值
+root.computed.authHotVal = function () {
+  return this.$store.state.authHotVal
 }
 
 // 判断是否是手机
@@ -145,25 +150,17 @@ root.methods.RE_GET_AUTH_STATE = function (res) {
   typeof res === 'string' && (res = JSON.parse(res));
   if (!res) return
   this.$store.commit('SET_AUTH_STATE', res.dataMap)
-  // let data = res.dataMap;
-  // this.identity_type = data;
-  // if (res.result == 'SUCCESS' && (data.sms || data.ga)) {
-  //   this.bindIdentify = data.identity;
-  // }
-  // 两者都验证了
-  // this.bindGA = data.ga;
-  // this.bindMobile = data.sms;
-  // this.bindEmail = data.email;
-  // this.bindMobile && (this.picked = 'bindMobile');
-  // this.bindGA && (this.picked = 'bindGA');
-  // if (this.bindGA && this.bindMobile) {
-  //   this.showPicker = true;
-  // }
-  //
-  // this.loading = false
+
 }
 
-
+//跳转热度
+root.methods.checkTheHeat = function () {
+  this.$router.push({name: 'heatList'})
+}
+//跳转热度
+root.methods.checkTheHeatH5 = function () {
+  this.$router.push({name: 'mobileHeatList'})
+}
 
 // 显示详情
 root.methods.showDetail = function () {
@@ -213,34 +210,34 @@ root.methods.getBalance = function () {
   })
 }
 root.methods.re_getBalance = function (data) {
-  console.log('查询用户余额get  index',data)
+  // console.log('查询用户余额get  index',data)
   typeof data === 'string' && (data = JSON.parse(data))
   data.data.forEach((v,index)=>{
     this.currency = v.currency
     if (v.currency == 'YY') {
-      console.log('查询用户余额get  index',index)
-      console.log('查询用户余额get  index',v.balance)
+      // console.log('查询用户余额get  index',index)
+      // console.log('查询用户余额get  index',v.balance)
       this.balanceYY = v.balance
       this.type = v.type
       this.currency = v.currency
     }
     if (v.currency == 'TT') {
-      console.log('查询用户余额get  index',index)
-      console.log('查询用户余额get  index',v.balance)
+      // console.log('查询用户余额get  index',index)
+      // console.log('查询用户余额get  index',v.balance)
       this.balanceTT = v.balance
       this.type = v.type
       this.currency = v.currency
     }
     if (v.currency == 'XX') {
-      console.log('查询用户余额get  index',index)
-      console.log('查询用户余额get  index',v.balance)
+      // console.log('查询用户余额get  index',index)
+      // console.log('查询用户余额get  index',v.balance)
       this.balanceXX = v.balance
       this.type = v.type
       this.currency = v.currency
     }
     if (v.currency == 'FF') {
-      console.log('查询用户余额get  index',index)
-      console.log('查询用户余额get  index',v.balance)
+      // console.log('查询用户余额get  index',index)
+      // console.log('查询用户余额get  index',v.balance)
       this.balanceFF = v.balance
       this.type = v.type
       this.currency = v.currency
@@ -281,14 +278,14 @@ root.methods.re_getSupporting = function (data) {
     // this.matchDataKey[v.fdesc]=YTX.substr(0,1)
 
 
-    console.log('v,key======',this.matchDataObj[v.fdesc])
-    console.log('v,key======',this.matchDataKey[v.fdesc])
-    console.log('v,key======',this.YTX)
+    // console.log('v,key======',this.matchDataObj[v.fdesc])
+    // console.log('v,key======',this.matchDataKey[v.fdesc])
+    // console.log('v,key======',this.YTX)
   })
 
   this.getBalance()
 
-  console.log("this.data查询配套数据get=====",data)
+  // console.log("this.data查询配套数据get=====",data)
 }
 root.methods.error_getSupporting = function (err) {
   console.log("this.err=====",err)
@@ -311,12 +308,13 @@ root.methods.re_getRegistrationRecord = function (data) {
 
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) {return}
-  console.log("this.re_getRegistrationRecord查询报名记录get=====",data)
+  // console.log("this.re_getRegistrationRecord查询报名记录get=====",data)
   this.records = data.data
 
   let E2 = this.records[0]
   this.fstatus = E2.fstatus
   this.complete = E2.complete
+  this.fdesc = E2.fdesc
   // this.fstatus = data.data.fstatus
   // this.remark = this.records.getArrayIndex(5)
   if ((this.records.length !== 0) && (this.matchDataKey[this.matchingAmount].indexOf('y') > -1)) {
@@ -347,8 +345,8 @@ root.methods.goToDelails = function () {
 
 //活动报名post(params:{})
 root.methods.postActivities = function () {
-  console.log(' this.balance', this.balance + ' KK')
-  console.log(' this.matchingAmount', this.matchingAmount)
+  // console.log(' this.balance', this.balance + ' KK')
+  // console.log(' this.matchingAmount', this.matchingAmount)
   // this.matchDataList
 
   // // 如果没有实名认证不允许报名
@@ -426,7 +424,7 @@ root.methods.postActivities = function () {
     fcode: this.matchDataKey[this.matchingAmount],
     // amount: this.matchDataObj[this.matchingAmount]//所需数额
   }
-  console.log("postActivities + params ===== ",params)
+  // console.log("postActivities + params ===== ",params)
 
   //
   // this.getVerificationCode = true
@@ -455,7 +453,7 @@ root.methods.re_postActivities = function (data) {
   // this.sending1 = false
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) {return}
-  console.log("this.re_postActivities活动报名=====",data)
+  // console.log("this.re_postActivities活动报名=====",data)
 
   // this.re_getRegistrationRecord()
   this.success = data.data.success
@@ -517,6 +515,14 @@ root.methods.re_postActivities = function (data) {
         this.popOpen = true
       }, 100)
     }
+    // if (data.errorCode == "9") {
+    //   this.popOpen = true
+    //   this.popType = 0
+    //   this.popText = this.$t('register') //热度值小于1，暂不能报名！
+    //   setTimeout(() => {
+    //     this.popOpen = true
+    //   }, 100)
+    // }
     if (data.errorCode == "400") {
       this.popOpen = true
       this.popType = 0

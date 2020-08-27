@@ -26,6 +26,7 @@
 
 .recharge-box {
   color: #fff;
+  padding:0 0.3rem;
   /*position: absolute;*/
   /*top: 0;*/
   /*bottom: 0;*/
@@ -48,11 +49,11 @@
 }
 
 .header-box {
-  padding: 0 0.2rem;
+  /*padding: 0 0.2rem;*/
   padding-top: 0.56rem;
   /*width: 7.1rem;*/
   border-bottom: 1px solid #131F30;
-  height: 3rem;
+  /*height: 3rem;*/
   position: relative;
   /*padding-top: 1.44rem;*/
 }
@@ -158,7 +159,7 @@
 }
 
 .container-box-address{
-  margin-top: 0.36rem;
+  margin-top: 0.06rem;
   min-height: 0.36rem;
   line-height: 0.36rem;
 }

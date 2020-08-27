@@ -121,7 +121,7 @@ root.methods.getLockCur = function () {
 root.methods.re_getLockCur = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) return
-  console.log('获取记录', data)
+  // console.log('获取记录', data)
   this.records = data
 
   if (this.records.length < this.limit) {
@@ -134,76 +134,6 @@ root.methods.re_getLockCur = function (data) {
 root.methods.error_getLockCur = function (err) {
   console.warn("充值获取记录出错！", err)
 }
-
-// // 点击拷贝
-// root.methods.clickCopy = function (id) {
-//   let input = this.$refs[id][0]
-//   input.select()
-//   document.execCommand("copy")
-//   this.popType = 1
-//   this.popText = this.$t('copyRight')
-//   this.popOpen = true
-// }
-
-// 点击查找
-// root.methods.clickCheck = function (item) {
-//   let currencyObj = this.$store.state.currency.get(item.currency)
-//
-//   // 如果是ETH的
-//   if (item.currency === 'ETH' || (currencyObj && currencyObj.addressAliasTo === 'ETH')) {
-//     window && window.open(`https://etherscan.io/tx/${item.uniqueId}`)
-//     return
-//   }
-//
-//   if (item.currency === 'ACT' || (currencyObj && currencyObj.addressAliasTo === 'ACT')) {
-//     window && window.open(`https://browser.achain.com/#/tradeInfo/${item.uniqueId}`)
-//     return
-//   }
-//
-//   if (item.currency === 'EOSFORCEIO' || (currencyObj && currencyObj.addressAliasTo === 'EOSFORCEIO')) {
-//     window && window.open(`https://explorer.eosforce.io/#/transaction_detail_view/${item.uniqueId}`)
-//     return
-//   }
-//
-//   if (item.currency === 'OMNI' || (currencyObj && currencyObj.addressAliasTo === 'OMNI')) {
-//     window && window.open(`https://www.omniexplorer.info/tx/${item.uniqueId}`)
-//     return
-//   }
-//
-//   if (item.currency === 'EOSIO' || (currencyObj && currencyObj.addressAliasTo === 'EOSIO')) {
-//     window && window.open(`https://eosflare.io/tx/${item.uniqueId}`)
-//     return
-//   }
-
-//   window && window.open(`https://blockchain.info/zh-cn/tx/${item.uniqueId}`)
-// }
-//
-// // 状态
-// root.methods.state = function (item) {
-//   let msg = ''
-//   switch (item.status) {
-//     case 'PENDING':
-//       msg = this.$t('recharge_status_1') + `(${item.confirms}/${item.minimumConfirms})`
-//       break;
-//     case 'DEPOSITED':
-//       msg = this.$t('recharge_status_2')
-//       break;
-//     case 'CANCELLED':
-//       msg = this.$t('recharge_status_3')
-//       break;
-//     case 'WAITING_FOR_APPROVAL':
-//       msg = this.$t('recharge_status_4')
-//       break;
-//     case 'DENIED':
-//       msg = this.$t('recharge_status_5')
-//       break;
-//     default:
-//       msg = '---'
-//   }
-//   return msg
-// }
-
-
 root.methods.loadingMore = function () {
   this.limit += this.limitNum
   this.loadingMoreShowing = true

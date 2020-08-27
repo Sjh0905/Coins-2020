@@ -489,6 +489,13 @@ requestAddress.LOCK_ASSET_RECODE = {url: urlHead+'/asset/user/assets', method: '
 requestAddress.UNLOCK_ASSET_RECODE = {url: urlHead+'/asset/user/unlock/asset', method: 'post'} // 解锁锁仓
 requestAddress.TOTAL_LOCK_REWARD = {url: urlHead+'/asset/user/total/reward', method: 'get'} // 锁仓累计
 requestAddress.LOCK_COUNT = {url: urlHead+'/asset/user/lock/count', method: 'get'} // 锁仓次数
+requestAddress.UNLOCK_MINING = {url: urlHead+'/lock/unlockMining', method: 'post'} // 解锁锁仓挖矿和锁仓学习
+requestAddress.LOCK_GET_MINING_DICT = {url: urlHead+'/lock/getMiningDict', method: 'get'} // 锁仓字典数据
+requestAddress.LOCK_MINING = {url: urlHead+'/lock/lockMining', method: 'post'} // 锁仓挖矿
+requestAddress.LOCK_STUDY = {url: urlHead+'/lock/lockStudy', method: 'post'} // 锁仓学习
+requestAddress.LOCK_LOCK_LIST = {url: urlHead+'/lock/lockList/', method: 'get'} // 锁仓挖矿学习列表
+requestAddress.LOCK_HIS_LOCK_LIST = {url: urlHead+'/lock/hisLockList/', method: 'get'} // 锁仓挖矿学习列表
+
 
 //2020-05-28TKF理财相关接口
 requestAddress.GET_PROJECT_LIST = {url: urlHead+'/tkf/projectList', method: 'get'} // TKF产品简介
@@ -506,8 +513,8 @@ requestAddress.GET_HEAT_LIST = {url: urlHead+'/memberCard/queryHotDetail/', meth
 //2020-06-15  跟单相关接口
 requestAddress.BIG_BROTHER_LIST = {url: urlHead+'/follow/listGod', method: 'post'} //首页大佬列表
 requestAddress.POST_ADDFOLLOWER= {url: urlHead+'/follow/user/addFollower', method: 'post'}  //跟单
-requestAddress.POST_BROTHER_ORDER= {url: urlHead+'/follow/user/historyOrderList', method: 'post'}  //大佬历史持仓
-requestAddress.POST_BROTHER_ORDER_SELF= {url: urlHead+'/follow/historyOrderList', method: 'post'}  //用户历史持仓
+requestAddress.POST_BROTHER_ORDER= {url: urlHead+'/follow/user/historyOrderList', method: 'post'}  //大佬操作记录
+requestAddress.POST_BROTHER_ORDER_SELF= {url: urlHead+'/follow/historyOrderList', method: 'post'}  //用户操作记录
 requestAddress.POST_FOLLOWUSER= {url: urlHead+'/follow/user/listFollowUser', method: 'post'}  //大佬跟随者
 requestAddress.POST_FOLLOWUSER_LIST= {url: urlHead+'/follow/listFollowUser', method: 'post'}  //用户跟随者
 requestAddress.POST_MY_USER= {url: urlHead+'/follow/user/myFollowList', method: 'post'}  //我的镜像交易
@@ -518,5 +525,12 @@ requestAddress.POST_GOD= {url: urlHead+'/follow/god', method: 'post'}  //自动�
 requestAddress.POST_GOD_BY_USERID= {url: urlHead+'/follow/godByUserId', method: 'post'}  //是否开启带单
 requestAddress.POST_REVISION_FEE= {url: urlHead+'/follow/updateFee', method: 'post'}  //修改带单费用
 requestAddress.POST_MANAGE = {url: urlHead+'/follow/followManage', method: 'post'}  //修改带单费用
+requestAddress.POST_GOD_FEE = {url: urlHead+'/follow/godFee', method: 'post'}  //跟单保证金
+
+
+
+//2020-08-20   周热度接口
+requestAddress.GET_HEATREWARD = {url: urlHead+'/user/getWeekReward', method: 'get'}  //跟单保证金
+
 
 export default requestAddress

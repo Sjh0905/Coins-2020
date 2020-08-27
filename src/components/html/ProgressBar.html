@@ -37,14 +37,15 @@
 
 
   <div class="progress-bar-main">
-    <div class="flex flex-between pro-bar-input-box">
+<!--    限价-->
+    <div class="flex flex-between pro-bar-input-box" v-if="pendingOrderType == 'limitPrice'">
       <div class="progress-bar-input-title" :class="{'progress-bar-price-en':lang!='CH'&&lang!='CHT'}">
         <span v-if="!orderType">{{$t("BuyingPrice")}}</span>
         <span v-if="orderType">{{$t("SellingPrice")}}</span></div>
       <label :for="'pro-bar-price'+ orderType" class="progress-bar-price flex-row border_radius"
              :class="{'focus-color-green':inputColor=='price'+orderType && !orderType,'focus-color-red':inputColor=='price'+orderType && orderType}"
       >
-        <input :id="'pro-bar-price' + orderType" class="txt-small txt-light" type="text" v-model="price"
+      <input :id="'pro-bar-price' + orderType" class="txt-small txt-light" type="text" v-model="price"
                @focus="changeColor('price' + orderType)"
                @blur="changeColor(0)"
                @keyup="keyBoard('pro-bar-price' + orderType)"
@@ -65,9 +66,32 @@
         </div> -->
       </label>
     </div>
+<!--    市价-->
+    <div class="flex flex-between pro-bar-input-box" v-if="pendingOrderType == 'marketPrice'">
+      <div class="progress-bar-input-title" :class="{'progress-bar-price-en':lang!='CH'&&lang!='CHT'}">
+        <span v-if="!orderType">{{$t("BuyingPrice")}}</span>
+        <span v-if="orderType">{{$t("SellingPrice")}}</span></div>
+      <label :for="'pro-bar-price'+ orderType" class="progress-bar-price-market-price flex-row border_radius">
 
-    <div class="flex flex-between pro-bar-input-box">
-      <div class="progress-bar-input-title" :class="{'progress-bar-price-en':lang!='CH'&&lang!='CHT'}"><span v-if="!orderType">{{$t("BuyingVolume")}}</span><span v-if="orderType">{{$t("SellingVolume")}}</span></div>
+        {{!orderType? '以市场最优价买入':'以市场最优价卖出'}}
+<!--        <input :id="'pro-bar-price' + orderType" class="txt-small txt-light" type="text" v-model="price"-->
+<!--               @focus="changeColor('price' + orderType)"-->
+<!--               @blur="changeColor(0)"-->
+<!--               @keyup="keyBoard('pro-bar-price' + orderType)"-->
+<!--               autocomplete="off"-->
+<!--        >-->
+        <!-- @keyup="keyBoard('pro-bar-price' + orderType)" -->
+        <!-- <span class="pro-bar-price-tit txt-small txt-light">{{orderType && $t("progressBar.salePrice") + this.$store.state.symbol.split('_')[1] || $t("progressBar.buyPrice") + this.$store.state.symbol.split('_')[1]}}</span> -->
+        <span class="pro-bar-price-tit txt-small txt-light">{{orderType && this.$store.state.symbol.split('_')[1] || this.$store.state.symbol.split('_')[1]}}</span>
+        <span class="buy_sall_tips" :class="!orderType ? 'buy' : 'sall'" v-show="inputColor=='price'+orderType">
+          <em class="arrow"></em>
+          {{change_price}}
+        </span>
+      </label>
+    </div>
+
+    <div class="flex flex-between pro-bar-input-box" v-if="pendingOrderType == 'limitPrice'">
+      <div class="progress-bar-input-title" :class="{'progress-bar-price-en':lang!='CH'&&lang!='CHT'}"><span v-if="!orderType">{{pendingOrderType == 'limitPrice' ? $t("BuyingVolume") : '交易额'}}</span><span v-if="orderType">{{$t("SellingVolume")}}</span></div>
       <label :for="'pro-bar-amount' + orderType" class="progress-bar-amount flex-row border_radius"
              :class="{'focus-color-green':inputColor=='amount'+orderType && !orderType,'focus-color-red':inputColor=='amount'+orderType && orderType}"
       >
@@ -80,14 +104,44 @@
         <!-- @keyup="keyBoard('pro-bar-amount' + orderType)" -->
         <!-- <span class="pro-bar-price-tit txt-small txt-light">{{orderType && $t("progressBar.saleNum") + this.$store.state.symbol.split('_')[0] || $t("progressBar.buyNum") + this.$store.state.symbol.split('_')[0]}}
         </span> -->
-        <span class="pro-bar-price-tit txt-small txt-light">{{orderType && this.$store.state.symbol.split('_')[0] || this.$store.state.symbol.split('_')[0]}}
+        <span class="pro-bar-price-tit txt-small txt-light" v-if="pendingOrderType == 'limitPrice'">{{orderType && this.$store.state.symbol.split('_')[0] || this.$store.state.symbol.split('_')[0]}}
       </span>
-        <!-- <div class="progress_up_down">
-          <ul>
-            <li @click="plusNum('amount')">⌃</li>
-            <li @click="reduceNum('amount')">⌃</li>
-          </ul>
-        </div> -->
+        <span class="pro-bar-price-tit txt-small txt-light" v-if="pendingOrderType == 'marketPrice'">{{orderType && this.$store.state.symbol.split('_')[0] || this.$store.state.symbol.split('_')[1]}}
+        </span>
+          <!-- <div class="progress_up_down">
+            <ul>
+              <li @click="plusNum('amount')">⌃</li>
+              <li @click="reduceNum('amount')">⌃</li>
+            </ul>
+          </div> -->
+
+      </label>
+    </div>
+
+    <div class="flex flex-between pro-bar-input-box" v-if="pendingOrderType == 'marketPrice'">
+      <div class="progress-bar-input-title" :class="{'progress-bar-price-en':lang!='CH'&&lang!='CHT'}"><span v-if="!orderType">{{pendingOrderType == 'limitPrice' ? $t("BuyingVolume") : '交易额'}}</span><span v-if="orderType">{{$t("SellingVolume")}}</span></div>
+      <label :for="'pro-bar-amount' + orderType" class="progress-bar-amount flex-row border_radius"
+             :class="{'focus-color-green':inputColor=='amount'+orderType && !orderType,'focus-color-red':inputColor=='amount'+orderType && orderType}"
+      >
+        <input :id="'pro-bar-amount' + orderType" :ref="'buy_sall_amount_' + orderType" class="txt-small txt-light" type="text" v-model="marketAmount"
+               @focus="changeColor('amount' + orderType)"
+               @blur="changeColor(0)"
+               @keyup="keyBoard('pro-bar-amount' + orderType)"
+               autocomplete="off"
+        >
+        <!-- @keyup="keyBoard('pro-bar-amount' + orderType)" -->
+        <!-- <span class="pro-bar-price-tit txt-small txt-light">{{orderType && $t("progressBar.saleNum") + this.$store.state.symbol.split('_')[0] || $t("progressBar.buyNum") + this.$store.state.symbol.split('_')[0]}}
+        </span> -->
+        <span class="pro-bar-price-tit txt-small txt-light" v-if="pendingOrderType == 'limitPrice'">{{orderType && this.$store.state.symbol.split('_')[0] || this.$store.state.symbol.split('_')[0]}}
+      </span>
+        <span class="pro-bar-price-tit txt-small txt-light" v-if="pendingOrderType == 'marketPrice'">{{orderType && this.$store.state.symbol.split('_')[0] || this.$store.state.symbol.split('_')[1]}}
+        </span>
+          <!-- <div class="progress_up_down">
+            <ul>
+              <li @click="plusNum('amount')">⌃</li>
+              <li @click="reduceNum('amount')">⌃</li>
+            </ul>
+          </div> -->
 
       </label>
     </div>
@@ -136,15 +190,30 @@
             >
           </el-slider>
       </div>
+<!--      <div class="block"  style="margin: 8px auto" v-if="pendingOrderType == 'marketPrice'">-->
+<!--          &lt;!&ndash; <span class="demonstration">默认</span> &ndash;&gt;-->
+<!--          <p :class="orderType ? 'radiusa_red' : 'radiusa_green'" v-if="value>=0" @click="value=0" style="cursor:pointer"></p>-->
+<!--          <p :class="orderType ? 'radiusb_red' : 'radiusb_green'" v-if="value>=25"@click="value=25" style="cursor:pointer"></p>-->
+<!--          <p :class="orderType ? 'radiusc_red' : 'radiusc_green'" v-if="value>=50"@click="value=50" style="cursor:pointer"></p>-->
+<!--          <p :class="orderType ? 'radiusd_red' : 'radiusd_green'" v-if="value>=75"@click="value=75" style="cursor:pointer"></p>-->
+<!--          <el-slider-->
+<!--            v-model="value"-->
+<!--            :class="orderType ? 'el-slider_green' : 'el-slider_red'"-->
+<!--            :marks="marks"-->
+<!--            :format-tooltip="formatTooltip"-->
+<!--            >-->
+<!--          </el-slider>-->
+<!--      </div>-->
     </div>
 
 
     <!--交易额 begin-->
-    <div class="progress-bar-tips flex">
-
-            <span><span class="txt-light jiaoyie">{{$t("progressBar.volume")}}</span><span
-              :class="!orderType ? 'txt_green jiaoyie2' : 'txt_red jiaoyie2'">{{accMul(price,amount)}}</span>
-            <span class="txt-light jiaoyie2">{{this.$store.state.symbol.split('_')[1]}}</span></span>
+    <div class="progress-bar-tips flex" v-if="pendingOrderType == 'limitPrice'">
+            <span>
+              <span class="txt-light jiaoyie">{{$t("progressBar.volume")}}</span>
+              <span :class="!orderType ? 'txt_green jiaoyie2' : 'txt_red jiaoyie2'">{{accMul(price,amount)}}</span>
+              <span class="txt-light jiaoyie2">{{this.$store.state.symbol.split('_')[1]}}</span>
+            </span>
       <!-- 显示买入持仓不足 start -->
       <span class="txt-red" style="width:35%; text-align: right;"
             v-if="!orderType && price * amount > available">*{{$t("progressBar.numLess",{currency})}}
@@ -169,6 +238,37 @@
       <!-- 显示卖出价格 end -->
     </div>
     <!--交易额 end-->
+    <!--交易额 begin-->
+    <div class="progress-bar-tips flex" v-if="pendingOrderType == 'marketPrice'">
+            <span>
+              <span class="txt-light jiaoyie">{{$t("progressBar.volume")}}</span>
+              <span :class="!orderType ? 'txt_green jiaoyie2' : 'txt_red jiaoyie2'">{{marketAmount}}</span>
+              <span class="txt-light jiaoyie2">{{orderType === 0 ? this.symbol.split('_')[1] : this.symbol.split('_')[0]}}</span>
+            </span>
+      <!-- 显示买入持仓不足 start -->
+      <span class="txt-red" style="width:35%; text-align: right;"
+            v-if="!orderType && Number(marketAmount) > Number(available)">*{{$t("progressBar.numLess",{currency})}}
+      </span>
+      <!-- 显示买入持仓不足 end -->
+      <!-- 显示买入价格 start -->
+      <span class="txt_green" style="width:35%; text-align: right;"
+            v-if="!orderType &&  Number(marketAmount) < Number(available)  && Number(marketAmount) > 0">
+            {{turnover_money(marketAmount)}}
+      </span>
+      <!-- 显示买入价格 end -->
+      <!-- 显示卖出持仓不足 start -->
+      <span class="txt-red" style="width:35%; text-align: right;"
+            v-if="orderType && Number(marketAmount) > Number(available)">*{{$t("progressBar.numLess",{currency})}}
+      </span>
+      <!-- 显示卖出持仓不足 end -->
+      <!-- 显示卖出价格 start -->
+      <span class="txt-red" style="width:35%; text-align: right;"
+            v-if="orderType && Number(marketAmount) <= Number(available) &&  marketAmount > 0">
+            {{turnover_money(marketAmount)}}
+      </span>
+      <!-- 显示卖出价格 end -->
+    </div>
+    <!--交易额 end-->
 
 
     <!--    sss 屏蔽-->
@@ -181,7 +281,7 @@
            v-if="$store.state.authMessage.userId && symbol_transaction && symbol_transaction_diy">
         <!-- {{orderType&& $t("progressBar.sale") + this.$store.state.symbol.split('_')[0]|| $t("progressBar.buy")
         +this.$store.state.symbol.split('_')[0]}} -->
-        {{orderType&& $t("progressBar.sale") + this.$store.state.symbol.split('_')[0]||$t("progressBar.buy")+this.$store.state.symbol.split('_')[0]}}
+        {{orderType && $t("progressBar.sale") + this.$store.state.symbol.split('_')[0]||$t("progressBar.buy")+this.$store.state.symbol.split('_')[0]}}
       </div>
 
       <div class="progress-bar-btn progress-bar-nologin-btn ptxt-nomal"

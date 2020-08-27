@@ -175,7 +175,6 @@ GlobalFunction.formatDateUitl = function (time, formatString, offset = 8) {
     return num;
   }
 
-
   // time += (3600000 * offset)
 
 

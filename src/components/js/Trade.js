@@ -8,7 +8,7 @@ root.name = 'Trade'
 
 let widget;
 // 存储当前选定区间
-let new_interval = "15";
+let new_interval = "1";
 
 // k线开始时间
 let startTime = 0;
@@ -21,7 +21,6 @@ root.data = function () {
     istoday: true
 	}
 }
-
 root.props = {}
 root.props.topic_bar = {
 	type: Object,
@@ -239,7 +238,8 @@ root.methods.initViews = function (lang) {
     //  localStorage.clear();
 
     //日线放缓存
-    if(resolution == '15'){
+    // if(resolution == '15'){
+    if(false){//所有种类K线均不作缓存，因为线上出现BUG
       //k线放入缓存
       this.bartemphc = JSON.parse(localStorage.getItem(symbolInfo.ticker+"_bars"));
       this.starttimehc = localStorage.getItem(symbolInfo.ticker+"_time");

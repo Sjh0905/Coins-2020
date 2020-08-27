@@ -3,7 +3,7 @@
   <div class="heatHeader">
     <div class="header">
       <router-link :to="{name:'securityCenter'}" class="header-title">
-        <!--区块恋首页-->
+        <!--区块安首页-->
         {{$t('个人中心')}}
       </router-link>
       <span class="spanbf">></span>
@@ -26,7 +26,9 @@
           <span class="currency">{{$t('日均资产（USDT）')}}</span>
 
           <!--数量-->
-          <span class="total">{{$t('月均资产（USDT）')}}</span>
+          <span class="type">{{$t('月均资产（USDT）')}}</span>
+          <span class="type">{{$t('日累计交易量（USDT）')}}</span>
+          <span class="total">{{$t('月累计交易量（USDT）')}}</span>
 
           <!--说明-->
           <span class="address">{{$t('热度')}}</span>
@@ -44,10 +46,10 @@
                   <!--              币种-->
                   <span class="currency">{{toFixed(item.amount,2)}}</span>
                   <!--              类型-->
-                  <!--              <span class="type">数据</span>-->
-                  <!--              formatDateUitl-->
                   <!--              数量-->
-                  <span class="total">{{toFixed(item.monthAvg,2)}}</span>
+                  <span class="type">{{toFixed(item.monthAvg,2)}}</span>
+                  <span class="type">{{toFixed(item.dayTransCounts,2)}}</span>
+                  <span class="total">{{toFixed(item.monthTransCounts,2)}}</span>
                   <!--              说明-->
                   <span class="address address-detail">{{toFixed(item.hotVal,2)}}</span>
 

@@ -13,6 +13,7 @@ root.data = function () {
   return {
     TT:0,
     KK:0,
+    USDT:0,
     totalReward:0,
     lastDateReward:0
   }
@@ -42,9 +43,10 @@ root.methods.getTotalLock = function () {
 // 获取锁仓总金额回调
 root.methods.re_getTotalLock = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  // if (!data) return
-  this.TT = data.dataMap.TT
-  this.KK = data.dataMap.KK
+  if (!data) return
+  this.TT = data.dataMap.KK || 0
+  this.KK = data.dataMap.mining_kk  || 0
+  this.USDT = data.dataMap.study_usdt || 0
   this.totalReward = data.dataMap.totalReward
   this.lastDateReward = data.dataMap.lastDateReward
 

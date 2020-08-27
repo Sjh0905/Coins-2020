@@ -12,7 +12,8 @@ root.data = function () {
     isAutomatic:false,
     isAutomaticing:false,
     followUserList:[],
-    profit:{}, // 总金额+总收益
+    profit:'', // 总金额+总收益
+    total:'',
     followId:'',
 
     // 弹框
@@ -85,7 +86,7 @@ root.watch = {}
 root.methods = {}
 
 root.methods.isFollowId = function (item) {
-  console.info('item====','执行啦几次呢？？?')
+  // console.info('item====','执行啦几次呢？？?')
   return this.followId = item.followId
 }
 // 取消跟随
@@ -114,7 +115,8 @@ root.methods.postMyDocumentary = function () {
 root.methods.re_postMyDocumentary = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   this.followUserList = data.dataMap.list || []
-  this.profit = data.dataMap.profit || {}
+  this.profit = data.dataMap.profit || ''
+  this.total = data.dataMap.total || ''
   if(data.dataMap.followSetting.autoType=="YES"){
     this.isAutomatic = true
     return
@@ -232,7 +234,7 @@ root.methods.removeEventPopstate = function () {
 }
 // 个人设置
 root.methods.personalSetting = function () {
-  console.info('personalSetting=======个人设置',)
+  // console.info('personalSetting=======个人设置',)
 }
 
 /*---------------------- 保留小数 begin ---------------------*/

@@ -22,9 +22,9 @@
     </div>
 
     <div class="with-list flex">
-      <div class="with-billboard">带单龙虎榜</div>
-      <div class="my-with-single" @click="goToMobileMyFollowOrder">我的镜像交易</div>
-      <div @click="goToMobileMyFollowOrder"><img class="my-with-single-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt=""></div>
+      <div class="with-billboard">带单收益榜</div>
+      <div class="my-with-single" @click="goToMobileMyFollowOrder">我的跟单</div>
+      <img @click="goToMobileMyFollowOrder" class="my-with-single-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
     </div>
 <!--    <div class="data-update">数据每小时更新一次</div>-->
 
@@ -50,15 +50,15 @@
       <div class="details-of-big-brother-transaction flex">
         <div class="accumulated-income">
           <div class="percentage">{{toFixed(item.rate* 10 * 10 || 0,2) }}%</div>
-          <div class="padding-bottom color-a2">累计收益率</div>
+          <div class="padding-bottom color-a2">收益率</div>
           <div class="color-13">{{toFixed(item.sum,2) || '0'}}</div>
-          <div class="color-a2">累计交易量</div>
+          <div class="color-a2">累计交易量 (USDT)</div>
         </div>
         <div class="accumulated-income">
           <div class="color-13">{{item.count}}</div>
           <div class="padding-bottom color-a2">交易笔数</div>
           <div class="color-13">{{item.followCount || '0'}}</div>
-          <div class="color-a2">累计跟单人数</div>
+          <div class="color-a2">当前跟单人数</div>
         </div>
 
       </div>
@@ -73,6 +73,33 @@
       </div>
     </template>
     <!--遍历大佬详细信息End-->
+  </div>
+
+
+
+  <!--弹窗-->
+  <div v-if="popIdenOpen" class="lock-position-confirm-toast">
+    <div class="lock-position-confirm-toast-window">
+      <!--关闭按钮-->
+      <div class="lock-position-confirm-toast-close-btn" @click="popIdenClose">
+        <img class="lock-position-confirm-toast-close-btn-img" src="../../../assets/mobile_img/mobile_asset_commen/h5_toast_close_btn.png" alt="">
+      </div>
+      <!--顶部标题-->
+      <div class="lock-position-confirm-toast-title">提示</div>
+      <div class="lock-position-confirm-toast-list">
+        <div class="lock-position-confirm-toast-item" v-if="(isApp)">
+          <!--该操作需要身份认证，请立刻前往app端个人中心完成-->
+          该操作需要身份认证，请立刻前往个人中心完成
+        </div>
+        <div class="lock-position-confirm-toast-item" v-if="!isApp">
+          <!--该操作需要身份认证，请立刻前往app端个人中心完成-->
+          该操作需要身份认证，请立刻前往PC端个人中心完成
+        </div>
+      </div>
+      <div class="lock-position-confirm-toast-btns">
+        <div class="lock-position-confirm-toast-btn-confirm btn_blue" @click="popIdenClose">我知道了</div>
+      </div>
+    </div>
   </div>
 
   <!--toast弹框-->

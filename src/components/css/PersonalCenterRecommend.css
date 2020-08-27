@@ -169,7 +169,7 @@
 }
 
 .time {
-  flex: 19.5;
+  flex: 13.5;
 }
 
 .ip {
@@ -698,7 +698,7 @@
 }
 
 .yaoqxq .yaoqrs{
-  width: 24.93%;
+  width: 19.9%;
   text-align: center;
   height: 150px;
   float: left;
@@ -1047,7 +1047,9 @@
   text-align: right;
 }
 /*FF明细 end*/
-
+.date-ff-jian {
+  flex: 4;
+}
 .mingingFooter {
   width: 100%;
   /*padding: 25px 0 35px;*/

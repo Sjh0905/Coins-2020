@@ -10,14 +10,14 @@
 .follow-trade-img-box {
   position: relative;
   width: 100%;
-  height: 206px;
+  height: 200px;
   background: black;
 }
 .follow-trade-img {
   position:absolute;
   top:50%;
   left:50%;
-  height: 206px;
+  height: 200px;
   -webkit-transform: translate(-50%,-50%);
   -moz-transform: translate(-50%,-50%);
   transform:translate(-50%,-50%);
@@ -184,4 +184,35 @@
   font-weight:400;
   color:rgba(107,125,162,1);
   float: left;
+}
+
+
+/*认证弹框样式*/
+.header_xuzhi {
+  padding-left: 25px;
+}
+
+.pop-recharge {
+  padding: 35px 25px;
+  font-size:16px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #0D0E23;
+  /*padding-bottom: 25px;*/
+}
+.pop-recharge-bottom {
+  margin-bottom: 15px;
+}
+.button-base33 {
+  width: 191px;
+  height: 35px;
+  /* background-color: #3576F5; */
+  color: #fff;
+  border-radius: 1px;
+  border: 0 solid transparent;
+  /*margin-right: 2px;*/
+  outline: none;
+}
+.m-l {
+  margin-left: 24px;
 }

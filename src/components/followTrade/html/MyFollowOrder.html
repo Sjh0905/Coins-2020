@@ -15,33 +15,47 @@
 
       <div class="follow-asset-total-data flex">
         <div class="follow-asset-total">
-          <div>累计跟单总金额（USDT）</div>
-          <div class="follow-asset-acount">{{toFixed(profit.amount||'0',2)}}</div>
+          <div class="follow-monery">累计跟单总交易量（USDT）</div>
+          <div class="follow-asset-acount">{{toFixed(total ||'0',2)}}</div>
         </div>
         <div class="follow-asset-total">
-          <div>跟单总收益（USDT）</div>
-          <div class="follow-asset-acount">{{toFixed(profit.profit||'0',2)}}</div>
+          <div class="follow-monery">跟单总收益（USDT）</div>
+          <div class="follow-asset-acount">{{toFixed(profit || '0',2)}}</div>
         </div>
       </div>
-      <div class="follow-asset-renewal flex">
-        <div class="follow-asset-remind pointer" @mouseenter="openRenew()" @mouseleave="closeRenew()">
-          <img src="../assets/remind_icon.png" alt="" >
+
+
+      <div class="follow-asset-renewal">
+<!--        <div class="follow-asset-remind pointer" @mouseenter="openRenew()" @mouseleave="closeRenew()">-->
+<!--          <img src="../assets/remind_icon.png" alt="" >-->
+<!--        </div>-->
+<!--        <div class="line"></div>-->
+        <div class="right-switch flex">
+          <div>跟单到期自动续费</div>
+          <!--关闭按钮-->
+          <div class="follow-asset-close-open flex pointer" @click="clickToggle" v-if="!isAutomatic">
+            <span class="open-automatic-renew-text-grew">已关闭</span>
+            <img src="../../../assets/personalCenter/personal_center_close.png" alt="">
+          </div>
+          <!--打开按钮-->
+          <div class="follow-asset-close-open flex pointer" @click="clickToggle" v-if="isAutomatic">
+            <span class="open-automatic-renew-text">已开启</span>
+            <img src="../../../assets/personalCenter/personal_center_open.png" alt="">
+          </div>
         </div>
-        <div>开启自动续费</div>
-        <!--关闭按钮-->
-        <div class="follow-asset-close-open pointer" @click="clickToggle" v-if="!isAutomatic">
-          <img src="../../../assets/personalCenter/personal_center_close.png" alt="">
-        </div>
-        <!--打开按钮-->
-        <div class="follow-asset-close-open pointer" @click="clickToggle" v-if="isAutomatic">
-          <img src="../../../assets/personalCenter/personal_center_open.png" alt="">
+        <!--隐藏的方块-->
+        <div class="descript">
+          <div>若此开关开启，跟单到期时，将自动续费，若因账户余额不足无法续费，跟单将停止。</div>
+          <div>若此开关关闭，跟单到期后，跟单将停止。</div>
+          <div>由于跟单费用可以随时调整，自动续费金额以将以最新设定费用为准，敬请保持关注。</div>
         </div>
       </div>
-      <!--隐藏的方块-->
-      <div class="descript">
-        订阅到期后，将自动续费原带单员，带单员的订阅费用可能会随时调整，自动续费金额以带单员最新订阅费用为准，请随时关注，如不想自动续费，请关闭自动续费功能。
-      </div>
+
+
     </div>
+
+
+
     <div class="follow-asset-content" v-if="followUserList.length != 0">
       <!--正在跟随-->
       <div class="follow-asset-content-title">{{$t('Followed')}}</div>
@@ -51,8 +65,8 @@
         <div class="UID">UID</div>
         <!--时间-->
         <div class="time">{{$t('time')}}</div>
-        <!--交易对-->
-        <div class="exchange-pair">{{$t('transactionPair')}}</div>
+<!--        &lt;!&ndash;交易对&ndash;&gt;-->
+<!--        <div class="exchange-pair">{{$t('transactionPair')}}</div>-->
         <!--类型-->
         <div class="type">{{$t('type')}}</div>
         <!--交易方式-->
@@ -60,7 +74,7 @@
         <!--累计笔数-->
         <div class="total-acount">{{$t('totalNumber')}}</div>
         <!--累计金额-->
-        <div class="total-money">{{$t('totalMoney')}}</div>
+        <div class="total-money">{{$t('totalMoney')}} (USDT)</div>
         <!--累计收益-->
         <div class="total-income">{{$t('totalIncome')}}</div>
         <!--操作-->
@@ -70,7 +84,7 @@
       <div class="follow-asset-topic-content flex" v-for="(item,index) in followUserList" :key="index">
         <div class="UID">{{item.followId}}</div>
         <div class="time">{{formatDateUitl(item.followTime)}}</div>
-        <div class="exchange-pair">{{item.symbol.replace('_','/')}}</div>
+<!--        <div class="exchange-pair">{{item.symbol.replace('_','/')}}</div>-->
         <!--现货-->
         <div class="type">{{item.type == 'SPOT'? $t('spot'):'--'}}</div>
         <!--固定金额/固定比例-->
@@ -107,8 +121,8 @@
       </div>
       <div class="follow-order flex">
         <!--跟单币对-->
-        <div>{{$t('documentaryCurrencyPair')}}</div>
-        <div class="follow-order-data">BTC/USDT</div>
+        <div>{{$t('documentaryPair')}}</div>
+        <div class="follow-order-data">BTC ETH LTC BCH</div>
       </div>
       <div class="follow-order">
         <!--跟单方式-->
@@ -146,9 +160,9 @@
         <!--3、当交易员撤掉时，您同步跟随的该笔订单将同步被撤销；-->
         <div>{{$t('fixedAmountOrders_detail3')}}</div>
         <!--4、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作；-->
-        <div>{{$t('fixedAmountOrders_detail4')}}</div>
-        <!--5、买入、卖出均已USDT进行核算，例：以一个BTC10000美金为例，100USDT固定金额相当于 0.01BTC。-->
-        <div>{{$t('fixedAmountOrders_detail5')}}</div>
+<!--        <div>{{$t('fixedAmountOrders_detail4')}}</div>-->
+<!--        &lt;!&ndash;5、买入、卖出均已USDT进行核算，例：以一个BTC10000美金为例，100USDT固定金额相当于 0.01BTC。&ndash;&gt;-->
+<!--        <div>{{$t('fixedAmountOrders_detail5')}}</div>-->
       </div>
       <div class="remind" v-if="followType == 'RATE'">
         <!--固定比例跟单：-->
@@ -162,9 +176,9 @@
         <!--4、跟单时将与带单交易员相同的价格进行下单，直至您的可用资金不足为止；-->
         <div>{{$t('fixedProportionOrders_detail4')}}</div>
         <!--5、当交易员撤掉时，您同步跟随的该笔订单将同步被撤销；-->
-        <div>{{$t('fixedProportionOrders_detail5')}}</div>
-        <!--6、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作。-->
-        <div>{{$t('fixedProportionOrders_detail6')}}</div>
+<!--        <div>{{$t('fixedProportionOrders_detail5')}}</div>-->
+<!--        &lt;!&ndash;6、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作。&ndash;&gt;-->
+<!--        <div>{{$t('fixedProportionOrders_detail6')}}</div>-->
       </div>
     </div>
     <div slot="footer" class="pop-recharge-bottom">

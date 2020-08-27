@@ -82,7 +82,7 @@ root.computed = {}
 root.computed.amount = function () {
   let balance = this.$route.params.accountsComputed
   this.$route.params.accountsComputed.forEach(v => {
-    console.log(v)
+    // console.log(v)
   })
 }
 // 获取userId
@@ -102,7 +102,7 @@ root.created = function () {
 /*---------------------- 方法 ---------------------*/
 root.methods ={}
 root.methods.currentCurr = function () {
-  console.log(this.$route.query.currency)
+  // console.log(this.$route.query.currency)
   this.currentCurrency = this.$route.query.currency
 
 }
@@ -115,7 +115,7 @@ root.methods.popClose = function () {
 
 // 判断转账数量的限制
 root.methods.transferAble = function () {
-  console.log('this.$route.query.currency=====',this.$route.query.currency)
+  // console.log('this.$route.query.currency=====',this.$route.query.currency)
 
   this.$http.send('GET_TRANSFER_AMOUNT_INFO',{
     bind: this,
@@ -145,7 +145,7 @@ root.methods.re_transferAble = function (data) {
   // 最小手续费
   this.minimumFee = data.dataMap.insideTransferAccount.minimumFee
   // this.$route.query.currency
-  console.log(data,this.maxAmount)
+  // console.log(data,this.maxAmount)
 }
 root.methods.error_transferAble = function (error) {
   // console.log(this.$route.query.currency)
@@ -168,7 +168,7 @@ root.methods.testEmail = function () {
     return false
   }
   this.userNameWA = ''
-  console.log(this.userNameWA)
+  // console.log(this.userNameWA)
   return true
 }
 
@@ -190,7 +190,7 @@ root.methods.testUID = function () {
     return false
   }
   this.UIDInputWA = ''
-  console.log(this.UIDInput)
+  // console.log(this.UIDInput)
   return true
 }
 
@@ -229,7 +229,7 @@ root.methods.testAmount = function () {
   if (Number(this.amountInput) > Number(this.singleMaxAmount)) {
     this.amountInput = this.singleMaxAmount
     this.amountInputWA = '输入数量超出每次转账数量'
-    console.info('================',typeof(Number(this.amountInput)),typeof(Number(this.singleMaxAmount)))
+    // console.info('================',typeof(Number(this.amountInput)),typeof(Number(this.singleMaxAmount)))
     return false
   }
 
@@ -254,7 +254,7 @@ root.methods.testAmount = function () {
 
 // 获取焦点后关闭placheholder
 root.methods.closePlaceholder = function (type) {
-  console.log(type)
+  // console.log(type)
   if(type == 'emailInput'){
     this.userNamePlaceholderShow = false;
   }
@@ -403,7 +403,7 @@ root.methods.re_ConfirmTransfer = function (data) {
   }
 
   // this.showtransfer = true
-  console.log(this.userName)
+  // console.log(this.userName)
 }
 
 root.methods.error_ConfirmTransfer = function () {

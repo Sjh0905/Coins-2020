@@ -140,6 +140,41 @@ root.data = function () {
     lockHouseAvailable:'',  // 锁仓可用
     lockNum:0,  //锁仓数量
 
+
+    lockReward: 1, // FF 奖励个数
+    openDateTime:'', // 锁仓挖矿开始时间
+    closeDateTime:'', // 锁仓挖矿到期时间
+    // lockAvailable: '500KK', // KK 所需个数
+    // lockAvailable1:'2500KK',
+    lockCurrencys: '500', // 锁仓钱数 1 :500 2:2500
+    lockTime: {
+      days:'25'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockTimeTwo: {
+      days:'20'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockTimeThree: {
+      days:'15'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockTimeFour: {
+      days:'10'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockTimeFive: {
+      days:'5'
+    }, // 锁仓天数 1 代表5天； 2 代表30天； 3 代表90天
+    lockIndex:0,
+    miningDate:[], // 币种数组
+    lockDaysOne:[],  //'500KK'对应的值
+    lockDaysTwo:[], //'2500KK'对应的值
+    lockDaysThree:[], //'2500KK'对应的值
+    lockDaysFour:[], //'2500KK'对应的值
+    lockDaysFive:[], //'2500KK'对应的值
+    amt : 500,
+    days: 25,
+    lockCurrency : 'KK',
+    rewAmt : 5,
+    rewCurrency :'FF',
+
     step2VerificationCode: '', //第二步
     step2VerificationCodeWA: '', //第二步验证
     step2VerificationSending: false,//第二步验证发送中
@@ -149,7 +184,10 @@ root.data = function () {
     picked:1,
     nowDateTime:'',
     dividendTime:'',
-    prohibitAll:false
+    prohibitAll:false,
+    sending1:false,
+    sending2:false,
+    sending3:false,
 
   }
 }
@@ -199,6 +237,11 @@ root.computed = {}
 // 获取userId
 root.computed.userId = function () {
   return this.$store.state.authMessage.userId
+}
+root.computed.computedMiningDate = function () {
+  // console.info('computedMiningDate',this.miningDate)
+  return this.miningDate || []
+  // return this.miningDate
 }
 // 验证类型
 root.computed.showPicker = function () {
@@ -337,6 +380,107 @@ root.computed.btc_rate = function () {
 //   let timeObj = {nowDateTime:this.nowDateTime,dividendTime:this.dividendTime}
 //   return timeObj
 // }
+//计算锁仓学习开始时间
+root.computed.lockHouseStudy = function () {
+  let severDate = new Date(this.serverTime)
+  let dayTimeStep = 24 * 60 * 60 * 1000//一天的时间差 毫秒
+  let nowTimeStamp = this.serverTime//起息日，默认当天
+  let dividendTimeStamp = this.serverTime //分红日，默认第二天
+  let nineTyTimeStamp = 90 * 24 * 60 * 60 * 1000  // 90天
+  //如果超过12点，时间分别加一天
+  if (severDate.getHours() >= 12){
+    nowTimeStamp += dayTimeStep
+    dividendTimeStamp += dayTimeStep
+  }
+  this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'YYYY-MM-DD');
+  this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'YYYY-MM-DD');
+  let timeObj = {openDateTime:this.openDateTime, closeDateTime:this.closeDateTime}
+  return timeObj
+}
+//计算锁仓挖矿开始时间
+root.computed.lockHouseMining = function () {
+  let severDate = new Date(this.serverTime)
+  let dayTimeStep = 24 * 60 * 60 * 1000//一天的时间差 毫秒
+  let nowTimeStamp = this.serverTime//起息日，默认当天
+  let dividendTimeStamp = this.serverTime//分红日，默认第二天
+
+  let fiveTimeStamp = 5 * dayTimeStep  // 5天
+  let thirtyTimeStamp = 30 * dayTimeStep  // 30天
+  let nineTyTimeStamp = 90 * dayTimeStep  // 90天
+  //如果超过12点，时间分别加一天
+  if (severDate.getHours() >= 12){
+    nowTimeStamp += dayTimeStep
+    dividendTimeStamp += dayTimeStep
+  }
+  this.openDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'YYYY-MM-DD');
+  if(this.lockCurrencys == '500') {
+    // if(this.lockTime.days == 5) {
+    //   this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp +( 5 * dayTimeStep),'YYYY-MM-DD');
+    // }
+    if(this.lockTime.days == 25) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 5),'YYYY-MM-DD');
+    }
+    if(this.lockTime.days == 150) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 5),'YYYY-MM-DD');
+    }
+    if(this.lockTime.days == 450) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp *5),'YYYY-MM-DD');
+    }
+  }
+  if(this.lockCurrencys == '1000') {
+
+    if(this.lockTimeTwo.days == 20) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 4),'YYYY-MM-DD');
+    }
+    if(this.lockTimeTwo.days == 120) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 4),'YYYY-MM-DD');
+    }
+    if(this.lockTimeTwo.days == 360) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp *6),'YYYY-MM-DD');
+    }
+  }
+  if(this.lockCurrencys == '1500') {
+
+    if(this.lockTimeThree.days == 15) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 3),'YYYY-MM-DD');
+    }
+    if(this.lockTimeThree.days == 90) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 3),'YYYY-MM-DD');
+    }
+    if(this.lockTimeThree.days == 270) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp * 3),'YYYY-MM-DD');
+    }
+  }
+  if(this.lockCurrencys == '2000') {
+
+    if(this.lockTimeFour.days == 10) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (fiveTimeStamp * 2),'YYYY-MM-DD');
+    }
+    if(this.lockTimeFour.days == 60) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (thirtyTimeStamp * 2),'YYYY-MM-DD');
+    }
+    if(this.lockTimeFour.days == 180) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + (nineTyTimeStamp * 2),'YYYY-MM-DD');
+    }
+  }
+  if(this.lockCurrencys == '2500') {
+    // if(this.lockTimeFive.days == 1) {
+    //   this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + dayTimeStep ,'YYYY-MM-DD');
+    // }
+    if(this.lockTimeFive.days == 5) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + fiveTimeStamp,'YYYY-MM-DD');
+    }
+    if(this.lockTimeFive.days == 30) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + thirtyTimeStamp,'YYYY-MM-DD');
+    }
+    if(this.lockTimeFive.days == 90) {
+      this.closeDateTime = this.$globalFunc.formatDateUitl(dividendTimeStamp + nineTyTimeStamp,'YYYY-MM-DD');
+    }
+  }
+  let timeObj = {openDateTime:this.openDateTime, closeDateTime:this.closeDateTime}
+  return timeObj
+}
+
 //计算锁仓起息日和分红日
 root.computed.lockHouseNowTime = function () {
   let severDate = new Date(this.serverTime)
@@ -348,11 +492,12 @@ root.computed.lockHouseNowTime = function () {
      nowTimeStamp += dayTimeStep
      dividendTimeStamp += dayTimeStep
   }
-  this.nowDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'MM-DD');
-  this.dividendTime = this.$globalFunc.formatDateUitl(dividendTimeStamp,'MM-DD');
+  this.nowDateTime = this.$globalFunc.formatDateUitl(nowTimeStamp,'YYYY-MM-DD');
+  this.dividendTime = this.$globalFunc.formatDateUitl(dividendTimeStamp,'YYYY-MM-DD');
   let timeObj = {nowDateTime:this.nowDateTime,dividendTime:this.dividendTime}
   return timeObj
 }
+
 
 root.computed.lockHouseDividendTime = function () {
   let date = new Date();
@@ -361,6 +506,64 @@ root.computed.lockHouseDividendTime = function () {
 
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
+//
+root.watch.lockCurrencys = function (newVal,oldVal) {
+  if (oldVal == newVal) return
+  if(newVal == '2500') {
+    this.amt = '2500'
+    this.rewAmt = 5
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 5
+    this.lockTimeFive = {
+      days: '5'
+    }
+    return
+  }
+  if(newVal == '2000') {
+    this.amt = '2000'
+    this.rewAmt = 5
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 10
+    this.lockTimeFour = {
+      days: '10'
+    }
+    return
+  }
+  if(newVal == '1500') {
+    this.amt = '1500'
+    this.rewAmt = 5
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 15
+    this.lockTimeThree = {
+      days: '15'
+    }
+    return
+  }
+  if(newVal == '1000') {
+    this.amt = '1000'
+    this.rewAmt = 5
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 20
+    this.lockTimeTwo = {
+      days: '20'
+    }
+    return
+  }
+  if(newVal == '500') {
+    this.amt = 500
+    this.rewAmt =  5
+    this.lockCurrency  ='KK'
+    this.rewCurrency = 'FF'
+    this.days = 25
+    this.lockTime = {
+      days: '25'
+    }
+  }
+}
 
 // 监听vuex中的变化
 root.watch.currencyChange = function (newVal, oldVal) {
@@ -469,8 +672,8 @@ root.methods.re_getProhibitAll = function (data) {
   }
   this.prohibitAll = data.dataMap.prohibitAll
 
-  console.info('this.re_getProhibitAll',this.getProhibitAll)
-  console.info('this.re_getProhibitAll++++++++++++',data)
+  // console.info('this.re_getProhibitAll',this.getProhibitAll)
+  // console.info('this.re_getProhibitAll++++++++++++',data)
   // this.getCheckGroupDetails()
 }
 
@@ -511,7 +714,7 @@ root.methods.changeAssetAccountType = function () {
 
 // 打开划转
 root.methods.openTransfer = function (index, item) {
-  console.log(item)
+  // console.log(item)
   // if (item.currency !=='USDT' && this.serverT < item.withdrawOpenTime) {
   //   this.popOpen = true
   //   this.popText = this.$t('TransferIsNotOpen')
@@ -584,7 +787,7 @@ root.methods.errorHandler = function (err, state, text) {
 }
 
 root.methods.changeTransferCurrency = function (currency){
-  console.log('changeTransferCurrency==============',currency)
+  // console.log('changeTransferCurrency==============',currency)
   // this.itemInfo = val
   this.transferCurrencyAvailable = this.transferCurrencyObj[currency].available || 0;
 }
@@ -693,10 +896,10 @@ root.methods.transferCommit = function () {
 }
 // 划转回调
 root.methods.re_transferCommit = function (data){
-  console.log('发送成功====================')
+  // console.log('发送成功====================')
   this.sending = false
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log(data.errorCode)
+  // console.log(data.errorCode)
 
   if( data.errorCode ){
     data.errorCode == 1 &&  (this.popText = '用户未登录')
@@ -996,9 +1199,9 @@ root.methods.internalTransfer = function (index, item) {
   this.transferDisabledss(item.currency)
 
 
-  console.log('item.currency=========================', item)
-  console.info('item.currency=========================', item.currency)
-  console.info('item.currency=========================', item.available)
+  // console.log('item.currency=========================', item)
+  // console.info('item.currency=========================', item.currency)
+  // console.info('item.currency=========================', item.available)
   this.transferCurrency = item.currency
 
   //sss屏蔽 2020.20.20 S
@@ -1185,7 +1388,7 @@ root.methods.GoToConfirmTransfer = function () {
 root.methods.re_GoToConfirmTransfer = function(data){
   typeof data === 'string' && (data = JSON.parse(data))
 
-  console.log(data)
+  // console.log(data)
   // console.log('data==================',data.dataMap.UserProfile.name)
   // console.log(this.name_0,this.testUID_0)
   // console.log('resDataMap==================ggggggggg=',data)
@@ -1252,7 +1455,7 @@ root.methods.re_GoToConfirmTransfer = function(data){
 }
 
 root.methods.error_GoToConfirmTransfer = function(data){
-  console.log('resDataMap=========rrrrr=========ggggggggg=',data)
+  // console.log('resDataMap=========rrrrr=========ggggggggg=',data)
 }
 
 // //提交谷歌或手机验证码
@@ -1494,13 +1697,13 @@ root.methods.commitStep2Verification = function () {
 
 // 提交谷歌或手机验证码成功
 root.methods.re_commitStep2Verification = function (data) {
-  console.log(data)
+  // console.log(data)
   typeof data === 'string' && (data = JSON.parse(data))
   // this.popWindowLoading = false
   // this.step2VerificationSending = true
 
   let resDataMap = data.dataMap
-  console.log('resDataMap==================ggggggggg=',resDataMap)
+  // console.log('resDataMap==================ggggggggg=',resDataMap)
 
   if (data.errorCode) {
 
@@ -1732,7 +1935,7 @@ root.methods.commitEmailVerification = function (data) {
   // this.step2VerificationSending = false
 
   // let resDataMap = data.dataMap
-  console.log('resDataMap==================ggggggggg=',data)
+  // console.log('resDataMap==================ggggggggg=',data)
 
 
   //
@@ -1751,7 +1954,7 @@ root.methods.commitEmailVerification = function (data) {
 
 // 提交邮箱验证成功
 root.methods.re_commitEmailVerification = function (data) {
-  console.log('...........',data)
+  // console.log('...........',data)
   // typeof data === 'string' && (data = JSON.parse(data))
 
   // let resDataMap = data.dataMap;
@@ -2276,19 +2479,6 @@ root.methods.beginVerificationStep2 = function () {
   if (!this.showPicker && this.picked == 2) {
     this.getMobileVerification()
   }
-
-  // if (this.picker == 0) {
-  //   this.popText = this.$t('popText_3')
-  //   this.popType = 0
-  //   this.popOpen = true
-  //   this.sending = false
-  //   return
-  // }
-  // this.popWindowStep = 2
-  // this.step2Error = false
-  // if (!this.showPicker && this.picker == 2) {
-  //   this.getMobileVerification()
-  // }
 }
 
 
@@ -2354,10 +2544,80 @@ root.methods.closeLockHouse = function () {
   this.popWindowOpenLockHouse = false
 }
 
+root.methods.selectLockCurrencys = function (lockCurrencys) {
+  this.lockCurrencys = lockCurrencys
+  if(this.lockCurrencys == '500') {
+    return this.lockDaysOne
+  }
+  if(this.lockCurrencys == '1000') {
+    return this.lockDaysTwo
+  }
+  if(this.lockCurrencys == '1500') {
+    return this.lockDaysThree
+  }
+  if(this.lockCurrencys == '2000') {
+    return this.lockDaysFour
+  }
+  if(this.lockCurrencys == '2500') {
+    return this.lockDaysFive
+  }
+}
+root.methods.selectLockTime = function (lockTime) {
+  if(this.lockCurrencys == '500') {
+    this.lockTime = lockTime
+    this.amt = this.lockTime.amt || 0
+    this.days = this.lockTime.days || 0
+    this.lockCurrency = this.lockTime.lockCurrency || ''
+    this.rewAmt = this.lockTime.rewAmt || 0
+    this.rewCurrency = this.lockTime.rewCurrency || ''
+    return
+  }
+  if(this.lockCurrencys == '1000') {
+    this.lockTimeTwo = lockTime
+    this.amt = this.lockTimeTwo.amt || 0
+    this.days = this.lockTimeTwo.days || 0
+    this.lockCurrency = this.lockTimeTwo.lockCurrency || ''
+    this.rewAmt = this.lockTimeTwo.rewAmt || 0
+    this.rewCurrency = this.lockTimeTwo.rewCurrency || ''
+    return
+  }
+  if(this.lockCurrencys == '1500') {
+    this.lockTimeThree = lockTime
+    this.amt = this.lockTimeThree.amt || 0
+    this.days = this.lockTimeThree.days || 0
+    this.lockCurrency = this.lockTimeThree.lockCurrency || ''
+    this.rewAmt = this.lockTimeThree.rewAmt || 0
+    this.rewCurrency = this.lockTimeThree.rewCurrency || ''
+    return
+  }
+  if(this.lockCurrencys == '2000') {
+    this.lockTimeFour = lockTime
+    this.amt = this.lockTimeFour.amt || 0
+    this.days = this.lockTimeFour.days || 0
+    this.lockCurrency = this.lockTimeFour.lockCurrency || ''
+    this.rewAmt = this.lockTimeFour.rewAmt || 0
+    this.rewCurrency = this.lockTimeFour.rewCurrency || ''
+    return
+  }
+  if(this.lockCurrencys == '2500'){
+    this.lockTimeFive = lockTime
+    this.amt = this.lockTimeFive.amt || 0
+    this.days = this.lockTimeFive.days || 0
+    this.lockCurrency = this.lockTimeFive.lockCurrency || ''
+    this.rewAmt = this.lockTimeFive.rewAmt || 0
+    this.rewCurrency = this.lockTimeFive.rewCurrency || ''
+  }
+
+}
+
+// root.methods.selectLockTimeTwo = function (lockTime) {
+//   this.lockTimeTwo = lockTime
+// }
 
 // 打开锁仓
 root.methods.openLockHouse = function (index,item) {
   // console.info(new Date().getDate())
+  this.getMiningDict()
   this.lockCount()
   this.lockHouseNowTime
   // 锁仓币
@@ -2372,10 +2632,6 @@ root.methods.openLockHouse = function (index,item) {
 root.methods.lockCount = function () {
   this.$http.send('LOCK_COUNT', {
     bind: this,
-    // params: {
-    //   currency: this.lockHouseCurrency,
-    //   amount: this.lockHomeNum,
-    // },
     callBack: this.re_lockCount,
     errorHandler: this.error_lockCount,
   })
@@ -2392,22 +2648,18 @@ root.methods.error_lockCount = function (err) {
 
 // 判断锁仓数量
 root.methods.testLockAmount  = function () {
-  if (this.$globalFunc.testSpecial(this.lockHomeNum)) {
+  if (!this.$globalFunc.testNumber(this.lockHomeNum)) {
     this.lockHomeNum_WA = this.$t('lock_house_prompt_1')
-    return false
+    return
   }
-  // if (this.amountInput == '0') {
-  //   this.transferAmountWA = this.$t('transferAmountWA2')
-  //   return false
-  // }
   if (Number(this.lockHomeNum) > Number(this.lockHouseAvailable)) {
     this.lockHomeNum_WA = this.$t('lock_house_prompt_2')
-    return false
+    return
   }
-  if (Number(this.lockHomeNum) <= 0) {
-    this.lockHomeNum = 0
+  if (Number(this.lockHomeNum) < 500) {
+    // this.lockHomeNum = 500
     this.lockHomeNum_WA = this.$t('lock_house_prompt_3')
-    return false
+    return
   }
   this.lockHomeNum_WA = ''
   return true
@@ -2415,26 +2667,158 @@ root.methods.testLockAmount  = function () {
 }
 
 // 可以提交
-root.methods.canCommitLock = function () {
-  let canSend = true
-  canSend = this.testLockAmount() && canSend
-  if (this.lockHomeNum === '') {
-    this.lockHomeNum_WA = this.$t('lock_house_prompt_1')
-    return canSend = false
-  }
-  // if (this.amountInput === '0') {
-  //   this.transferAmountWA = this.$t('transferAmountWA2')
-  //   canSend = false
-  // }
-  return canSend
-}
+// root.methods.canCommitLock = function () {
+//   let canSend = true
+//   canSend = this.testLockAmount() && canSend
+//   if (this.lockHomeNum === '') {
+//     this.lockHomeNum_WA = this.$t('lock_house_prompt_1')
+//     return canSend = false
+//   }
+//   // if (this.amountInput === '0') {
+//   //   this.transferAmountWA = this.$t('transferAmountWA2')
+//   //   canSend = false
+//   // }
+//   return canSend
+// }
 
-root.methods.commitLockHouse = function () {
-  if (this.sending) return
-  if (!this.canCommitLock()) {
+// 获取锁仓字典数据
+root.methods.getMiningDict = function () {
+
+  this.$http.send('LOCK_GET_MINING_DICT', {
+    bind: this,
+    callBack: this.re_getMiningDict,
+    errorHandler: this.error_getMiningDict,
+  })
+}
+root.methods.re_getMiningDict = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data) return
+  // var data = {
+  //   data :  {
+  //     '500KK': [
+  //       {rewCurrency: "FF", amt: 500, days: 25, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 150, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 450, rewAmt: 90, lockCurrency: "KK"},
+  //     ],
+  //     '1000KK': [
+  //       {rewCurrency: "FF", amt: 500, days: 20, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 120, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 360, rewAmt: 90, lockCurrency: "KK"},
+  //     ],
+  //     '1500KK': [
+  //       {rewCurrency: "FF", amt: 500, days: 15, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 90, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 270, rewAmt: 90, lockCurrency: "KK"},
+  //     ],
+  //     '2000KK': [
+  //       {rewCurrency: "FF", amt: 500, days: 10, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 60, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 500, days: 180, rewAmt: 90, lockCurrency: "KK"},
+  //     ],
+  //     '2500KK': [
+  //       {rewCurrency: "FF", amt: 2500, days: 5, rewAmt: 5, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 2500, days: 30, rewAmt: 30, lockCurrency: "KK"},
+  //       {rewCurrency: "FF", amt: 2500, days: 90, rewAmt: 90, lockCurrency: "KK"},
+  //     ]
+  //   }
+  // }
+  this.miningDate = Object.keys(data.data).reverse() || []
+  this.lockDaysOne = data.data['500'] || []
+  this.lockDaysTwo = data.data['1000'] || []
+  this.lockDaysThree = data.data['1500'] || []
+  this.lockDaysFour = data.data['2000'] || []
+  this.lockDaysFive = data.data['2500'] || []
+
+
+
+}
+root.methods.error_getMiningDict = function (err) {}
+
+// 锁仓挖矿
+root.methods.commitLockMining = function () {
+  if(this.days == 0) {
+    this.popOpen = true
+    this.popType = 0
+    this.popText = this.$t('请确认锁仓时间')
     return
   }
-  this.sending = true
+  this.sending2 = true
+  this.$http.send('LOCK_MINING', {
+    bind: this,
+    params: {
+      userId:this.userId,
+      days: this.days,
+      amt:this.amt,
+      rewAmt:this.rewAmt
+    },
+    callBack: this.re_commitLockMining,
+    errorHandler: this.error_commitLockMining,
+  })
+}
+root.methods.re_commitLockMining = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data) return
+  this.sending2 = false
+  if(data.errorCode) {
+    this.popOpen = true
+    if(data.errorCode == 2){
+      this.popType = 0
+      this.popText = this.$t('可用币种余额不足')
+      return
+    }
+    this.popType = 1
+    this.popText = this.$t('lock_house_success')
+    // 关闭锁仓弹框
+    this.closeLockHouse()
+    return
+  }
+
+}
+root.methods.error_commitLockMining = function (err) {
+  console.error('err=',err)
+}
+// 锁仓学习
+root.methods.commitLockLearing = function () {
+  this.sending3 = true
+  this.$http.send('LOCK_STUDY', {
+    bind: this,
+    params: {
+      userId:this.userId,
+    },
+    callBack: this.re_commitLockLearing,
+    errorHandler: this.error_commitLockLearing,
+  })
+}
+root.methods.re_commitLockLearing = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data) return
+  this.sending3 = false
+  this.popOpen = true
+  if(data.errorCode) {
+    if(data.errorCode == 2){
+      this.popType = 0
+      this.popText = this.$t('可用币种余额不足')
+      return
+    }
+    this.popType = 1
+    this.popText = this.$t('lock_house_success')
+    // 关闭锁仓弹框
+    this.closeLockHouse()
+    return
+  }
+}
+root.methods.error_commitLockLearing = function (err) {
+  console.error('err=',err)
+}
+
+// 锁仓分红
+root.methods.commitLockHouse = function () {
+  // if (this.sending1) return
+
+  if (!this.testLockAmount()) {
+    return
+  }
+  this.sending1 = true
 
   this.$http.send('LOCK_ASSET', {
     bind: this,
@@ -2448,7 +2832,7 @@ root.methods.commitLockHouse = function () {
 }
 
 root.methods.re_commitLockHouse = function (data) {
-  this.sending = false
+  this.sending1 = false
   typeof data === 'string' && (data = JSON.parse(data))
   if(!data) return
 

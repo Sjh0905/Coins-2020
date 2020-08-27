@@ -61,7 +61,7 @@ root.created = function () {
   this.currentInterval && clearInterval(this.currentInterval)
   this.currentInterval = setInterval(this.getOrder, 5000)
 
-  console.log('this.$route=======',this.$route.name)
+  // console.log('this.$route=======',this.$route.name)
   // console.log(('this.$router==========第四季',this.$router))
 }
 
@@ -97,6 +97,24 @@ root.computed.quoteScale_list = function () {
 
 
 root.methods = {}
+root.methods.changeType = function (order) {
+  if(!order.isFollow && (order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')){
+    let type = order.type === 'BUY_LIMIT' ? this.$t('orderPageHistoricalEntrustment.buy') : this. $t('orderPageHistoricalEntrustment.sale')
+    return type
+  }
+  if(!order.isFollow && (order.type === 'BUY_MARKET' || order.type === 'SELL_MARKET')){
+    let type = order.type === 'BUY_MARKET' ? this.$t('orderPageHistoricalEntrustment.marketBuy') : this. $t('orderPageHistoricalEntrustment.marketSale')
+    return type
+  }
+  if(order.isFollow && (order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')){
+    let type = order.type === 'BUY_LIMIT' ?  this.$t('orderPageHistoricalEntrustment.followBuy') : this.$t('orderPageHistoricalEntrustment.followSale')
+    return type
+  }
+  if(order.isFollow && (order.type === 'BUY_MARKET' || order.type === 'SELL_MARKET')){
+    let type = order.type === 'BUY_MARKET' ? this.$t('orderPageHistoricalEntrustment.followMarketBuy') : this.$t('orderPageHistoricalEntrustment.followMarketSale')
+    return type
+  }
+}
 
 // 获取订单
 root.methods.getOrder = function () {
@@ -146,7 +164,7 @@ root.methods.re_getOrder = function (data) {
   })
   this.$store.commit('GET_OPEN_ORDER', open_order);
 
-  console.log('this.currentOrder',this.currentOrder)
+  // console.log('this.currentOrder',this.currentOrder)
   // this.loading = false
   // // 加载更多中
   // this.loadingMoreIng = false

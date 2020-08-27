@@ -197,7 +197,7 @@ root.methods.getRecharge = function () {
 root.methods.re_getRecharge = function (dataObj) {
   // console.log("拿到了Init数据", JSON.stringify(data))
   // let dataObj = JSON.parse(data)  //错误代码
-  console.log(dataObj)
+  // console.log(dataObj)
   typeof dataObj === 'string' && JSON.parse(dataObj)
 
   if (dataObj.errorCode) {
@@ -220,7 +220,7 @@ root.methods.re_getRecharge = function (dataObj) {
   // this.address1 = dataObj.dataMap.addressBean.address
 
   this.memo = dataObj.dataMap.addressBean.memoAddress
-  console.log(this.address)
+  // console.log(this.address)
 
 }
 root.methods.error_getRecharge = function (err) {

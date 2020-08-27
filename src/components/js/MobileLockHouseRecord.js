@@ -55,7 +55,7 @@ root.data = function () {
 root.created = function () {
   // 修改顶部标题
   this.$store.commit('changeMobileHeaderTitle', '充提记录');
-  console.log(this.$route)
+  // console.log(this.$route)
   // if(this.)
   this.changeOpenTypeQuery()
   // 获取record值
@@ -73,7 +73,7 @@ root.computed.computedRecord = function () {
 }
 
 root.computed.computedWithdraw = function () {
-  console.log(this.historyRecords)
+  // console.log(this.historyRecords)
   return this.historyRecords
 }
 
@@ -85,7 +85,9 @@ root.computed.userId = function () {
 root.methods = {}
 
 root.methods.gotoZichan = function () {
-  this.$router.push({name:'MobileAssetRechargeAndWithdrawalsDetail',query:{currency:this.$route.query.name}})
+  this.$router.push({name:'MobileAssetRechargeAndWithdrawals'})
+  // this.$router.push({name:'MobileAssetRechargeAndWithdrawalsDetail',query:{currency:this.$route.query.name}})
+  // this.$router.go(-1)
 }
 
 root.methods.changeOpenTypeQuery = function () {
@@ -93,10 +95,22 @@ root.methods.changeOpenTypeQuery = function () {
   let num = this.$route.query.id || 1
   this.openType = num
 
-  if(num == 1) {
+  if(num == 1){
+    this.getLockMining()
+  }
+  if(num == 2){
+    this.getLockHistoryList()
+  }
+  if(num == 3){
+    this.getLockLearning()
+  }
+  if(num == 4){
+    this.getHisLockLearning()
+  }
+  if(num == 5){
     this.getLockCur()
   }
-  if (num == 2){
+  if(num == 4){
     this.getLockHistory()
   }
 }
@@ -104,32 +118,226 @@ root.methods.changeOpenTypeQuery = function () {
 // 切换当前锁仓记录和历史锁仓记录头部
 root.methods.changeOpenType = function(num){
   this.openType = num
-  // console.log('this is store',this.$store.state.mobileHeaderTitle,this.$store.state.currencyChange)
-
   if(num === 1){
     this.$router.push({'path':'/index/mobileAsset/MobileLockHouseRecord',query:{id:1,name:this.$route.query.name}})
-    // this.$store.commit('changeMobileHeaderTitle', '');
-    this.getLockCur()
+    this.getLockMining()
   }
-
   if(num===2){
     this.$router.push({'path':'/index/mobileAsset/MobileLockHouseRecord',query:{id:2,name:this.$route.query.name}})
+    this.getLockHistoryList()
+  }
+  if(num === 3){
+    this.$router.push({'path':'/index/mobileAsset/MobileLockHouseRecord',query:{id:3,name:this.$route.query.name}})
+    this.getLockLearning()
+  }
+  if(num === 4){
+    this.$router.push({'path':'/index/mobileAsset/MobileLockHouseRecord',query:{id:4,name:this.$route.query.name}})
+    this.getHisLockLearning()
+  }
+  if(num === 5){
+    this.$router.push({'path':'/index/mobileAsset/MobileLockHouseRecord',query:{id:5,name:this.$route.query.name}})
+    this.getLockCur()
+  }
+  if(num === 6){
+    this.$router.push({'path':'/index/mobileAsset/MobileLockHouseRecord',query:{id:6,name:this.$route.query.name}})
+    this.getLockHistory()
+  }
+}
 
-    // this.$store.commit('changeMobileHeaderTitle', '');
-    // 获取withdraw值
-    // if(this.isFirstGetWithdrawFlag === true ){
-      this.getLockHistory()
+// 获取锁仓挖矿记录
+root.methods.getLockMining = function () {
+  if (this.ajaxRecordFlag === true || this.isShowGetMoreRecord === false) {
+    return
+  }
+  this.ajaxRecordFlag = true
+  this.$http.send("LOCK_LOCK_LIST", {
+    bind: this,
+    urlFragment: `${this.userId}/0`,
+    callBack: this.re_getLockMining,
+    errorHandler: this.error_getLockCur
+  })
+}
+// 获取锁仓挖矿记录
+root.methods.re_getLockMining = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  this.ajaxRecordFlag = false
+  if (!data || data.length === 0) {
+    // if(this.ajaxRecordFlag === true){
+    this.loading = false
     // }
-    // return
+    this.isRecordFlag = true
+    return
+  }
+  // console.log('进入此步')
+  if (data.length < this.currentLockLimit){
+    this.isShowGetMoreRecord = false
+  } else {
+    this.currentLockLimit += 10;
   }
 
+  // console.warn('获取记录', data)
+  this.currentRecords = data.data || []
+
+  // if(this.ajaxRecordFlag === true){
+  this.loading = false
+  // }
+  this.isRecordFlag = false
 }
+// 获取锁仓挖矿记录错误
+root.methods.error_getLockMining = function (err) {
+  this.ajaxRecordFlag = true
+  this.isRecordFlag = true
+  this.loading = false
+  console.warn("充值获取记录出错！", err)
+}
+
+
+// 获取历史锁仓挖矿记录
+root.methods.getLockHistoryList = function () {
+  if (this.ajaxRecordFlag === true || this.isShowGetMoreRecord === false) {
+    return
+  }
+  this.ajaxRecordFlag = true
+  this.$http.send("LOCK_HIS_LOCK_LIST", {
+    bind: this,
+    urlFragment: `${this.userId}/0`,
+    callBack: this.re_getLockHistoryList,
+    errorHandler: this.error_getLockHistoryList
+  })
+}
+// 获取历史锁仓挖矿记录
+root.methods.re_getLockHistoryList = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  this.ajaxRecordFlag = false
+  if (!data || data.length === 0) {
+    // if(this.ajaxRecordFlag === true){
+    this.loading = false
+    // }
+    this.isRecordFlag = true
+    return
+  }
+  // console.log('进入此步')
+  if (data.length < this.currentLockLimit){
+    this.isShowGetMoreRecord = false
+  } else {
+    this.currentLockLimit += 10;
+  }
+
+  // console.warn('获取记录', data)
+  this.currentRecords = data.data || []
+
+  // if(this.ajaxRecordFlag === true){
+  this.loading = false
+  // }
+  this.isRecordFlag = false
+}
+// 获取历史锁仓挖矿记录
+root.methods.error_getLockHistoryList = function (err) {
+  this.ajaxRecordFlag = true
+  this.isRecordFlag = true
+  this.loading = false
+  console.warn("充值获取记录出错！", err)
+}
+
+
+// 获取锁仓学习
+root.methods.getLockLearning = function () {
+  if (this.ajaxRecordFlag === true || this.isShowGetMoreRecord === false) {
+    return
+  }
+  this.ajaxRecordFlag = true
+  this.$http.send("LOCK_LOCK_LIST", {
+    bind: this,
+    urlFragment: `${this.userId}/1`,
+    callBack: this.re_getLockLearning,
+    errorHandler: this.error_getLockLearning
+  })
+}
+// 获取锁仓学习
+root.methods.re_getLockLearning = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  this.ajaxRecordFlag = false
+  if (!data || data.length === 0) {
+    // if(this.ajaxRecordFlag === true){
+    this.loading = false
+    // }
+    this.isRecordFlag = true
+    return
+  }
+  // console.log('进入此步')
+  if (data.length < this.currentLockLimit){
+    this.isShowGetMoreRecord = false
+  } else {
+    this.currentLockLimit += 10;
+  }
+
+  // console.warn('获取记录', data)
+  this.currentRecords = data.data || []
+
+  // if(this.ajaxRecordFlag === true){
+  this.loading = false
+  // }
+  this.isRecordFlag = false
+}
+// 获取锁仓学习
+root.methods.error_getLockLearning = function (err) {
+  this.ajaxRecordFlag = true
+  this.isRecordFlag = true
+  this.loading = false
+  console.warn("充值获取记录出错！", err)
+}
+
+
+// 获取历史锁仓学习
+root.methods.getHisLockLearning = function () {
+  if (this.ajaxRecordFlag === true || this.isShowGetMoreRecord === false) {
+    return
+  }
+  this.ajaxRecordFlag = true
+  this.$http.send("LOCK_HIS_LOCK_LIST", {
+    bind: this,
+    urlFragment: `${this.userId}/1`,
+    callBack: this.re_getHisLockLearning,
+    errorHandler: this.error_getHisLockLearning
+  })
+}
+// 获取历史锁仓学习
+root.methods.re_getHisLockLearning = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  this.ajaxRecordFlag = false
+  if (!data || data.length === 0) {
+    // if(this.ajaxRecordFlag === true){
+    this.loading = false
+    // }
+    this.isRecordFlag = true
+    return
+  }
+  // console.log('进入此步')
+  if (data.length < this.currentLockLimit){
+    this.isShowGetMoreRecord = false
+  } else {
+    this.currentLockLimit += 10;
+  }
+
+  // console.warn('获取记录', data)
+  this.currentRecords = data.data || []
+
+  // if(this.ajaxRecordFlag === true){
+  this.loading = false
+  // }
+  this.isRecordFlag = false
+}
+// 获取历史锁仓学习
+root.methods.error_getHisLockLearning = function (err) {
+  this.ajaxRecordFlag = true
+  this.isRecordFlag = true
+  this.loading = false
+  console.warn("充值获取记录出错！", err)
+}
+
 
 // 获取当前锁仓记录
 root.methods.getLockCur = function () {
-  // if (currency) {
-  //
-  // }
   if (this.ajaxRecordFlag === true || this.isShowGetMoreRecord === false) {
     return
   }
@@ -139,8 +347,6 @@ root.methods.getLockCur = function () {
     bind: this,
     query: {
       status:'1',
-      // currency: '',
-      // limit: this.limit
     },
     callBack: this.re_getLockCur,
     errorHandler: this.error_getLockCur
@@ -150,7 +356,6 @@ root.methods.getLockCur = function () {
 root.methods.re_getLockCur = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   this.ajaxRecordFlag = false
-  console.log('充值记录',data)
   if (!data || data.length === 0) {
     // if(this.ajaxRecordFlag === true){
     this.loading = false
@@ -181,6 +386,7 @@ root.methods.error_getLockCur = function (err) {
   console.warn("充值获取记录出错！", err)
 }
 
+
 // 初始获取withdraw值
 root.methods.getLockHistory = function () {
   if(this.ajaxWithdrawFlag === true){
@@ -202,7 +408,7 @@ root.methods.getLockHistory = function () {
 // 获取记录返回，类型为{}
 root.methods.re_getLockHistory = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log('提现记录',data)
+  // console.log('提现记录',data)
   this.ajaxWithdrawFlag = false
   this.isFirstGetWithdrawFlag = false
   if (!data || data.length === 0) {
@@ -220,7 +426,7 @@ root.methods.re_getLockHistory = function (data) {
     this.historyLockLimit += 10;
   }
 
-  console.log('data有', data)
+  // console.log('data有', data)
   this.historyRecords = data
 
   // if(this.ajaxWithdrawFlag === true){
@@ -237,9 +443,9 @@ root.methods.error_getLockHistory = function (err) {
   }
 }
 
+
 // 点击跳转当前锁仓详情页
 root.methods.toRechargeDetailPath = function (type) {
-  console.log(123123123,type)
   this.$store.commit('changemobileLockRecordData',type)
   this.$router.push({name:'mobileAssetcurLockRecordDetail',query:{currency:this.$route.query.name}})
 }

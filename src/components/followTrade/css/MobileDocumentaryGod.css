@@ -79,10 +79,11 @@
   width: 100%;
   height: 0.96rem;
   background: #302E34;
+  padding: 0 0.3rem;
   justify-content: space-between;
 }
 .mobile-trade-data-item {
-  width: 1.86rem;
+  /*width: 1.86rem;*/
   height: 0.96rem;
   font-size:0.2rem;
   font-family:PingFangSC-Regular,PingFang SC;
@@ -127,7 +128,7 @@
   box-sizing: border-box;
 }
 .mobile-trade-center-title-line {
-  width: 0.01rem;
+  width: 1px;
   height: 0.52rem;
   background:#3576F5;
 }
@@ -137,7 +138,7 @@
   box-sizing: border-box;
   height:0.52rem;
   line-height:0.52rem;
-  border:0.01rem solid rgba(197,207,213,1);
+  border:1px solid rgba(197,207,213,1);
 }
 .mobile-trade-center-title-history{
   /*border-right-color: #3576F5;*/

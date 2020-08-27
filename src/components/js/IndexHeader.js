@@ -336,11 +336,11 @@ root.methods.re_getCheck = function (data) {
 
   this.data = data.data
   this.$store.commit('IS_VIP', data.data || {});
-  console.log('是否是会员get-----',this.data)
+  // console.log('是否是会员get-----',this.data)
 }
 
 root.methods.error_getCheck = function (err) {
-  console.log("this.err=====",err)
+  // console.log("this.err=====",err)
 }
 root.methods.reFresh  = function () {
   if (this.$route.name == 'home') {
@@ -885,7 +885,6 @@ root.methods.GET_NOTICE = function () {
 // 渲染通告列表
 root.methods.RE_GET_NOTICE = function (res) {
   this.noticelength = res.length;
-  console.log(res)
   this.noticeList = res;
   // console.log(this.noticeList)
 }
@@ -918,7 +917,7 @@ root.methods.goToFrenchCurrecy = function (){
 
 // 跳转法币交易
 root.methods.goToFranchExchange = function (){
-  console.info(process.env.DOMAIN)
+  // console.info(process.env.DOMAIN)
   if(!this.isLogin){
     this.$router.push('/index/sign/login')
     return;

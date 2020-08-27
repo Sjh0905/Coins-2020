@@ -13,7 +13,7 @@ root.created = function () {
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({
         method: 'setTitle',
-        parameters: '区块恋'
+        parameters: '区块安'
       })
     );
     window.postMessage(JSON.stringify({

@@ -20,6 +20,7 @@ root.data = function () {
 
     // 买卖数量和价格列表
     price: '0',
+    priceNow: '0',
     cnyPrice: '- -',
 
     sellOrders: [],
@@ -28,6 +29,8 @@ root.data = function () {
     // 交易时价格和数量
     transaction_price: '',
     transaction_amount: '',
+    //交易额
+    transactionVolume: '',
     fee: '',
     // 买卖可用数量
     currentSymbol: {
@@ -89,11 +92,15 @@ root.data = function () {
     currency_list:[],
 
     KKPriceRange:[],
+    miniVolumeSymbol:[],
 
+    optionSymbol:['KK_USDT','TT_USDT'],
     popIdenOpen: false, // 弹窗开放
 
-    priceCont:''
-
+    priceCont:'限价单',
+    chest:true,
+    optionData:['限价单','市价单'],
+    pendingOrderType:'limitPrice'
   }
 }
 
@@ -102,13 +109,12 @@ root.data = function () {
 
 root.created = function () {
 
+
   this.$eventBus.listen(this, 'GET_GRC_PRICE_RANGE', this.getKKPriceRange);
   this.getKKPriceRange();
 	this.$store.commit('SET_HALL_SYMBOL', true);
 	this.$store.commit('changeMobileTradingHallFlag', false)
-
 	let self = this
-
   if (this.$store.state.buy_or_sale_type === 1 || this.$store.state.buy_or_sale_type === '') {
     this.$store.commit('changeMobileHeaderTitle', '买入');
   }
@@ -150,8 +156,6 @@ root.created = function () {
       callBack: this.RE_FEE
     })
   }
-
-
   this.$eventBus.listen(this, 'TRADED', this.TRADED)
   // 获取订单
   this.loading = true
@@ -182,7 +186,6 @@ root.components = {
 /*------------------------------ 计算 begin -------------------------------*/
 
 root.computed = {}
-
 
 root.computed.currencyList = function(){
   return this.$store.state.symbol.currencyList
@@ -238,7 +241,14 @@ root.computed.KKPriceRangeH5 = function () {
 /*------------------------------ 方法 begin -------------------------------*/
 
 root.methods = {};
-
+root.methods.changeOptionData = function (currency) {
+  this.priceCont = currency
+  if(this.priceCont == '限价单') {
+    this.pendingOrderType= 'limitPrice'
+    return
+  }
+  this.pendingOrderType= 'marketPrice'
+}
 
 root.methods.RE_FEE = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
@@ -539,8 +549,22 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
     this.promptOpen = true;
     return
   }
+  if (!type && Number(this.transactionVolume) > Number(available)) {
+    // alert('您的持仓不足')
+    this.popText = '您的余额不足,请充值';
+    this.popType = 0;
+    this.promptOpen = true;
+    return
+  }
 
   if (type && Number(this.transaction_amount) > Number(available)) {
+    // alert('您的持仓不足')
+    this.popText = '您的余额不足,请充值';
+    this.popType = 0;
+    this.promptOpen = true;
+    return
+  }
+  if (type && Number(this.transactionVolume) > Number(available)) {
     // alert('您的持仓不足')
     this.popText = '您的余额不足,请充值';
     this.popType = 0;
@@ -551,77 +575,123 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
   let txt = !type ? '买入' : '卖出';
   let symbol = this.$store.state.symbol;
 
-  if(symbol == 'KK_USDT' && !this.checkPriceRange()) return;
-  if (!type && this.transaction_price == 0) {
-    this.popText = '请输入正确的' + txt + '价';
-    this.popType = 0;
-    this.promptOpen = true;
-    return
-  }
+  if(this.pendingOrderType == 'limitPrice' && symbol == 'KK_USDT' && !this.checkPriceRange()) return;
+  // if (!type && this.transaction_price == 0) {
+  //   this.popText = '请输入正确的' + txt + '价';
+  //   this.popType = 0;
+  //   this.promptOpen = true;
+  //   return
+  // }
 
   if(!type && popIdenOpen){
     this.popIdenOpen = !this.comparePriceNow();
     if(this.popIdenOpen)return;
   }
 
-  if (!type && this.transaction_amount == 0) {
+  if (this.pendingOrderType == 'limitPrice' && !type && this.transaction_amount == 0) {
     this.popText = '请输入正确的' + txt + '量';
     this.popType = 0;
     this.promptOpen = true;
     return
   }
-  if (type && this.transaction_price == 0) {
-    this.popText = '请输入正确的' + txt + '价';
+  if (this.pendingOrderType == 'marketPrice' && !type && (Number(this.transactionVolume) == 0)) {
+    this.popText = '请输入正确的交易额';
     this.popType = 0;
     this.promptOpen = true;
     return
   }
+  // if (type && this.transaction_price == 0) {
+  //   this.popText = '请输入正确的' + txt + '价';
+  //   this.popType = 0;
+  //   this.promptOpen = true;
+  //   return
+  // }
 
   if(type && popIdenOpen){
     this.popIdenOpen = !this.comparePriceNow();
     if(this.popIdenOpen)return;
   }
 
-  if (type && this.transaction_amount == 0) {
+  if (this.pendingOrderType == 'limitPrice' && type && this.transaction_amount == 0) {
     this.popText = '请输入正确的' + txt + '量';
     this.popType = 0;
     this.promptOpen = true;
     return
   }
-  let params = {
-    symbol: this.symbol,
-    price: this.transaction_price,
-    amount: this.transaction_amount,
-    type: type,
-    source: 'H5', //访问来源
-    // customFeatures: this.fee ? 65536 : 0
-  };
-  //燃烧抵扣不再需要
-  if (this.fee) {
-    Object.assign(params, {customFeatures: 65536});
+  //交易额
+  if (this.pendingOrderType == 'marketPrice' && type && Number(this.transactionVolume) == 0) {
+    this.popText = '请输入正确的数量';
+    this.popType = 0;
+    this.promptOpen = true;
+    return
   }
+
+  //燃烧抵扣不再需要
+  // if (this.fee) {
+  //   Object.assign(params, {customFeatures: 65536});
+  // }
   // 如果当前是BTC市场的话，price*amount<0.001不允许提交
   // 如果当前是ETH市场的话，price*amount<0.01不允许提交
   // 如果当前是BDB市场的话，price*amount<100不允许提交
   let turnover = Number(this.transaction_price) * Number(this.transaction_amount);
   let turnoverAmount = Number(this.transaction_amount);
   let miniVolume;
+  let baseMinimum;
   let maxAmount;
   let tradingParameters = this.$store.state.tradingParameters;
-  for (var i = 0; i < tradingParameters.length; i++) {
-    let item = tradingParameters[i];
-    let name = item.name;
-    if (name == this.symbol) {
-      miniVolume = item.miniVolume;
-      maxAmount = item.maxAmount;
+  if (this.pendingOrderType == 'limitPrice') {
+    for (var i = 0; i < tradingParameters.length; i++) {
+      let item = tradingParameters[i];
+      let name = item.name;
+      if (name == this.symbol) {
+        miniVolume = item.miniVolume;
+        maxAmount = item.maxAmount;
+        baseMinimum = item.baseMinimum;
+        console.info('baseMinimum========',tradingParameters)
+      }
     }
   }
+
+  if (this.pendingOrderType == 'marketPrice') {
+  //   for (var k = 0; k < this.miniVolumeSymbol.length; k++) {
+  //     let item = this.miniVolumeSymbol[k];
+  //     let name = item.baseName;
+
+      // if (name == this.symbol) {
+      //   baseMinimum = item.baseMinimum;
+      //   console.info('baseMinimum========',baseMinimum)
+      // }
+      if ((this.optionSymbol.indexOf(this.$store.state.symbol) >= 0) && !type && (Number(this.transactionVolume) < 1)) {
+        console.info('name===symbol====',this.$store.state.symbol)
+        this.popText = '交易额不能低于 1';
+        // this.popText = '请输入正确的数量';
+        this.popType = 0;
+        this.promptOpen = true;
+        return
+      }
+      if ((this.optionSymbol.indexOf(this.$store.state.symbol) < 0) && !type && (Number(this.transactionVolume) < 10)) {
+        console.info('name====symbol22===',this.$store.state.symbol)
+        this.popText = '交易额不能低于 10';
+        // this.popText = '请输入正确的数量';
+        this.popType = 0;
+        this.promptOpen = true;
+        return
+      }
+  //   }
+  }
+
   if (Number(turnover) < Number(miniVolume)) {
       this.popType = 0;
       this.popText = '交易额不能小于' + miniVolume;
       this.promptOpen = true;
       return;
   }
+  // if ( this.pendingOrderType == 'marketPrice' && (Number(this.transactionVolume) < Number(baseMinimum * this.price))) {
+  //     this.popType = 0;
+  //     this.popText = '交易额不能小于' + baseMinimum * this.price;
+  //     this.promptOpen = true;
+  //     return;
+  // }
   // if (Number(turnoverAmount) < Number(maxAmount)) {
   //     this.popType = 0;
   //     this.popText = '交易数量不能高于' + maxAmount;
@@ -643,7 +713,28 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
   //     return;
   //   }
   // }
-
+  let params = {};
+  if(this.pendingOrderType == 'limitPrice') {
+    params = {
+      symbol: this.$store.state.symbol,
+      price: this.transaction_price,  // 未输入,传市价; 输入,传输入价
+      amount: this.transaction_amount,
+      type: !this.orderType ? 'BUY_LIMIT':'SELL_LIMIT',
+      source: 'WEB', //访问来源
+      // customFeatures: this.fee ? 65536 : 0
+    };
+  }
+  if(this.pendingOrderType == 'marketPrice') {
+    params = {
+      symbol: this.$store.state.symbol,
+      // price: this.price, // 传当前市价
+      price: !this.orderType ? this.transactionVolume : 0,
+      amount: !this.orderType ? 0 : this.transactionVolume,
+      type: !this.orderType ? 'BUY_MARKET':'SELL_MARKET',
+      source: 'WEB', //访问来源
+      // customFeatures: this.fee ? 65536 : 0
+    };
+  }
 
   this.$http.send('TRADE_ORDERS',
     {
@@ -662,6 +753,7 @@ root.methods.successCallback = function (data) {
   this.promptOpen = true;
   // 清空数量
   this.transaction_amount = '';
+  this.transactionVolume = ''
   // console.log('TRADE_ORDERS', data)
   this.$http.send('ACCOUNTS', {
     bind: this,
@@ -733,6 +825,8 @@ root.methods.error_getKKPriceRange = function () {
 root.methods.checkPriceRange = function () {
   let len = this.KKPriceRange.length;
   if(len == 0) return true
+
+  if(this.pendingOrderType == 'marketPrice') return false
 
   let minPrice = this.KKPriceRange[0];
   let maxPrice = this.KKPriceRange[len-1];
@@ -915,6 +1009,8 @@ root.methods.re_getCurrencyList = function (data) {
   typeof(data) == 'string' && (data = JSON.parse(data));
   let objs = this.symbolList_priceList(data);
   this.currency_list = objs;
+  this.miniVolumeSymbol = data.symbols
+  console.info('miniVolumeSymbol====',this.miniVolumeSymbol)
 }
 
 // 请求price
@@ -957,6 +1053,7 @@ root.methods.changeType = function (typeNum) {
   }
   // 切换买入卖出时候需要清空数量
   this.transaction_amount = '';
+  this.transactionVolume = ''
 }
 
 // 切换左右结构
@@ -1070,6 +1167,10 @@ root.computed.transactionPrice = function () {
 
 
 root.watch = {};
+// 切换 市价/限价单 市价的交易量清空
+root.watch.pendingOrderType = function (newValue, oldValue) {
+  this.transactionVolume=''
+}
 root.watch.transactionAmount = function (newValue, oldValue) {
   let value = newValue.toString();
   // 限制输入位数
@@ -1103,6 +1204,11 @@ root.watch.symbol = function (newValue, oldValue) {
 
   this.getDepthInfo();
   this.getScaleConfig();
+  if(newValue == 'KK_USDT'){
+    this.pendingOrderType = 'limitPrice'
+    this.priceCont = '限价单'
+  }
+
 
 }
 // root.watch = {};
@@ -1542,6 +1648,8 @@ root.methods.clickChangePopOpen = function () {
 }
 
 root.methods.changeHeaderBoxFlag = function (item) {
+  // this.pendingOrderType= 'limitPrice'
+
   this.$store.commit('changeMobileTradingHallFlag',true);
   this.$store.commit('changeMobileSymbolType',item.name);
   this.$store.commit('SET_HALL_SYMBOL',true);

@@ -98,9 +98,6 @@
   margin-bottom: 0.14rem;
 }
 
-
-
-
 .left-container {
   width: 3.4rem;
   float: left;
@@ -109,24 +106,87 @@
   color: #fff;
   margin-top: 10px;
 }
+
 .left-container-default{
   float: right;
 }
 
-.left-container-title{
-  height: 0.4rem;
-  line-height: 0.4rem;
-  font-size: 0.26rem;
+.left-container-title {
+  width: 3.4rem;
+  height:0.72rem;
+  border-radius:0.03rem;
+  justify-content: space-between;
+  border:1px solid #3E536C;
+  line-height: 0.72rem;
+  font-size:0.28rem;
+  font-weight:600;
+  color: #CFD3E9;
+  padding-left: 0.2rem;
+  padding-right: 0.15rem;
   margin-top: 0.34rem;
   margin-bottom: 0.12rem;
 }
 
-.mobile-change-num{
+.language-jt-down{
+  /*margin-left: 5px;*/
+  width: 6px;
+  margin-top: 0.3rem;
+  height: 4px;
+  background: url("../../assets/jcdown.png") no-repeat;
+  background-size: 100% ;
+}
+.language-jt-up{
+  /*margin-left: 5px;*/
+  width: 6px;
+  margin-top: 0.3rem;
+  height: 4px;
+  background: url("../../assets/jtup.png") no-repeat;
+  background-size: 100% 100%;
+}
+.limit-market-change {
+  position: absolute;
+  display: none;
+  /*将固定宽度改为最小宽度，避免文字过长不显示*/
+  width: 3.4rem;
+  height:1.44rem;
+  justify-content: space-between;
+  line-height: 0.72rem;
+  font-size:0.28rem;
+  font-weight:600;
+  color: #6D87A8;
+  background: #fff;
+  box-shadow:0rem 0.04rem 0.36rem 0rem rgba(1,1,1,0.3);
+  border-radius:0.06rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.12rem;
+  left: 0.22rem;
+  top: 2.8rem;
+  border-top: 0;
+  z-index: 600;
+  padding-left: 0.2rem;
+}
+
+.mobile-change-num {
   width: 3.4rem;
   box-sizing: content-box;
   border: 1px solid #3E536C;
   border-radius: 1.5px;
   height: 0.72rem;
+  margin-top: 0.2rem;
+}
+
+.mobile-change-num-market {
+  width: 3.4rem;
+  padding-left: 0.3rem;
+  color:rgba(255,255,255,0.4);
+  background: #172841;
+  border: 1px solid #3E536C;
+  border-radius: 1.5px;
+  height: 0.72rem;
+  line-height: 0.72rem;
+  margin-top: 0.2rem;
+  font-size:0.26rem;
+  box-sizing: border-box;
 }
 
 .mobile-change-num-minus {
@@ -1335,7 +1395,29 @@
   line-height: 20px;
 }
 
+/* ============= 下拉框样式 ==============*/
+.el-select >>> .el-input__inner {
+  background: #131F30 ;
+  width: 3.4rem;
+  height: 0.72rem;
+  line-height: 0.72rem;
+  border: 1px solid #3E536C;
+  border-radius: 0.03rem;
+  /*box-sizing: border-box;*/
+  color: #CFD3E9;
+}
 
+.el-select >>> .el-input__suffix {
+  height: 0.72rem;
+}
 
-
-
+.el-select >>> .el-select-dropdown {
+  background: pink;
+}
+.self-el-select ul li.el-select-dropdown__item.selected {
+  color: #6B7DA2;
+  background-color:pink;
+}
+.self-el-select ul li.el-select-dropdown__item.hover, .self-el-select ul li.el-select-dropdown__item:hover {
+  background-color: rgba(53,118,245, 0.08);
+}

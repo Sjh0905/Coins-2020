@@ -91,7 +91,8 @@ root.data = function () {
     // pankqh:true,
     showinfo : false,
 
-    tradinghallLimit:10
+    tradinghallLimit:10,
+    pendingOrderType:'limitPrice', // 限价 limitPrice 市价 marketPrice
 
   }
 }
@@ -156,14 +157,17 @@ root.mounted = function () {
   //
   //
   // }
-
-
-
 }
 
 
 // 初始化各子组件
 root.methods = {}
+
+//交易类型切换 Start
+root.methods.changePendingOrderType = function (type) {
+  if(this.pendingOrderType == type)return
+  this.pendingOrderType = type;
+}
 
 root.methods.watchScreenWidth = function () {
   //必须声明局部变量，否则this.screenWidth不能触发页面渲染
@@ -278,7 +282,6 @@ root.methods.init = function () {
   this.initGetDatas();
 
 }
-
 
 // 判断验证状态
 root.methods.getAuthState = function () {
@@ -919,6 +922,9 @@ root.watch.symbol = function (newValue, oldValue) {
   if (newValue == oldValue) return;
   // this.getScaleConfig();
   // this.init();
+  if(newValue == 'KK_USDT'){
+    this.pendingOrderType = 'limitPrice'
+  }
 }
 root.watch.listenSymbol = function (newValue, oldValue) {
   if (newValue == oldValue) return;

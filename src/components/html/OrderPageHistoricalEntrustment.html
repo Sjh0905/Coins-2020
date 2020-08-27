@@ -89,14 +89,16 @@
             <!--市场 end -->
 
             <!--类别 begin -->
-            <div class="td td-category" :class="order.type==='BUY_LIMIT'?'text_blue-3':'text_red-4'" v-if="!order.isFollow">
-              {{order.type === 'BUY_LIMIT' && $t('orderPageHistoricalEntrustment.buy') ||
-              $t('orderPageHistoricalEntrustment.sale') }}
+            <div class="td td-category" :class="(order.type==='BUY_LIMIT' || order.type==='BUY_MARKET')?'text_blue-3':'text_red-4'">
+              {{changeType(order)}}
             </div>
-            <div class="td td-category" :class="order.type==='BUY_LIMIT'?'text_blue-3':'text_red-4'" v-if="order.isFollow">
-              {{order.type === 'BUY_LIMIT' && $t('orderPageHistoricalEntrustment.followBuy') ||
-              $t('orderPageHistoricalEntrustment.followSale') }}
-            </div>
+<!--              {{order.type === 'BUY_LIMIT' && $t('orderPageHistoricalEntrustment.buy') ||-->
+<!--              $t('orderPageHistoricalEntrustment.sale') }}-->
+
+<!--            <div class="td td-category" :class="order.type==='BUY_LIMIT'?'text_blue-3':'text_red-4'" v-if="order.isFollow">-->
+<!--              {{order.type === 'BUY_LIMIT' && $t('orderPageHistoricalEntrustment.followBuy') ||-->
+<!--              $t('orderPageHistoricalEntrustment.followSale') }}-->
+<!--            </div>-->
             <!--类别 end -->
 
             <!--单价 begin -->
@@ -104,7 +106,7 @@
             <!--单价 end -->
 
             <!--数量 begin -->
-            <div class="td td-market">{{toFixed(order.amount, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}} {{order.symbol.split('_')[0]}}</div>
+            <div class="td td-market">{{toFixed((order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT') ? order.amount : order.filledAmount , !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].baseScale : 8)}} {{order.symbol.split('_')[0]}}</div>
             <!--数量 end -->
 
             <!--成交数量 begin -->
@@ -145,7 +147,7 @@
           </div>
           <div v-if="clickThis === order.id" class="tr-hidden">
             <HiddenDetail :orderId="order.id" :symbol="order.symbol"
-                          :orderType="order.type ==='BUY_LIMIT'?0:1"
+                          :orderType="(order.type ==='BUY_LIMIT' || order.type ==='BUY_MARKET')?0:1"
             />
           </div>
 

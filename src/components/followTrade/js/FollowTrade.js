@@ -4,6 +4,7 @@ root.name = 'followTrade'
 root.components = {
   'Loading': resolve => require(['../../vue/Loading'], resolve),
   'PopupPrompt': resolve => require(['../../vue/PopupPrompt'], resolve),
+  'PopupWindow': resolve => require(['../../vue/PopupWindow'], resolve),
 }
 /*------------------------------ data -------------------------------*/
 root.data = function () {
@@ -18,12 +19,24 @@ root.data = function () {
     popText: '',
     popOpen: false,
     waitTime: 2000,
+
+    popWindowOpenShiM: false, //弹窗开关
+    popWindowTitle: '', //弹出提示标题
+    popWindowPrompt: '',//弹出样式提示
+    popWindowStyle: 0,//跳转 0表示实名认证，1表示手机或谷歌，2只有确定
+
+    currentInterval:null
+
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
 
+  this.GET_AUTH_STATE()
+
   this.getBigBrotherList()
+  this.currentInterval1 && clearInterval(this.currentInterval1)
+  this.currentInterval1 = setInterval(() => { this.getBigBrotherList() }, 4000)
 
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({
@@ -35,8 +48,12 @@ root.created = function () {
   }
 }
 
-root.mounted = function () {}
-root.beforeDestroy = function () {}
+root.mounted = function () {
+  // this.currentInterval1 && clearInterval(this.currentInterval1)
+}
+root.beforeDestroy = function () {
+  this.currentInterval1 && clearInterval(this.currentInterval1)
+}
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
 // root.computed.isFollow = function () {
@@ -78,27 +95,115 @@ root.computed.iosLogin = function () {
 root.computed.windowWidth = function () {
   return window.innerWidth
 }
+
+// 是否绑定手机
+root.computed.bindMobile = function () {
+  return this.$store.state.authState.sms
+}
+// 是否绑定谷歌验证码
+root.computed.bindGA = function () {
+  return this.$store.state.authState.ga
+}
+// 是否绑定邮箱
+root.computed.bindEmail = function () {
+  return this.$store.state.authState.email
+}
+// 是否实名认证
+root.computed.bindIdentify = function () {
+  return this.$store.state.authState.identity
+}
+
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+// 认证状态
+root.methods.GET_AUTH_STATE = function () {
+  this.$http.send("GET_AUTH_STATE", {
+    bind: this,
+    callBack: this.RE_GET_AUTH_STATE,
+    errorHandler: this.error_getCurrency
+  })
+}
+root.methods.RE_GET_AUTH_STATE = function (res) {
+  typeof res === 'string' && (res = JSON.parse(res));
+  if (!res) return
+  this.$store.commit('SET_AUTH_STATE', res.dataMap)
+}
+
+// 弹出绑定身份，跳转到实名认证界面
+root.methods.goToBindIdentity = function () {
+  this.popWindowOpenShiM = false
+  this.$router.push({name: 'authenticate'})
+}
+
+
+// 弹框跳安全中心
+root.methods.goToSecurityCenter = function () {
+  this.popWindowOpenShiM = false
+  this.$router.push({name: 'securityCenter'})
+}
+
+// 弹窗关闭
+root.methods.popWindowCloseShiM = function () {
+  this.popWindowOpenShiM = false
+}
+
 //跳转首页
 root.methods.jumpToBack = function () {
   this.$router.push({'path':'/index/newH5homePage'})
 }
 //跳转个人镜像交易
 root.methods.goTofollowTradeStrategy = function () {
+  // // 如果没有实名认证不允许报名
+  if (!this.bindIdentify) {
+    this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
+    this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
+    this.popWindowStyle = '0'
+    this.popWindowOpenShiM = true
+    return
+  }
+
+  // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
+  if (!this.bindGA && !this.bindMobile) {
+    this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
+    this.popWindowPrompt = this.$t('popWindowTitleBindGaWithdrawals')
+    this.popWindowStyle = '1'
+    this.popWindowOpenShiM = true
+    return
+  }
   this.$router.push({'path':'/index/followTradeStrategy'})
 }
 // 跳转我的镜像交易
-root.methods.goToDocumentary = function (userId,fee,days) {
+root.methods.goToDocumentary = function (userId,fee) {
+
+  // // 如果没有实名认证不允许报名
+  if (!this.bindIdentify) {
+    this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
+    this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
+    this.popWindowStyle = '0'
+    this.popWindowOpenShiM = true
+    return
+  }
+
+  // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
+  if (!this.bindGA && !this.bindMobile) {
+    this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
+    this.popWindowPrompt = this.$t('popWindowTitleBindGaWithdrawals')
+    this.popWindowStyle = '1'
+    this.popWindowOpenShiM = true
+    return
+  }
+
+
   if(this.userId == userId){
     // 自己不能跟随自己哦
     this.openPop(this.$t('canNotFollowMyself'))
     return
   }
   // this.$router.push({name:'mobileDocumentary',params: {item:item}})
-  this.$router.push({name:'documentaryGod',query:{userId:userId,fee:fee,days:days,isFollow:this.godList.indexOf(userId)}})
+  this.$router.push({name:'documentaryGod',query:{userId:userId,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId)}})
 }
 // // 去大神页面
 // root.methods.goToDocumentaryGod = function () {
@@ -106,15 +211,32 @@ root.methods.goToDocumentary = function (userId,fee,days) {
 // }
 // 返回我的镜像交易，正在跟随
 root.methods.goToMyFollowOrder = function () {
+  // // 如果没有实名认证不允许报名
+  if (!this.bindIdentify) {
+    this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
+    this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
+    this.popWindowStyle = '0'
+    this.popWindowOpenShiM = true
+    return
+  }
+
+  // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
+  if (!this.bindGA && !this.bindMobile) {
+    this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
+    this.popWindowPrompt = this.$t('popWindowTitleBindGaWithdrawals')
+    this.popWindowStyle = '1'
+    this.popWindowOpenShiM = true
+    return
+  }
   this.$router.push({name:'myFollowOrder'})
 }
 
 
 // 大佬列表
 root.methods.getBigBrotherList = function () {
+  // console.info('掉接口啦===',new Date().getTime())
   this.$http.send('BIG_BROTHER_LIST', {
     bind: this,
-    // query:{},
     callBack: this.re_getBigBrotherList,
     errorHandler:this.error_getBigBrotherList
   })

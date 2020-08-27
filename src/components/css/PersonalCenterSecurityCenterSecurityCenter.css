@@ -548,12 +548,25 @@
   color: #6B7DA2;
   margin-right: 40px;
 }
-
 .allinfo11_update img{
   width: 58px;
   height: 30px;
   /*margin-right: 8px;*/
-  margin-top: 25px;
+  /*margin-top: 25px;*/
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.closed {
+  color: #6A83A8;
+  font-size:0.24rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+}
+.opened {
+  color: #3576F5;
+  font-size:0.24rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
 }
 
 #binds2 {

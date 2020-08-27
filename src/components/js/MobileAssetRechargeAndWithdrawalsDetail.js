@@ -121,7 +121,7 @@ root.mounted = function () {
 // 计算
 root.computed = {}
 root.computed.isMyWallet = function () {
-  if(this.$route.params.assetAccountType == 'wallet'){
+  if(this.$route.params.assetAccountType == 'wallet' || this.$route.query.assetAccountType == 'wallet'){
     return true
   }
   return false//现在只开放钱包
@@ -863,7 +863,7 @@ root.methods.gotoTransfer = function (){
 
 // 判断是否可以转账
 root.methods.transferAble = function () {
-  console.info('this.$route.query.currency   sssssss',this.$route.query.currency)
+  // console.info('this.$route.query.currency   sssssss',this.$route.query.currency)
   this.$http.send('GET_TRANSFER_AMOUNT_INFO',{
     bind: this,
     query:{
@@ -935,7 +935,7 @@ root.methods.re_transferAble = function (data) {
     }
   }
 
-  console.info('this.re_transferAble--------------',data)
+  // console.info('this.re_transferAble--------------',data)
   console.log(data)
 }
 root.methods.error_transferAble = function (error) {
@@ -977,9 +977,9 @@ root.methods.re_getProhibitAll = function (data) {
   }
   this.prohibitAll = data.dataMap.prohibitAll
 
-
-  console.info('this.re_getProhibitAll',this.getProhibitAll)
-  console.info('this.re_getProhibitAll++++++++++++',data)
+  //
+  // console.info('this.re_getProhibitAll',this.getProhibitAll)
+  // console.info('this.re_getProhibitAll++++++++++++',data)
   // this.getCheckGroupDetails()
 }
 

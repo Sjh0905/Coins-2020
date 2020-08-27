@@ -76,6 +76,24 @@ root.created = function () {
 
 
 root.methods = {}
+root.methods.changeType = function (order) {
+  if(!order.isFollow && (order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')){
+    let type = order.type === 'BUY_LIMIT' ? '限价买' : '限价卖'
+    return type
+  }
+  if(!order.isFollow && (order.type === 'BUY_MARKET' || order.type === 'SELL_MARKET')){
+    let type = order.type === 'BUY_MARKET' ? '市价买' : '市价卖'
+    return type
+  }
+  if(order.isFollow && (order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')){
+    let type = order.type === 'BUY_LIMIT' ?  '限价跟买' : '限价跟卖'
+    return type
+  }
+  if(order.isFollow && (order.type === 'BUY_MARKET' || order.type === 'SELL_MARKET')){
+    let type = order.type === 'BUY_MARKET' ? '市价跟买' : '市价跟卖'
+    return type
+  }
+}
 
 root.methods.getScaleConfig = function () {
   this.$store.state.quoteConfig.forEach(

@@ -13,17 +13,24 @@
     "loadingMore": "加载更多",
     "operation": "操作",
     "un_lock": "解锁",
-    "lockedWarehouse": "已锁仓",
+
+    "lockedWarehouse": "已锁仓挖矿",
+    "lockedWareHouseDividends": "已锁仓分红",
+
     "lastDateDividends": "最新分红",
     "totalDividends": "累计分红",
-    "currentLock": "当前锁仓",
-    "historyLock": "历史锁仓",
+    "currentLock": "锁仓分红",
+    "historyLock": "历史锁仓分红",
+
+    "lockAndMine": "锁仓挖矿",
+    "historyLockAndMine": "历史锁仓挖矿",
+
     "lockSuccess": "解锁成功",
     "unLockTips": "用户未登录",
     "unLockTips_1": "参数错误",
     "unLockTips_2": "用户已解锁",
     "unLockTips_3": "解锁失败",
-    "unLockTips_4": "不能解锁，未满90天解锁日期"
+    "unLockTips_4": "未到解锁日期"
   },
   "EN": {},
   "CA": {},

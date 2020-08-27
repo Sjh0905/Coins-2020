@@ -249,7 +249,7 @@ root.watch = {}
 
 
 root.watch.searchResult = function(v){
-  console.log('this is searchResult',v)
+  // console.log('this is searchResult',v)
 
   if(v.indexOf('中国大陆地区') > -1){
     this.country = '0'
@@ -259,7 +259,7 @@ root.watch.searchResult = function(v){
 }
 
 root.watch.valuegender = function(v){
-  console.log('this is valuegender',v)
+  // console.log('this is valuegender',v)
 
   if(v.indexOf('男') > -1){
     this.gender = '0'
@@ -268,7 +268,7 @@ root.watch.valuegender = function(v){
   }
 }
 root.watch.searchCities = function(v){
-  console.log(v)
+  // console.log(v)
   // console.log(this.changeInputValue)
   // console.log(this.computedMarketList.name )
   // console.log('this.searchList====111',this.searchList)
@@ -319,7 +319,7 @@ root.methods.toggleRadios = function(){
   this.register = !this.register
 },
 root.methods.getMobileInfo = function(){
-  console.log("-----getMobileInfo----", this.getMobileInfo)
+  // console.log("-----getMobileInfo----", this.getMobileInfo)
   this.$http.send("REGISTER_BY_MOBILE_INFO",{
     bind: this,
     callBack: this.re_getMobileInfo,
@@ -396,7 +396,7 @@ root.methods.re_getIdentityInfo = function (data) {
     surname, surnameWA,
     identityAuth, identityAuthWA
   let arr = data.dataMap.identityAuths
-  console.info('arr=====',arr)
+  // console.info('arr=====',arr)
   for (let i = 0; i < arr.length; i++) {
 
     if(arr[i].type === 'area'){
@@ -1614,7 +1614,7 @@ root.methods.goToCustomerService= function () {
 //返回后端的数据
 root.methods.clickItem = function(code){
   this.$store.commit('SET_AREA_CODE',code);
-  console.log("clickItem code",code)
+  // console.log("clickItem code",code)
   window.history.go(-1)
 }
 

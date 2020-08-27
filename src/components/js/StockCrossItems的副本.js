@@ -54,9 +54,9 @@ root.computed.symbol = function () {
 
 root.computed.depth_list = function () {
   // let list = [];
-  console.log('type=======',this.type)
+  // console.log('type=======',this.type)
   let depth;
-  console.log('this.transactionData====================',this.transactionData)
+  // console.log('this.transactionData====================',this.transactionData)
   this.type && (depth = this.transactionData) || (depth = this.transactionData.splice(0, 14))
 
 
@@ -184,7 +184,7 @@ root.methods.contrastDeepthOpenOrder = function (order_list, depth_list) {
     this.list = depth_list;
   }
 
-  console.log('list==============',this.list)
+  // console.log('list==============',this.list)
 
 }
 
@@ -255,7 +255,7 @@ root.methods.getScaleConfig = function () {
       v.name === this.$store.state.symbol && (this.baseScale = v.baseScale , this.quoteScale = v.quoteScale)
     }
   )
-  console.log('baseScale', this.baseScale)
+  // console.log('baseScale', this.baseScale)
 }
 
 root.methods.formatnumber = function (value, num) {

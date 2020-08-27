@@ -16,7 +16,7 @@ root.data = () => {
     historyOrder: [],
     clickThis: -1,
 
-    limit: 100, //一次获取多少条数据
+    limit: 50, //一次获取多少条数据
     offsetId: 0, //最后的订单id
     updatedAt:1,//最后的订单更新时间,默认为1
     showLoadingMore: true,//是否显示加载更多
@@ -63,6 +63,25 @@ root.created = function () {
 
 
 root.methods = {}
+root.methods.changeType = function (order) {
+  if(!order.isFollow && (order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')){
+    let type = order.type === 'BUY_LIMIT' ? this.$t('orderPageHistoricalEntrustment.buy') : this. $t('orderPageHistoricalEntrustment.sale')
+    return type
+  }
+  if(!order.isFollow && (order.type === 'BUY_MARKET' || order.type === 'SELL_MARKET')){
+    let type = order.type === 'BUY_MARKET' ? this.$t('orderPageHistoricalEntrustment.marketBuy') : this. $t('orderPageHistoricalEntrustment.marketSale')
+    return type
+  }
+  if(order.isFollow && (order.type === 'BUY_LIMIT' || order.type === 'SELL_LIMIT')){
+    let type = order.type === 'BUY_LIMIT' ?  this.$t('orderPageHistoricalEntrustment.followBuy') : this.$t('orderPageHistoricalEntrustment.followSale')
+    return type
+  }
+  if(order.isFollow && (order.type === 'BUY_MARKET' || order.type === 'SELL_MARKET')){
+    let type = order.type === 'BUY_MARKET' ? this.$t('orderPageHistoricalEntrustment.followMarketBuy') : this.$t('orderPageHistoricalEntrustment.followMarketSale')
+    return type
+  }
+}
+
 // 发送请求获取
 root.methods.getOrder = function () {
   if (!this.$store.state.authMessage.userId) {

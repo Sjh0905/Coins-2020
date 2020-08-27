@@ -51,10 +51,10 @@
               <div class="color_bik_9">{{toFixed(accMul(commonDiscount || 0,100),0) }}%</div>
             </div>
 <!--            量化区折扣-->
-            <div class=" color_hui_s">
-              <div>{{$t('quantifiedDiscount')}}</div>
-              <div class="color_bik_9">{{toFixed(accMul(quantDiscount || 0,100),0) }}%</div>
-            </div>
+<!--            <div class=" color_hui_s">-->
+<!--              <div>{{$t('quantifiedDiscount')}}</div>-->
+<!--              <div class="color_bik_9">{{toFixed(accMul(quantDiscount || 0,100),0) }}%</div>-->
+<!--            </div>-->
           </li>
 <!--          团长，副团长 建团时间-->
           <li class="information_li m-to">
@@ -112,24 +112,24 @@
             <div class="cumulative_div">
           <!-- 普通区累计（USDT）-->
               <div class="information_div div_border div_s">
-                <p class="color_e2">{{$t('ordinaryAccumulation')}}(USDT）</p>
-                <p class="color_e9">{{commCumulative}}</p>
+                <p class="color_e2">{{$t('ordinaryAccumulation')}}(KK）</p>
+                <p class="color_e9">{{toFixed(commCumulative,4)}}</p>
               </div>
 <!--              普通区返佣-->
-              <div class="information_div div_border div_s">
-                <p class="color_e2">{{$t('ordinaryRebates')}}(USDT）</p>
-                <p class="color_e9">{{commRecommission}}</p>
-              </div>
+<!--              <div class="information_div div_border div_s">-->
+<!--                <p class="color_e2">{{$t('ordinaryRebates')}}(KK）</p>-->
+<!--                <p class="color_e9">{{toFixed(commRecommission,4)}}</p>-->
+<!--              </div>-->
 <!--              量化区累计-->
-              <div class="information_div div_border div_s">
-                <p class="color_e2">{{$t('quantizationAccumulation')}}(USDT）</p>
-                <p class="color_e9">{{quantCumulative}}</p>
+              <div class="information_div">
+                <p class="color_e2">{{$t('quantizationAccumulation')}}(KK）</p>
+                <p class="color_e9">{{toFixed(quantCumulative,4)}}</p>
               </div>
 <!--              量化区返佣-->
-              <div class="information_div border-ling div_border">
-                <p class="color_e2">{{$t('quantificationRebates')}}(USDT）</p>
-                <p class="color_e9">{{quantRecommission}}</p>
-              </div>
+<!--              <div class="information_div border-ling div_border">-->
+<!--                <p class="color_e2">{{$t('quantificationRebates')}}(KK）</p>-->
+<!--                <p class="color_e9">{{toFixed(quantRecommission,4)}}</p>-->
+<!--              </div>-->
 
             </div>
 
@@ -286,15 +286,15 @@
 
         <div class="mobileFoldL">
 <!--          <div class="mobileFoldLdiv">-->
-          <span class="mobileFoldSapn">普通区折扣</span>
-          <span class="mobileFoldSapnF">{{toFixed(accMul(commonDiscount || 0,100),0) }}%</span>
+          <span class="mobileFoldSapn">主流区返现 <span class="mobileFoldSapnF"> {{toFixed(accMul(commonDiscount || 0,100),0) }}%</span></span>
+
 <!--        </div>-->
         </div>
-        <div class="mobileX"></div>
-        <div class="mobileFoldLw">
-          <span class="mobileFoldSapn">挖矿区折扣</span>
-          <span class="mobileFoldSapnF">{{toFixed(accMul(quantDiscount || 0,100),0) }}%</span>
-        </div>
+<!--        <div class="mobileX"></div>-->
+<!--        <div class="mobileFoldLw">-->
+<!--          <span class="mobileFoldSapn">挖矿区折扣</span>-->
+<!--          <span class="mobileFoldSapnF">{{toFixed(accMul(quantDiscount || 0,100),0) }}%</span>-->
+<!--        </div>-->
       </div>
       <!--      账号-->
       <div class="mobileNumber flex">
@@ -320,24 +320,28 @@
     <div class="mobileliangtuan" v-if="idType=='1'">
     <div class="mobileliang" >
       <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">普通区累计折合</span>
-        <span class="mobileFoldSapnF18">{{commCumulative}} USDT</span>
+        <span class="mobileFoldSapnB7">主流区团级工资累计</span>
+        <span class="mobileFoldSapnF18">{{toFixed(commCumulative,4)}} KK</span>
       </div>
+<!--      <div class="mobileliangdiv">-->
+<!--        <span class="mobileFoldSapnB7">挖矿区团级工资累计</span>-->
+<!--        <span class="mobileFoldSapnF18">{{toFixed(commRecommission,4)}} KK</span>-->
+<!--      </div>-->
       <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">普通区返佣折合</span>
-        <span class="mobileFoldSapnF18">{{commRecommission}} USDT</span>
+        <span class="mobileFoldSapnB7">主流区团级工资最新</span>
+        <span class="mobileFoldSapnF18">{{toFixed(quantCumulative,4)}} KK</span>
       </div>
     </div>
-    <div class="mobileliang mt">
-      <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">挖矿区累计折合</span>
-        <span class="mobileFoldSapnF18">{{quantCumulative}} USDT</span>
-      </div>
-      <div class="mobileliangdiv">
-        <span class="mobileFoldSapnB7">挖矿区返佣折合</span>
-        <span class="mobileFoldSapnF18">{{quantRecommission}} USDT</span>
-      </div>
-    </div>
+<!--    <div class="mobileliang mt">-->
+<!--      <div class="mobileliangdiv">-->
+<!--        <span class="mobileFoldSapnB7">主流区团级工资最新</span>-->
+<!--        <span class="mobileFoldSapnF18">{{toFixed(quantCumulative,4)}} KK</span>-->
+<!--      </div>-->
+<!--      <div class="mobileliangdiv">-->
+<!--        <span class="mobileFoldSapnB7">挖矿区团级工资最新</span>-->
+<!--        <span class="mobileFoldSapnF18">{{toFixed(quantRecommission,4)}} KK</span>-->
+<!--      </div>-->
+<!--    </div>-->
     </div>
 
     <!--    团员列表-->
@@ -393,11 +397,12 @@
     </div>
     <div slot="article" class="pop-recharge">
 <!--      请确认是否解散-->
-      <p class="consequences" v-if="idType=='1'">{{$t('dissolution')}} <span class="consequencesSpan">{{gname}}</span></p>
+      <span class="consequences" v-if="idType=='1'">{{$t('dissolution')}} <span class="consequencesSpan">{{gname}}</span></span>
 <!--      请确认是否退出-->
-      <p class="consequences" v-if="idType=='3'">{{$t('whether')}} <span class="consequencesSpan">{{gname}}</span></p>
-      <p class="consequences" v-if="idType=='4'">{{$t('whether')}} <span class="consequencesSpan">{{gname}}</span></p>
-      <p class="consequences" v-if="idType=='5'">{{$t('whether')}} <span class="consequencesSpan">{{gname}}</span></p>
+      <span class="consequences" v-if="idType=='3'">{{$t('whether')}} <span class="consequencesSpan">{{gname}}</span></span>
+      <span class="consequences" v-if="idType=='4'">{{$t('whether')}} <span class="consequencesSpan">{{gname}}</span></span>
+      <span class="consequences" v-if="idType=='5'">{{$t('whether')}} <span class="consequencesSpan">{{gname}}</span></span>
+      <span>，退团将收取 <span class="consequencesSpan">3TT</span> 退团费用</span>
     </div>
     <div slot="footer" class="pop-recharge-bottom">
         <button @click="popWindowClose" class="button-base33 btn_simple pointer">
@@ -566,9 +571,10 @@
       <div class="toast-nobind-email-title">{{$t('prompt')}}</div>
       <div class="toast-nobind-email-body">
         <!--      请确认是否解散-->
-        <p class="consequences" v-if="idType=='1'">{{$t('dissolution')}} <span class="consequencesSpan">{{gname}}</span></p>
+        <p class="consequences" v-if="idType=='1'">{{$t('dissolution')}} <span class="consequencesSpanH5">{{gname}}</span></p>
         <!--      请确认是否退出-->
-        <p class="consequences" v-if="idType=='3'">{{$t('whether')}} <span class="consequencesSpan">{{gname}}</span></p>
+        <span class="consequences" v-if="idType=='3'">{{$t('whether')}} <span class="consequencesSpanH5">{{gname}}</span></span>
+        <span>，退团将收取 <span class="consequencesSpanH5">3TT</span> 退团费用</span>
 <!--        为了您的资金安全，请先绑定邮箱-->
       </div>
       <div v-if="idType=='1'" @click="postWithdraw(1)"  class="confirm-nobind-email-btn">

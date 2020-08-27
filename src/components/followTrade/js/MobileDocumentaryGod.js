@@ -63,7 +63,7 @@ root.methods.jumpToFollowDocumentary = function () {
   this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,fee:this.$route.query.fee,days:this.$route.query.days}})
 }
 
-//大神历史持仓
+//大神操作记录
 root.methods.postBigBrotherHistory = function () {
   let params = {
     followId: this.$route.query.userId,
@@ -76,9 +76,9 @@ root.methods.postBigBrotherHistory = function () {
   })
 }
 root.methods.re_postBigBrotherHistory = function (data) {
-  console.log("this.res=====",data)
+  // console.log("this.res=====",data)
   typeof data === 'string' && (data = JSON.parse(data))
-  console.info('data',data)
+  // console.info('data',data)
   this.loading = false
   this.godInfo = data.dataMap.godInfo || {}
   this.godHistorList = data.dataMap.list || []

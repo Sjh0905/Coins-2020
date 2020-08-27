@@ -21,6 +21,15 @@ root.data = function () {
     popOpen: false,
     waitTime: 2000,
 
+    godInfoList:{},
+    countFollower:'',
+    sumFee :'',
+    todayFee:'',
+    userFollowFees:[],
+
+    followDay :'',
+    godFee: '', //跟单保证金
+
     // 信息弹框
     popWindowOpen:false,
   }
@@ -40,9 +49,11 @@ root.created = function () {
       }
     }))
   }
+  this.postManage()
   this.isOpenFollow()
   this.postPersonalFollowUser()
   this.postPersonalrHistory()
+  this.postGodFee()
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
@@ -50,7 +61,7 @@ root.beforeDestroy = function () {}
 root.computed = {}
 
 root.computed.isHasItem = function () {
-  if(JSON.stringify(this.godInfo) == '{}') {
+  if(JSON.stringify(this.godInfoList) == '{}') {
     return false
   }
   return true
@@ -71,6 +82,44 @@ root.computed.isAndroid = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+// 跟单保证金
+root.methods.postGodFee = function () {
+  this.$http.send('POST_GOD_FEE', {
+    bind: this,
+    callBack: this.re_postGodFee,
+    errorHandler: this.error_postGodFee
+  })
+}
+root.methods.re_postGodFee = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data && !data.dataMap) return
+  this.godFee = data.dataMap.godFee || 0
+}
+root.methods.error_postGodFee = function (err) {
+  console.log('err===',err)
+}
+
+//个人带单管理
+root.methods.postManage = function () {
+  this.$http.send('POST_MANAGE', {
+    bind: this,
+    // params: params,
+    callBack: this.re_postManage,
+    errorHandler: this.error_postManage
+  })
+}
+root.methods.re_postManage = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  this.countFollower = data.dataMap.countFollower || '0'
+  this.sumFee = data.dataMap.sumFee || '0'
+  this.todayFee = data.dataMap.todayFee || '0'
+  this.userFollowFees = data.dataMap.userFollowFees || []
+  this.godInfoList = data.dataMap.godInfo || {}
+  this.followDay = data.dataMap.days || '0'
+}
+root.methods.error_postManage = function (err) {
+  console.log("this.err=====",err)
+}
 // 成为大神弹框
 root.methods.openTapeList = function () {
   this.popWindowOpen =true
@@ -88,7 +137,7 @@ root.methods.postCommitFee = function () {
     return
   }
   // if(this.currencyPair == 0){
-  //   this.openPop ('订阅费用不能为0')
+  //   this.openPop ('跟单费用不能为0')
   //   return
   // }
   let params = {
@@ -110,9 +159,19 @@ root.methods.re_postCommitFee = function (data) {
     this.popWindowClose()
     this.postManage()
   }
+  if(data.errorCode == 1) {
+    this.openPop(this.$t('systemError'))
+    return;
+  }
+  if(data.errorCode == 2) {
+    this.openPop(this.$t('insufficient'))
+    return;
+  }
+  if(data.errorCode == 3) {
+    this.openPop(this.$t('securityDeposit'))
+    return;
+  }
   if(data.errorCode != 0) {
-    this.openMaskWindow = false
-    this.isTapeList = true
     this.openPop(this.$t('systemError'))
   }
 }
@@ -150,7 +209,7 @@ root.methods.re_isOpenFollow = function (data) {
 root.methods.error_isOpenFollow = function (err) {
   console.log("this.err=====",err)
 }
-//个人历史持仓
+//个人操作记录
 root.methods.postPersonalrHistory = function () {
   let params = {
     followId: this.userId,

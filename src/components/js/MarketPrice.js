@@ -569,7 +569,7 @@ root.methods.getCollectionMarket = function () {
     // console.log(data)
     typeof data === 'string' && (data = JSON.parse(data))
     let collectionMarkets = data.dataMap && data.dataMap.symbols
-    console.log(collectionMarkets)
+    // console.log(collectionMarkets)
     this.collectionMarket = []
     collectionMarkets.forEach(v => {
       this.collectionMarket.push(v.symbol)

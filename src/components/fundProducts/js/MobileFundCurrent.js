@@ -34,7 +34,7 @@ root.created = function () {
       }
     }))
   }
-  console.info('item=================',JSON.parse(this.$route.query.item))
+  // console.info('item=================',JSON.parse(this.$route.query.item))
   this.getTkfTickets()
 }
 root.mounted = function () {}
