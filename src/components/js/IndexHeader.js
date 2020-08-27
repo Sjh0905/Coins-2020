@@ -915,6 +915,11 @@ root.methods.goToFrenchCurrecy = function (){
   window.location.replace(process.env.DOMAIN+'index/Order/OrderConduct')
 }
 
+// 跳转合约订单
+root.methods.goToContractCurrecy = function (){
+  // window.location.replace(process.env.DOMAIN+'index/Order/OrderConduct')
+}
+
 // 跳转法币交易
 root.methods.goToFranchExchange = function (){
   // console.info(process.env.DOMAIN)
@@ -924,5 +929,13 @@ root.methods.goToFranchExchange = function (){
   }
   window.location.replace(process.env.DOMAIN+'index/Transaction/TransactionBuy')
 }
-
+// 跳转法币交易
+root.methods.goToContractTransaction = function (){
+  // console.info("process.env.CONTRACT_URL",process.env.CONTRACT_URL)
+  if(!this.isLogin){
+    this.$router.push('/index/sign/login')
+    return;
+  }
+  // window.location.replace(process.env.CONTRACT_URL)
+}
 export default root

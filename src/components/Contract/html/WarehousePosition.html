@@ -12,31 +12,22 @@
       <div class="currency">{{$t('数量')}}</div>
       <!--开仓价格-->
       <div class="total">
-        <span class="totaler">
-          <div class="total-span">{{$t('开仓价格')}}</div>
-          <div class="detail-header-box">
-            你的持仓的平均买入/卖出成交价格。
-          </div>
-        </span>
-
+        <div class="total-span" @mouseenter="openOpeningPrice()" @mouseleave="closeOpeningPrice()">{{$t('开仓价格')}}</div>
+        <div class="detail-header-box">你的持仓的平均买入/卖出成交价格。</div>
       </div>
       <!--标记价格-->
       <div class="lock-house-time">
-        <span class="lock-house-timeer">
-          <div class="lock-house-time-span">{{$t('标记价格')}}</div>
-          <div class="lock-house-time-box">
-            该合约的实时标记价格。此标记价格将用于计算盈亏及保证金，可能与合约最新成交价格有所偏差，以避免价格操纵。
-          </div>
-        </span>
+        <div class="lock-house-time-span" @mouseenter="openMarkedPrice()" @mouseleave="closeMarkedPrice()">{{$t('标记价格')}}</div>
+        <div class="lock-house-time-box">
+          该合约的实时标记价格。此标记价格将用于计算盈亏及保证金，可能与合约最新成交价格有所偏差，以避免价格操纵。
+        </div>
       </div>
       <!--未实现盈亏(回报率)-->
       <div class="income-yesterday">
-        <span class="income-yesterdayer">
-          <div class="income-yesterday-span">{{$t('未实现盈亏 (回报率)')}}</div>
-          <div class="income-yesterday-box">
-            "采用标记价格计算得出的未实现盈亏，以及回报率。
-          </div>
-        </span>
+        <div class="income-yesterday-span" @mouseenter="openRateOfReturn()" @mouseleave="closeRateOfReturn()">{{$t('未实现盈亏 (回报率)')}}</div>
+        <div class="income-yesterday-box">
+          "采用标记价格计算得出的未实现盈亏，以及回报率。
+        </div>
       </div>
       <!-- 操作-->
       <div class="operation">{{$t('操作')}}</div>
@@ -53,23 +44,23 @@
           <div class="li-container flex">
             <!--合约-->
             <div class="order-number">
-              <div class="order-number-box">{{item.id}}</div>
+              <div class="order-number-box" :class="item.positionAmt > 0 ? 'order-number-box' : 'order-number-box-fu'">{{item.symbol}}</div>
             </div>
             <!--数量-->
             <div class="currency">
-              <div class="currency-box">{{item.currency}}</div>
+              <div class="" :class="item.positionAmt > 0 ? 'currency-box' : 'currency-box-fu'">{{item.positionAmt}}</div>
             </div>
             <!--开仓价格-->
-            <div class="total">{{toFixed(item.amount,8)}}</div>
+            <div class="total">{{toFixed(item.entryPrice,8)}}</div>
             <!--标记价格 -->
-            <div class="lock-house-time">{{item.updatedAt}}</div>
+            <div class="lock-house-time">{{item.markPrice}}</div>
             <!--未实现盈亏(回报率)-->
             <div class="lock-house-time">
-              <div class="currency-box-fu">{{item.updatedAt}} (-0.5%)</div>
+              <div class="" :class="item.unrealizedProfit > 0 ? 'currency-box' : 'currency-box-fu'">{{item.unrealizedProfit}} (-0.5%)</div>
             </div>
             <!-- 操作-->
             <div class="operation">
-              <button class="pointer" @click="unLockHouse(item)">{{$t('去交易')}}</button>
+              <button class="pointer" @click="goToContractTransaction(item)">{{$t('去交易')}}</button>
             </div>
           </div>
         </li>

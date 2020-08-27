@@ -49,6 +49,13 @@
   padding-left: 8px;
 }
 
+.order-number-box-fu {
+  height: 30px;
+  line-height: 30px;
+  border-left: 2px solid #EF5656;
+  padding-left: 8px;
+}
+
 .currency-box {
   color: #08D0AC;
 }
@@ -309,9 +316,6 @@
   opacity: 0.8;
   border-bottom: 1px dashed #6B7DA2;
 }
-.totaler:hover .detail-header-box {
-  display: block;
-}
 
 
 .lock-house-time-span {
@@ -324,9 +328,7 @@
   opacity: 0.8;
   border-bottom: 1px dashed #6B7DA2;
 }
-.lock-house-timeer:hover .lock-house-time-box {
-  display: block;
-}
+
 .lock-house-time-box {
   position: absolute;
   right: 32%;
@@ -350,9 +352,7 @@
   opacity: 0.8;
   border-bottom: 1px dashed #6B7DA2;
 }
-.income-yesterdayer:hover .income-yesterday-box {
-  display: block;
-}
+
 .income-yesterday-box {
   position: absolute;
   right: 14%;

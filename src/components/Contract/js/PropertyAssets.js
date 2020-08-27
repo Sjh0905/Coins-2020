@@ -25,8 +25,6 @@ root.data = function () {
     // 内部划转变量
     popWindowOpen1:false,
     assetAccountType:'wallet',//当前账户类型,默认显示币币账户
-    // bibiAccount:'币币账户',
-    // account:'我的钱包',
     itemInfo:{
       currency:''
     },
@@ -48,32 +46,72 @@ root.data = function () {
     popupPromptOpen: false,
     popupPromptType: 0,
     popupPromptText: '',
+    balance:[],
+    accounts:[],
+    hideZeroAsset: false, //隐藏零资产币种
+
+    otcCurrencyList:[]
+
 
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
-
+  this.bianBalance()
+  this.getCurrency()
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
+root.watch = {}
 
+// 监听vuex中的变化
+root.watch.currencyChange = function (newVal, oldVal) {
+
+  let otcAccounts = [];
+  this.otcCurrencyList.map(v=>{
+    let item = this.$store.state.currency.get(v.currency);
+    otcAccounts.push(item)
+  })
+  this.accounts = otcAccounts
+  // console.log('this.accounts zpy============== ',this.accounts)
+}
 
 
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
 
-root.computed.computedRecord = function () {
-  return this.records = [
-    {
-      id:'12',
-      currency:'232323',
-      amount:'99999',
-      updatedAt:'990090'
-    }
-  ]
+// 账户可用
+root.computed.available = function () {
+  let available = 0
+  for (let i = 0; i < this.accounts.length; i++) {
+    available = this.accAdd(available, this.accounts[i].available)
+    // console.info(this.accounts[i].rate)
+  }
+  return this.toFixed(available)
 }
 
+root.computed.currencyChange = function () {
+  return this.$store.state.currencyChange
+}
+root.computed.computedRecord = function () {
+  return this.records
+}
+// 计算后的accounts，排序、筛选之类的放在这里！
+root.computed.accountsComputed = function () {
+  // // 特殊处理
+  if (this.hideZeroAsset) {
+    return this.accounts.filter((val,inx) => {
+      val.currencyKey = val.currency+'-'+inx;
+      return val.total !== 0
+    })
+  }
+  this.accounts.map((val,inx) => {
+    val.currencyKey = val.currency+'-'+inx;
+  })
+
+
+  return this.accounts
+}
 // 是否绑定手机
 root.computed.bindMobile = function () {
   return this.$store.state.authState.sms
@@ -91,35 +129,33 @@ root.computed.bindIdentify = function () {
   return this.$store.state.authState.identity
 }
 /*------------------------------ 观察 -------------------------------*/
-// 监听
-root.watch = {}
-// 监听vuex中的变化
-// root.watch.currencyChange = function (newVal, oldVal) {
-//
-//   // let accounts = [...this.$store.state.currency.values()];
-//   let otcAccounts = [];
-//   this.otcCurrencyList.map(v=>{
-//     let item = this.$store.state.currency.get(v.currency);
-//     otcAccounts.push(item)
-//   })
-//   this.accounts = otcAccounts
-//   console.log('this.accounts zpy============== ',this.accounts)
-// }
-root.watch.loading = function (newVal, oldVal) {
-  if (oldVal && !newVal) {
-    if (this.$route.query.symbol) {
-      let currencyArr = [...this.$store.state.currency.values()]
-      for (let i = 0; i < currencyArr.length; i++) {
-        if (this.$route.query.symbol === currencyArr[i].currency) {
-          this.openRecharge(i)
-          return
-        }
-      }
-    }
-  }
-}
+
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+/*---------------------- 账户余额 begin ---------------------*/
+root.methods.closeAccountBalance= function () {
+  $(".currencyer-header-box").attr("style","display:none");
+}
+root.methods.openAccountBalance = function () {
+  $(".currencyer-header-box").attr("style","display:block");
+}
+/*---------------------- 账户余额 end ---------------------*/
+/*---------------------- 未实现盈亏 begin ---------------------*/
+root.methods.closeUnrealizedLooses= function () {
+  $(".detail-header-box").attr("style","display:none");
+}
+root.methods.openUnrealizedLooses = function () {
+  $(".detail-header-box").attr("style","display:block");
+}
+/*---------------------- 未实现盈亏 end ---------------------*/
+/*---------------------- 未实现盈亏 begin ---------------------*/
+root.methods.closeAvailableOrderBalance= function () {
+  $(".lock-house-time-box").attr("style","display:none");
+}
+root.methods.openAvailableOrderBalance = function () {
+  $(".lock-house-time-box").attr("style","display:block");
+}
+/*---------------------- 未实现盈亏 end ---------------------*/
 
 // 划转弹窗关闭
 root.methods.popWindowClose1 = function () {
@@ -141,6 +177,10 @@ root.methods.unLockHouse = function (item) {
 root.methods.closePopupPrompt = function () {
   this.popupPromptOpen = false
 }
+//切换我的钱包和币币账户
+root.methods.changeAssetAccountType = function () {
+  this.assetAccountType = this.assetAccountType == 'wallet' ? 'currency':'wallet'
+}
 // 点击全提
 root.methods.allMention = function () {
   if( this.assetAccountType == 'wallet'){
@@ -150,31 +190,37 @@ root.methods.allMention = function () {
   this.amountInput = this.transferCurrencyAvailable
 }
 
+
+// 获取币种
+root.methods.getCurrency = async function () {
+  this.$http.send('GET_OTC_CURRENCY', {
+    bind: this,
+    callBack: this.re_getCurrency,
+    errorHandler: this.error_getCurrency,
+  })
+}
+// 获取币种的状态
+root.methods.re_getCurrency = function (data) {
+  typeof (data) === 'string' && (data = JSON.parse(data))
+  if (!data) {
+    return
+  }
+  // console.info('data====',data)
+  this.otcCurrencyList = data;
+  // this.$store.commit('CHANGE_CURRENCY', data)
+  this.getAccounts()
+}
+// 获取币种失败
+root.methods.error_getCurrency = function (err) {
+}
+
 root.methods.changeTransferCurrency = function (currency){
-  console.log('changeTransferCurrency==============',currency)
+  // console.log('changeTransferCurrency==============',currency)
   // this.itemInfo = val
   this.transferCurrencyAvailable = this.transferCurrencyObj[currency].available || 0;
 }
 
-// 计算后的accounts，排序、筛选之类的放在这里！
-// root.computed.accountsComputed = function () {
-//   // 特殊处理
-//   if (this.hideZeroAsset) {
-//     return this.accounts.filter((val,inx) => {
-//       val.currencyKey = val.currency+'-'+inx;
-//
-//       // this.transferCurrencyObj[val.currency] = val;
-//       return val.total !== 0
-//     })
-//   }
-//
-//   this.accounts.map((val,inx) => {
-//     val.currencyKey = val.currency+'-'+inx;
-//   })
-//   return this.accounts
-// }
-
-root.methods.openTransfer = function (index, item) {
+root.methods.openTransfer = function (balance) {
 
   // 如果没有实名认证不允许打开划转
   // if (!this.bindIdentify) {
@@ -209,108 +255,160 @@ root.methods.openTransfer = function (index, item) {
   this.popWindowOpen1 = true
 
   // 法币可用余额
-  // this.transferCurrencyOTCAvailable = item.otcAvailable
-  // // 我的钱包可用余额
+  this.transferCurrencyOTCAvailable = balance.availableBalance
+  // 我的钱包可用余额
   // this.transferCurrencyAvailable = item.available
   // this.itemInfo = item
-  // this.currencyValue = this.itemInfo.currency
-  // // 再次打开清空输入框
-  // this.amountInput = ''
-  // this.transferAmountWA = ''
+  this.currencyValue = balance.asset
+  // 再次打开清空输入框
+  this.amountInput = ''
+  this.transferAmountWA = ''
 
 }
 
-// root.methods.re_unLockHouse = function ( data ) {
-//   typeof (data) === 'string' && (data = JSON.parse(data))
-//   this.popOpen = true
-//   if(data.errorCode){
-//     if(data.errorCode == 1 ) {
-//       this.popType = 0
-//       this.popText = this.$t('unLockTips')
-//       return
-//     }
-//     if(data.errorCode == 2 ) {
-//       this.popType = 0
-//       this.popText = this.$t('unLockTips_1')
-//       return
-//     }
-//     if(data.errorCode == 3 ) {
-//       this.popType = 0
-//       this.popText = this.$t('unLockTips_2')
-//       return
-//     }
-//     if(data.errorCode == 4 ) {
-//       this.popType = 0
-//       this.popText = this.$t('unLockTips_3')
-//       return
-//     }
-//     if(data.errorCode == 5 ) {
-//       this.popType = 0
-//       this.popText = this.$t('unLockTips_4')
-//       return
-//     }
-//
-//     this.popType = 0
-//     this.popText = this.$t('unLockTips_3')
-//     return
-//   }
-//   if(data.result == 'SUCCESS') {
-//     this.popType = 1
-//     this.popText = this.$t('lockSuccess')
-//     this.$eventBus.notify({key: 'UN_LOCK'})
-//     this.getLockCur()
-//     return
-//   }
-//
-//   // console.log(data)
-// }
-// root.methods.error_unLockHouse = function ( err ) {
-//   console.log(err)
-// }
 
-// 获取锁仓记录
-root.methods.getLockCur = function () {
-  // if (currency) {
-  //
-  // }
-  this.$http.send("", {
+// 资产
+root.methods.bianBalance = function (item) {
+  this.$http.send("GET_BALAN_ACCOUNT", {
     bind: this,
     query: {
-
-      // currency: '',
-      // limit: this.limit
+      timestamp: this.serverTime
     },
-    callBack: this.re_getLockCur,
-    errorHandler: this.error_getLockCur
+    callBack: this.re_bianBalance,
+    errorHandler: this.error_bianBalance
   })
 }
-// 获取记录返回，类型为{}
-root.methods.re_getLockCur = function (data) {
-  typeof data === 'string' && (data = JSON.parse(data))
-  if (!data) return
-  console.log('获取记录', data)
-  this.records = data
 
-  if (this.records.length < this.limit) {
-    this.loadingMoreShow = false
+root.methods.re_bianBalance = function ( data ) {
+  typeof (data) === 'string' && (data = JSON.parse(data))
+  this.balance = data.data.assets[0]
+}
+root.methods.error_bianBalance = function ( err ) {
+  // console.log(err)
+}
+
+// 判断划转数量
+root.methods.testTransferAmount  = function () {
+  if (this.$globalFunc.testSpecial(this.amountInput)) {
+    this.transferAmountWA = this.$t('请输入数字')
+    return false
   }
-  this.loadingMoreShowing = false
-  // this.loading = false
-}
-// 获取记录出错
-root.methods.error_getLockCur = function (err) {
-  console.warn("充值获取记录出错！", err)
+
+  if(this.assetAccountType == ' currency'){
+    if (Number(this.amountInput) > Number(this.transferCurrencyAvailable)) {
+      this.transferAmountWA = this.$t('超出划转可用余额')
+      return false
+    }
+    return true
+  }
+  if(this.assetAccountType == 'wallet'){
+    if (Number(this.amountInput) > Number(this.transferCurrencyOTCAvailable)) {
+      this.transferAmountWA = this.$t('超出划转可用余额')
+      return false
+    }
+    return true
+  }
+
+  if (Number(this.amountInput) <= 0) {
+    this.amountInput = 0
+    this.transferAmountWA = this.$t('低于划转最小额')
+    return false
+  }
+  return true
 }
 
-root.methods.loadingMore = function () {
-  this.limit += this.limitNum
-  this.loadingMoreShowing = true
-  this.getLockCur()
+// 可以提交
+root.methods.canCommit = function () {
+  let canSend = true
+  canSend = this.testTransferAmount() && canSend
+  if (this.currencyValue === '') {
+    this.transferCurrencyWA = this.$t('请输入币种信息')
+    return canSend = false
+  }
+  if (this.amountInput === '') {
+    this.transferAmountWA = this.$t('请输入划转数量')
+    return canSend = false
+  }
+  return canSend
 }
+// 划转提交
+root.methods.transferCommit = function () {
+
+  if (this.sending) return
+  if (!this.canCommit()) {
+    return
+  }
+
+  this.sending = true
+  this.$http.send('GET_BALAN_FUTURE', {
+    bind: this,
+    params: {
+      currency: this.currencyValue,
+      amount: this.amountInput,
+      transferFrom: this.assetAccountType == 'wallet' ? 'CONTRACTS':'WALLET',
+      transferTo: this.assetAccountType != 'wallet' ? 'CONTRACTS':'WALLET'
+    },
+    callBack: this.re_transferCommit,
+    errorHandler: this.error_transferCommit
+  })
+}
+// 划转回调
+root.methods.re_transferCommit = function (data){
+  // console.log('发送成功====================')
+  this.sending = false
+  typeof data === 'string' && (data = JSON.parse(data))
+  // console.log(data.errorCode)
+
+  this.popupPromptOpen = true
+  this.popupPromptType = 0
+
+  if( data.errorCode ){
+    data.errorCode == 1 &&  (this.popupPromptText = '用户未登录')
+    data.errorCode == 2 &&  (this.popupPromptText = '数量错误')
+    data.errorCode == 3 &&  (this.popupPromptText = '系统账户不存在')
+    data.errorCode == 4 &&  (this.popupPromptText = '余额不足')
+  }
+  if(data.errorCode == 0) {
+    this.popupPromptText = '划转成功'
+    this.popupPromptType = 1
+    setTimeout(() => {
+      this.popupPromptOpen = true
+    }, 1000)
+  }
+  this.popWindowOpen1 = false
+}
+//划转错误回调
+root.methods.error_transferCommit = function (err){
+  console.log(err)
+  this.sending = false
+}
+
 
 
 root.methods.popClose = function () {
   this.popOpen = false
+}
+
+// //获取账户信息
+root.methods.getAccounts = function () {
+  // 请求各项估值
+  this.$http.send('RECHARGE_AND_WITHDRAWALS_RECORD', {
+    bind: this,
+    callBack: this.re_getAccount,
+    errorHandler: this.error_getAccount
+  })
+}
+// 获取账户信息回调
+root.methods.re_getAccount = function (data) {
+  typeof (data) === 'string' && (data = JSON.parse(data))
+  if (!data || !data.accounts) {
+    return
+  }
+  this.$store.commit('CHANGE_ACCOUNT', data.accounts)
+}
+// 获取账户信息失败
+root.methods.error_getAccount = function (err) {
+  // console.warn("获取账户内容失败", err)
 }
 
 /*---------------------- 保留小数 begin ---------------------*/
@@ -319,5 +417,18 @@ root.methods.toFixed = function (num, acc = 8) {
 }
 /*---------------------- 保留小数 end ---------------------*/
 
+/*---------------------- 乘法运算 begin ---------------------*/
+root.methods.accMul = function (num1, num2) {
+  return this.$globalFunc.accMul(num1, num2)
+}
+/*---------------------- 乘法运算 end ---------------------*/
 
+
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  num1 = parseFloat(num1)
+  num2 = parseFloat(num2)
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
 export default root
