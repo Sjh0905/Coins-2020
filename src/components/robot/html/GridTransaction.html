@@ -24,18 +24,18 @@
         </div>
         <div class="grid-margin-left">
           <div class="grid-profit grid-profit-14">网格利润 <span class="grid-font-size">USDT</span></div>
-          <div class="grid-profit-num grid-profit">58</div>
-          <div class="grid-profit-num grid-profit">0.86%</div>
+          <div class="grid-profit" :class="'grid-profit-num'">58</div>
+          <div class="grid-profit" :class="'grid-profit-num'">0.86%</div>
         </div>
         <div class="grid-margin-left">
           <div class="grid-profit grid-profit-14">浮动盈亏 <span class="grid-font-size">USDT</span></div>
-          <div class="grid-profit-num grid-profit">58</div>
-          <div class="grid-profit-num grid-profit">0.86%</div>
+          <div class="grid-profit" :class="'grid-profit-num'">58</div>
+          <div class="grid-profit" :class="'grid-profit-num'">0.86%</div>
         </div>
         <div class="grid-margin-left ">
           <div class="grid-profit grid-profit-14">网格年化/总年化</div>
-          <div class="grid-profit-num grid-profit">58</div>
-          <div class="grid-profit-num grid-profit">0.86%</div>
+          <div class="grid-profit" :class="'decline-in-profits-class'">58</div>
+          <div class="grid-profit" :class="'decline-in-profits-class'">0.86%</div>
         </div>
         <div class="grid-margin-left ">
           <div class="grid-profit grid-profit-14">当前价</div>
@@ -72,6 +72,112 @@
             <div class="buy text-al margin-right">卖1</div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="grid-pending-del margin-del" v-if="detailsType == 2">
+      <div class="flex margin-top-25">
+        <div class="buy">
+          <div>走势判断</div>
+          <div>BTC震荡后上涨</div>
+        </div>
+        <div class="buy">
+          <div>投什么赚什么</div>
+          <div>USDT</div>
+        </div>
+        <div class="flex-2">
+          <div>最高价</div>
+          <div>12321</div>
+        </div>
+      </div>
+      <div class="flex margin-top-36">
+        <div class="buy">
+          <div>最低价</div>
+          <div>1233</div>
+        </div>
+        <div class="buy">
+          <div>网格数量</div>
+          <div>31</div>
+        </div>
+        <div class="buy">
+          <div>每格买卖数量</div>
+          <div>0.00001</div>
+        </div>
+        <div class="buy">
+          <div>开单时价格</div>
+          <div>12219.18</div>
+        </div>
+      </div>
+      <div class="flex margin-top-36">
+        <div class="buy">
+          <div>每格利润</div>
+          <div>0.37% - 0.45%</div>
+        </div>
+        <div class="buy">
+          <div>止损价格</div>
+          <div>12650</div>
+        </div>
+        <div class="buy">
+          <div>自动止盈</div>
+          <div>12650</div>
+        </div>
+        <div class="buy">
+          <div>触发价格</div>
+          <div>12219.18</div>
+        </div>
+      </div>
+    </div>
+    <div class="grid-pending-del margin-del" v-if="detailsType == 3">
+      <div class="flex top-color">
+        <div class="buy">套利次数</div>
+        <div class="buy">利润</div>
+        <div class="buy">下单时间</div>
+        <div class="buy">操作 (USDT)</div>
+        <div class="flex-15">价格 (USDT)</div>
+        <div class="buy">成交额</div>
+        <div class="flex-07 text-al">手续费</div>
+      </div>
+
+      <div class="flex border-color">
+        <div class="buy line-height-48">#24</div>
+        <div class="buy line-height-48" :class="'rising-profits'">+ 0.004828 USDT</div>
+        <div class="buy">
+          <div>08/20 12:03</div>
+          <div>08/20 12:03</div>
+        </div>
+        <div class="buy">
+          <div :class="'decline-in-profits'">限价卖出</div>
+          <div :class="'rising-profits'">限价买入</div>
+        </div>
+        <div class="flex-15">
+          <div>您买的BTC 将在价格上涨时卖出</div>
+          <div>11690</div>
+        </div>
+        <div class="buy">
+          <div>11690</div>
+          <div>11690</div>
+        </div>
+        <div class="flex-07 line-height-48 text-al">0.00000005</div>
+      </div>
+      <div class="flex border-color">
+        <div class="buy line-height-48">--</div>
+        <div class="buy line-height-48">等待卖出</div>
+        <div class="buy">
+          <div>-</div>
+          <div>08/20 12:03</div>
+        </div>
+        <div class="buy">
+          <div>待卖出</div>
+          <div :class="'rising-profits'">限价买入</div>
+        </div>
+        <div class="flex-15">
+          <div>您买的BTC 将在价格上涨时卖出</div>
+          <div>11690</div>
+        </div>
+        <div class="buy">
+          <div>-</div>
+          <div>11690</div>
+        </div>
+        <div class="flex-07 line-height-48 text-al">0.00000005</div>
       </div>
     </div>
   </div>

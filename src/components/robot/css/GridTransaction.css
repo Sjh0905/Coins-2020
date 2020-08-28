@@ -233,3 +233,62 @@
 .margin-right {
   margin-right: 10px;
 }
+.margin-del {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #0D0E23;
+}
+
+.flex-2 {
+  flex: 2;
+}
+.flex-07 {
+  flex: 0.7;
+}
+.margin-top-36 {
+  margin-top: 36px;
+}
+
+.margin-top-25 {
+  margin-top: 25px;
+}
+.top-color {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B7DA2;
+}
+.border-color {
+  height: 60px;
+  border-bottom: 1px solid #EFF0FF;
+  padding-top: 12px;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #0D0E23;
+}
+.line-height-48 {
+  line-height: 40px;
+}
+.flex-15 {
+  flex: 1.5;
+}
+.rising-profits {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #EF5656;
+}
+.decline-in-profits {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #08D0AC;
+}
+.decline-in-profits-class {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #39B496;
+}
