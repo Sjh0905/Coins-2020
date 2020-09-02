@@ -261,5 +261,20 @@ root.methods.closePop = function () {
 root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)
 }
+/*---------------------- 除法运算 begin ---------------------*/
+root.methods.accDiv = function (num1, num2) {
+  return this.$globalFunc.accDiv(num1, num2)
+}
+/*---------------------- 除法运算 end ---------------------*/
+/*---------------------- 乘法运算 begin ---------------------*/
+root.methods.accMul = function (num1, num2) {
+  return this.$globalFunc.accMul(num1, num2)
+}
+/*---------------------- 乘法运算 end ---------------------*/
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
 
 export default root

@@ -55,7 +55,8 @@
         </div>
         <div class="follow-btn-box">
           <!--天-->
-          <div class="follow-gde">{{item.fee}} USDT/ {{days}}{{$t('days')}}</div>
+          <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} USDT/ {{days}}{{$t('days')}}</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE'">每笔收益收取 {{accAdd(accMul(item.fee,100),20)}}%</div>
           <!--跟单-->
           <div class="follow-fff" v-if="godList.indexOf(item.userId) < 0">{{$t('documentary')}}</div>
           <!--已跟随-->

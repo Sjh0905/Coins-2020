@@ -32,6 +32,7 @@ root.data = function () {
 
     // 信息弹框
     popWindowOpen:false,
+    fixedAmPr:1,  //默认固定金额
 
   }
 }
@@ -73,10 +74,28 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//
+root.computed.fixedAmountPr1 = function () {
+  return this.currencyPairFee || 0
+}
+root.computed.fixedAmountPr2 = function () {
+  return this.toFixed(this.accMul(Number(this.currencyPairFee), 0.8),2)
+}
+root.computed.fixedAmountPr3 = function () {
+  return this.accMinus(80,Number(this.currencyPairFee))
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+//固定比例-金额选择
+root.methods.fixedAmountPr = function (type) {
+  this.currencyPair = ''
+  this.currencyPairFee=''
+  this.fixedAmPr = type
+}
+
 // 跟单保证金
 root.methods.postGodFee = function () {
   this.$http.send('POST_GOD_FEE', {
@@ -128,8 +147,13 @@ root.methods.postRevisionFee = function () {
     this.openPop(this.$t('modificationFeeCannotBeBlank'))
     return
   }
+  if (this.currencyPairFee > '60') {
+    this.openPop(this.$t('分成比例超过了最大比例'))
+    return
+  }
   let params = {
-    fee: this.currencyPairFee,
+    feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
+    fee: this.accDiv(this.currencyPairFee,100),
   }
   this.$http.send('POST_REVISION_FEE', {
     bind: this,
@@ -147,11 +171,18 @@ root.methods.re_postRevisionFee = function (data) {
     this.popWindowClose()
     this.postManage()
   }
+  if(data.errorCode == 2) {
+    this.openMaskWindow = false
+    this.isTapeList = true
+    this.openPop(this.$t('分成比例超过了最大比例'))
+    return
+  }
   if(data.errorCode != 0) {
     this.openMaskWindow = false
     this.isTapeList = true
     this.openPop(this.$t('systemError'))
   }
+
 }
 root.methods.error_postRevisionFee = function (err) {
   console.log("this.err=====",err)
@@ -201,4 +232,27 @@ root.methods.closePop = function () {
 root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)
 }
+
+/*---------------------- 乘法运算 begin ---------------------*/
+root.methods.accMul = function (num1, num2) {
+  return this.$globalFunc.accMul(num1, num2)
+}
+/*---------------------- 乘法运算 end ---------------------*/
+/*---------------------- 减法运算 begin ---------------------*/
+root.methods.accMinus = function (num1, num2) {
+  return this.$globalFunc.accMinus(num1, num2)
+}
+/*---------------------- 减法运算 end ---------------------*/
+/*---------------------- 除法运算 begin ---------------------*/
+root.methods.accDiv = function (num1, num2) {
+  return this.$globalFunc.accDiv(num1, num2)
+}
+/*---------------------- 除法运算 end ---------------------*/
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
+
+
 export default root

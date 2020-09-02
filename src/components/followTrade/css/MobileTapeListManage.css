@@ -274,8 +274,9 @@
   height:0.48rem;
   border-radius:0.03rem;
   border:1px solid #D0D4E9;
-  margin-right: 0.18rem;
+  /*margin-right: 0.18rem;*/
   padding-left: 0.2rem;
+  text-align: right;
   box-sizing: border-box;
 }
 .mobile-open-tape-pop-window-content-text {
@@ -324,6 +325,30 @@
   color:#3576F5;
 }
 
+.fixed-amount {
+  flex: 1;
+  height: 0.64rem;
+  line-height: 0.64rem;
+  text-align: center;
+  color: #0D0E23;
+  font-size: 0.28rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  background: #FFFFFF;
+  border-radius: 0.04rem;
+  border: 1px solid #E0E1F4;
+}
+.fixed-am {
+  margin-left: 0.2rem;
+}
+.fixed-proportion {
+  background: rgba(53, 118, 245, 0.1);
+  border-radius: 0.04rem;
+  border: 1px solid #3576F5;
+}
+.choose {
+  padding-top: 0.3rem;
+}
 /*------------ 蒙层部分  end -------------*/
 
 

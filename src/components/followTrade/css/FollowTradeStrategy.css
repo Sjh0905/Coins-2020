@@ -275,7 +275,8 @@
   font-family:PingFangSC-Medium,PingFang SC;
   font-weight:500;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
 .follow-order-data {
   font-family:PingFangSC-Semibold,PingFang SC;
@@ -329,9 +330,10 @@
   height:24px;
   border-radius:2px;
   border:1px solid #D0D4E9;
-  margin-right: 10px;
+  /*margin-right: 10px;*/
   padding-left: 10px;
   box-sizing: border-box;
+  text-align: right;
 }
 .mobile-open-tape-pop-window-content-text {
   width: 100%;
@@ -351,4 +353,29 @@
 }
 .text-red {
   color: #EF5656;
+}
+
+.choose {
+
+}
+.fixed-am {
+  margin-left: 10px;
+}
+.fixed-amount {
+  flex: 1;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #0D0E23;
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  background: #FFFFFF;
+  border-radius: 2px;
+  border: 1px solid #E0E1F4;
+}
+.fixed-proportion {
+  background: rgba(53, 118, 245, 0.1);
+  border-radius: 2px;
+  border: 1px solid #3576F5;
 }
