@@ -114,7 +114,8 @@
     <div class="mobile-trade-open-exchange" >
       <div class="mobile-trade-open-exchange-text flex">
         <div class="mobile-trade-fee">费用</div>
-        <div class="mobile-trade-order-fee text-blue">{{$route.query.fee || '0'}} USDT / {{$route.query.days  || '0'}}天</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT / {{$route.query.days  || '0'}}天</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE'">每笔收益收取 {{accAdd(accMul($route.query.fee,100),20) || '0'}}%</div>
       </div>
       <div class="mobile-trade-open-exchange-button" @click="jumpToFollowDocumentary" v-if="$route.query.isFollow < 0">跟单</div>
       <div class="mobile-trade-open-exchange-button-isfollow" v-if="$route.query.isFollow >= 0">已跟随</div>
