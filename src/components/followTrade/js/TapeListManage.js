@@ -14,7 +14,7 @@ root.data = function () {
     isTapeList: false,
     currencyPair:'', //跟单费用
     currencyPairFee:'', //修改跟单费用
-
+    currencyPairFeeRATE:'',
 
     // 弹框
     popType: 0,
@@ -79,9 +79,12 @@ root.computed.fixedAmountPr1 = function () {
   return this.currencyPairFee || 0
 }
 root.computed.fixedAmountPr2 = function () {
-  return this.toFixed(this.accMul(Number(this.currencyPairFee), 0.8),2)
+  return this.toFixed(this.accMul(Number(this.currencyPair), 0.8),2)
 }
 root.computed.fixedAmountPr3 = function () {
+  return this.accMinus(80,Number(this.currencyPairFee))
+}
+root.computed.fixedAmountPr4 = function () {
   return this.accMinus(80,Number(this.currencyPairFee))
 }
 /*------------------------------ 观察 -------------------------------*/
@@ -114,8 +117,10 @@ root.methods.error_postGodFee = function (err) {
 }
 //修改跟单
 root.methods.goToModify = function (fee) {
-  this.currencyPairFee = fee
+  this.currencyPair = fee
+  this.currencyPairFee = this.accMul(fee,100)
   this.popWindowOpen = true
+  this.fixedAmPr = this.godInfo.feeType == 'LOT' ? 1 : 2
 }
 // 关闭修改策略弹框
 root.methods.popWindowClose= function () {
@@ -143,7 +148,11 @@ root.methods.testCurrencyPair = function () {
 
 //修改大神
 root.methods.postRevisionFee = function () {
-  if (this.currencyPairFee == '') {
+  if (this.fixedAmPr != 1 && this.currencyPairFee == '') {
+    this.openPop(this.$t('modificationFeeCannotBeBlank'))
+    return
+  }
+  if (this.fixedAmPr == 1 && this.currencyPair == '') {
     this.openPop(this.$t('modificationFeeCannotBeBlank'))
     return
   }
@@ -153,7 +162,7 @@ root.methods.postRevisionFee = function () {
   }
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
-    fee: this.accDiv(this.currencyPairFee,100),
+    fee:this.fixedAmPr == 1 ? this.currencyPair : this.accDiv(this.currencyPairFee,100),
   }
   this.$http.send('POST_REVISION_FEE', {
     bind: this,
