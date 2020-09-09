@@ -21,7 +21,7 @@
       <div class="mobile-open-tape-list-btn-top flex">
         <div class="mobile-open-tape-list-fee">带单费用：
           <span class="text_blue" v-if="godInfo.feeType == 'LOT'">{{godInfo.fee}} USDT / {{followDay}}天</span>
-          <span class="text_blue" v-if="godInfo.feeType == 'RATE'">每笔收益收取 {{accAdd(accMul(godInfo.fee,100),20)}}%</span>
+          <span class="text_blue" v-if="godInfo.feeType == 'RATE'">每笔收益收取 {{accAdd(godInfo.fee,20)}}%</span>
         </div>
         <div class="mobile-open-tape-list-operation" @click="RevisionFee">
           <img src="../assets/single_setting_icon.png" alt="">

@@ -209,7 +209,7 @@ root.methods.postRevisionFee = function () {
   }
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
-    fee: this.accDiv(this.currencyPairFee,100),
+    fee: this.currencyPairFee,
   }
   this.$http.send('POST_REVISION_FEE', {
     bind: this,

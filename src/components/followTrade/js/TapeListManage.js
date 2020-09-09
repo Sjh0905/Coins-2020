@@ -118,7 +118,7 @@ root.methods.error_postGodFee = function (err) {
 //修改跟单
 root.methods.goToModify = function (fee) {
   this.currencyPair = fee
-  this.currencyPairFee = this.accMul(fee,100)
+  this.currencyPairFee = fee
   this.popWindowOpen = true
   this.fixedAmPr = this.godInfo.feeType == 'LOT' ? 1 : 2
 }
@@ -162,7 +162,7 @@ root.methods.postRevisionFee = function () {
   }
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
-    fee:this.fixedAmPr == 1 ? this.currencyPair : this.accDiv(this.currencyPairFee,100),
+    fee:this.fixedAmPr == 1 ? this.currencyPair : this.currencyPairFee,
   }
   this.$http.send('POST_REVISION_FEE', {
     bind: this,

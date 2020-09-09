@@ -28,7 +28,7 @@
       <div class="flex">
         <div class="tape-flex-bule">{{$t('subscriptionFee')}}：</div>
         <div class="days" v-if="godInfo.feeType == 'LOT'">{{godInfo.fee}} USDT / {{followDay}}{{$t('days')}}</div>
-        <div class="days" v-if="godInfo.feeType == 'RATE'">每笔收益收取 {{accAdd(accMul(godInfo.fee,100),20)}}%</div>
+        <div class="days" v-if="godInfo.feeType == 'RATE'">每笔收益收取 {{accAdd(godInfo.fee,20)}}%</div>
 <!--        <div class="days">{{godInfo.fee}} USDT / {{followDay}}{{$t('days')}}</div>-->
       </div>
       <div class="modify" @click="goToModify(godInfo.fee)">{{$t('update')}}</div>
@@ -64,7 +64,7 @@
         <div class="application_header_div_right">{{$t('followSubscriptionRevenue')}}（USDT)</div>
       </li>
       <template>
-        <!-- 当前挖矿记录 -->
+        <!-- 当前记录 -->
         <template v-if="">
           <li class="flex application_li" v-for="(item,index) in userFollowFees" :key="index" v-if="userFollowFees.length != 0">
             <!--账号-->
