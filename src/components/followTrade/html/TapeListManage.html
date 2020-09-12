@@ -72,7 +72,7 @@
             <!--时间-->
             <div class="application_header_div">{{$globalFunc.formatDateUitl(Number(item.createdAt),'YYYY-MM-DD hh:mm:ss')}}</div>
             <!--跟单费用-->
-            <div class="application_header_div_right">{{item.fee || '0'}}</div>
+            <div class="application_header_div_right">{{toFixed(item.fee,2) || '0'}}</div>
           </li>
         </template>
 
