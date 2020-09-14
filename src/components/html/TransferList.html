@@ -46,7 +46,7 @@
             <!--币种 end-->
 
             <!--类型-->
-            <span class="type">{{item.transferFrom == 'OTC' ? '从法币到钱包':'从钱包到法币'}}</span>
+            <span class="type">{{status[item.transferTo]}}</span>
 
             <!--数量 begin-->
             <span class="total">{{toFixed(item.amount,8)}}</span>

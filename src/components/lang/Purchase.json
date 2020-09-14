@@ -1,0 +1,29 @@
+{
+  "CH": {
+    "issuingTime": "时间",
+    "cycle": "周期",
+    "Biweekly": "双周热度奖",
+    "Weekly": "单周热度奖",
+    "issued": "已发放",
+    "standard": "未达标",
+    "standard2": "月度交易返现",
+    "standard3": "月度矿源返现",
+    "standard4": "金额",
+    "standard5": "状态"
+  },
+  "EN": {},
+  "CA": {},
+  "CHT": {
+    "issuingTime": "時間",
+    "cycle": "週期",
+    "Biweekly": "雙周熱度獎",
+    "Weekly": "單周熱度獎",
+    "issued": "已發放",
+    "standard": "未達標",
+    "standard2": "月度交易返現",
+    "standard3": "月度礦源返現",
+    "standard4": "金額",
+    "standard5": "狀態"
+
+  }
+}

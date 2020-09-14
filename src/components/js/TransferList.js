@@ -23,7 +23,20 @@ root.data = function () {
 
     popType: 0,
     popText: '',
-    popOpen: false
+    popOpen: false,
+    // status:{
+    //   'OTC_WALLET': this.$t('otc_wallet'),
+    //   'WALLET_OTC': this.$t('wallet_otc'),
+    //   'BINANCE_WALLET': this.$t('binance_wallet'),
+    //   'WALLET_BINANCE': this.$t('wallet_binance'),
+    //   'SPOTS_WALLET': this.$t('spots_wallet'),
+    //   'WALLET_SPOTS': this.$t('wallet_spots'),
+    //   'MARGIN_WALLET': this.$t('margin_wallet'),
+    //   'WALLET_MARGIN': this.$t('wallet_margin'),
+    //   'CONTRACTS_WALLET' : this.$t('contracts_wallet'),
+    //   'WALLET_CONTRACTS': this.$t('wallet_contracts'),
+    //   'PURCHASE': this.$t('purchase'),
+    // },
   }
 }
 
@@ -32,6 +45,21 @@ root.computed = {}
 
 root.computed.computedTransferList = function () {
   return this.transferSpotList
+}
+root.computed.status = function () {
+  return {
+    'OTC_WALLET': this.$t('otc_wallet'),
+    'WALLET_OTC': this.$t('wallet_otc'),
+    'BINANCE_WALLET': this.$t('binance_wallet'),
+    'WALLET_BINANCE': this.$t('wallet_binance'),
+    'SPOTS_WALLET': this.$t('spots_wallet'),
+    'WALLET_SPOTS': this.$t('wallet_spots'),
+    'MARGIN_WALLET': this.$t('margin_wallet'),
+    'WALLET_MARGIN': this.$t('wallet_margin'),
+    'CONTRACTS_WALLET' : this.$t('contracts_wallet'),
+    'WALLET_CONTRACTS': this.$t('wallet_contracts'),
+    'PURCHASE': this.$t('purchase'),
+  }
 }
 
 
@@ -52,7 +80,8 @@ root.methods.getRecord = function (currency) {
   this.$http.send("GET_TRANSFER_SPOT_LIST", {
     bind: this,
     query: {
-      pageSize: this.limit
+      pageSize: this.limit,
+      status:0
     },
     callBack: this.re_getRecord,
     errorHandler: this.error_getRecord
@@ -61,10 +90,12 @@ root.methods.getRecord = function (currency) {
 
 // 获取记录返回，类型为{}
 root.methods.re_getRecord = function (data) {
+  this.loading = false
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) return
   console.log('获取记录', data)
   this.transferSpotList = data.dataMap.userTransferRecordList
+  // console.info('this.transferSpotList',this.transferSpotList)
 
   if (this.transferSpotList.length < this.limit) {
     this.loadingMoreShow = false
