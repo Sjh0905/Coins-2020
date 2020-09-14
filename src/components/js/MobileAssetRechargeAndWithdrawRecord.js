@@ -96,6 +96,22 @@ root.created = function () {
 
 root.computed = {}
 
+root.computed.status = function () {
+  return {
+    'OTC_WALLET': '法币到钱包',
+    'WALLET_OTC':'钱包到法币',
+    'BINANCE_WALLET': '现货到钱包',
+    'WALLET_BINANCE': '钱包到现货',
+    'SPOTS_WALLET':'现货到钱包',
+    'WALLET_SPOTS':'钱包到现货',
+    'MARGIN_WALLET': '杠杆到钱包',
+    'WALLET_MARGIN': '钱包到杠杆',
+    'CONTRACTS_WALLET' : '合约到钱包',
+    'WALLET_CONTRACTS': '钱包到合约',
+    'PURCHASE': '申购',
+  }
+}
+
 root.computed.computedRecord = function () {
   return this.records
 }
