@@ -131,7 +131,7 @@ root.methods.closeMaskWindow = function () {
 }
 root.methods.testCurrencyPair = function () {
   if(this.currencyPair == ''){
-    this.currencyPairText = '跟单费用不能为空'
+    this.currencyPairText = '不能为空'
     return
   }
 }
@@ -139,7 +139,7 @@ root.methods.testCurrencyPair = function () {
 //成为大神
 root.methods.postCommitFee = function () {
   if(this.currencyPair == ''){
-    this.openPop ('跟单费用不能为空')
+    this.openPop ('不能为空')
     return
   }
   // if(this.currencyPair == 0){
@@ -200,7 +200,7 @@ root.methods.error_postCommitFee = function (err) {
 //修改大神
 root.methods.postRevisionFee = function () {
   if (this.currencyPairFee == '') {
-    this.openPop('修改费用不可为空')
+    this.openPop('不可为空')
     return
   }
   if (this.currencyPairFee > '60') {
