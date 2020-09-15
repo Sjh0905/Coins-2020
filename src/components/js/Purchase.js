@@ -98,13 +98,13 @@ root.methods.re_getFundList = function (data) {
   if (data.errorCode) return
 
   this.fundListLists = data.dataMap.lists
-  console.info('阅读返现',this.fundListLists)
+  // console.info('阅读返现',this.fundListLists)
   // this.rewCycle = this.fundListLists.rewCycle.split('_')
-  this.fundListLists.map(v=>{
-    let rewCycleSplit = v.rewCycle.split('_');
-    this.rewSplit = rewCycleSplit[0]
-    this.rewTow = rewCycleSplit[1]
-  })
+  // this.fundListLists.map(v=>{
+  //   let rewCycleSplit = v.rewCycle.split('_');
+  //   this.rewSplit = rewCycleSplit[0]
+  //   this.rewTow = rewCycleSplit[1]
+  // })
   this.fundListLists.length < this.limit && (this.loadingMoreShow = false)
   this.fundListLists.length >= this.limit && (this.loadingMoreShow = true)
   this.loadingMoreShowing = false

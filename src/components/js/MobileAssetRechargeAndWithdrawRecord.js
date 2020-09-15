@@ -61,6 +61,8 @@ root.data = function () {
     ajaxInternalTransferFlag:false,
     //划转记录
     internalTransferLists:[],
+    //月度返现
+    monthlyCashBackLists:[],
     // 是否显示划转记录加载更多
     isShowGetMoreInternalTransfer: true,
 
@@ -96,18 +98,18 @@ root.created = function () {
 
 root.computed = {}
 
-root.computed.status = function () {
+root.computed.transferType = function () {
   return {
-    'OTC_WALLET': '法币到钱包',
-    'WALLET_OTC':'钱包到法币',
-    'BINANCE_WALLET': '现货到钱包',
-    'WALLET_BINANCE': '钱包到现货',
-    'SPOTS_WALLET':'现货到钱包',
-    'WALLET_SPOTS':'钱包到现货',
-    'MARGIN_WALLET': '杠杆到钱包',
-    'WALLET_MARGIN': '钱包到杠杆',
-    'CONTRACTS_WALLET' : '合约到钱包',
-    'WALLET_CONTRACTS': '钱包到合约',
+    'OTC_WALLET': '从法币到钱包',
+    'WALLET_OTC':'从钱包到法币',
+    'BINANCE_WALLET': '从现货到钱包',
+    'WALLET_BINANCE': '从钱包到现货',
+    'SPOTS_WALLET':'从现货到钱包',
+    'WALLET_SPOTS':'从钱包到现货',
+    'MARGIN_WALLET': '从杠杆到钱包',
+    'WALLET_MARGIN': '从钱包到杠杆',
+    'CONTRACTS_WALLET' : '从合约到钱包',
+    'WALLET_CONTRACTS': '从钱包到合约',
     'PURCHASE': '申购',
   }
 }
@@ -136,6 +138,11 @@ root.computed.computedCapitalTransfer = function () {
 root.computed.computedInternalTransfer = function () {
   return this.internalTransferLists
 }
+
+//月度奖励
+// root.computed.computedmMnthlyCashBack = function () {
+//   return this.monthlyCashBackLists
+// }
 
 // 获取userId
 root.computed.userId = function () {
@@ -172,6 +179,9 @@ root.methods.changeOpenTypeQuery = function () {
   }
   if(num == 8) {
     this.getHeatReward()
+  }
+  if(num == 9) {
+    this.monthlyCashBack()
   }
 
 }
@@ -231,6 +241,12 @@ root.methods.changeOpenType = function(num){
     this.$router.push({'path':'/index/mobileAsset/MobileAssetRechargeAndWithdrawRecord',query:{id:8}})
     this.$store.commit('changeMobileHeaderTitle', '');
     this.getHeatReward()
+  }
+
+  if(num === 9) {
+    this.$router.push({'path':'/index/mobileAsset/MobileAssetRechargeAndWithdrawRecord',query:{id:9}})
+    this.$store.commit('changeMobileHeaderTitle', '');
+    this.monthlyCashBack()
   }
 
 }
@@ -762,6 +778,11 @@ root.methods.tofundDetailsPath1 = function (item) {
   this.$store.commit('changeMobileRechargeRecordData',item)
   this.$router.push("/index/mobileAsset/mobileAssetInternalTransferRecordDetail/?openType=8")
 }
+// 点击跳进基金详情页
+root.methods.monthlyDetailsPath = function (item) {
+  this.$store.commit('changeMobileRechargeRecordData',item)
+  this.$router.push("/index/mobileAsset/mobileAssetInternalTransferRecordDetail/?openType=9")
+}
 // 获取周热度记录
 root.methods.getHeatReward = function (limit) {
   this.$http.send('GET_HEATREWARD', {
@@ -790,6 +811,43 @@ root.methods.re_getHeatReward = function (data) {
 root.methods.error_getHeatReward = function (err) {
   console.warn('获取平台奖励出错', err)
 }
+
+// 获取阅读返现记录
+root.methods.monthlyCashBack = function (limit) {
+  this.$http.send('GET_PURCHASE', {
+    bind: this,
+    callBack: this.re_monthlyCashBack,
+    errorHandler: this.error_monthlyCashBack,
+  })
+}
+// 获取周热度记录回调
+root.methods.re_monthlyCashBack = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  this.loading = false
+  this.firstLoad = true
+  this.loadingNext = false
+  // console.log('this is data', data.dataMap.lists)
+  if (data.errorCode) return
+
+  this.monthlyCashBackLists = data.dataMap.lists
+  console.info('阅读返现',this.monthlyCashBackLists)
+  // // this.rewCycle = this.fundListLists.rewCycle.split('_')
+  // this.fundListLists.map(v=>{
+  //   let rewCycleSplit = v.rewCycle.split('_');
+  //   this.rewSplit = rewCycleSplit[0]
+  //   this.rewTow = rewCycleSplit[1]
+  // })
+  // this.fundListLists.length < this.limit && (this.loadingMoreShow = false)
+  // this.fundListLists.length >= this.limit && (this.loadingMoreShow = true)
+  // this.loadingMoreShowing = false
+  this.loading = false
+  // this.page_size = data.dataMap.size   // 总页数
+}
+// 获取周热度记录出错
+root.methods.error_monthlyCashBack = function (err) {
+  console.warn('获取平台奖励出错', err)
+}
+
 
 // 关闭pop提示
 root.methods.popClose = function () {

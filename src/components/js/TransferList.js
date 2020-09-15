@@ -46,7 +46,7 @@ root.computed = {}
 root.computed.computedTransferList = function () {
   return this.transferSpotList
 }
-root.computed.status = function () {
+root.computed.transferType = function () {
   return {
     'OTC_WALLET': this.$t('otc_wallet'),
     'WALLET_OTC': this.$t('wallet_otc'),
