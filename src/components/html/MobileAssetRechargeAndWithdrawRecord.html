@@ -349,7 +349,7 @@
         </div>
 <!--        <div class="withdraw-item-state">{{item.weekOfMonth}}</div>-->
 <!--        <div class="withdraw-item-state">{{item.weekOfMonth}}</div>-->
-        <div class="withdraw-item-state">{{item.status == 'DONE'? '已发放' : '未达标'}}</div>
+        <div class="withdraw-item-state">{{item.rewType == 2 ? '双周热度奖' : '单周热度奖'}}</div>
       </div>
 
       <div v-if="ajaxWithdrawFlag" class="recharge-list-loading">
@@ -378,7 +378,7 @@
         </div>
 <!--        <div class="withdraw-item-state">{{item.weekOfMonth}}</div>-->
 <!--        <div class="withdraw-item-state">{{item.weekOfMonth}}</div>-->
-        <div class="withdraw-item-state">{{item.status == 'DONE'? '已发放' : '未达标'}}</div>
+        <div class="withdraw-item-state">{{item.rewType == '1' ? '月度交易返现' : '月度矿源返现'}}</div>
       </div>
 
 <!--      <div v-if="ajaxWithdrawFlag" class="recharge-list-loading">-->
