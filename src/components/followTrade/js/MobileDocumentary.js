@@ -137,7 +137,7 @@ root.watch = {}
 root.methods = {}
 root.methods.openDocumentaryWindow = function () {
   if ( this.followType == 'LOT' && this.fixedAmountLot == '') {
-    this.openPop('固定金额不可为空')
+    this.openPop('请输入金额')
     this.follow = true
     return
   }
@@ -222,7 +222,7 @@ root.methods.postDocumentaryImmediately = function () {
   this.follow = false
   let canSend = true
   if (this.followType == 'LOT' && this.fixedAmountLot == '') {
-    this.openPop('固定金额不可为空')
+    this.openPop('请输入金额')
     this.follow = true
     return
   }
