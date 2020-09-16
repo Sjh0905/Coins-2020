@@ -125,6 +125,11 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     this.openPop(this.$t('canNotFollowMyself'))
     return;
   }
+
+  if (data.errorCode == 4) {
+    this.openPop('canNotFollowMyself2')
+    return;
+  }
   if (data.errorCode == 10) {
     this.openPop(this.$t('followDetails'))
     return;

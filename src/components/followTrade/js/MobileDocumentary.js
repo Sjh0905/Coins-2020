@@ -253,6 +253,10 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     this.openPop('不能自己跟随自己哦')
     return;
   }
+  if (data.errorCode == 4) {
+    this.openPop('用户固定金额跟单余额不够')
+    return;
+  }
   if (data.errorCode == 10) {
     this.openPop('跟随失败')
     return;
