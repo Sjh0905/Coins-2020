@@ -196,6 +196,11 @@ root.methods.re_commitModify = function (data) {
   }
   if(data.errorCode == 1) {
     this.openPop('系统错误',0)
+    return
+  }
+  if(data.errorCode == 4) {
+    this.openPop('余额不足',0)
+    return
   }
 
 }

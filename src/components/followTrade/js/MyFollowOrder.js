@@ -193,6 +193,11 @@ root.methods.re_commitModify = function (data) {
   }
   if(data.errorCode == 1) {
     this.openPop(this.$t('systemError'),0)
+    return
+  }
+  if(data.errorCode == 4) {
+    this.openPop(this.$t('canNotFollowMyself2'),0)
+    return
   }
 }
 root.methods.error_commitModify = function (err) {
