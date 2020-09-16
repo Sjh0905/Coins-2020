@@ -163,8 +163,8 @@
       <div class="mobile-open-tape-pop-window-content-text">
 <!--        开启后，如您收益率靠前，您将可能出现在带单收益榜榜单中，同时可被用户跟单，零成本获得额外的带单收益，双重盈利。-->
         <div>{{$t('openInterpretation_1',{godFee})}}</div>
-        <div>{{$t('openInterpretation_2')}}</div>
-        <div>{{$t('openInterpretation_3')}}</div>
+        <div v-if="fixedAmPr == 1">{{$t('openInterpretation_2')}}</div>
+        <div v-if="fixedAmPr == 1">{{$t('openInterpretation_3')}}</div>
       </div>
     </div>
     <div slot="footer" class="pop-recharge-bottom">
