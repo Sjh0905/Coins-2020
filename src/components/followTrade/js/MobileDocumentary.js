@@ -254,7 +254,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     return;
   }
   if (data.errorCode == 4) {
-    this.openPop('用户固定金额跟单余额不够')
+    this.openPop('余额不足')
     return;
   }
   if (data.errorCode == 10) {
