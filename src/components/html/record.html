@@ -74,6 +74,13 @@
           {{$t('assetPage.miningHeat')}}
         </router-link>
         <!-- 平台奖励 end -->
+        <!-- 申购记录 begin -->
+        <router-link :to="{name:'purchase'}" class="title-tab flex-center margin-a-little tab-item-last"
+                     :class="lang!='CH'?'title-tab-en':''"
+                     active-class="selected text_blue">
+          {{$t('assetPage.cashBack')}}
+        </router-link>
+        <!-- 申购记录 end -->
 
 
     </div>

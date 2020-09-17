@@ -22,7 +22,19 @@
     "recharge_status_5": "审核未通过",
     "type":"类型",
     "loadingMore": "加载更多",
-    "noRecord":"暂无记录"
+    "noRecord":"暂无记录",
+    "otc_wallet":"从法币到钱包",
+    "wallet_otc":"从钱包到法币",
+    "binance_wallet":"从现货到钱包",
+    "wallet_binance":"从钱包到现货",
+    "spots_wallet":"从现货到钱包",
+    "wallet_spots":"从钱包到现货",
+    "margin_wallet":"从杠杆到钱包",
+    "wallet_margin":"从钱包到杠杆",
+    "contracts_wallet":"从合约到钱包",
+    "wallet_contracts":"从钱包到合约",
+    "purchase":"申购"
+
   },
   "EN": {
     "currency": "Coin",
@@ -93,6 +105,17 @@
     "recharge_status_5": "審核未通過",
     "type":"類型",
     "loadingMore": "載入更多",
-    "noRecord":"暫無記錄"
+    "noRecord":"暫無記錄",
+    "otc_wallet":"從法幣到錢包",
+    "wallet_otc":"從錢包到法幣",
+    "binance_wallet":"從現貨到錢包",
+    "wallet_binance":"從錢包到現貨",
+    "spots_wallet":"從現貨到錢包",
+    "wallet_spots":"從錢包到現貨",
+    "margin_wallet":"從槓桿到錢包",
+    "wallet_margin":"從錢包到槓桿",
+    "contracts_wallet":"從合約到錢包",
+    "wallet_contracts":"從錢包到合約",
+    "purchase":"申購"
   }
 }
