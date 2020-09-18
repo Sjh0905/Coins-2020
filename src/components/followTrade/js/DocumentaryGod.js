@@ -130,6 +130,10 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     this.openPop(this.$t('canNotFollowMyself2'))
     return;
   }
+  if (data.errorCode == 4) {
+    this.openPop(this.$t('大神不能跟单大神'))
+    return;
+  }
   if (data.errorCode == 10) {
     this.openPop(this.$t('followDetails'))
     return;

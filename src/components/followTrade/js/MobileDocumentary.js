@@ -262,6 +262,10 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     this.openPop('余额不足')
     return;
   }
+  if (data.errorCode == 5) {
+    this.openPop('大神不能跟单大神')
+    return;
+  }
   if (data.errorCode == 10) {
     this.openPop('跟随失败')
     return;
