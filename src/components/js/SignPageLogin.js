@@ -512,6 +512,11 @@ root.methods.re_login = async function (data) {
     // return;
   }
 
+  if(this.$route.query.toUrl && this.$route.query.toUrl == "future_url"){
+    this.GO_CONTRACT();
+    // return;
+  }
+
   // if(this.$route.query.toUrl && this.$route.query.toUrl == "GRC"){
   //   this.GO_GRC();
   //   // return;
@@ -524,8 +529,17 @@ root.methods.GO_OTC = function () {
   let paras = this.$store.state.save_cookie;
   if (!paras) return;
   let c2c_url = process.env.DOMAIN;
-  console.log(c2c_url)
+  // console.log(c2c_url)
   window.open(c2c_url);
+}
+
+// 跳到合约页面
+root.methods.GO_CONTRACT = function () {
+  let paras = this.$store.state.save_cookie;
+  if (!paras) return;
+  let con_url = process.env.CONTRACT_URL;
+  // console.log(con_url)
+  window.open(con_url);
 }
 
 // 跳到GRC页面
