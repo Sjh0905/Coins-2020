@@ -53,9 +53,12 @@
             <!--可用下单余额-->
             <div class="lock-house-time">{{balance.availableBalance || 0}}</div>
             <!-- 操作-->
-            <div class="operation">
-              <button class="pointer" @click="openTransfer(balance)">{{$t('划转')}}</button>
+            <div class="operation-text">
+              <button>{{$t('划转')}}</button>
             </div>
+<!--            <div class="operation">-->
+<!--              <button class="pointer" @click="openTransfer(balance)">{{$t('划转')}}</button>-->
+<!--            </div>-->
           </div>
         </li>
         <!--各条记录 begin-->
