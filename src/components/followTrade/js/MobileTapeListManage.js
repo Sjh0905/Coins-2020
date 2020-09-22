@@ -27,7 +27,8 @@ root.data = function () {
     userFollowFees:[], //收益明细
     followDay:'', // 跟单天数
     godInfo:{}, //是否开启带单
-    godFee: '' //跟单保证金
+    godFee: '', //跟单保证金
+    fixedAmPr:1
 
   }
 }
@@ -69,10 +70,37 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//
+root.computed.fixedAmountPr1 = function () {
+  return this.currencyPair || 0
+}
+root.computed.fixedAmountPr2 = function () {
+  return this.toFixed(this.accMul(Number(this.currencyPair), 0.8),2)
+}
+root.computed.fixedAmountPr3 = function () {
+  return this.accMinus(80,Number(this.currencyPair))
+}
+//
+root.computed.fixedCurrencyPairFee = function () {
+  return this.currencyPairFee || 0
+}
+root.computed.fixedCurrencyPairFee2 = function () {
+  return this.toFixed(this.accMul(Number(this.currencyPairFee), 0.8),2)
+}
+root.computed.fixedCurrencyPairFee3 = function () {
+  return this.accMinus(80,Number(this.currencyPairFee))
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+//金额/baifenbi
+root.methods.fixedAmountPr = function (type) {
+  this.currencyPairFee = ''
+  this.currencyPair = ''
+  this.fixedAmPr = type
+}
 // 跟单保证金
 root.methods.postGodFee = function () {
   this.$http.send('POST_GOD_FEE', {
@@ -103,7 +131,7 @@ root.methods.closeMaskWindow = function () {
 }
 root.methods.testCurrencyPair = function () {
   if(this.currencyPair == ''){
-    this.currencyPairText = '跟单费用不能为空'
+    this.currencyPairText = '请输入费用/提成'
     return
   }
 }
@@ -111,7 +139,7 @@ root.methods.testCurrencyPair = function () {
 //成为大神
 root.methods.postCommitFee = function () {
   if(this.currencyPair == ''){
-    this.openPop ('跟单费用不能为空')
+    this.openPop ('请输入费用/提成')
     return
   }
   // if(this.currencyPair == 0){
@@ -119,6 +147,7 @@ root.methods.postCommitFee = function () {
   //   return
   // }
   let params = {
+    feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
     fee: this.currencyPair,
   }
   this.$http.send('POST_GOD', {
@@ -171,10 +200,15 @@ root.methods.error_postCommitFee = function (err) {
 //修改大神
 root.methods.postRevisionFee = function () {
   if (this.currencyPairFee == '') {
-    this.openPop('修改费用不可为空')
+    this.openPop('请输入费用/提成')
+    return
+  }
+  if (this.currencyPairFee > '60') {
+    this.openPop(this.$t('分成比例超过了最大比例'))
     return
   }
   let params = {
+    feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
     fee: this.currencyPairFee,
   }
   this.$http.send('POST_REVISION_FEE', {
@@ -245,4 +279,25 @@ root.methods.closePop = function () {
 root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)
 }
+/*---------------------- 乘法运算 begin ---------------------*/
+root.methods.accMul = function (num1, num2) {
+  return this.$globalFunc.accMul(num1, num2)
+}
+/*---------------------- 乘法运算 end ---------------------*/
+/*---------------------- 减法运算 begin ---------------------*/
+root.methods.accMinus = function (num1, num2) {
+  return this.$globalFunc.accMinus(num1, num2)
+}
+/*---------------------- 除法运算 begin ---------------------*/
+root.methods.accDiv = function (num1, num2) {
+  return this.$globalFunc.accDiv(num1, num2)
+}
+/*---------------------- 除法运算 end ---------------------*/
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
+
+
 export default root

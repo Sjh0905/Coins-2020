@@ -2251,6 +2251,21 @@ root.routes.push({
               caseSensitive: true,
               component: resolve => require(['@/components/vue/HeatReward'], resolve),
             },
+            // 申购记录
+            {
+              path: 'purchase',
+              name: 'purchase',
+              meta: {
+                pcname: 'purchase',
+                h5name: '',
+                requireLogin: true,
+                templateClose: false,
+                // templatePath: '/index/assetPageT',
+                requireLoginOff: false,
+              },
+              caseSensitive: true,
+              component: resolve => require(['@/components/vue/Purchase'], resolve),
+            },
           ]
         },
 

@@ -137,7 +137,7 @@ root.watch = {}
 root.methods = {}
 root.methods.openDocumentaryWindow = function () {
   if ( this.followType == 'LOT' && this.fixedAmountLot == '') {
-    this.openPop('固定金额不可为空')
+    this.openPop('请输入金额')
     this.follow = true
     return
   }
@@ -196,6 +196,11 @@ root.methods.re_commitModify = function (data) {
   }
   if(data.errorCode == 1) {
     this.openPop('系统错误',0)
+    return
+  }
+  if(data.errorCode == 4) {
+    this.openPop('余额不足',0)
+    return
   }
 
 }
@@ -222,7 +227,7 @@ root.methods.postDocumentaryImmediately = function () {
   this.follow = false
   let canSend = true
   if (this.followType == 'LOT' && this.fixedAmountLot == '') {
-    this.openPop('固定金额不可为空')
+    this.openPop('请输入金额')
     this.follow = true
     return
   }
@@ -251,6 +256,14 @@ root.methods.re_postDocumentaryImmediately = function (data) {
 
   if (data.errorCode == 3) {
     this.openPop('不能自己跟随自己哦')
+    return;
+  }
+  if (data.errorCode == 4) {
+    this.openPop('余额不足')
+    return;
+  }
+  if (data.errorCode == 5) {
+    this.openPop('大神不能跟单大神')
     return;
   }
   if (data.errorCode == 10) {

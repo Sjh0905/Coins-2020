@@ -532,6 +532,10 @@ requestAddress.POST_GOD_FEE = {url: urlHead+'/follow/godFee', method: 'post'}  /
 //2020-08-20   周热度接口
 requestAddress.GET_HEATREWARD = {url: urlHead+'/user/getWeekReward', method: 'get'}  //跟单保证金
 
+// 2020.09.14     申购列表
+// requestAddress.GET_PURCHASE = {url: urlHead+'/user/queryApplyPurchase', method: 'get'}  //申购列表
+requestAddress.GET_PURCHASE = {url: urlHead+'/user/getMonthReward', method: 'get'}  //月度返现
+
 
 //2020-7-22  合约账户相关接口
 // requestAddress.GET_BALAN = {url: urlHead+'/future/account/userBalance', method: 'get'}  //账户余额

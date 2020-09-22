@@ -70,7 +70,10 @@
         <div class="mobile-trade-item-top flex">
           <div class="mobile-trade-item-top-left">
             <span>{{item.symbol.replace('_','/')}}</span>
-            <span class="mobile-trade-buy text-green" :class="item.type=='BUY_LIMIT'?'text-green':'text-red'">{{item.type == 'BUY_LIMIT'? '买入':'卖出'}}</span>
+            <span class="mobile-trade-buy text-red" v-if="item.orderType=='SELL_MARKET'">市价卖出</span>
+            <span class="mobile-trade-buy  text-green" v-if="item.orderType=='BUY_MARKET'">市价买入</span>
+            <span class="mobile-trade-buy  text-red" v-if="item.orderType=='SELL_LIMIT'">限价卖出</span>
+            <span class="mobile-trade-buy  text-green" v-if="item.orderType=='BUY_LIMIT'">限价买入</span>
           </div>
           <div class="mobile-trade-item-top-right">{{$globalFunc.formatDateUitl(Number(item.createdAt),'MM/DD hh:mm:ss')}}</div>
         </div>
@@ -114,7 +117,8 @@
     <div class="mobile-trade-open-exchange" >
       <div class="mobile-trade-open-exchange-text flex">
         <div class="mobile-trade-fee">费用</div>
-        <div class="mobile-trade-order-fee text-blue">{{$route.query.fee || '0'}} USDT / {{$route.query.days  || '0'}}天</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT / {{$route.query.days  || '0'}}天</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE'">每笔收益收取 {{accAdd($route.query.fee,20) || '0'}}%</div>
       </div>
       <div class="mobile-trade-open-exchange-button" @click="jumpToFollowDocumentary" v-if="$route.query.isFollow < 0">跟单</div>
       <div class="mobile-trade-open-exchange-button-isfollow" v-if="$route.query.isFollow >= 0">已跟随</div>

@@ -125,6 +125,15 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     this.openPop(this.$t('canNotFollowMyself'))
     return;
   }
+
+  if (data.errorCode == 4) {
+    this.openPop(this.$t('canNotFollowMyself2'))
+    return;
+  }
+  if (data.errorCode == 5) {
+    this.openPop(this.$t('大神不能跟单大神'))
+    return;
+  }
   if (data.errorCode == 10) {
     this.openPop(this.$t('followDetails'))
     return;
@@ -260,6 +269,16 @@ root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)
 }
 /*---------------------- 保留小数 end ---------------------*/
+/*---------------------- 乘法运算 begin ---------------------*/
+root.methods.accMul = function (num1, num2) {
+  return this.$globalFunc.accMul(num1, num2)
+}
+/*---------------------- 乘法运算 end ---------------------*/
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
 
 
 export default root

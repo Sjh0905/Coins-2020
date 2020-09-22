@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="follow-data" v-if="listGod.length != 0" v-for="(item,index) in listGod" @click="goToDocumentary(item.userId,item.fee)">
+    <div class="follow-data" v-if="listGod.length != 0" v-for="(item,index) in listGod" @click="goToDocumentary(item.userId,item.fee,item.feeType)">
       <div class="follow-data-box flex">
         <img class="follow-data-box-img" src="../assets/big-brother.png" alt="">
         <div class="follow-data-box-img-box">{{item.userId}}</div>
@@ -55,7 +55,8 @@
         </div>
         <div class="follow-btn-box">
           <!--天-->
-          <div class="follow-gde">{{item.fee}} USDT/ {{days}}{{$t('days')}}</div>
+          <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} USDT/ {{days}}{{$t('days')}}</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE'">每笔收益收取 {{accAdd(item.fee,20)}}%</div>
           <!--跟单-->
           <div class="follow-fff" v-if="godList.indexOf(item.userId) < 0">{{$t('documentary')}}</div>
           <!--已跟随-->

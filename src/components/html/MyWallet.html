@@ -145,7 +145,7 @@
               <!--sss打开转账 begin-->
 
               <span class="withdrawals-button button"
-                    v-if="!prohibitAll && item.currency != 'TKF' && item.currency != 'FF'"
+                    v-if="!prohibitAll && grayCurrency.indexOf(item.currency) < 0"
                   @click="internalTransfer(index,item)"
                   :class="{'recharge-button-select-transfer':activeIndex===index  && transferss}"
                   >
