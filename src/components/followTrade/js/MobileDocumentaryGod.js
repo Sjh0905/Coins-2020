@@ -45,6 +45,10 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -67,6 +71,7 @@ root.methods.jumpToFollowDocumentary = function () {
 root.methods.postBigBrotherHistory = function () {
   let params = {
     followId: this.$route.query.userId,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_BROTHER_ORDER', {
     bind: this,
@@ -92,6 +97,7 @@ root.methods.error_postBigBrotherHistory = function (err) {
 root.methods.postFollowUser = function () {
   let params = {
     followId: this.$route.query.userId ,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_FOLLOWUSER', {
     bind: this,

@@ -112,7 +112,8 @@
         </div>
         <div class="mobile-open-tape-pop-window-content-item flex">
           <div class="mobile-open-tape-pop-window-content-currency-pair">带单币对</div>
-          <div class="mobile-open-tape-pop-window-content-currency">BTC ETH LTC BCH</div>
+          <div class="mobile-open-tape-pop-window-content-currency" v-if="this.$store.state.isSwitchOrder == 'SPOT'">BTC ETH LTC BCH</div>
+          <div class="mobile-open-tape-pop-window-content-currency" v-if="this.$store.state.isSwitchOrder == 'CONTRACT'">BTC</div>
         </div>
         <div v-if="fixedAmPr == 1">
           <div class="mobile-open-tape-pop-window-content-item flex">

@@ -49,6 +49,10 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -63,6 +67,9 @@ root.methods.toggleType = function (type) {
 root.methods.isOpenFollow = function () {
   this.$http.send('POST_GOD_BY_USERID', {
     bind: this,
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_isOpenFollow,
     errorHandler: this.error_isOpenFollow
   })
@@ -83,6 +90,7 @@ root.methods.error_isOpenFollow = function (err) {
 root.methods.postPersonalrHistory = function () {
   let params = {
     followId: this.userId,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_BROTHER_ORDER_SELF', {
     bind: this,
@@ -110,6 +118,9 @@ root.methods.postPersonalFollowUser = function () {
   this.$http.send('POST_FOLLOWUSER_LIST', {
     bind: this,
     // params: params,
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_postPersonalFollowUser,
     errorHandler: this.error_postPersonalFollowUser
   })

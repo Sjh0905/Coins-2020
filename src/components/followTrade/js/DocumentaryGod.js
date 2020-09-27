@@ -60,6 +60,10 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -106,6 +110,7 @@ root.methods.postDocumentaryImmediately = function () {
     followId: this.$route.query.userId,
     followType: this.followType ,    //固定金额LOT   固定比例RATE
     val: this.followType == 'LOT' ? this.fixedAmountLot : this.fixedAmountRate,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_ADDFOLLOWER', {
     bind: this,
@@ -206,6 +211,7 @@ root.methods.error_postDocumentaryImmediately = function (err) {
 root.methods.postBigBrotherHistory = function () {
   let params = {
     followId: this.$route.query.userId,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_BROTHER_ORDER', {
     bind: this,
@@ -231,6 +237,7 @@ root.methods.error_postBigBrotherHistory = function (err) {
 root.methods.postFollowUser = function () {
   let params = {
     followId: this.$route.query.userId ,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_FOLLOWUSER', {
     bind: this,
