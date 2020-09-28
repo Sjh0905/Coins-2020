@@ -11,7 +11,7 @@ root.data = function () {
   return {
     loading:true,
     fixedFollow:1,
-    followType:'LOT',
+    followType:'RATE',
     godHistorList:[],
     godInfo:{},
     followUserList:[],
@@ -97,7 +97,7 @@ root.methods.fixedType = function (type) {
 root.methods.postDocumentaryImmediately = function () {
   this.follow = false
   let canSend = true
-  if (this.followType == 'LOT' && this.fixedAmountLot == '') {
+  if (this.followType == 'LOT' && isSwitchOrder == 'SPOT' && this.fixedAmountLot == '') {
     this.openPop(this.$t('cannotBeEmpty'))
     this.follow = true
     return

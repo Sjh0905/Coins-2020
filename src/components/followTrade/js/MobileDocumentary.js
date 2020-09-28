@@ -10,7 +10,7 @@ root.data = function () {
   return {
     loading:true,
     follow:true,
-    followType:'LOT',
+    followType:'RATE',
     fixedLotAmount: '',//输入的固定金额
     fixedRateAmount: '',//输入的固定比例
     fixedAmountLot:'',//修改输入的固定金额
@@ -130,6 +130,10 @@ root.computed.iosLogin = function () {
 // 获取屏幕宽度
 root.computed.windowWidth = function () {
   return window.innerWidth
+}
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
 }
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}

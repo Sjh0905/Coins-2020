@@ -2,9 +2,17 @@
 <!--  面包屑-->
   <div class="record-container2">
     <div class="header">
-      <router-link :to="{name:'followTrade'}" class="header-title">
-        <!--镜像交易-->
-        {{$t('followOrder')}}
+<!--      <router-link :to="{name:'followTrade'}" class="header-title">-->
+<!--        &lt;!&ndash;镜像交易&ndash;&gt;-->
+<!--        {{$t('followOrder')}}-->
+<!--      </router-link>-->
+      <router-link :to="{name:'followTrade'}" class="header-title" v-if="isSwitchOrder == 'SPOT'">
+        <!--现货带单-->
+        {{$t('现货带单')}}
+      </router-link>
+      <router-link :to="{name:'followTrade'}" class="header-title" v-if="isSwitchOrder == 'CONTRACT'">
+        <!--合约带单-->
+        {{$t('合约带单')}}
       </router-link>
       <span class="spanbf">></span>
       <!--我的主页-->
@@ -100,7 +108,9 @@
   <PopupWindow :switch="popWindowOpen" @close="popWindowClose">
     <div slot="header">
 <!--      修改镜像交易-->
-      <span class="update-follow">{{$t('modifyPolicyOrders')}}</span>
+<!--      <span class="update-follow">{{$t('modifyPolicyOrders')}}</span>-->
+      <span class="update-follow" v-if="isSwitchOrder == 'SPOT'">{{$t('修改现货带单')}}</span>
+      <span class="update-follow" v-if="isSwitchOrder == 'CONTRACT'">{{$t('修改合约带单')}}</span>
     </div>
     <div slot="article" class="update-follow-article">
 

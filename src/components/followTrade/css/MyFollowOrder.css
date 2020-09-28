@@ -253,6 +253,7 @@
   margin-bottom: 12px;
 }
 .fixed-amount-proportion {
+  display: inline-block;
   height:30px;
   line-height: 30px;
   color: #6A83A8;

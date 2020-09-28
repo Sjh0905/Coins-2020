@@ -9,7 +9,8 @@
     <div class="fund-buy-header-title-back-icon" @click="goToFollowTrade">
       <img class="fund-buy-header-title-back-icon-img" src="../../LuckyDraw/assets/mobileForecastHomePage/back_icon.png" alt="">
     </div>
-    <div class="fund-buy-header-title-text">跟单</div>
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'SPOT'">现货跟单</div>
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'CONTRACT'">合约跟单</div>
   </div>
 
   <!--  跟单主体部分-->
@@ -23,15 +24,17 @@
       </div>
       <div class="fund-description-info-item">
         <div class="fund-description-info-left">带单交易对</div>
-        <div class="fund-description-info-right">BTC ETH LTC BCH</div>
+        <div class="fund-description-info-right" v-if="isSwitchOrder == 'SPOT'">BTC ETH LTC BCH</div>
+        <div class="fund-description-info-right" v-if="isSwitchOrder == 'CONTRACT'">BTC</div>
       </div>
       <div class="fund-description-felx">
         <div class="fund-description-info-left">跟单方式</div>
       </div>
-      <div class="flex">
+      <div class="flex" v-if="isSwitchOrder == 'SPOT'">
         <div class="fixed-amount-proportion" :class="followType == 'LOT' ? 'fixed-amount' : '' " @click="fixedType('LOT')">固定金额</div>
         <div class="fixed-amount-proportion" :class="followType == 'RATE' ? 'fixed-amount' : '' " @click="fixedType('RATE')">固定比例</div>
       </div>
+      <span v-if="isSwitchOrder == 'CONTRACT'" class="fixed-amount-proportion fixed-amount" @click="fixedType('RATE')">固定比例</span>
       <div class="fund-description-amount" v-if="followType == 'LOT'">
         <div class="fund-description-usdt">跟单金额(USDT)</div>
         <div class="fund-description-info-right-input">
