@@ -91,7 +91,7 @@ root.methods.re_getPositionRisk = function (data) {
   console.log('获取记录', data)
   this.records = data.data
   this.records.map((v,index)=>{
-    if (v.positionAmt != 0) {
+    if (v.positionAmt != 0 && v.symbol == 'BTCUSDT') {
       let aa = []
       aa.push(v)
       this.records1 = aa

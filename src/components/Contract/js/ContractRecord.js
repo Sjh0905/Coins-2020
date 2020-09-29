@@ -4,6 +4,9 @@ root.name = 'contractRecord'
 root.components = {
   'Loading': resolve => require(['../../vue/Loading'], resolve),
   // 'PopupPrompt': resolve => require(['../../vue/PopupPrompt'], resolve),
+  'PopupWindow': resolve => require(['../../vue/PopupWindow'], resolve),
+  'ContractRiskWarning': resolve => require(['../../vue/ContractRiskWarning'], resolve),
+
 }
 /*------------------------------ data -------------------------------*/
 root.data = function () {
@@ -11,7 +14,9 @@ root.data = function () {
     loading: false,
     totalWalletBalance:0, //全仓余额
     totalUnrealizedProfit:0, //未实现盈亏
-    totalMarginBalance:0 //保证金
+    totalMarginBalance:0, //保证金
+    popWindowContractRiskWarning: true, //合约账户未开通
+    popWindowOpen:false,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -72,6 +77,19 @@ root.computed.lang = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+// root.methods.popWindowClose = function () {
+//   this.popWindowOpen = false
+// }
+// 合约首次风险提示弹窗关闭确认按钮
+root.methods.popCloseTemporarilyClosed = function () {
+  this.popWindowOpen = false
+  this.$router.push({'path':'/index/tradingHall?symbol=KK_USDT'})
+}
+
+root.methods.openAContract = function () {
+  // this.popWindowOpen = false
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+}
 
 // 资产
 root.methods.bianBalance = function (item) {
@@ -88,6 +106,10 @@ root.methods.bianBalance = function (item) {
 
 root.methods.re_bianBalance = function ( data ) {
   typeof (data) === 'string' && (data = JSON.parse(data))
+
+  if (data.code == 1000) {
+    this.popWindowOpen = true
+  }
 
   // this.balance = data.data[0]
   // console.info('币安接口账户余额',this.balance)

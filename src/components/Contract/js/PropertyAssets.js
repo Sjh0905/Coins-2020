@@ -5,6 +5,7 @@ root.components = {
   'Loading': resolve => require(['../../vue/Loading'], resolve),
   'PopupT': resolve => require(['../../vue/PopupT'], resolve),
   'PopupPrompt': resolve => require(['../../vue/PopupPrompt'], resolve),
+  'PopupWindow': resolve => require(['../../vue/PopupWindow'], resolve),
 }
 /*------------------------------ data -------------------------------*/
 root.data = function () {
@@ -24,6 +25,7 @@ root.data = function () {
     popOpen: false,
     // 内部划转变量
     popWindowOpen1:false,
+    popWindowOpen:false,
     assetAccountType:'wallet',//当前账户类型,默认显示币币账户
     itemInfo:{
       currency:''
@@ -57,6 +59,7 @@ root.data = function () {
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
+  this.GET_AUTH_STATE()
   this.bianBalance()
   this.getCurrency()
 }
@@ -132,6 +135,20 @@ root.computed.bindIdentify = function () {
 
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+// 认证状态
+root.methods.GET_AUTH_STATE = function () {
+  this.$http.send("GET_AUTH_STATE", {
+    bind: this,
+    callBack: this.RE_GET_AUTH_STATE,
+    errorHandler: this.error_getCurrency
+  })
+}
+root.methods.RE_GET_AUTH_STATE = function (res) {
+  typeof res === 'string' && (res = JSON.parse(res));
+  if (!res) return
+  this.$store.commit('SET_AUTH_STATE', res.dataMap)
+}
+
 /*---------------------- 账户余额 begin ---------------------*/
 root.methods.closeAccountBalance= function () {
   $(".currencyer-header-box").attr("style","display:none");
@@ -161,6 +178,11 @@ root.methods.openAvailableOrderBalance = function () {
 root.methods.popWindowClose1 = function () {
   // this.popWindowOpen1 = false
   this.click_rel_em()
+}
+// 划转弹窗关闭
+root.methods.popWindowClose = function () {
+  // this.popWindowOpen1 = false
+  this.popWindowOpen = false
 }
 // 关闭划转弹窗
 root.methods.click_rel_em = function () {
@@ -223,31 +245,31 @@ root.methods.changeTransferCurrency = function (currency){
 root.methods.openTransfer = function (balance) {
 
   // 如果没有实名认证不允许打开划转
-  // if (!this.bindIdentify) {
-  //   this.popWindowTitle = this.$t('popWindowTitleTransfer')
-  //   this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
-  //   this.popWindowStyle = '0'
-  //   this.popWindowOpen = true
-  //   return
-  // }
+  if (!this.bindIdentify) {
+    this.popWindowTitle = this.$t('popWindowTitleTransfer')
+    this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
+    this.popWindowStyle = '0'
+    this.popWindowOpen = true
+    return
+  }
 
   // 如果没有绑定邮箱，不允许打开划转
-  // if (!this.bindEmail) {
-  //   this.popWindowTitle = this.$t('bind_email_pop_title')
-  //   this.popWindowPrompt = this.$t('bind_email_pop_article')
-  //   this.popWindowStyle = '3'
-  //   this.popWindowOpen = true
-  //   return
-  // }
+  if (!this.bindEmail) {
+    this.popWindowTitle = this.$t('bind_email_pop_title')
+    this.popWindowPrompt = this.$t('bind_email_pop_article')
+    this.popWindowStyle = '3'
+    this.popWindowOpen = true
+    return
+  }
 
   // 如果没有绑定谷歌或手机，不允许打开划转
-  // if (!this.bindGA && !this.bindMobile) {
-  //   this.popWindowTitle = this.$t('popWindowTitleTransfer')
-  //   this.popWindowPrompt = this.$t('popWindowTitleBindGaWithdrawals')
-  //   this.popWindowStyle = '1'
-  //   this.popWindowOpen = true
-  //   return
-  // }
+  if (!this.bindGA && !this.bindMobile) {
+    this.popWindowTitle = this.$t('popWindowTitleTransfer')
+    this.popWindowPrompt = this.$t('popWindowTitleBindGaWithdrawals')
+    this.popWindowStyle = '1'
+    this.popWindowOpen = true
+    return
+  }
 
 
   //todo 修改密码后不能提现
@@ -265,10 +287,20 @@ root.methods.openTransfer = function (balance) {
   this.transferAmountWA = ''
 
 }
-
+// 弹出绑定身份，跳转到实名认证界面
+root.methods.goToBindIdentity = function () {
+  this.popWindowOpenShiM = false
+  this.$router.push({name: 'authenticate'})
+}
+// 弹框跳安全中心
+root.methods.goToSecurityCenter = function () {
+  this.popWindowOpenShiM = false
+  this.$router.push({name: 'securityCenter'})
+}
 
 // 资产
 root.methods.bianBalance = function (item) {
+  this.loading = true
   this.$http.send("GET_BALAN_ACCOUNT", {
     bind: this,
     query: {
@@ -281,6 +313,7 @@ root.methods.bianBalance = function (item) {
 
 root.methods.re_bianBalance = function ( data ) {
   typeof (data) === 'string' && (data = JSON.parse(data))
+  this.loading = false
   this.balance = data.data.assets[0]
 }
 root.methods.error_bianBalance = function ( err ) {

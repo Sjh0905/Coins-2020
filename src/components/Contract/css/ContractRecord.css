@@ -311,3 +311,64 @@
 .color-red {
   color: #EF5656;
 }
+
+/*认证弹框样式*/
+.header_xuzhi {
+  padding-left: 25px;
+}
+
+.pop-recharge {
+  padding: 35px 25px;
+  font-size:16px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #0D0E23;
+  /*padding-bottom: 25px;*/
+}
+.pop-recharge-bottom {
+  margin-bottom: 15px;
+}
+.button-base33 {
+  width: 191px;
+  height: 35px;
+  /* background-color: #3576F5; */
+  color: #fff;
+  border-radius: 1px;
+  border: 0 solid transparent;
+  /*margin-right: 2px;*/
+  outline: none;
+}
+.m-l {
+  margin-left: 24px;
+}
+
+/*合约风险提示*/
+.footer-btn {
+  /*padding-right: 30px;*/
+  /*margin-bottom: 20px;*/
+  justify-content:flex-end;
+}
+.popWindow-article2 {
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #6B7DA2;
+  padding: 0 27px;
+  border-radius:3px;
+  border:1px solid rgba(231,235,238,1);
+  cursor: pointer;
+}
+.popWindow-btn{
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #F7F7FB;
+  padding: 0 41px;
+  background:rgba(53,118,245,1);
+  border-radius:3px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+/*合约风险提示*/
