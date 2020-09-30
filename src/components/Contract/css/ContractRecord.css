@@ -168,7 +168,7 @@
   color: #3576F5;
   font-size:14px;
   font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
+  font-weight:600;
   /*border-bottom: 2px solid #3576F5;*/
 }
 
@@ -372,3 +372,11 @@
   cursor: pointer;
 }
 /*合约风险提示*/
+.selected {
+  /*background-color: #fff;*/
+  /*color: #3576F5;*/
+  /*font-weight: bold;*/
+  border-bottom:2px solid #3576F5;
+  box-sizing: border-box;
+  z-index: 100;
+}
