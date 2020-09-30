@@ -117,19 +117,19 @@ root.computed.accountsComputed = function () {
 }
 // 是否绑定手机
 root.computed.bindMobile = function () {
-  return this.$store.state.authState.sms
+  return this.$store.state.authState && this.$store.state.authState.sms || false
 }
 // 是否绑定谷歌验证码
 root.computed.bindGA = function () {
-  return this.$store.state.authState.ga
+  return this.$store.state.authState && this.$store.state.authState.ga || false
 }
 // 是否绑定邮箱
 root.computed.bindEmail = function () {
-  return this.$store.state.authState.email
+  return this.$store.state.authState && this.$store.state.authState.email || false
 }
 // 是否实名认证
 root.computed.bindIdentify = function () {
-  return this.$store.state.authState.identity
+  return this.$store.state.authState && this.$store.state.authState.identity || false
 }
 /*------------------------------ 观察 -------------------------------*/
 

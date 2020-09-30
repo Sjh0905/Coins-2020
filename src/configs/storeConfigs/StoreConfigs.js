@@ -215,7 +215,7 @@ store.state.buy_or_sale_type = 1
  * @type {null}
  */
 
-store.state.authState = {}
+store.state.authState = null//！！！不能写成{}，否则会报大错！！！
 
 store.state.symbol = ''
 
