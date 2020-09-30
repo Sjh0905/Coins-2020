@@ -113,7 +113,7 @@ root.methods.re_bianBalance = function ( data ) {
 
   // this.balance = data.data[0]
   // console.info('币安接口账户余额',this.balance)
-  console.info('币安接口账户余额',data)
+  // console.info('币安接口账户余额',data)
   this.totalWalletBalance = data.data.totalWalletBalance
   this.totalUnrealizedProfit = data.data.totalUnrealizedProfit
   this.totalMarginBalance = data.data.totalMarginBalance

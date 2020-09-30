@@ -88,7 +88,7 @@ root.methods.getPositionRisk = function () {
 root.methods.re_getPositionRisk = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) return
-  console.log('获取记录', data)
+  // console.log('获取记录', data)
   this.records = data.data
   this.records.map((v,index)=>{
     if (v.positionAmt != 0 && v.symbol == 'BTCUSDT') {
