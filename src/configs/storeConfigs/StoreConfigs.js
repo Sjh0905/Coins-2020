@@ -27,7 +27,7 @@ store.state.GRC_URL = process.env.GRC_URL || 'https://build.2020.exchange/events
 // store.state.GRC_URL = 'https://build.highdefi.com/events/grc-token-mining'  // TODO:生产打版需要屏蔽掉
 
 // 美金汇率 2018-07-17
-store.state.exchange_rate_dollar = 7.02
+store.state.exchange_rate_dollar = 6.82
 
 store.state.isLogin = false
 

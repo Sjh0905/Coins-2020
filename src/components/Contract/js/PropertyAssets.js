@@ -209,7 +209,7 @@ root.methods.allMention = function () {
     this.amountInput = this.transferCurrencyOTCAvailable
     return
   }
-  this.amountInput = this.transferCurrencyAvailable
+  this.amountInput = this.available
 }
 
 
