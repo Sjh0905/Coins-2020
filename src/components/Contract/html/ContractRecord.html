@@ -12,7 +12,7 @@
         <div>
           <div class="account-balance">账户余额</div>
           <div class="flex">
-            <div class="margin-balance-usdt-balance">{{totalWalletBalance > 0 ? totalMarginBalance : '----'}}  <span class="margin-balance-usdt-span-balance">USDT</span></div>
+            <div class="margin-balance-usdt-balance">{{totalWalletBalance > 0 ? totalWalletBalance : '----'}}  <span class="margin-balance-usdt-span-balance">USDT</span></div>
             <div class="margin-balance-is-about-balance"> ≈ {{( valuationWall >0)? $globalFunc.accFixedCny(valuationWall,2) : '----'}} {{lang ==='CH'?'CNY':'USDT'}}</div>
           </div>
         </div>

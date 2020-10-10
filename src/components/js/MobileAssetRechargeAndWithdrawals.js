@@ -57,7 +57,8 @@ root.data = function () {
 
     assetAccountType:'wallet',//当前账户类型,默认显示我的钱包
 
-    otcCurrencyList:[] //法币账户列表
+    otcCurrencyList:[], //法币账户列表
+    selectType:'hold',
 
   }
 }
@@ -93,6 +94,8 @@ root.created = function () {
   this.getAccounts()
   this.getOtcCurrency()
   this.getCurrency()
+  // this.bianBalance()
+  // console.info('this.$store.state.exchange_rate_dollar',this.$store.state.exchange_rate_dollar)
 
 
 }
@@ -101,7 +104,43 @@ root.beforeDestroy = function () {
   this.exchangeRateInterval && clearInterval(this.exchangeRateInterval)
 }
 
+
 root.computed = {}
+
+// // 当前语言
+// root.computed.lang = function () {
+//   return this.$store.state.lang;
+// }
+
+//保证金余额换算成人民币的估值
+root.computed.valuationCon = function () {
+  return this.computedExchangeRate
+}
+// 计算汇率
+root.computed.computedExchangeRate = function () {
+  console.info('保证金余额',this.totalMarginBalance,this.$store.state.exchange_rate_dollar)
+  return this.accMul(this.totalMarginBalance, this.$store.state.exchange_rate_dollar)
+}
+//未实现盈亏换算成人民币的估值
+root.computed.valuationFit = function () {
+  return this.computedTotalUnrealizedProfit
+}
+// 计算汇率
+root.computed.computedTotalUnrealizedProfit = function () {
+  // console.info('未实现盈亏',this.totalUnrealizedProfit,this.$store.state.exchange_rate_dollar)
+  return this.accMul(this.totalUnrealizedProfit, this.$store.state.exchange_rate_dollar)
+}
+
+//账户余额换算成人民币的估值
+root.computed.valuationWall = function () {
+  return this.computedTotalWalletBalance
+}
+// 计算汇率
+root.computed.computedTotalWalletBalance = function () {
+  // console.info('账户余额',this.totalWalletBalance,this.$store.state.exchange_rate_dollar)
+  return this.accMul(this.totalWalletBalance, this.$store.state.exchange_rate_dollar)
+}
+
 //换算成人民币的估值
 root.computed.valuation = function () {
   return this.$globalFunc.accFixedCny(this.total * this.computedExchangeRate,2)
@@ -246,6 +285,9 @@ root.methods = {};
 root.methods.changeAssetAccountType = function (type) {
   if(this.assetAccountType == type)return
   this.assetAccountType = type
+  if (this.assetAccountType == 'contract') {
+    this.bianBalance()
+  }
 };
 // 点击币种，是否弹出币种的详细信息开关
 root.methods.changeTableOpenFlag = function (obj) {
@@ -633,6 +675,50 @@ root.methods.changeTotalAssetShow = function () {
 root.methods.popClose = function () {
   this.popOpen = false
 }
+
+//切换选择
+root.methods.holdAll = function (type) {
+  this.selectType = type
+}
+
+
+// 资产
+root.methods.bianBalance = function (item) {
+  // console.log(item.id)
+  this.$http.send("GET_BALAN_ACCOUNT", {
+    bind: this,
+    query: {
+      timestamp: this.serverTime
+    },
+    callBack: this.re_bianBalance,
+    errorHandler: this.error_bianBalance
+  })
+}
+
+root.methods.re_bianBalance = function ( data ) {
+  typeof (data) === 'string' && (data = JSON.parse(data))
+
+  if (data.code == 1000) {
+    this.popWindowOpen = true
+  }
+
+  // this.balance = data.data[0]
+  // console.info('币安接口账户余额',this.balance)
+  // console.info('币安接口账户余额',data)
+  this.totalWalletBalance = data.data.totalWalletBalance
+  this.totalUnrealizedProfit = data.data.totalUnrealizedProfit
+  this.totalMarginBalance = data.data.totalMarginBalance
+  // console.info('this.$store.state.exchange_rate_dollar',this.totalMarginBalance)
+}
+root.methods.error_bianBalance = function ( err ) {
+  console.log(err)
+}
+
+
+
+
+
+
 
 // 保留小数点后8位
 root.methods.toFixed = function (num, acc = 8) {

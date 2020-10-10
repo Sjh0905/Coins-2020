@@ -24,21 +24,41 @@
 
       <div class="asset-check-box flex-around">
         <div class="asset-check-item" :class="(assetAccountType == 'wallet') ? 'asset-check-item-select':''" @click="changeAssetAccountType('wallet')">我的钱包</div>
-        <div class="asset-check-item" :class="(assetAccountType != 'wallet') ? 'asset-check-item-select':''" @click="changeAssetAccountType('currency')">法币账户</div>
+        <div class="asset-check-item" :class="(assetAccountType == 'currency') ? 'asset-check-item-select':''" @click="changeAssetAccountType('currency')">法币账户</div>
+        <div class="asset-check-item" :class="(assetAccountType == 'contract') ? 'asset-check-item-select':''" @click="changeAssetAccountType('contract')">合约账户</div>
       </div>
 
       <div class="asset-total-box-item">
-        <div class="lan-title-item">{{ assetAccountType == 'wallet' ? "我的钱包" : "法币账户"}}资产估值(BTC)</div>
-        <div class="landata-item">
+        <div class="lan-title-item" v-if="assetAccountType == 'wallet'">我的钱包资产估值(BTC)</div>
+        <div class="lan-title-item" v-if="assetAccountType == 'currency'">法币账户资产估值(BTC)</div>
+        <div class="lan-title-item" v-if="assetAccountType == 'contract'">
+          <div>保证金余额</div>
+          <div class="BTC-asset-item m-t-1">{{totalMarginBalance > 0 ? totalMarginBalance : '----'}} USDT </div>
+          <div class="CHN-asset-item m-t-1">≈ {{( valuationCon > 0)? $globalFunc.accFixedCny(valuationCon,2) : '----'}} CNY</div>
+          <div class="flex contract-height">
+            <div class="contract-flex">
+              <div>账户余额</div>
+              <div class="BTC-asset-item m-t-1">{{totalWalletBalance > 0 ? totalMarginBalance : '----'}}</div>
+              <div class="CHN-asset-item m-t-1"> ≈ {{( valuationWall >0)? $globalFunc.accFixedCny(valuationWall,2) : '----'}} CNY</div>
+            </div>
+            <div class="contract-flex">
+              <div>未实现盈亏</div>
+              <div class="BTC-asset-item m-t-1" :class="totalUnrealizedProfit >= 0 ? 'cont-green' : 'cont-red'">{{totalUnrealizedProfit || '----'}}</div>
+              <div class="CHN-asset-item m-t-1" :class="valuationFit >= 0 ? 'cont-green' : 'cont-red'">≈ {{ $globalFunc.accFixedCny(valuationFit,2) || '----'}} CNY</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="landata-item" v-if="assetAccountType == 'wallet' || assetAccountType == 'currency'">
           <span class="BTC-asset-item">{{priceReady || initReady ? (isTotalAssetShow?toFixed((assetAccountType == 'wallet')? total : otcTotal,8)+' ':'******'):'---- '}} </span>
           <span class="CHN-asset-item">≈ </span>
           <span class="CHN-asset-item"> {{priceReady || initReady?(isTotalAssetShow?''+$globalFunc.accFixedCny((assetAccountType == 'wallet')? valuation : otcValuation,2):''):'----'}}&nbsp;CNY</span>
         </div>
       </div>
 
-      <div class="tiao1"></div>
+<!--      <div class="tiao1"></div>-->
 
-      <div class="asset-header-total-asset-detail-box">
+      <div class="asset-header-total-asset-detail-box" v-if="assetAccountType == 'wallet' || assetAccountType == 'currency'">
         <div class="asset-header-total-asset-search-box"></div>
         <div class="asset-header-total-asset-hide-box">
 <!--          <MobileCheckbox :agreement="agreement" :changeAgreement='hideZeroItem'></MobileCheckbox>-->
@@ -68,39 +88,90 @@
         <!--<div class="asset-header-right-box-price">{{priceReady || initReady ?toFixed(frozen,8):'&#45;&#45;&#45;&#45;'}} BTC</div>-->
       <!--</div>-->
     <!--</div>-->
+    <div v-if="assetAccountType == 'wallet' || assetAccountType == 'currency'">
+      <div class="asset-container"  v-for="(item,index) in accountsComputed"
+           v-if="serverT >= item.displayTime && (!agreement || (agreement && item.total != 0)) && !item.isUSDT2 && !item.isUSDT3"
+           :key="index" @click="jumpToDetail(item.currency)">
+        <div class="asset-info-title">
+          <div class="asset-container-item clearfix">
+            <div class="asset-container-item-title">
+              <!--          <span class="asset-container-item-icon-box">-->
+              <!--            <img class="asset-container-item-icon" :src="'http://logo.2020.exchange/' + item.currency +'.png'" alt="">-->
+              <!--          </span>-->
+              <span>{{item.currency== 'USDT2' || item.currency== 'USDT3' ? 'USDT' : item.currency}}</span>
+              <!--<span class="asset-container-item-title-description">({{item.description}})</span>-->
+            </div>
+            <div class="asset-container-item-assetNum">
+              <img src="../../assets/H5img/right_jt.png" />
+            </div>
+          </div>
+        </div>
+        <div class="asset-info">
+          <div class="asset-keyong">
+            <div class="asky-title">可用</div>
+            <div class="asky-title-val">{{isTotalAssetShow?toFixed(assetAccountType == 'wallet'? item.available:item.otcAvailable,8):'******'}}</div>
+          </div>
+          <div class="asset-keyong">
+            <div class="asky-title">冻结</div>
+            <div class="asky-title-val">{{isTotalAssetShow?toFixed(assetAccountType == 'wallet'?item.frozen:item.otcFrozen,8):'******'}}</div>
+          </div>
+          <div class="asset-keyong-right">
+            <div class="asky-title-right">估值(CNY)</div>
+            <!--          <div class="asky-title-right-val">{{item.total!== 0 ? $globalFunc.accFixedCny(item.total * $store.state.exchange_rate_dollar,2) : '-&#45;&#45;'}}</div>-->
+            <div class="asky-title-right-val">{{$globalFunc.accFixedCny(calculationAppraisement(item),2)}}</div>
+          </div>
+          <!--        <div class="asset-container-item-assetNum">{{isTotalAssetShow?toFixed(item.total,8):'******'}}</div>-->
+        </div>
+        <div class="tiao1"></div>
+      </div>
+    </div>
 
-    <div class="asset-container"  v-for="(item,index) in accountsComputed" v-if="serverT >= item.displayTime && (!agreement || (agreement && item.total != 0)) && !item.isUSDT2 && !item.isUSDT3" :key="index" @click="jumpToDetail(item.currency)">
-      <div class="asset-info-title">
-      <div class="asset-container-item clearfix">
-        <div class="asset-container-item-title">
-<!--          <span class="asset-container-item-icon-box">-->
-<!--            <img class="asset-container-item-icon" :src="'http://logo.2020.exchange/' + item.currency +'.png'" alt="">-->
-<!--          </span>-->
-          <span>{{item.currency== 'USDT2' || item.currency== 'USDT3' ? 'USDT' : item.currency}}</span>
-          <!--<span class="asset-container-item-title-description">({{item.description}})</span>-->
+    <div class="flex contract-title" v-if="assetAccountType == 'contract'">
+      <div class="contract-select padding-r" :class="selectType == 'hold' ? 'contract-select-to' : ''" @click="holdAll('hold')">持有仓位</div>
+      <div class="contract-select" :class=" selectType == 'all' ? 'contract-select-to' : ''"  @click="holdAll('all')">全部资产</div>
+    </div>
+
+    <div v-if="assetAccountType == 'contract'">
+      <div class="hold-order" v-if="selectType == 'hold'">
+        <div class="flex">
+          <div class="cont-sell cont-text">卖</div>
+          <div class="cont-se">BTCUSDT</div>
         </div>
-        <div class="asset-container-item-assetNum">
-          <img src="../../assets/H5img/right_jt.png" />
+        <div class="flex">
+          <div class="contract-flex">
+            <div class="cont-title">持仓数量(BTC)</div>
+            <div class="cont-filling">32125.4224</div>
+          </div>
+          <div class="contract-flex">
+            <div class="cont-title">未实现盈亏 (回报率)</div>
+            <div class="cont-red-tex cont-red">90.09(+10.98%)</div>
+          </div>
+        </div>
+        <div class="flex m-t">
+          <div class="contract-flex">
+            <div class="cont-title">开仓价格</div>
+            <div class="cont-filling">32125.4224</div>
+          </div>
+          <div class="contract-flex">
+            <div class="cont-title">标记价格</div>
+            <div class="cont-filling">90.09(+10.98%)</div>
+          </div>
         </div>
       </div>
+
+      <div class="hold-order" v-if="selectType == 'all'">
+        <div class="all-usdt">USDT</div>
+        <div class="flex">
+          <div class="contract-flex">
+            <div class="all-title">账户余额</div>
+            <div class="all-filling">0.00000055</div>
+          </div>
+          <div class="contract-flex">
+            <div class="all-title">可用划转余额</div>
+            <div class="all-filling">0.00000055</div>
+          </div>
+        </div>
       </div>
-      <div class="asset-info">
-        <div class="asset-keyong">
-          <div class="asky-title">可用</div>
-          <div class="asky-title-val">{{isTotalAssetShow?toFixed(assetAccountType == 'wallet'? item.available:item.otcAvailable,8):'******'}}</div>
-        </div>
-        <div class="asset-keyong">
-          <div class="asky-title">冻结</div>
-          <div class="asky-title-val">{{isTotalAssetShow?toFixed(assetAccountType == 'wallet'?item.frozen:item.otcFrozen,8):'******'}}</div>
-        </div>
-        <div class="asset-keyong-right">
-          <div class="asky-title-right">估值(CNY)</div>
-<!--          <div class="asky-title-right-val">{{item.total!== 0 ? $globalFunc.accFixedCny(item.total * $store.state.exchange_rate_dollar,2) : '-&#45;&#45;'}}</div>-->
-          <div class="asky-title-right-val">{{$globalFunc.accFixedCny(calculationAppraisement(item),2)}}</div>
-        </div>
-<!--        <div class="asset-container-item-assetNum">{{isTotalAssetShow?toFixed(item.total,8):'******'}}</div>-->
-      </div>
-      <div class="tiao1"></div>
     </div>
 
 
