@@ -59,7 +59,6 @@ root.data = function () {
 
     otcCurrencyList:[], //法币账户列表
     selectType:'hold',
-
   }
 }
 
@@ -67,9 +66,12 @@ root.components = {
   'Loading': resolve => require(['../vue/Loading'], resolve),
   'PopupPrompt': resolve => require(['../vue/PopupPrompt'], resolve),
   'MobileCheckbox': resolve => require(['../mobileVue/MobileCompentsVue/MobileCheckbox'], resolve),
+  'ContractRiskWarning': resolve => require(['../vue/ContractRiskWarning'], resolve),
+
 }
 
 root.created = function () {
+  this.bianBalance()
   // console.log(this.total)
   // 修改顶部标题
   this.$store.commit('changeMobileHeaderTitle', '资产');
@@ -286,7 +288,7 @@ root.methods.changeAssetAccountType = function (type) {
   if(this.assetAccountType == type)return
   this.assetAccountType = type
   if (this.assetAccountType == 'contract') {
-    this.bianBalance()
+    // this.bianBalance()
   }
 };
 // 点击币种，是否弹出币种的详细信息开关
@@ -699,9 +701,10 @@ root.methods.re_bianBalance = function ( data ) {
   typeof (data) === 'string' && (data = JSON.parse(data))
 
   if (data.code == 1000) {
-    this.popWindowOpen = true
+    // this.popWindowOpen = true
+    this.$router.push({'path':'/index/contractRiskWarning'})
   }
-
+  this.$router.push({'path':'/index/contractRiskWarning'})
   // this.balance = data.data[0]
   // console.info('币安接口账户余额',this.balance)
   // console.info('币安接口账户余额',data)

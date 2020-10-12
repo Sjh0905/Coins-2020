@@ -1390,6 +1390,23 @@ root.routes.push({
       component: resolve => require(['@/components/mobileVue/NewH5HomePage'], resolve),
     },
 
+    // 合约资产记录
+    {
+      path: 'contractRiskWarning',
+      name: 'contractRiskWarning',
+      meta: {
+        pcname: '',
+        h5name: 'contractRiskWarning',
+        requireLogin: true,
+        templateClose: false,
+        requireLoginOff: false,
+      },
+      caseSensitive: true,
+      component: resolve => require(['@/components/vue/ContractRiskWarning'], resolve),
+    },
+
+
+
     {
       path: 'mobileHeatList',
       name: 'mobileHeatList',
@@ -2090,9 +2107,9 @@ root.routes.push({
               caseSensitive: true,
               component: resolve => require(['@/components/Contract/vue/PropertyAssets'], resolve),
             },
+
           ]
         },
-
 
 
         {
