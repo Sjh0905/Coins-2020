@@ -10,7 +10,7 @@ root.data = function () {
   return {
     loading:true,
     follow:true,
-    followType:'LOT',
+    followType:'RATE',
     fixedLotAmount: '',//输入的固定金额
     fixedRateAmount: '',//输入的固定比例
     fixedAmountLot:'',//修改输入的固定金额
@@ -131,6 +131,10 @@ root.computed.iosLogin = function () {
 root.computed.windowWidth = function () {
   return window.innerWidth
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -181,6 +185,7 @@ root.methods.commitModify = function (){
       followId: this.queryItem.followId,
       followType: this.followType,
       val: this.followType == 'LOT' ? this.fixedAmountLot:this.fixedAmountRate,
+      type: this.isSwitchOrder,
     },
     callBack: this.re_commitModify,
     errorHandler: this.error_commitModify
@@ -239,6 +244,7 @@ root.methods.postDocumentaryImmediately = function () {
     followId: this.$route.query.userId,
     followType: this.followType ,    //固定金额LOT   固定比例RATE
     val: this.followType == 'LOT' ? this.fixedAmountLot : this.fixedAmountRate,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_ADDFOLLOWER', {
     bind: this,

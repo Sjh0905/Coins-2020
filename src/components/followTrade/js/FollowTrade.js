@@ -25,7 +25,8 @@ root.data = function () {
     popWindowPrompt: '',//弹出样式提示
     popWindowStyle: 0,//跳转 0表示实名认证，1表示手机或谷歌，2只有确定
 
-    currentInterval:null
+    currentInterval:null,
+    switchOrder: 'SPOT',
 
   }
 }
@@ -71,6 +72,10 @@ root.computed = {}
 
 root.computed.isLogin = function () {
   return this.$store.state.isLogin;
+}
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
 }
 
 root.computed.userId = function () {
@@ -143,6 +148,13 @@ root.methods.goToBindIdentity = function () {
 root.methods.goToSecurityCenter = function () {
   this.popWindowOpenShiM = false
   this.$router.push({name: 'securityCenter'})
+}
+//切换跟单类型
+root.methods.switchingOrders = function (orderType) {
+  this.switchOrder = orderType
+  this.$store.commit('IS_SWITCHORDER', orderType);
+  // console.info('this.switchOrder=======',this.switchOrder,orderType)
+  this.getBigBrotherList()
 }
 
 // 弹窗关闭
@@ -237,6 +249,9 @@ root.methods.getBigBrotherList = function () {
   // console.info('掉接口啦===',new Date().getTime())
   this.$http.send('BIG_BROTHER_LIST', {
     bind: this,
+    params:{
+      type: this.isSwitchOrder
+    },
     callBack: this.re_getBigBrotherList,
     errorHandler:this.error_getBigBrotherList
   })

@@ -21,7 +21,8 @@ root.data = function () {
 
     popIdenOpen: false,
 
-    currentInterval:null
+    currentInterval:null,
+    switchOrder: 'SPOT',
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -121,6 +122,11 @@ root.computed.bindEmail = function () {
 root.computed.bindIdentify = function () {
   return this.$store.state.authState.identity
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
+
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -140,6 +146,13 @@ root.methods.RE_GET_AUTH_STATE = function (res) {
   if (!res) return
   this.$store.commit('SET_AUTH_STATE', res.dataMap)
 
+}
+//切换跟单类型
+root.methods.switchingOrders = function (orderType) {
+  this.switchOrder = orderType
+  this.$store.commit('IS_SWITCHORDER', orderType);
+  // console.info('this.switchOrder=======',this.switchOrder,orderType)
+  this.getBigBrotherList()
 }
 
 // 关闭弹窗
@@ -229,7 +242,9 @@ root.methods.goToMobileMyFollowOrder = function () {
 root.methods.getBigBrotherList = function () {
   this.$http.send('BIG_BROTHER_LIST', {
     bind: this,
-    // query:{},
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_getBigBrotherList,
     errorHandler:this.error_getBigBrotherList
   })

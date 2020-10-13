@@ -3,7 +3,15 @@
   <div class="follow-info">
     <div class="follow-container">
       <div class="follow-trande-bread">
-        <router-link to="/index/followTrade" class="management">{{$t('followOrder')}}</router-link>
+<!--        <router-link to="/index/followTrade" class="management">{{$t('followOrder')}}</router-link>-->
+        <router-link to="/index/followTrade" class="management" v-if="isSwitchOrder == 'SPOT'">
+          <!--现货带单-->
+          {{$t('现货带单')}}
+        </router-link>
+        <router-link to="/index/followTrade" class="management" v-if="isSwitchOrder == 'CONTRACT'">
+          <!--合约带单-->
+          {{$t('合约带单')}}
+        </router-link>
         <span> > </span>
         {{$t('myFollowOrder')}}
       </div>
@@ -111,7 +119,9 @@
   <PopupWindow :switch="popWindowOpen" @close="popWindowClose">
     <div slot="header">
       <!--修改镜像交易-->
-      <span class="update-follow">{{$t('modifyPolicyOrders')}}</span>
+<!--      <span class="update-follow">{{$t('modifyPolicyOrders')}}</span>-->
+      <span class="update-follow" v-if="isSwitchOrder == 'SPOT'">{{$t('修改现货跟单')}}</span>
+      <span class="update-follow" v-if="isSwitchOrder == 'CONTRACT'">{{$t('修改合约跟单')}}</span>
     </div>
     <div slot="article" class="update-follow-article">
       <div class="follow-order flex">
@@ -122,19 +132,21 @@
       <div class="follow-order flex">
         <!--跟单币对-->
         <div>{{$t('documentaryPair')}}</div>
-        <div class="follow-order-data">BTC ETH LTC BCH</div>
+        <div class="follow-order-data" v-if="isSwitchOrder == 'SPOT'">BTC ETH LTC BCH</div>
+        <div class="follow-order-data" v-if="isSwitchOrder == 'CONTRACT'">BTC</div>
       </div>
       <div class="follow-order">
         <!--跟单方式-->
         <div class="follow-order-title">{{$t('documentaryMode')}}</div>
-        <div class="flex">
+        <div class="flex" v-if="isSwitchOrder == 'SPOT'">
           <!--固定金额-->
           <div class="fixed-amount-proportion pointer" :class="followType == 'LOT' ? 'fixed-amount' : '' " @click="fixedType('LOT')">{{$t('fixedAmount')}}</div>
           <!--固定比例-->
           <div class="fixed-amount-proportion pointer" :class="followType == 'RATE' ? 'fixed-amount' : '' " @click="fixedType('RATE')">{{$t('fixedProportion')}}</div>
         </div>
+        <span class="fixed-amount-proportion fixed-amount pointer" v-if="isSwitchOrder == 'CONTRACT'" >{{$t('fixedProportion')}}</span>
       </div>
-      <div class="fund-description-amount" v-if="followType == 'LOT'">
+      <div class="fund-description-amount" v-if="followType == 'LOT' && isSwitchOrder == 'SPOT'">
         <!--跟单金额-->
         <div class="fund-description-usdt">{{$t('documentarySum')}}（USDT）</div>
         <div class="fund-description-info-right-input">

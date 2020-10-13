@@ -8,15 +8,17 @@
   <div class="follow-trade-c-position">
 
     <div class="flex follow-status">
-      <div class="follow-status-box">
+      <div class="follow-status-box flex">
         <!--带单收益榜-->
-        <div class="follow-long">{{$t('listOfDragonsAndTigers')}}</div>
+<!--        <div class="follow-long">{{$t('listOfDragonsAndTigers')}}</div>-->
+        <div class="follow-long" :class="this.$store.state.isSwitchOrder == 'SPOT' ? '' : 'switchCss'" v-if="" @click="switchingOrders('SPOT')">{{$t('现货带单')}}</div>
+        <div class="follow-long" :class="this.$store.state.isSwitchOrder == 'CONTRACT' ? '' : 'switchCss'" v-if="" @click="switchingOrders('CONTRACT')">{{$t('合约带单')}}</div>
         <!--数据每小时更新一次-->
 <!--        <div class="follow-xue">{{$t('updatedEveryHour')}}</div>-->
       </div>
       <div class="follow-my">
         <!--我的镜像交易-->
-        <div class="follow-my-bix" @click="goToMyFollowOrder">{{$t('myFollowOrder')}}</div>
+        <div class="follow-my-bix" @click="goToMyFollowOrder()">{{$t('myFollowOrder')}}</div>
         <!--我要带单-->
         <div class="follow-my-bix follow-my-box" @click="goTofollowTradeStrategy">{{$t('bringTheBill')}}</div>
       </div>

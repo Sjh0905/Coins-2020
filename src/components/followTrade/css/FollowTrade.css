@@ -34,6 +34,8 @@
   font-size:24px;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
+  margin-right: 34px;
+  cursor: pointer;
 }
 .follow-status-box {
   width: 50%;
@@ -216,4 +218,10 @@
 .m-l {
   margin-left: 24px;
 }
-
+.switchCss {
+  font-size: 16px;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #A2B5D9;
+  padding-top: 7px;
+}

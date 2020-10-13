@@ -90,6 +90,10 @@ root.computed.fixedCurrencyPairFee2 = function () {
 root.computed.fixedCurrencyPairFee3 = function () {
   return this.accMinus(80,Number(this.currencyPairFee))
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -105,6 +109,9 @@ root.methods.fixedAmountPr = function (type) {
 root.methods.postGodFee = function () {
   this.$http.send('POST_GOD_FEE', {
     bind: this,
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_postGodFee,
     errorHandler: this.error_postGodFee
   })
@@ -149,6 +156,7 @@ root.methods.postCommitFee = function () {
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
     fee: this.currencyPair,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_GOD', {
     bind: this,
@@ -210,6 +218,7 @@ root.methods.postRevisionFee = function () {
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
     fee: this.currencyPairFee,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_REVISION_FEE', {
     bind: this,
@@ -241,6 +250,9 @@ root.methods.postManage = function () {
   this.$http.send('POST_MANAGE', {
     bind: this,
     // params: params,
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_postManage,
     errorHandler: this.error_postManage
   })

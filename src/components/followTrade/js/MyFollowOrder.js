@@ -56,7 +56,10 @@ root.mounted = function () {}
 root.beforeDestroy = function () {}
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
-
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -88,6 +91,9 @@ root.methods.delFollowClose = function () {
 root.methods.postMyDocumentary = function () {
   this.$http.send('POST_MY_USER', {
     bind: this,
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_postMyDocumentary,
     errorHandler: this.error_postMyDocumentary
   })
@@ -116,7 +122,8 @@ root.methods.clickToggle = function () {
   this.$http.send('POST_AUTO_RENEW', {
     bind: this,
     params: {
-      val:this.isAutomatic ? 'YES':'NO'
+      val:this.isAutomatic ? 'YES':'NO',
+      type: this.isSwitchOrder,
     },
     callBack: this.re_clickToggle,
     errorHandler: this.error_clickToggle
@@ -140,7 +147,8 @@ root.methods.delFollowList = function () {
   this.$http.send('POST_DEL_FOLLOWER', {
     bind: this,
     params: {
-      followId: this.followId
+      followId: this.followId,
+      type: this.isSwitchOrder,
     },
     callBack: this.re_delFollowList,
     errorHandler: this.error_delFollowList
@@ -179,6 +187,7 @@ root.methods.commitModify = function (){
       followId: this.followId,
       followType: this.followType,
       val: this.followType == 'LOT' ? this.fixedAmountLot:this.fixedAmountRate,
+      type: this.isSwitchOrder,
     },
     callBack: this.re_commitModify,
     errorHandler: this.error_commitModify
