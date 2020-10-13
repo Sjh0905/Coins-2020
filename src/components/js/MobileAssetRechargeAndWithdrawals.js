@@ -704,7 +704,7 @@ root.methods.re_bianBalance = function ( data ) {
     // this.popWindowOpen = true
     this.$router.push({'path':'/index/contractRiskWarning'})
   }
-  this.$router.push({'path':'/index/contractRiskWarning'})
+  // this.$router.push({'path':'/index/contractRiskWarning'})
   // this.balance = data.data[0]
   // console.info('币安接口账户余额',this.balance)
   // console.info('币安接口账户余额',data)

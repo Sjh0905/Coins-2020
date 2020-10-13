@@ -210,6 +210,20 @@ root.routes.push({
 })
 
 
+// 合约首次进入弹框记录
+root.routes.push({
+  path: '/index/contractRiskWarning',
+  name: 'contractRiskWarning',
+  meta: {
+    requireLogin: true,
+    pcname: '',
+    h5name: 'contractRiskWarning',
+  },
+  caseSensitive: true,
+  component: resolve => require(['@/components/vue/ContractRiskWarning'], resolve)
+})
+
+
 /*-----------------  跟单H5 begin  ------------------------*/
 //H5  跟单首页
 root.routes.push({
@@ -1390,20 +1404,6 @@ root.routes.push({
       component: resolve => require(['@/components/mobileVue/NewH5HomePage'], resolve),
     },
 
-    // 合约资产记录
-    {
-      path: 'contractRiskWarning',
-      name: 'contractRiskWarning',
-      meta: {
-        pcname: '',
-        h5name: 'contractRiskWarning',
-        requireLogin: true,
-        templateClose: false,
-        requireLoginOff: false,
-      },
-      caseSensitive: true,
-      component: resolve => require(['@/components/vue/ContractRiskWarning'], resolve),
-    },
 
 
 
