@@ -158,6 +158,11 @@ root.methods.delFollowList = function () {
 root.methods.re_delFollowList = function (data) {
   typeof (data) === 'string' && (data = JSON.parse(data))
   if(!data) return
+
+  if(data.errorCode == 2){
+    this.openPop('用户有仓位，无法取消跟随',0)
+    return
+  }
   if(data.errorCode != 0){
     //系统错误
     this.openPop(this.$t('systemError'),0)

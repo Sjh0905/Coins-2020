@@ -163,6 +163,22 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     this.openPop(this.$t('followDetails_5'))
     return;
   }
+  if (data.errorCode == 16) {
+    this.openPop('用户已经有仓位了不能跟随大神')
+    return;
+  }
+  if (data.errorCode == 17) {
+    this.openPop('用户和大神的杠杆倍数不一致')
+    return;
+  }
+  if (data.errorCode == 18) {
+    this.openPop('用户和大神的逐全仓模式不一致')
+    return;
+  }
+  if (data.errorCode == 19) {
+    this.openPop('用户和大神的单双仓模式不一致')
+    return;
+  }
   if (data.errorCode != 0) {
     this.openPop(this.$t('systemError'))
     return;
