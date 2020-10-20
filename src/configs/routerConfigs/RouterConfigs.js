@@ -298,7 +298,18 @@ root.routes.push({
   component: resolve => require(['@/components/followTrade/vue/MobileMyFollowOrder'], resolve)
 })
 /*-----------------  跟单H5 end  ------------------------*/
-
+//H5  划转
+root.routes.push({
+  path: '/index/mobileWebTransferContract',
+  name: 'mobileWebTransferContract',
+  meta: {
+    requireLogin: true,
+    pcname: '',
+    h5name: 'mobileWebTransferContract',
+  },
+  caseSensitive: true,
+  component: resolve => require(['@/components/vue/MobileWebTransferContract'], resolve)
+})
 
 /*-----------------  基金理财H5 begin  ------------------------*/
 // 基金理财

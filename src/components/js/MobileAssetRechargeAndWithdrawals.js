@@ -59,6 +59,14 @@ root.data = function () {
 
     otcCurrencyList:[], //法币账户列表
     selectType:'hold',
+    limitNum: 10,
+
+    records: [],
+    records1:[],
+
+    loadingMoreShow: true,
+    loadingMoreShowing: false,
+    balance:[],
   }
 }
 
@@ -98,7 +106,7 @@ root.created = function () {
   this.getCurrency()
   // this.bianBalance()
   // console.info('this.$store.state.exchange_rate_dollar',this.$store.state.exchange_rate_dollar)
-
+  this.getPositionRisk()//仓位
 
 }
 
@@ -114,12 +122,15 @@ root.computed = {}
 //   return this.$store.state.lang;
 // }
 
+root.computed.serverTime = function () {
+  return new Date().getTime();
+}
 //保证金余额换算成人民币的估值
 root.computed.valuationCon = function () {
-  return this.computedExchangeRate
+  return this.computedExchangeRate1
 }
 // 计算汇率
-root.computed.computedExchangeRate = function () {
+root.computed.computedExchangeRate1 = function () {
   console.info('保证金余额',this.totalMarginBalance,this.$store.state.exchange_rate_dollar)
   return this.accMul(this.totalMarginBalance, this.$store.state.exchange_rate_dollar)
 }
@@ -249,6 +260,12 @@ root.computed.otcFrozen = function () {
 root.computed.totalAssets = function () {
   return this.toFixed((this.accAdd(this.total,this.otcTotal)))
 }
+
+
+root.computed.computedRecord = function () {
+  return this.records1
+}
+
 
 
 /*----------------------------- 监听 ------------------------------*/
@@ -681,7 +698,16 @@ root.methods.popClose = function () {
 //切换选择
 root.methods.holdAll = function (type) {
   this.selectType = type
+  if (this.selectType == 'hold') {
+    this.getPositionRisk()
+  }
+  if (this.selectType == 'all') {
+
+  }
 }
+
+
+
 
 
 // 资产
@@ -711,6 +737,7 @@ root.methods.re_bianBalance = function ( data ) {
   this.totalWalletBalance = data.data.totalWalletBalance
   this.totalUnrealizedProfit = data.data.totalUnrealizedProfit
   this.totalMarginBalance = data.data.totalMarginBalance
+  this.balance = data.data.assets[0]
   // console.info('this.$store.state.exchange_rate_dollar',this.totalMarginBalance)
 }
 root.methods.error_bianBalance = function ( err ) {
@@ -718,8 +745,47 @@ root.methods.error_bianBalance = function ( err ) {
 }
 
 
+// 仓位
+root.methods.getPositionRisk = function () {
 
+  this.$http.send("GET_BALAN_POSITIONRISK", {
+    bind: this,
+    query: {
+      timestamp: this.serverTime
+    },
+    callBack: this.re_getPositionRisk,
+    errorHandler: this.error_getPositionRisk
+  })
+}
+// 获取记录返回，类型为{}
+root.methods.re_getPositionRisk = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if (!data) return
+  // console.log('获取记录', data)
+  this.records = data.data
+  this.records.map((v,index)=>{
+    if (v.positionAmt != 0 && v.symbol == 'BTCUSDT') {
+      let aa = []
+      aa.push(v)
+      this.records1 = aa
+    }
+  })
 
+  // if (this.records1.length < this.limit) {
+  //   this.loadingMoreShow = false
+  // }
+  // this.loadingMoreShowing = false
+  // this.loading = false
+}
+// 获取记录出错
+root.methods.error_getPositionRisk = function (err) {
+  console.warn("充值获取记录出错！", err)
+}
+
+//合约划转
+root.methods.openTransfer = function (balance) {
+  this.$router.push({name:'mobileWebTransferContract',query:{balance:(this.balance)}})
+}
 
 
 

@@ -24,7 +24,7 @@
       </div>
       <!--未实现盈亏(回报率)-->
       <div class="income-yesterday">
-        <div class="income-yesterday-span" @mouseenter="openRateOfReturn()" @mouseleave="closeRateOfReturn()">{{$t('未实现盈亏 (回报率)')}}</div>
+        <div class="income-yesterday-span" @mouseenter="openRateOfReturn()" @mouseleave="closeRateOfReturn()">{{$t('未实现盈亏')}}</div>
         <div class="income-yesterday-box">
           "采用标记价格计算得出的未实现盈亏，以及回报率。
         </div>
@@ -51,12 +51,12 @@
               <div class="" :class="item.positionAmt > 0 ? 'currency-box' : 'currency-box-fu'">{{item.positionAmt}}</div>
             </div>
             <!--开仓价格-->
-            <div class="total">{{toFixed(item.entryPrice,8)}}</div>
+            <div class="total">{{toFixed(item.entryPrice,2)}}</div>
             <!--标记价格 -->
             <div class="lock-house-time">{{item.markPrice}}</div>
             <!--未实现盈亏(回报率)-->
             <div class="lock-house-time">
-              <div class="" :class="item.unrealizedProfit > 0 ? 'currency-box' : 'currency-box-fu'">{{item.unrealizedProfit}} (-0.5%)</div>
+              <div class="" :class="item.unrealizedProfit > 0 ? 'currency-box' : 'currency-box-fu'">{{item.unrealizedProfit}}</div>
             </div>
             <!-- 操作-->
             <div class="operation">
