@@ -677,6 +677,11 @@ root.methods.gotoJiaoyi = function () {
   this.$router.push({name: 'mobileTradingHallDetail'});
 }
 
+/*---------------------- 跳转合约项目 ---------------------*/
+root.methods.gotoContract = function () {
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+}
+
 // 买卖提交
 // root.methods.tradeMarket = function () {
 //   if (!this.symbol_transaction_diy) return;
