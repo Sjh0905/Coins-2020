@@ -525,6 +525,11 @@ root.methods.goToNotice = function () {
 //   this.$router.push({name: 'officialQuantitativeDetails'})
 //
 // }
+// 跳转合约项目
+root.methods.gotoContract = function () {
+  // this.$router.push({name: 'mobileTradingHallDetail'});
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+}
 
 //量化查询报名记录get
 root.methods.getRegistrationRecord = function () {
