@@ -10,7 +10,9 @@
       <img class="mobile-trade-header-title-back-icon-img" src="../../LuckyDraw/assets/mobileForecastHomePage/back_icon.png" alt="">
     </div>
     <!--UID标题-->
-    <div class="fund-buy-header-title-text">带单管理</div>
+<!--    <div class="fund-buy-header-title-text">带单管理</div>-->
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'SPOT'">现货带单管理</div>
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'CONTRACT'">合约带单管理</div>
   </div>
 
   <div class="mobile-trade-header-null-data"></div>
@@ -31,7 +33,9 @@
     <!--已开启带单-->
     <div class="mobile-open-tape-list-btn" v-else>
     <div class="mobile-open-tape-list-top flex">
-      <div class="mobile-open-tape-list-title">开启带单</div>
+<!--      <div class="mobile-open-tape-list-title">开启带单</div>-->
+      <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'SPOT'">开启现货带单</div>
+      <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'CONTRACT'">开启合约带单</div>
       <div class="mobile-open-tape-list-button" @click="openMask">开启</div>
     </div>
     <div class="mobile-open-tape-list-text">
@@ -90,8 +94,10 @@
   <div class="mobile-tape-mask" v-if="openMaskWindow">
     <div class="mobile-open-tape-pop-window" :class="(isApp) ? 'mobile-open-tape-pop-window-app' : 'mobile-open-tape-pop-window' ">
       <div class="mobile-open-tape-pop-window-title flex">
-        <div class="mobile-open-tape-pop-list-window-title" v-if="!isHasItem">开启带单</div>
-        <div class="mobile-open-tape-pop-list-window-title" v-if="isHasItem">修改带单</div>
+        <div class="mobile-open-tape-pop-list-window-title" v-if="!isHasItem && isSwitchOrder == 'SPOT'">开启现货带单</div>
+        <div class="mobile-open-tape-pop-list-window-title" v-if="!isHasItem && isSwitchOrder == 'CONTRACT'">开启合约带单</div>
+        <div class="mobile-open-tape-pop-list-window-title" v-if="isHasItem && isSwitchOrder == 'SPOT'">修改现货带单</div>
+        <div class="mobile-open-tape-pop-list-window-title" v-if="isHasItem && isSwitchOrder == 'CONTRACT'">修改合约带单</div>
         <div class="mobile-window-title-btn flex">
           <div class="confirm" @click="postCommitFee" v-if="!isHasItem">确认</div>
           <div class="confirm" @click="postRevisionFee" v-if="isHasItem">确认</div>
@@ -112,7 +118,8 @@
         </div>
         <div class="mobile-open-tape-pop-window-content-item flex">
           <div class="mobile-open-tape-pop-window-content-currency-pair">带单币对</div>
-          <div class="mobile-open-tape-pop-window-content-currency">BTC ETH LTC BCH</div>
+          <div class="mobile-open-tape-pop-window-content-currency" v-if="this.$store.state.isSwitchOrder == 'SPOT'">BTC ETH LTC BCH</div>
+          <div class="mobile-open-tape-pop-window-content-currency" v-if="this.$store.state.isSwitchOrder == 'CONTRACT'">BTC</div>
         </div>
         <div v-if="fixedAmPr == 1">
           <div class="mobile-open-tape-pop-window-content-item flex">

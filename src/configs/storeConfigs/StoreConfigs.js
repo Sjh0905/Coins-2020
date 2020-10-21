@@ -269,6 +269,8 @@ store.state.initPriceSymbol = []
 
 //手机区域number
 store.state.areaCode = '0086'
+//切换跟单类型
+store.state.isSwitchOrder = 'SPOT'
 
 /**
  * 同步修改state
@@ -889,6 +891,11 @@ store.mutations.LOGIN_OUT = (state, info) => {
 
 store.mutations.IS_VIP = (state, info) => {
   state.isVIP = info
+}
+
+
+store.mutations.IS_SWITCHORDER = (state, info) => {
+  state.isSwitchOrder = info
 }
 
 

@@ -3,7 +3,15 @@
   <div class="follow-info">
     <div class="follow-container">
       <div class="follow-trande-bread">
-        <router-link to="/index/followTrade" class="management">{{$t('followOrder')}}</router-link>
+<!--        <router-link to="/index/followTrade" class="management">{{$t('followOrder')}}</router-link>-->
+        <router-link to="/index/followTrade" class="management" v-if="isSwitchOrder == 'SPOT'">
+          <!--现货带单-->
+          {{$t('现货带单')}}
+        </router-link>
+        <router-link to="/index/followTrade" class="management" v-if="isSwitchOrder == 'CONTRACT'">
+          <!--合约带单-->
+          {{$t('合约带单')}}
+        </router-link>
         <span> > </span>
         {{$t('myHomePage')}}
       </div>
@@ -194,7 +202,9 @@
   <PopupWindow :switch="popWindowOpen" @close="popWindowClose">
     <div slot="header">
       <!--开启镜像交易-->
-      <span class="update-follow">{{$t('openStrategyDocumentary')}}</span>
+<!--      <span class="update-follow">{{$t('openStrategyDocumentary')}}</span>-->
+      <span class="update-follow" v-if="isSwitchOrder == 'SPOT'">{{$t('现货带单')}}</span>
+      <span class="update-follow" v-if="isSwitchOrder == 'CONTRACT'">{{$t('合约带单')}}</span>
     </div>
     <div slot="article" class="update-follow-article">
       <div class="flex choose">
@@ -204,7 +214,8 @@
       <div class="follow-order flex">
         <!--跟单币对-->
         <div>{{$t('documentaryCurrencyPair')}}</div>
-        <div class="follow-order-data">BTC ETH LTC BCH</div>
+        <div v-if="isSwitchOrder == 'STOP'" class="follow-order-data">BTC ETH LTC BCH</div>
+        <div v-if="isSwitchOrder == 'CONTRACT'" class="follow-order-data">BTC</div>
       </div>
       <div v-if="fixedAmPr == 1">
         <div class="follow-order-item flex">

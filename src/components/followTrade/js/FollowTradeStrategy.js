@@ -55,6 +55,7 @@ root.created = function () {
   this.postPersonalFollowUser()
   this.postPersonalrHistory()
   this.postGodFee()
+  // console.info('==============',this.$store.state.isSwitchOrder)
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
@@ -89,6 +90,10 @@ root.computed.fixedAmountPr2 = function () {
 root.computed.fixedAmountPr3 = function () {
   return this.accMinus(80,Number(this.currencyPair))
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -105,6 +110,9 @@ root.methods.fixedAmountPr = function (type) {
 root.methods.postGodFee = function () {
   this.$http.send('POST_GOD_FEE', {
     bind: this,
+    params: {
+      type: this.isSwitchOrder
+    },
     callBack: this.re_postGodFee,
     errorHandler: this.error_postGodFee
   })
@@ -122,7 +130,9 @@ root.methods.error_postGodFee = function (err) {
 root.methods.postManage = function () {
   this.$http.send('POST_MANAGE', {
     bind: this,
-    // params: params,
+    params: {
+      type: this.isSwitchOrder
+    },
     callBack: this.re_postManage,
     errorHandler: this.error_postManage
   })
@@ -162,6 +172,7 @@ root.methods.postCommitFee = function () {
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
     fee: this.currencyPair,
+    type: this.isSwitchOrder
   }
   this.$http.send('POST_GOD', {
     bind: this,
@@ -195,6 +206,11 @@ root.methods.re_postCommitFee = function (data) {
     this.openPop(this.$t('分成比例超过了最大比例'))
     return;
   }
+
+  if(data.errorCode == 5) {
+    this.openPop('已经有仓位了，不能成为大神')
+    return;
+  }
   if(data.errorCode != 0) {
     this.openPop(this.$t('systemError'))
   }
@@ -217,6 +233,9 @@ root.methods.toggleType = function (type) {
 root.methods.isOpenFollow = function () {
   this.$http.send('POST_GOD_BY_USERID', {
     bind: this,
+    params: {
+      type: this.isSwitchOrder
+    },
     callBack: this.re_isOpenFollow,
     errorHandler: this.error_isOpenFollow
   })
@@ -237,6 +256,7 @@ root.methods.error_isOpenFollow = function (err) {
 root.methods.postPersonalrHistory = function () {
   let params = {
     followId: this.userId,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_BROTHER_ORDER_SELF', {
     bind: this,
@@ -264,6 +284,9 @@ root.methods.postPersonalFollowUser = function () {
   this.$http.send('POST_FOLLOWUSER_LIST', {
     bind: this,
     // params: params,
+    params:{
+      type: this.isSwitchOrder
+    },
     callBack: this.re_postPersonalFollowUser,
     errorHandler: this.error_postPersonalFollowUser
   })

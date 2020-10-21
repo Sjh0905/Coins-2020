@@ -10,7 +10,7 @@ root.data = function () {
   return {
     loading:true,
     follow:true,
-    followType:'LOT',
+    followType:'RATE',
     fixedLotAmount: '',//输入的固定金额
     fixedRateAmount: '',//输入的固定比例
     fixedAmountLot:'',//修改输入的固定金额
@@ -131,6 +131,10 @@ root.computed.iosLogin = function () {
 root.computed.windowWidth = function () {
   return window.innerWidth
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -181,6 +185,7 @@ root.methods.commitModify = function (){
       followId: this.queryItem.followId,
       followType: this.followType,
       val: this.followType == 'LOT' ? this.fixedAmountLot:this.fixedAmountRate,
+      type: this.isSwitchOrder,
     },
     callBack: this.re_commitModify,
     errorHandler: this.error_commitModify
@@ -239,6 +244,7 @@ root.methods.postDocumentaryImmediately = function () {
     followId: this.$route.query.userId,
     followType: this.followType ,    //固定金额LOT   固定比例RATE
     val: this.followType == 'LOT' ? this.fixedAmountLot : this.fixedAmountRate,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_ADDFOLLOWER', {
     bind: this,
@@ -288,6 +294,22 @@ root.methods.re_postDocumentaryImmediately = function (data) {
   }
   if (data.errorCode == 11) {
     this.openPop('24小时转账金额必须要在范围内')
+    return;
+  }
+  if (data.errorCode == 16) {
+    this.openPop('用户已经有仓位了不能跟随大神')
+    return;
+  }
+  if (data.errorCode == 17) {
+    this.openPop('用户和大神的杠杆倍数不一致')
+    return;
+  }
+  if (data.errorCode == 18) {
+    this.openPop('用户和大神的逐全仓模式不一致')
+    return;
+  }
+  if (data.errorCode == 19) {
+    this.openPop('用户和大神的单双仓模式不一致')
     return;
   }
   if (data.errorCode != 0) {

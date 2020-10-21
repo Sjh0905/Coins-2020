@@ -131,6 +131,7 @@ input {
   margin-right: 0.06rem;
 }
 .fixed-amount-proportion {
+  display: inline-block;
   height:0.6rem;
   line-height: 0.6rem;
   color: #6A83A8;

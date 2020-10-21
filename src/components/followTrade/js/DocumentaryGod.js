@@ -11,7 +11,7 @@ root.data = function () {
   return {
     loading:true,
     fixedFollow:1,
-    followType:'LOT',
+    followType:'RATE',
     godHistorList:[],
     godInfo:{},
     followUserList:[],
@@ -60,6 +60,10 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$store.state.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -93,7 +97,7 @@ root.methods.fixedType = function (type) {
 root.methods.postDocumentaryImmediately = function () {
   this.follow = false
   let canSend = true
-  if (this.followType == 'LOT' && this.fixedAmountLot == '') {
+  if (this.followType == 'LOT' && isSwitchOrder == 'SPOT' && this.fixedAmountLot == '') {
     this.openPop(this.$t('cannotBeEmpty'))
     this.follow = true
     return
@@ -106,6 +110,7 @@ root.methods.postDocumentaryImmediately = function () {
     followId: this.$route.query.userId,
     followType: this.followType ,    //固定金额LOT   固定比例RATE
     val: this.followType == 'LOT' ? this.fixedAmountLot : this.fixedAmountRate,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_ADDFOLLOWER', {
     bind: this,
@@ -158,6 +163,22 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     this.openPop(this.$t('followDetails_5'))
     return;
   }
+  if (data.errorCode == 16) {
+    this.openPop('用户已经有仓位了不能跟随大神')
+    return;
+  }
+  if (data.errorCode == 17) {
+    this.openPop('用户和大神的杠杆倍数不一致')
+    return;
+  }
+  if (data.errorCode == 18) {
+    this.openPop('用户和大神的逐全仓模式不一致')
+    return;
+  }
+  if (data.errorCode == 19) {
+    this.openPop('用户和大神的单双仓模式不一致')
+    return;
+  }
   if (data.errorCode != 0) {
     this.openPop(this.$t('systemError'))
     return;
@@ -206,6 +227,7 @@ root.methods.error_postDocumentaryImmediately = function (err) {
 root.methods.postBigBrotherHistory = function () {
   let params = {
     followId: this.$route.query.userId,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_BROTHER_ORDER', {
     bind: this,
@@ -231,6 +253,7 @@ root.methods.error_postBigBrotherHistory = function (err) {
 root.methods.postFollowUser = function () {
   let params = {
     followId: this.$route.query.userId ,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_FOLLOWUSER', {
     bind: this,

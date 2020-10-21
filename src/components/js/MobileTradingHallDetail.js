@@ -662,7 +662,7 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
       //   console.info('baseMinimum========',baseMinimum)
       // }
       if ((this.optionSymbol.indexOf(this.$store.state.symbol) >= 0) && !type && (Number(this.transactionVolume) < 1)) {
-        console.info('name===symbol====',this.$store.state.symbol)
+        // console.info('name===symbol====',this.$store.state.symbol)
         this.popText = '交易额不能低于 1';
         // this.popText = '请输入正确的数量';
         this.popType = 0;
@@ -670,7 +670,7 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
         return
       }
       if ((this.optionSymbol.indexOf(this.$store.state.symbol) < 0) && !type && (Number(this.transactionVolume) < 10)) {
-        console.info('name====symbol22===',this.$store.state.symbol)
+        // console.info('name====symbol22===',this.$store.state.symbol)
         this.popText = '交易额不能低于 10';
         // this.popText = '请输入正确的数量';
         this.popType = 0;
@@ -1010,7 +1010,7 @@ root.methods.re_getCurrencyList = function (data) {
   let objs = this.symbolList_priceList(data);
   this.currency_list = objs;
   this.miniVolumeSymbol = data.symbols
-  console.info('miniVolumeSymbol====',this.miniVolumeSymbol)
+  // console.info('miniVolumeSymbol====',this.miniVolumeSymbol)
 }
 
 // 请求price
