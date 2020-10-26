@@ -136,7 +136,7 @@
 
         <div v-if="computedRecord != 0" v-for="(item,index) in computedRecord" :key="item.id">
           <div class="flex">
-            <div class="cont-sell cont-text" :class="item.positionAmt > 0 ? 'cont-text-rad' : 'cont-text-gr'">{{item.positionAmt > 0 ? '卖' : '买'}}</div>
+            <div class="cont-sell cont-text" :class="item.positionAmt > 0 ? 'cont-text-gr' : 'cont-text-rad'">{{item.positionAmt > 0 ? '买' : '卖'}}</div>
             <div class="cont-se">{{item.symbol}}</div>
           </div>
           <div class="flex">
@@ -146,7 +146,7 @@
             </div>
             <div class="contract-flex">
               <div class="cont-title">未实现盈亏</div>
-              <div class="cont-red-tex cont-red">{{item.unrealizedProfit}}</div>
+              <div class="cont-red-tex" :class="item.unrealizedProfit >= 0 ? 'cont-text-gr' :'cont-red'">{{item.unrealizedProfit}}</div>
             </div>
           </div>
           <div class="flex m-t">

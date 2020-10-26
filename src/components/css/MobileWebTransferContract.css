@@ -549,14 +549,15 @@
   -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
   transition: border-color .2s cubic-bezier(.645,.045,.355,1);
 }
-.inputInner >>> .el-select-dropdown {
+.inputInner .el-select >>> .el-select-dropdown {
   min-width: 331.219px;
   transform-origin: center top;
   z-index: 2005;
   position: absolute;
-  top: 123px;
+  top: 123px !important;
   left: 14px;
 }
+
 .available-right {
   /*float: right;*/
 
