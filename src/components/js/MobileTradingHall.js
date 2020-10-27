@@ -299,6 +299,12 @@ root.computed.volume = function () {
 root.computed.serverTime = function () {
   return this.$store.state.serverTime;
 }
+// 是否登录
+root.computed.isLogin = function () {
+  if (this.$store.state.authMessage.userId !== '') return true
+  return false
+}
+
 
 root.watch.symbol = function (newValue, oldValue) {
   // console.log("==========root.watch.symbol===========",newValue,oldValue)
@@ -677,7 +683,7 @@ root.methods.gotoContract = function () {
     this.$router.push('/index/sign/login')
     return;
   }
-  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
 }
 
 /*---------------------- 跳入到交易页面 ---------------------*/

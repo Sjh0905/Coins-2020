@@ -1149,7 +1149,7 @@ root.methods.gotoContract = function () {
     this.$router.push('/index/sign/login')
     return;
   }
-  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
 }
 
 /*---------------------- 跳入到会员卡页面 ---------------------*/

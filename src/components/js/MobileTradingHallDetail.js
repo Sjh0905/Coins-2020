@@ -186,6 +186,11 @@ root.components = {
 /*------------------------------ 计算 begin -------------------------------*/
 
 root.computed = {}
+// 是否登录
+root.computed.isLogin = function () {
+  if (this.$store.state.authMessage.userId !== '') return true
+  return false
+}
 
 root.computed.currencyList = function(){
   return this.$store.state.symbol.currencyList
@@ -1642,7 +1647,7 @@ root.methods.gotoContract = function () {
     this.$router.push('/index/sign/login')
     return;
   }
-  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
 }
 
 /*---------------------- 跳入到交易页面 ---------------------*/

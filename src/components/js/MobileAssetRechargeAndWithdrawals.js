@@ -102,6 +102,11 @@ root.beforeDestroy = function () {
 }
 
 root.computed = {}
+// 是否登录
+root.computed.isLogin = function () {
+  if (this.$store.state.authMessage.userId !== '') return true
+  return false
+}
 //换算成人民币的估值
 root.computed.valuation = function () {
   return this.$globalFunc.accFixedCny(this.total * this.computedExchangeRate,2)
@@ -683,7 +688,7 @@ root.methods.gotoContract = function () {
     this.$router.push('/index/sign/login')
     return;
   }
-  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
 }
 
 
