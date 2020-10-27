@@ -1636,6 +1636,14 @@ root.methods.gotoShichang = function () {
 root.methods.gotoZichan = function () {
   this.$router.push({name: 'MobileAssetRechargeAndWithdrawals'});
 }
+/*---------------------- 跳入到合约 ---------------------*/
+root.methods.gotoContract = function () {
+  if(!this.isLogin){
+    this.$router.push('/index/sign/login')
+    return;
+  }
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+}
 
 /*---------------------- 跳入到交易页面 ---------------------*/
 root.methods.gotoJiaoyi = function () {
