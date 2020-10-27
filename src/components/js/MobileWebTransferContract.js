@@ -1,5 +1,5 @@
 const root = {}
-root.name = 'propertyAssets'
+root.name = 'mobileWebTransferContract'
 /*------------------------------ 组件 ------------------------------*/
 root.components = {
   'Loading': resolve => require(['../vue/Loading'], resolve),
