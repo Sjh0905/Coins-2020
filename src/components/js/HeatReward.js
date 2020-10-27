@@ -47,8 +47,8 @@ root.data = function () {
 
     loadingMoreShow:true,
     loadingMoreShowing: false,
-    rewTow:'',
-    rewSplit:''
+    rewTow:[],
+    rewSplit:[]
   }
 }
 
@@ -98,12 +98,24 @@ root.methods.re_getFundList = function (data) {
   if (data.errorCode) return
 
   this.fundListLists = data.dataMap.lists
+  let rewCycleIndex =  this.fundListLists.rewCycle.indexOf('_')
+  console.info('rewCycleIndex', rewCycleIndex)
+  let rewCycleIndex1 = this.fundListLists.rewCycle.substring(this.rewCycleIndex+1,this.rewCycleIndex.length)
+  console.info('rewCycleIndex1', rewCycleIndex1)
   // this.rewCycle = this.fundListLists.rewCycle.split('_')
-  this.fundListLists.map(v=>{
-    let rewCycleSplit = v.rewCycle.split('_');
-    this.rewSplit = rewCycleSplit[0]
-    this.rewTow = rewCycleSplit[1]
-  })
+  // this.fundListLists.map(v=>{
+  //   let rewCycleSplit = []
+  //   rewCycleSplit = v.rewCycle.split('_');
+  //   // console.info('rewCycleSplit=====',v.rewCycle)
+  //   let rewSplit = []
+  //   rewSplit = rewCycleSplit[0]
+  //   let rewTow = []
+  //   rewTow = rewCycleSplit[1]
+  //   let rewSplit2 = rewCycleSplit
+  //   console.info('this.rewSplit====',rewSplit)
+  //   console.info('this.rewTow====',rewTow)
+  //   console.info('this.rewSplit2====',rewSplit2)
+  // })
   this.fundListLists.length < this.limit && (this.loadingMoreShow = false)
   this.fundListLists.length >= this.limit && (this.loadingMoreShow = true)
   this.loadingMoreShowing = false
