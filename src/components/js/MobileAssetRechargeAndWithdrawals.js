@@ -107,6 +107,11 @@ root.created = function () {
   // this.bianBalance()
   // console.info('this.$store.state.exchange_rate_dollar',this.$store.state.exchange_rate_dollar)
   this.getPositionRisk()//仓位
+  if(this.$route.query.toWebTransfer && this.$route.query.toWebTransfer == 'true'){
+    this.bianBalance()
+    this.assetAccountType = 'contract'
+    this.selectType = 'all'
+  }
 
 }
 
@@ -276,6 +281,7 @@ root.computed.computedRecord = function () {
 /*----------------------------- 监听 ------------------------------*/
 
 root.watch = {}
+
 
 
 // 监听vuex中的变化
