@@ -67,6 +67,9 @@ root.data = function () {
     loadingMoreShow: true,
     loadingMoreShowing: false,
     balance:[],
+    totalWalletBalance:0,
+    totalUnrealizedProfit:0,
+    totalMarginBalance:0,
   }
 }
 
