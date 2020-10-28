@@ -82,7 +82,7 @@ root.components = {
 }
 
 root.created = function () {
-  this.bianBalance()
+  // this.bianBalance()
   // console.log(this.total)
   // 修改顶部标题
   this.$store.commit('changeMobileHeaderTitle', '资产');
@@ -313,7 +313,7 @@ root.methods.changeAssetAccountType = function (type) {
   if(this.assetAccountType == type)return
   this.assetAccountType = type
   if (this.assetAccountType == 'contract') {
-    // this.bianBalance()
+    this.bianBalance()
   }
 };
 // 点击币种，是否弹出币种的详细信息开关
