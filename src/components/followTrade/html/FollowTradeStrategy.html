@@ -54,9 +54,11 @@
         </div>
 
         <div class="trade-data-item">
-          <div class="trade-data text-green">{{toFixed(godInfo.rate * 10 * 10 || '0',2)}}%</div>
+          <div class="trade-data text-green" v-if="isSwitchOrder == 'SPOT'">{{toFixed(godInfo.rate * 10 * 10 || '0',2)}}%</div>
+          <div class="trade-data text-green" v-if="isSwitchOrder == 'CONTRACT'">{{toFixed(godInfo.rate,2)}}</div>
           <!--收益率-->
-          <div>{{$t('totalIncomeRate')}}</div>
+          <div v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
+          <div v-if="isSwitchOrder == 'CONTRACT'">收益 (USDT)</div>
         </div>
       </div>
     </div>
@@ -110,22 +112,11 @@
 <!--                &lt;!&ndash;买入/卖出&ndash;&gt;-->
 <!--                {{item.type == 'BUY_LIMIT'? $t('buyIn'):$t('selllOut')}}-->
 <!--              </div>-->
-              <div class="application_header_div text-green" v-if="item.orderType == 'BUY_LIMIT'">
+              <div class="application_header_div">
                 <!--限价买入-->
-                {{$t('buyIn')}}
+                {{contractType[item.orderType]}}
               </div>
-              <div class="application_header_div text-green" v-if="item.orderType == 'BUY_MARKET'">
-                <!--市价买入-->
-                {{$t('buyOutshi')}}
-              </div>
-              <div class="application_header_div text-red" v-if="item.orderType == 'SELL_LIMIT'">
-                <!--限价卖出-->
-                {{$t('selllOut')}}
-              </div>
-              <div class="application_header_div text-red" v-if="item.orderType == 'SELL_MARKET'">
-                <!--市价卖出-->
-                {{$t('selllOutshi')}}
-              </div>
+
               <!--价格-->
               <div class="application_header_div">{{toFixed(item.price,2)}}</div>
               <!--数量-->
