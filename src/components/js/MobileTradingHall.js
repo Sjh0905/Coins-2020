@@ -414,7 +414,6 @@ root.created = function () {
 
 
 
-
 // 判断当前币是否可交易
 root.methods.SYMBOL_ENTRANSACTION = function () {
   // console.log("=====root.methods.SYMBOL_ENTRANSACTION========>1",this.symbol_transaction)
@@ -677,6 +676,11 @@ root.methods.gotoJiaoyi = function () {
   this.$router.push({name: 'mobileTradingHallDetail'});
 }
 
+/*---------------------- 跳转合约项目 ---------------------*/
+root.methods.gotoContract = function () {
+  // this.$router.push({name: 'mobileTradingHallDetail'});
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+}
 // 买卖提交
 // root.methods.tradeMarket = function () {
 //   if (!this.symbol_transaction_diy) return;
