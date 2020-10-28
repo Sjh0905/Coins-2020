@@ -1162,6 +1162,11 @@ root.methods.gotoJiaoyi = function () {
   this.$router.push({name: 'mobileTradingHallDetail'});
 }
 
+/*---------------------- 跳转合约项目 ---------------------*/
+root.methods.gotoContract = function () {
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+}
+
 root.methods.gotoRecommend = function () {
   this.$router.push({name: 'H5Recommend'});
 }

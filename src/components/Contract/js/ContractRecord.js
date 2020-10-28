@@ -27,6 +27,12 @@ root.mounted = function () {}
 root.beforeDestroy = function () {}
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
+
+// 判断是否是手机
+root.computed.isMobile = function () {
+  return this.$store.state.isMobile
+}
+
 root.computed.serverTime = function () {
   return new Date().getTime();
 }

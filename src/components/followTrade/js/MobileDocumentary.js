@@ -266,6 +266,10 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     this.openPop('大神不能跟单大神')
     return;
   }
+  if (data.errorCode == 6) {
+    this.openPop('只能跟随一个大神')
+    return;
+  }
   if (data.errorCode == 10) {
     this.openPop('跟随失败')
     return;

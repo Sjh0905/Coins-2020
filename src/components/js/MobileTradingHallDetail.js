@@ -1654,6 +1654,10 @@ root.methods.gotoContract = function () {
 root.methods.gotoJiaoyi = function () {
   this.$router.push({name: 'mobileTradingHallDetail'});
 }
+/*---------------------- 跳转合约项目 ---------------------*/
+root.methods.gotoContract = function () {
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+}
 
 //移动端是否显示右侧菜单
 root.methods.clickChangePopOpen = function () {

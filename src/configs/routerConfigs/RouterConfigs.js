@@ -210,6 +210,20 @@ root.routes.push({
 })
 
 
+// 合约首次进入弹框记录
+root.routes.push({
+  path: '/index/contractRiskWarning',
+  name: 'contractRiskWarning',
+  meta: {
+    requireLogin: true,
+    pcname: '',
+    h5name: 'contractRiskWarning',
+  },
+  caseSensitive: true,
+  component: resolve => require(['@/components/vue/ContractRiskWarning'], resolve)
+})
+
+
 /*-----------------  跟单H5 begin  ------------------------*/
 //H5  跟单首页
 root.routes.push({
@@ -284,7 +298,18 @@ root.routes.push({
   component: resolve => require(['@/components/followTrade/vue/MobileMyFollowOrder'], resolve)
 })
 /*-----------------  跟单H5 end  ------------------------*/
-
+//H5  划转
+root.routes.push({
+  path: '/index/mobileWebTransferContract',
+  name: 'mobileWebTransferContract',
+  meta: {
+    requireLogin: true,
+    pcname: '',
+    h5name: 'mobileWebTransferContract',
+  },
+  caseSensitive: true,
+  component: resolve => require(['@/components/vue/MobileWebTransferContract'], resolve)
+})
 
 /*-----------------  基金理财H5 begin  ------------------------*/
 // 基金理财
@@ -1390,6 +1415,9 @@ root.routes.push({
       component: resolve => require(['@/components/mobileVue/NewH5HomePage'], resolve),
     },
 
+
+
+
     {
       path: 'mobileHeatList',
       name: 'mobileHeatList',
@@ -2090,9 +2118,9 @@ root.routes.push({
               caseSensitive: true,
               component: resolve => require(['@/components/Contract/vue/PropertyAssets'], resolve),
             },
+
           ]
         },
-
 
 
         {

@@ -1,3 +1,9 @@
+.mobile-follow-trade{
+  background: #142030;
+  height: 100%;
+  /*overflow-y: hidden;*/
+}
+
 /*下方内容*/
 
 .recharge-record-container {
@@ -168,7 +174,7 @@
 }
 
 .state_text {
-  width: 90%;
+  width: 86%;
   display: inline-block;
 }
 
@@ -388,33 +394,46 @@
 }
 
 /*placeholder样式 begin*/
-.wallet-to-account-content input::placeholder {
-  color: #0D0E23;
+.block-input input::placeholder {
+
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
 }
 
-.wallet-to-account-content input::-moz-placeholder {
-  color: #0D0E23;
+.block-input input::-moz-placeholder {
+
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
 }
 
-.wallet-to-account-content input::-webkit-input-placeholder {
-  color: #0D0E23;
+.block-input input::-webkit-input-placeholder {
+
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
 }
 
-.wallet-to-account-content input:-ms-input-placeholder {
-  color: #0D0E23;
+.block-input input:-ms-input-placeholder {
+
+  font-size: 0.32rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
 }
 /*placeholder样式 end*/
 
 .wallet-to-account {
-  width: 410px;
-  height: 88px;
-  background-color: #fff;
-  box-shadow:0px 0px 10px 0px rgba(0,0,0,0.08);
-  margin-bottom: 15px;
+  /*width: 410px;*/
+  height: 1.76rem;
+  background: #172841;
+  border-radius: 0.03rem;
+  /*box-shadow:0px 0px 10px 0px rgba(0,0,0,0.08);*/
+  margin-bottom: 0.3rem;
 }
 
 .wallet-to-account-left {
-  width: 87px;
+  width: 2rem;
   height: 100%;
   /*background-color: #ccc;*/
   /*text-align: center;*/
@@ -423,6 +442,11 @@
 }
 
 .wallet-account-change {
+
+  font-size: 0.24rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #CFD3E9;
   text-align: center;
 }
 
@@ -433,15 +457,18 @@
 .wallet-to-account-content {
   flex: 1;
   /*width: 100%;*/
-  line-height:44px;
+  line-height:0.88rem;
   border: 0;
   box-sizing: border-box;
   background-color: transparent;
-  color: #0D0E23;
+  font-size: 0.28rem;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #CFD3E9;
 }
 
 .wallet-to-account-content-line {
-  border-bottom: 1px solid #EFF0FF;
+  border-bottom: 1px solid #223349;
   box-sizing: border-box;
 }
 
@@ -458,7 +485,7 @@
 /*}*/
 
 .wallet-to-account-right {
-  width: 92px;
+  width: 2rem;
   height: 100%;
   justify-content: center;
   align-items: center;
@@ -470,7 +497,7 @@
 }
 
 .block-input {
-  width: 410px;
+  /*width: 410px;*/
   height: 87px;
   font-size: 12px;
   color: #6B7DA2;
@@ -484,26 +511,30 @@
 
 
 .block-input input {
-  height: 40px;
-  border: 1px solid #E0E1F4;
-  padding-left: 15px;
+  /*height: 0.8rem;*/
+  /*border: 1px solid #E0E1F4;*/
+  /*padding-left: 15px;*/
   box-sizing: border-box;
-  width: 100%;
+  width: 68%;
+  background-color: #142030;
+  border: 0;
+  font-size: 0.28rem;
+  color: #CFD3E9;
 }
 
 
 .inputInner {
   display: inline-block;
   width: 100%;
-  height: 40px;
+  height: 0.8rem;
 }
 
 .inputInner >>> .el-input__inner {
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 0.8rem;
+  line-height: 0.8rem;
   /*margin-top: 7px;*/
-  padding-left: 15px;
+  padding-left: 0.3rem;
   -webkit-appearance: none;
   background-color: #FFF;
   background-image: none;
@@ -518,23 +549,29 @@
   -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
   transition: border-color .2s cubic-bezier(.645,.045,.355,1);
 }
-.inputInner >>> .el-select-dropdown {
+.inputInner .el-select >>> .el-select-dropdown {
   min-width: 331.219px;
   transform-origin: center top;
   z-index: 2005;
   position: absolute;
-  top: 123px;
+  top: 123px !important;
   left: 14px;
- }
+}
+
 .available-right {
-  float: right;
+  /*float: right;*/
+
+  font-size: 0.24rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #3E536C;
 }
 
 .amount-input {
-  height: 40px;
-  border: 1px solid #E0E1F4;
-  background: #fff;
-  border-radius: 1px;
+  height: 0.8rem;
+  /*border: 1px solid #E0E1F4;*/
+  /*background: #fff;*/
+  /*border-radius: 1px;*/
   overflow: hidden;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -548,8 +585,9 @@
 .amount-all {
   flex: 1;
   text-align: center;
-  line-height: 40px;
-  color: #3576F5;
+  line-height: 0.7rem;
+  color: #CFD3E9;
+  padding-left: 0.2rem;
 }
 .amount-not-empty {
   color: #FD5555;
@@ -558,22 +596,22 @@
 .pop-footer {
   width: 100%;
   text-align: right;
-  padding-right: 25px;
+  padding-right: 0.5rem;
   /*margin-top: 15px;*/
 }
 
 
 /*认证弹框样式*/
 .header_xuzhi {
-  padding-left: 25px;
+  padding-left: 0.5rem;
 }
 
 .pop-recharge {
-  padding: 35px 25px;
-  font-size:16px;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  color: #0D0E23;
+  padding: 0.7rem 0.5rem;
+  font-size: 0.28rem;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 400;
+  color: #CFD3E9;
   /*padding-bottom: 25px;*/
 }
 .pop-recharge-bottom {
@@ -594,4 +632,153 @@
 }
 .m-r {
   margin-left: 24px;
+}
+
+
+/*非ios头部 样式Start*/
+.fund-buy-header-title {
+  height: 0.88rem;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  z-index: 100;
+  background-color: #142030;
+  border-bottom: 0.02rem solid #223349 ;
+}
+.fund-buy {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.3rem;
+  width: 0.48rem;
+  height: 0.48rem;
+}
+
+.fund-buy-header-title-back-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.88rem;
+  height: 0.88rem;
+}
+
+.fund-buy-header-title-back-icon-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.32rem;
+  transform: translate(-50%,-50%);
+}
+.fund-buy-header-title-text {
+  height:0.44rem;
+  font-size:0.32rem;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(11,11,39,1);
+  line-height:0.44rem;
+}
+/*非ios头部 样式End*/
+
+.conter-hauzhuan {
+  padding: 0.3rem;
+}
+.conter-hauzhuan-title {
+  margin-top: 0.88rem;
+  height: 0.72rem;
+  font-size: 0.48rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #CFD3E9;
+  line-height: 0.72rem;
+  padding-bottom: 0.2rem;
+}
+.conter-input {
+
+  height: 0.88rem;
+  background: #172841;
+  border-radius: 0.03rem;
+}
+.currency {
+  flex:26;
+  text-align: left;
+  /*flex:19.9;*/
+}
+.block-input {
+  /*width: 410px;*/
+  margin-top: 0.2rem;
+  height: 87px;
+  font-size: 12px;
+  color: #6B7DA2;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  margin-bottom: 5px;
+}
+.block-input-title {
+  margin-bottom: 10px;
+}
+.inputInner {
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+}
+.amount-not-empty {
+  color: #FD5555;
+}
+
+.inputInner >>> .el-input__inner {
+  width: 100%;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  /*margin-top: 7px;*/
+  padding-left: 0.3rem;
+  -webkit-appearance: none;
+  background: #172841;
+  background-image: none;
+  border-radius: 0.03rem;
+  border: 1px solid #172841;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  /*font-size: 0.32rem;*/
+  font-family: Roboto-Bold, Roboto;
+  font-weight: bold;
+  color: #CFD3E9;
+  display: inline-block;
+  font-size: inherit;
+  outline: 0;
+  -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+}
+.box-inp {
+  height: 0.7rem;
+  border-bottom: 1px solid #3E536C;
+  margin-bottom: 0.1rem;
+}
+.box-span {
+  font-size: 0.28rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #3E536C;
+  padding-left: 0.2rem;
+}
+.box-btn-con {
+  /*width: 100%;*/
+}
+.box-btn {
+  position: fixed;
+  left: 0.3rem;
+  bottom: 0.3rem;
+  width: 6.9rem;
+  height: 0.88rem;
+  line-height: 0.88rem;
+  font-size: 0.28rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #FFFFFF;
+  text-align: center;
+  background: linear-gradient(270deg, #3576F5 0%, #459AF5 100%);
+  box-shadow: 0rem 0.2rem 0.24rem -0.12rem rgba(0, 2, 40, 0.2);
+  border-radius: 0.03rem;
 }
