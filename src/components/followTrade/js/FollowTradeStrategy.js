@@ -92,7 +92,7 @@ root.computed.fixedAmountPr3 = function () {
 }
 //什么类型的跟单
 root.computed.isSwitchOrder = function () {
-  return this.$store.state.isSwitchOrder;
+  return this.$route.query.isSwitchOrder || this.$store.state.isSwitchOrder;
 }
 
 
@@ -238,8 +238,8 @@ root.methods.error_postCommitFee = function (err) {
 }
 
 // 跳转到带单管理
-root.methods.goToTapeListManage = function () {
-  this.$router.push({name:'tapeListManage'})
+root.methods.goToTapeListManage = function (isSwitchOrder) {
+  this.$router.push({name:'tapeListManage',query:{isSwitchOrder:this.isSwitchOrder}})
 }
 
 // 切换历史跟单和跟随者

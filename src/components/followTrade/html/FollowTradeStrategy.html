@@ -27,7 +27,7 @@
           </div>
           <div class="trade-top-banner-text">{{userId}}</div>
         </div>
-        <div class="follow-management pointer" @click="goToTapeListManage" v-if="isTapeList">
+        <div class="follow-management pointer" @click="goToTapeListManage(isSwitchOrder)" v-if="isTapeList">
           <img src="../assets/setting_icon.png" alt="">
           <!--带单管理-->
           <span>{{$t('tapeListManagement')}}</span>

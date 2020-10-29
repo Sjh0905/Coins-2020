@@ -133,7 +133,7 @@ root.computed.windowWidth = function () {
 }
 //什么类型的跟单
 root.computed.isSwitchOrder = function () {
-  return this.$store.state.isSwitchOrder;
+  return this.$route.query.isSwitchOrder;
 }
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}

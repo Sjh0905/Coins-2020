@@ -90,12 +90,17 @@ root.computed.fixedAmountPr4 = function () {
 }
 //什么类型的跟单
 root.computed.isSwitchOrder = function () {
-  return this.$store.state.isSwitchOrder;
+  return this.$route.query.isSwitchOrder;
 }
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+root.methods.goToZhuYe = function(isSwitchOrder) {
+  this.$router.push({name:'followTradeStrategy',query:{isSwitchOrder:this.isSwitchOrder,}})
+
+}
 
 //固定比例-金额选择
 root.methods.fixedAmountPr = function (type) {

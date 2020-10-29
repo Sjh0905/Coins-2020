@@ -124,7 +124,7 @@ root.computed.bindIdentify = function () {
 }
 //什么类型的跟单
 root.computed.isSwitchOrder = function () {
-  return this.$store.state.isSwitchOrder;
+  return this.switchOrder;
 }
 
 /*------------------------------ 观察 -------------------------------*/
@@ -173,7 +173,7 @@ root.methods.jumpToBack = function () {
   // this.$router.push({'path':'/index/newH5homePage'})
 }
 //跳转个人镜像交易
-root.methods.goToMobileFollowTradeStrategy = function () {
+root.methods.goToMobileFollowTradeStrategy = function (switchOrder) {
   if (!this.bindIdentify) {
     this.popIdenOpen = true
     return
@@ -188,7 +188,7 @@ root.methods.goToMobileFollowTradeStrategy = function () {
     return
   }
 
-  this.$router.push({'path':'/index/mobileFollowTradeStrategy'})
+  this.$router.push({name:'mobileFollowTradeStrategy',query:{isSwitchOrder:this.switchOrder}})
 }
 // 跳转我的镜像交易
 root.methods.goToDocumentary = function (item) {
@@ -219,7 +219,7 @@ root.methods.goToDocumentary = function (item) {
 //   this.$router.push({name: 'mobileDocumentaryGod'})
 // }
 // 返回我的镜像交易，正在跟随
-root.methods.goToMobileMyFollowOrder = function () {
+root.methods.goToMobileMyFollowOrder = function (switchOrder) {
   if (!this.bindIdentify) {
     this.popIdenOpen = true
     return
@@ -234,7 +234,7 @@ root.methods.goToMobileMyFollowOrder = function () {
     return
   }
 
-  this.$router.push({name:'mobileMyFollowOrder'})
+  this.$router.push({name:'mobileMyFollowOrder',query:{isSwitchOrder:this.switchOrder}})
 }
 
 

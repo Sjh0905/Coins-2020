@@ -22,10 +22,10 @@
     </div>
 
     <div class="with-list flex">
-      <div class="with-billboard" :class="this.$store.state.isSwitchOrder == 'SPOT' ? '' : 'switchCss'" @click="switchingOrders('SPOT')">现货带单</div>
-      <div class="with-billboard" :class="this.$store.state.isSwitchOrder == 'CONTRACT' ? '' : 'switchCss'" @click="switchingOrders('CONTRACT')">合约带单</div>
-      <div class="my-with-single" @click="goToMobileMyFollowOrder">我的跟单</div>
-      <img @click="goToMobileMyFollowOrder" class="my-with-single-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
+      <div class="with-billboard" :class="isSwitchOrder == 'SPOT' ? '' : 'switchCss'" @click="switchingOrders('SPOT')">现货带单</div>
+      <div class="with-billboard" :class="isSwitchOrder == 'CONTRACT' ? '' : 'switchCss'" @click="switchingOrders('CONTRACT')">合约带单</div>
+      <div class="my-with-single" @click="goToMobileMyFollowOrder(switchOrder)">我的跟单</div>
+      <img @click="goToMobileMyFollowOrder(switchOrder)" class="my-with-single-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
     </div>
 <!--    <div class="data-update">数据每小时更新一次</div>-->
 

@@ -75,7 +75,7 @@ root.computed.isLogin = function () {
 }
 //什么类型的跟单
 root.computed.isSwitchOrder = function () {
-  return this.$store.state.isSwitchOrder;
+  return this.switchOrder;
 }
 
 root.computed.userId = function () {
@@ -167,7 +167,7 @@ root.methods.jumpToBack = function () {
   this.$router.push({'path':'/index/newH5homePage'})
 }
 //跳转个人镜像交易
-root.methods.goTofollowTradeStrategy = function () {
+root.methods.goTofollowTradeStrategy = function (switchOrder) {
   // // 如果没有实名认证不允许报名
   if (!this.bindIdentify) {
     this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
@@ -185,7 +185,9 @@ root.methods.goTofollowTradeStrategy = function () {
     this.popWindowOpenShiM = true
     return
   }
-  this.$router.push({'path':'/index/followTradeStrategy'})
+  // this.$router.push({'path':'/index/followTradeStrategy'})
+  this.$router.push({name:'followTradeStrategy',query:{isSwitchOrder:this.switchOrder,}})
+
 }
 // 跳转我的镜像交易
 root.methods.goToDocumentary = function (userId,fee,feeType) {
@@ -222,7 +224,7 @@ root.methods.goToDocumentary = function (userId,fee,feeType) {
 //   this.$router.push({name: 'mobileDocumentaryGod'})
 // }
 // 返回我的镜像交易，正在跟随
-root.methods.goToMyFollowOrder = function () {
+root.methods.goToMyFollowOrder = function (switchOrder) {
   // // 如果没有实名认证不允许报名
   if (!this.bindIdentify) {
     this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
@@ -240,7 +242,7 @@ root.methods.goToMyFollowOrder = function () {
     this.popWindowOpenShiM = true
     return
   }
-  this.$router.push({name:'myFollowOrder'})
+  this.$router.push({name:'myFollowOrder',query:{isSwitchOrder:this.switchOrder}})
 }
 
 

@@ -16,9 +16,9 @@
       </router-link>
       <span class="spanbf">></span>
       <!--我的主页-->
-      <router-link :to="{name:'followTradeStrategy'}" class="header-title">
+      <span @click="goToZhuYe(isSwitchOrder)" class="header-title">
         {{$t('myHomePage')}}
-      </router-link>
+      </span>
       <span class="spanbf">></span>
       <!-- 带单管理-->
       <span :to="{name:'followTrade'}" class="">

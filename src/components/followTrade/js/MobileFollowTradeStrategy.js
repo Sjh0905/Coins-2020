@@ -51,7 +51,7 @@ root.computed.isAndroid = function () {
 }
 //什么类型的跟单
 root.computed.isSwitchOrder = function () {
-  return this.$store.state.isSwitchOrder;
+  return this.$route.query.isSwitchOrder;
 }
 
 root.computed.contractType = function () {
@@ -156,8 +156,8 @@ root.methods.jumpToFollowTrade = function () {
   this.$router.go(-1)
 }
 // 个人设置
-root.methods.personalSetting = function () {
-  this.$router.push({name:'mobileTapeListManage'})
+root.methods.personalSetting = function (isSwitchOrder) {
+  this.$router.push({name:'mobileTapeListManage',query:{isSwitchOrder:this.isSwitchOrder}})
 }
 
 /*---------------------- 保留小数 begin ---------------------*/
