@@ -1149,7 +1149,8 @@ root.methods.gotoContract = function () {
     this.$router.push('/index/sign/login')
     return;
   }
-  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+  // window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
 }
 
 /*---------------------- 跳入到会员卡页面 ---------------------*/
@@ -1163,9 +1164,9 @@ root.methods.gotoJiaoyi = function () {
 }
 
 /*---------------------- 跳转合约项目 ---------------------*/
-root.methods.gotoContract = function () {
-  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
-}
+// root.methods.gotoContract = function () {
+//   window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+// }
 
 root.methods.gotoRecommend = function () {
   this.$router.push({name: 'H5Recommend'});

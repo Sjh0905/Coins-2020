@@ -1647,17 +1647,22 @@ root.methods.gotoContract = function () {
     this.$router.push('/index/sign/login')
     return;
   }
-  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+  // window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
 }
 
 /*---------------------- 跳入到交易页面 ---------------------*/
 root.methods.gotoJiaoyi = function () {
   this.$router.push({name: 'mobileTradingHallDetail'});
 }
-/*---------------------- 跳转合约项目 ---------------------*/
-root.methods.gotoContract = function () {
-  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
-}
+// /*---------------------- 跳转合约项目 ---------------------*/
+// root.methods.gotoContract = function () {
+//   if(!this.isLogin){
+//     this.$router.push('/index/sign/login')
+//     return;
+//   }
+//
+// }
 
 //移动端是否显示右侧菜单
 root.methods.clickChangePopOpen = function () {
