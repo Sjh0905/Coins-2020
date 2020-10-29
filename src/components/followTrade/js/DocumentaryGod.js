@@ -126,63 +126,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
   // console.log("re_postJoinGroup + data=====",data)
   //
 
-  if (data.errorCode == 3) {
-    this.openPop(this.$t('canNotFollowMyself'))
-    return;
-  }
 
-  if (data.errorCode == 4) {
-    this.openPop(this.$t('canNotFollowMyself2'))
-    return;
-  }
-  if (data.errorCode == 5) {
-    this.openPop(this.$t('大神不能跟单大神'))
-    return;
-  }
-  if (data.errorCode == 10) {
-    this.openPop(this.$t('followDetails'))
-    return;
-  }
-  if (data.errorCode == 8 || data.errorCode == 12) {
-    this.openPop(this.$t('followDetails_1'))
-    return;
-  }
-  if (data.errorCode == 9) {
-    this.openPop(this.$t('followDetails_2'))
-    return;
-  }
-  if (data.errorCode == 15) {
-    this.openPop(this.$t('followDetails_3'))
-    return;
-  }
-  if (data.errorCode == 7) {
-    this.openPop(this.$t('followDetails_4'))
-    return;
-  }
-  if (data.errorCode == 11) {
-    this.openPop(this.$t('followDetails_5'))
-    return;
-  }
-  if (data.errorCode == 16) {
-    this.openPop('用户已经有仓位了不能跟随大神')
-    return;
-  }
-  if (data.errorCode == 17) {
-    this.openPop('用户和大神的杠杆倍数不一致')
-    return;
-  }
-  if (data.errorCode == 18) {
-    this.openPop('用户和大神的逐全仓模式不一致')
-    return;
-  }
-  if (data.errorCode == 19) {
-    this.openPop('用户和大神的单双仓模式不一致')
-    return;
-  }
-  if (data.errorCode != 0) {
-    this.openPop(this.$t('systemError'))
-    return;
-  }
   if (data.errorCode == 0) {
     this.openPop(this.$t('followSuccess'),1)
     setTimeout(() => {
@@ -193,6 +137,85 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     }, 1000)
     return;
   }
+
+  if (data.errorCode) {
+    data.errorCode == 1 &&  this.openPop(this.$t('systemError'));
+    data.errorCode == 3 &&  this.openPop(this.$t('canNotFollowMyself'));
+    data.errorCode == 4 &&  this.openPop(this.$t('canNotFollowMyself2'));
+    data.errorCode == 5 &&  this.openPop(this.$t('大神不能跟单大神'));
+    data.errorCode == 6 &&  this.openPop(this.$t('用户合约跟单只能跟随一个大神'));
+    data.errorCode == 7 &&  this.openPop(this.$t('followDetails_4'));
+    data.errorCode == 8 &&  this.openPop(this.$t('followDetails_1'));
+    data.errorCode == 9 &&  this.openPop(this.$t('followDetails_2'));
+    data.errorCode == 10 &&  this.openPop(this.$t('followDetails'));
+    data.errorCode == 11 &&  this.openPop(this.$t('followDetails_5'));
+    data.errorCode == 12 &&  this.openPop(this.$t('followDetails_1'));
+    data.errorCode == 15 &&  this.openPop(this.$t('followDetails_3'));
+    data.errorCode == 16 &&  this.openPop(this.$t('用户已经有仓位了不能跟随大神'));
+    data.errorCode == 17 &&  this.openPop(this.$t('用户和大神的杠杆倍数不一致'));
+    data.errorCode == 18 &&  this.openPop(this.$t('用户和大神的逐全仓模式不一致'));
+    data.errorCode == 19 &&  this.openPop(this.$t('用户和大神的单双仓模式不一致'));
+  }
+
+  // if (data.errorCode == 3) {
+  //   this.openPop(this.$t('canNotFollowMyself'))
+  //   return;
+  // }
+  //
+  // if (data.errorCode == 4) {
+  //   this.openPop(this.$t('canNotFollowMyself2'))
+  //   return;
+  // }
+  // if (data.errorCode == 5) {
+  //   this.openPop(this.$t('大神不能跟单大神'))
+  //   return;
+  // }
+  // if (data.errorCode == 7) {
+  //   this.openPop(this.$t('followDetails_4'))
+  //   return;
+  // }
+  // if (data.errorCode == 8 || data.errorCode == 12) {
+  //   this.openPop(this.$t('followDetails_1'))
+  //   return;
+  // }
+  // if (data.errorCode == 9) {
+  //   this.openPop(this.$t('followDetails_2'))
+  //   return;
+  // }
+  // if (data.errorCode == 10) {
+  //   this.openPop(this.$t('followDetails'))
+  //   return;
+  // }
+  // if (data.errorCode == 11) {
+  //   this.openPop(this.$t('followDetails_5'))
+  //   return;
+  // }
+  //
+  // if (data.errorCode == 15) {
+  //   this.openPop(this.$t('followDetails_3'))
+  //   return;
+  // }
+  //
+  // if (data.errorCode == 16) {
+  //   this.openPop('用户已经有仓位了不能跟随大神')
+  //   return;
+  // }
+  // if (data.errorCode == 17) {
+  //   this.openPop('用户和大神的杠杆倍数不一致')
+  //   return;
+  // }
+  // if (data.errorCode == 18) {
+  //   this.openPop('用户和大神的逐全仓模式不一致')
+  //   return;
+  // }
+  // if (data.errorCode == 19) {
+  //   this.openPop('用户和大神的单双仓模式不一致')
+  //   return;
+  // }
+  // if (data.errorCode != 0) {
+  //   this.openPop(this.$t('systemError'))
+  //   return;
+  // }
 
   // if (data.errorCode) {
   //   if (
