@@ -64,7 +64,7 @@ root.methods.jumpToFollowTrade = function () {
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {
   // this.$router.push({name:'mobileMyFollowOrder'})
-  this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,feeType:this.$route.query.feeType,fee:this.$route.query.fee,days:this.$route.query.days}})
+  this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,feeType:this.$route.query.feeType,fee:this.$route.query.fee,days:this.$route.query.days,isSwitchOrder:this.$route.query.isSwitchOrder}})
 }
 
 //大神操作记录

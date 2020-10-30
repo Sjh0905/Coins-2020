@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="follow-data" v-if="listGod.length != 0" v-for="(item,index) in listGod" @click="goToDocumentary(item.userId,item.fee,item.feeType)">
+    <div class="follow-data" v-if="listGod.length != 0" v-for="(item,index) in listGod" @click="goToDocumentary(item.userId,item.fee,item.feeType,switchOrder)">
       <div class="follow-data-box flex">
         <img class="follow-data-box-img" src="../assets/big-brother.png" alt="">
         <div class="follow-data-box-img-box">{{item.userId}}</div>

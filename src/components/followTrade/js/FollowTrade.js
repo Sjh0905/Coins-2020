@@ -190,7 +190,7 @@ root.methods.goTofollowTradeStrategy = function (switchOrder) {
 
 }
 // 跳转我的镜像交易
-root.methods.goToDocumentary = function (userId,fee,feeType) {
+root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
 
   // // 如果没有实名认证不允许报名
   if (!this.bindIdentify) {
@@ -217,7 +217,7 @@ root.methods.goToDocumentary = function (userId,fee,feeType) {
     return
   }
   // this.$router.push({name:'mobileDocumentary',params: {item:item}})
-  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId)}})
+  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isSwitchOrder:this.switchOrder}})
 }
 // // 去大神页面
 // root.methods.goToDocumentaryGod = function () {

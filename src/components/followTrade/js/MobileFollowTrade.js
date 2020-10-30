@@ -191,7 +191,7 @@ root.methods.goToMobileFollowTradeStrategy = function (switchOrder) {
   this.$router.push({name:'mobileFollowTradeStrategy',query:{isSwitchOrder:this.switchOrder}})
 }
 // 跳转我的镜像交易
-root.methods.goToDocumentary = function (item) {
+root.methods.goToDocumentary = function (item,switchOrder) {
 
   if (!this.bindIdentify) {
     this.popIdenOpen = true
@@ -212,7 +212,7 @@ root.methods.goToDocumentary = function (item) {
     return
   }
   // this.$router.push({name:'mobileDocumentary',params: {item:item}})
-  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId)}})
+  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isSwitchOrder:this.switchOrder}})
 }
 // // 去大神页面
 // root.methods.goToDocumentaryGod = function () {

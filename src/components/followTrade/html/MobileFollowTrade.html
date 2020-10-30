@@ -30,7 +30,7 @@
 <!--    <div class="data-update">数据每小时更新一次</div>-->
 
     <!--遍历大佬详细信息Start-->
-    <div class="big-brother-start" v-if="listGod.length != 0 && !loading" v-for="(item,index) in listGod" @click="goToDocumentary(item)">
+    <div class="big-brother-start" v-if="listGod.length != 0 && !loading" v-for="(item,index) in listGod" @click="goToDocumentary(item,switchOrder)">
     <!--大佬头像Start-->
       <div class="big-brother-large-box flex">
         <div>
