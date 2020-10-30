@@ -64,6 +64,23 @@ root.computed.isAndroid = function () {
 root.computed.isSwitchOrder = function () {
   return this.$route.query.isSwitchOrder;
 }
+
+root.computed.contractType = function () {
+
+  return {
+    'LIMIT': this.$t('limitCon'),
+    'MARKET': this.$t('marketCon'),
+    'STOP': this.$t('stopCon'),
+    'STOP_MARKET': this.$t('stopMarketCon'),
+    'TAKE_PROFIT': this.$t('takeProfitCon'),
+    'TAKE_PROFIT_MARKET': this.$t('takeProfitMarketCon'),
+    'TRAILING_STOP_MARKET': this.$t('trailingStopMarketCon'),
+    'BUY_LIMIT': this.$t('buyIn'),
+    'BUY_MARKET' : this.$t('buyOutshi'),
+    'SELL_LIMIT': this.$t('selllOut'),
+    'SELL_MARKET': this.$t('selllOutshi'),
+  }
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/

@@ -46,8 +46,10 @@
           </div>
           <!--收益率-->
           <div class="follow-wi">
-            <div class="follow-gru">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
-            <div class="follow-gru2">{{$t('totalIncomeRate')}}</div>
+            <div class="follow-gru" v-if="isSwitchOrder == 'SPOT'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
+            <div class="follow-gru" v-if="isSwitchOrder == 'CONTRACT'">{{godInfo.rate ? toFixed(godInfo.rate, 2) : '0'}}</div>
+            <div class="follow-gru2" v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
+            <div class="follow-gru2" v-if="isSwitchOrder == 'CONTRACT'">收益 (USDT)</div>
           </div>
         </div>
 
@@ -97,9 +99,9 @@
               <!--交易对-->
               <div class="application_header_div">{{item.symbol.replace('_','/')}}</div>
               <!--类型-->
-              <div class="application_header_div" :class="item.type=='BUY_LIMIT'?'text-green':'text-red'">
+              <div class="application_header_div">
                 <!--买入/卖出-->
-                {{item.type == 'BUY_LIMIT'? $t('buyIn'):$t('selllOut')}}
+                {{contractType[item.orderType]}}
               </div>
               <!--价格-->
               <div class="application_header_div">{{toFixed(item.price,4) || '0'}}</div>

@@ -49,6 +49,23 @@ root.computed.isAndroid = function () {
 root.computed.isSwitchOrder = function () {
   return this.$route.query.isSwitchOrder;
 }
+
+root.computed.contractType = function () {
+
+  return {
+    'LIMIT': this.$t('限价单'),
+    'MARKET': this.$t('市价单'),
+    'STOP': this.$t('止损限价单'),
+    'STOP_MARKET': this.$t('止损市价单'),
+    'TAKE_PROFIT': this.$t('止盈限价单'),
+    'TAKE_PROFIT_MARKET': this.$t('止盈市价单'),
+    'TRAILING_STOP_MARKET': this.$t('跟踪止损单'),
+    'BUY_LIMIT': this.$t('限价买入'),
+    'BUY_MARKET' : this.$t('市价买入'),
+    'SELL_LIMIT': this.$t('限价卖出'),
+    'SELL_MARKET': this.$t('市价卖出'),
+  }
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
