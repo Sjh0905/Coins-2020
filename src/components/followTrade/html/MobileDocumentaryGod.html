@@ -47,8 +47,10 @@
 
       <div class="mobile-trade-data-item">
 <!--        <div class="mobile-trade-data text-green">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0,2) : '- -'}}%</div>-->
-        <div class="mobile-trade-data text-green">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0, 2) : '0'}}%</div>
-        <div>收益率</div>
+        <div class="mobile-trade-data text-green" v-if="isSwitchOrder == 'SPOT'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0, 2) : '0'}}%</div>
+        <div class="mobile-trade-data text-green" v-if="isSwitchOrder == 'CONTRACT'">{{godInfo.rate ? toFixed(godInfo.rate , 2) : '0'}}</div>
+        <div v-if="isSwitchOrder == 'SPOT'">收益率</div>
+        <div v-if="isSwitchOrder == 'CONTRACT'">收益 (USDT)</div>
       </div>
     </div>
   </div>
@@ -110,6 +112,7 @@
   </div>
   <!--内容底部-->
   <div class="mobile-trade-no-data" v-if="!loading">
+
 
     <div class="mobile-trade-open-exchange" >
       <div class="mobile-trade-open-exchange-text flex">
