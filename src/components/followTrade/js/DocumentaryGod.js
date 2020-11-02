@@ -93,6 +93,10 @@ root.methods.toggleType = function (type) {
 root.methods.jumpToFollowTrade = function () {
   this.$router.push({name:'mobileFollowTrade'})
 }
+// 返回跟单首页
+root.methods.goToFollowTrade = function (isSwitchOrder) {
+  this.$router.push({name:'followTrade',query:{isSwitchOrder:this.isSwitchOrder}})
+}
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {
   this.popWindowOpen = true

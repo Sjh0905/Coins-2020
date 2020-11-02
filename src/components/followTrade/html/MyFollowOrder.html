@@ -94,7 +94,7 @@
         <div class="time">{{formatDateUitl(item.followTime)}}</div>
 <!--        <div class="exchange-pair">{{item.symbol.replace('_','/')}}</div>-->
         <!--现货-->
-        <div class="type">{{item.type == 'SPOT'? $t('spot'):'--'}}</div>
+        <div class="type">{{item.type == 'SPOT' ? $t('spot') : $t('合约')}}</div>
         <!--固定金额/固定比例-->
         <div class="follow-type">{{item.followType == 'LOT'? $t('fixedAmount') +'：' + item.lot || 0 +'USDT' :$t('fixedProportion')}}</div>
         <div class="total-acount">{{toFixed(item.count,0) || '0'}}</div>

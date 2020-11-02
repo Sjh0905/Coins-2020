@@ -163,6 +163,12 @@ root.methods.re_delFollowList = function (data) {
     this.openPop('用户有仓位，无法取消跟随',0)
     return
   }
+  if(data.errorCode == 5){
+    this.openPop('已经取消合约跟单，请稍等利润结算',1)
+    this.postMyDocumentary()
+    this.delFollowClose()
+    return
+  }
   if(data.errorCode != 0){
     //系统错误
     this.openPop(this.$t('systemError'),0)

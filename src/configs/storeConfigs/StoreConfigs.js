@@ -270,7 +270,7 @@ store.state.initPriceSymbol = []
 //手机区域number
 store.state.areaCode = '0086'
 //切换跟单类型
-store.state.isSwitchOrder = 'SPOT'
+store.state.isSwitchOrder = ''
 
 /**
  * 同步修改state
