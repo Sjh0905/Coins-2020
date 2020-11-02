@@ -93,10 +93,10 @@ root.methods.toggleType = function (type) {
 root.methods.jumpToFollowTrade = function () {
   this.$router.push({name:'mobileFollowTrade'})
 }
-// 返回跟单首页
-root.methods.goToFollowTrade = function (isSwitchOrder) {
-  this.$router.push({name:'followTrade',query:{isSwitchOrder:this.isSwitchOrder}})
-}
+// // 返回跟单首页
+// root.methods.goToFollowTrade = function (isSwitchOrder) {
+//   this.$router.push({name:'followTrade',query:{isSwitchOrder:this.isSwitchOrder}})
+// }
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {
   this.popWindowOpen = true
@@ -118,7 +118,7 @@ root.methods.fixedType = function (type) {
 root.methods.postDocumentaryImmediately = function () {
   this.follow = false
   let canSend = true
-  if (this.followType == 'LOT' && isSwitchOrder == 'SPOT' && this.fixedAmountLot == '') {
+  if (this.followType == 'LOT' && this.isSwitchOrder == 'SPOT' && this.fixedAmountLot == '') {
     this.openPop(this.$t('cannotBeEmpty'))
     this.follow = true
     return
