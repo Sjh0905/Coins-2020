@@ -40,6 +40,9 @@ root.data = function () {
   // });
 // }
 root.created = function () {
+  if(this.$route.query.isSwitchOrder == 'CONTRACT'){
+    this.switchOrder = 'CONTRACT'
+  }
 
   this.GET_AUTH_STATE()
 

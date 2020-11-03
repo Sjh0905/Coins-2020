@@ -32,6 +32,9 @@ root.data = function () {
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
+  if(this.$route.query.isSwitchOrder == 'CONTRACT'){
+    this.switchOrder = 'CONTRACT'
+  }
 
   this.GET_AUTH_STATE()
 
@@ -153,6 +156,7 @@ root.methods.goToSecurityCenter = function () {
 root.methods.switchingOrders = function (orderType) {
   this.switchOrder = orderType
   this.$store.commit('IS_SWITCHORDER', orderType);
+  this.$router.push({name:'followTrade',query:{isSwitchOrder:orderType}})
   // console.info('this.switchOrder=======',this.switchOrder,orderType)
   this.getBigBrotherList()
 }

@@ -6,11 +6,11 @@
 <!--        &lt;!&ndash;镜像交易&ndash;&gt;-->
 <!--        {{$t('followOrder')}}-->
 <!--      </router-link>-->
-      <router-link :to="{name:'followTrade'}" class="header-title" v-if="isSwitchOrder == 'SPOT'">
+      <router-link to="/index/followTrade" class="header-title" v-if="isSwitchOrder == 'SPOT'">
         <!--现货带单-->
         {{$t('现货带单')}}
       </router-link>
-      <router-link :to="{name:'followTrade'}" class="header-title" v-if="isSwitchOrder == 'CONTRACT'">
+      <router-link to="/index/followTrade?isSwitchOrder=CONTRACT" class="header-title" v-if="isSwitchOrder == 'CONTRACT'">
         <!--合约带单-->
         {{$t('合约带单')}}
       </router-link>
