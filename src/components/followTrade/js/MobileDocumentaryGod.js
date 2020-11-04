@@ -76,7 +76,9 @@ root.methods.toggleType = function (type) {
 }
 // 返回跟单首页
 root.methods.jumpToFollowTrade = function () {
-  this.$router.go(-1)
+  // this.$router.go(-1)
+  this.$router.push({name:'mobileFollowTrade',query:{isSwitchOrder:this.isSwitchOrder}})
+
 }
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {

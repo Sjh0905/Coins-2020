@@ -154,6 +154,7 @@ root.methods.RE_GET_AUTH_STATE = function (res) {
 root.methods.switchingOrders = function (orderType) {
   this.switchOrder = orderType
   this.$store.commit('IS_SWITCHORDER', orderType);
+  this.$router.push({name:'followTrade',query:{isSwitchOrder:orderType}})
   // console.info('this.switchOrder=======',this.switchOrder,orderType)
   this.getBigBrotherList()
 }
