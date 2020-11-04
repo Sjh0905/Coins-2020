@@ -92,6 +92,7 @@
           <div class="application_header_div">{{$t('transactionPair')}}</div>
           <!--类型-->
           <div class="application_header_div">{{$t('type')}}</div>
+          <div class="application_header_div" v-if="isSwitchOrder == 'CONTRACT'">{{$t('方向')}}</div>
           <!--价格-->
           <div class="application_header_div">{{$t('henchman')}}</div>
           <!--数量-->
@@ -112,9 +113,19 @@
 <!--                &lt;!&ndash;买入/卖出&ndash;&gt;-->
 <!--                {{item.type == 'BUY_LIMIT'? $t('buyIn'):$t('selllOut')}}-->
 <!--              </div>-->
-              <div class="application_header_div">
+              <div class="application_header_div"
+                   v-if="isSwitchOrder == 'SPOT'"
+                   :class="item.direction==='BUY_LIMIT' || item.direction==='BUY_MARKET'?'text-green':'text-red'">
                 <!--限价买入-->
                 {{contractType[item.orderType]}}
+              </div>
+              <div class="application_header_div" v-if="isSwitchOrder == 'CONTRACT'">
+                <!--限价买入-->
+                {{contractType[item.orderType]}}
+              </div>
+
+              <div class="application_header_div" :class="item.direction==='BUY'?'text-green':'text-red'" v-if="isSwitchOrder == 'CONTRACT'">
+                {{$globalFunc.getOrderSide(item.positionSide,item.direction)}}
               </div>
 
               <!--价格-->

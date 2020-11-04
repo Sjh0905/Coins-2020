@@ -172,14 +172,18 @@
   margin-bottom: 0.24rem;
 }
 .mobile-trade-buy {
-  font-size:0.3rem;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  padding-right: 0.2rem;
-  float: right;
+  /*font-size:0.3rem;*/
+  /*font-family:PingFangSC-Regular,PingFang SC;*/
+  /*font-weight:400;*/
+  /*padding-right: 0.2rem;*/
+  /*float: right;*/
+  font-size: 0.3rem;
+  font-family: PingFangSC-Regular,PingFang SC;
+  font-weight: 400;
+  padding: 0 0.2rem;
 }
 .mobile-trade-item-top-left {
-  width: 46%;
+  width: 52%;
 }
 .mobile-trade-item-top-right {
   font-size:0.24rem;
@@ -321,4 +325,9 @@
   font-weight:400;
   color: #8994A5;
 
+}
+.text-color {
+  font-size: 0.24rem;
+  font-family:Roboto-Medium,Roboto;
+  font-weight:400;
 }

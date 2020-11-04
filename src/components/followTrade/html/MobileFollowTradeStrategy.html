@@ -70,8 +70,20 @@
         <div class="mobile-trade-item-top flex">
           <div class="mobile-trade-item-top-left">
             <span>{{item.symbol.replace('_','/')}}</span>
-            <span class="mobile-trade-buy" v-if="item.orderType=='SELL_MARKET'">{{contractType[item.orderType]}}</span>
-
+            <span class="mobile-trade-buy"
+                  v-if="isSwitchOrder == 'SPOT'"
+                  :class="item.direction==='BUY'?'text-green':'text-red'">
+              {{contractType[item.orderType]}}
+            </span>
+            <span class="mobile-trade-buy"
+                  v-if="isSwitchOrder == 'CONTRACT'">
+              {{contractType[item.orderType]}}
+            </span>
+            <span class="text-color"
+                  :class="item.direction==='BUY'?'text-green':'text-red'"
+                  v-if="isSwitchOrder == 'CONTRACT'">
+              {{$globalFunc.getOrderSide(item.positionSide,item.direction)}}
+            </span>
           </div>
           <div class="mobile-trade-item-top-right">{{$globalFunc.formatDateUitl(Number(item.createdAt),'MM/DD hh:mm:ss')}}</div>
         </div>
