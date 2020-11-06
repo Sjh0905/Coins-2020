@@ -71,7 +71,7 @@ root.created = function () {
   this.bianBalance()
   this.getPositionRisk()
   this.currentInterval1 && clearInterval(this.currentInterval1)
-  this.currentInterval1 = setInterval(this.bianBalance, 5000)
+  this.currentInterval1 = setInterval(this.bianBalance, 8000)
   this.GET_AUTH_STATE()
   this.getCurrency()
 }
