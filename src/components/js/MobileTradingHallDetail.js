@@ -1647,7 +1647,7 @@ root.methods.gotoContract = function () {
     this.$router.push('/index/sign/login')
     return;
   }
-  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
   // window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
 }
 
