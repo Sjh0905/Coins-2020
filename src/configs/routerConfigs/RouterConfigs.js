@@ -2065,62 +2065,76 @@ root.routes.push({
         },
 
 
-        // 合约账户
-        {
-          path: 'contractRecord',
-          name: 'contractRecord',
-          caseSensitive: true,
-          meta: {
-            requireLogin: true,
-            templateClose: false,
-            requireLoginOff: false,
+
+          {
+            path: 'contractRecord',
+            name: 'contractRecord',
+            meta: {
+              pcname: 'contractRecord',
+              h5name: '',
+              requireLogin: true,
+              templateClose: false,
+              requireLoginOff: false,
+            },
+            caseSensitive: true,
+            component: resolve => require(['@/components/Contract/vue/ContractRecord'], resolve),
           },
-          component: resolve => require(['@/components/Contract/vue/ContractRecord'], resolve),
-          children:[
-            {
-              path: '',
-              meta: {
-                requireLogin: true,
-                templateClose: false,
-                requireLoginOff: false,
-              },
-              redirect: 'warehousePosition',
-              caseSensitive: true,
-            },
-
-            // 仓位记录
-            {
-              path: 'warehousePosition',
-              name: 'warehousePosition',
-              meta: {
-                pcname: 'warehousePosition',
-                h5name: '',
-                requireLogin: true,
-                templateClose: false,
-                requireLoginOff: false,
-              },
-              caseSensitive: true,
-              component: resolve => require(['@/components/Contract/vue/WarehousePosition'], resolve),
-            },
-
-
-            // 合约资产记录
-            {
-              path: 'propertyAssets',
-              name: 'propertyAssets',
-              meta: {
-                pcname: 'propertyAssets',
-                h5name: '',
-                requireLogin: true,
-                templateClose: false,
-                requireLoginOff: false,
-              },
-              caseSensitive: true,
-              component: resolve => require(['@/components/Contract/vue/PropertyAssets'], resolve),
-            },
-
-          ]
-        },
+        // 合约账户
+        // {
+        //   path: 'contractRecord',
+        //   name: 'contractRecord',
+        //   caseSensitive: true,
+        //   meta: {
+        //     requireLogin: true,
+        //     templateClose: false,
+        //     requireLoginOff: false,
+        //   },
+        //   component: resolve => require(['@/components/Contract/vue/ContractRecord'], resolve),
+        //   // children:[
+        //   //   {
+        //   //     path: '',
+        //   //     meta: {
+        //   //       requireLogin: true,
+        //   //       templateClose: false,
+        //   //       requireLoginOff: false,
+        //   //     },
+        //   //     redirect: 'warehousePosition',
+        //   //     caseSensitive: true,
+        //   //   },
+        //   //
+        //   //   // 仓位记录
+        //   //   {
+        //   //     path: 'warehousePosition',
+        //   //     name: 'warehousePosition',
+        //   //     meta: {
+        //   //       pcname: 'warehousePosition',
+        //   //       h5name: '',
+        //   //       requireLogin: true,
+        //   //       templateClose: false,
+        //   //       requireLoginOff: false,
+        //   //     },
+        //   //     caseSensitive: true,
+        //   //     component: resolve => require(['@/components/Contract/vue/WarehousePosition'], resolve),
+        //   //   },
+        //   //
+        //   //
+        //   //   // 合约资产记录
+        //   //   {
+        //   //     path: 'propertyAssets',
+        //   //     name: 'propertyAssets',
+        //   //     meta: {
+        //   //       pcname: 'propertyAssets',
+        //   //       h5name: '',
+        //   //       requireLogin: true,
+        //   //       templateClose: false,
+        //   //       requireLoginOff: false,
+        //   //     },
+        //   //     caseSensitive: true,
+        //   //     component: resolve => require(['@/components/Contract/vue/PropertyAssets'], resolve),
+        //   //   },
+        //   //
+        //   // ]
+        // },
 
 
         {
