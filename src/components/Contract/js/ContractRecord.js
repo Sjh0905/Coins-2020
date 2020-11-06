@@ -19,7 +19,7 @@ root.data = function () {
     totalMarginBalance:0, //保证金
     popWindowContractRiskWarning: true, //合约账户未开通
     popWindowOpen:false,
-    propertyType:1,
+    propertyType:'position',
     limit: 10,
     limitNum: 10,
 
@@ -74,6 +74,9 @@ root.created = function () {
   this.currentInterval1 = setInterval(this.bianBalance, 8000)
   this.GET_AUTH_STATE()
   this.getCurrency()
+  if (this.$route.query.propertyType == 'propertyAssets') {
+    this.propertyType = 'propertyAssets';
+  }
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {
@@ -205,7 +208,7 @@ root.watch.currencyChange = function (newVal, oldVal) {
 root.methods = {}
 root.methods.clickProperty = function (type) {
   this.propertyType = type
-  if (this.propertyType==2) {
+  if (this.propertyType=='propertyAssets') {
     this.bianBalance()
   }
 }
