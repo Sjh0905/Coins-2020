@@ -57,8 +57,19 @@ root.data = function () {
 
     assetAccountType:'wallet',//当前账户类型,默认显示我的钱包
 
-    otcCurrencyList:[] //法币账户列表
+    otcCurrencyList:[], //法币账户列表
+    selectType:'hold',
+    limitNum: 10,
 
+    records: [],
+    records1:[],
+
+    loadingMoreShow: true,
+    loadingMoreShowing: false,
+    balance:[],
+    totalWalletBalance:0,
+    totalUnrealizedProfit:0,
+    totalMarginBalance:0,
   }
 }
 
@@ -66,9 +77,12 @@ root.components = {
   'Loading': resolve => require(['../vue/Loading'], resolve),
   'PopupPrompt': resolve => require(['../vue/PopupPrompt'], resolve),
   'MobileCheckbox': resolve => require(['../mobileVue/MobileCompentsVue/MobileCheckbox'], resolve),
+  'ContractRiskWarning': resolve => require(['../vue/ContractRiskWarning'], resolve),
+
 }
 
 root.created = function () {
+  // this.bianBalance()
   // console.log(this.total)
   // 修改顶部标题
   this.$store.commit('changeMobileHeaderTitle', '资产');
@@ -93,7 +107,14 @@ root.created = function () {
   this.getAccounts()
   this.getOtcCurrency()
   this.getCurrency()
-
+  // this.bianBalance()
+  // console.info('this.$store.state.exchange_rate_dollar',this.$store.state.exchange_rate_dollar)
+  this.getPositionRisk()//仓位
+  if(this.$route.query.toWebTransfer && this.$route.query.toWebTransfer == 'true'){
+    this.bianBalance()
+    this.assetAccountType = 'contract'
+    this.selectType = 'all'
+  }
 
 }
 
@@ -101,7 +122,51 @@ root.beforeDestroy = function () {
   this.exchangeRateInterval && clearInterval(this.exchangeRateInterval)
 }
 
+
 root.computed = {}
+
+// // 当前语言
+// root.computed.lang = function () {
+//   return this.$store.state.lang;
+// }
+
+root.computed.serverTime = function () {
+  return new Date().getTime();
+}
+//保证金余额换算成人民币的估值
+root.computed.valuationCon = function () {
+  return this.computedExchangeRate1
+}
+// 计算汇率
+root.computed.computedExchangeRate1 = function () {
+  console.info('保证金余额',this.totalMarginBalance,this.$store.state.exchange_rate_dollar)
+  return this.accMul(this.totalMarginBalance, this.$store.state.exchange_rate_dollar)
+}
+//未实现盈亏换算成人民币的估值
+root.computed.valuationFit = function () {
+  return this.computedTotalUnrealizedProfit
+}
+// 计算汇率
+root.computed.computedTotalUnrealizedProfit = function () {
+  // console.info('未实现盈亏',this.totalUnrealizedProfit,this.$store.state.exchange_rate_dollar)
+  return this.accMul(this.totalUnrealizedProfit, this.$store.state.exchange_rate_dollar)
+}
+
+//账户余额换算成人民币的估值
+root.computed.valuationWall = function () {
+  return this.computedTotalWalletBalance
+}
+// 计算汇率
+root.computed.computedTotalWalletBalance = function () {
+  // console.info('账户余额',this.totalWalletBalance,this.$store.state.exchange_rate_dollar)
+  return this.accMul(this.totalWalletBalance, this.$store.state.exchange_rate_dollar)
+}
+
+// 是否登录
+root.computed.isLogin = function () {
+  if (this.$store.state.authMessage.userId !== '') return true
+  return false
+}
 //换算成人民币的估值
 root.computed.valuation = function () {
   return this.$globalFunc.accFixedCny(this.total * this.computedExchangeRate,2)
@@ -210,9 +275,16 @@ root.computed.totalAssets = function () {
 }
 
 
+root.computed.computedRecord = function () {
+  return this.records1
+}
+
+
+
 /*----------------------------- 监听 ------------------------------*/
 
 root.watch = {}
+
 
 
 // 监听vuex中的变化
@@ -246,6 +318,9 @@ root.methods = {};
 root.methods.changeAssetAccountType = function (type) {
   if(this.assetAccountType == type)return
   this.assetAccountType = type
+  if (this.assetAccountType == 'contract') {
+    this.bianBalance()
+  }
 };
 // 点击币种，是否弹出币种的详细信息开关
 root.methods.changeTableOpenFlag = function (obj) {
@@ -634,6 +709,100 @@ root.methods.popClose = function () {
   this.popOpen = false
 }
 
+//切换选择
+root.methods.holdAll = function (type) {
+  this.selectType = type
+  if (this.selectType == 'hold') {
+    this.getPositionRisk()
+  }
+  if (this.selectType == 'all') {
+
+  }
+}
+
+
+
+
+
+// 资产
+root.methods.bianBalance = function (item) {
+  // console.log(item.id)
+  this.$http.send("GET_BALAN_ACCOUNT", {
+    bind: this,
+    query: {
+      timestamp: this.serverTime
+    },
+    callBack: this.re_bianBalance,
+    errorHandler: this.error_bianBalance
+  })
+}
+
+root.methods.re_bianBalance = function ( data ) {
+  typeof (data) === 'string' && (data = JSON.parse(data))
+
+  if (data.code == 1000) {
+    // this.popWindowOpen = true
+    this.$router.push({'path':'/index/contractRiskWarning'})
+  }
+  // this.$router.push({'path':'/index/contractRiskWarning'})
+  // this.balance = data.data[0]
+  // console.info('币安接口账户余额',this.balance)
+  // console.info('币安接口账户余额',data)
+  this.totalWalletBalance = data.data.totalWalletBalance
+  this.totalUnrealizedProfit = data.data.totalUnrealizedProfit
+  this.totalMarginBalance = data.data.totalMarginBalance
+  this.balance = data.data.assets[0]
+  // console.info('this.$store.state.exchange_rate_dollar',this.totalMarginBalance)
+}
+root.methods.error_bianBalance = function ( err ) {
+  console.log(err)
+}
+
+
+// 仓位
+root.methods.getPositionRisk = function () {
+
+  this.$http.send("GET_BALAN_POSITIONRISK", {
+    bind: this,
+    query: {
+      timestamp: this.serverTime
+    },
+    callBack: this.re_getPositionRisk,
+    errorHandler: this.error_getPositionRisk
+  })
+}
+// 获取记录返回，类型为{}
+root.methods.re_getPositionRisk = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if (!data) return
+  // console.log('获取记录', data)
+  this.records = data.data
+  this.records.map((v,index)=>{
+    if (v.positionAmt != 0 && v.symbol == 'BTCUSDT') {
+      let aa = []
+      aa.push(v)
+      this.records1 = aa
+    }
+  })
+
+  // if (this.records1.length < this.limit) {
+  //   this.loadingMoreShow = false
+  // }
+  // this.loadingMoreShowing = false
+  // this.loading = false
+}
+// 获取记录出错
+root.methods.error_getPositionRisk = function (err) {
+  console.warn("充值获取记录出错！", err)
+}
+
+//合约划转
+root.methods.openTransfer = function (balance) {
+  this.$router.push({name:'mobileWebTransferContract',query:{balance:(this.balance)}})
+}
+
+
+
 // 保留小数点后8位
 root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)
@@ -683,9 +852,18 @@ root.methods.gotoJiaoyi = function () {
   this.$router.push({name: 'mobileTradingHallDetail'});
 }
 /*---------------------- 跳转合约项目 ---------------------*/
+// root.methods.gotoContract = function () {
+//   // this.$router.push({name: 'mobileTradingHallDetail'});
+//   window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
+// }
+
+/*---------------------- 跳转合约项目 ---------------------*/
 root.methods.gotoContract = function () {
-  // this.$router.push({name: 'mobileTradingHallDetail'});
-  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+  if(!this.isLogin){
+    this.$router.push('/index/sign/login')
+    return;
+  }
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
 }
 
 export default root

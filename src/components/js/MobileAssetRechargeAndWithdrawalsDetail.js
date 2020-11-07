@@ -164,6 +164,11 @@ root.computed.accountsComputed = function () {
   return item
 }
 
+// 是否登录
+root.computed.isLogin = function () {
+  if (this.$store.state.authMessage.userId !== '') return true
+  return false
+}
 // 基础货币
 root.computed.baseCurrency = function () {
   return this.$store.state.baseCurrency
@@ -850,6 +855,14 @@ root.methods.goToBindEmail = function () {
 /*---------------------- 跳入到资产页面 ---------------------*/
 root.methods.gotoZichan = function () {
   this.$router.push({name: 'MobileAssetRechargeAndWithdrawals'});
+}
+/*---------------------- 跳入到合约 ---------------------*/
+root.methods.gotoContract = function () {
+  if(!this.isLogin){
+    this.$router.push('/index/sign/login')
+    return;
+  }
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
 }
 
 /*---------------------- 内部转账 ---------------------*/

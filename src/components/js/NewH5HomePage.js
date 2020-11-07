@@ -525,11 +525,11 @@ root.methods.goToNotice = function () {
 //   this.$router.push({name: 'officialQuantitativeDetails'})
 //
 // }
-// 跳转合约项目
-root.methods.gotoContract = function () {
-  // this.$router.push({name: 'mobileTradingHallDetail'});
-  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
-}
+// // 跳转合约项目
+// root.methods.gotoContract = function () {
+//   // this.$router.push({name: 'mobileTradingHallDetail'});
+//   window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
+// }
 
 //量化查询报名记录get
 root.methods.getRegistrationRecord = function () {
@@ -1148,6 +1148,16 @@ root.methods.gotoZichan = function () {
   this.$router.push({name: 'MobileAssetRechargeAndWithdrawals'});
 }
 
+/*---------------------- 跳入到合约 ---------------------*/
+root.methods.gotoContract = function () {
+  if(!this.isLogin){
+    this.$router.push('/index/sign/login')
+    return;
+  }
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
+  // window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
+}
+
 /*---------------------- 跳入到会员卡页面 ---------------------*/
 // root.methods.gotoVIP = function () {
 //   this.$router.push({name: 'membershipCard'});
@@ -1157,6 +1167,11 @@ root.methods.gotoZichan = function () {
 root.methods.gotoJiaoyi = function () {
   this.$router.push({name: 'mobileTradingHallDetail'});
 }
+
+/*---------------------- 跳转合约项目 ---------------------*/
+// root.methods.gotoContract = function () {
+//   window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
+// }
 
 root.methods.gotoRecommend = function () {
   this.$router.push({name: 'H5Recommend'});

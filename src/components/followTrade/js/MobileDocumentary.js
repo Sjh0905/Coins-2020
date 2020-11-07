@@ -256,9 +256,7 @@ root.methods.postDocumentaryImmediately = function () {
 root.methods.re_postDocumentaryImmediately = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   this.follow = true
-  // this.success = data.data.success
-  // console.log("re_postJoinGroup + data=====",data)
-  //
+
   if (data.errorCode == 0) {
     this.openPop('跟单成功',1)
     setTimeout(() => {
@@ -284,63 +282,6 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     data.errorCode == 18 &&  this.openPop(this.$t('用户和大神的逐全仓模式不一致'));
     data.errorCode == 19 &&  this.openPop(this.$t('用户和大神的单双仓模式不一致'));
   }
-  // if (data.errorCode == 3) {
-  //   this.openPop('不能自己跟随自己哦')
-  //   return;
-  // }
-  // if (data.errorCode == 4) {
-  //   this.openPop('余额不足')
-  //   return;
-  // }
-  // if (data.errorCode == 5) {
-  //   this.openPop('大神不能跟单大神')
-  //   return;
-  // }
-  // if (data.errorCode == 10) {
-  //   this.openPop('跟随失败')
-  //   return;
-  // }
-  // if (data.errorCode == 8 || data.errorCode == 12) {
-  //   this.openPop('用户余额不足')
-  //   return;
-  // }
-  // if (data.errorCode == 9) {
-  //   this.openPop('转账不能为负值')
-  //   return;
-  // }
-  // if (data.errorCode == 15) {
-  //   this.openPop('转账币种限额不存在')
-  //   return;
-  // }
-  // if (data.errorCode == 7) {
-  //   this.openPop('超出单比额度限制')
-  //   return;
-  // }
-  // if (data.errorCode == 11) {
-  //   this.openPop('24小时转账金额必须要在范围内')
-  //   return;
-  // }
-  // if (data.errorCode == 16) {
-  //   this.openPop('用户已经有仓位了不能跟随大神')
-  //   return;
-  // }
-  // if (data.errorCode == 17) {
-  //   this.openPop('用户和大神的杠杆倍数不一致')
-  //   return;
-  // }
-  // if (data.errorCode == 18) {
-  //   this.openPop('用户和大神的逐全仓模式不一致')
-  //   return;
-  // }
-  // if (data.errorCode == 19) {
-  //   this.openPop('用户和大神的单双仓模式不一致')
-  //   return;
-  // }
-  // if (data.errorCode != 0) {
-  //   this.openPop('系统有误')
-  //   return;
-  // }
-
 
 }
 root.methods.error_postDocumentaryImmediately = function (err) {

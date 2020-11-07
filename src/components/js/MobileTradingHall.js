@@ -299,6 +299,12 @@ root.computed.volume = function () {
 root.computed.serverTime = function () {
   return this.$store.state.serverTime;
 }
+// 是否登录
+root.computed.isLogin = function () {
+  if (this.$store.state.authMessage.userId !== '') return true
+  return false
+}
+
 
 root.watch.symbol = function (newValue, oldValue) {
   // console.log("==========root.watch.symbol===========",newValue,oldValue)
@@ -670,17 +676,27 @@ root.methods.gotoShichang = function () {
 root.methods.gotoZichan = function () {
   this.$router.push({name: 'MobileAssetRechargeAndWithdrawals'});
 }
+/*---------------------- 跳入到合约 ---------------------*/
+root.methods.gotoContract = function () {
+  if(!this.isLogin){
+    this.$router.push('/index/sign/login')
+    return;
+  }
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
+}
 
 /*---------------------- 跳入到交易页面 ---------------------*/
 root.methods.gotoJiaoyi = function () {
   this.$router.push({name: 'mobileTradingHallDetail'});
 }
 
-/*---------------------- 跳转合约项目 ---------------------*/
-root.methods.gotoContract = function () {
-  // this.$router.push({name: 'mobileTradingHallDetail'});
-  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
-}
+
+// /*---------------------- 跳转合约项目 ---------------------*/
+// root.methods.gotoContract = function () {
+//   // this.$router.push({name: 'mobileTradingHallDetail'});
+//   window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
+// }
+
 // 买卖提交
 // root.methods.tradeMarket = function () {
 //   if (!this.symbol_transaction_diy) return;

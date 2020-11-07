@@ -50,5 +50,11 @@ root.methods.closeClick = function () {
   this.$router.push('index/home')
 }
 
+root.methods.contractOpen = function () {
+  this.$router.push('index/newH5homePage')
+}
 
+root.methods.openContractH5 = function () {
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHallDetail');
+}
 export default root
