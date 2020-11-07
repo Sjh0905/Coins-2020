@@ -1,0 +1,204 @@
+<div class="recharge-record-container">
+<!--  <Loading v-if="loading" class="min-height-all recharge-record-loading-container border_radius"/>-->
+
+
+  <div class="border_box border_radius">
+
+    <!--充值记录title begin-->
+    <div class="detail-header flex">
+      <!-- 资产-->
+      <div class="order-number">{{$t('资产')}}</div>
+      <!--账户余额-->
+      <div class="currency">
+        <div class="currency-span" @mouseenter="openAccountBalance()" @mouseleave="closeAccountBalance()">{{$t('账户余额')}}</div>
+        <div class="currencyer-header-box">
+          账户余额 ＝ 总共净划入+ 总共已实现盈亏 + 总共净资金费用 - 总共手续费
+        </div>
+      </div>
+      <!--未实现盈亏-->
+      <div class="total">
+        <div class="total-span" @mouseenter="openUnrealizedLooses()" @mouseleave="closeUnrealizedLooses()">{{$t('未实现盈亏')}}</div>
+        <div class="detail-header-box">
+          采用标记价格计算得出的未实现盈亏。
+        </div>
+      </div>
+      <!--可用下单余额-->
+      <div class="lock-house-time">
+        <div class="lock-house-time-span" @mouseenter="openAvailableOrderBalance()" @mouseleave="closeAvailableOrderBalance()">{{$t('可用下单余额')}}</div>
+        <div class="lock-house-time-box">
+          可用下单余额 = 保证金余额 - 开仓保证金，代表你可用于开新仓的金额。
+        </div>
+      </div>
+      <!-- 操作-->
+      <div class="operation">{{$t('操作')}}</div>
+
+    </div>
+    <!--充值记录title end-->
+
+
+
+    <template >
+
+      <!--充值记录具体 begin-->
+      <ul class="detail-container">
+        <!--各条记录 begin-->
+        <li class="detail-li">
+          <div class="li-container flex"  v-if="!loading">
+            <!--资产-->
+            <div class="order-number">{{balance.asset || '——'}}</div>
+            <!--账户余额-->
+            <div class="currency">{{balance.walletBalance || 0}}</div>
+            <!--未实现盈亏-->
+            <div class="total">{{toFixed(balance.unrealizedProfit,8) || 0}}</div>
+            <!--可用下单余额-->
+            <div class="lock-house-time">{{balance.availableBalance || 0}}</div>
+            <!-- 操作-->
+<!--            <div class="operation-text">-->
+<!--              <button>{{$t('划转')}}</button>-->
+<!--            </div>-->
+            <div class="operation">
+              <button class="pointer" @click="openTransfer(balance)">{{$t('划转')}}</button>
+            </div>
+          </div>
+        </li>
+        <!--各条记录 begin-->
+
+        <!--如果没有记录 begin-->
+<!--        <li class="detail-li-no-data" v-if="computedRecord.length===0">-->
+<!--          <div class="no-data-content">-->
+<!--            <img src="../../../assets/assetPageRecord/no-order-light.png" alt="">-->
+<!--            <div class="no-record">{{$t('暂无记录')}}</div>-->
+<!--          </div>-->
+<!--        </li>-->
+        <!--如果没有记录 end-->
+      </ul>
+      <!--充值记录具体 end-->
+
+      <!--加载更多 begin-->
+      <!--      <div class="loading-more" v-if="loadingMoreShow">-->
+      <!--        <span v-if="!loadingMoreShowing" @click="loadingMore">{{$t('loadingMore')}}</span>-->
+      <!--        <span v-if="loadingMoreShowing">-->
+      <!--          <Loading/>-->
+      <!--        </span>-->
+      <!--      </div>-->
+      <!--加载更多 end-->
+
+    </template>
+  </div>
+  <!--<Loading v-if="loading"/>-->
+
+<!--  <PopupPrompt :popOpen="popOpen" :popClose="popClose" :popType="popType" :popText="popText"/>-->
+
+
+  <!--  内部划转-->
+  <PopupT :switch="popWindowOpen1" @close="popWindowClose1">
+    <div slot="header">
+      <span class="pop-ei-ar">{{$t('资金划转')}}</span>
+    </div>
+    <div slot="article" class="pop-article">
+      <!--      钱包到账户-->
+      <div class="wallet-to-account flex">
+        <div class="wallet-to-account-left flex">
+          <div class="wallet-account-change">
+            <div>{{$t('从')}}</div>
+            <img src="../../../assets/myWallet/record_change_bottom_icon.png" alt="">
+            <div>{{$t('到')}}</div>
+          </div>
+        </div>
+        <div class="wallet-to-account-content" :class="(assetAccountType == 'wallet') ? 'flex-colum':'flex-colum-reverse'">
+          <div>{{$t('合约账户')}}</div>
+          <div class="wallet-to-account-content-line"/>
+          <div>{{$t('我的钱包')}}</div>
+        </div>
+        <div class="wallet-to-account-right pointer flex" @click="changeAssetAccountType()">
+          <img src="../../../assets/myWallet/record_change_icon.png" alt="">
+        </div>
+      </div>
+
+      <!--      币种-->
+      <div class="currency block-input">
+        <div class="block-input-title">{{$t('币种')}}</div>
+        <el-select class="inputInner" value-key="currencyKey" v-model="currencyValue" filterable placeholder="" @change="changeTransferCurrency">
+          <el-option
+            v-if="!item.isUSDT2"
+            v-for="item in accountsComputed"
+            :key="item.currencyKey"
+            :label="item.currency"
+            :value="item.currency"
+          >
+          </el-option>
+        </el-select>
+
+        <div class="amount-not-empty">
+          <span>{{transferCurrencyWA}}</span>
+        </div>
+      </div>
+
+      <!--      数量-->
+      <div class="amount block-input">
+        <div class="block-input-title">
+          <span>{{$t('数量')}}</span>
+          <span class="available-right">{{$t('可用')}}：{{this.assetAccountType == 'wallet'? transferCurrencyOTCAvailable : available }} {{currencyValue}}</span>
+        </div>
+        <div class="amount-input flex">
+          <input type="text" placeholder="" class="amount-input-box" v-model="amountInput">
+          <span class="amount-all pointer" @click="allMention()">{{$t('全部')}}</span>
+        </div>
+        <div class="amount-not-empty">
+          <span>{{transferAmountWA}}</span>
+        </div>
+      </div>
+    </div>
+    <div slot="footer" class="pop-footer">
+      <span class="pop-qu pointer" @click="click_rel_em">{{$t('取消')}}</span>
+<!--      <button class="pop-qu-2 pointer" @click="transferCommit">{{$t('立即划转')}}</button>-->
+      <button class="pop-qu-2 pointer" @click="transferCommit">{{$t('立即划转')}}</button>
+
+    </div>
+  </PopupT>
+
+  <!-- 提示 start -->
+  <PopupPrompt :popType="popupPromptType" :popText="popupPromptText" :popOpen="popupPromptOpen"
+               :popClose="closePopupPrompt"></PopupPrompt>
+
+  <!--   提示 弹窗-->
+  <PopupWindow :switch="popWindowOpen" @close="popWindowClose">
+    <div slot="header">
+      <span class="header_xuzhi">{{popWindowTitle}}</span>
+    </div>
+    <div slot="article" class="pop-recharge">{{popWindowPrompt}}
+    </div>
+    <div slot="footer" class="pop-recharge-bottom flex-center">
+      <template v-if="popWindowStyle==0">
+        <button @click="popWindowClose" class="button-base33 btn_simple pointer">
+          {{$t('cancel')}}
+        </button>
+        <button @click="goToBindIdentity" class="button-base33 btn_blue pointer m-r">
+          {{$t('verification')}}
+        </button>
+      </template>
+      <template v-if="popWindowStyle==1">
+        <button @click="popWindowClose" class="button-base33 btn_simple pointer">
+          {{$t('cancel')}}
+        </button>
+        <button @click="goToSecurityCenter" class="button-base33 btn_blue pointer m-r">
+          {{$t('beBinding')}}
+        </button>
+      </template>
+
+      <template v-if="popWindowStyle==3">
+        <button @click="popWindowClose" class="button-base33 btn_simple pointer ">
+          {{$t('cancel')}}
+          <!--          {{$t('bindGa')}}-->
+        </button>
+        <button @click="goToSecurityCenter" class="button-base33 btn_blue pointer m-r">
+          {{$t('beBinding')}}
+        </button>
+      </template>
+    </div>
+
+  </PopupWindow>
+
+  <!-- 提示 end -->
+  <Loading v-if="loading"/>
+</div>

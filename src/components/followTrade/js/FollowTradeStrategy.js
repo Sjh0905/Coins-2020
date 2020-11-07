@@ -32,6 +32,7 @@ root.data = function () {
 
     // 信息弹框
     popWindowOpen:false,
+    fixedAmPr:1,  //默认固定金额
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -54,6 +55,7 @@ root.created = function () {
   this.postPersonalFollowUser()
   this.postPersonalrHistory()
   this.postGodFee()
+  // console.info('==============',this.$store.state.isSwitchOrder)
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
@@ -78,14 +80,57 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//
+root.computed.fixedAmountPr1 = function () {
+  return this.currencyPair || 0
+}
+root.computed.fixedAmountPr2 = function () {
+  return this.toFixed(this.accMul(Number(this.currencyPair), 0.8),2)
+}
+root.computed.fixedAmountPr3 = function () {
+  return this.accMinus(80,Number(this.currencyPair))
+}
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$route.query.isSwitchOrder || this.$store.state.isSwitchOrder;
+}
+
+
+root.computed.contractType = function () {
+
+  return {
+    'LIMIT': this.$t('limitCon'),
+    'MARKET': this.$t('marketCon'),
+    'STOP': this.$t('stopCon'),
+    'STOP_MARKET': this.$t('stopMarketCon'),
+    'TAKE_PROFIT': this.$t('takeProfitCon'),
+    'TAKE_PROFIT_MARKET': this.$t('takeProfitMarketCon'),
+    'TRAILING_STOP_MARKET': this.$t('trailingStopMarketCon'),
+    'BUY_LIMIT': this.$t('buyIn'),
+    'BUY_MARKET' : this.$t('buyOutshi'),
+    'SELL_LIMIT': this.$t('selllOut'),
+    'SELL_MARKET': this.$t('selllOutshi'),
+  }
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+//固定比例-金额选择
+root.methods.fixedAmountPr = function (type) {
+  this.currencyPair = ''
+  this.fixedAmPr = type
+}
+
+
 // 跟单保证金
 root.methods.postGodFee = function () {
   this.$http.send('POST_GOD_FEE', {
     bind: this,
+    params: {
+      type: this.isSwitchOrder
+    },
     callBack: this.re_postGodFee,
     errorHandler: this.error_postGodFee
   })
@@ -103,7 +148,9 @@ root.methods.error_postGodFee = function (err) {
 root.methods.postManage = function () {
   this.$http.send('POST_MANAGE', {
     bind: this,
-    // params: params,
+    params: {
+      type: this.isSwitchOrder
+    },
     callBack: this.re_postManage,
     errorHandler: this.error_postManage
   })
@@ -141,7 +188,9 @@ root.methods.postCommitFee = function () {
   //   return
   // }
   let params = {
+    feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
     fee: this.currencyPair,
+    type: this.isSwitchOrder
   }
   this.$http.send('POST_GOD', {
     bind: this,
@@ -171,6 +220,15 @@ root.methods.re_postCommitFee = function (data) {
     this.openPop(this.$t('securityDeposit'))
     return;
   }
+  if(data.errorCode == 4) {
+    this.openPop(this.$t('分成比例超过了最大比例'))
+    return;
+  }
+
+  if(data.errorCode == 5) {
+    this.openPop('已经有仓位了，不能成为大神')
+    return;
+  }
   if(data.errorCode != 0) {
     this.openPop(this.$t('systemError'))
   }
@@ -180,8 +238,8 @@ root.methods.error_postCommitFee = function (err) {
 }
 
 // 跳转到带单管理
-root.methods.goToTapeListManage = function () {
-  this.$router.push({name:'tapeListManage'})
+root.methods.goToTapeListManage = function (isSwitchOrder) {
+  this.$router.push({name:'tapeListManage',query:{isSwitchOrder:this.isSwitchOrder}})
 }
 
 // 切换历史跟单和跟随者
@@ -193,6 +251,9 @@ root.methods.toggleType = function (type) {
 root.methods.isOpenFollow = function () {
   this.$http.send('POST_GOD_BY_USERID', {
     bind: this,
+    params: {
+      type: this.isSwitchOrder
+    },
     callBack: this.re_isOpenFollow,
     errorHandler: this.error_isOpenFollow
   })
@@ -213,6 +274,7 @@ root.methods.error_isOpenFollow = function (err) {
 root.methods.postPersonalrHistory = function () {
   let params = {
     followId: this.userId,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_BROTHER_ORDER_SELF', {
     bind: this,
@@ -240,6 +302,9 @@ root.methods.postPersonalFollowUser = function () {
   this.$http.send('POST_FOLLOWUSER_LIST', {
     bind: this,
     // params: params,
+    params:{
+      type: this.isSwitchOrder
+    },
     callBack: this.re_postPersonalFollowUser,
     errorHandler: this.error_postPersonalFollowUser
   })
@@ -272,4 +337,16 @@ root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)
 }
 /*---------------------- 保留小数 end ---------------------*/
+
+/*---------------------- 乘法运算 begin ---------------------*/
+root.methods.accMul = function (num1, num2) {
+  return this.$globalFunc.accMul(num1, num2)
+}
+/*---------------------- 乘法运算 end ---------------------*/
+/*---------------------- 减法运算 begin ---------------------*/
+root.methods.accMinus = function (num1, num2) {
+  return this.$globalFunc.accMinus(num1, num2)
+}
+/*---------------------- 减法运算 end ---------------------*/
+
 export default root

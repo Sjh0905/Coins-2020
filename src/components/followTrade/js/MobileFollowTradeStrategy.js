@@ -49,6 +49,27 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$route.query.isSwitchOrder;
+}
+
+root.computed.contractType = function () {
+
+  return {
+    'LIMIT': this.$t('限价单'),
+    'MARKET': this.$t('市价单'),
+    'STOP': this.$t('止损限价单'),
+    'STOP_MARKET': this.$t('止损市价单'),
+    'TAKE_PROFIT': this.$t('止盈限价单'),
+    'TAKE_PROFIT_MARKET': this.$t('止盈市价单'),
+    'TRAILING_STOP_MARKET': this.$t('跟踪止损单'),
+    'BUY_LIMIT': this.$t('限价买入'),
+    'BUY_MARKET' : this.$t('市价买入'),
+    'SELL_LIMIT': this.$t('限价卖出'),
+    'SELL_MARKET': this.$t('市价卖出'),
+  }
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -63,6 +84,9 @@ root.methods.toggleType = function (type) {
 root.methods.isOpenFollow = function () {
   this.$http.send('POST_GOD_BY_USERID', {
     bind: this,
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_isOpenFollow,
     errorHandler: this.error_isOpenFollow
   })
@@ -83,6 +107,7 @@ root.methods.error_isOpenFollow = function (err) {
 root.methods.postPersonalrHistory = function () {
   let params = {
     followId: this.userId,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_BROTHER_ORDER_SELF', {
     bind: this,
@@ -110,6 +135,9 @@ root.methods.postPersonalFollowUser = function () {
   this.$http.send('POST_FOLLOWUSER_LIST', {
     bind: this,
     // params: params,
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_postPersonalFollowUser,
     errorHandler: this.error_postPersonalFollowUser
   })
@@ -128,8 +156,8 @@ root.methods.jumpToFollowTrade = function () {
   this.$router.go(-1)
 }
 // 个人设置
-root.methods.personalSetting = function () {
-  this.$router.push({name:'mobileTapeListManage'})
+root.methods.personalSetting = function (isSwitchOrder) {
+  this.$router.push({name:'mobileTapeListManage',query:{isSwitchOrder:this.isSwitchOrder}})
 }
 
 /*---------------------- 保留小数 begin ---------------------*/

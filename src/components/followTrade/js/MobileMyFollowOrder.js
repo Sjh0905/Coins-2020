@@ -80,6 +80,10 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$route.query.isSwitchOrder;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -108,6 +112,9 @@ root.methods.modifyDocumentary = function (item) {
 root.methods.postMyDocumentary = function () {
   this.$http.send('POST_MY_USER', {
     bind: this,
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_postMyDocumentary,
     errorHandler: this.error_postMyDocumentary
   })
@@ -136,7 +143,8 @@ root.methods.clickToggle = function () {
   this.$http.send('POST_AUTO_RENEW', {
     bind: this,
     params: {
-      val:this.isAutomatic ? 'YES':'NO'
+      val:this.isAutomatic ? 'YES':'NO',
+      type: this.isSwitchOrder,
     },
     callBack: this.re_clickToggle,
     errorHandler: this.error_clickToggle
@@ -160,7 +168,8 @@ root.methods.delFollowList = function () {
   this.$http.send('POST_DEL_FOLLOWER', {
     bind: this,
     params: {
-      followId: this.followId
+      followId: this.followId,
+      type: this.isSwitchOrder,
     },
     callBack: this.re_delFollowList,
     errorHandler: this.error_delFollowList
@@ -170,6 +179,18 @@ root.methods.delFollowList = function () {
 root.methods.re_delFollowList = function (data) {
   typeof (data) === 'string' && (data = JSON.parse(data))
   if(!data) return
+
+
+  if(data.errorCode == 2){
+    this.openPop('用户有仓位，无法取消跟随',0)
+    return
+  }
+  if(data.errorCode == 5){
+    this.openPop('已经取消合约跟单，请稍等利润结算',1)
+    this.postMyDocumentary()
+    this.delFollowClose()
+    return
+  }
   if(data.errorCode != 0){
     this.openPop('系统错误',0)
     return

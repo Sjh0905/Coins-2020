@@ -75,13 +75,19 @@
   align-items: center;
 }
 .with-billboard {
-  flex: 50;
+  flex: 15;
   height: 0.44rem;
   line-height: 0.44rem;
   color: #131F30;
   font-size:0.32rem;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
+}
+.switchCss {
+  font-size: 0.26rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #A2B5D9;
 }
 .folloe-banner-img {
   /*position: absolute;*/

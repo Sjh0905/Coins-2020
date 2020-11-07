@@ -25,12 +25,16 @@ root.data = function () {
     popWindowPrompt: '',//弹出样式提示
     popWindowStyle: 0,//跳转 0表示实名认证，1表示手机或谷歌，2只有确定
 
-    currentInterval:null
+    currentInterval:null,
+    switchOrder: 'SPOT',
 
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
+  if(this.$route.query.isSwitchOrder == 'CONTRACT'){
+    this.switchOrder = 'CONTRACT'
+  }
 
   this.GET_AUTH_STATE()
 
@@ -71,6 +75,10 @@ root.computed = {}
 
 root.computed.isLogin = function () {
   return this.$store.state.isLogin;
+}
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.switchOrder;
 }
 
 root.computed.userId = function () {
@@ -144,6 +152,14 @@ root.methods.goToSecurityCenter = function () {
   this.popWindowOpenShiM = false
   this.$router.push({name: 'securityCenter'})
 }
+//切换跟单类型
+root.methods.switchingOrders = function (orderType) {
+  this.switchOrder = orderType
+  this.$store.commit('IS_SWITCHORDER', orderType);
+  this.$router.push({name:'followTrade',query:{isSwitchOrder:orderType}})
+  // console.info('this.switchOrder=======',this.switchOrder,orderType)
+  this.getBigBrotherList()
+}
 
 // 弹窗关闭
 root.methods.popWindowCloseShiM = function () {
@@ -155,7 +171,7 @@ root.methods.jumpToBack = function () {
   this.$router.push({'path':'/index/newH5homePage'})
 }
 //跳转个人镜像交易
-root.methods.goTofollowTradeStrategy = function () {
+root.methods.goTofollowTradeStrategy = function (switchOrder) {
   // // 如果没有实名认证不允许报名
   if (!this.bindIdentify) {
     this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
@@ -173,10 +189,12 @@ root.methods.goTofollowTradeStrategy = function () {
     this.popWindowOpenShiM = true
     return
   }
-  this.$router.push({'path':'/index/followTradeStrategy'})
+  // this.$router.push({'path':'/index/followTradeStrategy'})
+  this.$router.push({name:'followTradeStrategy',query:{isSwitchOrder:this.switchOrder,}})
+
 }
 // 跳转我的镜像交易
-root.methods.goToDocumentary = function (userId,fee) {
+root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
 
   // // 如果没有实名认证不允许报名
   if (!this.bindIdentify) {
@@ -203,14 +221,14 @@ root.methods.goToDocumentary = function (userId,fee) {
     return
   }
   // this.$router.push({name:'mobileDocumentary',params: {item:item}})
-  this.$router.push({name:'documentaryGod',query:{userId:userId,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId)}})
+  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isSwitchOrder:this.switchOrder}})
 }
 // // 去大神页面
 // root.methods.goToDocumentaryGod = function () {
 //   this.$router.push({name: 'mobileDocumentaryGod'})
 // }
 // 返回我的镜像交易，正在跟随
-root.methods.goToMyFollowOrder = function () {
+root.methods.goToMyFollowOrder = function (switchOrder) {
   // // 如果没有实名认证不允许报名
   if (!this.bindIdentify) {
     this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
@@ -228,7 +246,7 @@ root.methods.goToMyFollowOrder = function () {
     this.popWindowOpenShiM = true
     return
   }
-  this.$router.push({name:'myFollowOrder'})
+  this.$router.push({name:'myFollowOrder',query:{isSwitchOrder:this.switchOrder}})
 }
 
 
@@ -237,6 +255,9 @@ root.methods.getBigBrotherList = function () {
   // console.info('掉接口啦===',new Date().getTime())
   this.$http.send('BIG_BROTHER_LIST', {
     bind: this,
+    params:{
+      type: this.isSwitchOrder
+    },
     callBack: this.re_getBigBrotherList,
     errorHandler:this.error_getBigBrotherList
   })
@@ -269,4 +290,15 @@ root.methods.closePop = function () {
 root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)
 }
+/*---------------------- 乘法运算 begin ---------------------*/
+root.methods.accMul = function (num1, num2) {
+  return this.$globalFunc.accMul(num1, num2)
+}
+/*---------------------- 乘法运算 end ---------------------*/
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
+
 export default root

@@ -1,0 +1,194 @@
+.popWindow-container {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+}
+.popWindow-container-mobile {
+  background-color: #FFFFFF;
+  height: 100%;
+  margin-top:0.88rem;
+}
+.background {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  right: -100%;
+  bottom: 0;
+  background-color: #000000;
+  opacity: 0.7;
+}
+
+.popup {
+  width: 440px;
+  /*height: 200px;*/
+  background-color: #FFFFFF;
+  position: absolute;
+  /*top: 50%;*/
+  left: 50%;
+  margin-bottom: 200px;
+  margin-top: 400px;
+  transform: translateY(-50%) translateX(-50%);
+  border-radius: 1px;
+  box-shadow:0px 0px 60px 0px rgba(255,255,255,0.1);
+  overflow:hidden;
+}
+.min-popup{
+  min-width: 340px;
+  /*height: 200px;*/
+  background-color: #202133;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  border-radius: 2px;
+  box-shadow:0px 0px 60px 0px rgba(255,255,255,0.1);
+}
+.popWindow-title {
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  /*padding-left: 25px;*/
+  position: relative;
+  background: #FFFFFF;
+  border-radius:1px 1px 0px 0px;
+  border-bottom: 1px solid #E7EBEE;
+  font-size:18px;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color: #172A4D;
+  letter-spacing: 2px;
+}
+
+/*内容*/
+.popWindow-article {
+  text-align: left;
+  font-size: 14px;
+  color: #172A4D;
+  padding: 20px 30px 15px;
+}
+.footer-btn {
+  padding-right: 30px;
+  margin-bottom: 20px;
+  justify-content:flex-end;
+}
+.popWindow-article2 {
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #6B7DA2;
+  padding: 0 27px;
+  border-radius:3px;
+  border:1px solid rgba(231,235,238,1);
+  cursor: pointer;
+}
+.popWindow-btn{
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #F7F7FB;
+  padding: 0 41px;
+  background:rgba(53,118,245,1);
+  border-radius:3px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+
+/*h5*/
+.fund-buy-header-title {
+  margin-top: 0.88rem;
+  height: 0.88rem;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+  border-bottom: 0.02rem solid #F7F8FA ;
+}
+.fund-buy {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.3rem;
+  width: 0.48rem;
+  height: 0.48rem;
+}
+
+.fund-buy-header-title-back-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.88rem;
+  height: 0.88rem;
+}
+
+.fund-buy-header-title-back-icon-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.32rem;
+  transform: translate(-50%,-50%);
+}
+.fund-buy-header-title-text {
+  height:0.44rem;
+  font-size:0.32rem;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:rgba(11,11,39,1);
+  line-height:0.44rem;
+}
+.popWindow-article-mobile {
+  padding: 0.3rem;
+  font-size: 0.28rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B7DA2;
+  line-height: 0.4rem;
+}
+.popWindow-title-mobile {
+  text-align: center;
+  font-size: 0.32rem;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #0D0E23;
+  line-height: 0.44rem;
+}
+.footer-btn-mobile {
+  width: 6.9rem;
+  margin: 0 auto;
+  height: 0.88rem;
+  line-height: 0.88rem;
+  background: #3576F5;
+  border-radius: 0.03rem;
+  font-size: 0.32rem;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-align: center;
+}
+.flex-mobile {
+  position: fixed;
+  bottom: 0.3rem;
+  left: 0;
+  right: 0;
+}
+.open-contract-dev {
+  /*width: 1.2rem;*/
+  /*height: 1.2rem;*/
+  margin: 0 auto;
+  padding: 0.92rem 0 0.4rem 0;
+  text-align: center;
+}
+.open-contract-img {
+  width: 1.2rem;
+  height: 1.2rem;
+}

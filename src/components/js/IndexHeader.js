@@ -900,19 +900,17 @@ root.methods.goToNoticeCenter = function (id) {
   if(this.$route.name  == 'notice') {
     this.$eventBus.notify({key: 'GET_NOTICE_LIST'},id);
   }
-  // this.$router.push({name: 'notice', query: {columnId: id}})
 }
-//
-// // 更换类（区分h5和pc）
-// root.methods.toggleClass = function () {
-//  isMobile? 'HeaderCenter':'header_body_container'
-// }
-
 // 获取汇率
 
 // 跳转法币订单
 root.methods.goToFrenchCurrecy = function (){
   window.location.replace(process.env.DOMAIN+'index/Order/OrderConduct')
+}
+
+// 跳转合约订单
+root.methods.goToContractCurrecy = function (){
+  window.location.replace(this.$store.state.contract_url + 'index/order/currentEntrust');
 }
 
 // 跳转法币交易
@@ -924,5 +922,12 @@ root.methods.goToFranchExchange = function (){
   }
   window.location.replace(process.env.DOMAIN+'index/Transaction/TransactionBuy')
 }
-
+// 跳转合约交易
+root.methods.goToContractTransaction = function (){
+  if(!this.isLogin){
+    this.$router.push('/index/sign/login')
+    return;
+  }
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+}
 export default root

@@ -1,0 +1,86 @@
+<div class="mobile-follow-trade">
+  <!--头部-->
+  <div :class="'fund-buy-header-title' ">
+    <div class="fund-buy-header-title-back-icon" @click="jumpToBack">
+      <img class="fund-buy-header-title-back-icon-img" src="../LuckyDraw/assets/mobileForecastHomePage/back_icon.png" alt="">
+    </div>
+    <div class="fund-buy-header-title-text"></div>
+  </div>
+
+  <div class="conter-hauzhuan">
+    <div class="conter-hauzhuan-title">划转</div>
+
+    <!--      币种-->
+    <div class="currency block-input">
+      <div class="block-input-title">{{$t('币种')}}</div>
+      <el-select class="inputInner" value-key="currencyKey" v-model="currencyValue" filterable placeholder="" @change="changeTransferCurrency">
+        <el-option
+          v-if="!item.isUSDT2"
+          v-for="item in accountsComputed"
+          :key="item.currencyKey"
+          :label="item.currency"
+          :value="item.currency"
+        >
+        </el-option>
+      </el-select>
+
+      <div class="amount-not-empty">
+        <span>{{transferCurrencyWA}}</span>
+      </div>
+    </div>
+
+
+    <!--      钱包到账户-->
+    <div class="wallet-to-account flex">
+      <div class="wallet-to-account-left flex">
+        <div class="wallet-account-change">
+          <div>{{$t('从')}}</div>
+<!--          <img src="../../assets/myWallet/record_change_bottom_icon.png" alt="">-->
+          <img src="../../assets/transfer_up_icon@2x.png" alt="">
+          <div>{{$t('到')}}</div>
+        </div>
+      </div>
+      <div class="wallet-to-account-content" :class="(assetAccountType == 'wallet') ? 'flex-colum':'flex-colum-reverse'">
+        <div>{{$t('合约账户')}}</div>
+        <div class="wallet-to-account-content-line"/>
+        <div>{{$t('我的钱包')}}</div>
+      </div>
+      <div class="wallet-to-account-right pointer flex" @click="changeAssetAccountType()">
+<!--        <img src="../../assets/myWallet/record_change_icon.png" alt="">-->
+        <img src="../../assets/transfer_icon@2x.png" alt="">
+      </div>
+    </div>
+
+    <!--      数量-->
+    <div class="amount block-input">
+      <div class="block-input-title">
+        <span>{{$t('划转数量')}}</span>
+      </div>
+
+      <div class="box-inp">
+        <input type="text" placeholder="输入划转数量" class="amount-input-box" v-model="amountInput">
+        <span class="box-span">USDT</span>
+        <span class="box-span">|</span>
+        <span class="amount-all pointer" @click="allMention()">{{$t('全部')}}</span>
+      </div>
+<!--      <div class="amount-input flex">-->
+<!--        <input type="text" placeholder="" class="amount-input-box" v-model="amountInput">-->
+
+<!--      </div>-->
+      <div class="amount-not-empty">
+        <span>{{transferAmountWA}}</span>
+      </div>
+      <span class="available-right">{{$t('可用')}}：{{this.assetAccountType == 'wallet'? transferCurrencyOTCAvailable : available }} {{currencyValue}}  USDT</span>
+
+    </div>
+  </div>
+
+  <div class="box-btn-con">
+    <div class="box-btn" @click="transferCommit">确定</div>
+  </div>
+
+
+  <!-- 提示 start -->
+  <PopupPrompt :popType="popupPromptType" :popText="popupPromptText" :popOpen="popupPromptOpen"
+               :popClose="closePopupPrompt"></PopupPrompt>
+</div>

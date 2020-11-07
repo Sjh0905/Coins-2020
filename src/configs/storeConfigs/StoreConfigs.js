@@ -20,12 +20,14 @@ store.state.urlHead = '/apis'
 // 静态页地址
 store.state.static_url = process.env.STATIC_URL || 'http://static.2020.exchange'
 
+store.state.contract_url = process.env.CONTRACT_URL || 'http://future.2020-ex.com/'
+
 //GRC活动地址
 store.state.GRC_URL = process.env.GRC_URL || 'https://build.2020.exchange/events/grc-token-mining'
 // store.state.GRC_URL = 'https://build.highdefi.com/events/grc-token-mining'  // TODO:生产打版需要屏蔽掉
 
 // 美金汇率 2018-07-17
-store.state.exchange_rate_dollar = 7.02
+store.state.exchange_rate_dollar = 6.82
 
 store.state.isLogin = false
 
@@ -213,7 +215,7 @@ store.state.buy_or_sale_type = 1
  * @type {null}
  */
 
-store.state.authState = null
+store.state.authState = null//！！！不能写成{}，否则会报大错！！！
 
 store.state.symbol = ''
 
@@ -267,6 +269,8 @@ store.state.initPriceSymbol = []
 
 //手机区域number
 store.state.areaCode = '0086'
+//切换跟单类型
+store.state.isSwitchOrder = ''
 
 /**
  * 同步修改state
@@ -887,6 +891,11 @@ store.mutations.LOGIN_OUT = (state, info) => {
 
 store.mutations.IS_VIP = (state, info) => {
   state.isVIP = info
+}
+
+
+store.mutations.IS_SWITCHORDER = (state, info) => {
+  state.isSwitchOrder = info
 }
 
 

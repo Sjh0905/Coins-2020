@@ -5,9 +5,9 @@
     <div>{{$t("transaction.Trading_platform1")}}</div>
 
   </div>
-<!--  <div class="index-home-info-title-fu">-->
-<!--&lt;!&ndash;    {{$t("transaction.Trading_platform_1")}}&ndash;&gt;-->
-<!--  </div>-->
+  <!--  <div class="index-home-info-title-fu">-->
+  <!--&lt;!&ndash;    {{$t("transaction.Trading_platform_1")}}&ndash;&gt;-->
+  <!--  </div>-->
   <div class="index-home-info-list">
     <ul>
       <li>
@@ -51,7 +51,7 @@
         <div class="tutu">
           <img src="../../assets/indexHome/alliance-of-resurrectors.png" >
         </div>
-<!--        复活者联盟-->
+        <!--        复活者联盟-->
         <div class="tututitle"> {{$t("transaction.Trading_platform_2")}}</div>
         <div class="tutuinfo ">{{$t("transaction.Trading_platform_2_1")}}</div>
 
@@ -60,7 +60,7 @@
         <div class="tutu">
           <img src="../../assets/indexHome/mirror-identity.png" >
         </div>
-<!--        镜像式身份-->
+        <!--        镜像式身份-->
         <div class="tututitle">{{$t("transaction.Trading_platform_7")}}</div>
 
         <div class="tutuinfo tutuinfo-mr">{{$t("transaction.Trading_platform_7_1")}}</div>
@@ -74,43 +74,43 @@
   <div class="downloadnew">
     <div class="downconten">
       <div class="tt1">
-<!--        <img class="tt1img" src="../../assets/InstallIcon.png" >-->
+        <!--        <img class="tt1img" src="../../assets/InstallIcon.png" >-->
         <div class="tdown2">{{$t("transaction.Trading_platform_8")}}</div>
-<!--        <div class="tdown3">{{$t("transaction.Trading_platform_9")}}</div>-->
+        <!--        <div class="tdown3">{{$t("transaction.Trading_platform_9")}}</div>-->
         <div class="tdownx">
-        <div class="tdown4" @mouseenter="openIOSCode()" @mouseleave="closeIOSCode()">
-<!--          @mouseenter="openIOSCode()" @mouseleave="closeIOSCode()"-->
-          <img class="imgs4" src="../../assets/苹果_icon.png" alt="">
-<!--          iOS-->
-          {{$t('indexHeader.ios')}}</div>
+          <div class="tdown4" @mouseenter="openIOSCode()" @mouseleave="closeIOSCode()">
+            <!--          @mouseenter="openIOSCode()" @mouseleave="closeIOSCode()"-->
+            <img class="imgs4" src="../../assets/苹果_icon.png" alt="">
+            <!--          iOS-->
+            {{$t('indexHeader.ios')}}</div>
           <div class="tdown6" @mouseenter="openAndroidCode()" @mouseleave="closeAndroidCode()">
-<!--            @mouseenter="openAndroidCode()" @mouseleave="closeAndroidCode()"-->
+            <!--            @mouseenter="openAndroidCode()" @mouseleave="closeAndroidCode()"-->
             <img class="imgs4" src="../../assets/安卓_icon.png" alt="">
-<!--            Android-->
+            <!--            Android-->
             {{$t('indexHeader.android')}}
           </div>
         </div>
 
-<!--        v-show="showewm"-->
-<!--        ios-->
+        <!--        v-show="showewm"-->
+        <!--        ios-->
         <div class="tdown5" >
-        <div class="download-left-download-item-erwma">
-          <div class="download-left-download-item-qrcode-img">
-            <Qrcode
-              :size="size"
-              :value="value"
-              :logo="logo"
-              :bgColor="bgColor"
-              :fgColor="fgColor"
-            >
-            </Qrcode>
+          <div class="download-left-download-item-erwma">
+            <div class="download-left-download-item-qrcode-img">
+              <Qrcode
+                :size="size"
+                :value="value"
+                :logo="logo"
+                :bgColor="bgColor"
+                :fgColor="fgColor"
+              >
+              </Qrcode>
+            </div>
           </div>
-        </div>
 
-<!--        <div class="tdown6"    @mouseenter="backtpenter()" @mouseleave="backtpleave()">{{$t("transaction.Trading_platform_10")}}</div>-->
+          <!--        <div class="tdown6"    @mouseenter="backtpenter()" @mouseleave="backtpleave()">{{$t("transaction.Trading_platform_10")}}</div>-->
           <!--          android-->
         </div>
-<!--        v-show="showewm1"-->
+        <!--        v-show="showewm1"-->
         <div class="tdown7" >
           <div class="download-left-download-item-erwma1">
             <div class="download-left-download-item-qrcode-img1">
@@ -146,58 +146,58 @@
     </div>
   </div>
 
-<!--  去交易-->
-<!--  <div class="goLogo">-->
-<!--    <div class="goLogo2">{{$t("transaction.Trading_platform_13")}}</div>-->
-<!--    <div class="goLogo3">{{$t("transaction.Trading_platform_14")}}</div>-->
-<!--    <div :class="!isLogin?'zhuce1':'zhuce3'">-->
-<!--      <router-link-->
-<!--      :to="{name:'login'}"-->
-<!--      class="navigation-item-router login-register-item flex"-->
-<!--      active-class="navigation-item-router-selected text_blue"-->
-<!--    >-->
-<!--      {{!isLogin? $t("transaction.Trading_platform_15"):$t("transaction.Trading_platform_16")}}-->
-<!--    </router-link></div>-->
-<!--    <div class="zhuce2">-->
-<!--      <router-link-->
-<!--      :to="{name: 'tradingHall', query: {symbol: $store.state.symbol} }"-->
-<!--      class="navigation-item-router1 flex"-->
-<!--      active-class="navigation-item-router-selected "-->
-<!--    >-->
-<!--      {{$t("transaction.Trading_platform_17")}}-->
-<!--     </router-link></div>-->
+  <!--  去交易-->
+  <!--  <div class="goLogo">-->
+  <!--    <div class="goLogo2">{{$t("transaction.Trading_platform_13")}}</div>-->
+  <!--    <div class="goLogo3">{{$t("transaction.Trading_platform_14")}}</div>-->
+  <!--    <div :class="!isLogin?'zhuce1':'zhuce3'">-->
+  <!--      <router-link-->
+  <!--      :to="{name:'login'}"-->
+  <!--      class="navigation-item-router login-register-item flex"-->
+  <!--      active-class="navigation-item-router-selected text_blue"-->
+  <!--    >-->
+  <!--      {{!isLogin? $t("transaction.Trading_platform_15"):$t("transaction.Trading_platform_16")}}-->
+  <!--    </router-link></div>-->
+  <!--    <div class="zhuce2">-->
+  <!--      <router-link-->
+  <!--      :to="{name: 'tradingHall', query: {symbol: $store.state.symbol} }"-->
+  <!--      class="navigation-item-router1 flex"-->
+  <!--      active-class="navigation-item-router-selected "-->
+  <!--    >-->
+  <!--      {{$t("transaction.Trading_platform_17")}}-->
+  <!--     </router-link></div>-->
 
-<!--  </div>-->
-
-
-<!--  <div class="hezhb">-->
-<!--    <div class="index-home-info-title">-->
-<!--      {{$t("transaction.Trading_platform_12")}}-->
-<!--    </div>-->
-<!--    <div class="table8">-->
-<!--      <table>-->
-<!--        <tr>-->
-<!--          <td><img src="" ></td>-->
-<!--          <td><img src="" ></td>-->
-<!--          <td><img src="" ></td>-->
-<!--          <td  class="lastCol"><img src="" ></td>-->
-<!--        </tr>-->
-<!--        <tr  class="lastrow">-->
-<!--          <td><img src="" ></td>-->
-<!--          <td><img src="" ></td>-->
-<!--          <td><img src="" ></td>-->
-<!--          <td  class="lastCol"><img src="" ></td>-->
-<!--        </tr>-->
-<!--      </table>-->
-<!--    </div>-->
-
-<!--  </div>-->
+  <!--  </div>-->
 
 
-<!--  <div class="bkbutton" @click="backtop()"  >-->
-<!--    <img v-show="backtophui" src=""   @mouseenter="backtpenter()" @mouseleave="backtpleave()">-->
-<!--    <img v-show="backtopzi" src=""    @mouseenter="backtpenter()" @mouseleave="backtpleave()">-->
-<!--  </div>-->
-<!--  <div id="kefu2019" class="chartbutton" @click="openkf()"><img src="" alt="">{{$t('infoItemChart')}}</div>-->
+  <!--  <div class="hezhb">-->
+  <!--    <div class="index-home-info-title">-->
+  <!--      {{$t("transaction.Trading_platform_12")}}-->
+  <!--    </div>-->
+  <!--    <div class="table8">-->
+  <!--      <table>-->
+  <!--        <tr>-->
+  <!--          <td><img src="" ></td>-->
+  <!--          <td><img src="" ></td>-->
+  <!--          <td><img src="" ></td>-->
+  <!--          <td  class="lastCol"><img src="" ></td>-->
+  <!--        </tr>-->
+  <!--        <tr  class="lastrow">-->
+  <!--          <td><img src="" ></td>-->
+  <!--          <td><img src="" ></td>-->
+  <!--          <td><img src="" ></td>-->
+  <!--          <td  class="lastCol"><img src="" ></td>-->
+  <!--        </tr>-->
+  <!--      </table>-->
+  <!--    </div>-->
+
+  <!--  </div>-->
+
+
+  <!--  <div class="bkbutton" @click="backtop()"  >-->
+  <!--    <img v-show="backtophui" src=""   @mouseenter="backtpenter()" @mouseleave="backtpleave()">-->
+  <!--    <img v-show="backtopzi" src=""    @mouseenter="backtpenter()" @mouseleave="backtpleave()">-->
+  <!--  </div>-->
+  <!--  <div id="kefu2019" class="chartbutton" @click="openkf()"><img src="" alt="">{{$t('infoItemChart')}}</div>-->
 </div>
 

@@ -21,7 +21,8 @@ root.data = function () {
 
     popIdenOpen: false,
 
-    currentInterval:null
+    currentInterval:null,
+    switchOrder: 'SPOT',
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -39,6 +40,9 @@ root.data = function () {
   // });
 // }
 root.created = function () {
+  if(this.$route.query.isSwitchOrder == 'CONTRACT'){
+    this.switchOrder = 'CONTRACT'
+  }
 
   this.GET_AUTH_STATE()
 
@@ -121,6 +125,11 @@ root.computed.bindEmail = function () {
 root.computed.bindIdentify = function () {
   return this.$store.state.authState.identity
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.switchOrder;
+}
+
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -141,6 +150,14 @@ root.methods.RE_GET_AUTH_STATE = function (res) {
   this.$store.commit('SET_AUTH_STATE', res.dataMap)
 
 }
+//切换跟单类型
+root.methods.switchingOrders = function (orderType) {
+  this.switchOrder = orderType
+  this.$store.commit('IS_SWITCHORDER', orderType);
+  this.$router.push({name:'followTrade',query:{isSwitchOrder:orderType}})
+  // console.info('this.switchOrder=======',this.switchOrder,orderType)
+  this.getBigBrotherList()
+}
 
 // 关闭弹窗
 root.methods.popIdenClose = function () {
@@ -160,7 +177,7 @@ root.methods.jumpToBack = function () {
   // this.$router.push({'path':'/index/newH5homePage'})
 }
 //跳转个人镜像交易
-root.methods.goToMobileFollowTradeStrategy = function () {
+root.methods.goToMobileFollowTradeStrategy = function (switchOrder) {
   if (!this.bindIdentify) {
     this.popIdenOpen = true
     return
@@ -175,10 +192,10 @@ root.methods.goToMobileFollowTradeStrategy = function () {
     return
   }
 
-  this.$router.push({'path':'/index/mobileFollowTradeStrategy'})
+  this.$router.push({name:'mobileFollowTradeStrategy',query:{isSwitchOrder:this.switchOrder}})
 }
 // 跳转我的镜像交易
-root.methods.goToDocumentary = function (item) {
+root.methods.goToDocumentary = function (item,switchOrder) {
 
   if (!this.bindIdentify) {
     this.popIdenOpen = true
@@ -199,14 +216,14 @@ root.methods.goToDocumentary = function (item) {
     return
   }
   // this.$router.push({name:'mobileDocumentary',params: {item:item}})
-  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId)}})
+  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isSwitchOrder:this.switchOrder}})
 }
 // // 去大神页面
 // root.methods.goToDocumentaryGod = function () {
 //   this.$router.push({name: 'mobileDocumentaryGod'})
 // }
 // 返回我的镜像交易，正在跟随
-root.methods.goToMobileMyFollowOrder = function () {
+root.methods.goToMobileMyFollowOrder = function (switchOrder) {
   if (!this.bindIdentify) {
     this.popIdenOpen = true
     return
@@ -221,7 +238,7 @@ root.methods.goToMobileMyFollowOrder = function () {
     return
   }
 
-  this.$router.push({name:'mobileMyFollowOrder'})
+  this.$router.push({name:'mobileMyFollowOrder',query:{isSwitchOrder:this.switchOrder}})
 }
 
 
@@ -229,7 +246,9 @@ root.methods.goToMobileMyFollowOrder = function () {
 root.methods.getBigBrotherList = function () {
   this.$http.send('BIG_BROTHER_LIST', {
     bind: this,
-    // query:{},
+    params:{
+      type: this.isSwitchOrder,
+    },
     callBack: this.re_getBigBrotherList,
     errorHandler:this.error_getBigBrotherList
   })
@@ -261,5 +280,20 @@ root.methods.closePop = function () {
 root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)
 }
+/*---------------------- 除法运算 begin ---------------------*/
+root.methods.accDiv = function (num1, num2) {
+  return this.$globalFunc.accDiv(num1, num2)
+}
+/*---------------------- 除法运算 end ---------------------*/
+/*---------------------- 乘法运算 begin ---------------------*/
+root.methods.accMul = function (num1, num2) {
+  return this.$globalFunc.accMul(num1, num2)
+}
+/*---------------------- 乘法运算 end ---------------------*/
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
 
 export default root

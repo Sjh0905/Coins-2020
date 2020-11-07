@@ -40,7 +40,8 @@
               <span class="currency">{{item.currency}}</span>
               <!--数量-->
               <span class="total">{{toFixed(item.amount,8)}}</span>
-              <span class="rewCycle"> {{item.weekOfMonth}} ({{$globalFunc.formatDateUitl(Number(rewSplit),'MM.DD')}} - {{$globalFunc.formatDateUitl(Number(rewTow),'MM.DD')}})</span>
+<!--              <span class="rewCycle"> {{item.weekOfMonth}} ({{$globalFunc.formatDateUitl(Number(rewSplit),'MM.DD')}} - {{$globalFunc.formatDateUitl(Number(rewTow),'MM.DD')}})</span>-->
+              <span class="rewCycle"> {{item.weekOfMonth}} ({{$globalFunc.formatDateUitl(Number(item.rewCycle.match(/(\S*)_/)[1]),'MM.DD')}} - {{$globalFunc.formatDateUitl(Number(item.rewCycle.split("_")[1]),'MM.DD')}})</span>
               <!--类型-->
               <span class="address address-detail" >{{item.rewType == 2 ? $t('Biweekly') : $t('Weekly')}}</span>
               <span class="state">{{item.status == 'DONE'? $t('issued'):$t('standard')}}</span>

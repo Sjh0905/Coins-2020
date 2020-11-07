@@ -3,7 +3,15 @@
   <div class="follow-info">
     <div class="follow-container">
       <div class="follow-trande-bread">
-        <router-link to="/index/followTrade" class="management">{{$t('followOrder')}}</router-link>
+<!--        <router-link to="/index/followTrade" class="management">{{$t('followOrder')}}</router-link>-->
+        <router-link to="/index/followTrade?isSwitchOrder=SPOT" class="management" v-if="isSwitchOrder == 'SPOT'">
+          <!--现货带单-->
+          {{$t('现货带单')}}
+        </router-link>
+        <router-link to="/index/followTrade?isSwitchOrder=CONTRACT" class="management" v-if="isSwitchOrder == 'CONTRACT'">
+          <!--合约带单-->
+          {{$t('合约带单')}}
+        </router-link>
         <span> > </span>
         {{$t('myHomePage')}}
       </div>
@@ -19,7 +27,7 @@
           </div>
           <div class="trade-top-banner-text">{{userId}}</div>
         </div>
-        <div class="follow-management pointer" @click="goToTapeListManage" v-if="isTapeList">
+        <div class="follow-management pointer" @click="goToTapeListManage(isSwitchOrder)" v-if="isTapeList">
           <img src="../assets/setting_icon.png" alt="">
           <!--带单管理-->
           <span>{{$t('tapeListManagement')}}</span>
@@ -46,9 +54,11 @@
         </div>
 
         <div class="trade-data-item">
-          <div class="trade-data text-green">{{toFixed(godInfo.rate * 10 * 10 || '0',2)}}%</div>
+          <div class="trade-data text-green" v-if="isSwitchOrder == 'SPOT'">{{toFixed(godInfo.rate * 10 * 10 || '0',2)}}%</div>
+          <div class="trade-data text-green" v-if="isSwitchOrder == 'CONTRACT'">{{toFixed(godInfo.rate,2)}}</div>
           <!--收益率-->
-          <div>{{$t('totalIncomeRate')}}</div>
+          <div v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
+          <div v-if="isSwitchOrder == 'CONTRACT'">收益 (USDT)</div>
         </div>
       </div>
     </div>
@@ -82,6 +92,7 @@
           <div class="application_header_div">{{$t('transactionPair')}}</div>
           <!--类型-->
           <div class="application_header_div">{{$t('type')}}</div>
+          <div class="application_header_div" v-if="isSwitchOrder == 'CONTRACT'">{{$t('方向')}}</div>
           <!--价格-->
           <div class="application_header_div">{{$t('henchman')}}</div>
           <!--数量-->
@@ -98,10 +109,25 @@
               <!--交易对-->
               <div class="application_header_div">{{item.symbol.replace('_','/')}}</div>
               <!--类型-->
-              <div class="application_header_div" :class="item.type=='BUY_LIMIT'?'text-green':'text-red'">
-                <!--买入/卖出-->
-                {{item.type == 'BUY_LIMIT'? $t('buyIn'):$t('selllOut')}}
+<!--              <div class="application_header_div" :class="item.type=='BUY_LIMIT'?'text-green':'text-red'">-->
+<!--                &lt;!&ndash;买入/卖出&ndash;&gt;-->
+<!--                {{item.type == 'BUY_LIMIT'? $t('buyIn'):$t('selllOut')}}-->
+<!--              </div>-->
+              <div class="application_header_div"
+                   v-if="isSwitchOrder == 'SPOT'"
+                   :class="item.direction==='BUY_LIMIT' || item.direction==='BUY_MARKET'?'text-green':'text-red'">
+                <!--限价买入-->
+                {{contractType[item.orderType]}}
               </div>
+              <div class="application_header_div" v-if="isSwitchOrder == 'CONTRACT'">
+                <!--限价买入-->
+                {{contractType[item.orderType]}}
+              </div>
+
+              <div class="application_header_div" :class="item.direction==='BUY'?'text-green':'text-red'" v-if="isSwitchOrder == 'CONTRACT'">
+                {{$globalFunc.getOrderSide(item.positionSide,item.direction)}}
+              </div>
+
               <!--价格-->
               <div class="application_header_div">{{toFixed(item.price,2)}}</div>
               <!--数量-->
@@ -132,7 +158,7 @@
       </ul>
       <!-- 跟随者 -->
       <ul class="recordUl1" v-if="followType == 2">
-        <!--历史挖矿记录表头 S-->
+        <!--跟随者 S-->
         <li class="application_header">
           <!--          账号-->
           <div class="application_header_div">{{$t('accountNumber')}}</div>
@@ -142,7 +168,7 @@
           <div class="application-header-div-box">{{$t('followUpIncome')}}（USDT）</div>
         </li>
         <template>
-          <!-- 历史挖矿记录-->
+          <!-- 跟随者-->
           <template v-if="followUserList.length !== 0">
             <li class="" v-for="(item,index) in followUserList" :key="item.id">
 
@@ -178,27 +204,62 @@
   <PopupWindow :switch="popWindowOpen" @close="popWindowClose">
     <div slot="header">
       <!--开启镜像交易-->
-      <span class="update-follow">{{$t('openStrategyDocumentary')}}</span>
+<!--      <span class="update-follow">{{$t('openStrategyDocumentary')}}</span>-->
+      <span class="update-follow" v-if="isSwitchOrder == 'SPOT'">{{$t('现货带单')}}</span>
+      <span class="update-follow" v-if="isSwitchOrder == 'CONTRACT'">{{$t('合约带单')}}</span>
     </div>
     <div slot="article" class="update-follow-article">
+      <div class="flex choose">
+        <div class="fixed-amount" :class="fixedAmPr == 1 ? 'fixed-proportion' : ''" @click="fixedAmountPr(1)">固定费用</div>
+        <div class="fixed-amount fixed-am" :class="fixedAmPr == 2 ? 'fixed-proportion' : ''" @click="fixedAmountPr(2)">收益提成</div>
+      </div>
       <div class="follow-order flex">
         <!--跟单币对-->
         <div>{{$t('documentaryCurrencyPair')}}</div>
-        <div class="follow-order-data">BTC ETH LTC BCH</div>
+        <div v-if="isSwitchOrder == 'SPOT'" class="follow-order-data">BTC ETH LTC BCH</div>
+        <div v-if="isSwitchOrder == 'CONTRACT'" class="follow-order-data">BTCUSDT</div>
       </div>
-      <div class="follow-order-item flex">
-        <!--跟单费用-->
-        <div class="follow-order-pair">{{$t('subscriptionFee')}}(USDT)</div>
-        <div class="follow-order-currency">
-          <input v-model="currencyPair" v-if="!isHasItem" class="currency-account" onkeyup="value = value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''">
-          / {{followDay}}天
+      <div v-if="fixedAmPr == 1">
+        <div class="follow-order-item flex">
+          <!--跟单费用-->
+          <div class="follow-order-pair">{{$t('跟单费用 (USDT/')}}{{followDay}}天) </div>
+          <div class="follow-order-currency">
+            <input v-model="currencyPair" v-if="!isHasItem" class="currency-account" onkeyup="value = value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''">
+          </div>
+        </div>
+        <div class="follow-order-item flex">
+          <!--跟单费用-->
+          <div class="follow-order-pair">{{$t('带单收入 (USDT/')}}{{followDay}}天)</div>
+          <div class="follow-order-currency">
+            {{fixedAmountPr2}}
+          </div>
         </div>
       </div>
+      <div v-if="fixedAmPr == 2">
+        <div class="follow-order-item flex">
+          <!--跟单费用-->
+          <div class="follow-order-pair">{{$t('带单提成(收益/笔)')}} </div>
+          <div class="follow-order-currency">
+            <input v-model="currencyPair" v-if="!isHasItem" class="currency-account" onkeyup="value = value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''">
+           %
+          </div>
+        </div>
+        <div class="follow-order-item flex">
+          <!--跟单费用-->
+          <div class="follow-order-pair">{{$t('跟单利润(收益/笔)')}}</div>
+          <div class="follow-order-currency">
+            {{fixedAmountPr3}}%
+          </div>
+        </div>
+      </div>
+
+
       <div class="mobile-open-tape-pop-window-content-text">
         <div>{{$t('openInterpretation_1',{godFee})}}</div>
-        <div>{{$t('openInterpretation_2')}}</div>
+        <div v-if="fixedAmPr == 1">{{$t('openInterpretation_2')}}</div>
         <!--开启后，如您收益率靠前，您将可能出现在带单收益榜榜单中，同时可被用户跟单，零成本获得额外的带单收益，双重盈利。-->
-        <div>{{$t('openInterpretation_3')}}</div>
+        <div v-if="fixedAmPr == 1">{{$t('openInterpretation_3')}}</div>
+        <div v-if="fixedAmPr == 2">{{$t('openInterpretation_9')}}</div>
       </div>
     </div>
     <div slot="footer" class="pop-recharge-bottom">

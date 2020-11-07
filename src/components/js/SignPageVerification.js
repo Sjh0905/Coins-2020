@@ -428,6 +428,11 @@ root.methods.re_commit = function (data) {
       // return;
     }
 
+    if(this.$route.query.toUrl && this.$route.query.toUrl == "future_url"){
+      this.GO_CONTRACT();
+      // return;
+    }
+
     this.$router.push({name: 'tradingHall'})
   }
 
@@ -445,16 +450,17 @@ root.methods.GO_OTC = function () {
   console.log(c2c_url)
   window.open(c2c_url);
 }
+// 跳到合约页面
+root.methods.GO_CONTRACT = function () {
+  let paras = this.$store.state.save_cookie;
+  if (!paras) return;
+  let con_url = process.env.CONTRACT_URL;
+  // console.log(con_url)
+  window.open(con_url);
+}
 // 跳到GRC页面
 root.methods.GO_GRC = function () {
-  let paras = this.$store.state.save_cookie;
-  typeof paras == 'string' && (paras = JSON.parse(paras))
-  let _bitsession_ =paras.cookies && paras.cookies.value || '';
-  let isApp = false;
-  let userId = this.$store.state.authMessage.userId;
-  let lang = this.$store.state.lang;
-  let GRC_URL = this.$store.state.GRC_URL+'?'+'isApp='+isApp+'&_bitsession_='+_bitsession_+'&userId='+userId+'&lang='+lang;
-  window.open(GRC_URL);
+
 }
 ;
 // 返回用户状态

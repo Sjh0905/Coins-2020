@@ -47,8 +47,10 @@
 
       <div class="mobile-trade-data-item">
 <!--        <div class="mobile-trade-data text-green">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0,2) : '- -'}}%</div>-->
-        <div class="mobile-trade-data text-green">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0, 2) : '0'}}%</div>
-        <div>收益率</div>
+        <div class="mobile-trade-data text-green" v-if="isSwitchOrder == 'SPOT'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0, 2) : '0'}}%</div>
+        <div class="mobile-trade-data text-green" v-if="isSwitchOrder == 'CONTRACT'">{{godInfo.rate ? toFixed(godInfo.rate , 2) : '0'}}</div>
+        <div v-if="isSwitchOrder == 'SPOT'">收益率</div>
+        <div v-if="isSwitchOrder == 'CONTRACT'">收益 (USDT)</div>
       </div>
     </div>
   </div>
@@ -70,7 +72,21 @@
         <div class="mobile-trade-item-top flex">
           <div class="mobile-trade-item-top-left">
             <span>{{item.symbol.replace('_','/')}}</span>
-            <span class="mobile-trade-buy text-green" :class="item.type=='BUY_LIMIT'?'text-green':'text-red'">{{item.type == 'BUY_LIMIT'? '买入':'卖出'}}</span>
+<!--            <span class="mobile-trade-buy">{{contractType[item.orderType]}}</span>-->
+            <span class="mobile-trade-buy"
+                  v-if="isSwitchOrder == 'SPOT'"
+                  :class="item.direction==='BUY_LIMIT' || item.direction==='BUY_MARKET'?'text-green':'text-red'">
+              {{contractType[item.orderType]}}
+            </span>
+            <span class="mobile-trade-buy"
+                  v-if="isSwitchOrder == 'CONTRACT'">
+              {{contractType[item.orderType]}}
+            </span>
+            <span class="text-color"
+                  :class="item.direction==='BUY'?'text-green':'text-red'"
+                  v-if="isSwitchOrder == 'CONTRACT'">
+              {{$globalFunc.getOrderSide(item.positionSide,item.direction)}}
+            </span>
           </div>
           <div class="mobile-trade-item-top-right">{{$globalFunc.formatDateUitl(Number(item.createdAt),'MM/DD hh:mm:ss')}}</div>
         </div>
@@ -111,12 +127,14 @@
   <!--内容底部-->
   <div class="mobile-trade-no-data" v-if="!loading">
 
+
     <div class="mobile-trade-open-exchange" >
       <div class="mobile-trade-open-exchange-text flex">
         <div class="mobile-trade-fee">费用</div>
-        <div class="mobile-trade-order-fee text-blue">{{$route.query.fee || '0'}} USDT / {{$route.query.days  || '0'}}天</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT / {{$route.query.days  || '0'}}天</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE'">每笔收益收取 {{accAdd($route.query.fee,20) || '0'}}%</div>
       </div>
-      <div class="mobile-trade-open-exchange-button" @click="jumpToFollowDocumentary" v-if="$route.query.isFollow < 0">跟单</div>
+      <div class="mobile-trade-open-exchange-button" @click="jumpToFollowDocumentary()" v-if="$route.query.isFollow < 0">跟单</div>
       <div class="mobile-trade-open-exchange-button-isfollow" v-if="$route.query.isFollow >= 0">已跟随</div>
     </div>
   </div>

@@ -86,7 +86,7 @@ root.methods.re_getAuthState = function (data) {
 }
 // 判断验证状态出错
 root.methods.error_getAuthState = function (err) {
-	console.warn("获取验证状态出错！", err)
+	// console.warn("获取验证状态出错！", err)
 	this.$router.push('/index/personal/securityCenter')
 }
 
@@ -121,7 +121,7 @@ root.methods.re_bind_google = function (data) {
 	this.loading = !(this.getAuthReady && this.getGAReady)
 }
 root.methods.error_bind_google = function (err) {
-	console.warn("返回出错", err)
+	// console.warn("返回出错", err)
 }
 
 // 点击发送
@@ -163,7 +163,7 @@ root.methods.re_commit = function (data) {
 	typeof data === 'string' && (data = JSON.parse(data))
 	this.sending = false
 	this.popOpen = false
-	console.warn("提交返回！", data)
+	// console.warn("提交返回！", data)
 
 	if (data.errorCode) {
 		data.errorCode === 1 && (this.pswWA = this.$t('personalCenterSecurityCenterBindGoogleAuthenticator.pswWa_1'))
@@ -177,7 +177,7 @@ root.methods.re_commit = function (data) {
 
 }
 root.methods.error_commit = function (err) {
-	console.warn("绑定谷歌验证码失败！", err)
+	// console.warn("绑定谷歌验证码失败！", err)
 	this.sending = false
 	this.popOpen = false
 	this.popType = 0

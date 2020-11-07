@@ -11,7 +11,7 @@ root.data = function () {
   return {
     loading:true,
     fixedFollow:1,
-    followType:'LOT',
+    followType:'RATE',
     godHistorList:[],
     godInfo:{},
     followUserList:[],
@@ -60,6 +60,27 @@ root.computed.isApp = function () {
 root.computed.isAndroid = function () {
   return this.$store.state.isAndroid
 }
+//什么类型的跟单
+root.computed.isSwitchOrder = function () {
+  return this.$route.query.isSwitchOrder;
+}
+
+root.computed.contractType = function () {
+
+  return {
+    'LIMIT': this.$t('limitCon'),
+    'MARKET': this.$t('marketCon'),
+    'STOP': this.$t('stopCon'),
+    'STOP_MARKET': this.$t('stopMarketCon'),
+    'TAKE_PROFIT': this.$t('takeProfitCon'),
+    'TAKE_PROFIT_MARKET': this.$t('takeProfitMarketCon'),
+    'TRAILING_STOP_MARKET': this.$t('trailingStopMarketCon'),
+    'BUY_LIMIT': this.$t('buyIn'),
+    'BUY_MARKET' : this.$t('buyOutshi'),
+    'SELL_LIMIT': this.$t('selllOut'),
+    'SELL_MARKET': this.$t('selllOutshi'),
+  }
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -72,6 +93,10 @@ root.methods.toggleType = function (type) {
 root.methods.jumpToFollowTrade = function () {
   this.$router.push({name:'mobileFollowTrade'})
 }
+// // 返回跟单首页
+// root.methods.goToFollowTrade = function (isSwitchOrder) {
+//   this.$router.push({name:'followTrade',query:{isSwitchOrder:this.isSwitchOrder}})
+// }
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {
   this.popWindowOpen = true
@@ -93,7 +118,7 @@ root.methods.fixedType = function (type) {
 root.methods.postDocumentaryImmediately = function () {
   this.follow = false
   let canSend = true
-  if (this.followType == 'LOT' && this.fixedAmountLot == '') {
+  if (this.followType == 'LOT' && this.isSwitchOrder == 'SPOT' && this.fixedAmountLot == '') {
     this.openPop(this.$t('cannotBeEmpty'))
     this.follow = true
     return
@@ -106,6 +131,7 @@ root.methods.postDocumentaryImmediately = function () {
     followId: this.$route.query.userId,
     followType: this.followType ,    //固定金额LOT   固定比例RATE
     val: this.followType == 'LOT' ? this.fixedAmountLot : this.fixedAmountRate,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_ADDFOLLOWER', {
     bind: this,
@@ -121,38 +147,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
   // console.log("re_postJoinGroup + data=====",data)
   //
 
-  if (data.errorCode == 3) {
-    this.openPop(this.$t('canNotFollowMyself'))
-    return;
-  }
-  if (data.errorCode == 10) {
-    this.openPop(this.$t('followDetails'))
-    return;
-  }
-  if (data.errorCode == 8 || data.errorCode == 12) {
-    this.openPop(this.$t('followDetails_1'))
-    return;
-  }
-  if (data.errorCode == 9) {
-    this.openPop(this.$t('followDetails_2'))
-    return;
-  }
-  if (data.errorCode == 15) {
-    this.openPop(this.$t('followDetails_3'))
-    return;
-  }
-  if (data.errorCode == 7) {
-    this.openPop(this.$t('followDetails_4'))
-    return;
-  }
-  if (data.errorCode == 11) {
-    this.openPop(this.$t('followDetails_5'))
-    return;
-  }
-  if (data.errorCode != 0) {
-    this.openPop(this.$t('systemError'))
-    return;
-  }
+
   if (data.errorCode == 0) {
     this.openPop(this.$t('followSuccess'),1)
     setTimeout(() => {
@@ -164,26 +159,24 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     return;
   }
 
-  // if (data.errorCode) {
-  //   if (
-  //     data.errorCode == 1 && (this.popText = this.$t('exist')) ||//账户不存在
-  //     data.errorCode == 2 && (this.popText = this.$t('资产')) || // 团长剩余比例不足
-  //     data.errorCode == 3 && (this.popText = this.$t('modified')) || // 团长职位不能修改
-  //     data.errorCode == 4 && (this.popText = this.$t('Wrong')) || // 成员类型有误
-  //     data.errorCode == 5 && (this.popText = this.$t('changed')) || // 联席团长职位不可更换
-  //     data.errorCode == 6 && (this.popText = this.$t('Setting')) || // 设置比例折扣不能为0
-  //     data.errorCode == 400 && (this.popText = this.$t('parameter_error')) //参数有误
-  //   ) {
-  //     this.popOpen = true
-  //     this.popType = 0
-  //     setTimeout(() => {
-  //       this.popOpen = true
-  //     }, 100)
-  //     return;
-  //   }
-  // }
-
-
+  if (data.errorCode) {
+    data.errorCode == 1 &&  this.openPop(this.$t('systemError'));
+    data.errorCode == 3 &&  this.openPop(this.$t('canNotFollowMyself'));
+    data.errorCode == 4 &&  this.openPop(this.$t('canNotFollowMyself2'));
+    data.errorCode == 5 &&  this.openPop(this.$t('大神不能跟单大神'));
+    data.errorCode == 6 &&  this.openPop(this.$t('用户合约跟单只能跟随一个大神'));
+    data.errorCode == 7 &&  this.openPop(this.$t('followDetails_4'));
+    data.errorCode == 8 &&  this.openPop(this.$t('followDetails_1'));
+    data.errorCode == 9 &&  this.openPop(this.$t('followDetails_2'));
+    data.errorCode == 10 &&  this.openPop(this.$t('followDetails'));
+    data.errorCode == 11 &&  this.openPop(this.$t('followDetails_5'));
+    data.errorCode == 12 &&  this.openPop(this.$t('followDetails_1'));
+    data.errorCode == 15 &&  this.openPop(this.$t('followDetails_3'));
+    data.errorCode == 16 &&  this.openPop(this.$t('用户已经有仓位了不能跟随大神'));
+    data.errorCode == 17 &&  this.openPop(this.$t('用户和大神的杠杆倍数不一致'));
+    data.errorCode == 18 &&  this.openPop(this.$t('用户和大神的逐全仓模式不一致'));
+    data.errorCode == 19 &&  this.openPop(this.$t('用户和大神的单双仓模式不一致'));
+  }
 
 }
 root.methods.error_postDocumentaryImmediately = function (err) {
@@ -197,6 +190,7 @@ root.methods.error_postDocumentaryImmediately = function (err) {
 root.methods.postBigBrotherHistory = function () {
   let params = {
     followId: this.$route.query.userId,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_BROTHER_ORDER', {
     bind: this,
@@ -222,6 +216,7 @@ root.methods.error_postBigBrotherHistory = function (err) {
 root.methods.postFollowUser = function () {
   let params = {
     followId: this.$route.query.userId ,
+    type: this.isSwitchOrder,
   }
   this.$http.send('POST_FOLLOWUSER', {
     bind: this,
@@ -260,6 +255,16 @@ root.methods.toFixed = function (num, acc = 8) {
   return this.$globalFunc.accFixed(num, acc)
 }
 /*---------------------- 保留小数 end ---------------------*/
+/*---------------------- 乘法运算 begin ---------------------*/
+root.methods.accMul = function (num1, num2) {
+  return this.$globalFunc.accMul(num1, num2)
+}
+/*---------------------- 乘法运算 end ---------------------*/
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
 
 
 export default root

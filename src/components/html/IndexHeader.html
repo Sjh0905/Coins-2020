@@ -245,8 +245,6 @@
                   >{{$t('quotes')}}
 <!--                                      {{$t('currencyQuotation')}}-->
                   </router-link>
-                  <!--隐藏的标签 法币交易 begin-->
-                  <!--隐藏的标签 end-->
                 </li>
 
                 <!--币币交易 begin-->
@@ -259,9 +257,16 @@
                     {{$t('currencyExchange')}}
 
                   </router-link>
-                  <!--隐藏的标签 币币交易 begin-->
+                </li>
 
-                  <!--隐藏的标签 end-->
+                <!--合约交易 begin-->
+                <li class="navigation-item-container flex">
+                  <div @click="goToContractTransaction"
+                       class="navigation-item-router flex pointer"
+                       active-class="navigation-item-router-selected"
+                  >
+                    {{$t('contractExchange')}}
+                  </div>
                 </li>
 
                 <!--法币交易 begin-->
@@ -272,12 +277,9 @@
                   >
                     {{$t('fiatDeal')}}
                   </div>
-                  <!--隐藏的标签 法币交易 begin-->
-
-                  <!--隐藏的标签 end-->
                 </li>
 
-                <!--合约交易 begin-->
+
 
 
 <!--                &lt;!&ndash; 法币交易 &ndash;&gt;-->
@@ -553,7 +555,7 @@
                         :to="{name:'Forecast'}"
                         class="navigation-item-hidden-list-item-router"
                         active-class="item_selected">
-                        <!--百日庆之百宝箱-->
+                        <!--百宝箱-->
                         {{$t('celebration')}}
                       </router-link>
                     </li>
@@ -679,6 +681,17 @@
                       </router-link>
                     </li>
 
+                    <!-- 合约账户 bebgin-->
+                    <li class="navigation-item-hidden-list-item">
+                      <router-link
+                        :to="{name:'contractRecord'}"
+                        class="navigation-item-hidden-list-item-router"
+                        active-class="item_selected">
+                        {{$t('contract')}}
+                      </router-link>
+                    </li>
+                    <!--合约账户 end-->
+
                     <!-- 法币账户 暂时屏蔽 bebgin-->
                     <li class="navigation-item-hidden-list-item">
                       <router-link
@@ -689,6 +702,7 @@
                       </router-link>
                     </li>
                     <!--法币账户 暂时屏蔽 end-->
+
 
                     <!-- 主流账户 bebgin-->
 <!--                    <li class="navigation-item-hidden-list-item">-->
@@ -798,6 +812,14 @@
                         active-class="item_selected">
                         {{$t('currentEntrust')}}
                       </router-link>
+                    </li>
+                    <li class="navigation-item-hidden-list-item">
+                      <div @click="goToContractCurrecy"
+                           class="navigation-item-hidden-list-item-router"
+                           active-class="item_selected"
+                      >
+                        {{$t('合约订单')}}
+                      </div>
                     </li>
                     <li class="navigation-item-hidden-list-item">
                       <div class="navigation-item-hidden-list-item-router"

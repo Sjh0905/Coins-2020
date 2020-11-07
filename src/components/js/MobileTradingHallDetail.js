@@ -186,6 +186,11 @@ root.components = {
 /*------------------------------ 计算 begin -------------------------------*/
 
 root.computed = {}
+// 是否登录
+root.computed.isLogin = function () {
+  if (this.$store.state.authMessage.userId !== '') return true
+  return false
+}
 
 root.computed.currencyList = function(){
   return this.$store.state.symbol.currencyList
@@ -662,7 +667,7 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
       //   console.info('baseMinimum========',baseMinimum)
       // }
       if ((this.optionSymbol.indexOf(this.$store.state.symbol) >= 0) && !type && (Number(this.transactionVolume) < 1)) {
-        console.info('name===symbol====',this.$store.state.symbol)
+        // console.info('name===symbol====',this.$store.state.symbol)
         this.popText = '交易额不能低于 1';
         // this.popText = '请输入正确的数量';
         this.popType = 0;
@@ -670,7 +675,7 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
         return
       }
       if ((this.optionSymbol.indexOf(this.$store.state.symbol) < 0) && !type && (Number(this.transactionVolume) < 10)) {
-        console.info('name====symbol22===',this.$store.state.symbol)
+        // console.info('name====symbol22===',this.$store.state.symbol)
         this.popText = '交易额不能低于 10';
         // this.popText = '请输入正确的数量';
         this.popType = 0;
@@ -1010,7 +1015,7 @@ root.methods.re_getCurrencyList = function (data) {
   let objs = this.symbolList_priceList(data);
   this.currency_list = objs;
   this.miniVolumeSymbol = data.symbols
-  console.info('miniVolumeSymbol====',this.miniVolumeSymbol)
+  // console.info('miniVolumeSymbol====',this.miniVolumeSymbol)
 }
 
 // 请求price
@@ -1636,11 +1641,26 @@ root.methods.gotoShichang = function () {
 root.methods.gotoZichan = function () {
   this.$router.push({name: 'MobileAssetRechargeAndWithdrawals'});
 }
+/*---------------------- 跳入到合约 ---------------------*/
+root.methods.gotoContract = function () {
+  if(!this.isLogin){
+    this.$router.push('/index/sign/login')
+    return;
+  }
+  window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
+  // window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=BTC_USDT');
+}
 
 /*---------------------- 跳入到交易页面 ---------------------*/
 root.methods.gotoJiaoyi = function () {
   this.$router.push({name: 'mobileTradingHallDetail'});
 }
+// /*---------------------- 跳转合约项目 ---------------------*/
+// root.methods.gotoContract = function () {
+//   // this.$router.push({name: 'mobileTradingHallDetail'});
+//   window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
+// }
+
 
 //移动端是否显示右侧菜单
 root.methods.clickChangePopOpen = function () {

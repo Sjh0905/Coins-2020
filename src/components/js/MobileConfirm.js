@@ -270,7 +270,7 @@ root.methods.re_getAccounts = function (data) {
 
 // 获取币种出错
 root.methods.error_getAccounts = function (err) {
-  console.log('获取账户信息出错！', err)
+  // console.log('获取账户信息出错！', err)
 }
 
 
@@ -392,7 +392,7 @@ root.methods.re_getEmailVerification = function (data) {
 }
 // 获取转账邮箱验证码出错
 root.methods.error_getEmailVerification = function (err) {
-  console.warn('获取邮箱验证码出错', err)
+  // console.warn('获取邮箱验证码出错', err)
 }
 // 再点击邮箱，把错误提示关闭
 root.methods.closeMailWrong = function () {

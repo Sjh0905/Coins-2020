@@ -188,7 +188,7 @@ root.data = function () {
     sending1:false,
     sending2:false,
     sending3:false,
-
+    grayCurrency:['TKF','FF'],
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/

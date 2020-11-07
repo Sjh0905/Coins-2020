@@ -210,6 +210,20 @@ root.routes.push({
 })
 
 
+// 合约首次进入弹框记录
+root.routes.push({
+  path: '/index/contractRiskWarning',
+  name: 'contractRiskWarning',
+  meta: {
+    requireLogin: true,
+    pcname: '',
+    h5name: 'contractRiskWarning',
+  },
+  caseSensitive: true,
+  component: resolve => require(['@/components/vue/ContractRiskWarning'], resolve)
+})
+
+
 /*-----------------  跟单H5 begin  ------------------------*/
 //H5  跟单首页
 root.routes.push({
@@ -284,7 +298,18 @@ root.routes.push({
   component: resolve => require(['@/components/followTrade/vue/MobileMyFollowOrder'], resolve)
 })
 /*-----------------  跟单H5 end  ------------------------*/
-
+//H5  划转
+root.routes.push({
+  path: '/index/mobileWebTransferContract',
+  name: 'mobileWebTransferContract',
+  meta: {
+    requireLogin: true,
+    pcname: '',
+    h5name: 'mobileWebTransferContract',
+  },
+  caseSensitive: true,
+  component: resolve => require(['@/components/vue/MobileWebTransferContract'], resolve)
+})
 
 /*-----------------  基金理财H5 begin  ------------------------*/
 // 基金理财
@@ -1390,6 +1415,9 @@ root.routes.push({
       component: resolve => require(['@/components/mobileVue/NewH5HomePage'], resolve),
     },
 
+
+
+
     {
       path: 'mobileHeatList',
       name: 'mobileHeatList',
@@ -2037,6 +2065,78 @@ root.routes.push({
         },
 
 
+
+          {
+            path: 'contractRecord',
+            name: 'contractRecord',
+            meta: {
+              pcname: 'contractRecord',
+              h5name: '',
+              requireLogin: true,
+              templateClose: false,
+              requireLoginOff: false,
+            },
+            caseSensitive: true,
+            component: resolve => require(['@/components/Contract/vue/ContractRecord'], resolve),
+          },
+        // 合约账户
+        // {
+        //   path: 'contractRecord',
+        //   name: 'contractRecord',
+        //   caseSensitive: true,
+        //   meta: {
+        //     requireLogin: true,
+        //     templateClose: false,
+        //     requireLoginOff: false,
+        //   },
+        //   component: resolve => require(['@/components/Contract/vue/ContractRecord'], resolve),
+        //   // children:[
+        //   //   {
+        //   //     path: '',
+        //   //     meta: {
+        //   //       requireLogin: true,
+        //   //       templateClose: false,
+        //   //       requireLoginOff: false,
+        //   //     },
+        //   //     redirect: 'warehousePosition',
+        //   //     caseSensitive: true,
+        //   //   },
+        //   //
+        //   //   // 仓位记录
+        //   //   {
+        //   //     path: 'warehousePosition',
+        //   //     name: 'warehousePosition',
+        //   //     meta: {
+        //   //       pcname: 'warehousePosition',
+        //   //       h5name: '',
+        //   //       requireLogin: true,
+        //   //       templateClose: false,
+        //   //       requireLoginOff: false,
+        //   //     },
+        //   //     caseSensitive: true,
+        //   //     component: resolve => require(['@/components/Contract/vue/WarehousePosition'], resolve),
+        //   //   },
+        //   //
+        //   //
+        //   //   // 合约资产记录
+        //   //   {
+        //   //     path: 'propertyAssets',
+        //   //     name: 'propertyAssets',
+        //   //     meta: {
+        //   //       pcname: 'propertyAssets',
+        //   //       h5name: '',
+        //   //       requireLogin: true,
+        //   //       templateClose: false,
+        //   //       requireLoginOff: false,
+        //   //     },
+        //   //     caseSensitive: true,
+        //   //     component: resolve => require(['@/components/Contract/vue/PropertyAssets'], resolve),
+        //   //   },
+        //   //
+        //   // ]
+        // },
+
+
         {
           path: 'record',
           caseSensitive: true,
@@ -2192,6 +2292,21 @@ root.routes.push({
               },
               caseSensitive: true,
               component: resolve => require(['@/components/vue/HeatReward'], resolve),
+            },
+            // 申购记录
+            {
+              path: 'purchase',
+              name: 'purchase',
+              meta: {
+                pcname: 'purchase',
+                h5name: '',
+                requireLogin: true,
+                templateClose: false,
+                // templatePath: '/index/assetPageT',
+                requireLoginOff: false,
+              },
+              caseSensitive: true,
+              component: resolve => require(['@/components/vue/Purchase'], resolve),
             },
           ]
         },
