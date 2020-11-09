@@ -848,7 +848,7 @@ root.methods.re_monthlyCashBack = function (data) {
   if (data.errorCode) return
 
   this.monthlyCashBackLists = data.dataMap.lists
-  console.info('阅读返现',this.monthlyCashBackLists)
+  // console.info('阅读返现',this.monthlyCashBackLists)
   // // this.rewCycle = this.fundListLists.rewCycle.split('_')
   // this.fundListLists.map(v=>{
   //   let rewCycleSplit = v.rewCycle.split('_');
@@ -879,7 +879,7 @@ root.methods.getCapitalExchange = function (limit) {
 // 获取周热度记录回调
 root.methods.re_getCapitalExchange = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  console.info('this is data=======', data)
+  // console.info('this is data=======', data)
   this.loading = false
   this.firstLoad = true
   this.loadingNext = false
