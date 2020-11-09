@@ -75,12 +75,6 @@
           <!--状态-->
           <div class="header-box-state">
             <span class="header-box-state-title">状态</span>
-<!--            <div v-if="rechargeDetailData.fromUserId === userId" class="header-box-state-container">转出{{statusObj[rechargeDetailData.status]}}</div>-->
-<!--            <div v-else class="header-box-state-container">收款{{statusObj[rechargeDetailData.status]}}</div>-->
-            <div class="header-box-state-container" v-if="$route.query.openType == 5">{{rechargeDetailData.status == 'SUCCESS' ? '成功' : '失败'}}</div>
-            <div class="header-box-state-container" v-if="$route.query.openType == 4">{{rechargeDetailData.done == 'SUCCESS' ? '成功' : '失败'}}</div>
-            <div class="header-box-state-container" v-if="$route.query.openType == 6">已发放</div>
-            <div class="header-box-state-container" v-if="$route.query.openType == 3">已发放</div>
             <div v-if="rechargeDetailData.fromUserId === userId" class="header-box-state-container">转出{{statusObj[rechargeDetailData.status]}}</div>
             <div v-else class="header-box-state-container">收款{{statusObj[rechargeDetailData.status]}}</div>
           </div>
