@@ -91,7 +91,7 @@ root.methods.getFundList = function (limit) {
 // 获取周热度记录回调
 root.methods.re_getFundList = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  console.info('this is data=======', data)
+  // console.info('this is data=======', data)
   this.loading = false
   this.firstLoad = true
   this.loadingNext = false
