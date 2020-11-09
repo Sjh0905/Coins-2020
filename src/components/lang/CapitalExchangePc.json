@@ -1,0 +1,23 @@
+{
+  "CH": {
+    "issuingTime": "时间",
+    "cycle": "周期",
+    "Biweekly": "双周热度奖",
+    "Weekly": "单周热度奖",
+    "issued": "成功",
+    "standard": "失败",
+    "standard5": "状态"
+  },
+  "EN": {},
+  "CA": {},
+  "CHT": {
+    "issuingTime": "時間",
+    "cycle": "週期",
+    "Biweekly": "雙周熱度獎",
+    "Weekly": "單周熱度獎",
+    "issued": "成功",
+    "standard": "失敗",
+    "standard5": "狀態"
+
+  }
+}

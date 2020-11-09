@@ -535,6 +535,7 @@ requestAddress.GET_HEATREWARD = {url: urlHead+'/user/getWeekReward', method: 'ge
 // 2020.09.14     申购列表
 // requestAddress.GET_PURCHASE = {url: urlHead+'/user/queryApplyPurchase', method: 'get'}  //申购列表
 requestAddress.GET_PURCHASE = {url: urlHead+'/user/getMonthReward', method: 'get'}  //月度返现
+requestAddress.GET_PURCHASE_RECORD = {url: urlHead+'/user/transfer/spot/purchaseRecord', method: 'get'}  //月度返现
 
 
 //2020-7-22  合约账户相关接口
