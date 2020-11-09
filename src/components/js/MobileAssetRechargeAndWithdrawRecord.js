@@ -63,7 +63,7 @@ root.data = function () {
     internalTransferLists:[],
     //月度返现
     monthlyCashBackLists:[],
-    h5apitalExchange:[],
+    h5CapitalExchange:[],
     // 是否显示划转记录加载更多
     isShowGetMoreInternalTransfer: true,
 
@@ -140,8 +140,8 @@ root.computed.computedInternalTransfer = function () {
   return this.internalTransferLists
 }
 
-root.computed.computedH5apitalExchange = function () {
-  return this.h5apitalExchange
+root.computed.computedH5CapitalExchange = function () {
+  return this.h5CapitalExchange
 }
 
 //月度奖励
@@ -189,7 +189,7 @@ root.methods.changeOpenTypeQuery = function () {
     this.monthlyCashBack()
   }
   if(num == 10) {
-    this.getapitalExchange()
+    this.getCapitalExchange()
   }
 
 }
@@ -259,7 +259,7 @@ root.methods.changeOpenType = function(num){
   if(num === 10) {
     this.$router.push({'path':'/index/mobileAsset/MobileAssetRechargeAndWithdrawRecord',query:{id:10}})
     this.$store.commit('changeMobileHeaderTitle', '');
-    this.getapitalExchange()
+    this.getCapitalExchange()
   }
 
 }
@@ -869,15 +869,15 @@ root.methods.error_monthlyCashBack = function (err) {
 
 
 // 获取资金往来
-root.methods.getapitalExchange = function (limit) {
+root.methods.getCapitalExchange = function (limit) {
   this.$http.send('GET_PURCHASE_RECORD', {
     bind: this,
-    callBack: this.re_getapitalExchange,
-    errorHandler: this.error_getapitalExchange,
+    callBack: this.re_getCapitalExchange,
+    errorHandler: this.error_getCapitalExchange,
   })
 }
 // 获取周热度记录回调
-root.methods.re_getapitalExchange = function (data) {
+root.methods.re_getCapitalExchange = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   console.info('this is data=======', data)
   this.loading = false
@@ -886,7 +886,7 @@ root.methods.re_getapitalExchange = function (data) {
   // console.log('this is data', data.dataMap.lists)
   if (data.errorCode) return
 
-  this.h5apitalExchange = data.dataMap.recordList
+  this.h5CapitalExchange = data.dataMap.recordList
   // console.info('阅读返现',this.fundListLists)
   // this.rewCycle = this.fundListLists.rewCycle.split('_')
   // this.fundListLists.map(v=>{
@@ -901,7 +901,7 @@ root.methods.re_getapitalExchange = function (data) {
   // this.page_size = data.dataMap.size   // 总页数
 }
 // 获取周热度记录出错
-root.methods.error_getapitalExchange = function (err) {
+root.methods.error_getCapitalExchange = function (err) {
   console.warn('获取平台奖励出错', err)
 }
 
