@@ -101,6 +101,9 @@ root.data = function () {
     advancedSettings: false, //网格交易高级设置
     popConfirmationRobot: false, //网格交易二次确认
     popTransactionCancellation: false, //网格交易取消二次确认
+    aiType:2,//AI策略切换
+    value3:0, //AI策略滑块
+    switchImg:false,
 
   }
 }
@@ -165,6 +168,230 @@ root.mounted = function () {
   //
   //
   // }
+}
+
+
+// 组件销毁前清除 interval
+root.beforeDestroy = function () {
+  clearInterval(interval);
+}
+
+
+
+
+
+root.props = {}
+// root.props.currency_list = {
+//   type: Object,
+//   default: {}
+// }
+// root.props.socket_tick = {
+//   type: Object,
+//   default: {}
+// }
+// root.props.socket_snap_shot = {
+//   type: Object,
+//   default: {}
+// }
+// root.props.socket_price = {
+//   type: Object,
+//   default: {}
+// }
+// root.props.btc_eth_rate = {
+//   type: Object,
+//   default: {}
+// }
+// root.props.buy_sale_list = {
+//   type: Object,
+//   default: {}
+// }
+
+
+// 计算symbol变化
+root.computed = {};
+// 当前货币对
+root.computed.symbol = function () {
+  return this.$store.state.symbol;
+}
+// 实时价格
+root.computed.isNowPrice = function () {
+  // console.log('socket_snap_shot====',this.socket_snap_shot,this.buy_sale_list,this.quoteScale)
+  let price = this.$globalFunc.mergeObj(this.socket_snap_shot.price, this.buy_sale_list.price) || 0;
+  let priceObj = this.$globalFunc.mergeObj(this.socket_tick, {price: price});
+  let now_price = this.$globalFunc.accFixed(priceObj.price, this.quoteScale);
+  document.title = now_price+" "+this.$store.state.symbol.replace('_', '/')+" "+this.$t('document_title');
+  // if (!!this.socket_snap_shot.price)
+  return now_price;
+}
+// 实时价格的升降
+root.computed.direction = function () {
+  return this.socket_tick.direction;
+}
+// 实时价格cny
+root.computed.isCnyPrice = function () {
+  let close = this.isNowPrice || 0;
+  // if (this.$store.state.lang === 'CH') {
+    return ('￥' + this.$globalFunc.accFixedCny(this.$store.state.exchange_rate_dollar * (close * this.rate), 2));
+  // }
+  // else {
+  //   return ('$' + this.$globalFunc.accFixedCny((close * this.rate), 2));
+  // }
+  // if (this.$store.state.lang === 'EN') {
+  // 	return ('$' + ((close * this.rate)).toFixed(2));
+  // }
+}
+
+// 24小时最低价
+root.computed.low24 = function () {
+  // console.log('list', this.mergeList[this.symbol][3])
+  if (!this.mergeList[this.symbol]) return;
+  let low = Math.min((this.isNowPrice || 10000), this.mergeList[this.symbol][3]);
+  let low24 = this.$globalFunc.accFixed(low, this.quoteScale);
+  return low24;
+}
+// 24小时最高价
+root.computed.high24 = function () {
+  // console.log('list', this.mergeList[this.symbol][2])
+  if (!this.mergeList[this.symbol]) return;
+  let high = Math.max(this.isNowPrice, this.mergeList[this.symbol][2]);
+  let high24 = this.$globalFunc.accFixed(high, this.quoteScale);
+  return high24;
+}
+// 24小时成交量
+root.computed.volume = function () {
+  if (!this.mergeList[this.symbol]) return;
+  let volume = this.$globalFunc.accFixed(this.mergeList[this.symbol][5], 0);
+  return volume;
+}
+
+// 实时价格 需要取BDB/ETH的时价和汇率来算BDB的汇率
+root.computed.topic_price = function () {
+  return this.socket_price;
+}
+
+
+root.computed.mergeList = function () {
+  let list = this.$globalFunc.mergeObj(this.socket_price, this.currency_list);
+  return list;
+}
+
+// 24小时涨跌
+root.computed.diff24 = function () {
+  // let diff = this.isNowPrice  - Number(this.mergeList[this.symbol][1])
+  // 减法
+  if (!this.mergeList[this.symbol]) return;
+  let diff = this.$globalFunc.accFixed(this.$globalFunc.accMinus(this.isNowPrice, this.mergeList[this.symbol][1]), this.quoteScale);
+  return diff;
+}
+// 24小时涨跌百分比 (现价 - 开盘价) / 开盘价
+root.computed.diff24Ratio = function () {
+  if (!this.mergeList[this.symbol]) return;
+  let now_price = this.isNowPrice || 0;
+  let diff = ((Number(now_price) - Number(this.mergeList[this.symbol][1])) / Number(this.mergeList[this.symbol][1])*100).toFixed(2);
+  // let diff = this.toFixed(this.accMul(this.accDiv(this.accMinus(now_price, this.mergeList[this.symbol][1]), this.mergeList[this.symbol][1] || 1), 100), 2)
+  if (this.mergeList[this.symbol][1] == 0) {
+    return 0
+  } else {
+    return diff;
+  }
+}
+
+/*****************************************************/
+root.computed.listenSymbol = function () {
+  return this.$store.state.symbol;
+}
+// 判断是否为移动端
+root.computed.isMobile = function () {
+  return this.$store.state.isMobile
+}
+
+// bt奖励比率
+root.computed.btReward = function () {
+  return this.$store.state.btReward;
+}
+// bt活动
+root.computed.btActivity = function () {
+  return this.$store.state.btActivity;
+}
+// 特殊专区
+root.computed.specialSymbol = function () {
+  return this.$store.state.specialSymbol
+}
+// 是否显示为蜜简介
+root.computed.showSuperBeeIntroduction = function () {
+  // if (this.specialSymbol[0].has(this.listenSymbol)) {
+  //   return true
+  // }
+  return false
+}
+
+
+// 监听symbol 做一些操作
+root.watch = {};
+
+root.watch.isNowPrice = function (newValue, oldValue) {
+  this.GET_RATE('');
+}
+
+root.watch.symbol = function (newValue, oldValue) {
+  if (newValue == oldValue) return;
+  // this.getScaleConfig();
+  // this.init();
+  if(newValue == 'KK_USDT'){
+    this.pendingOrderType = 'limitPrice'
+  }
+}
+root.watch.listenSymbol = function (newValue, oldValue) {
+  if (newValue == oldValue) return;
+  this.refreshTime = 0;
+  //切换币对后第一次进入不需要延迟刷新
+  // this.refresh = 0;
+  // 订阅某个币对的信息
+  // this.$socket.emit('unsubscribe', {symbol: oldValue});
+  this.$socket.emit('subscribe', {symbol: this.$store.state.symbol});
+
+  // 2018-2-8 切换币对时候清空所有socket的数据，等socket推送以后重新赋值
+  this.socket_snap_shot = {};
+  this.socket_tick = {};
+  this.topic_bar = {};
+  this.socket_tick_arr = [];
+  this.socket_tick_obj = {};
+
+  // this.buy_sale_list = {}//为了保证切换币对时价不显示0
+  this.buy_sale_list.sellOrders = []
+  this.buy_sale_list.buyOrders = []
+
+  this.header_price = {}
+  // socket_price: {}, //总价格
+  this.socket_snap_shot_temp = {}
+  this.snap_shot_timeout = null
+
+  // 重新获取信息
+  this.getScaleConfig();
+  this.init();
+  // this.initGetDatas();
+
+  // 各小版块加载中
+  this.trade_loading = true;
+
+  this.$router.push({name: 'tradingHall', query: {symbol: newValue}});
+}
+
+// 如果切换市场的时候，在超级为蜜区，并且打开了为蜜资料
+root.watch.showSuperBeeIntroduction = function (newValue, oldValue) {
+  if (!newValue && oldValue && this.isNow == 3) {
+    this.isNow = 0
+  }
+}
+
+// 组件卸载前取消订阅
+root.beforeDestroy = function () {
+  this.$socket.emit('unsubscribe', {symbol: this.$store.state.symbol});
+}
+// 组件卸载取消订阅
+root.destroyed = function () {
+  //加进window的方法当跳出此页面后需要销毁哦
+  window.onresize = null;
 }
 
 
@@ -275,12 +502,6 @@ root.methods.rangePrice = function (max, min, every) {
   this.max_min_pisition = position;
   // console.log('position', position);
 }
-
-// 组件销毁前清除 interval
-root.beforeDestroy = function () {
-  clearInterval(interval);
-}
-
 
 // init
 root.methods.init = function () {
@@ -449,9 +670,9 @@ root.methods.initSocket = function () {
   this.$socket.emit('subscribe', {symbol: this.$store.state.symbol});
 
   this.$socket.on({key: 'connect',bind: this,callBack: ()=>{
-      // console.log("监听socket连接状态，成功，订阅消息")
-      this.$socket.emit('unsubscribe', {symbol: this.$store.state.symbol});
-      this.$socket.emit('subscribe', {symbol: this.$store.state.symbol});
+        // console.log("监听socket连接状态，成功，订阅消息")
+        this.$socket.emit('unsubscribe', {symbol: this.$store.state.symbol});
+        this.$socket.emit('subscribe', {symbol: this.$store.state.symbol});
       }
     }
   )
@@ -793,7 +1014,7 @@ root.methods.popCloseGridTransaction = function () {
 }
 
 root.methods.gridClick = function () {
-  this.popSelectRobot = false
+  // this.popSelectRobot = false
   this.popGridTransaction = true
 }
 //打开机器人交易
@@ -801,12 +1022,16 @@ root.methods.createRobotChoose = function () {
   this.popSelectRobot = true
 }
 root.methods.isodyneCommon = function (type) {
-    this.checkPrice = type
+  this.checkPrice = type
 
 }
 //使用我的BTC
-root.methods.useBTC = function () {
-
+root.methods.useBtcClick = function () {
+ this.switchImg = true
+}
+//使用我的BTC
+root.methods.useBtcClickOff = function () {
+ this.switchImg = false
 }
 //网格交易高级设置
 root.methods.advancedSettingsClick = function () {
@@ -851,223 +1076,13 @@ root.methods.transactionCancellationConfirm = function () {
 }
 
 
-
-
-
-
-root.props = {}
-// root.props.currency_list = {
-//   type: Object,
-//   default: {}
-// }
-// root.props.socket_tick = {
-//   type: Object,
-//   default: {}
-// }
-// root.props.socket_snap_shot = {
-//   type: Object,
-//   default: {}
-// }
-// root.props.socket_price = {
-//   type: Object,
-//   default: {}
-// }
-// root.props.btc_eth_rate = {
-//   type: Object,
-//   default: {}
-// }
-// root.props.buy_sale_list = {
-//   type: Object,
-//   default: {}
-// }
-
-
-// 计算symbol变化
-root.computed = {};
-// 当前货币对
-root.computed.symbol = function () {
-  return this.$store.state.symbol;
-}
-// 实时价格
-root.computed.isNowPrice = function () {
-  // console.log('socket_snap_shot====',this.socket_snap_shot,this.buy_sale_list,this.quoteScale)
-  let price = this.$globalFunc.mergeObj(this.socket_snap_shot.price, this.buy_sale_list.price) || 0;
-  let priceObj = this.$globalFunc.mergeObj(this.socket_tick, {price: price});
-  let now_price = this.$globalFunc.accFixed(priceObj.price, this.quoteScale);
-  document.title = now_price+" "+this.$store.state.symbol.replace('_', '/')+" "+this.$t('document_title');
-  // if (!!this.socket_snap_shot.price)
-  return now_price;
-}
-// 实时价格的升降
-root.computed.direction = function () {
-  return this.socket_tick.direction;
-}
-// 实时价格cny
-root.computed.isCnyPrice = function () {
-  let close = this.isNowPrice || 0;
-  // if (this.$store.state.lang === 'CH') {
-    return ('￥' + this.$globalFunc.accFixedCny(this.$store.state.exchange_rate_dollar * (close * this.rate), 2));
-  // }
-  // else {
-  //   return ('$' + this.$globalFunc.accFixedCny((close * this.rate), 2));
-  // }
-  // if (this.$store.state.lang === 'EN') {
-  // 	return ('$' + ((close * this.rate)).toFixed(2));
-  // }
-}
-
-// 24小时最低价
-root.computed.low24 = function () {
-  // console.log('list', this.mergeList[this.symbol][3])
-  if (!this.mergeList[this.symbol]) return;
-  let low = Math.min((this.isNowPrice || 10000), this.mergeList[this.symbol][3]);
-  let low24 = this.$globalFunc.accFixed(low, this.quoteScale);
-  return low24;
-}
-// 24小时最高价
-root.computed.high24 = function () {
-  // console.log('list', this.mergeList[this.symbol][2])
-  if (!this.mergeList[this.symbol]) return;
-  let high = Math.max(this.isNowPrice, this.mergeList[this.symbol][2]);
-  let high24 = this.$globalFunc.accFixed(high, this.quoteScale);
-  return high24;
-}
-// 24小时成交量
-root.computed.volume = function () {
-  if (!this.mergeList[this.symbol]) return;
-  let volume = this.$globalFunc.accFixed(this.mergeList[this.symbol][5], 0);
-  return volume;
-}
-
-// 实时价格 需要取BDB/ETH的时价和汇率来算BDB的汇率
-root.computed.topic_price = function () {
-  return this.socket_price;
+//切换AI策略和自己设置参数
+root.methods.getAi = function (type) {
+  this.aiType = type
 }
 
 
-root.computed.mergeList = function () {
-  let list = this.$globalFunc.mergeObj(this.socket_price, this.currency_list);
-  return list;
-}
 
-// 24小时涨跌
-root.computed.diff24 = function () {
-  // let diff = this.isNowPrice  - Number(this.mergeList[this.symbol][1])
-  // 减法
-  if (!this.mergeList[this.symbol]) return;
-  let diff = this.$globalFunc.accFixed(this.$globalFunc.accMinus(this.isNowPrice, this.mergeList[this.symbol][1]), this.quoteScale);
-  return diff;
-}
-// 24小时涨跌百分比 (现价 - 开盘价) / 开盘价
-root.computed.diff24Ratio = function () {
-  if (!this.mergeList[this.symbol]) return;
-  let now_price = this.isNowPrice || 0;
-  let diff = ((Number(now_price) - Number(this.mergeList[this.symbol][1])) / Number(this.mergeList[this.symbol][1])*100).toFixed(2);
-  // let diff = this.toFixed(this.accMul(this.accDiv(this.accMinus(now_price, this.mergeList[this.symbol][1]), this.mergeList[this.symbol][1] || 1), 100), 2)
-  if (this.mergeList[this.symbol][1] == 0) {
-    return 0
-  } else {
-    return diff;
-  }
-}
-
-/*****************************************************/
-root.computed.listenSymbol = function () {
-  return this.$store.state.symbol;
-}
-// 判断是否为移动端
-root.computed.isMobile = function () {
-  return this.$store.state.isMobile
-}
-
-// bt奖励比率
-root.computed.btReward = function () {
-  return this.$store.state.btReward;
-}
-// bt活动
-root.computed.btActivity = function () {
-  return this.$store.state.btActivity;
-}
-// 特殊专区
-root.computed.specialSymbol = function () {
-  return this.$store.state.specialSymbol
-}
-// 是否显示为蜜简介
-root.computed.showSuperBeeIntroduction = function () {
-  // if (this.specialSymbol[0].has(this.listenSymbol)) {
-  //   return true
-  // }
-  return false
-}
-
-
-// 监听symbol 做一些操作
-root.watch = {};
-
-root.watch.isNowPrice = function (newValue, oldValue) {
-  this.GET_RATE('');
-}
-
-root.watch.symbol = function (newValue, oldValue) {
-  if (newValue == oldValue) return;
-  // this.getScaleConfig();
-  // this.init();
-  if(newValue == 'KK_USDT'){
-    this.pendingOrderType = 'limitPrice'
-  }
-}
-root.watch.listenSymbol = function (newValue, oldValue) {
-  if (newValue == oldValue) return;
-  this.refreshTime = 0;
-  //切换币对后第一次进入不需要延迟刷新
-  // this.refresh = 0;
-  // 订阅某个币对的信息
-  // this.$socket.emit('unsubscribe', {symbol: oldValue});
-  this.$socket.emit('subscribe', {symbol: this.$store.state.symbol});
-
-  // 2018-2-8 切换币对时候清空所有socket的数据，等socket推送以后重新赋值
-  this.socket_snap_shot = {};
-  this.socket_tick = {};
-  this.topic_bar = {};
-  this.socket_tick_arr = [];
-  this.socket_tick_obj = {};
-
-  // this.buy_sale_list = {}//为了保证切换币对时价不显示0
-  this.buy_sale_list.sellOrders = []
-  this.buy_sale_list.buyOrders = []
-
-  this.header_price = {}
-  // socket_price: {}, //总价格
-  this.socket_snap_shot_temp = {}
-  this.snap_shot_timeout = null
-
-  // 重新获取信息
-  this.getScaleConfig();
-  this.init();
-  // this.initGetDatas();
-
-  // 各小版块加载中
-  this.trade_loading = true;
-
-  this.$router.push({name: 'tradingHall', query: {symbol: newValue}});
-}
-
-// 如果切换市场的时候，在超级为蜜区，并且打开了为蜜资料
-root.watch.showSuperBeeIntroduction = function (newValue, oldValue) {
-  if (!newValue && oldValue && this.isNow == 3) {
-    this.isNow = 0
-  }
-}
-
-// 组件卸载前取消订阅
-root.beforeDestroy = function () {
-  this.$socket.emit('unsubscribe', {symbol: this.$store.state.symbol});
-}
-// 组件卸载取消订阅
-root.destroyed = function () {
-  //加进window的方法当跳出此页面后需要销毁哦
-  window.onresize = null;
-}
 
 
 /*---------------------- 保留小数 begin ---------------------*/

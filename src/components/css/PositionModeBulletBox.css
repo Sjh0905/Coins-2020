@@ -21,7 +21,7 @@
 .popup {
   width: 400px;
   /*height: 200px;*/
-  background-color: #202133;
+  background-color: #16171D;
   position: absolute;
   /*top: 50%;*/
   left: 50%;
@@ -35,7 +35,7 @@
 .min-popup{
   min-width: 340px;
   /*height: 200px;*/
-  background-color: #202133;
+  background-color: #16171D;
   position: absolute;
   top: 40%;
   left: 50%;
@@ -53,7 +53,7 @@
   text-align: left;
   /*padding-left: 25px;*/
   position: relative;
-  background:rgba(20,21,26,1);
+  background: #14151A;
   border-radius:1px 1px 0px 0px;
   font-size:18px;
   font-family:PingFangSC-Regular,PingFang SC;
@@ -91,7 +91,7 @@
   width: 100%;
   padding-left: 25px;
   padding-right: 25px;
-  background-color: #202133;
+  background-color: #16171D;
   /*padding-bottom: 25px;*/
   /*align-items: center;*/
   /*-webkit-align-items: center;*/
@@ -164,7 +164,7 @@
   .popup {
     width: 280px;
     /*height: 200px;*/
-    background-color: #202133;
+    background-color: #16171D;
     position: absolute;
     top: 50%;
     left: 50%;

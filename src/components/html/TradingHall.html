@@ -57,7 +57,8 @@
           <div class="" v-if="this.$store.state.symbol != 'KK_USDT'" :class="pendingOrderType == 'marketPrice' ? 'progress-bar-title-brand':'progress-bar-title-brand-default'" @click="changePendingOrderType('marketPrice')">
             市价
           </div>
-          <div class="progress-bar-title-brand-default-robot" @click="createRobotChoose">
+<!--          <div class="progress-bar-title-brand-default-robot" @click="createRobotChoose">-->
+          <div class="progress-bar-title-brand-default-robot" @click="gridClick">
             <img class="robot-img" src="../../assets/Robot.png" alt="">
             创建机器人
           </div>
@@ -267,61 +268,101 @@
     </div>
     <div slot="article"class="pop-lock-house">
      <div class="grid-Wireless">
-       <div class="flex ">
-         <div class="minimum">
-           <div class="minimum-title">最低价格</div>
-           <div>
-             <input type="text" placeholder='' class="minimum-input">
+       <div class="flex">
+         <div class="AIflex AIflex-conter"><img class="Ai-img" src="../../assets/AI-icon.png" alt="">点此自动填入AI参数</div>
+         <div class="my-flex use_bob_fire">
+           <div class="my-flex-conter" :class="aiType == 1 ? 'select-ai' : ''" @click="getAi(1)">
+             使用AI策略
+             <img src="../../assets/My-icon.png" class="my-img" alt="" v-if="aiType == 1">
+           </div>
+           <div class="my-flex-conter m-t"  :class="aiType == 2 ? 'select-ai' : ''" @click="getAi(2)">
+             自己设置参数
+             <img src="../../assets/My-icon.png" class="my-img" alt="" v-if="aiType == 2">
+           </div>
+         </div>
+       </div>
 
+
+       <div v-if="aiType == 2">
+         <div class="flex Ai-my">
+           <div class="minimum">
+             <div class="minimum-title">最低价格</div>
+             <div>
+               <input type="text" placeholder='' class="minimum-input">
+
+             </div>
+           </div>
+           <div class="highest">
+             <div class="minimum-title">最高价格</div>
+             <div>
+               <input class="minimum-input" type="text">
+             </div>
            </div>
          </div>
-         <div class="highest">
-           <div class="minimum-title">最高价格</div>
-           <div>
-             <input class="minimum-input" type="text">
+         <div class="flex margin-top-grid">
+           <div class="minimum">
+             <div class="minimum-title">最低价格</div>
+             <div class="flex">
+               <div class="isodyne grid-common" :class="checkPrice==1?'select-grid-common':''" @click="isodyneCommon(1)">等差网格</div>
+               <div class="geometricProportion grid-common" :class="checkPrice==2?'select-grid-common':''" @click="isodyneCommon(2)">等比网格</div>
+             </div>
+           </div>
+           <div class="highest">
+             <div class="minimum-title">网格数量</div>
+             <div>
+               <input class="minimum-input" type="text">
+             </div>
            </div>
          </div>
-       </div>
-       <div class="flex margin-top-grid">
-         <div class="minimum">
-           <div class="minimum-title">最低价格</div>
-           <div class="flex">
-             <div class="isodyne grid-common" :class="checkPrice==1?'select-grid-common':''" @click="isodyneCommon(1)">等差网格</div>
-             <div class="geometricProportion grid-common" :class="checkPrice==2?'select-grid-common':''" @click="isodyneCommon(2)">等比网格</div>
-           </div>
+         <div class="flex word-color word-bottom">
+           <div class="word-flex">使用我的BTC</div>
+           <div class="word-flex word-lift">
+             <img class="word-flex-img" src="../robot/assets/on.png" v-if="!switchImg" alt="" @click="useBtcClick">
+             <img class="word-flex-img" src="../robot/assets/off.png" v-if="switchImg" alt="" @click="useBtcClickOff">
+             每格利润:</div>
+           <div class="word-flex word-lift">0.37%——0.62%</div>
          </div>
-         <div class="highest">
-           <div class="minimum-title">网格数量</div>
-           <div>
-             <input class="minimum-input" type="text">
-           </div>
+         <div>
+           <input class="total-investment" type="text" placeholder="总投资额">
+         </div>
+         <div class="flex word-color">
+           <div class="word-flex">可用资金:</div>
+           <div class="word-flex word-lift">≈ 0 USDT</div>
          </div>
        </div>
-       <div class="flex word-color word-bottom">
-         <div class="word-flex">使用我的BTC</div>
-         <div class="word-flex word-lift">
-           <img class="word-flex-img" src="../robot/assets/on.png" alt="" @click="useBTC">
-<!--           <img src="../robot/assets/off.png" alt="">-->
-           每格利润:</div>
-         <div class="word-flex word-lift">0.37%——0.62%</div>
+
+       <div v-if="aiType == 1">
+         <div class="flex ai-word-color Ai-my-top">
+           <div class="word-flex">价格区间 (USDT):</div>
+           <div class="word-flex word-lift ai-word-color-left">10853.56-18509.53</div>
+         </div>
+         <div class="flex ai-word-color">
+           <div class="word-flex">单网格利润 (已扣除手续费):</div>
+           <div class="word-flex word-lift ai-word-color-left">0.34%-0.65% (95 网格数量)</div>
+         </div>
+         <div class="flex ai-word-color">
+           <div class="word-flex">投资额 (USDT):</div>
+           <div class="word-flex word-lift ai-word-color-left">(0%)</div>
+         </div>
+
+         <div class="ju-text">运行当前网格交易策略最少需要金额为187.32</div>
+
+         <div class="block">
+           <el-slider v-model="value3" :show-tooltip="false"></el-slider>
+         </div>
        </div>
-       <div>
-         <input class="total-investment" type="text" placeholder="总投资额">
-       </div>
-       <div class="flex word-color">
-         <div class="word-flex">可用资金:</div>
-         <div class="word-flex word-lift">≈ 0 USDT</div>
-       </div>
+
+
      </div>
       <!--高级设置-->
-      <div class="flex word-color advanced-bac">
+      <div class="flex word-color advanced-bac" v-if="aiType == 2">
         <div class="word-flex">高级设置</div>
         <div class="word-flex word-lift">
           <img src="../../assets/jcdown.png" alt="" v-if="!advancedSettings" @click="advancedSettingsClick">
           <img src="../../assets/jtup.png" alt="" v-if="advancedSettings" @click="advancedSettingsClickOn">
         </div>
       </div>
-      <div class="chufa" v-if="advancedSettings">
+      <div class="chufa" v-if="advancedSettings && aiType == 2">
         <div>
           <div class="word-pcick">触发价格</div>
           <input class="chufa-input" type="text" placeholder="选填 (USDT)">
@@ -335,7 +376,9 @@
           <input class="chufa-input" type="text" placeholder="选填 (USDT)">
         </div>
       </div>
-      <div class="grid-create" @click="createOrder">创建订单</div>
+
+
+      <div class="grid-create" :class="aiType == 1?'grid-create-top':''" @click="createOrder">创建订单</div>
     </div>
   </PositionModeBulletBox>
 <!--  网格交易二次确认-->
