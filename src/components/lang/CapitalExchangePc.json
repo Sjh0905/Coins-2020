@@ -7,7 +7,9 @@
     "issued": "成功",
     "standard": "失败",
     "standard5": "状态",
-    "standard4": "数量"
+    "standard4": "数量",
+    "purchase": "申购",
+    "giveOut": "发放"
   },
   "EN": {},
   "CA": {},
@@ -19,7 +21,11 @@
     "issued": "成功",
     "standard": "失敗",
     "standard5": "狀態",
-    "standard4": "數量"
+    "standard4": "數量",
+    "purchase": "申購",
+    "giveOut": "發放"
+
+
 
   }
 }

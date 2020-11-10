@@ -35,7 +35,7 @@
               <span class="currency">{{item.currency}}</span>
               <!--数量-->
               <span class="total">{{toFixed(item.amount,8)}}</span>
-              <span class="type">{{item.type}}</span>
+              <span class="type">{{item.type == '申购' ? $t('purchase'):$t('giveOut')}}</span>
               <span class="state">{{item.done == 'SUCCESS'? $t('issued'):$t('standard')}}</span>
             </div>
           </li>
