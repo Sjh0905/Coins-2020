@@ -794,6 +794,15 @@ root.methods.RE_ERROR = function (err) {
     this.promptOpen = true;
     return
   }
+  if (err_type == 'amount*price') {
+    // txt = '无法交易'
+    // txt = '数量不能大于'+err_type.split("|")[1] || "最大值"
+    // this.toastOpen = true
+    this.popText = '低于最小交易额'+message.split("than")[1] + "\xa0" + 'USDT' || "最大值";
+    this.popType = 0;
+    this.promptOpen = true;
+    return
+  }
 
   // alert('你先去充点钱再来玩')
   this.popText = '暂不可用';
