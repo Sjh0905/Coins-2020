@@ -876,6 +876,9 @@ root.methods.RE_ERROR = function (err) {
     case 'account_freeze_failed':
       txt = this.lang == 'CH' ? '资产冻结失败!' : 'Fail to freeze funds';
       break;
+    case 'amount*price':
+      txt = this.lang == 'CH' ? '低于最小交易额!' : '';
+      break;
     default:
       txt = this.lang == 'CH' ? '暂不可用!' : 'Unavailable now';
       break;
@@ -898,6 +901,12 @@ root.methods.RE_ERROR = function (err) {
 
     txt = this.lang == 'CH' ? '数量不能大于'+err_type.split("|")[1] || "最大值"
       : 'Quantity cannot be greater than: '+err_type.split("|")[1] || "最大值";
+  }
+
+  if(err_type == 'amount*price'){
+
+    txt = this.lang == 'CH' ? '低于最小交易额'+message.split("than")[1] || "最大值"
+      : 'Below the minimum transaction value: '+message.split("|")[1] || "最大值";
   }
   // console.warn("this is wrong", err)
   this.popText = txt;
