@@ -905,8 +905,8 @@ root.methods.RE_ERROR = function (err) {
 
   if(err_type == 'amount*price'){
 
-    txt = this.lang == 'CH' ? '低于最小交易额'+message.split("than")[1] || "最大值"
-      : 'Below the minimum transaction value: '+message.split("|")[1] || "最大值";
+    txt = this.lang == 'CH' ? '低于最小交易额'+message.split("than")[1] + "\xa0" + 'USDT' || "最大值"
+      : 'Below the minimum transaction value: '+message.split("|")[1] + "\xa0" +'USDT' || "最大值";
   }
   // console.warn("this is wrong", err)
   this.popText = txt;
