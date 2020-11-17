@@ -240,7 +240,7 @@ root.methods.error_getCurrency = function (err) {
 root.methods.changeTransferCurrency = function (currency){
   // console.log('changeTransferCurrency==============',currency)
   // this.itemInfo = val
-  this.transferCurrencyAvailable = this.transferCurrencyObj[currency].available || 0;
+  this.transferCurrencyAvailable = this.transferCurrencyObj[currency] && this.transferCurrencyObj[currency].available || 0;
 
 
   if(this.isApp){
@@ -328,7 +328,7 @@ root.methods.re_bianBalance = function ( data ) {
   this.balance = data.data.assets[0]
 
 
-  if(isApp){
+  if(this.isApp){
     this.openTransfer();
   }
 }
