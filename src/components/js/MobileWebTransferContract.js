@@ -85,8 +85,16 @@ root.watch.currencyChange = function (newVal, oldVal) {
 
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
-
+// 检验是否是APP
+root.computed.isApp = function () {
+  return this.$route.query.isApp ? true : false
+}
 root.computed.queryBalance = function () {
+
+  if(this.isApp){
+    return this.balance;
+  }
+
   let queryBalance = JSON.stringify(this.$route.query.balance)
   // console.info('queryBalance=======',queryBalance)
   // return typeof queryBalance == 'string' && JSON.parse(queryBalance) || {}
@@ -233,6 +241,12 @@ root.methods.changeTransferCurrency = function (currency){
   // console.log('changeTransferCurrency==============',currency)
   // this.itemInfo = val
   this.transferCurrencyAvailable = this.transferCurrencyObj[currency].available || 0;
+
+
+  if(this.isApp){
+    //由于APP直接进入的划转，并未query传参，如果第一次数据未加载成功，切换币对时调用接口
+    this.bianBalance();
+  }
 }
 
 root.methods.openTransfer = function (balance) {
@@ -312,6 +326,11 @@ root.methods.re_bianBalance = function ( data ) {
   typeof (data) === 'string' && (data = JSON.parse(data))
   this.loading = false
   this.balance = data.data.assets[0]
+
+
+  if(isApp){
+    this.openTransfer();
+  }
 }
 root.methods.error_bianBalance = function ( err ) {
   // console.log(err)
