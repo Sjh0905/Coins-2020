@@ -710,7 +710,7 @@
   box-sizing: border-box;
   font-size: 0.24rem;
   line-height: 0.34rem;
-  color: #FD5555;
+  color: #F60076;
 }
 
 .forecast-activity-toast-btn {
@@ -925,7 +925,7 @@
 }
 
 .forecast-activity-ruleToast-agreement-wrong-text {
-  color: #FD5555;
+  color: #F60076;
   height: 14px;
   line-height: 14px;
   font-size: 10px;

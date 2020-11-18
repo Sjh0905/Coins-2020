@@ -221,7 +221,7 @@ body {
 }
 
 .m-txt-green {
-  color: #39B496;
+  color: #86CB12;
 }
 
 .txt-green {
@@ -229,7 +229,7 @@ body {
 }
 
 .txt-green2 {
-  color: #08D0AC;
+  color: #86CB12;
   /* color: rgb(112, 168, 0) */
 }
 
@@ -244,7 +244,7 @@ body {
 
 .txt-red {
   /*color: #3576F5;*/
-  color: #FD5555;
+  color: #F60076;
 }
 
 .txt-reda {
@@ -290,11 +290,11 @@ body {
 }
 
 .wrong-msg {
-  color: #FD5555 !important;
+  color: #F60076 !important;
 }
 
 .wrong-border {
-  border: 1px solid #EF5656 !important;
+  border: 1px solid #F60076 !important;
 }
 
 .pointer {

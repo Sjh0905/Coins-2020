@@ -544,7 +544,7 @@
   font-size:12px;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
-  color: #EF5656;
+  color: #F60076;
 }
 .Payee {
   /*height: 42px;*/
@@ -1055,7 +1055,7 @@
   color: #3576F5;
 }
 .amount-not-empty {
-  color: #FD5555;
+  color: #F60076;
 }
 
 .pop-footer {

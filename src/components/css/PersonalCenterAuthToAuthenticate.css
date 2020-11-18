@@ -499,12 +499,12 @@
 
 /*提示错误*/
 .wrong-border {
-  border: 1px solid #EF5656;
+  border: 1px solid #F60076;
 }
 
 
 .wrong-msg {
-  color: #FD5555;
+  color: #F60076;
 }
 
 .right-msg {

@@ -294,7 +294,7 @@
   line-height: 0.4rem;
   font-size: 0.28rem;
   margin-top: 0.04rem;
-  color: #39B496;
+  color: #86CB12;
 }
 
 .asset-header-right-box-price{
@@ -455,7 +455,7 @@
 
 .asset-container-box-btn-buy{
   float: left;
-  background: #39B496;
+  background: #86CB12;
 }
 
 .asset-container-box-btn-sale{
@@ -626,11 +626,11 @@
 }
 .cont-text-rad {
   background-color: rgba(239,86,86,.4);
-  color: #EF5656;
+  color: #F60076;
 }
 .cont-text-gr {
   background-color: rgba(57,180,150,.4);
-  color: #39B496;
+  color: #86CB12;
 }
 .hold-order {
   padding: 0.3rem;
@@ -672,10 +672,10 @@
   margin-top: 0.1rem;
 }
 .cont-red {
-  color: #EF5656;
+  color: #F60076;
 }
 .cont-green {
-  color: #39B496;
+  color: #86CB12;
 }
 .m-t {
   margin-top: 0.16rem;

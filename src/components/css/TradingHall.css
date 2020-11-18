@@ -565,7 +565,7 @@
   margin-bottom: 1px;
   font-family: Roboto-Medium,Roboto;
   font-size: 16px;
-  color: #08D0AC;
+  color: #86CB12;
   font-weight:500;
   line-height:19px;
 }
@@ -594,10 +594,10 @@
   line-height:15px;
 }
 .txt-price{
-  color: #08D0AC;
+  color: #86CB12;
 }
 .txt-price-red{
-  color: #EF5656;
+  color: #F60076;
 }
 .pankou{
   height: 44px;
