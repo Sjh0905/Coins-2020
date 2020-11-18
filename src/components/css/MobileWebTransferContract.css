@@ -590,7 +590,7 @@
   padding-left: 0.2rem;
 }
 .amount-not-empty {
-  color: #FD5555;
+  color: #F60076;
 }
 
 .pop-footer {
@@ -727,7 +727,7 @@
   height: 40px;
 }
 .amount-not-empty {
-  color: #FD5555;
+  color: #F60076;
 }
 
 .inputInner >>> .el-input__inner {
