@@ -2308,6 +2308,21 @@ root.routes.push({
               caseSensitive: true,
               component: resolve => require(['@/components/vue/Purchase'], resolve),
             },
+            // 资金往来
+            {
+              path: 'capitalExchangePc',
+              name: 'capitalExchangePc',
+              meta: {
+                pcname: 'capitalExchangePc',
+                h5name: '',
+                requireLogin: true,
+                templateClose: false,
+                // templatePath: '/index/assetPageT',
+                requireLoginOff: false,
+              },
+              caseSensitive: true,
+              component: resolve => require(['@/components/vue/CapitalExchangePc'], resolve),
+            },
           ]
         },
 

@@ -38,7 +38,7 @@
           <div class="flex contract-height">
             <div class="contract-flex">
               <div>账户余额</div>
-              <div class="BTC-asset-item m-t-1">{{totalWalletBalance > 0 ? totalMarginBalance : '----'}}</div>
+              <div class="BTC-asset-item m-t-1">{{totalWalletBalance > 0 ? totalWalletBalance : '----'}}</div>
               <div class="CHN-asset-item m-t-1"> ≈ {{( valuationWall >0)? $globalFunc.accFixedCny(valuationWall,2) : '----'}} CNY</div>
             </div>
             <div class="contract-flex">

@@ -63,6 +63,7 @@ root.data = function () {
     internalTransferLists:[],
     //月度返现
     monthlyCashBackLists:[],
+    h5CapitalExchange:[],
     // 是否显示划转记录加载更多
     isShowGetMoreInternalTransfer: true,
 
@@ -139,6 +140,10 @@ root.computed.computedInternalTransfer = function () {
   return this.internalTransferLists
 }
 
+root.computed.computedH5CapitalExchange = function () {
+  return this.h5CapitalExchange
+}
+
 //月度奖励
 // root.computed.computedmMnthlyCashBack = function () {
 //   return this.monthlyCashBackLists
@@ -182,6 +187,9 @@ root.methods.changeOpenTypeQuery = function () {
   }
   if(num == 9) {
     this.monthlyCashBack()
+  }
+  if(num == 10) {
+    this.getCapitalExchange()
   }
 
 }
@@ -247,6 +255,11 @@ root.methods.changeOpenType = function(num){
     this.$router.push({'path':'/index/mobileAsset/MobileAssetRechargeAndWithdrawRecord',query:{id:9}})
     this.$store.commit('changeMobileHeaderTitle', '');
     this.monthlyCashBack()
+  }
+  if(num === 10) {
+    this.$router.push({'path':'/index/mobileAsset/MobileAssetRechargeAndWithdrawRecord',query:{id:10}})
+    this.$store.commit('changeMobileHeaderTitle', '');
+    this.getCapitalExchange()
   }
 
 }
@@ -761,7 +774,7 @@ root.methods.toEventRewardsRecordPath = function (item) {
 // 点击跳进划转详情页
 root.methods.toCapitalTransferDetailPath = function (item) {
   this.$store.commit('changeMobileRechargeRecordData',item)
-  this.$router.push("/index/mobileAsset/mobileAssetCapitalTransferRecordDetail/")
+  this.$router.push("/index/mobileAsset/mobileAssetCapitalTransferRecordDetail/?openType=4")
 }
 // 点击跳进内部转账详情页
 root.methods.toInternalTransferDetailPath = function (item) {
@@ -782,6 +795,11 @@ root.methods.tofundDetailsPath1 = function (item) {
 root.methods.monthlyDetailsPath = function (item) {
   this.$store.commit('changeMobileRechargeRecordData',item)
   this.$router.push("/index/mobileAsset/mobileAssetInternalTransferRecordDetail/?openType=9")
+}
+// 点击跳进基金详情页
+root.methods.CapitalExchangeH5 = function (item) {
+  this.$store.commit('changeMobileRechargeRecordData',item)
+  this.$router.push("/index/mobileAsset/mobileAssetInternalTransferRecordDetail/?openType=10")
 }
 // 获取周热度记录
 root.methods.getHeatReward = function (limit) {
@@ -845,6 +863,45 @@ root.methods.re_monthlyCashBack = function (data) {
 }
 // 获取周热度记录出错
 root.methods.error_monthlyCashBack = function (err) {
+  console.warn('获取平台奖励出错', err)
+}
+
+
+
+// 获取资金往来
+root.methods.getCapitalExchange = function (limit) {
+  this.$http.send('GET_PURCHASE_RECORD', {
+    bind: this,
+    callBack: this.re_getCapitalExchange,
+    errorHandler: this.error_getCapitalExchange,
+  })
+}
+// 获取周热度记录回调
+root.methods.re_getCapitalExchange = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  // console.info('this is data=======', data)
+  this.loading = false
+  this.firstLoad = true
+  this.loadingNext = false
+  // console.log('this is data', data.dataMap.lists)
+  if (data.errorCode) return
+
+  this.h5CapitalExchange = data.dataMap.recordList
+  // console.info('阅读返现',this.fundListLists)
+  // this.rewCycle = this.fundListLists.rewCycle.split('_')
+  // this.fundListLists.map(v=>{
+  //   let rewCycleSplit = v.rewCycle.split('_');
+  //   this.rewSplit = rewCycleSplit[0]
+  //   this.rewTow = rewCycleSplit[1]
+  // })
+  this.fundListLists.length < this.limit && (this.loadingMoreShow = false)
+  this.fundListLists.length >= this.limit && (this.loadingMoreShow = true)
+  this.loadingMoreShowing = false
+  this.loading = false
+  // this.page_size = data.dataMap.size   // 总页数
+}
+// 获取周热度记录出错
+root.methods.error_getCapitalExchange = function (err) {
   console.warn('获取平台奖励出错', err)
 }
 

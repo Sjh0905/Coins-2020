@@ -81,6 +81,13 @@
           {{$t('assetPage.cashBack')}}
         </router-link>
         <!-- 申购记录 end -->
+        <!-- 资金往来 begin -->
+        <router-link :to="{name:'capitalExchangePc'}" class="title-tab flex-center margin-a-little tab-item-last"
+                     :class="lang!='CH'?'title-tab-en':''"
+                     active-class="selected text_blue">
+          {{$t('assetPage.capitalExchange')}}
+        </router-link>
+        <!-- 资金往来 end -->
 
 
     </div>
