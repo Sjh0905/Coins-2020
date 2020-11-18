@@ -134,7 +134,8 @@
 }
 
 .identity-button-passed img {
-  vertical-align: middle;
+  width: 17px;
+  vertical-align: sub;
 }
 
 .identity-button1 {
@@ -156,7 +157,7 @@
 
 .rejected {
   margin-left: 10px;
-  color: #EF5656;
+  color: #F60076;
   /*text-decoration: underline;*/
 }
 .rejected:hover {
@@ -170,7 +171,7 @@
   width:150px;
   height:29px;
   background:rgba(255,248,248,1);
-  color: #EF5656;
+  color: #F60076;
   border-radius:15px;
 }
 
@@ -187,7 +188,7 @@
 
 .pass {
   margin-left: 10px;
-  color: #08D0AC;
+  color: #86CB12;
   /*text-decoration: underline;*/
 }
 

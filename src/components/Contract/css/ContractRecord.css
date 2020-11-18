@@ -312,10 +312,10 @@
   margin-left: 80px;
 }
 .color-gre {
-  color: #08D0AC;
+  color: #86CB12;
 }
 .color-red {
-  color: #EF5656;
+  color: #F60076;
 }
 
 /*认证弹框样式*/
@@ -454,22 +454,22 @@
 .order-number-box {
   height: 30px;
   line-height: 30px;
-  border-left: 2px solid #08D0AC;
+  border-left: 2px solid #86CB12;
   padding-left: 8px;
 }
 
 .order-number-box-fu {
   height: 30px;
   line-height: 30px;
-  border-left: 2px solid #EF5656;
+  border-left: 2px solid #F60076;
   padding-left: 8px;
 }
 
 .currency-box {
-  color: #08D0AC;
+  color: #86CB12;
 }
 .currency-box-fu {
-  color: #EF5656;
+  color: #F60076;
 }
 .currency1 {
   flex:26;
