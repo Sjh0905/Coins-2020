@@ -197,13 +197,13 @@ root.methods.goTofollowTradeStrategy = function (switchOrder) {
 root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
 
   // // 如果没有实名认证不允许报名
-  if (!this.bindIdentify) {
-    this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
-    this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
-    this.popWindowStyle = '0'
-    this.popWindowOpenShiM = true
-    return
-  }
+  // if (!this.bindIdentify) {
+  //   this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
+  //   this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
+  //   this.popWindowStyle = '0'
+  //   this.popWindowOpenShiM = true
+  //   return
+  // }
 
   // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
   if (!this.bindGA && !this.bindMobile) {
@@ -230,13 +230,13 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
 // 返回我的镜像交易，正在跟随
 root.methods.goToMyFollowOrder = function (switchOrder) {
   // // 如果没有实名认证不允许报名
-  if (!this.bindIdentify) {
-    this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
-    this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
-    this.popWindowStyle = '0'
-    this.popWindowOpenShiM = true
-    return
-  }
+  // if (!this.bindIdentify) {
+  //   this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
+  //   this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
+  //   this.popWindowStyle = '0'
+  //   this.popWindowOpenShiM = true
+  //   return
+  // }
 
   // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
   if (!this.bindGA && !this.bindMobile) {
