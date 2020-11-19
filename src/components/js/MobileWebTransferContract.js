@@ -416,6 +416,7 @@ root.methods.re_transferCommit = function (data){
     data.errorCode == 2 &&  (this.popupPromptText = '数量错误')
     data.errorCode == 3 &&  (this.popupPromptText = '系统账户不存在')
     data.errorCode == 4 &&  (this.popupPromptText = '用户无权限')
+    data.errorCode == 5 &&  (this.popupPromptText = '余额不足')
   }
   if(data.errorCode == 0) {
     this.popupPromptText = '划转成功'
