@@ -36,6 +36,7 @@ root.data = function () {
 
     // 内部划转变量
     popWindowOpen1:false,
+    popWindowOpenContract:false,
     assetAccountType:'wallet',//当前账户类型,默认显示币币账户
     itemInfo:{
       currency:''
@@ -214,7 +215,7 @@ root.methods.clickProperty = function (type) {
 }
 // 合约首次风险提示弹窗关闭确认按钮
 root.methods.popCloseTemporarilyClosed = function () {
-  this.popWindowOpen = false
+  this.popWindowOpenContract = false
   this.$router.push({'path':'/index/tradingHall?symbol=KK_USDT'})
 }
 
@@ -240,7 +241,7 @@ root.methods.re_bianBalance = function ( data ) {
   typeof (data) === 'string' && (data = JSON.parse(data))
 
   if (data.code == 1000) {
-    this.popWindowOpen = true
+    this.popWindowOpenContract = true
   }
 
   // this.balance = data.data[0]
