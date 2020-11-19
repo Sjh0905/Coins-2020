@@ -400,11 +400,6 @@ root.methods.click_rel_em = function () {
 }
 
 
-// 划转
-root.methods.unLockHouse = function (item) {
-  this.popWindowOpen1 = true
-}
-
 // 关闭toast弹窗
 root.methods.closePopupPrompt = function () {
   this.popupPromptOpen = false
@@ -499,12 +494,12 @@ root.methods.openTransfer = function (balance) {
 }
 // 弹出绑定身份，跳转到实名认证界面
 root.methods.goToBindIdentity = function () {
-  this.popWindowOpenShiM = false
+  this.popWindowOpen = false
   this.$router.push({name: 'authenticate'})
 }
 // 弹框跳安全中心
 root.methods.goToSecurityCenter = function () {
-  this.popWindowOpenShiM = false
+  this.popWindowOpen = false
   this.$router.push({name: 'securityCenter'})
 }
 
