@@ -105,7 +105,7 @@
           <template v-if="godHistorList.length !== 0">
             <li class="flex application_li" v-for="(item,index) in godHistorList">
               <!--时间-->
-              <div class="application_header_div">{{$globalFunc.formatDateUitl(Number(item.createdAt),'YYYY-MM-DD hh:mm:ss')}}</div>
+              <div class="application_header_div">{{$globalFunc.formatDateUitl(Number(item.orderUpdatedAt),'YYYY-MM-DD hh:mm:ss')}}</div>
               <!--交易对-->
               <div class="application_header_div">{{item.symbol.replace('_','/')}}</div>
               <!--类型-->
@@ -159,13 +159,13 @@
       <!-- 跟随者 -->
       <ul class="recordUl1" v-if="followType == 2">
         <!--跟随者 S-->
-        <li class="application_header">
+        <li class="flex application_header">
           <!--          账号-->
           <div class="application_header_div">{{$t('accountNumber')}}</div>
           <!--          跟单总成交额-->
-          <div class="application_header_div">{{$t('totalDocumentaryAmount')}}（USDT）</div>
+          <div class="application_header_div">{{$t('totalDocumentaryAmount')}} (USDT)</div>
           <!--          跟随收益-->
-          <div class="application-header-div-box">{{$t('followUpIncome')}}（USDT）</div>
+          <div class="application-header-div-box">{{$t('followUpIncome')}} (USDT)</div>
         </li>
         <template>
           <!-- 跟随者-->

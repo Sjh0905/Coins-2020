@@ -1562,6 +1562,7 @@ root.assetPage.fundManagement = '基金奖励'
 root.assetPage.miningReward = '挖矿奖励'
 root.assetPage.miningHeat = '热度奖励'
 root.assetPage.cashBack = '月度返现'
+root.assetPage.capitalExchange = '资金往来'
 
 root.assetPagePlatformReward = {}
 root.assetPagePlatformReward.state1 = '说明'

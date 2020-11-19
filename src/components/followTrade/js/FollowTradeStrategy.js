@@ -229,6 +229,11 @@ root.methods.re_postCommitFee = function (data) {
     this.openPop('已经有仓位了，不能成为大神')
     return;
   }
+
+  if(data.errorCode == 6) {
+    this.openPop('合约跟单中，不能成为大神')
+    return;
+  }
   if(data.errorCode != 0) {
     this.openPop(this.$t('systemError'))
   }
