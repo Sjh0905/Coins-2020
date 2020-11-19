@@ -666,22 +666,22 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
       //   baseMinimum = item.baseMinimum;
       //   console.info('baseMinimum========',baseMinimum)
       // }
-      if ((this.optionSymbol.indexOf(this.$store.state.symbol) >= 0) && !type && (Number(this.transactionVolume) < 1)) {
-        console.info('name===symbol====',this.$store.state.symbol)
-        this.popText = '交易额不能低于 1';
-        // this.popText = '请输入正确的数量';
-        this.popType = 0;
-        this.promptOpen = true;
-        return
-      }
-      if ((this.optionSymbol.indexOf(this.$store.state.symbol) < 0) && !type && (Number(this.transactionVolume) < 10)) {
-        console.info('name====symbol22===',this.$store.state.symbol)
-        this.popText = '交易额不能低于 10';
-        // this.popText = '请输入正确的数量';
-        this.popType = 0;
-        this.promptOpen = true;
-        return
-      }
+      // if ((this.optionSymbol.indexOf(this.$store.state.symbol) >= 0) && !type && (Number(this.transactionVolume) < 1)) {
+      //   console.info('name===symbol====',this.$store.state.symbol)
+      //   this.popText = '交易额不能低于 1';
+      //   // this.popText = '请输入正确的数量';
+      //   this.popType = 0;
+      //   this.promptOpen = true;
+      //   return
+      // }
+      // if ((this.optionSymbol.indexOf(this.$store.state.symbol) < 0) && !type && (Number(this.transactionVolume) < 10)) {
+      //   console.info('name====symbol22===',this.$store.state.symbol)
+      //   this.popText = '交易额不能低于 10';
+      //   // this.popText = '请输入正确的数量';
+      //   this.popType = 0;
+      //   this.promptOpen = true;
+      //   return
+      // }
   //   }
   }
 

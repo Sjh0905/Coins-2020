@@ -694,18 +694,18 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
     this.promptOpen = true;
     return
   }
-  if ((!this.orderType) && this.symbolsInfo.indexOf(symbol) >= 0 && (Number(this.marketAmount) < 1) && this.pendingOrderType == 'marketPrice') {
-    this.popText = this.lang == 'CH' ? '交易额不能低于 1 ' : 'Invalid amount';
-    this.popType = 0;
-    this.promptOpen = true;
-    return
-  }
-  if (!this.orderType && this.symbolsInfo.indexOf(symbol) < 0 && (Number(this.marketAmount) < 10) && this.pendingOrderType == 'marketPrice') {
-    this.popText = this.lang == 'CH' ? '交易额不能低于 10 ' : 'Invalid amount';
-    this.popType = 0;
-    this.promptOpen = true;
-    return
-  }
+  // if ((!this.orderType) && this.symbolsInfo.indexOf(symbol) >= 0 && (Number(this.marketAmount) < 1) && this.pendingOrderType == 'marketPrice') {
+  //   this.popText = this.lang == 'CH' ? '交易额不能低于 1 ' : 'Invalid amount';
+  //   this.popType = 0;
+  //   this.promptOpen = true;
+  //   return
+  // }
+  // if (!this.orderType && this.symbolsInfo.indexOf(symbol) < 0 && (Number(this.marketAmount) < 10) && this.pendingOrderType == 'marketPrice') {
+  //   this.popText = this.lang == 'CH' ? '交易额不能低于 10 ' : 'Invalid amount';
+  //   this.popType = 0;
+  //   this.promptOpen = true;
+  //   return
+  // }
   if(!this.orderType && popWindowOpen1){
     this.popWindowOpen1 = !this.comparePriceNow();
     if(this.popWindowOpen1)return;
@@ -791,12 +791,12 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
       maxAmount = item.maxAmount;
     }
   }
-  if (Number(turnover) < Number(miniVolume)) {
-    this.popType = 0;
-    this.popText = this.lang == 'CH' ? '交易额不能小于' + miniVolume : 'Minimum trading amount' + miniVolume;
-    this.promptOpen = true;
-    return;
-  }
+  // if (Number(turnover) < Number(miniVolume)) {
+  //   this.popType = 0;
+  //   this.popText = this.lang == 'CH' ? '交易额不能小于' + miniVolume : 'Minimum trading amount' + miniVolume;
+  //   this.promptOpen = true;
+  //   return;
+  // }
 
   // if (Number(maxAmount)>0) {
   //   if ((Number(turnoverAamount)>Number(maxAmount))) {
