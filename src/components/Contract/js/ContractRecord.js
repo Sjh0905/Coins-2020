@@ -36,6 +36,7 @@ root.data = function () {
 
     // 内部划转变量
     popWindowOpen1:false,
+    popWindowOpenContract:false,
     assetAccountType:'wallet',//当前账户类型,默认显示币币账户
     itemInfo:{
       currency:''
@@ -214,7 +215,7 @@ root.methods.clickProperty = function (type) {
 }
 // 合约首次风险提示弹窗关闭确认按钮
 root.methods.popCloseTemporarilyClosed = function () {
-  this.popWindowOpen = false
+  this.popWindowOpenContract = false
   this.$router.push({'path':'/index/tradingHall?symbol=KK_USDT'})
 }
 
@@ -240,7 +241,7 @@ root.methods.re_bianBalance = function ( data ) {
   typeof (data) === 'string' && (data = JSON.parse(data))
 
   if (data.code == 1000) {
-    this.popWindowOpen = true
+    this.popWindowOpenContract = true
   }
 
   // this.balance = data.data[0]
@@ -399,11 +400,6 @@ root.methods.click_rel_em = function () {
 }
 
 
-// 划转
-root.methods.unLockHouse = function (item) {
-  this.popWindowOpen1 = true
-}
-
 // 关闭toast弹窗
 root.methods.closePopupPrompt = function () {
   this.popupPromptOpen = false
@@ -498,12 +494,12 @@ root.methods.openTransfer = function (balance) {
 }
 // 弹出绑定身份，跳转到实名认证界面
 root.methods.goToBindIdentity = function () {
-  this.popWindowOpenShiM = false
+  this.popWindowOpen = false
   this.$router.push({name: 'authenticate'})
 }
 // 弹框跳安全中心
 root.methods.goToSecurityCenter = function () {
-  this.popWindowOpenShiM = false
+  this.popWindowOpen = false
   this.$router.push({name: 'securityCenter'})
 }
 
@@ -608,7 +604,8 @@ root.methods.re_transferCommit = function (data){
     data.errorCode == 1 &&  (this.popupPromptText = '用户未登录')
     data.errorCode == 2 &&  (this.popupPromptText = '数量错误')
     data.errorCode == 3 &&  (this.popupPromptText = '系统账户不存在')
-    data.errorCode == 4 &&  (this.popupPromptText = '余额不足')
+    data.errorCode == 4 &&  (this.popupPromptText = '用户无权限')
+    data.errorCode == 5 &&  (this.popupPromptText = '余额不足')
   }
   if(data.errorCode == 0) {
     this.popupPromptText = '划转成功'

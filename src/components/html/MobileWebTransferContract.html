@@ -1,6 +1,6 @@
 <div class="mobile-follow-trade">
   <!--头部-->
-  <div :class="'fund-buy-header-title' ">
+  <div v-if="!isApp" :class="'fund-buy-header-title' ">
     <div class="fund-buy-header-title-back-icon" @click="jumpToBack">
       <img class="fund-buy-header-title-back-icon-img" src="../LuckyDraw/assets/mobileForecastHomePage/back_icon.png" alt="">
     </div>
@@ -8,7 +8,7 @@
   </div>
 
   <div class="conter-hauzhuan">
-    <div class="conter-hauzhuan-title">划转</div>
+    <div class="conter-hauzhuan-title" :class="isApp && 'conter-hauzhuan-title-app' || '' ">划转</div>
 
     <!--      币种-->
     <div class="currency block-input">
@@ -70,7 +70,7 @@
       <div class="amount-not-empty">
         <span>{{transferAmountWA}}</span>
       </div>
-      <span class="available-right">{{$t('可用')}}：{{this.assetAccountType == 'wallet'? transferCurrencyOTCAvailable : available }} {{currencyValue}}  USDT</span>
+      <span class="available-right">{{$t('可用')}}：{{this.assetAccountType == 'wallet'? transferCurrencyOTCAvailable : available }} {{currencyValue}}</span>
 
     </div>
   </div>

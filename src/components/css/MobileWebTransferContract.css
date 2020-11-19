@@ -590,7 +590,7 @@
   padding-left: 0.2rem;
 }
 .amount-not-empty {
-  color: #FD5555;
+  color: #F60076;
 }
 
 .pop-footer {
@@ -694,6 +694,9 @@
   line-height: 0.72rem;
   padding-bottom: 0.2rem;
 }
+.conter-hauzhuan-title-app {
+  margin-top: 0.18rem;
+}
 .conter-input {
 
   height: 0.88rem;
@@ -724,7 +727,7 @@
   height: 40px;
 }
 .amount-not-empty {
-  color: #FD5555;
+  color: #F60076;
 }
 
 .inputInner >>> .el-input__inner {
