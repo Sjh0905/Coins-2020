@@ -41,12 +41,12 @@
   transform: translate(-50%,-50%);
 }
 .fund-buy-header-title-text {
-  height:0.44rem;
+  height:0.88rem;
   font-size:0.32rem;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
   color:rgba(11,11,39,1);
-  line-height:0.44rem;
+  line-height:0.88rem;
 }
 /*非ios头部 样式End*/
 /*镜像交易主体部分样式Start*/

@@ -301,4 +301,11 @@ root.methods.openPop = function (popText, popType, waitTime) {
 root.methods.closePop = function () {
   this.popOpen = false;
 }
+
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
+
 export default root
