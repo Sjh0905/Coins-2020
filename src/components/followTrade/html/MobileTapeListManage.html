@@ -112,9 +112,13 @@
       <!--保证金 end-->
 
       <div class="mobile-open-tape-pop-window-content">
-        <div class="flex choose">
+        <div class="flex choose" v-if="this.$store.state.isSwitchOrder == 'SPOT'">
           <div class="fixed-amount" :class="fixedAmPr == 1 ? 'fixed-proportion' : ''" @click="fixedAmountPr(1)">固定费用</div>
           <div class="fixed-amount fixed-am" :class="fixedAmPr == 2 ? 'fixed-proportion' : ''" @click="fixedAmountPr(2)">收益提成</div>
+        </div>
+        <div class="flex choose" v-if="this.$store.state.isSwitchOrder == 'CONTRACT'">
+          <div class="fixed-amount-xin">固定费用</div>
+          <div class="fixed-amount fixed-am" :class="'fixed-proportion'">收益提成</div>
         </div>
         <div class="mobile-open-tape-pop-window-content-item flex">
           <div class="mobile-open-tape-pop-window-content-currency-pair">带单币对</div>

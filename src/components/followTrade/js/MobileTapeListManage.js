@@ -28,7 +28,7 @@ root.data = function () {
     followDay:'', // 跟单天数
     godInfo:{}, //是否开启带单
     godFee: '', //跟单保证金
-    fixedAmPr:1
+    fixedAmPr:2
 
   }
 }
