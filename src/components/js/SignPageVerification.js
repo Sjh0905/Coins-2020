@@ -435,7 +435,8 @@ root.methods.re_commit = function (data) {
     // 邀请海报跳转过来+type参数
     if(this.$route.query.type && this.$route.query.type == "contract"){
       window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall?type=contract&uid='+ this.$route.query.uid);
-      // return;
+      // window.location.replace('http://ccc.2020-ex.com:8084/index/mobileTradingHall?type=contract&uid='+ this.$route.query.uid);
+      return;
     }
 
     this.$router.push({name: 'tradingHall'})
