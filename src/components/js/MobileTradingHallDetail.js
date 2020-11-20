@@ -798,7 +798,10 @@ root.methods.RE_ERROR = function (err) {
     // txt = '无法交易'
     // txt = '数量不能大于'+err_type.split("|")[1] || "最大值"
     // this.toastOpen = true
-    this.popText = '低于最小交易额'+message.split("than")[1] + "\xa0" + 'USDT' || "最大值";
+    let minPrice = message && message.split("than") && message.split("than")[1] || 0
+    minPrice = this.$globalFunc.accFixed(Number(minPrice),0)
+
+    this.popText = '低于最小交易额'+ minPrice + "\xa0" + 'USDT' || 0;
     this.popType = 0;
     this.promptOpen = true;
     return

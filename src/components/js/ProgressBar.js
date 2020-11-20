@@ -905,8 +905,11 @@ root.methods.RE_ERROR = function (err) {
 
   if(err_type == 'amount*price'){
 
-    txt = this.lang == 'CH' ? '交易额不能低于'+message.split("than")[1] + "\xa0" + 'USDT'
-      : 'Transaction volume cannot be lower than: '+message.split("|")[1] + "\xa0" +'USDT';
+    let minPrice = message && message.split("than") && message.split("than")[1] || 0
+    minPrice = this.$globalFunc.accFixed(Number(minPrice),0)
+
+    txt = this.lang == 'CH' ? '交易额不能低于'+ minPrice + "\xa0" + 'USDT'
+      : 'Transaction volume cannot be lower than: '+ minPrice + "\xa0" +'USDT';
   }
   // console.warn("this is wrong", err)
   this.popText = txt;
