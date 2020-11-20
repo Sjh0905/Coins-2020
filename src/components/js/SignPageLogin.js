@@ -415,13 +415,16 @@ root.methods.re_login = async function (data) {
         break;
       case 3:
         if(this.isMobile){
+
           this.$router.push({
             name: 'verification',
             query: {
               email: this.loginType == 1 ? this.userName.trim() : '',
               mobile: this.loginType == 0 ? this.userName.trim() : '',
               name: this.$route.query.name,
-              toUrl: this.$route.query.toUrl
+              toUrl: this.$route.query.toUrl,
+              type: this.$route.query.type == 'contract' ?'contract':'',
+              uid:this.$route.query.uid ||''
             }
           });
         }
@@ -518,7 +521,7 @@ root.methods.re_login = async function (data) {
   }
   // 邀请海报跳转过来+type参数
   if(this.$route.query.type && this.$route.query.type == "contract"){
-    window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall?type=contract'+ this.$route.query.uid);
+    window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall?type=contract&uid='+ this.$route.query.uid);
   }
 
   // if(this.$route.query.toUrl && this.$route.query.toUrl == "GRC"){
