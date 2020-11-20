@@ -716,7 +716,7 @@ root.methods.holdAll = function (type) {
     this.getPositionRisk()
   }
   if (this.selectType == 'all') {
-
+    this.bianBalance()
   }
 }
 

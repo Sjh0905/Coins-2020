@@ -682,6 +682,22 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
         this.promptOpen = true;
         return
       }
+      // if ((this.optionSymbol.indexOf(this.$store.state.symbol) >= 0) && !type && (Number(this.transactionVolume) < 1)) {
+      //   console.info('name===symbol====',this.$store.state.symbol)
+      //   this.popText = '交易额不能低于 1';
+      //   // this.popText = '请输入正确的数量';
+      //   this.popType = 0;
+      //   this.promptOpen = true;
+      //   return
+      // }
+      // if ((this.optionSymbol.indexOf(this.$store.state.symbol) < 0) && !type && (Number(this.transactionVolume) < 10)) {
+      //   console.info('name====symbol22===',this.$store.state.symbol)
+      //   this.popText = '交易额不能低于 10';
+      //   // this.popText = '请输入正确的数量';
+      //   this.popType = 0;
+      //   this.promptOpen = true;
+      //   return
+      // }
   //   }
   }
 
@@ -790,6 +806,18 @@ root.methods.RE_ERROR = function (err) {
     // txt = '数量不能大于'+err_type.split("|")[1] || "最大值"
     // this.toastOpen = true
     this.popText = '数量不能大于'+err_type.split("|")[1] || "最大值";
+    this.popType = 0;
+    this.promptOpen = true;
+    return
+  }
+  if (err_type == 'amount*price') {
+    // txt = '无法交易'
+    // txt = '数量不能大于'+err_type.split("|")[1] || "最大值"
+    // this.toastOpen = true
+    let minPrice = message && message.split("than") && message.split("than")[1] || 0
+    minPrice = this.$globalFunc.accFixed(Number(minPrice),0)
+
+    this.popText = '低于最小交易额'+ minPrice + "\xa0" + 'USDT' || 0;
     this.popType = 0;
     this.promptOpen = true;
     return
