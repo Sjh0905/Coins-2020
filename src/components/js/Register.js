@@ -618,12 +618,17 @@ root.methods.re_register = function (data) {
       data.errorCode === 4 && (this.refereeWA = this.$t('register.verificationCodeWA_6'))
       return
     }
-
   }
 
   this.$store.commit('SET_AUTH_MESSAGE', data.dataMap.userProfile)
-
-  this.$router.push({name: 'home'})
+  // 如果是通过扫描海报二维码进来
+  if(this.$route.query.type == 'contract'){
+    window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall?type=contract&uid=' + this.$route.query.uid);
+  }
+  // 如果不是扫描海报二维码进来
+  if(!this.$route.query.type){
+    this.$router.push({name: 'home'})
+  }
   // 判断是否验证
   this.$http.send('GET_AUTH_STATE', {
     bind: this,

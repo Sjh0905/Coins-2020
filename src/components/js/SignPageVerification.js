@@ -432,10 +432,14 @@ root.methods.re_commit = function (data) {
       this.GO_CONTRACT();
       // return;
     }
+    // 邀请海报跳转过来+type参数
+    if(this.$route.query.type && this.$route.query.type == "contract"){
+      window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall?type=contract&uid='+ this.$route.query.uid);
+      // return;
+    }
 
     this.$router.push({name: 'tradingHall'})
   }
-
 
   this.$http.send('GET_AUTH_STATE', {
     bind: this,
@@ -447,7 +451,7 @@ root.methods.GO_OTC = function () {
   let paras = this.$store.state.save_cookie;
   if (!paras) return;
   let c2c_url = process.env.DOMAIN;
-  console.log(c2c_url)
+  // console.log(c2c_url)
   window.open(c2c_url);
 }
 // 跳到合约页面

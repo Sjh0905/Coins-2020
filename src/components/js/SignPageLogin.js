@@ -516,6 +516,10 @@ root.methods.re_login = async function (data) {
     this.GO_CONTRACT();
     // return;
   }
+  // 邀请海报跳转过来+type参数
+  if(this.$route.query.type && this.$route.query.type == "contract"){
+    window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall?type=contract'+ this.$route.query.uid);
+  }
 
   // if(this.$route.query.toUrl && this.$route.query.toUrl == "GRC"){
   //   this.GO_GRC();
