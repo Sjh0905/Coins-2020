@@ -150,7 +150,7 @@
       </div>
       <div class="shutt1"/>
       <div class="yaoqrs">
-        <div class="titless1">{{$t('personalCenterRecommend.yihuodejinbi')}}（KK）</div>
+        <div class="titless1">{{$t('personalCenterRecommend.yihuodejinbi')}}（TT）</div>
         <div class="titless2"><span>{{allKKAmount || '--'}}</span></div>
       </div>
 
@@ -187,7 +187,7 @@
       <span class="source">{{$t('personalCenterRecommend.jiangli')}} (FF)</span>
       <span class="reward">
         <!--注册返利-->
-        {{$t('personalCenterRecommend.jiangli')}} (KK)
+        {{$t('personalCenterRecommend.jiangli')}} (TT)
       </span>
       <!--<span class="trading">-->
         <!--{{$t('personalCenterRecommend.trading')}}-->
@@ -233,9 +233,9 @@
             <span class="details pointer" v-if="item.ffReward !=0" @click="openFFMining(item)">{{$t('personalCenterRecommend.details')}}</span>
           </span>
 <!--          <span class="reward">{{item.invitedNum===0?'&#45;&#45;':item.invitedNum}}</span>-->
-          <!--奖励（KK）-->
+          <!--奖励（TT）-->
           <span class="reward">{{item.userWages == 0 ? toFixed(item.userWages,2):toFixed(item.userWages)}}
-            <!--奖励（KK）明细-->
+            <!--奖励（TT）明细-->
             <span class="details pointer" @click="openKKMining(item)" v-if="item.userWages !=0">{{$t('personalCenterRecommend.details')}}</span>
           </span>
           <!--<span class="trading">-->
@@ -389,7 +389,7 @@
           <div class="account-number">{{handleName(v.beInvitedEmail)}}</div>
 <!--          <div class="date">2020-04-25</div>-->
           <div class="type">{{v.invitedlevel ==1 ? $t("personalCenterRecommend.directInvitation"): $t("personalCenterRecommend.indirectInvitation")}}</div>
-          <div class="trading-reward">{{v.allamount}} KK</div>
+          <div class="trading-reward">{{v.allamount}} TT</div>
         </div>
       </div>
     </div>
