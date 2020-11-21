@@ -32,7 +32,7 @@ root.data = function () {
 
     // 信息弹框
     popWindowOpen:false,
-    fixedAmPr:1,  //默认固定金额
+    fixedAmPr:2,  //默认固定金额
 
   }
 }
