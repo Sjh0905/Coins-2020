@@ -50,7 +50,18 @@
         <!-- 移动端头部logo -->
         <template v-if="isMobile">
           <div class="mobile-header">
-            <ul v-if="!isLogin" class="login flex-center">
+            <ul v-if="!isLogin && $route.query.type" class="login flex-center">
+<!--              <li>-->
+<!--                <router-link to="/index/register" active-class="selected">{{$t('register')}}</router-link>-->
+<!--              </li>-->
+<!--              <li>|</li>-->
+<!--              <li>-->
+<!--                <router-link to="/index/sign/" active-class="selected">-->
+<!--                  {{$t('login')}}-->
+<!--                </router-link>-->
+<!--              </li>-->
+            </ul>
+            <ul v-if="!isLogin && !$route.query.type" class="login flex-center">
               <li>
                 <router-link to="/index/register" active-class="selected">{{$t('register')}}</router-link>
               </li>
@@ -84,12 +95,10 @@
               <img src="../../assets/财务记录_icon@2x.png" alt="">
             </div>
 
-
-            <router-link to="/index/home" class="mobile-header-login-box">
+            <div class="mobile-header-login-box" v-if="$route.query.type"></div>
+            <router-link to="/index/home" class="mobile-header-login-box" v-if="!$route.query.type">
             <span>
               <img class="mobile-header-login-box-imgs" src="../../assets/H5-LOGO.png" alt="">
-
-
             </span>
             </router-link>
           </div>
