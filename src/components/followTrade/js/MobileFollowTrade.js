@@ -173,8 +173,8 @@ root.methods.jumpToBack = function () {
     return
   }
 
-  this.$router.go(-1)
-  // this.$router.push({'path':'/index/newH5homePage'})
+  // this.$router.go(-1)
+  this.$router.push({'path':'/index/newH5homePage'})
 }
 //跳转个人镜像交易
 root.methods.goToMobileFollowTradeStrategy = function (switchOrder) {
