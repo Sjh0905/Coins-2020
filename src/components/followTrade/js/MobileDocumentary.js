@@ -260,7 +260,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
   if (data.errorCode == 0) {
     this.openPop('跟单成功',1)
     setTimeout(() => {
-      this.$router.push({'name':'mobileMyFollowOrder',params:{fromPageType:'addFollower'}})
+      this.$router.push({'name':'mobileMyFollowOrder',params:{fromPageType:'addFollower',isSwitchOrder:this.isSwitchOrder}})
     }, 1000)
     return;
   }
@@ -301,4 +301,11 @@ root.methods.openPop = function (popText, popType, waitTime) {
 root.methods.closePop = function () {
   this.popOpen = false;
 }
+
+/*---------------------- 加法运算 begin ---------------------*/
+root.methods.accAdd = function (num1, num2) {
+  return this.$globalFunc.accAdd(num1, num2)
+}
+/*---------------------- 加法运算 end ---------------------*/
+
 export default root

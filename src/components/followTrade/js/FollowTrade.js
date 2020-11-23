@@ -26,14 +26,14 @@ root.data = function () {
     popWindowStyle: 0,//跳转 0表示实名认证，1表示手机或谷歌，2只有确定
 
     currentInterval:null,
-    switchOrder: 'SPOT',
+    switchOrder: 'CONTRACT',
 
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
 root.created = function () {
-  if(this.$route.query.isSwitchOrder == 'CONTRACT'){
-    this.switchOrder = 'CONTRACT'
+  if(this.$route.query.isSwitchOrder == 'SPOT'){
+    this.switchOrder = 'SPOT'
   }
 
   this.GET_AUTH_STATE()

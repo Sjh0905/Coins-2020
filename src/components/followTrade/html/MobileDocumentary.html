@@ -74,7 +74,8 @@
   <div :class="!isHasItem ? 'documentary-box' : 'documentary-box-has-item'">
     <div class="mobile-trade-open-exchange-text flex" v-if="!isHasItem">
       <div class="mobile-trade-fee">费用</div>
-      <div class="mobile-trade-order-fee text_blue">{{$route.query.fee}} USDT / {{$route.query.days}}天</div>
+      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'LOT'">{{$route.query.fee}} USDT / {{$route.query.days}}天</div>
+      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'RATE'">跟单收益收取 {{accAdd($route.query.fee,20) || '0'}}%</div>
     </div>
     <div class="documentary-button" @click="openDocumentaryWindow" v-if="!isHasItem">立即跟单</div>
 <!--    <div class="documentary-button" @click="openDocumentaryWindow" v-if="!isHasItem && !follow">跟单中</div>-->
@@ -93,8 +94,11 @@
       </div>
       <div class="del-follow-text">
         <div>跟随者：<span class="text_blue">{{$route.query.userId || ''}}</span></div>
-        <div>
+        <div v-if="followType == 'LOT'">
           将扣除 <span class="text_blue">{{$route.query.fee}} USDT</span> 跟单费用
+        </div>
+        <div v-if="followType == 'RATE'">
+          将扣除 <span class="text_blue">跟单收益收取{{accAdd($route.query.fee,20) || '0'}}%</span> 跟单费用
         </div>
       </div>
       <div class="forecast-activity-toast-btn" v-if="follow" @click="postDocumentaryImmediately">确 定</div>

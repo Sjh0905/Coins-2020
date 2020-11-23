@@ -694,18 +694,18 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
     this.promptOpen = true;
     return
   }
-  if ((!this.orderType) && this.symbolsInfo.indexOf(symbol) >= 0 && (Number(this.marketAmount) < 1) && this.pendingOrderType == 'marketPrice') {
-    this.popText = this.lang == 'CH' ? '交易额不能低于 1 ' : 'Invalid amount';
-    this.popType = 0;
-    this.promptOpen = true;
-    return
-  }
-  if (!this.orderType && this.symbolsInfo.indexOf(symbol) < 0 && (Number(this.marketAmount) < 10) && this.pendingOrderType == 'marketPrice') {
-    this.popText = this.lang == 'CH' ? '交易额不能低于 10 ' : 'Invalid amount';
-    this.popType = 0;
-    this.promptOpen = true;
-    return
-  }
+  // if ((!this.orderType) && this.symbolsInfo.indexOf(symbol) >= 0 && (Number(this.marketAmount) < 1) && this.pendingOrderType == 'marketPrice') {
+  //   this.popText = this.lang == 'CH' ? '交易额不能低于 1 ' : 'Invalid amount';
+  //   this.popType = 0;
+  //   this.promptOpen = true;
+  //   return
+  // }
+  // if (!this.orderType && this.symbolsInfo.indexOf(symbol) < 0 && (Number(this.marketAmount) < 10) && this.pendingOrderType == 'marketPrice') {
+  //   this.popText = this.lang == 'CH' ? '交易额不能低于 10 ' : 'Invalid amount';
+  //   this.popType = 0;
+  //   this.promptOpen = true;
+  //   return
+  // }
   if(!this.orderType && popWindowOpen1){
     this.popWindowOpen1 = !this.comparePriceNow();
     if(this.popWindowOpen1)return;
@@ -791,12 +791,12 @@ root.methods.tradeMarket = function (popWindowOpen1,type) {
       maxAmount = item.maxAmount;
     }
   }
-  if (Number(turnover) < Number(miniVolume)) {
-    this.popType = 0;
-    this.popText = this.lang == 'CH' ? '交易额不能小于' + miniVolume : 'Minimum trading amount' + miniVolume;
-    this.promptOpen = true;
-    return;
-  }
+  // if (Number(turnover) < Number(miniVolume)) {
+  //   this.popType = 0;
+  //   this.popText = this.lang == 'CH' ? '交易额不能小于' + miniVolume : 'Minimum trading amount' + miniVolume;
+  //   this.promptOpen = true;
+  //   return;
+  // }
 
   // if (Number(maxAmount)>0) {
   //   if ((Number(turnoverAamount)>Number(maxAmount))) {
@@ -876,6 +876,9 @@ root.methods.RE_ERROR = function (err) {
     case 'account_freeze_failed':
       txt = this.lang == 'CH' ? '资产冻结失败!' : 'Fail to freeze funds';
       break;
+    case 'amount*price':
+      txt = this.lang == 'CH' ? '低于最小交易额!' : '';
+      break;
     default:
       txt = this.lang == 'CH' ? '暂不可用!' : 'Unavailable now';
       break;
@@ -898,6 +901,15 @@ root.methods.RE_ERROR = function (err) {
 
     txt = this.lang == 'CH' ? '数量不能大于'+err_type.split("|")[1] || "最大值"
       : 'Quantity cannot be greater than: '+err_type.split("|")[1] || "最大值";
+  }
+
+  if(err_type == 'amount*price'){
+
+    let minPrice = message && message.split("than") && message.split("than")[1] || 0
+    minPrice = this.$globalFunc.accFixed(Number(minPrice),0)
+
+    txt = this.lang == 'CH' ? '交易额不能低于'+ minPrice + "\xa0" + 'USDT'
+      : 'Transaction volume cannot be lower than: '+ minPrice + "\xa0" +'USDT';
   }
   // console.warn("this is wrong", err)
   this.popText = txt;

@@ -375,6 +375,19 @@
   border-radius: 2px;
   border: 1px solid #E0E1F4;
 }
+.fixed-amount-xin {
+  flex: 1;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #0D0E23;
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  background: #cccccc;
+  border-radius: 2px;
+  border: 1px solid #E0E1F4;
+}
 .fixed-proportion {
   background: rgba(53, 118, 245, 0.1);
   border-radius: 2px;
