@@ -5,6 +5,7 @@ root.components = {
   'Loading': resolve => require(['../../vue/Loading'], resolve),
   'PopupPrompt': resolve => require(['../../vue/PopupPrompt'], resolve),
   'PopupWindow': resolve => require(['../../vue/PopupWindow'], resolve),
+
 }
 /*------------------------------ data -------------------------------*/
 root.data = function () {

@@ -393,3 +393,61 @@
   border-radius: 2px;
   border: 1px solid #3576F5;
 }
+
+/*禁用风险提示*/
+.footer-btn {
+  /*padding-right: 30px;*/
+  /*margin-bottom: 20px;*/
+  justify-content:flex-end;
+}
+.popWindow-article2 {
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #6B7DA2;
+  padding: 0 27px;
+  border-radius:3px;
+  border:1px solid rgba(231,235,238,1);
+  cursor: pointer;
+}
+.popWindow-btn{
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-size: 14px;
+  color: #F7F7FB;
+  padding: 0 41px;
+  background:rgba(53,118,245,1);
+  border-radius:3px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.yuan-span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #3576F5;
+  border-radius: 50%;
+  margin: 0px 3px  0px 15px;
+}
+
+.div-one {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B7DA2;
+  line-height: 22px;
+  margin-bottom: 8px;
+}
+.div-two {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #172A4D;
+  line-height: 22px;
+}
+.m-f {
+  margin-left:0px;
+}
+/*禁用风险提示*/
