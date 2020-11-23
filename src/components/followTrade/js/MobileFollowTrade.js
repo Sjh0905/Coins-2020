@@ -22,7 +22,7 @@ root.data = function () {
     popIdenOpen: false,
 
     currentInterval:null,
-    switchOrder: 'SPOT',
+    switchOrder: 'CONTRACT',
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -40,8 +40,8 @@ root.data = function () {
   // });
 // }
 root.created = function () {
-  if(this.$route.query.isSwitchOrder == 'CONTRACT'){
-    this.switchOrder = 'CONTRACT'
+  if(this.$route.query.isSwitchOrder == 'SPOT'){
+    this.switchOrder = 'SPOT'
   }
 
   this.GET_AUTH_STATE()
