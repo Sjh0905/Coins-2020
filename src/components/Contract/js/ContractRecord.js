@@ -77,6 +77,9 @@ root.created = function () {
   this.getCurrency()
   if (this.$route.query.propertyType == 'propertyAssets') {
     this.propertyType = 'propertyAssets';
+
+    this.openTransfer(this.balance)
+
   }
 }
 root.mounted = function () {}
