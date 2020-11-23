@@ -43,7 +43,7 @@
             <span class="documentary-follow" v-if="godList.indexOf(item.userId) >= 0">已跟随</span>
           </div>
           <div class="interest-rate" v-if="item.feeType == 'LOT'">{{item.fee || '0'}} USDT/ {{days || '0'}}天</div>
-          <div class="interest-rate" v-if="item.feeType == 'RATE'">每笔收益收取 {{accAdd(item.fee,20) || '0'}}%</div>
+          <div class="interest-rate" v-if="item.feeType == 'RATE'">跟单收益收取 {{accAdd(item.fee,20) || '0'}}%</div>
         </div>
       </div>
       <!--大佬头像End-->
