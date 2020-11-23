@@ -453,13 +453,13 @@ root.methods.changeTransferCurrency = function (currency){
 root.methods.openTransfer = function (balance) {
 
   // 如果没有实名认证不允许打开划转
-  if (!this.bindIdentify) {
-    this.popWindowTitle = this.$t('popWindowTitleTransfer')
-    this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
-    this.popWindowStyle = '0'
-    this.popWindowOpen = true
-    return
-  }
+  // if (!this.bindIdentify) {
+  //   this.popWindowTitle = this.$t('popWindowTitleTransfer')
+  //   this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
+  //   this.popWindowStyle = '0'
+  //   this.popWindowOpen = true
+  //   return
+  // }
 
   // 如果没有绑定邮箱，不允许打开划转
   if (!this.bindEmail) {
