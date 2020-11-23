@@ -11,7 +11,8 @@ root.data = function () {
     godInfo:{},
     godHistorList:[],
     followUserList:[],
-    isTapeList:false
+    isTapeList:false,
+    delFollowOpenDisable:false
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -158,6 +159,18 @@ root.methods.jumpToFollowTrade = function () {
 // 个人设置
 root.methods.personalSetting = function (isSwitchOrder) {
   this.$router.push({name:'mobileTapeListManage',query:{isSwitchOrder:this.isSwitchOrder}})
+}
+
+
+root.methods.openMaskDisable = function () {
+  this.delFollowOpenDisable = true
+}
+root.methods.postDocumentaryImmediatelyDisable = function () {
+  this.delFollowOpenDisable = false
+  this.openMaskWindow = true
+}
+root.methods.popCloseTemporarilyClosed = function () {
+  this.delFollowOpenDisable = false
 }
 
 /*---------------------- 保留小数 begin ---------------------*/

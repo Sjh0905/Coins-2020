@@ -37,8 +37,7 @@
 <!--      <div class="mobile-open-tape-list-title">开启带单</div>-->
       <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'SPOT'">开启现货镜像</div>
       <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'CONTRACT'">开启合约镜像</div>
-      <div class="mobile-open-tape-list-button" v-if="isSwitchOrder == 'SPOT'" @click="openMask">开启</div>
-      <div class="mobile-open-tape-list-button" v-if="isSwitchOrder == 'CONTRACT'" @click="openMaskDisable">开启</div>
+      <div class="mobile-open-tape-list-button" @click="openMask">开启</div>
     </div>
     <div class="mobile-open-tape-list-text">
       <div>1. 带单开启：需抵押{{godFee}}枚平台币TT作为带单保证金，请预存资产；</div>
