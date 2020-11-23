@@ -56,7 +56,8 @@
 
         <div class="follow-btn-box">
           <div class="follow-gde" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT/{{$route.query.days  || '0'}}{{$t('days')}}费用</div>
-          <div class="follow-gde" v-if="$route.query.feeType == 'RATE'">跟单利润 {{accAdd($route.query.fee,20)}}%/周费用</div>
+          <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单利润 {{accAdd($route.query.fee,20)}}%/周费用</div>
+          <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单利润 {{accAdd($route.query.fee,20)}}%/笔费用</div>
           <!--跟单-->
           <div class="follow-fff" v-if="$route.query.isFollow < 0" @click="jumpToFollowDocumentary">{{$t('documentary')}}</div>
           <!--已跟随-->

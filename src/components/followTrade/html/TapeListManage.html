@@ -36,7 +36,8 @@
       <div class="flex">
         <div class="tape-flex-bule">{{$t('subscriptionFee')}}：</div>
         <div class="days" v-if="godInfo.feeType == 'LOT'">{{godInfo.fee}} USDT/{{followDay}}{{$t('days')}}费用</div>
-        <div class="days" v-if="godInfo.feeType == 'RATE'">跟单收益 {{accAdd(godInfo.fee,20)}}%/周费用</div>
+        <div class="days" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(godInfo.fee,20)}}%/周费用</div>
+        <div class="days" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(godInfo.fee,20)}}%/笔费用</div>
 <!--        <div class="days">{{godInfo.fee}} USDT / {{followDay}}{{$t('days')}}</div>-->
       </div>
       <div class="modify" @click="goToModify(godInfo.fee)">{{$t('update')}}</div>
