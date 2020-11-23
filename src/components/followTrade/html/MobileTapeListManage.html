@@ -11,8 +11,8 @@
     </div>
     <!--UID标题-->
 <!--    <div class="fund-buy-header-title-text">带单管理</div>-->
-    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'SPOT'">现货带单管理</div>
-    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'CONTRACT'">合约带单管理</div>
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'SPOT'">现货镜像管理</div>
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'CONTRACT'">合约镜像管理</div>
   </div>
 
   <div class="mobile-trade-header-null-data"></div>
@@ -22,8 +22,8 @@
     <div v-if="isHasItem" >
       <div class="mobile-open-tape-list-btn-top flex">
         <div class="mobile-open-tape-list-fee">带单费用：
-          <span class="text_blue" v-if="godInfo.feeType == 'LOT'">{{godInfo.fee}} USDT / {{followDay}}天</span>
-          <span class="text_blue" v-if="godInfo.feeType == 'RATE'">跟单收益收取 {{accAdd(godInfo.fee,20)}}%</span>
+          <span class="text_blue" v-if="godInfo.feeType == 'LOT'">{{godInfo.fee}} USDT/{{followDay}}天费用</span>
+          <span class="text_blue" v-if="godInfo.feeType == 'RATE'">跟单收益 {{accAdd(godInfo.fee,20)}}%/周费用</span>
         </div>
         <div class="mobile-open-tape-list-operation" @click="RevisionFee">
           <img src="../assets/single_setting_icon.png" alt="">
@@ -34,8 +34,8 @@
     <div class="mobile-open-tape-list-btn" v-else>
     <div class="mobile-open-tape-list-top flex">
 <!--      <div class="mobile-open-tape-list-title">开启带单</div>-->
-      <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'SPOT'">开启现货带单</div>
-      <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'CONTRACT'">开启合约带单</div>
+      <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'SPOT'">开启现货镜像</div>
+      <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'CONTRACT'">开启合约镜像</div>
       <div class="mobile-open-tape-list-button" @click="openMask">开启</div>
     </div>
     <div class="mobile-open-tape-list-text">
@@ -94,10 +94,10 @@
   <div class="mobile-tape-mask" v-if="openMaskWindow">
     <div class="mobile-open-tape-pop-window" :class="(isApp) ? 'mobile-open-tape-pop-window-app' : 'mobile-open-tape-pop-window' ">
       <div class="mobile-open-tape-pop-window-title flex">
-        <div class="mobile-open-tape-pop-list-window-title" v-if="!isHasItem && isSwitchOrder == 'SPOT'">开启现货带单</div>
-        <div class="mobile-open-tape-pop-list-window-title" v-if="!isHasItem && isSwitchOrder == 'CONTRACT'">开启合约带单</div>
-        <div class="mobile-open-tape-pop-list-window-title" v-if="isHasItem && isSwitchOrder == 'SPOT'">修改现货带单</div>
-        <div class="mobile-open-tape-pop-list-window-title" v-if="isHasItem && isSwitchOrder == 'CONTRACT'">修改合约带单</div>
+        <div class="mobile-open-tape-pop-list-window-title" v-if="!isHasItem && isSwitchOrder == 'SPOT'">开启现货镜像</div>
+        <div class="mobile-open-tape-pop-list-window-title" v-if="!isHasItem && isSwitchOrder == 'CONTRACT'">开启合约镜像</div>
+        <div class="mobile-open-tape-pop-list-window-title" v-if="isHasItem && isSwitchOrder == 'SPOT'">修改现货镜像</div>
+        <div class="mobile-open-tape-pop-list-window-title" v-if="isHasItem && isSwitchOrder == 'CONTRACT'">修改合约镜像</div>
         <div class="mobile-window-title-btn flex">
           <div class="confirm" @click="postCommitFee" v-if="!isHasItem">确认</div>
           <div class="confirm" @click="postRevisionFee" v-if="isHasItem">确认</div>

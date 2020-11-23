@@ -5,12 +5,12 @@
       <div class="follow-trande-bread">
 <!--        <router-link to="/index/followTrade" class="management">{{$t('followOrder')}}</router-link>-->
         <router-link to="/index/followTrade" class="management" v-if="isSwitchOrder == 'SPOT'">
-          <!--现货带单-->
-          {{$t('现货带单')}}
+          <!--现货镜像-->
+          {{$t('现货镜像')}}
         </router-link>
         <router-link to="/index/followTrade?isSwitchOrder=CONTRACT" class="management" v-if="isSwitchOrder == 'CONTRACT'">
-          <!--合约带单-->
-          {{$t('合约带单')}}
+          <!--合约镜像-->
+          {{$t('合约镜像')}}
         </router-link>
         <span> > </span>
         {{$t('myFollowOrder')}}
