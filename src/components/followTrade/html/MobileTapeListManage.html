@@ -37,7 +37,8 @@
 <!--      <div class="mobile-open-tape-list-title">开启带单</div>-->
       <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'SPOT'">开启现货镜像</div>
       <div class="mobile-open-tape-list-title" v-if="isSwitchOrder == 'CONTRACT'">开启合约镜像</div>
-      <div class="mobile-open-tape-list-button" @click="openMask">开启</div>
+      <div class="mobile-open-tape-list-button" v-if="isSwitchOrder == 'SPOT'" @click="openMask">开启</div>
+      <div class="mobile-open-tape-list-button" v-if="isSwitchOrder == 'CONTRACT'" @click="openMaskDisable">开启</div>
     </div>
     <div class="mobile-open-tape-list-text">
       <div>1. 带单开启：需抵押{{godFee}}枚平台币TT作为带单保证金，请预存资产；</div>
@@ -169,6 +170,31 @@
     </div>
   </div>
 
+
+  <!--弹窗-->
+  <div v-if="delFollowOpenDisable" class="forecast-activity-toast">
+    <div class="forecast-activity-toast-box-D">
+      <div class="forecast-activity-toast-title">提示
+        <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
+        </span>
+      </div>
+      <div class="del-follow-text-D">
+        <div class="m-bottom">开启带单后以下功能将被禁用：</div>
+        <div class="div-two">
+          <div class="m-bottom-1"><span class="yuan-span m-f"></span> 仓位模式修改 <span class="yuan-span"></span> 保证金模式修改</div>
+          <div class="m-bottom-1"><span class="yuan-span m-f"></span> 杠杆倍数修改 <span class="yuan-span"></span> 资金划转 </div>
+        </div>
+      </div>
+
+      <div slot="footer" class="flex footer-btn">
+        <div class="popWindow-article2" @click="popCloseTemporarilyClosed">取消</div>
+        <div class="popWindow-btn" @click="postDocumentaryImmediatelyDisable">同意</div>
+        <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
+      </div>
+    </div>
+  </div>
+
   <PopupPrompt :popOpen="popOpen" :popClose="closePop" :popType="popType" :popText="popText" :waitTime="waitTime" />
+
 
 </div>

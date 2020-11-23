@@ -26,6 +26,7 @@ root.data = function () {
     waitTime: 2000,
 
     delFollowOpen:false,
+    delFollowOpenDisable:false,
     // 确认弹窗
   }
 }
@@ -145,38 +146,19 @@ root.methods.openDocumentaryWindow = function () {
     this.follow = true
     return
   }
-  // if (this.followType == 'RATE' && this.fixedAmountRate == '') {
-  //   this.openPop('固定金额/固定比例不可为空')
-  //   this.follow = true
-  //   return
-  // }
   this.delFollowOpen = true
 }
-// // 确定修改跟单币比例
-// root.methods.commitModify = function () {
-//   this.$http.send('POST_UPDATE_RATEORLOT', {
-//     bind: this,
-//     params: params,
-//     callBack: this.re_commitModify,
-//     errorHandler: this.error_commitModify
-//   })
-//
-//   this.delFollowClose()
-// }
-// root.methods.re_commitModify = function (data) {
-//   typeof data === 'string' && (data = JSON.parse(data))
-//   if(!data) return
-//   if(data.errorCode == 0) {
-//     this.openPop('修改跟单成功')
-//   }
-//   if(data.errorCode == 1) {
-//     this.openPop('修改跟单成功')
-//   }
-//   this.delFollowClose()
-// }
-// root.methods.error_commitModify = function (err){
-//   console.info('err==========',err)
-// }
+
+root.methods.openDocumentaryWindowDisable = function () {
+  this.delFollowOpenDisable = true
+}
+root.methods.popCloseTemporarilyClosed = function () {
+  this.delFollowOpenDisable = false
+}
+root.methods.postDocumentaryImmediatelyDisable = function () {
+  this.delFollowOpenDisable = false
+  this.delFollowOpen = true
+}
 // 确认修改
 root.methods.commitModify = function (){
   this.$http.send('POST_UPDATE_RATEORLOT', {
