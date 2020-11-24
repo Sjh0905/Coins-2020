@@ -1,0 +1,48 @@
+.grid-transaction {
+  width: 1200px;
+  margin:  0 auto;
+}
+.grid-conter {
+  margin-top: 35px;
+  padding: 15px 25px;
+  border: 1px solid #EFF0FF;
+}
+.grid-pending {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B7DA2;
+}
+.buy {
+  flex: 1;
+}
+.flex-06 {
+  flex: 0.7;
+}
+.flex-07 {
+  flex: 0.6;
+  text-align: right;
+}
+.xiangqing {
+  padding: 4px 15px;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #3576F5;
+  background: #FFFFFF;
+  border-radius: 1px;
+  border: 1px solid #3576F5;
+}
+.grid-details {
+  line-height: 50px;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #0D0E23;
+  cursor: pointer;
+}
+.grid-conter-img {
+  width: 22px;
+  vertical-align: text-top;
+  margin-right: 12px;
+}

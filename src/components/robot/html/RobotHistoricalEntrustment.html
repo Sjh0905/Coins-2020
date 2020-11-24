@@ -1,1 +1,61 @@
-<div>李漂亮</div>
+<div>
+  <div class="grid-transaction">
+    <div class="grid-conter">
+      <!--表头-->
+      <div class="flex grid-pending">
+        <!-- 机器人类别-->
+        <div class="buy">机器人类别</div>
+        <!-- 交易对-->
+        <div class="buy">交易对</div>
+        <!-- 投资额-->
+        <div class="buy">投资额</div>
+        <!-- 利润-->
+        <div class="buy">利润</div>
+        <!-- 当前状态-->
+        <div class="flex-06">当前状态</div>
+        <!-- 操作-->
+        <div class="flex-07">操作</div>
+      </div>
+      <!--详情-->
+      <div class="flex grid-details">
+        <!-- 机器人类别-->
+        <div class="buy"><img class="grid-conter-img" src="../assets/GridTransaction.png" alt="">网格交易</div>
+        <!-- 交易对-->
+        <div class="buy">BTCUSDT</div>
+        <!-- 投资额-->
+        <div class="buy">60 USDT</div>
+        <!-- 利润-->
+        <div class="buy">+0 USDT（0.00%）</div>
+        <!-- 当前状态-->
+        <div class="flex-06">已手动取消</div>
+        <!-- 操作-->
+        <div class="flex-07">
+          <span class="xiangqing" @click="clickDetails">详情</span>
+        </div>
+      </div>
+      <div class="flex grid-details">
+        <!-- 机器人类别-->
+        <div class="buy"><img class="grid-conter-img" src="../assets/GridTransaction.png" alt="">网格交易</div>
+        <!-- 交易对-->
+        <div class="buy">BTCUSDT</div>
+        <!-- 投资额-->
+        <div class="buy">60 USDT</div>
+        <!-- 利润-->
+        <div class="buy">+0 USDT（0.00%）</div>
+        <!-- 当前状态-->
+        <div class="flex-06">已手动取消</div>
+        <!-- 操作-->
+        <div class="flex-07">
+          <span class="xiangqing">详情</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <PopupWindow :switch="popWindowOpenDetails" @close="popWindowCloseDetails">
+    <div slot="header">
+      <span class="header_xuzhi">{{BTC/USDT}}</span>
+    </div>
+    <div slot="article" class="pop-recharge">jsvnjsnvnvjnvdfjnv</div>
+  </PopupWindow>
+</div>
