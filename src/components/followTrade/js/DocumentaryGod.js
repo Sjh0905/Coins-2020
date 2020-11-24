@@ -190,6 +190,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     data.errorCode == 19 &&  this.openPop(this.$t('用户和大神的单双仓模式不一致'));
     data.errorCode == 20 &&  this.openPop(this.$t('大神有挂单，暂不能跟单'));
     data.errorCode == 21 &&  this.openPop(this.$t('清算中，请三分钟后再试。'));
+    data.errorCode == 22 &&  this.openPop(this.$t('请先开通合约'));
   }
 
 }
