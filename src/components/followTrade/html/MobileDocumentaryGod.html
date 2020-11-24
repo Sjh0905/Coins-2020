@@ -131,11 +131,37 @@
     <div class="mobile-trade-open-exchange" >
       <div class="mobile-trade-open-exchange-text flex">
         <div class="mobile-trade-fee">费用</div>
-        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT / {{$route.query.days  || '0'}}天</div>
-        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE'">跟单收益收取 {{accAdd($route.query.fee,20) || '0'}}%</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT/{{$route.query.days  || '0'}}天费用</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单利润 {{accAdd($route.query.fee,20) || '0'}}%/周费用</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单利润 {{accAdd($route.query.fee,20) || '0'}}%/笔费用</div>
       </div>
-      <div class="mobile-trade-open-exchange-button" @click="jumpToFollowDocumentary()" v-if="$route.query.isFollow < 0">跟单</div>
+      <div class="mobile-trade-open-exchange-button" @click="jumpToFollowDocumentary()" v-if="$route.query.isFollow < 0 && isSwitchOrder == 'SPOT'">跟单</div>
+      <div class="mobile-trade-open-exchange-button" @click="openDocumentaryWindowDisable()" v-if="$route.query.isFollow < 0 && isSwitchOrder == 'CONTRACT'">跟单</div>
       <div class="mobile-trade-open-exchange-button-isfollow" v-if="$route.query.isFollow >= 0">已跟随</div>
+    </div>
+  </div>
+
+  <!--弹窗-->
+  <div v-if="delFollowOpenDisable" class="forecast-activity-toast">
+    <div class="forecast-activity-toast-box-D">
+      <div class="forecast-activity-toast-title">提示
+        <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
+        </span>
+      </div>
+      <div class="del-follow-text-D">
+        <div class="m-bottom">合约跟单后以下功能将被禁用：</div>
+        <div class="div-two">
+          <div class="m-bottom-1"><span class="yuan-span m-f"></span> 仓位模式修改 <span class="yuan-span"></span> 保证金模式修改</div>
+          <div class="m-bottom-1"><span class="yuan-span m-f"></span> 杠杆倍数修改 <span class="yuan-span"></span> 资金划转 </div>
+          <div class="m-bottom-1"><span class="yuan-span m-f"></span> 合约交易 </div>
+        </div>
+      </div>
+
+      <div slot="footer" class="flex footer-btn">
+        <div class="popWindow-article2" @click="popCloseTemporarilyClosed">取消</div>
+        <div class="popWindow-btn" @click="jumpToFollowDocumentary">同意</div>
+        <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
+      </div>
     </div>
   </div>
 

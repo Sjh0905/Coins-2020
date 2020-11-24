@@ -5,6 +5,7 @@ root.components = {
   'Loading': resolve => require(['../../vue/Loading'], resolve),
   'PopupPrompt': resolve => require(['../../vue/PopupPrompt'], resolve),
   'PopupWindow': resolve => require(['../../vue/PopupWindow'], resolve),
+  'OpenTapeListDisable': resolve => require(['../../vue/OpenTapeListDisable'], resolve),
 }
 /*------------------------------ data -------------------------------*/
 root.data = function () {
@@ -25,7 +26,8 @@ root.data = function () {
     fixedAmountLot:'',
 
     follow:true,
-    popWindowOpen: false
+    popWindowOpen: false,
+    popWindowOpenContract:false,//禁用
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -103,9 +105,19 @@ root.methods.jumpToFollowDocumentary = function () {
   // this.$router.push({name:'mobileMyFollowOrder'})
   // this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,fee:this.$route.query.fee,days:this.$route.query.days}})
 }
+root.methods.openTapeListDisable = function () {
+  this.popWindowOpenContract = true
+}
+root.methods.popCloseTemporarilyClosed = function () {
+  this.popWindowOpenContract = false
+}
 // 关闭跟单弹框
 root.methods.popWindowClose= function () {
   this.popWindowOpen = false
+}
+root.methods.openAContract = function () {
+  this.popWindowOpenContract = false
+  this.popWindowOpen =true
 }
 
 // 切换固定金额和固定比例
@@ -177,6 +189,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     data.errorCode == 18 &&  this.openPop(this.$t('用户和大神的逐全仓模式不一致'));
     data.errorCode == 19 &&  this.openPop(this.$t('用户和大神的单双仓模式不一致'));
     data.errorCode == 20 &&  this.openPop(this.$t('大神有挂单，暂不能跟单'));
+    data.errorCode == 21 &&  this.openPop(this.$t('清算中，请三分钟后再试。'));
   }
 
 }

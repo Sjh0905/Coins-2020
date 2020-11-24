@@ -272,6 +272,17 @@ input:-ms-input-placeholder {
   box-shadow:0rem 0.1rem 0.2rem 0rem rgba(0,0,0,0.1);
   border-radius:0.04rem;
 }
+.forecast-activity-toast-box-D {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width:6rem;
+  height:4.9rem;
+  background: #fff;
+  box-shadow:0rem 0.1rem 0.2rem 0rem rgba(0,0,0,0.1);
+  border-radius:0.04rem;
+}
 .forecast-activity-toast-title {
   /*margin-top: 8px;*/
   height: 1.04rem;
@@ -304,8 +315,79 @@ input:-ms-input-placeholder {
   font-size: 0.28rem;
 }
 .del-follow-text {
-  font-size:0.29rem;
+  font-size:0.28rem;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   padding: 0.6rem 0.4rem;
+}
+.del-follow-text-D {
+  font-size:0.29rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  padding: 0.3rem 0.3rem;
+  color: #6B7DA2;
+}
+.c0l0r-AD {
+  color: #172A4D;
+}
+.yuan-span {
+  display: inline-block;
+  width: 0.16rem;
+  height: 0.16rem;
+  background: #3576F5;
+  border-radius: 50%;
+  margin: 0px 0.06rem  0px 0.3rem;
+}
+
+.div-one {
+  font-size: 0.28rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B7DA2;
+  margin-bottom: 0.16rem;
+}
+.div-two {
+  font-size: 0.28rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #172A4D;
+}
+.m-f {
+  margin-left:0px;
+}
+.m-bottom-1 {
+  margin-bottom: 0.1rem;
+}
+.m-bottom {
+  margin-bottom: 0.2rem;
+}
+.footer-btn {
+  /*padding-right: 30px;*/
+  /*margin-bottom: 20px;*/
+  padding: 0 0.3rem;
+}
+.popWindow-article2 {
+  flex: 1;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  text-align: center;
+  font-size: 0.28rem;
+  color: #6B7DA2;
+  /*padding: 0 27px;*/
+  border-radius:0.06rem;
+  border:1px solid rgba(231,235,238,1);
+  cursor: pointer;
+}
+.popWindow-btn{
+ flex: 1;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  text-align: center;
+  font-size: 0.28rem;
+  color: #F7F7FB;
+  /*padding: 0 41px;*/
+  background:rgba(53,118,245,1);
+  border-radius:0.06rem;
+  margin-left: 0.35rem;
+  cursor: pointer;
 }

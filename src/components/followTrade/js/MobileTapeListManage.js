@@ -28,7 +28,8 @@ root.data = function () {
     followDay:'', // 跟单天数
     godInfo:{}, //是否开启带单
     godFee: '', //跟单保证金
-    fixedAmPr:2
+    fixedAmPr:2,
+    delFollowOpenDisable:false,
 
   }
 }
@@ -132,6 +133,18 @@ root.methods.jumpToFollowTradeStrategy = function () {
 root.methods.openMask = function () {
   this.openMaskWindow = true
 }
+
+root.methods.openMaskDisable = function () {
+  this.delFollowOpenDisable = true
+}
+root.methods.postDocumentaryImmediatelyDisable = function () {
+  this.delFollowOpenDisable = false
+  this.openMaskWindow = true
+}
+root.methods.popCloseTemporarilyClosed = function () {
+  this.delFollowOpenDisable = false
+}
+
 // 关闭蒙层
 root.methods.closeMaskWindow = function () {
   this.openMaskWindow = false

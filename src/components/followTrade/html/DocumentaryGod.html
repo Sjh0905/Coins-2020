@@ -6,12 +6,12 @@
 <!--        {{$t('followOrder')}}-->
 <!--      </router-link>-->
       <router-link to="/index/followTrade" class="header-title" v-if="isSwitchOrder == 'SPOT'">
-        <!--现货带单-->
-        {{$t('现货带单')}}
+        <!--现货镜像-->
+        {{$t('现货镜像')}}
       </router-link>
       <router-link to="/index/followTrade?isSwitchOrder=CONTRACT" class="header-title" v-if="isSwitchOrder == 'CONTRACT'">
-        <!--合约带单-->
-        {{$t('合约带单')}}
+        <!--合约镜像-->
+        {{$t('合约镜像')}}
       </router-link>
       <span class="spanbf">></span>
       <!--大神UID-->
@@ -55,10 +55,12 @@
 
 
         <div class="follow-btn-box">
-          <div class="follow-gde" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT / {{$route.query.days  || '0'}}{{$t('days')}}</div>
-          <div class="follow-gde" v-if="$route.query.feeType == 'RATE'">跟单收益收取 {{accAdd($route.query.fee,20)}}%</div>
+          <div class="follow-gde" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT/{{$route.query.days  || '0'}}{{$t('days')}}费用</div>
+          <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单利润 {{accAdd($route.query.fee,20)}}%/周费用</div>
+          <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单利润 {{accAdd($route.query.fee,20)}}%/笔费用</div>
           <!--跟单-->
-          <div class="follow-fff" v-if="$route.query.isFollow < 0" @click="jumpToFollowDocumentary">{{$t('documentary')}}</div>
+          <div class="follow-fff" v-if="$route.query.isFollow < 0 && isSwitchOrder == 'SPOT'" @click="jumpToFollowDocumentary">{{$t('documentary')}}</div>
+          <div class="follow-fff" v-if="$route.query.isFollow < 0 && isSwitchOrder == 'CONTRACT'" @click="openTapeListDisable">{{$t('documentary')}}</div>
           <!--已跟随-->
           <div class="follow-c" v-if="$route.query.isFollow >= 0">{{$t('following')}}</div>
         </div>
@@ -270,6 +272,21 @@
     </div>
 
   </PopupWindow>
+
+  <!--  禁用风险提示-->
+  <OpenTapeListDisable :switch="popWindowOpenContract">
+    <div slot="conter">
+      <div class="div-one">合约跟单后以下功能将被禁用：</div>
+      <div class="div-two"> <span class="yuan-span m-f"></span> 仓位模式修改 <span class="yuan-span"></span> 保证金模式修改 <span class="yuan-span"></span> 杠杆倍数修改
+        <div><span class="yuan-span m-f"></span> 资金划转 <span class="yuan-span"></span> 合约交易</div> </div>
+
+    </div>
+    <div slot="footer" class="flex footer-btn">
+      <div class="popWindow-article2" @click="popCloseTemporarilyClosed">取消</div>
+      <div class="popWindow-btn" @click="openAContract">同意</div>
+      <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
+    </div>
+  </OpenTapeListDisable>
   <PopupPrompt :popOpen="popOpen" :popClose="closePop" :popType="popType" :popText="popText" :waitTime="waitTime" />
 
 </div>

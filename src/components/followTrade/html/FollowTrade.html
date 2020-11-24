@@ -11,8 +11,8 @@
       <div class="follow-status-box flex">
         <!--带单收益榜-->
 <!--        <div class="follow-long">{{$t('listOfDragonsAndTigers')}}</div>-->
-        <div class="follow-long" :class="switchOrder == 'CONTRACT'? '' : 'switchCss'" v-if="" @click="switchingOrders('CONTRACT')">{{$t('合约带单')}}</div>
-        <div class="follow-long" :class="switchOrder == 'SPOT'? '' : 'switchCss'" v-if="" @click="switchingOrders('SPOT')">{{$t('现货带单')}}</div>
+        <div class="follow-long" :class="switchOrder == 'CONTRACT'? '' : 'switchCss'" v-if="" @click="switchingOrders('CONTRACT')">{{$t('合约镜像')}}</div>
+        <div class="follow-long" :class="switchOrder == 'SPOT'? '' : 'switchCss'" v-if="" @click="switchingOrders('SPOT')">{{$t('现货镜像')}}</div>
         <!--数据每小时更新一次-->
 <!--        <div class="follow-xue">{{$t('updatedEveryHour')}}</div>-->
       </div>
@@ -59,8 +59,9 @@
         </div>
         <div class="follow-btn-box">
           <!--天-->
-          <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} USDT/ {{days}}{{$t('days')}}</div>
-          <div class="follow-gde" v-if="item.feeType == 'RATE'">跟单收益收取 {{accAdd(item.fee,20)}}%</div>
+          <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} USDT/{{days}}{{$t('days')}}费用</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'CONTRACT'">跟单利润 {{accAdd(item.fee,20)}}%/周费用</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'SPOT'">跟单利润 {{accAdd(item.fee,20)}}%/笔费用</div>
           <!--跟单-->
           <div class="follow-fff" v-if="godList.indexOf(item.userId) < 0">{{$t('documentary')}}</div>
           <!--已跟随-->
@@ -107,6 +108,7 @@
 
   <!--toast弹框-->
   <PopupPrompt :popOpen="popOpen" :popClose="closePop" :popType="popType" :popText="popText" :waitTime="waitTime" />
+
 
 
 </div>

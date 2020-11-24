@@ -5,6 +5,7 @@ root.components = {
  // 'Loading': resolve => require(['../Loading/Loading.vue'], resolve),
   'PopupPrompt': resolve => require(['../../vue/PopupPrompt'], resolve),
   'PopupWindow': resolve => require(['../../vue/PopupWindow'], resolve),
+  'OpenTapeListDisable': resolve => require(['../../vue/OpenTapeListDisable'], resolve),
 }
 /*------------------------------ data -------------------------------*/
 root.data = function () {
@@ -33,6 +34,7 @@ root.data = function () {
     // 信息弹框
     popWindowOpen:false,
     fixedAmPr:2,  //默认固定金额
+    popWindowOpenContract:false,  //带单禁用
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -171,6 +173,19 @@ root.methods.error_postManage = function (err) {
 root.methods.openTapeList = function () {
   this.popWindowOpen =true
 }
+
+root.methods.openTapeListDisable = function () {
+  this.popWindowOpenContract = true
+}
+root.methods.popCloseTemporarilyClosed = function () {
+  this.popWindowOpenContract = false
+}
+root.methods.openAContract = function () {
+  this.popWindowOpenContract = false
+  this.popWindowOpen =true
+}
+
+
 
 // 关闭修改策略弹框
 root.methods.popWindowClose= function () {

@@ -11,7 +11,8 @@ root.data = function () {
     followType:1,
     godHistorList:[],
     godInfo:{},
-    followUserList:[]
+    followUserList:[],
+    delFollowOpenDisable:false
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -84,6 +85,14 @@ root.methods.jumpToFollowTrade = function () {
 root.methods.jumpToFollowDocumentary = function () {
   // this.$router.push({name:'mobileMyFollowOrder'})
   this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,feeType:this.$route.query.feeType,fee:this.$route.query.fee,days:this.$route.query.days,isSwitchOrder:this.$route.query.isSwitchOrder}})
+}
+
+root.methods.openDocumentaryWindowDisable = function () {
+  this.delFollowOpenDisable = true
+}
+
+root.methods.popCloseTemporarilyClosed = function () {
+  this.delFollowOpenDisable = false
 }
 
 //大神操作记录
