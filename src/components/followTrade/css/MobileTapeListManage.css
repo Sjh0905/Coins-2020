@@ -348,7 +348,7 @@
   font-size: 0.28rem;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
-  background: #cccccc;
+  background: rgba(00, 8, 2, 0.1);
   border-radius: 0.04rem;
   border: 1px solid #E0E1F4;
 }
