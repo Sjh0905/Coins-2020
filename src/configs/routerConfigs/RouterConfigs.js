@@ -3454,6 +3454,21 @@ root.routes.push({
             requireLoginOff: false,
           },
         },
+        // 机器人订单
+        {
+          path: 'robotOrderPc',
+          name: 'robotOrderPc',
+          caseSensitive: true,
+          component: resolve => require(['@/components/vue/RobotOrderPc'], resolve),
+          meta: {
+            pcname: 'robotOrderPc',
+            h5name: '',
+            requireLogin: true,
+            templateClose: false,
+            templatePath: '/index/orderPageT',
+            requireLoginOff: false,
+          },
+        },
 
       ]
     },

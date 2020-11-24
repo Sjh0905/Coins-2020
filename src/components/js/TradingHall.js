@@ -13,6 +13,7 @@ root.components = {
   'StockCross': resolve => require(['../vue/StockCross'], resolve),
   'MarketPrice': resolve => require(['../vue/MarketPrice'], resolve),
   'orderCurrent': resolve => require(['../vue/OrderPageCurrentEntrustment'], resolve),
+  'robotOrderPc': resolve => require(['../vue/RobotOrderPc'], resolve),
   'orderHistory': resolve => require(['../vue/OrderPageHistoricalEntrustment'], resolve),
   'PopupPrompt': resolve => require(['../vue/PopupPrompt'], resolve),
   // 实时成交

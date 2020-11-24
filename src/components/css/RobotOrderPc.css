@@ -1,0 +1,293 @@
+.current-entrustment-container {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  background-color: #fff;
+}
+
+tr, th, td {
+  box-sizing: border-box;
+}
+
+.detail {
+  width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-top-left-radius: 0 !important;
+  min-height: 200px;
+  border:1px solid rgba(239,240,255,1);
+  margin-top: 25px;
+  /*padding: 0 25px 0 25px;*/
+  box-sizing: border-box;
+}
+.detail-1 {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  border-top-left-radius: 0 !important;
+  min-height: 200px;
+  /*border:1px solid rgba(239,240,255,1);*/
+  /*margin-top: 25px;*/
+  /*padding: 0 25px 0 25px;*/
+  box-sizing: border-box;
+  background-color: #0D111F;
+  color: #F5F6FA;
+}
+.weit{
+  width: 100%;
+  height: 240px;
+  line-height: 240px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.seeMore {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.tr-th {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  /*border: 1px solid #e5e5e5;*/
+  /*background-color: #ffffff;*/
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #6B7DA2;
+  text-align: left;
+}
+
+.tr-td {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: left;
+  /*border-left: 1px solid #e5e5e5;*/
+  /*border-right: 1px solid #e5e5e5;*/
+  /*border-bottom: 1px solid #e5e5e5;*/
+  background-color: #ffffff;
+  /*border-top: 1px solid #f9f9f9;*/
+  color:#0D0E23;
+}
+
+.tr-td-col {
+  width: 100%;
+  min-height: 50px;
+  line-height: 50px;
+  text-align: left;
+  background-color: #0D111F;
+  color: #F5F6FA;
+}
+
+.td {
+  /*padding: 10px 0 0 ;*/
+  cursor:pointer
+}
+.tr-td-col:hover {
+  background-color: #090C16;
+}
+
+.tr-td:hover {
+  background-color:rgba(53,118,245,0.03);
+}
+
+.td-order {
+  width: 11.92%;
+
+}
+
+/*.td-source {*/
+/*width: 6.5%;*/
+/*}*/
+
+.td-time {
+  flex: 9.3;
+
+}
+.td-time1 {
+  flex: 6.3;
+  padding-left: 25px;
+}
+
+.td-category {
+  flex: 7.3;
+}
+.td-category-1 {
+  flex: 6.3;
+}
+
+.td-market {
+  flex: 7.3;
+}
+
+.td-price {
+  flex: 9.3;
+}
+
+.td-number {
+  flex: 6.3;
+}
+
+.td-amount {
+  flex: 8.3;
+}
+
+.td-turnover {
+  flex: 9.3;
+}
+
+.td-operation {
+  flex: 5.3;
+  text-align: right;
+  padding-right: 25px;
+
+}
+
+.click-operation {
+  cursor: pointer;
+}
+
+.chedanbutton {
+  display: inline-block;
+  padding: 0 15px;
+  height: 28px;
+  border:1px solid #3576F5;
+  line-height:28px;
+  border-radius: 2px;
+}
+.text_blue-0 {
+  /*color: #3576F5;*/
+  color: #FFFFFF;
+}
+.text_blue-1 {
+  color: #3576F5;
+  /*color: #FFFFFF;*/
+}
+
+.chedanbutton:hover {
+  display: inline-block;
+  color: #F7F8FA !important;
+  padding: 0 15px;
+  height: 28px;
+  line-height:28px;
+  border-radius: 2px;
+  background-color:#3576F5;
+}
+
+.cancelAll {
+  cursor: pointer;
+  color: #3576F5;
+}
+
+.click-operating {
+  color: #3576F5;
+}
+
+/*加载框*/
+.loading {
+  display: block;
+  height: 150px;
+  width: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.td-sale {
+  color: #ff695f;
+}
+
+.td-buy {
+  color: #0babb6;
+}
+
+/*弹窗相关*/
+
+.pop-header {
+  padding-left: 25px;
+
+}
+.pop-footer {
+  width: 100%;
+  margin-bottom: 15px;
+  align-items: center;
+  /*-webkit-align-items: center;*/
+  /*justify-content: space-around;*/
+  /*-webkit-justify-content: space-around;*/
+}
+
+/*动画效果*/
+.fade-enter-active, .fade-leave-active {
+  transition: all .5s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+{
+  height: 0;
+  transform: scaleY(0);
+  opacity: 0;
+}
+
+/*弹窗button*/
+
+.pop-article {
+  padding: 35px 25px;
+  color: #0D0E23;
+  font-size:16px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+}
+
+.button-base {
+  width: 195px;
+  height: 40px;
+  /* background-color: #3576F5; */
+  color: #fff;
+  border-radius: 1px;
+  border: 0 solid transparent;
+  margin-right: 2px;
+  outline: none;
+}
+
+.m-r {
+  margin-left: 20px;
+}
+
+.button-base:last-of-type {
+  margin-right: 0;
+}
+
+
+.weit .nhtu{
+  width: 100%;
+  height: 120px;
+  float: left;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+.weit .nhtu img{
+  /*height: 36px;*/
+}
+.weit span{
+  width: 100%;
+  height: 24px;
+  text-align: center;
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(107,125,162,1);
+  line-height: 24px;
+  float: left;
+}
+.text_blue-3 {
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:#86CB12;
+}
+.text_red-4 {
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:#F60076;
+}
