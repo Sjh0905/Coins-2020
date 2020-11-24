@@ -53,9 +53,76 @@
   </div>
 
   <PopupWindow :switch="popWindowOpenDetails" @close="popWindowCloseDetails">
-    <div slot="header">
-      <span class="header_xuzhi">{{BTC/USDT}}</span>
+    <div slot="header" class="headerDe">
+      <span class="header_xuzhi"><img class="grid-conter-img-sub" src="../assets/GridTransaction.png" alt="">BTC/USDT</span>
     </div>
-    <div slot="article" class="pop-recharge">jsvnjsnvnvjnvdfjnv</div>
+    <div slot="article" class="pop-recharge">
+      <div class="grid-chang flex">
+        <div class="grid-investment-div">
+          <div class="grid-investment">总投入 <span class="grid-font-size"> USDT</span></div>
+          <div class="grid-investment-number">58</div>
+        </div>
+        <div class="grid-trapezoid">
+          <div class="grid-trapezoid-ding">
+            <div class="grid-investment">总利润 <span class="grid-font-size"> USDT</span></div>
+            <div class="grid-investment-number">-0.492 (-8.86%)</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex grid-pending">
+        <div class="buy">
+          <div>浮动盈亏：(USDT)</div>
+          <div class="green-text m-t">-0.4519 (-0.77%)</div>
+        </div>
+        <div class="flex-06">
+          <div>网格利润(USDT)</div>
+          <div class="green-text m-t">+0.1422 (+0.24%)</div>
+        </div>
+        <div class="flex-07">
+          <div>年化收益率</div>
+          <div class="black-text m-t">-49.05%</div>
+        </div>
+      </div>
+      <div class="flex grid-pending">
+        <div class="buy">
+          <div>最高价</div>
+          <div class="black-text m-t">12650</div>
+        </div>
+        <div class="flex-06">
+          <div>网格数</div>
+          <div class="black-text m-t">31</div>
+        </div>
+        <div class="flex-07">
+          <div>止损价</div>
+          <div class="black-text m-t">10000</div>
+        </div>
+      </div>
+      <div class="flex grid-pending">
+        <div class="buy">
+          <div>最低价</div>
+          <div class="black-text m-t">10850</div>
+        </div>
+        <div class="flex-06">
+          <div>单网格买入数量</div>
+          <div class="black-text m-t">0.0001</div>
+        </div>
+        <div class="flex-07">
+          <div>总套利次数</div>
+          <div class="black-text m-t">-30</div>
+        </div>
+      </div>
+      <div class="flex grid-pending m-bottom">
+        <div class="buy">
+          <div>持续时长</div>
+          <div class="black-text m-t">2020/08/08 19:39:49-2020/08/08 19:39:49</div>
+        </div>
+        <div class="flex-06">
+          <div>当前价格(USDT)</div>
+          <div class="black-text m-t">- -</div>
+        </div>
+        <div class="flex-07">
+        </div>
+      </div>
+    </div>
   </PopupWindow>
 </div>

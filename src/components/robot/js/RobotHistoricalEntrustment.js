@@ -7,8 +7,7 @@ root.components = {
 /*------------------------------ data -------------------------------*/
 root.data = function () {
   return {
-    openDetails:true,
-    popWindowOpenDetails:true,
+    popWindowOpenDetails:false,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/

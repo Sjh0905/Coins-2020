@@ -6,7 +6,7 @@
           <img class="grid-conter-img" src="../assets/GridTransaction.png" alt="">网格交易
           <span class="grid-conter-span">BTC/USDT (BTC震荡, 赚取USDT)</span>
         </div>
-        <div class="grid-conter-stop">停止机器人</div>
+        <div class="grid-conter-stop" @click="StopTheRobot">停止机器人</div>
       </div>
       <div class="grid-duration">运行时长 0日19时43分03秒 (2020/08/18 19:39:49 创建)</div>
       <div class="flex grid-margin-top">
@@ -181,4 +181,20 @@
       </div>
     </div>
   </div>
+
+
+  <PopupWindow :switch="openStopTheRobot" @close="popStopTheRobot">
+    <div slot="header" class="headerDe">
+      <span class="header_xuzhi">提示</span>
+    </div>
+    <div slot="article" class="pop-recharge">
+      你确认想要终止 BTCUSDT 网格机器人么？
+    </div>
+    <div slot="footer" class="flex m-bottom">
+      <div class="buy"><span class="cursor" @click="popStopTheRobot">取消</span></div>
+      <div class="m-left">
+        <span class="btn-blu cursor">确认</span>
+      </div>
+    </div>
+  </PopupWindow>
 </div>

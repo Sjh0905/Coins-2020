@@ -42,6 +42,7 @@
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color:rgba(53,118,245,1);
+  cursor: pointer;
 }
 .grid-duration {
   height:17px;
@@ -70,8 +71,6 @@
   border-left:50px solid transparent;
   border-right:0px solid transparent;
   position: relative;
-
-
 }
 .grid-margin-top {
   margin-top: 20px;
@@ -291,4 +290,41 @@
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #39B496;
+}
+.header_xuzhi {
+  font-size: 18px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #0D0E23;
+}
+.headerDe {
+  padding: 0 25px;
+}
+
+.pop-recharge {
+  padding: 35px 25px;
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #0D0E23;
+}
+.btn-blu {
+  padding: 10px 15px;
+  line-height: 40px;
+  background: linear-gradient(270deg, #3576F5 0%, #459AF5 100%);
+  border-radius: 1px;
+  color: #FFFFFF;
+}
+.m-left {
+  margin-left: 40px;
+}
+
+.m-bottom {
+  width: 100%;
+  text-align: right;
+  line-height: 40px;
+  margin-bottom: 25px;
+}
+.cursor {
+  cursor: pointer;
 }
