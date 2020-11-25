@@ -35,7 +35,7 @@
       </div>
 
       <div class="H-pop-lic">
-        <input class="input-h" type="text" v-model="code">
+        <input class="input-h" type="text" v-model="code" @input="$globalFunc.testVerificationCode(code,btnConfirm)">
 
         <div class="rig-ht">
           <!--获取验证码-->

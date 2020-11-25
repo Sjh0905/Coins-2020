@@ -337,6 +337,12 @@ root.methods.re_commit = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   // console.warn(data)
 
+  //PC用到这行，通知二次验证码input清空
+  this.$eventBus.notify({key: 'CLEAR_CODE_INPUT'});
+  //H5直接清空
+  this.GACode = ''
+  this.verificationCode = ''
+
   if (data.errorCode || data.result === 'FAIL') {
     if (this.picked === 'bindGA') {
       if (data.errorCode === '1') {

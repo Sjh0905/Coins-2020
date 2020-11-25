@@ -38,7 +38,7 @@
           <!--<span class="input-icon ga-icon"></span>-->
         <!--</span>-->
           <input type="text" :placeholder='$t("identifyingCodeGa")' class="unit-input"
-                 v-model="GACode">
+                 v-model="GACode" @input="$globalFunc.testVerificationCode(GACode,click_send)">
         </div>
         <div class="unit-input-interval txt-red" v-if="picked==='bindGA'">
           <span v-if="GACodeWA!==''">{{GACodeWA}}</span>
@@ -57,7 +57,7 @@
           <!--这个空的span用于占位，因为按钮【获取】的所在的span会受影响-->
           <span></span>
           <input type="text" :placeholder='$t("identifyingCodeMo")' class="unit-input"
-                 v-model="verificationCode">
+                 v-model="verificationCode" @input="$globalFunc.testVerificationCode(verificationCode,click_send)">
           <!--<div v-if="isMobile" class="cutter-line flex-center">|</div>-->
           <span class="flex-center" v-if="!getVerificationCode" @click="click_getVerificationCode">{{$t('get')}}验证码</span>
           <span class="flex-center identifying-code-button-close"

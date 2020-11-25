@@ -86,6 +86,8 @@ root.data = function () {
 
 root.created = function () {
   this.picked = this.bindEmail ? 3 :(this.bindGA ? 2 : 1)
+
+  this.$eventBus.listen(this, 'CLEAR_CODE_INPUT', this.clearCodeInput)
 }
 
 root.components = {}
@@ -93,6 +95,14 @@ root.components = {}
 root.computed = {}
 
 root.methods = {}
+
+//接口返回后清空验证码
+root.methods.clearCodeInput = function () {
+
+  setTimeout(()=>{
+    this.code = ''
+  },200)
+}
 
 // 开始获取手机验证
 root.methods.beginCountDownVerification = function () {

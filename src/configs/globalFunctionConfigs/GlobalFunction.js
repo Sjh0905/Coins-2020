@@ -92,6 +92,20 @@ GlobalFunction.testNumber = function (number) {
   return /^[0-9]*$/.test(number)
 }
 
+// 判断输入验证码后是否自动调用接口
+GlobalFunction.testVerificationCode = function (code,callback) {
+
+  let result = /^\d{6}$/.test(code)
+
+  console.log('this is code',code,result,callback.toString());
+
+  if(result){
+    setTimeout(()=>{
+      callback()
+    },200)
+  }
+}
+
 // 不允许特殊字符
 GlobalFunction.testSpecial = function (src) {
   return /["'<>%;)(&=＜＞％；）（＆＇＂＝]/.test(src)
