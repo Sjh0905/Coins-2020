@@ -343,31 +343,6 @@
       </div>
 
 
-      <!--验证码-->
-      <div class="unit-input-container-pc flex-colum"
-           :class="{'wrong-answer':verificationCodeWA!=''}">
-        <div class="placeholder-title-box">
-          <div v-show="(!verificationCodePlaceholderShow || verificationCode !='')" class="placeholder-title">{{$t("register.identifyingCode")}}</div>
-        </div>
-        <div class="flex double-input-container">
-          <span></span>
-          <input type="text" :placeholder='verificationCodePlaceholderShow && $t("register.identifyingCode") || ""' @focus="closePlaceholder('verificationCode')" v-model="verificationCode"
-                 @blur="testVerificationCode" class="unit-input">
-
-          <template v-if="!isMobile">
-            <span class="flex-center identifying-code-button-on " v-if="!getVerificationCode"
-                  @click="postVerificationCode">{{$t("register.achieve")}}</span>
-            <span class="flex-center identifying-code-button-close"
-                  v-if="getVerificationCode">{{getVerificationCodeCountdown}}s{{$t('register.Resend')}}</span>
-          </template>
-        </div>
-
-      </div>
-      <div class="unit-input-interval txt-red">
-        <span v-if="verificationCodeWA!=''">{{verificationCodeWA}}</span>
-      </div>
-
-
       <!--密码-->
       <div class="unit-input-container-pc flex-colum"
            :class="{'wrong-answer':pswWA!=''}">
@@ -407,6 +382,30 @@
 
       <div class="unit-input-interval txt-red">
         <span v-if="refereeWA!=''">{{refereeWA}}</span>
+      </div>
+
+      <!--验证码-->
+      <div class="unit-input-container-pc flex-colum"
+           :class="{'wrong-answer':verificationCodeWA!=''}">
+        <div class="placeholder-title-box">
+          <div v-show="(!verificationCodePlaceholderShow || verificationCode !='')" class="placeholder-title">{{($t("register.phone")+$t("register.identifyingCode"))}}</div>
+        </div>
+        <div class="flex double-input-container">
+          <span></span>
+          <input type="text" :placeholder='verificationCodePlaceholderShow && ($t("register.phone")+$t("register.identifyingCode")) || ""' @focus="closePlaceholder('verificationCode')" v-model="verificationCode"
+                 @blur="testVerificationCode" class="unit-input" @input="$globalFunc.testVerificationCode(verificationCode,registerCommit)">
+
+          <template v-if="!isMobile">
+            <span class="flex-center identifying-code-button-on " v-if="!getVerificationCode"
+                  @click="postVerificationCode">{{$t("register.achieve")}}</span>
+            <span class="flex-center identifying-code-button-close"
+                  v-if="getVerificationCode">{{getVerificationCodeCountdown}}s{{$t('register.Resend')}}</span>
+          </template>
+        </div>
+
+      </div>
+      <div class="unit-input-interval txt-red">
+        <span v-if="verificationCodeWA!=''">{{verificationCodeWA}}</span>
       </div>
 
 
@@ -468,45 +467,7 @@
         <span v-if="userNameWA!=''">{{userNameWA}}</span>
       </div>
 
-      <!--验证码-->
-      <div class="unit-input-container-pc flex-colum"
-           :class="{'wrong-answer':verificationCodeWA!=''}">
-        <!--<span class="flex-center unit-input-container-title">-->
-        <!--<img class="unit-input-container-title-img" v-if="isMobile" src="../../assets/h5form/mobile_check.png" alt="">-->
-        <!--<img v-if="!isMobile" src="" alt="">-->
-        <!--</span>-->
-        <div class="placeholder-title-box">
-          <div v-show="(!verificationCodePlaceholderShow || verificationCode !='')" class="placeholder-title">{{$t("register.identifyingCode")}}</div>
-        </div>
-        <div class="flex double-input-container">
-          <span></span>
-          <input type="text" :placeholder='verificationCodePlaceholderShow && $t("register.identifyingCode") || ""' @focus="closePlaceholder('verificationCode')" v-model="verificationCode"
-                 @blur="testVerificationCode" class="unit-input">
-          <div v-if="isMobile" class="cutter-line flex-center">|</div>
-          <template v-if="!isMobile">
-          <span class="flex-center identifying-code-button-on " v-if="!getVerificationCode"
-                @click="postVerificationCode">{{$t("register.achieve")}}</span>
-            <span class="flex-center identifying-code-button-close"
-                  v-if="getVerificationCode">{{getVerificationCodeCountdown}}s{{$t("register.Resend")}}</span>
-          </template>
-        </div>
 
-        <!--<template v-if="isMobile">-->
-          <!--<div class="getcodeval" v-if="!getVerificationCode"-->
-               <!--@click="postVerificationCode">{{$t("register.achieve")}}</div>-->
-          <!--<div class="getcodeval"-->
-               <!--v-if="getVerificationCode">{{getVerificationCodeCountdown}}</div>-->
-        <!--</template>-->
-
-        <!--<template v-if="!captchaReady">-->
-        <!--<span class="flex-center button-grey">-->
-        <!--{{$t('register.disabled')}}-->
-        <!--</span>-->
-        <!--</template>-->
-      </div>
-      <div class="unit-input-interval txt-red">
-        <span v-if="verificationCodeWA!=''">{{verificationCodeWA}}</span>
-      </div>
 
 
       <!--密码-->
@@ -562,6 +523,46 @@
 
       <div class="unit-input-interval txt-red">
         <span v-if="refereeWA!=''">{{refereeWA}}</span>
+      </div>
+
+      <!--验证码-->
+      <div class="unit-input-container-pc flex-colum"
+           :class="{'wrong-answer':verificationCodeWA!=''}">
+        <!--<span class="flex-center unit-input-container-title">-->
+        <!--<img class="unit-input-container-title-img" v-if="isMobile" src="../../assets/h5form/mobile_check.png" alt="">-->
+        <!--<img v-if="!isMobile" src="" alt="">-->
+        <!--</span>-->
+        <div class="placeholder-title-box">
+          <div v-show="(!verificationCodePlaceholderShow || verificationCode !='')" class="placeholder-title">{{($t("register.mail")+$t("register.identifyingCode"))}}</div>
+        </div>
+        <div class="flex double-input-container">
+          <span></span>
+          <input type="text" :placeholder='verificationCodePlaceholderShow && ($t("register.mail")+$t("register.identifyingCode")) || ""' @focus="closePlaceholder('verificationCode')" v-model="verificationCode"
+                 @blur="testVerificationCode" class="unit-input" @input="$globalFunc.testVerificationCode(verificationCode,registerCommit)">
+          <div v-if="isMobile" class="cutter-line flex-center">|</div>
+          <template v-if="!isMobile">
+          <span class="flex-center identifying-code-button-on " v-if="!getVerificationCode"
+                @click="postVerificationCode">{{$t("register.achieve")}}</span>
+            <span class="flex-center identifying-code-button-close"
+                  v-if="getVerificationCode">{{getVerificationCodeCountdown}}s{{$t("register.Resend")}}</span>
+          </template>
+        </div>
+
+        <!--<template v-if="isMobile">-->
+        <!--<div class="getcodeval" v-if="!getVerificationCode"-->
+        <!--@click="postVerificationCode">{{$t("register.achieve")}}</div>-->
+        <!--<div class="getcodeval"-->
+        <!--v-if="getVerificationCode">{{getVerificationCodeCountdown}}</div>-->
+        <!--</template>-->
+
+        <!--<template v-if="!captchaReady">-->
+        <!--<span class="flex-center button-grey">-->
+        <!--{{$t('register.disabled')}}-->
+        <!--</span>-->
+        <!--</template>-->
+      </div>
+      <div class="unit-input-interval txt-red">
+        <span v-if="verificationCodeWA!=''">{{verificationCodeWA}}</span>
       </div>
 
 

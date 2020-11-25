@@ -53,7 +53,7 @@ root.data = function () {
     channel: '',
 
 
-    agreement: false,
+    agreement: true,
     agreementWA: '',
 
     // verifying: false,
@@ -594,6 +594,9 @@ root.methods.re_register = function (data) {
   // console.warn('注册数据', data)
 
   typeof(data) === 'string' && (data = JSON.parse(data))
+
+  //清空验证码
+  this.verificationCode = '';
 
   if (data.result === 'FAIL' || data.errorCode) {
 
