@@ -63,37 +63,6 @@
         <span v-if="userNameWA!=''">{{userNameWA}}</span>
       </div>
 
-      <!--验证码-->
-      <div class="unit-input-container flex double-input-container"
-           :class="{'wrong-answer':verificationCodeWA!=''}">
-
-        <span></span>
-        <input type="text" :placeholder='verificationCodePlaceholderShow && "验证码" || ""' @focus="closePlaceholder('verificationCode')" v-model="verificationCode"
-               @blur="testVerificationCode" class="unit-input">
-        <!--<div v-if="isMobile" class="cutter-line flex-center">|</div>-->
-
-        <template v-if="isMobile">
-          <div class="getcodeval" v-if="!getVerificationCode"
-                @click="postVerificationCode">{{$t("register.achieve")}}</div>
-        <div class="getcodeval"
-              v-if="getVerificationCode">{{getVerificationCodeCountdown}}s{{$t('register.Resend')}}</div>
-      </template>
-        <template v-if="!isMobile">
-          <span class="flex-center identifying-code-button-on " v-if="!getVerificationCode"
-                @click="postVerificationCode">{{$t("register.achieve")}}</span>
-          <span class="flex-center identifying-code-button-close btn_grey"
-                v-if="getVerificationCode">{{getVerificationCodeCountdown}}</span>
-        </template>
-        <!--<template v-if="!captchaReady">-->
-            <!--<span class="flex-center button-grey">-->
-              <!--{{$t('register.disabled')}}-->
-            <!--</span>-->
-        <!--</template>-->
-      </div>
-      <div class="unit-input-interval txt-red">
-        <span v-if="verificationCodeWA!=''">{{verificationCodeWA}}</span>
-      </div>
-
 
       <!--密码-->
       <div class="unit-input-container flex"
@@ -130,6 +99,36 @@
         <span v-if="refereeWA!=''">{{refereeWA}}</span>
       </div>
 
+      <!--验证码-->
+      <div class="unit-input-container flex double-input-container"
+           :class="{'wrong-answer':verificationCodeWA!=''}">
+
+        <span></span>
+        <input type="text" :placeholder='verificationCodePlaceholderShow && "手机验证码" || ""' @focus="closePlaceholder('verificationCode')" v-model="verificationCode"
+               @blur="testVerificationCode" class="unit-input" @input="$globalFunc.testVerificationCode(verificationCode,registerCommit)">
+        <!--<div v-if="isMobile" class="cutter-line flex-center">|</div>-->
+
+        <template v-if="isMobile">
+          <div class="getcodeval" v-if="!getVerificationCode"
+               @click="postVerificationCode">{{$t("register.achieve")}}</div>
+          <div class="getcodeval"
+               v-if="getVerificationCode">{{getVerificationCodeCountdown}}s{{$t('register.Resend')}}</div>
+        </template>
+        <template v-if="!isMobile">
+          <span class="flex-center identifying-code-button-on " v-if="!getVerificationCode"
+                @click="postVerificationCode">{{$t("register.achieve")}}</span>
+          <span class="flex-center identifying-code-button-close btn_grey"
+                v-if="getVerificationCode">{{getVerificationCodeCountdown}}</span>
+        </template>
+        <!--<template v-if="!captchaReady">-->
+        <!--<span class="flex-center button-grey">-->
+        <!--{{$t('register.disabled')}}-->
+        <!--</span>-->
+        <!--</template>-->
+      </div>
+      <div class="unit-input-interval txt-red">
+        <span v-if="verificationCodeWA!=''">{{verificationCodeWA}}</span>
+      </div>
 
       <!--同意协议-->
       <div class="unit-input-container agreement">
@@ -183,41 +182,6 @@
         <span v-if="userNameWA!=''">{{userNameWA}}</span>
       </div>
 
-      <!--验证码-->
-      <div class="unit-input-container flex double-input-container"
-           :class="{'wrong-answer':verificationCodeWA!=''}">
-        <!--<span class="flex-center unit-input-container-title">-->
-          <!--<img class="unit-input-container-title-img" v-if="isMobile" src="../../assets/h5form/mobile_check.png" alt="">-->
-          <!--<img v-if="!isMobile" src="" alt="">-->
-        <!--</span>-->
-        <span></span>
-        <input type="text" :placeholder='verificationCodePlaceholderShow && "验证码" || ""' @focus="closePlaceholder('verificationCode')" v-model="verificationCode"
-               @blur="testVerificationCode" class="unit-input">
-        <!--<div v-if="isMobile" class="cutter-line flex-center">|</div>-->
-
-        <template v-if="isMobile">
-          <div class="getcodeval" v-if="!getVerificationCode"
-                @click="postVerificationCode">{{$t("register.achieve")}}</div>
-        <div class="getcodeval"
-              v-if="getVerificationCode">{{getVerificationCodeCountdown}}s{{$t("register.Resend")}}</div>
-      </template>
-        <template v-if="!isMobile">
-          <span class="flex-center identifying-code-button-on " v-if="!getVerificationCode"
-                @click="postVerificationCode">{{$t("register.achieve")}}</span>
-          <span class="flex-center identifying-code-button-close btn_grey"
-                v-if="getVerificationCode">{{getVerificationCodeCountdown}}</span>
-        </template>
-        <!--<template v-if="!captchaReady">-->
-            <!--<span class="flex-center button-grey">-->
-              <!--{{$t('register.disabled')}}-->
-            <!--</span>-->
-        <!--</template>-->
-      </div>
-      <div class="unit-input-interval txt-red">
-        <span v-if="verificationCodeWA!=''">{{verificationCodeWA}}</span>
-      </div>
-
-
       <!--密码-->
       <div class="unit-input-container flex"
            :class="{'wrong-answer':pswWA!=''}">
@@ -265,6 +229,39 @@
       </div>
 
 
+      <!--验证码-->
+      <div class="unit-input-container flex double-input-container"
+           :class="{'wrong-answer':verificationCodeWA!=''}">
+        <!--<span class="flex-center unit-input-container-title">-->
+        <!--<img class="unit-input-container-title-img" v-if="isMobile" src="../../assets/h5form/mobile_check.png" alt="">-->
+        <!--<img v-if="!isMobile" src="" alt="">-->
+        <!--</span>-->
+        <span></span>
+        <input type="text" :placeholder='verificationCodePlaceholderShow && "验证码" || ""' @focus="closePlaceholder('verificationCode')" v-model="verificationCode"
+               @blur="testVerificationCode" class="unit-input" @input="$globalFunc.testVerificationCode(verificationCode,registerCommit)">
+        <!--<div v-if="isMobile" class="cutter-line flex-center">|</div>-->
+
+        <template v-if="isMobile">
+          <div class="getcodeval" v-if="!getVerificationCode"
+               @click="postVerificationCode">{{$t("register.achieve")}}</div>
+          <div class="getcodeval"
+               v-if="getVerificationCode">{{getVerificationCodeCountdown}}s{{$t("register.Resend")}}</div>
+        </template>
+        <template v-if="!isMobile">
+          <span class="flex-center identifying-code-button-on " v-if="!getVerificationCode"
+                @click="postVerificationCode">{{$t("register.achieve")}}</span>
+          <span class="flex-center identifying-code-button-close btn_grey"
+                v-if="getVerificationCode">{{getVerificationCodeCountdown}}</span>
+        </template>
+        <!--<template v-if="!captchaReady">-->
+        <!--<span class="flex-center button-grey">-->
+        <!--{{$t('register.disabled')}}-->
+        <!--</span>-->
+        <!--</template>-->
+      </div>
+      <div class="unit-input-interval txt-red">
+        <span v-if="verificationCodeWA!=''">{{verificationCodeWA}}</span>
+      </div>
 
       <!--同意协议-->
       <div class="unit-input-container agreement">
