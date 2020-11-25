@@ -23,55 +23,110 @@
     </li>
     <!-- 表头 end -->
     <!-- 如果加载完成、已登录、有数据，则显示数据 begin -->
-    <template v-if="!loading">
-      <template v-if="userId && currentOrderComputed.length!==0">
-        <transition-group name="fade">
-          <li class="flex"
-              :class="$route.name == 'currentEntrust'?'tr-td':'tr-td-col'"
-              v-for="(order,index) in currentOrderComputed" :key="order.id">
+<!--    <template v-if="!loading">-->
+<!--      <template v-if="userId && currentOrderComputed.length!==0">-->
+<!--        <transition-group name="fade">-->
+<!--          <li class="flex"-->
+<!--              :class="$route.name == 'currentEntrust'?'tr-td':'tr-td-col'"-->
+<!--              v-for="(order,index) in currentOrderComputed" :key="order.id">-->
+<!--            &lt;!&ndash;单号&ndash;&gt;-->
+<!--            &lt;!&ndash;<div class="td td-order">{{order.id}}</div>&ndash;&gt;-->
+<!--            &lt;!&ndash;订单id&ndash;&gt;-->
+<!--            <div class="td td-time1">{{(order.id)}}</div>-->
+<!--            &lt;!&ndash;委托时间&ndash;&gt;-->
+<!--            <div class="td td-time">{{$globalFunc.formatDateUitl(order.createdAt,'YYYY-MM-DD hh:mm:ss')}}</div>-->
+<!--            &lt;!&ndash;类别&ndash;&gt;-->
+<!--            <div class="td td-category">{{order.symbol.split('_')[0]}}/{{order.symbol.split('_')[1]}}</div>-->
+<!--            &lt;!&ndash;市场&ndash;&gt;-->
+<!--            <div class="td td-category-1" :class="(order.type==='BUY_LIMIT' || order.type==='BUY_MARKET')?'text_blue-3':'text_red-4'">-->
+<!--              {{changeType(order)}}-->
+<!--            </div>-->
+<!--            <div class="td td-market">{{toFixed(order.price, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].quoteScale : 8)}}</div>-->
+<!--            &lt;!&ndash;撤单&ndash;&gt;-->
+<!--            <div class="td td-operation">-->
+<!--              <span class="click-operation chedanbutton"-->
+<!--                    :class="$route.name == 'currentEntrust'?'text_blue-1':'text_blue-0'"-->
+<!--                    @click="cancelOrder(order)" v-if="!order.click">{{$t('orderPageCurrentEntrustment.cancel')}}</span>-->
+<!--              <span class="click-operating chedanbutton" v-else>{{$t('orderPageCurrentEntrustment.canceling')}}</span>-->
+<!--            </div>-->
+<!--          </li>-->
+<!--        </transition-group>-->
+<!--      </template>-->
+<!--      &lt;!&ndash; 如果加载完成、已登录、有数据，则显示数据 end &ndash;&gt;-->
+
+<!--      &lt;!&ndash; 如果没加载完成、没登录、没数据，则显示'&#45;&#45;' begin &ndash;&gt;-->
+<!--      <template v-else>-->
+<!--        <li class="weit">-->
+<!--          &lt;!&ndash;          <div class="td td-order">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-time">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-category">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-market">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-price">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-number">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-amount">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-turnover">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-operation">&#45;&#45;</div>&ndash;&gt;-->
+
+<!--          <div class="nhtu" v-if="$route.name == 'currentEntrust'"><img src="../../assets/noOrders.png"></div>-->
+<!--          <div class="nhtu" v-if="$route.name !== 'currentEntrust'"><img src="../../assets/noOrderDark.png"></div>-->
+<!--          <span>{{$t('orderPageCurrentEntrustment.close_9')}}</span>-->
+<!--        </li>-->
+<!--      </template>-->
+<!--      &lt;!&ndash; 如果没加载完成、没登录、没数据，则显示'&#45;&#45;' begin &ndash;&gt;-->
+<!--      <template v-if="!loading && userId && tradinghallLimit===10 && currentOrderComputed.length >= 10">-->
+<!--        <li class="loading-more seeMore" >-->
+<!--          <span class="text_blue pointer" @click="toCurrentHistory">{{$t('orderPageHistoricalEntrustment.close_12')}}</span>-->
+<!--        </li>-->
+<!--      </template>-->
+<!--    </template>-->
+
+          <li class="flex">
             <!--单号-->
             <!--<div class="td td-order">{{order.id}}</div>-->
             <!--订单id-->
-            <div class="td td-time1">{{(order.id)}}</div>
+            <div class="td td-time1">1111</div>
             <!--委托时间-->
-            <div class="td td-time">{{$globalFunc.formatDateUitl(order.createdAt,'YYYY-MM-DD hh:mm:ss')}}</div>
+            <div class="td td-time">11111111</div>
             <!--类别-->
-            <div class="td td-category">{{order.symbol.split('_')[0]}}/{{order.symbol.split('_')[1]}}</div>
+            <div class="td td-category">11111111</div>
             <!--市场-->
-            <div class="td td-category-1" :class="(order.type==='BUY_LIMIT' || order.type==='BUY_MARKET')?'text_blue-3':'text_red-4'">
-              {{changeType(order)}}
+            <div class="td td-category-1">
+              111111
             </div>
-            <div class="td td-market">{{toFixed(order.price, !!quoteScale_list[order.symbol] ? quoteScale_list[order.symbol].quoteScale : 8)}}</div>
+            <div class="td td-market">1111111</div>
             <!--撤单-->
             <div class="td td-operation">
+              <span class="click-operation chedanbutton-xin"
+                    :class="$route.name == 'currentEntrust'?'text_blue-1':'text_blue-0'">
+                取消
+              </span>
+              <span class="span-kong"></span>
               <span class="click-operation chedanbutton"
-                    :class="$route.name == 'currentEntrust'?'text_blue-1':'text_blue-0'"
-                    @click="cancelOrder(order)" v-if="!order.click">{{$t('orderPageCurrentEntrustment.cancel')}}</span>
-              <span class="click-operating chedanbutton" v-else>{{$t('orderPageCurrentEntrustment.canceling')}}</span>
+                    :class="$route.name == 'currentEntrust'?'text_blue-1':'text_blue-0'">
+                详情
+              </span>
             </div>
           </li>
-        </transition-group>
-      </template>
       <!-- 如果加载完成、已登录、有数据，则显示数据 end -->
 
       <!-- 如果没加载完成、没登录、没数据，则显示'--' begin -->
-      <template v-else>
-        <li class="weit">
-          <!--          <div class="td td-order">&#45;&#45;</div>-->
-          <!--          <div class="td td-time">&#45;&#45;</div>-->
-          <!--          <div class="td td-category">&#45;&#45;</div>-->
-          <!--          <div class="td td-market">&#45;&#45;</div>-->
-          <!--          <div class="td td-price">&#45;&#45;</div>-->
-          <!--          <div class="td td-number">&#45;&#45;</div>-->
-          <!--          <div class="td td-amount">&#45;&#45;</div>-->
-          <!--          <div class="td td-turnover">&#45;&#45;</div>-->
-          <!--          <div class="td td-operation">&#45;&#45;</div>-->
+<!--      <template v-else>-->
+<!--        <li class="weit">-->
+<!--          &lt;!&ndash;          <div class="td td-order">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-time">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-category">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-market">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-price">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-number">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-amount">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-turnover">&#45;&#45;</div>&ndash;&gt;-->
+<!--          &lt;!&ndash;          <div class="td td-operation">&#45;&#45;</div>&ndash;&gt;-->
 
-          <div class="nhtu" v-if="$route.name == 'currentEntrust'"><img src="../../assets/noOrders.png"></div>
-          <div class="nhtu" v-if="$route.name !== 'currentEntrust'"><img src="../../assets/noOrderDark.png"></div>
-          <span>{{$t('orderPageCurrentEntrustment.close_9')}}</span>
-        </li>
-      </template>
+<!--          <div class="nhtu" v-if="$route.name == 'currentEntrust'"><img src="../../assets/noOrders.png"></div>-->
+<!--          <div class="nhtu" v-if="$route.name !== 'currentEntrust'"><img src="../../assets/noOrderDark.png"></div>-->
+<!--          <span>{{$t('orderPageCurrentEntrustment.close_9')}}</span>-->
+<!--        </li>-->
+<!--      </template>-->
       <!-- 如果没加载完成、没登录、没数据，则显示'--' begin -->
       <template v-if="!loading && userId && tradinghallLimit===10 && currentOrderComputed.length >= 10">
         <li class="loading-more seeMore" >

@@ -113,11 +113,11 @@
           <div>0.37% - 0.45%</div>
         </div>
         <div class="buy">
-          <div>止损价格</div>
+          <div class="cursor" @click="clickSetStopLoss">止损价格 <span class="span-color"> > </span></div>
           <div>12650</div>
         </div>
         <div class="buy">
-          <div>自动止盈</div>
+          <div class="cursor"  @click="clickAutomaticStopProfit">自动止盈 <span class="span-color"> > </span></div>
           <div>12650</div>
         </div>
         <div class="buy">
@@ -195,6 +195,32 @@
       <div class="m-left">
         <span class="btn-blu cursor">确认</span>
       </div>
+    </div>
+  </PopupWindow>
+  <PopupWindow :switch="openSetStopLoss" @close="popSetStopLoss">
+    <div slot="header" class="headerDe">
+      <span class="header_xuzhi" v-if="distinguishPrice">修改止损价格</span>
+      <span class="header_xuzhi" v-else>修改止赢价格</span>
+    </div>
+    <div slot="article" class="pop-recharge-set">
+      <div v-if="distinguishPrice">
+        <div class="set-col">止损价格</div>
+        <div class="input-div flex">
+          <input type="text" class="input-set" v-model="modifyPrice">
+          <div class="input-usdt">USDT</div>
+        </div>
+      </div>
+      <div v-else>
+        <div class="set-col">止赢价格</div>
+        <div class="input-div flex">
+          <input type="text" class="input-set" v-model="winPrice">
+          <div class="input-usdt">USDT</div>
+        </div>
+      </div>
+    </div>
+    <div slot="footer" class="flex m-bottom">
+      <div class="buy cancer-btn cursor" @click="popSetStopLoss">取消</div>
+      <div class="buy confirm-btn cursor">确认</div>
     </div>
   </PopupWindow>
 </div>

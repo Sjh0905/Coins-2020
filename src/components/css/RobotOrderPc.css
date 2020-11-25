@@ -156,6 +156,14 @@ tr, th, td {
   line-height:28px;
   border-radius: 2px;
 }
+.chedanbutton-xin {
+  display: inline-block;
+  padding: 0 15px;
+  height: 28px;
+  border: 1px solid #6B7DA2;
+  line-height:28px;
+  border-radius: 2px;
+}
 .text_blue-0 {
   /*color: #3576F5;*/
   color: #FFFFFF;
@@ -166,6 +174,16 @@ tr, th, td {
 }
 
 .chedanbutton:hover {
+  display: inline-block;
+  color: #F7F8FA !important;
+  padding: 0 15px;
+  height: 28px;
+  line-height:28px;
+  border-radius: 2px;
+  background-color:#3576F5;
+}
+
+.chedanbutton-xin:hover {
   display: inline-block;
   color: #F7F8FA !important;
   padding: 0 15px;
@@ -290,4 +308,8 @@ tr, th, td {
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color:#F60076;
+}
+.span-kong {
+  display: inline-block;
+  padding: 0 5px;
 }

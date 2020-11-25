@@ -8,7 +8,11 @@ root.components = {
 root.data = function () {
   return {
     detailsType:1,
-    openStopTheRobot:true,
+    openStopTheRobot:false,
+    openSetStopLoss:false,
+    distinguishPrice:false, //辨别价格
+    modifyPrice:'', //止损价格
+    winPrice:'', //止盈价格
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -32,5 +36,19 @@ root.methods.popStopTheRobot = function () {
 //打开停止机器人
 root.methods.StopTheRobot = function () {
   this.openStopTheRobot = true
+}
+//关闭止损价格弹窗
+root.methods.popSetStopLoss = function () {
+  this.openSetStopLoss = false
+}
+//打开止损价格弹窗
+root.methods.clickSetStopLoss = function () {
+  this.openSetStopLoss = true
+  this.distinguishPrice = true
+}
+//打开自动止盈价格弹窗
+root.methods.clickAutomaticStopProfit = function () {
+  this.openSetStopLoss = true
+  this.distinguishPrice = false
 }
 export default root
