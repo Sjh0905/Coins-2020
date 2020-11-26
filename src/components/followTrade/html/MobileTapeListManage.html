@@ -1,4 +1,5 @@
 <div class="mobile-trade-tape-manage">
+  <Loading v-if="loading"></Loading>
   <!--ios status栏-->
   <div v-if="(isApp)" class="mobile-status-bar-ios"/>
   <div v-if="(isApp)" class="mobile-status-bar-bg-ios"/>
@@ -17,7 +18,7 @@
 
   <div class="mobile-trade-header-null-data"></div>
 
-  <div class="mobile-open-tape-list">
+  <div class="mobile-open-tape-list" v-if="!loading">
     <!--没有开启带单-->
     <div v-if="isHasItem" >
       <div class="mobile-open-tape-list-btn-top flex">

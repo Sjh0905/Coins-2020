@@ -2,12 +2,13 @@ const root = {}
 root.name = 'mobileTapeListManage'
 /*------------------------------ 组件 ------------------------------*/
 root.components = {
- // 'Loading': resolve => require(['../Loading/Loading.vue'], resolve),
+ 'Loading': resolve => require(['../../vue/Loading'], resolve),
   'PopupPrompt': resolve => require(['../../vue/PopupPrompt'], resolve),
 }
 /*------------------------------ data -------------------------------*/
 root.data = function () {
   return {
+    loading:true,
     openMaskWindow:false,
     // 是否开启带单
     isTapeList: false,
@@ -280,6 +281,7 @@ root.methods.error_postRevisionFee = function (err) {
 
 //个人带单管理
 root.methods.postManage = function () {
+
   this.$http.send('POST_MANAGE', {
     bind: this,
     // params: params,
@@ -292,6 +294,7 @@ root.methods.postManage = function () {
 }
 root.methods.re_postManage = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
+  this.loading = false
   this.countFollower = data.dataMap.countFollower || '0'
   this.sumFee = data.dataMap.sumFee || '0'
   this.todayFee = data.dataMap.todayFee || '0'

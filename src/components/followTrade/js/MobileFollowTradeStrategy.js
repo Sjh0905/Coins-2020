@@ -12,7 +12,9 @@ root.data = function () {
     godHistorList:[],
     followUserList:[],
     isTapeList:false,
-    delFollowOpenDisable:false
+    delFollowOpenDisable:false,
+    delFollowOpenDisableBi:false,
+    BDBInfo:true,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -75,6 +77,13 @@ root.computed.contractType = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+root.methods.clickToggle = function () {
+  this.BDBInfo = false
+}
+root.methods.clickToggleTrue = function () {
+  this.BDBInfo = true
+}
 
 // 切换历史跟单和跟随者
 root.methods.toggleType = function (type) {
@@ -158,6 +167,14 @@ root.methods.jumpToFollowTrade = function () {
 }
 // 个人设置
 root.methods.personalSetting = function (isSwitchOrder) {
+  this.delFollowOpenDisableBi = true
+  // this.$router.push({name:'mobileTapeListManage',query:{isSwitchOrder:this.isSwitchOrder}})
+}
+
+
+// 个人设置
+root.methods.personalSettingBi = function (isSwitchOrder) {
+  this.delFollowOpenDisableBi = false
   this.$router.push({name:'mobileTapeListManage',query:{isSwitchOrder:this.isSwitchOrder}})
 }
 
@@ -171,6 +188,10 @@ root.methods.postDocumentaryImmediatelyDisable = function () {
 }
 root.methods.popCloseTemporarilyClosed = function () {
   this.delFollowOpenDisable = false
+}
+
+root.methods.popCloseTemporarilyClosedBi = function () {
+  this.delFollowOpenDisableBi = false
 }
 
 /*---------------------- 保留小数 begin ---------------------*/
