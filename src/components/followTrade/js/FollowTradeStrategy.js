@@ -35,6 +35,8 @@ root.data = function () {
     popWindowOpen:false,
     fixedAmPr:2,  //默认固定金额
     popWindowOpenContract:false,  //带单禁用
+    BDBInfo:true,
+    popWindowOpenContractBi:false,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -119,6 +121,15 @@ root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
 
+root.methods.clickToggle = function () {
+  this.BDBInfo = false
+}
+root.methods.clickToggleTrue = function () {
+  this.BDBInfo = true
+}
+
+
+
 //固定比例-金额选择
 root.methods.fixedAmountPr = function (type) {
   this.currencyPair = ''
@@ -171,7 +182,7 @@ root.methods.error_postManage = function (err) {
 }
 // 成为大神弹框
 root.methods.openTapeList = function () {
-  this.popWindowOpen =true
+  this.popWindowOpenContractBi =true
 }
 
 root.methods.openTapeListDisable = function () {
@@ -183,6 +194,15 @@ root.methods.popCloseTemporarilyClosed = function () {
 root.methods.openAContract = function () {
   this.popWindowOpenContract = false
   this.popWindowOpen =true
+}
+
+root.methods.openAContractBi = function () {
+  this.popWindowOpenContractBi = false
+  this.popWindowOpen =true
+}
+
+root.methods.popCloseTemporarilyClosedBi = function () {
+  this.popWindowOpenContractBi = false
 }
 
 
