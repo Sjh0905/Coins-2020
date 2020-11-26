@@ -558,4 +558,25 @@
 .m-f {
   margin-left:0px;
 }
+.fenxian {
+  width: 100%;
+  /*height: 36px;*/
+  padding: 10px;
+  background: #FFF9F2;
+  border-radius: 1px;
+  border: 1px solid #FFC58B;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B7DA2;
+}
+
+.fenxianBi {
+  font-size: 14px;
+  padding: 10px 0;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B7DA2;
+}
 /*禁用风险提示*/

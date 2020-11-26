@@ -96,9 +96,7 @@ GlobalFunction.testNumber = function (number) {
 GlobalFunction.testVerificationCode = function (code,callback) {
 
   let result = /^\d{6}$/.test(code)
-
-  console.log('this is code',code,result,callback.toString());
-
+  // console.log('this is code',code,result,callback.toString());
   if(result){
     setTimeout(()=>{
       callback()

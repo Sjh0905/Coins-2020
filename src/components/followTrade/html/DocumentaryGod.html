@@ -276,6 +276,9 @@
   <!--  禁用风险提示-->
   <OpenTapeListDisable :switch="popWindowOpenContract">
     <div slot="conter">
+      <div class="fenxian">
+        我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
+      </div>
       <div class="div-one">合约跟单后以下功能将被禁用：</div>
       <div class="div-two"> <span class="yuan-span m-f"></span> 仓位模式修改 <span class="yuan-span"></span> 保证金模式修改 <span class="yuan-span"></span> 杠杆倍数修改
         <div><span class="yuan-span m-f"></span> 资金划转 <span class="yuan-span"></span> 合约交易</div> </div>
@@ -287,6 +290,19 @@
       <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
     </div>
   </OpenTapeListDisable>
+  <OpenTapeListDisable :switch="popWindowOpenContractBi">
+    <div slot="conter">
+      <div class="fenxianBi">
+        我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
+      </div>
+    </div>
+    <div slot="footer" class="flex footer-btn">
+      <div class="popWindow-article2" @click="popCloseTemporarilyClosedBi">取消</div>
+      <div class="popWindow-btn" @click="openAContractBi">同意</div>
+      <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
+    </div>
+  </OpenTapeListDisable>
+
   <PopupPrompt :popOpen="popOpen" :popClose="closePop" :popType="popType" :popText="popText" :waitTime="waitTime" />
 
 </div>

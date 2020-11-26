@@ -144,11 +144,16 @@
   <!--弹窗-->
   <div v-if="delFollowOpenDisable" class="forecast-activity-toast">
     <div class="forecast-activity-toast-box-D">
-      <div class="forecast-activity-toast-title">提示
+      <div class="forecast-activity-toast-title">
+        <img src="../../../assets/pinchakan.png" alt="" class="fenxian-img">
+        风险提示
         <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
         </span>
       </div>
       <div class="del-follow-text-D">
+        <div class="fenxian">
+          我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
+        </div>
         <div class="m-bottom">合约跟单后以下功能将被禁用：</div>
         <div class="div-two">
           <div class="m-bottom-1"><span class="yuan-span m-f"></span> 仓位模式修改 <span class="yuan-span"></span> 保证金模式修改</div>
@@ -159,7 +164,28 @@
 
       <div slot="footer" class="flex footer-btn">
         <div class="popWindow-article2" @click="popCloseTemporarilyClosed">取消</div>
-        <div class="popWindow-btn" @click="jumpToFollowDocumentary">同意</div>
+        <div class="popWindow-btn" @click="jumpToFollowDocumentaryHe">同意</div>
+        <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
+      </div>
+    </div>
+  </div>
+  <div v-if="delFollowOpenDisableBi" class="forecast-activity-toast">
+    <div class="forecast-activity-toast-box-Bi">
+      <div class="forecast-activity-toast-title">
+        <img src="../../../assets/pinchakan.png" alt="" class="fenxian-img">
+        风险提示
+        <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
+        </span>
+      </div>
+      <div class="del-follow-text-D">
+        <div class="fenxianBi">
+          我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
+        </div>
+      </div>
+
+      <div slot="footer" class="flex footer-btn">
+        <div class="popWindow-article2" @click="popCloseTemporarilyClosedBi">取消</div>
+        <div class="popWindow-btn" @click="jumpToFollowDocumentaryBi">同意</div>
         <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
       </div>
     </div>

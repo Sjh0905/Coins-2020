@@ -192,3 +192,7 @@
   width: 1.2rem;
   height: 1.2rem;
 }
+.contract-img {
+  vertical-align: sub;
+  margin-bottom: 2px;
+}

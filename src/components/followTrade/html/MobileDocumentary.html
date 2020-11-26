@@ -94,15 +94,15 @@
         </span>
       </div>
       <div class="del-follow-text">
-        <div>跟随者：<span class="text_blue">{{$route.query.userId || ''}}</span></div>
+        <div>跟随：<span class="text_blue">{{$route.query.userId || ''}}</span></div>
         <div v-if="followType == 'LOT'">
-          将扣除 <span class="text_blue">{{$route.query.fee}} USDT</span> 跟单费用
+          费用： 将扣除 <span class="text_blue">{{$route.query.fee}} USDT/7天</span>
         </div>
         <div v-if="followType == 'RATE' && isSwitchOrder == 'CONTRACT'">
-          将扣除 <span class="text_blue">跟单利润{{accAdd($route.query.fee,20) || '0'}}%/周费用</span>
+          费用： 每周将扣除跟单利润的 <span class="text_blue">{{accAdd($route.query.fee,20) || '0'}}% </span>作为跟单费
         </div>
         <div v-if="followType == 'RATE' && isSwitchOrder == 'SPOT'">
-          将扣除 <span class="text_blue">跟单利润{{accAdd($route.query.fee,20) || '0'}}%/笔费用</span>
+          费用： 将扣除跟单利润 <span class="text_blue">{{accAdd($route.query.fee,20) || '0'}}%/笔</span>
         </div>
       </div>
       <div class="forecast-activity-toast-btn" v-if="follow" @click="postDocumentaryImmediately">确 定</div>

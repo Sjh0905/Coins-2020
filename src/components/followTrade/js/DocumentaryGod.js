@@ -28,6 +28,7 @@ root.data = function () {
     follow:true,
     popWindowOpen: false,
     popWindowOpenContract:false,//禁用
+    popWindowOpenContractBi:false,//禁用
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -101,7 +102,13 @@ root.methods.jumpToFollowTrade = function () {
 // }
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {
+  this.popWindowOpenContractBi = true
+  // this.$router.push({name:'mobileMyFollowOrder'})
+  // this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,fee:this.$route.query.fee,days:this.$route.query.days}})
+}// 点击跟单
+root.methods.openAContractBi = function () {
   this.popWindowOpen = true
+  this.popWindowOpenContractBi = false
   // this.$router.push({name:'mobileMyFollowOrder'})
   // this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,fee:this.$route.query.fee,days:this.$route.query.days}})
 }
@@ -110,6 +117,9 @@ root.methods.openTapeListDisable = function () {
 }
 root.methods.popCloseTemporarilyClosed = function () {
   this.popWindowOpenContract = false
+}
+root.methods.popCloseTemporarilyClosedBi = function () {
+  this.popWindowOpenContractBi = false
 }
 // 关闭跟单弹框
 root.methods.popWindowClose= function () {

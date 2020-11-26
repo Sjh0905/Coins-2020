@@ -12,7 +12,8 @@ root.data = function () {
     godHistorList:[],
     godInfo:{},
     followUserList:[],
-    delFollowOpenDisable:false
+    delFollowOpenDisable:false,
+    delFollowOpenDisableBi:false
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -84,14 +85,35 @@ root.methods.jumpToFollowTrade = function () {
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {
   // this.$router.push({name:'mobileMyFollowOrder'})
+  this.delFollowOpenDisableBi = true
+}
+// 点击跟单
+root.methods.jumpToFollowDocumentaryBi = function () {
+  // this.$router.push({name:'mobileMyFollowOrder'})
+  this.delFollowOpenDisableBi = false
   this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,feeType:this.$route.query.feeType,fee:this.$route.query.fee,days:this.$route.query.days,isSwitchOrder:this.$route.query.isSwitchOrder}})
+}
+// 点击跟单
+root.methods.jumpToFollowDocumentaryHe = function () {
+  // this.$router.push({name:'mobileMyFollowOrder'})
+  this.delFollowOpenDisable = false
+  this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,feeType:this.$route.query.feeType,fee:this.$route.query.fee,days:this.$route.query.days,isSwitchOrder:this.$route.query.isSwitchOrder}})
+}
+
+root.methods.popCloseTemporarilyClosedBi = function () {
+  this.delFollowOpenDisableBi = false
 }
 
 root.methods.openDocumentaryWindowDisable = function () {
   this.delFollowOpenDisable = true
 }
 
+
 root.methods.popCloseTemporarilyClosed = function () {
+  this.delFollowOpenDisable = false
+}
+// 关闭修改跟单弹窗
+root.methods.delFollowClose = function () {
   this.delFollowOpenDisable = false
 }
 
