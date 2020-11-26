@@ -29,6 +29,7 @@ root.data = function () {
     popWindowOpen: false,
     popWindowOpenContract:false,//禁用
     popWindowOpenContractBi:false,//禁用
+    BDBInfo:true,//勾选
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -88,6 +89,16 @@ root.computed.contractType = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+root.methods.clickToggle = function () {
+  this.BDBInfo = false
+}
+root.methods.clickToggleTrue = function () {
+  this.BDBInfo = true
+}
+
+
+
 // 切换历史跟单和跟随者
 root.methods.toggleType = function (type) {
   this.fixedFollow = type
@@ -107,6 +118,10 @@ root.methods.jumpToFollowDocumentary = function () {
   // this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,fee:this.$route.query.fee,days:this.$route.query.days}})
 }// 点击跟单
 root.methods.openAContractBi = function () {
+  if(!this.BDBInfo) {
+    this.openPop(this.$t('您尚未勾选'));
+    return;
+  }
   this.popWindowOpen = true
   this.popWindowOpenContractBi = false
   // this.$router.push({name:'mobileMyFollowOrder'})
@@ -126,6 +141,10 @@ root.methods.popWindowClose= function () {
   this.popWindowOpen = false
 }
 root.methods.openAContract = function () {
+  if(!this.BDBInfo) {
+    this.openPop(this.$t('您尚未勾选'));
+    return;
+  }
   this.popWindowOpenContract = false
   this.popWindowOpen =true
 }

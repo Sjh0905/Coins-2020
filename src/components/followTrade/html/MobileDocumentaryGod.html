@@ -152,6 +152,10 @@
       </div>
       <div class="del-follow-text-D">
         <div class="fenxian">
+          <!--              关闭按钮 -->
+          <img src="../../../assets/noselect.png" alt="" class="geng-img" @click="clickToggleTrue" v-if="!BDBInfo">
+          <!--              打开按钮-->
+          <img src="../../../assets/select.png" alt="" class="geng-img" @click="clickToggle" v-if="BDBInfo">
           我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
         </div>
         <div class="m-bottom">合约跟单后以下功能将被禁用：</div>
@@ -164,7 +168,8 @@
 
       <div slot="footer" class="flex footer-btn">
         <div class="popWindow-article2" @click="popCloseTemporarilyClosed">取消</div>
-        <div class="popWindow-btn" @click="jumpToFollowDocumentaryHe">同意</div>
+        <div class="popWindow-btn" @click="jumpToFollowDocumentaryHe" v-if="BDBInfo">同意</div>
+        <div class="popWindow-btn-hui" v-else>同意</div>
         <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
       </div>
     </div>
@@ -179,13 +184,18 @@
       </div>
       <div class="del-follow-text-D">
         <div class="fenxianBi">
+          <!--              关闭按钮 -->
+          <img src="../../../assets/noselect.png" alt="" class="geng-img" @click="clickToggleTrue" v-if="!BDBInfo">
+          <!--              打开按钮-->
+          <img src="../../../assets/select.png" alt="" class="geng-img" @click="clickToggle" v-if="BDBInfo">
           我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
         </div>
       </div>
 
       <div slot="footer" class="flex footer-btn">
         <div class="popWindow-article2" @click="popCloseTemporarilyClosedBi">取消</div>
-        <div class="popWindow-btn" @click="jumpToFollowDocumentaryBi">同意</div>
+        <div class="popWindow-btn" @click="jumpToFollowDocumentaryBi" v-if="BDBInfo">同意</div>
+        <div class="popWindow-btn-hui" v-else>同意</div>
         <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
       </div>
     </div>

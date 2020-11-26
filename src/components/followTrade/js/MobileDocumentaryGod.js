@@ -13,7 +13,8 @@ root.data = function () {
     godInfo:{},
     followUserList:[],
     delFollowOpenDisable:false,
-    delFollowOpenDisableBi:false
+    delFollowOpenDisableBi:false,
+    BDBInfo:true,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -72,6 +73,13 @@ root.computed.contractType = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+root.methods.clickToggle = function () {
+  this.BDBInfo = false
+}
+root.methods.clickToggleTrue = function () {
+  this.BDBInfo = true
+}
 // 切换历史跟单和跟随者
 root.methods.toggleType = function (type) {
   this.followType = type
