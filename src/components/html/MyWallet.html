@@ -820,7 +820,9 @@
           <div v-if="picked == 1">
             <label for="gaCode" class="verification-title">{{$t('gaCode')}}</label>
             <div class="verification-container flex">
-              <input type="text" id="gaCode" class="verification-input input_padding" v-model="step2VerificationCode" @blur="testGACodeVerification">
+              <input type="text" id="gaCode" class="verification-input input_padding" v-model="step2VerificationCode" @blur="testGACodeVerification"
+                     @input="$globalFunc.testVerificationCode(step2VerificationCode,commitStep2Verification)"
+              >
             </div>
           </div>
           <div class="" v-if="picked == 2">
@@ -828,7 +830,9 @@
             <div class="verification-container flex">
               <input type="text" id="mobile" class="verification-input input_padding"
                      v-model="step2VerificationCode"
-                     @blur="testMobileVerification">
+                     @blur="testMobileVerification"
+                     @input="$globalFunc.testVerificationCode(step2VerificationCode,commitStep2Verification)"
+              >
 
               <div class="get-verification pointer" v-if="!getMobileVerificationCode"
                    @click="getMobileVerification">
@@ -872,6 +876,7 @@
         <div class="pointer ssss2 button-base btn_simple rig" @click="goToConfirmsjhclose">
           {{$t('cancel')}}
         </div>
+        <!--TODO：内转输验证码后自动掉接口和这里函数一致-->
         <div class="pointer ssss12 btn_blue" v-if="!step2VerificationSending"
                 @click="commitStep2Verification">
           {{$t('commit')}}

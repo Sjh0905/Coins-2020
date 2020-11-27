@@ -526,6 +526,10 @@ root.methods.re_commit = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if (!data) return
   // console.warn('绑定手机回复', data)
+
+  //清空验证码
+  this.verificationCode = '';
+
   this.sending = false;
 
   if (data.errorCode == '2' && !!data.dataMap.times) {

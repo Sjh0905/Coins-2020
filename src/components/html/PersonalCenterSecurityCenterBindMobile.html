@@ -54,7 +54,9 @@
           <div class="article-pop-1">
             <div class="article-pop-2">{{$t('personalCenterSecurityCenterBindMobile.verificationCode')}}</div>
             <div class="input-pop" :class="{'wrong-border':verificationCodeWA!==''}">
-              <input class="pop-input-3" type="text" v-model="verificationCode" @blur="testVerificationCode">
+              <input class="pop-input-3" type="text" v-model="verificationCode" @blur="testVerificationCode"
+                     @input="$globalFunc.testVerificationCode(verificationCode,commit)"
+              >
               <span class=" fl-ce-y" v-if="!getVerificationCode" @click="postVerificationCode">{{$t('personalCenterSecurityCenterBindMobile.send')}}</span>
               <span class="fl-ce-y-s" v-else disabled> {{getVerificationCodeCountdown}}s</span>
             </div>

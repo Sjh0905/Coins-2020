@@ -104,7 +104,7 @@ root.data = function () {
 
     currency2:'USDT',
     currency1:'USDT2',
-    selectTab: (this.currency == 'USDT' && this.withdrawalsFlagUSDT2) ? 2 : 1,
+    selectTab: (this.currency == 'USDT' && this.withdrawalsFlagUSDT3) ? 3 : 1,
 
   }
 }
@@ -250,7 +250,7 @@ root.watch.serverTime = function (oldVal, newVal) {
 /*--------------------------------- 生命周期 --------------------------------*/
 
 root.created = function () {
-  this.selectTab=(this.currency == 'USDT' && this.withdrawalsFlagUSDT2) ? 2 : 1
+  this.selectTab=(this.currency == 'USDT' && this.withdrawalsFlagUSDT3) ? 3 : 1
   this.getAuthState()
   // this.getWithdrawalsAddress1()
   this.getWithdrawalsAddress()

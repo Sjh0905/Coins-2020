@@ -1025,6 +1025,9 @@ root.methods.commitge = function () {
 root.methods.re_commitge = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
 
+  //清空验证码
+  this.GACodege = ''
+
   if (!data) return
   this.sending = false
   this.popClose()
