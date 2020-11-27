@@ -535,7 +535,7 @@
       <div class="article-pop-1">
         <div class="article-pop-2">{{$t('gogaCord')}}</div>
         <input class="pop-input-1" type="text" v-model="GACodege" :class="{'wrong-border':GACodeWAge!==''}"
-               @blur="testGACodege">
+               @blur="testGACodege" @input="$globalFunc.testVerificationCode(GACodege,commitge)">
         <span class="detail-center-prompt txt-red" v-if="GACodeWAge!==''">{{GACodeWAge}}</span>
       </div>
     </div>

@@ -138,7 +138,7 @@
               <div>{{$t('personalCenterSecurityCenterBindGoogleAuthenticator.ga')}}</div>
               <div class="line-input-detail">
                 <input type="text" v-model="verificationCode" :class="{'wrong-border':verificationCodeWA!==''}"
-                       @blur="testVerificationCode">
+                       @blur="testVerificationCode" @input="$globalFunc.testVerificationCode(verificationCode,commit)">
               </div>
               <span class="input-prompt txt-red" v-if="verificationCodeWA!==''">{{verificationCodeWA}}</span>
             </div>

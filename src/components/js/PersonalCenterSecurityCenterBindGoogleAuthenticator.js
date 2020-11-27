@@ -184,6 +184,10 @@ root.methods.commit = function () {
 }
 root.methods.re_commit = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
+
+  //清空验证码
+  this.verificationCode = ''
+
   this.sending = false
   this.popOpen = false
   // console.warn("提交返回！", data)
