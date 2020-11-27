@@ -411,7 +411,7 @@ root.methods.initViews = function (lang) {
 			custom_css_url: 'css/chart_mobile.css',
 			//	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
 			drawings_access: { type: 'black', tools: [ { name: "Regression Trend" } ] },
-			disabled_features: ['use_localstorage_for_settings', 'left_toolbar', 'header_symbol_search', 'timeframes_toolbar', 'header_interval_dialog_button', 'header_chart_type', 'header_settings', 'header_indicators', 'header_screenshot', 'volume_force_overlay', 'border_around_the_chart'],
+			disabled_features: ['use_localstorage_for_settings', 'left_toolbar', 'header_symbol_search', 'timeframes_toolbar', 'header_interval_dialog_button', 'header_chart_type', 'header_settings', 'header_indicators', 'header_screenshot', 'volume_force_overlay','create_volume_indicator_by_default', 'border_around_the_chart'],
 			// preset: "mobile",
 			toolbar_bg: '#131F30',
 			favorites: {
@@ -465,7 +465,7 @@ root.methods.initViews = function (lang) {
 			datafeed: new BitexDataFeed(),
 			// datafeed: new Datafeeds.UDFCompatibleDatafeed(config),
 			// header_indicators 已放开left_toolbar
-			disabled_features: ['use_localstorage_for_settings', '', 'header_symbol_search', 'timeframes_toolbar', 'header_interval_dialog_button', 'header_chart_type', 'header_settings', '', 'header_screenshot', 'volume_force_overlay', 'border_around_the_chart'],
+			disabled_features: ['use_localstorage_for_settings', '', 'header_symbol_search', 'timeframes_toolbar', 'header_interval_dialog_button', 'header_chart_type', 'header_settings', '', 'header_screenshot', 'volume_force_overlay','create_volume_indicator_by_default', 'border_around_the_chart'],
 			//	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
 			drawings_access: { type: 'black', tools: [ { name: "Regression Trend" } ] },
 			debug: !true,
@@ -597,6 +597,17 @@ root.methods.initViews = function (lang) {
         'LowerLimit.color': '#0D111F',
         'LowerLimit.linewidth': 1,
         'Hlines Background.color':'#626874',
+      });
+      widget.chart().createStudy('Relative Strength Index',false, false,[4],null, {
+        'Plot.color': '#86CB12',
+        'Plot.linewidth': 1,
+        'UpperLimit.value': 80,
+        'LowerLimit.value': 20,
+        'UpperLimit.color': '#0D111F',
+        'UpperLimit.linewidth': 1,
+        'LowerLimit.color': '#0D111F',
+        'LowerLimit.linewidth': 1,
+        'Hlines Background.color':'#6B7DA2',
       });
 
 
