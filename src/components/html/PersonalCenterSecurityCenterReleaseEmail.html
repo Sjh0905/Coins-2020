@@ -130,7 +130,9 @@
                    type="text"
 
                    v-model="verificationCode"
-                   @blur="testVerificationCode">
+                   @blur="testVerificationCode"
+                   @input="$globalFunc.testVerificationCode(verificationCode,commit)"
+            >
             <span class=" fl-ce-y" @click="getVerificationCodeFunc" v-if="!getVerificationCode">{{$t('sendVerificationCode')}}</span>
             <span class="fl-ce-y-s" @click="getVerificationCodeFunc" v-else disabled>{{getVerificationCodeCountdown}}s</span>
           </div>

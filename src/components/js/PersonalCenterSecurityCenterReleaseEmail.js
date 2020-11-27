@@ -316,6 +316,10 @@ root.methods.commit = function () {
 
 root.methods.re_commit = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
+
+  //清空验证码
+  this.verificationCode = '';
+
   if (!data) return
   // console.warn('绑定手机回复', data)
   this.sending = false;
