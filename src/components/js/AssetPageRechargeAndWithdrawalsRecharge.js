@@ -47,7 +47,7 @@ root.data = function () {
     memoPopWindowOpen: false, // memo提示弹窗
 
     // 默认为erc20
-    selectTab: (this.currency == 'USDT' && this.rechargeFlagUSDT2) ? 2 : 1,
+    selectTab: (this.currency == 'USDT' && this.rechargeFlagUSDT3) ? 3 : 1,
     currency2:'USDT2',
     currency1:'USDT'
 
@@ -59,7 +59,7 @@ root.data = function () {
 
 // 初始化
 root.created = function () {
-  this.selectTab =(this.currency == 'USDT' && this.rechargeFlagUSDT2) ? 2: 1
+  this.selectTab =(this.currency == 'USDT' && this.rechargeFlagUSDT3) ? 3: 1
   this.getAuthState()
 
   this.getRecharge()
