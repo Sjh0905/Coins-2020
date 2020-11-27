@@ -1702,6 +1702,9 @@ root.methods.re_commitStep2Verification = function (data) {
   // this.popWindowLoading = false
   // this.step2VerificationSending = true
 
+  //清空验证码
+  this.step2VerificationCode = ''
+
   let resDataMap = data.dataMap
   // console.log('resDataMap==================ggggggggg=',resDataMap)
 
