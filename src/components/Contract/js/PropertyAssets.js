@@ -401,6 +401,7 @@ root.methods.re_transferCommit = function (data){
     data.errorCode == 3 &&  (this.popupPromptText = '系统账户不存在')
     data.errorCode == 4 &&  (this.popupPromptText = '用户无权限')
     data.errorCode == 5 &&  (this.popupPromptText = '余额不足')
+    data.errorCode == 6 &&  (this.popupPromptText = '您可能存在挂单或仓位，不支持资金划转')
   }
   if(data.errorCode == 0) {
     this.popupPromptText = '划转成功'
