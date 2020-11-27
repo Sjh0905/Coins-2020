@@ -144,6 +144,7 @@
                  class="pop-input-3"
                  v-model="verificationCode"
                  @blur="testVerificationCode"
+                 @input="$globalFunc.testVerificationCode(verificationCode,commit)"
           >
           <span class=" fl-ce-y" v-if="!getVerificationCode" @click="getVerificationCodeFunc">{{$t('personalCenterSecurityCenterBindMobile.send')}}</span>
           <span class="fl-ce-y-s" v-else disabled> {{getVerificationCodeCountdown}}s</span>
