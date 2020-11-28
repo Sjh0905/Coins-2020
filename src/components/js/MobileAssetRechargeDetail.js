@@ -46,7 +46,7 @@ root.data = function () {
 
     publicKeyAgreement: false,
 
-    selectTab:2,
+    selectTab:3,
   }
 }
 root.components = {
@@ -65,7 +65,7 @@ root.created = function () {
 }
 
 root.mounted = function () {
-  console.log('==memoAddress==',this.memoAddress)
+  // console.log('==memoAddress==',this.memoAddress)
   // 进入此页发请求
   // this.createDetail('mounted');
 }
@@ -183,18 +183,18 @@ root.methods.isERC20 = function () {
 // 切换状态
 root.methods.toggleStatus= function (tab) {
   this.selectTab = tab
-  console.log('this.selectTab===========',this.selectTab);
+  // console.log('this.selectTab===========',this.selectTab);
   // if(this.selectTab === 2){
     this.createDetail()
   // }
 }
 
 root.methods.createDetail = function (type) {
-  console.log(type);
+  // console.log(type);
   this.title = location.search.substr(1).split("=")[1]
 
   this.$store.commit('changeMobileHeaderTitle', this.title + '充值');
-  console.log(this.title)
+  // console.log(this.title)
   let params = {"currency": this.title == "USDT" ? this.isERC20() : this.title}
   // let params = {"currency": this.title}
   // let params = {"currency": "USDT2"}
@@ -214,7 +214,7 @@ root.methods.re_createDetail = function (data) {
     this.toastOpen = true
     return
   }
-  console.log('data.dataMap===1',data.dataMap)
+  // console.log('data.dataMap===1',data.dataMap)
 
   this.loading = false
 
@@ -262,7 +262,7 @@ root.methods.re_createDetail = function (data) {
 //   // console.log('address', address)
 // }
 root.methods.error_createDetail = function (err) {
-  console.log('err', err);
+  // console.log('err', err);
 }
 
 
