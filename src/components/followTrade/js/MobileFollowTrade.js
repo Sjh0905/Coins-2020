@@ -194,6 +194,23 @@ root.methods.goToMobileFollowTradeStrategy = function (switchOrder) {
   }
 
   this.$router.push({name:'mobileFollowTradeStrategy',query:{isSwitchOrder:this.switchOrder}})
+}//跳转个人镜像交易
+root.methods.goToManagementiWthBill = function (switchOrder) {
+  if (!this.bindIdentify) {
+    this.popIdenOpen = true
+    return
+  }
+
+  // H5判断是否绑定谷歌或手机，如果都没绑定
+  if (!this.bindGA && !this.bindMobile) {
+    // this.$eventBus.notify({key: 'BIND_AUTH_POP'})
+    this.popText = '请绑定谷歌或手机';
+    this.popType = 0;
+    this.popOpen = true;
+    return
+  }
+
+  this.$router.push({name:'mobileTapeListManage',query:{isSwitchOrder:this.switchOrder}})
 }
 // 跳转我的镜像交易
 root.methods.goToDocumentary = function (item,switchOrder) {

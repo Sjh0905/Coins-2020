@@ -11,7 +11,8 @@
       <img class="fund-buy-header-title-back-icon-img" src="../../LuckyDraw/assets/mobileForecastHomePage/back_icon.png" alt="">
     </div>
     <div class="fund-buy-header-title-text">镜像交易</div>
-    <div @click="goToMobileFollowTradeStrategy"><img class="fund-buy" src="../assets/manage_with_orders_icon.png" alt=""></div>
+    <div v-if="!godInfo" @click="goToMobileFollowTradeStrategy"><img class="fund-buy" src="../assets/manage_with_orders_icon.png" alt=""></div>
+    <div v-else @click="goToManagementiWthBill"><img class="fund-buy" src="../assets/manage_with_orders_icon.png" alt=""></div>
   </div>
 
   <!--镜像交易主体部分-->
