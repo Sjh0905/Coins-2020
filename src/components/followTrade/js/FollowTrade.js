@@ -28,7 +28,7 @@ root.data = function () {
 
     currentInterval:null,
     switchOrder: 'CONTRACT',
-    godInfo: true,
+    isGod: true,
 
   }
 }
@@ -156,7 +156,7 @@ root.methods.goToSecurityCenter = function () {
 }
 // 弹框跳安全中心
 root.methods.goToManagementWithBill = function (switchOrder) {
-  this.$router.push({name: 'tapeListManage',query:{isSwitchOrder:this.switchOrder,godInfo:this.godInfo}})
+  this.$router.push({name: 'tapeListManage',query:{isSwitchOrder:this.switchOrder,isGod:this.isGod}})
 }
 //切换跟单类型
 root.methods.switchingOrders = function (orderType) {
@@ -215,7 +215,7 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
     return
   }
 
-  if(this.godInfo){
+  if(this.isGod){
     // 自己不能跟随自己哦
     this.openPop(this.$t('大神不能跟单大神'))
     return
@@ -225,7 +225,7 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
 }
 
 // 跳转我的镜像交易
-root.methods.goToDocumentary1 = function (userId,fee,feeType,switchOrder) {
+root.methods.goToDocumentary1 = function (userId,fee,feeType,switchOrder,isGod) {
   // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
   if (!this.bindGA && !this.bindMobile) {
     this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
@@ -287,7 +287,7 @@ root.methods.re_getBigBrotherList = function (data) {
   this.listGod = data.dataMap.list || [] // 大神列表
   this.days = data.dataMap.days || '0'
   this.godList = data.dataMap.godList || []   // 已跟随大神列表
-  this.godInfo = data.dataMap.godInfo || ''   // 已跟随大神列表
+  this.isGod = data.dataMap.isGod || ''   // 已跟随大神列表
 }
 root.methods.error_getBigBrotherList = function (err) {
   console.log('err=====',err)

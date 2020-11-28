@@ -30,6 +30,7 @@ root.data = function () {
     popWindowOpenContract:false,//禁用
     popWindowOpenContractBi:false,//禁用
     BDBInfo:true,//勾选
+    isGod:true,//勾选
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -113,6 +114,11 @@ root.methods.jumpToFollowTrade = function () {
 // }
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {
+  if(this.isGod){
+    // 自己不能跟随自己哦
+    this.openPop(this.$t('大神不能跟单大神'))
+    return
+  }
   this.popWindowOpenContractBi = true
   // this.$router.push({name:'mobileMyFollowOrder'})
   // this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,fee:this.$route.query.fee,days:this.$route.query.days}})
@@ -128,6 +134,11 @@ root.methods.openAContractBi = function () {
   // this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,fee:this.$route.query.fee,days:this.$route.query.days}})
 }
 root.methods.openTapeListDisable = function () {
+  if(this.isGod){
+    // 自己不能跟随自己哦
+    this.openPop(this.$t('大神不能跟单大神'))
+    return
+  }
   this.popWindowOpenContract = true
 }
 root.methods.popCloseTemporarilyClosed = function () {
@@ -274,6 +285,7 @@ root.methods.re_postFollowUser = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   // console.info('data',data)
   this.followUserList = data.dataMap.list || []
+  this.isGod = data.dataMap.isGod || ''
 }
 root.methods.error_postFollowUser = function (err) {
   console.log("this.err=====",err)

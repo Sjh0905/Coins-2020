@@ -16,9 +16,9 @@
         <!--数据每小时更新一次-->
 <!--        <div class="follow-xue">{{$t('updatedEveryHour')}}</div>-->
       </div>
-      <div class="follow-my" v-if="godInfo">
+      <div class="follow-my" v-if="isGod">
         <!--我的镜像交易-->
-        <div class="follow-my-bix" @click="goToManagementWithBill(switchOrder,godInfo)">{{$t('带单管理')}}</div>
+        <div class="follow-my-bix" @click="goToManagementWithBill(switchOrder,isGod)">{{$t('带单管理')}}</div>
       </div>
       <div class="follow-my" v-else>
         <!--我的镜像交易-->

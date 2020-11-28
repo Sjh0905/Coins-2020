@@ -11,7 +11,7 @@
       <img class="fund-buy-header-title-back-icon-img" src="../../LuckyDraw/assets/mobileForecastHomePage/back_icon.png" alt="">
     </div>
     <div class="fund-buy-header-title-text">镜像交易</div>
-    <div v-if="!godInfo" @click="goToMobileFollowTradeStrategy"><img class="fund-buy" src="../assets/manage_with_orders_icon.png" alt=""></div>
+    <div v-if="!isGod" @click="goToMobileFollowTradeStrategy"><img class="fund-buy" src="../assets/manage_with_orders_icon.png" alt=""></div>
     <div v-else @click="goToManagementiWthBill"><img class="fund-buy" src="../assets/manage_with_orders_icon.png" alt=""></div>
   </div>
 
@@ -25,10 +25,10 @@
     <div class="with-list flex">
       <div class="with-billboard" :class="isSwitchOrder == 'CONTRACT' ? '' : 'switchCss'" @click="switchingOrders('CONTRACT')">合约镜像</div>
       <div class="with-billboard" :class="isSwitchOrder == 'SPOT' ? '' : 'switchCss'" @click="switchingOrders('SPOT')">现货镜像</div>
-      <div class="my-with-single" v-if="!godInfo" @click="goToMobileMyFollowOrder(switchOrder)">我的跟单</div>
+      <div class="my-with-single" v-if="!isGod" @click="goToMobileMyFollowOrder(switchOrder)">我的跟单</div>
       <div class="my-with-single" v-else></div>
 
-      <img v-if="!godInfo" @click="goToMobileMyFollowOrder(switchOrder)" class="my-with-single-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
+      <img v-if="!isGod" @click="goToMobileMyFollowOrder(switchOrder)" class="my-with-single-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
     </div>
 <!--    <div class="data-update">数据每小时更新一次</div>-->
 

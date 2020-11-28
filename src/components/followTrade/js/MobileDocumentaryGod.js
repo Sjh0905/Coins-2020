@@ -3,11 +3,17 @@ root.name = 'mobileDocumentaryGod'
 /*------------------------------ 组件 ------------------------------*/
 root.components = {
   'Loading': resolve => require(['../../vue/Loading'], resolve),
+  'PopupPrompt': resolve => require(['../../vue/PopupPrompt'], resolve),
 }
 /*------------------------------ data -------------------------------*/
 root.data = function () {
   return {
     loading:true,
+    // 弹框
+    popType: 0,
+    popText: '',
+    popOpen: false,
+    waitTime: 2000,
     followType:1,
     godHistorList:[],
     godInfo:{},
@@ -15,6 +21,7 @@ root.data = function () {
     delFollowOpenDisable:false,
     delFollowOpenDisableBi:false,
     BDBInfo:true,
+    isGod:true,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -93,6 +100,11 @@ root.methods.jumpToFollowTrade = function () {
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {
   // this.$router.push({name:'mobileMyFollowOrder'})
+  if(this.isGod){
+    // 自己不能跟随自己哦
+    this.openPop(this.$t('大神不能跟单大神'))
+    return
+  }
   this.delFollowOpenDisableBi = true
 }
 // 点击跟单
@@ -113,6 +125,11 @@ root.methods.popCloseTemporarilyClosedBi = function () {
 }
 
 root.methods.openDocumentaryWindowDisable = function () {
+  if(this.isGod){
+    // 自己不能跟随自己哦
+    this.openPop(this.$t('大神不能跟单大神'))
+    return
+  }
   this.delFollowOpenDisable = true
 }
 
@@ -167,11 +184,25 @@ root.methods.postFollowUser = function () {
 root.methods.re_postFollowUser = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   this.followUserList = data.dataMap.list || []
+  this.isGod = data.dataMap.isGod || ''
 }
 root.methods.error_postFollowUser = function (err) {
   console.log("this.err=====",err)
 }
 
+
+// 打开toast
+root.methods.openPop = function (popText, popType, waitTime) {
+  this.popText = popText
+  this.popType = popType || 0
+  this.popOpen = true
+  this.waitTime = waitTime || 2000
+}
+
+// 关闭toast
+root.methods.closePop = function () {
+  this.popOpen = false;
+}
 
 
 

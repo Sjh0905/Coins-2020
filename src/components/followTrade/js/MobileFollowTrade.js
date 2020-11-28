@@ -23,7 +23,7 @@ root.data = function () {
 
     currentInterval:null,
     switchOrder: 'CONTRACT',
-    godInfo: true,
+    isGod: true,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -233,7 +233,7 @@ root.methods.goToDocumentary = function (item,switchOrder) {
     this.openPop('不能跟随自己哦')
     return
   }
-  if(this.godInfo){
+  if(this.isGod){
     // 自己不能跟随自己哦
     this.openPop('大神不能跟单大神')
     return
@@ -301,7 +301,7 @@ root.methods.re_getBigBrotherList = function (data) {
   this.listGod = data.dataMap.list || [] // 大神列表
   this.days = data.dataMap.days || '0'
   this.godList = data.dataMap.godList || []   // 已跟随大神列表
-  this.godInfo = data.dataMap.godInfo || ''   // 已跟随大神列表
+  this.isGod = data.dataMap.isGod || ''   // 已跟随大神列表
 }
 root.methods.error_getBigBrotherList = function (err) {
   console.log('err=====',err)
