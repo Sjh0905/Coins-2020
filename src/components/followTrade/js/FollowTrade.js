@@ -28,6 +28,7 @@ root.data = function () {
 
     currentInterval:null,
     switchOrder: 'CONTRACT',
+    godInfo: true,
 
   }
 }
@@ -153,6 +154,10 @@ root.methods.goToSecurityCenter = function () {
   this.popWindowOpenShiM = false
   this.$router.push({name: 'securityCenter'})
 }
+// 弹框跳安全中心
+root.methods.goToManagementWithBill = function (switchOrder) {
+  this.$router.push({name: 'tapeListManage',query:{isSwitchOrder:this.switchOrder,}})
+}
 //切换跟单类型
 root.methods.switchingOrders = function (orderType) {
   this.switchOrder = orderType
@@ -196,16 +201,6 @@ root.methods.goTofollowTradeStrategy = function (switchOrder) {
 }
 // 跳转我的镜像交易
 root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
-
-  // // 如果没有实名认证不允许报名
-  // if (!this.bindIdentify) {
-  //   this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
-  //   this.popWindowPrompt = this.$t('popWindowPromptWithdrawals')
-  //   this.popWindowStyle = '0'
-  //   this.popWindowOpenShiM = true
-  //   return
-  // }
-
   // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
   if (!this.bindGA && !this.bindMobile) {
     this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
@@ -214,20 +209,35 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
     this.popWindowOpenShiM = true
     return
   }
-
-
   if(this.userId == userId){
     // 自己不能跟随自己哦
     this.openPop(this.$t('canNotFollowMyself'))
     return
   }
-  // this.$router.push({name:'mobileDocumentary',params: {item:item}})
   this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isSwitchOrder:this.switchOrder}})
 }
-// // 去大神页面
-// root.methods.goToDocumentaryGod = function () {
-//   this.$router.push({name: 'mobileDocumentaryGod'})
-// }
+
+// 跳转我的镜像交易
+root.methods.goToDocumentary1 = function (userId,fee,feeType,switchOrder) {
+  // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
+  if (!this.bindGA && !this.bindMobile) {
+    this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
+    this.popWindowPrompt = this.$t('popWindowTitleBindGaWithdrawals')
+    this.popWindowStyle = '1'
+    this.popWindowOpenShiM = true
+    return
+  }
+  if(this.userId == userId){
+    // 自己不能跟随自己哦
+    this.$router.push({name:'followTradeStrategy',query:{isSwitchOrder:this.switchOrder,}})
+    return
+  }
+  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isSwitchOrder:this.switchOrder}})
+}
+
+
+
+
 // 返回我的镜像交易，正在跟随
 root.methods.goToMyFollowOrder = function (switchOrder) {
   // // 如果没有实名认证不允许报名
@@ -270,6 +280,7 @@ root.methods.re_getBigBrotherList = function (data) {
   this.listGod = data.dataMap.list || [] // 大神列表
   this.days = data.dataMap.days || '0'
   this.godList = data.dataMap.godList || []   // 已跟随大神列表
+  this.godInfo = data.dataMap.godInfo || ''   // 已跟随大神列表
 }
 root.methods.error_getBigBrotherList = function (err) {
   console.log('err=====',err)

@@ -6,7 +6,7 @@
 <!--        &lt;!&ndash;镜像交易&ndash;&gt;-->
 <!--        {{$t('followOrder')}}-->
 <!--      </router-link>-->
-      <router-link to="/index/followTrade" class="header-title" v-if="isSwitchOrder == 'SPOT'">
+      <router-link to="/index/followTrade?isSwitchOrder=SPOT" class="header-title" v-if="isSwitchOrder == 'SPOT'">
         <!--现货镜像-->
         {{$t('现货镜像')}}
       </router-link>
