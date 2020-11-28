@@ -593,9 +593,9 @@ root.methods.initViews = function (lang) {
         '%D.linewidth': 1,
         '%D.transparency': 35,
         'UpperLimit.color': '#0D111F',
-        'UpperLimit.linewidth': 1,
+        'UpperLimit.linewidth': 0,
         'LowerLimit.color': '#0D111F',
-        'LowerLimit.linewidth': 1,
+        'LowerLimit.linewidth': 0,
         'Hlines Background.color':'#626874',
       });
       widget.chart().createStudy('Relative Strength Index',false, false,[4],null, {
@@ -604,10 +604,10 @@ root.methods.initViews = function (lang) {
         'UpperLimit.value': 80,
         'LowerLimit.value': 20,
         'UpperLimit.color': '#0D111F',
-        'UpperLimit.linewidth': 1,
+        'UpperLimit.linewidth': 0,
         'LowerLimit.color': '#0D111F',
-        'LowerLimit.linewidth': 1,
-        'Hlines Background.color':'#6B7DA2',
+        'LowerLimit.linewidth': 0,
+        'Hlines Background.color':'#D8D8D8',
       });
 
 
