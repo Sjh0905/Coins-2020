@@ -6,8 +6,11 @@
     </div>
     <div :class="!pop_width ? 'popup' : 'min-popup'">
       <div class="popWindow-title">
-        <img src="../../assets/pinchakan.png" alt="" class="contract-img">
-        <span>{{$t("风险提示")}}</span>
+<!--        <img src="../../assets/pinchakan.png" alt="" class="contract-img">-->
+        <slot name="toty">
+        </slot>
+
+<!--        <span>{{$t("风险提示")}}</span>-->
       </div>
       <div class="popWindow-article">
         <slot name="conter">

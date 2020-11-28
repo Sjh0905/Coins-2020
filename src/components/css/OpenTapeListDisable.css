@@ -193,6 +193,7 @@
   height: 1.2rem;
 }
 .contract-img {
+  display: inline-block;
   vertical-align: sub;
   margin-bottom: 2px;
 }

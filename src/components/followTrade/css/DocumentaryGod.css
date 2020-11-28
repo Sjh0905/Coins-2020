@@ -541,7 +541,7 @@
 }
 
 .div-one {
-  font-size: 14px;
+  font-size: 13px;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #6B7DA2;
@@ -608,5 +608,9 @@
   background:#EFF0FF;
   border-radius:3px;
   margin-left: 10px;
+}
+.contract-img {
+  vertical-align: sub;
+  margin-bottom: 2px;
 }
 /*禁用风险提示*/

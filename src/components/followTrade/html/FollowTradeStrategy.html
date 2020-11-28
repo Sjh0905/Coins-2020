@@ -285,6 +285,10 @@
 
   <!--  禁用风险提示-->
   <OpenTapeListDisable :switch="popWindowOpenContract">
+    <div slot="toty">
+      <img src="../../../assets/pinchakan.png" alt="" class="contract-img">
+      带单提示
+    </div>
     <div slot="conter">
       <div class="fenxian">
         <!--              关闭按钮 -->
@@ -294,7 +298,7 @@
 
         我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
       </div>
-      <div class="div-one">开启带单后以下功能将被禁用：</div>
+      <div class="div-one">跟单交易将在带单者无仓位后开启，带单后以下功能将被禁用：</div>
       <div class="div-two"> <span class="yuan-span m-f"></span> 仓位模式修改 <span class="yuan-span"></span> 保证金模式修改 <span class="yuan-span"></span> 杠杆倍数修改
         <div><span class="yuan-span m-f"></span> 资金划转</div>
       </div>
@@ -309,6 +313,10 @@
   </OpenTapeListDisable>
  <!--  禁用风险提示-->
   <OpenTapeListDisable :switch="popWindowOpenContractBi">
+    <div slot="toty">
+      <img src="../../../assets/pinchakan.png" alt="" class="contract-img">
+      带单提示
+    </div>
     <div slot="conter">
       <div class="fenxianBi">
         <!--              关闭按钮 -->
