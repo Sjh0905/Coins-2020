@@ -233,6 +233,12 @@ root.methods.goToDocumentary = function (item,switchOrder) {
     this.openPop('不能跟随自己哦')
     return
   }
+  if(this.godInfo){
+    // 自己不能跟随自己哦
+    this.openPop('大神不能跟单大神')
+    return
+  }
+
   // this.$router.push({name:'mobileDocumentary',params: {item:item}})
   this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isSwitchOrder:this.switchOrder}})
 }// 跳转我的镜像交易

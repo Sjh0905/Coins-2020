@@ -214,6 +214,13 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
     this.openPop(this.$t('canNotFollowMyself'))
     return
   }
+
+  if(this.godInfo){
+    // 自己不能跟随自己哦
+    this.openPop(this.$t('大神不能跟单大神'))
+    return
+  }
+
   this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isSwitchOrder:this.switchOrder}})
 }
 
