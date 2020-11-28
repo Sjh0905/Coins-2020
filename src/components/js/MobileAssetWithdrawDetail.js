@@ -145,7 +145,7 @@ root.data = function () {
 
     // 是否是WCG币对
     // isWCG: false,
-    selectTab: 2,
+    selectTab: 3,
 
 
   }
@@ -341,7 +341,7 @@ root.methods.re_getCurrency = function (data) {
 
   let object = this.$store.state.currency.get(this.title)
 
-  console.log('object', object)
+  // console.log('object', object)
   if(object.memo === 'yes') {
     this.isMemo = true
     this.memoToastShow = true
@@ -390,7 +390,7 @@ root.methods.re_getAccounts = function (data) {
 
 // 获取币种出错
 root.methods.error_getAccounts = function (err) {
-  console.log('获取账户信息出错！', err)
+  // console.log('获取账户信息出错！', err)
 }
 
 /*---------------------- 关闭memo弹框系列 ---------------------*/
@@ -658,7 +658,7 @@ root.methods.error_getWithdrawalsFee = function (err) {
 // 切换状态
 root.methods.toggleStatus= function (tab) {
   this.selectTab = tab
-  console.log('this.selectTab===========',this.selectTab);
+  // console.log('this.selectTab===========',this.selectTab);
   // if(this.selectTab === 2){
   this.getOldAddress()
   this.getWithdrawalsFee()
@@ -670,7 +670,7 @@ root.methods.toggleStatus= function (tab) {
 root.methods.getOldAddress = function () {
 
   let isERC20 = this.isERC20();
-  console.log('this is isERC20',isERC20);
+  // console.log('this is isERC20',isERC20);
   let params = {"currency": this.title == "USDT" ? isERC20 : this.title}//TODO:这里的币种要切换
   this.$http.send("POST_WITHDRAW_ADDRESS", {
     bind: this,
@@ -683,7 +683,7 @@ root.methods.getOldAddress = function () {
 // 获取地址回调
 root.methods.re_getWithdrawalsAddress = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log("获取历史地址", data)
+  // console.log("获取历史地址", data)
   if (!data || !data.dataMap) {
     return
   }
@@ -714,7 +714,7 @@ root.methods.re_getWithdrawalsAddress = function (data) {
 }
 // 获取地址出错
 root.methods.error_getWithdrawalsAddress = function (err) {
-  console.log("出错！", err)
+  // console.log("出错！", err)
 }
 
 /*---------------------- 进入页面，获取地址信息 end ---------------------*/
@@ -783,7 +783,7 @@ root.methods.chooseAddressItem = function (item) {
 // 点击删除地址
 root.methods.deleteAddressItem = function (item) {
   let id = item.id
-  console.log('点击删除按钮', item.id)
+  // console.log('点击删除按钮', item.id)
   for (let i = 0; i < this.oldAddress.length; i++) {
     if (this.oldAddress[i].id === id) {
       // this.getOldAddress();
@@ -1049,7 +1049,7 @@ root.methods.getMailVerificationCode = function () {
 // 获取邮箱验证码
 root.methods.re_getEmailVerification = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log('data', data)
+  // console.log('data', data)
 
   if (data.errorCode) {
     if (data.errorCode === 1) {
@@ -1116,7 +1116,7 @@ root.methods.submitSendMail = function () {
 
 root.methods.re_commitEmailVerification = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log('点击提交了', data)
+  // console.log('点击提交了', data)
 
   let resDataMap = data.dataMap;
 
