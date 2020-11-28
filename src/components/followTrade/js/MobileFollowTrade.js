@@ -23,6 +23,7 @@ root.data = function () {
 
     currentInterval:null,
     switchOrder: 'CONTRACT',
+    godInfo: true,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -217,6 +218,23 @@ root.methods.goToDocumentary = function (item,switchOrder) {
   }
   // this.$router.push({name:'mobileDocumentary',params: {item:item}})
   this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isSwitchOrder:this.switchOrder}})
+}// 跳转我的镜像交易
+root.methods.goToDocumentary1 = function (item,switchOrder) {
+
+  // H5判断是否绑定谷歌或手机，如果都没绑定
+  if (!this.bindGA && !this.bindMobile) {
+    // this.$eventBus.notify({key: 'BIND_AUTH_POP'})
+    this.popText = '请绑定谷歌或手机';
+    this.popType = 0;
+    this.popOpen = true;
+    return
+  }
+
+  if(this.userId == item.userId){
+    this.$router.push({name:'mobileFollowTradeStrategy',query:{isSwitchOrder:this.switchOrder}})
+    return
+  }
+  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isSwitchOrder:this.switchOrder}})
 }
 // // 去大神页面
 // root.methods.goToDocumentaryGod = function () {
@@ -260,6 +278,7 @@ root.methods.re_getBigBrotherList = function (data) {
   this.listGod = data.dataMap.list || [] // 大神列表
   this.days = data.dataMap.days || '0'
   this.godList = data.dataMap.godList || []   // 已跟随大神列表
+  this.godInfo = data.dataMap.godInfo || ''   // 已跟随大神列表
 }
 root.methods.error_getBigBrotherList = function (err) {
   console.log('err=====',err)

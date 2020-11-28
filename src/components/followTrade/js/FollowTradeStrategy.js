@@ -2,7 +2,7 @@ const root = {}
 root.name = 'FollowTradeStrategy'
 /*------------------------------ 组件 ------------------------------*/
 root.components = {
- // 'Loading': resolve => require(['../Loading/Loading.vue'], resolve),
+  'Loading': resolve => require(['../../vue/Loading'], resolve),
   'PopupPrompt': resolve => require(['../../vue/PopupPrompt'], resolve),
   'PopupWindow': resolve => require(['../../vue/PopupWindow'], resolve),
   'OpenTapeListDisable': resolve => require(['../../vue/OpenTapeListDisable'], resolve),
@@ -10,6 +10,7 @@ root.components = {
 /*------------------------------ data -------------------------------*/
 root.data = function () {
   return {
+    loading:true,
     followType: 1,
     godInfo:{},
     godHistorList:[],
@@ -236,6 +237,7 @@ root.methods.postCommitFee = function () {
 }
 root.methods.re_postCommitFee = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
+  this.loading = false
   if(data.errorCode == 0) {
     this.openMaskWindow = false
     this.isTapeList = true

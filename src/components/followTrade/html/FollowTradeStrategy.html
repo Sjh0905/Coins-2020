@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="follow-asset">
+  <div class="follow-asset" v-if="!loading">
     <div class="follow-asset-title">
       <div class="trade-top-banner flex">
         <div class="flex">
@@ -75,7 +75,7 @@
     </div>
 
     <!-- 自己持仓-->
-    <div class="record" v-if="isTapeList">
+    <div class="record" v-else>
       <!--   当前持仓/跟随者-->
       <div class="recordMining borbot">
         <!--操作记录-->
@@ -327,4 +327,5 @@
     </div>
   </OpenTapeListDisable>
 
+  <Loading v-if="loading"/>
 </div>
