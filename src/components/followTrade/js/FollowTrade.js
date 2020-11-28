@@ -156,7 +156,7 @@ root.methods.goToSecurityCenter = function () {
 }
 // 弹框跳安全中心
 root.methods.goToManagementWithBill = function (switchOrder) {
-  this.$router.push({name: 'tapeListManage',query:{isSwitchOrder:this.switchOrder,}})
+  this.$router.push({name: 'tapeListManage',query:{isSwitchOrder:this.switchOrder,godInfo:this.godInfo}})
 }
 //切换跟单类型
 root.methods.switchingOrders = function (orderType) {

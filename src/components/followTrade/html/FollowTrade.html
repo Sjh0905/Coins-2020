@@ -18,7 +18,7 @@
       </div>
       <div class="follow-my" v-if="godInfo">
         <!--我的镜像交易-->
-        <div class="follow-my-bix" @click="goToManagementWithBill(switchOrder)">{{$t('带单管理')}}</div>
+        <div class="follow-my-bix" @click="goToManagementWithBill(switchOrder,godInfo)">{{$t('带单管理')}}</div>
       </div>
       <div class="follow-my" v-else>
         <!--我的镜像交易-->

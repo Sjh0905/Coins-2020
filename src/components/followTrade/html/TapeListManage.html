@@ -16,10 +16,10 @@
       </router-link>
       <span class="spanbf">></span>
       <!--我的主页-->
-      <span @click="goToZhuYe(isSwitchOrder)" class="header-title">
+      <span v-if="this.$route.query.godInfo == false" @click="goToZhuYe(isSwitchOrder)" class="header-title">
         {{$t('myHomePage')}}
       </span>
-      <span class="spanbf">></span>
+      <span class="spanbf" v-if="this.$route.query.godInfo == false">></span>
       <!-- 带单管理-->
       <span :to="{name:'followTrade'}" class="">
         {{$t('带单管理')}}
