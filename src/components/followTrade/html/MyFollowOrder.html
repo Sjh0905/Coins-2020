@@ -28,7 +28,7 @@
         </div>
         <div class="follow-asset-total">
           <div class="follow-monery">跟单总收益（USDT）</div>
-          <div class="follow-asset-acount">{{toFixed(profit || '0',2)}}</div>
+          <div class="follow-asset-acount">{{(profit.toFixed(2) || '0')}}</div>
         </div>
       </div>
 
@@ -99,7 +99,7 @@
         <div class="follow-type">{{item.followType == 'LOT'? $t('fixedAmount') +'：' + item.lot || 0 +'USDT' :$t('fixedProportion')}}</div>
         <div class="total-acount">{{toFixed(item.count,0) || '0'}}</div>
         <div class="total-money">{{toFixed(item.amount,2) || '0'}}</div>
-        <div class="total-income">{{toFixed(item.profit,2) || '0'}}</div>
+        <div class="total-income">{{item.profit.toFixed(2) || '0'}}</div>
         <div class="operation">
           <!--修改策略-->
           <span class="btn-size update pointer" @click="openFollowWindow(item)">{{$t('modifyPolicy')}}</span>
