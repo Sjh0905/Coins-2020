@@ -32,7 +32,7 @@ root.data = function () {
     records: [],
     importantMembers:[],
     currPage:1,
-    pageSize:5,
+    pageSize:10,
     showLoadingMore: true,//是否显示加载更多
     // loadingMoreIng: false, //是否正在加载更多
     loadingMoreShow:false,
