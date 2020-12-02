@@ -68,7 +68,8 @@
               <div class="mobile-trade-item-top-right">{{formatDateUitl(item.followTime)}}</div>
             </div>
           </div>
-          <div class="mobile-trade-item-follower-cancle-btn" @click="delFollow(item)">取消跟随</div>
+          <div class="mobile-trade-item-follower-cancle-btn" v-if="item.status == 'FOLLOWING'" @click="delFollow(item)">取消跟随</div>
+          <div class="mobile-trade-item-follower-cancle-btn-hui" v-else>取消跟随</div>
         </div>
 
         <div class="mobile-trade-item-top flex">
@@ -81,9 +82,12 @@
                 <span class="mobile-trade-item-currency-bgd">{{item.type == 'SPOT'?'现货':'合约'}}</span>
               </div>
             </div>
-            <div class="modify" @click="modifyDocumentary(item)">
+            <div class="modify" @click="modifyDocumentary(item)" v-if="item.status == 'FOLLOWING'">
               修改
               <img class="modify-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
+            </div>
+            <div class="modify-hui" v-else>
+              修改
             </div>
 <!--            <span class="mobile-trade-buy text-green">买入</span>-->
           </div>
