@@ -77,6 +77,7 @@ root.created = function () {
   this.getCurrency()
   if (this.$route.query.propertyType == 'propertyAssets') {
     this.propertyType = 'propertyAssets';
+    this.popWindowOpen1 = true
   }
 }
 root.mounted = function () {}
@@ -411,7 +412,7 @@ root.methods.changeAssetAccountType = function () {
 // 点击全提
 root.methods.allMention = function () {
   if( this.assetAccountType == 'wallet'){
-    this.amountInput = this.transferCurrencyOTCAvailable
+    this.amountInput = this.balance.walletBalance
     return
   }
   this.amountInput = this.available
@@ -481,7 +482,7 @@ root.methods.openTransfer = function (balance) {
 
   this.popWindowOpen1 = true
 
-  // 法币可用余额
+  // 合约可用余额
   this.transferCurrencyOTCAvailable = balance.availableBalance
   // 我的钱包可用余额
   // this.transferCurrencyAvailable = item.available

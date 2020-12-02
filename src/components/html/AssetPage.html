@@ -150,6 +150,14 @@
       </router-link>
       <!--我的钱包 end-->
 
+      <!--合约账户 begin-->
+      <router-link to="/index/asset/contractRecord/" class="title-tab flex-center tab-item-first margin-a-little"
+                   active-class="selected text_blue"
+                   :class="lang!='CH'?'title-tab-en':''">
+        {{$t('合约账户')}}
+      </router-link>
+      <!--合约账户 end-->
+
       <!--法币账户 begin-->
       <router-link to="/index/asset/rechargeAndWithdrawals" class="title-tab flex-center tab-item-first margin-a-little"
                    active-class="selected text_blue"
@@ -158,13 +166,7 @@
       </router-link>
       <!--法币账户 end-->
 
-      <!--合约账户 begin-->
-      <router-link to="/index/asset/contractRecord/" class="title-tab flex-center tab-item-first margin-a-little"
-                   active-class="selected text_blue"
-                   :class="lang!='CH'?'title-tab-en':''">
-        {{$t('合约账户')}}
-      </router-link>
-      <!--合约账户 end-->
+
 
       <!--主流账户 begin-->
 <!--      <router-link to="/index/asset/mainstreamAccount" class="title-tab flex-center tab-item-first margin-a-little"-->
