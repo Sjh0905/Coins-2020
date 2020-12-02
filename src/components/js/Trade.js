@@ -396,56 +396,131 @@ root.methods.initViews = function (lang) {
 
 
 	function initTradingView() {
-		var mobile = {
-			symbol: self.symbol,
-			interval: new_interval,
-			width: '100%',
-			height: '100%',
-			container_id: "chart_container",
-			//	BEWARE: no trailing slash is expected in feed URL
-			datafeed: new BitexDataFeed(),
-			library_path: "/static/chart/",
-			locale: "zh",
-			timezone: 'Asia/Shanghai',
-			// 引入第三方样式
-			custom_css_url: 'css/chart_mobile.css',
-			//	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
-			drawings_access: { type: 'black', tools: [ { name: "Regression Trend" } ] },
-			disabled_features: ['use_localstorage_for_settings', 'left_toolbar', 'header_symbol_search', 'timeframes_toolbar', 'header_interval_dialog_button', 'header_chart_type', 'header_settings', 'header_indicators', 'header_screenshot', 'volume_force_overlay','create_volume_indicator_by_default', 'border_around_the_chart'],
-			// preset: "mobile",
-			toolbar_bg: '#131F30',
-			favorites: {
-				intervals: ["1S", "1", "5", "15", "30", "60","120", "240","360","720", "D"],
-				chartTypes: ["Candles"]
-			},
-			overrides: {
-				"mainSeriesProperties.style": 1,
-				"paneProperties.background": "#131F30",
-                "paneProperties.vertGridProperties.color": "#454545",
-                "paneProperties.horzGridProperties.color": "#454545",
-				"symbolWatermarkProperties.transparency": 90,
-				"scalesProperties.textColor" : "#AAA",
-				"mainSeriesProperties.lineStyle.color": "#131F30",
-				"mainSeriesProperties.lineStyle.linewidth": 2,
-				"paneProperties.legendProperties.showLegend": false,
+		// var mobile = {
+		// 	symbol: self.symbol,
+		// 	interval: new_interval,
+		// 	width: '100%',
+		// 	height: '100%',
+		// 	container_id: "chart_container",
+		// 	//	BEWARE: no trailing slash is expected in feed URL
+		// 	datafeed: new BitexDataFeed(),
+		// 	library_path: "/static/chart/",
+		// 	locale: "zh",
+		// 	timezone: 'Asia/Shanghai',
+		// 	// 引入第三方样式
+		// 	custom_css_url: 'css/chart_mobile.css',
+		// 	//	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
+		// 	drawings_access: { type: 'black', tools: [ { name: "Regression Trend" } ] },
+		// 	disabled_features: ['use_localstorage_for_settings', 'left_toolbar', 'header_symbol_search', 'timeframes_toolbar', 'header_interval_dialog_button', 'header_chart_type', 'header_settings', 'header_indicators', 'header_screenshot', 'volume_force_overlay','create_volume_indicator_by_default', 'border_around_the_chart'],
+		// 	// preset: "mobile",
+		// 	toolbar_bg: '#131F30',
+		// 	favorites: {
+		// 		intervals: ["1S", "1", "5", "15", "30", "60","120", "240","360","720", "D"],
+		// 		chartTypes: ["Candles"]
+		// 	},
+		// 	overrides: {
+		// 		"mainSeriesProperties.style": 1,
+		// 		"paneProperties.background": "#131F30",
+    //             "paneProperties.vertGridProperties.color": "#454545",
+    //             "paneProperties.horzGridProperties.color": "#454545",
+		// 		"symbolWatermarkProperties.transparency": 90,
+		// 		"scalesProperties.textColor" : "#AAA",
+		// 		"mainSeriesProperties.lineStyle.color": "#131F30",
+		// 		"mainSeriesProperties.lineStyle.linewidth": 2,
+		// 		"paneProperties.legendProperties.showLegend": false,
+    //
+		// 		// 蜡烛样式
+		// 		"mainSeriesProperties.candleStyle.upColor": "#86CB12",
+		// 		"mainSeriesProperties.candleStyle.downColor": "#F60076",
+		// 		"mainSeriesProperties.candleStyle.drawWick": true,
+		// 		"mainSeriesProperties.candleStyle.drawBorder": true,
+		// 		"mainSeriesProperties.candleStyle.borderColor": "#378658",
+		// 		"mainSeriesProperties.candleStyle.borderUpColor": "#86CB12",
+		// 		"mainSeriesProperties.candleStyle.borderDownColor": "#F60076",
+		// 		"mainSeriesProperties.candleStyle.wickUpColor": '#86CB12',
+		// 		"mainSeriesProperties.candleStyle.wickDownColor": '#F60076',
+		// 		"mainSeriesProperties.candleStyle.barColorsOnPrevClose": false,
+    //
+		// 		// 边际（百分比）。 用于自动缩放。
+		// 		"paneProperties.topMargin": 13,
+		// 		"paneProperties.bottomMargin": 5,
+		// 	}
+		// }
+    var mobile = {
+      container_id: "chart_container",
+      fullscreen: false,
+      width: '100%',
+      height: '100%',
+      autosize: true,
+      library_path: "/static/chart/",
+      locale: "zh",
+      timezone: 'Asia/Shanghai',
+      symbol: self.symbol,
+      interval: new_interval,
+      // 引入第三方样式
+      custom_css_url: 'css/chart_mobile.css',
+      //	BEWARE: no trailing slash is expected in feed URL
+      datafeed: new BitexDataFeed(),
+      // 'create_volume_indicator_by_default_once','create_volume_indicator_by_default',//使交易量消失
+      disabled_features: ['use_localstorage_for_settings', 'left_toolbar', 'header_symbol_search', 'timeframes_toolbar', 'header_interval_dialog_button', 'header_chart_type','header_widget_dom_node', 'header_settings', 'header_indicators', 'header_screenshot', 'volume_force_overlay', 'create_volume_indicator_by_default','border_around_the_chart'],
+      //	Regression Trend-related functionality is not implemented yet, so it's hidden for a while
+      drawings_access: { type: 'black', tools: [ { name: "Regression Trend" } ] },
+      // preset: "mobile",
+      // toolbar_bg: '#081724',
+      toolbar_bg: '#0D111F',
 
-				// 蜡烛样式
-				"mainSeriesProperties.candleStyle.upColor": "#86CB12",
-				"mainSeriesProperties.candleStyle.downColor": "#F60076",
-				"mainSeriesProperties.candleStyle.drawWick": true,
-				"mainSeriesProperties.candleStyle.drawBorder": true,
-				"mainSeriesProperties.candleStyle.borderColor": "#378658",
-				"mainSeriesProperties.candleStyle.borderUpColor": "#86CB12",
-				"mainSeriesProperties.candleStyle.borderDownColor": "#F60076",
-				"mainSeriesProperties.candleStyle.wickUpColor": '#86CB12',
-				"mainSeriesProperties.candleStyle.wickDownColor": '#F60076',
-				"mainSeriesProperties.candleStyle.barColorsOnPrevClose": false,
+      favorites: {
+        intervals: ["1S", "1", "5", "15", "30", "60","120", "240","360","720", "D"],
+        chartTypes: ["Candles"]
+      },
+      // favorites: {
+      //   intervals: ["1S", "1", "5", "15", "30", "60","120", "240","360","720", "D"],
+      //   chartTypes: ["Candles"]
+      // },
+      overrides: {
+        "mainSeriesProperties.style": 1,
+        "paneProperties.background": "#081724",
+        // "paneProperties.vertGridProperties.color": "#454545",
+        // "paneProperties.horzGridProperties.color": "#454545",
+        // "symbolWatermarkProperties.color" : "#944",//水印
+        // "symbolWatermarkProperties.transparency": 90,//水印透明度
+        "mainSeriesProperties.lineStyle.color": "#02c0cc",
+        "mainSeriesProperties.lineStyle.linewidth": 1,
+        //指标参数的显示、隐藏  true为展开（显示）; false为隐藏
+        "paneProperties.legendProperties.showLegend": false,
+        // "paneProperties.legendProperties.showStudyArguments": true,
 
-				// 边际（百分比）。 用于自动缩放。
-				"paneProperties.topMargin": 13,
-				"paneProperties.bottomMargin": 5,
-			}
-		}
+        // 蜡烛样式
+        "mainSeriesProperties.candleStyle.upColor": "#86CB12",
+        "mainSeriesProperties.candleStyle.downColor": "#F60076",
+        "mainSeriesProperties.candleStyle.drawWick": true,
+        "mainSeriesProperties.candleStyle.drawBorder": true,
+        // "mainSeriesProperties.candleStyle.borderColor": "#378658",
+        "mainSeriesProperties.candleStyle.borderUpColor": "#86CB12",
+        "mainSeriesProperties.candleStyle.borderDownColor": "#F60076",
+        "mainSeriesProperties.candleStyle.wickUpColor": '#86CB12',
+        "mainSeriesProperties.candleStyle.wickDownColor": '#F60076',
+        "mainSeriesProperties.candleStyle.barColorsOnPrevClose": false,
+
+        // 背景网格颜色
+        "paneProperties.vertGridProperties.color": "#1E1F22",
+        "paneProperties.horzGridProperties.color": "#1E1F22",
+        // 边际（百分比）。 用于自动缩放。
+        "paneProperties.topMargin": 13,
+        "paneProperties.bottomMargin": 5,
+        // 刻度，分界线，字体颜色
+        "scalesProperties.lineColor" : "#1E1F22",
+        "scalesProperties.e" : 0,
+
+        "scalesProperties.textColor": "#6B7DA2",
+        "timeScale.rightOffset": 5,
+      },
+      studies_overrides: {
+        "volume.volume.color.0": "#F60076",
+        "volume.volume.color.1": "#86CB12",
+      },
+
+    }
 		var pc = {
 			container_id: 'chart_container',
 			fullscreen: false,
@@ -573,43 +648,43 @@ root.methods.initViews = function (lang) {
         'Lower.linewidth': 1,
         'Plots Background.color':'#626874',
       });
-      widget.chart().createStudy('MACD',false, false,[2,33,'close',3],null, {
-        'Histogram.color': '#838B99',
-        'Histogram.linewidth': 1,
-        'Histogram.transparency': 35,
-        'MACD.color': '#86CB12',
-        'MACD.linewidth': 1,
-        'MACD.transparency': 35,
-        'Signal.color': '#F60076',
-        'Signal.linewidth': 1,
-        'Signal.transparency': 35,
-      });
+      let MACDConfigs = self.$store.state.isMobile ? {
+        'Histogram.color': '#838B99', 'Histogram.linewidth': 1, 'Histogram.transparency': 35,
+        'MACD.color': '#86CB12', 'MACD.linewidth': 2, 'MACD.transparency': 35,
+        'Signal.color': '#F60076', 'Signal.linewidth': 2, 'Signal.transparency': 35,
+      } : {
+        'Histogram.color': '#838B99', 'Histogram.linewidth': 1, 'Histogram.transparency': 35,
+        'MACD.color': '#86CB12', 'MACD.linewidth': 1, 'MACD.transparency': 35,
+        'Signal.color': '#F60076', 'Signal.linewidth': 1, 'Signal.transparency': 35,
+      }
 
-      widget.chart().createStudy('Stochastic RSI',false, false,[14,14,2,3],null, {
-        '%K.color': '#86CB12',
-        '%K.linewidth': 1,
-        '%K.transparency': 35,
-        '%D.color': '#F60076',
-        '%D.linewidth': 1,
-        '%D.transparency': 35,
-        'UpperLimit.color': '#0D111F',
-        'UpperLimit.linewidth': 0,
-        'LowerLimit.color': '#0D111F',
-        'LowerLimit.linewidth': 0,
+      let StochasticRSIConfigs = self.$store.state.isMobile ? {
+        '%K.color': '#86CB12', '%K.linewidth': 2, '%K.transparency': 35,
+        '%D.color': '#F60076', '%D.linewidth': 2, '%D.transparency': 35,
+        'UpperLimit.color': '#0D111F', 'UpperLimit.linewidth': 0,
+        'LowerLimit.color': '#0D111F', 'LowerLimit.linewidth': 0,
         'Hlines Background.color':'#626874',
-      });
-      widget.chart().createStudy('Relative Strength Index',false, false,[4],null, {
-        'Plot.color': '#86CB12',
-        'Plot.linewidth': 1,
-        'UpperLimit.value': 80,
-        'LowerLimit.value': 20,
-        'UpperLimit.color': '#0D111F',
-        'UpperLimit.linewidth': 0,
-        'LowerLimit.color': '#0D111F',
-        'LowerLimit.linewidth': 0,
+      } : {
+        '%K.color': '#86CB12', '%K.linewidth': 1, '%K.transparency': 35,
+        '%D.color': '#F60076', '%D.linewidth': 1, '%D.transparency': 35,
+        'UpperLimit.color': '#0D111F', 'UpperLimit.linewidth': 0,
+        'LowerLimit.color': '#0D111F', 'LowerLimit.linewidth': 0,
+        'Hlines Background.color':'#626874',
+      }
+      let RelativeStrengthIndexConfigs = self.$store.state.isMobile ? {
+        'Plot.color': '#86CB12', 'Plot.linewidth': 2, 'UpperLimit.value': 80, 'LowerLimit.value': 20,
+        'UpperLimit.color': '#0D111F', 'UpperLimit.linewidth': 0,
+        'LowerLimit.color': '#0D111F', 'LowerLimit.linewidth': 0,
         'Hlines Background.color':'#D8D8D8',
-      });
-
+      } : {
+        'Plot.color': '#86CB12', 'Plot.linewidth': 1, 'UpperLimit.value': 80, 'LowerLimit.value': 20,
+        'UpperLimit.color': '#0D111F', 'UpperLimit.linewidth': 0,
+        'LowerLimit.color': '#0D111F', 'LowerLimit.linewidth': 0,
+        'Hlines Background.color':'#D8D8D8',
+      }
+      widget.chart().createStudy('MACD',false, false,[2,33,'close',3],null,MACDConfigs);
+      widget.chart().createStudy('Stochastic RSI',false, false,[14,14,2,3],null, StochasticRSIConfigs);
+      widget.chart().createStudy('Relative Strength Index',false, false,[4],null, RelativeStrengthIndexConfigs);
 
       // 移动端切换显示
 			if (self.$store.state.isMobile) {
