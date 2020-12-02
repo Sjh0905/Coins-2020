@@ -28,7 +28,7 @@
         </div>
         <div class="follow-asset-total">
           <div class="follow-monery">跟单总收益（USDT）</div>
-          <div class="follow-asset-acount">{{(profit.toFixed(2) || '0')}}</div>
+          <div class="follow-asset-acount">{{(profit || '0')}}</div>
         </div>
       </div>
 
@@ -104,7 +104,8 @@
           <!--修改策略-->
           <span class="btn-size update pointer" @click="openFollowWindow(item)">{{$t('modifyPolicy')}}</span>
           <!--取消跟随-->
-          <span class="btn-size pointer" @click="delFollow(item)">{{$t('cancelFollowing')}}</span>
+          <span class="btn-size pointer" v-if="item.status == 'FOLLOWING'" @click="delFollow(item)">{{$t('cancelFollowing')}}</span>
+          <span class="btn-size1" v-else >{{$t('cancelFollowing')}}</span>
         </div>
       </div>
 <!--      <div class="follow-asset-not-data" >-->

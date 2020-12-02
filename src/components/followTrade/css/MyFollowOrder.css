@@ -212,6 +212,20 @@
   color: #3576F5;
   border:1px solid #3576F5;
 }
+.btn-size1 {
+  display: inline-block;
+  width:78px;
+  height:28px;
+  line-height:28px;
+  text-align: center;
+  background: #FFFFFF;
+  border-radius: 1px;
+  border: 1px solid #C1C1C1;
+  border-radius:1px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #C1C1C1;
+}
 .update {
   margin-right: 6px;
 }
@@ -232,7 +246,6 @@
   text-align: center;
   color: #6B7DA2;
 }
-
 .follow-order {
   color: #193662;
   font-size:14px;
