@@ -73,6 +73,12 @@ root.computed.isHasItem = function () {
   }
   return true
 }
+root.computed.isHasGodInfo = function () {
+  if(JSON.stringify(this.godInfo) == '{}') {
+    return false
+  }
+  return true
+}
 // 获取本人的userId
 root.computed.userId = function () {
   return this.$store.state.authMessage.userId
@@ -128,8 +134,6 @@ root.methods.clickToggle = function () {
 root.methods.clickToggleTrue = function () {
   this.BDBInfo = true
 }
-
-
 
 //固定比例-金额选择
 root.methods.fixedAmountPr = function (type) {

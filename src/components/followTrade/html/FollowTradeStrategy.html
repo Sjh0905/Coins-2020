@@ -54,11 +54,17 @@
         </div>
 
         <div class="trade-data-item">
-          <div class="trade-data text-green" v-if="isSwitchOrder == 'SPOT'">{{toFixed(godInfo.rate * 10 * 10 || '0',2)}}%</div>
-          <div class="trade-data text-green" v-if="isSwitchOrder == 'CONTRACT'">{{toFixed(godInfo.rate,2)}}</div>
+          <div class="trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'" v-if="isSwitchOrder == 'SPOT'">{{toFixed(godInfo.rate * 10 * 10 || '0',2)}}%</div>
+          <div class="trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'" v-if="isSwitchOrder == 'CONTRACT'">{{toFixed(godInfo.rate,2)}}</div>
           <!--收益率-->
           <div v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
           <div v-if="isSwitchOrder == 'CONTRACT'">收益 (USDT)</div>
+        </div>
+
+        <div class="trade-data-item" v-if="isSwitchOrder == 'CONTRACT'">
+          <div class="trade-data" :class="godInfo.weekRate >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.weekRate || '0'}}</div>
+          <!--跟单人数-->
+          <div>{{$t('本周收益')}}</div>
         </div>
       </div>
     </div>
