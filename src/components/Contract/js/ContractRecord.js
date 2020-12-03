@@ -42,7 +42,7 @@ root.data = function () {
       currency:''
     },
 
-    currencyValue:'',// 输入框币种信息
+    currencyValue:'USDT',// 输入框币种信息
     transferCurrencyWA:'',// 币种错误提示
     amountInput:'',// 输入框划转的数量
     transferAmountWA:'',// 数量错误提示
