@@ -40,6 +40,12 @@ root.mounted = function () {}
 root.beforeDestroy = function () {}
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
+root.computed.isHasGodInfo = function () {
+  if(JSON.stringify(this.godInfo) == '{}') {
+    return false
+  }
+  return true
+}
 // 获取本人的userId
 root.computed.userId = function () {
   return this.$store.state.authMessage.userId

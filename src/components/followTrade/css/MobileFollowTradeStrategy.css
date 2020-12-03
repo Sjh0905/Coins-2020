@@ -195,6 +195,15 @@
 .mobile-trade-amount {
   flex: 2;
 }
+.mobile-trade-amount1 {
+  flex: 1;
+}
+.mobile-trade-amount12 {
+  flex: 0.4;
+}
+.mobile-trade-amount13 {
+  flex: 0.1;
+}
 .mobile-trade-money {
   flex: 3;
   text-align: right;

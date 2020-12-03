@@ -28,8 +28,8 @@
 
   <div class="mobile-trade-header-null"></div>
 
-  <!--内容上部-->
-  <div class="mobile-trade-top">
+  <!--现货内容上部-->
+  <div class="mobile-trade-top"  v-if="isSwitchOrder=='SPOT'">
     <div class="mobile-trade-top-banner flex">
       <div class="mobile-trade-top-banner-img">
         <img src="../assets/management_personal_icon.png" alt="" class="mobile-trade-img">
@@ -54,14 +54,53 @@
       </div>
 
       <div class="mobile-trade-data-item">
-        <div class="mobile-trade-data text-green" v-if="isSwitchOrder=='SPOT'">{{toFixed(godInfo.rate*10*10 || '0',2)}}%</div>
-        <div class="mobile-trade-data text-green" v-if="isSwitchOrder=='CONTRACT'">{{toFixed(godInfo.rate,2)}}</div>
-        <div v-if="isSwitchOrder=='SPOT'">收益率</div>
-        <div v-if="isSwitchOrder=='CONTRACT'">收益 (USDT)</div>
+        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{toFixed(godInfo.rate*10*10 || '0',2)}}%</div>
+        <div>收益率</div>
       </div>
     </div>
   </div>
-  <!--内容下部-->
+  <!--内容上部-->
+
+  <!--合约内容上部-->
+  <div class="mobile-trade-top" v-if="isSwitchOrder=='CONTRACT'">
+    <div class="mobile-trade-top-banner flex">
+      <div class="mobile-trade-top-banner-img">
+        <img src="../assets/management_personal_icon.png" alt="" class="mobile-trade-img">
+      </div>
+      <div class="mobile-trade-top-banner-text">{{this.userId}}</div>
+    </div>
+    <div class="mobile-trade-top-data flex">
+
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{toFixed(godInfo.sum || '0',2)}}</div>
+        <div>累计交易量 (USDT)</div>
+      </div>
+
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{godInfo.count || '- -'}}</div>
+        <div>交易笔数</div>
+      </div>
+
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{godInfo.followCount || '- -'}}</div>
+        <div>当前跟单人数</div>
+      </div>
+    </div>
+    <div class="mobile-trade-top-data flex">
+      <div class="mobile-trade-data-item mobile-trade-amount12 "></div>
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{toFixed(godInfo.rate,2)}}</div>
+        <div>收益 (USDT)</div>
+      </div>
+      <div class="mobile-trade-data-item mobile-trade-amount13 "></div>
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{toFixed(godInfo.sum || '0',2)}}</div>
+        <div>累计交易量 (USDT)</div>
+      </div>
+      <div class="mobile-trade-data-item mobile-trade-amount12 "></div>
+    </div>
+  </div>
+  <!--内容上部-->
 
   <!--内容中部-->
   <div class="mobile-trade-center" v-if="isTapeList">
