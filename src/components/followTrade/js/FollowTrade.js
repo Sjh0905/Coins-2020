@@ -216,12 +216,18 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
   }
 
   if(this.isGod){
-    // 自己不能跟随自己哦
+    // 大神不能跟单大神
     this.openPop(this.$t('大神不能跟单大神'))
     return
   }
 
-  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isSwitchOrder:this.switchOrder}})
+  if(this.godList.length != 0){
+    // 用户合约跟单只能跟随一个大神
+    this.openPop(this.$t('用户合约跟单只能跟随一个大神'))
+    return
+  }
+
+  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isYuan:this.godList,isSwitchOrder:this.switchOrder}})
 }
 
 // 跳转我的镜像交易
@@ -239,7 +245,7 @@ root.methods.goToDocumentary1 = function (userId,fee,feeType,switchOrder,isGod) 
     this.$router.push({name:'followTradeStrategy',query:{isSwitchOrder:this.switchOrder,}})
     return
   }
-  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isSwitchOrder:this.switchOrder}})
+  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isYuan:this.godList,isSwitchOrder:this.switchOrder}})
 }
 
 

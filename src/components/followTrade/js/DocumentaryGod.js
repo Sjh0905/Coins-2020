@@ -69,6 +69,9 @@ root.computed.isAndroid = function () {
 root.computed.isSwitchOrder = function () {
   return this.$route.query.isSwitchOrder;
 }
+root.computed.isYuan = function () {
+  return this.$route.query.isYuan;
+}
 
 root.computed.contractType = function () {
 
@@ -135,8 +138,12 @@ root.methods.openAContractBi = function () {
 }
 root.methods.openTapeListDisable = function () {
   if(this.isGod){
-    // 自己不能跟随自己哦
+    // 大神不能跟单大神
     this.openPop(this.$t('大神不能跟单大神'))
+    return
+  }
+  if (this.isYuan.length != 0) {
+    this.openPop(this.$t('用户合约跟单只能跟随一个大神'))
     return
   }
   this.popWindowOpenContract = true

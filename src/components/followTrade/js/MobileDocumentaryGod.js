@@ -76,6 +76,9 @@ root.computed.contractType = function () {
     'SELL_MARKET': this.$t('市价卖出'),
   }
 }
+root.computed.isYuan = function () {
+  return this.$route.query.isYuan;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -128,6 +131,10 @@ root.methods.openDocumentaryWindowDisable = function () {
   if(this.isGod){
     // 自己不能跟随自己哦
     this.openPop(this.$t('大神不能跟单大神'))
+    return
+  }
+  if (this.isYuan.length != 0) {
+    this.openPop(this.$t('用户合约跟单只能跟随一个大神'))
     return
   }
   this.delFollowOpenDisable = true

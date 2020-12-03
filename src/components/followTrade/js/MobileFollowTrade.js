@@ -238,9 +238,14 @@ root.methods.goToDocumentary = function (item,switchOrder) {
     this.openPop('大神不能跟单大神')
     return
   }
+  if(this.godList.length != 0){
+    // 用户合约跟单只能跟随一个大神
+    this.openPop(this.$t('用户合约跟单只能跟随一个大神'))
+    return
+  }
 
   // this.$router.push({name:'mobileDocumentary',params: {item:item}})
-  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isSwitchOrder:this.switchOrder}})
+  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isYuan:this.godList,isSwitchOrder:this.switchOrder}})
 }// 跳转我的镜像交易
 root.methods.goToDocumentary1 = function (item,switchOrder) {
 
@@ -257,7 +262,7 @@ root.methods.goToDocumentary1 = function (item,switchOrder) {
     this.$router.push({name:'mobileFollowTradeStrategy',query:{isSwitchOrder:this.switchOrder}})
     return
   }
-  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isSwitchOrder:this.switchOrder}})
+  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isYuan:this.godList,isSwitchOrder:this.switchOrder}})
 }
 // // 去大神页面
 // root.methods.goToDocumentaryGod = function () {
