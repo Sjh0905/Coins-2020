@@ -61,6 +61,7 @@ requestAddress.CHANGE_FEE_BDB = {url: urlHead+'/user/feebdbchange', method: 'pos
 requestAddress.SEND_IDENTITY = {url: urlHead+'/auth/sendIdentity', method: 'post'} //提交身份认证
 requestAddress.GET_IDENTITY_INFO = {url: urlHead+'/auth/getIdentityInfo', method: 'get'} //获取被驳回的认证状态
 // requestAddress.GET_BTC_TO_CNY = {url: urlHead+'/user/getBtcToCNY', method: 'get'} //获取BTC对CNY的汇率
+
 requestAddress.GET_EXCHANGE__RAGE = {url: urlHead+'/user/getExchangeRate', method: 'get'}//获取各种汇率
 
 // requestAddress.GET_ORDERS_DETAIL = {url: urlHead+'/v1/trade/orders', method: 'get'} //获取委托订单详情，需要拼接
@@ -545,6 +546,12 @@ requestAddress.GET_PURCHASE_RECORD = {url: urlHead+'/user/transfer/spot/purchase
 requestAddress.GET_BALAN_ACCOUNT = {url: urlHead+'/future/account/userAccountv2', method: 'get'}  //账户余额
 requestAddress.GET_BALAN_POSITIONRISK = {url: urlHead+'/future/account/positionRiskv2', method: 'get'}  //仓位
 requestAddress.GET_BALAN_FUTURE = {url: urlHead+'/user/transfer/future', method: 'post'}  //合约划转 转账
+
+
+
+
+
+requestAddress.GET_EXCHANGE = {url: urlHead+'/user/exchange/rate', method: 'get'}  //合约划转 转账
 
 
 export default requestAddress

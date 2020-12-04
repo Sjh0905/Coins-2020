@@ -1,3 +1,5 @@
+// import axios from "axios";
+
 const REFRESH_KEY = 'refreshDataObj'
 const REFRESH_TIME_STEP = 10000
 const REFRESH_COUNT = 5
@@ -37,7 +39,8 @@ root.data = function () {
     getTimeInterval:null,
     getTimeout:10,
     show:false,
-    borderTop:true
+    borderTop:true,
+    exchangeRateInterval: null, //循环拿汇率
   }
 }
 
@@ -63,6 +66,9 @@ root.created = function () {
 
   this.isWhiteQuery()
 
+  // this.getUSDThl()
+  // this.currentInterval1 && clearInterval(this.currentInterval1)
+  // this.currentInterval1 = setInterval(this.getUSDThl, 50000)
   // console.log(this.isClose,'bbb')
 
 }
@@ -80,7 +86,8 @@ root.mounted = function () {
 root.beforeDestroy = function () {
   // 清空clearInterval
   this.accountInterval && clearInterval(this.accountInterval)
-
+  // this.exchangeRateInterval && clearInterval(this.exchangeRateInterval)
+  // this.currentInterval1 && clearInterval(this.currentInterval1)
 }
 
 /*------------------------------ 计算 -------------------------------*/
@@ -335,5 +342,25 @@ root.methods.isWhiteQuery = function () {
     this.isWhite = false
   }
 }
+
+// root.methods.getUSDThl = function(){
+//   this.$http.send("GET_EXCHANGE", {
+//     bind: this,
+//     callBack: this.re_getUSDThl,
+//     errorHandler: this.error_getUSDThl
+//   })
+// }
+// // 获取账户信息回调
+// root.methods.re_getUSDThl = function (data) {
+//   console.info('折合人民币1',data)
+//   typeof (data) === 'string' && (data = JSON.parse(data))
+//   console.info('折合人民币2',data)
+//   this.$store.commit('changeExchange_rate_dollar', data)
+//   console.info('折合人民币3',data)
+// }
+// // 获取账户信息出错
+// root.methods.error_getUSDThl = function (err) {
+//   console.warn('index获取账户信息出错')
+// }
 
 export default root
