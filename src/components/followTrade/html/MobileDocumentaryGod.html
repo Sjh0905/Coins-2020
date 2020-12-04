@@ -28,7 +28,7 @@
       </div>
       <div class="mobile-trade-top-banner-text">{{godInfo.userId ? godInfo.userId : $route.query.userId}}</div>
     </div>
-    <div class="mobile-trade-top-data flex">
+    <div class="mobile-trade-top-data flex" v-if="isSwitchOrder == 'SPOT'">
 
       <div class="mobile-trade-data-item">
         <div class="mobile-trade-data">{{toFixed(godInfo.sum,2) || '- -'}}</div>
@@ -47,11 +47,43 @@
 
       <div class="mobile-trade-data-item">
 <!--        <div class="mobile-trade-data text-green">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0,2) : '- -'}}%</div>-->
-        <div class="mobile-trade-data text-green" v-if="isSwitchOrder == 'SPOT'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0, 2) : '0'}}%</div>
-        <div class="mobile-trade-data text-green" v-if="isSwitchOrder == 'CONTRACT'">{{godInfo.rate ? toFixed(godInfo.rate , 2) : '0'}}</div>
-        <div v-if="isSwitchOrder == 'SPOT'">收益率</div>
-        <div v-if="isSwitchOrder == 'CONTRACT'">收益 (USDT)</div>
+        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0, 2) : '0'}}%</div>
+        <div>收益率</div>
       </div>
+    </div>
+    <div class="mobile-trade-top-data flex" v-if="isSwitchOrder == 'CONTRACT'">
+
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{toFixed(godInfo.sum,2) || '- -'}}</div>
+        <div>累计交易量 (USDT)</div>
+      </div>
+
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{godInfo.count || '0'}}</div>
+        <div>交易笔数</div>
+      </div>
+
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{godInfo.followCount ? godInfo.followCount : '- -'}}</div>
+        <div>当前跟单人数</div>
+      </div>
+
+    </div>
+    <div class="mobile-trade-top-data flex" v-if="isSwitchOrder == 'CONTRACT'">
+      <div class="mobile-trade-data-item mobile-trade-amount12 "></div>
+
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate , 2) : '0'}}</div>
+        <div>收益 (USDT)</div>
+      </div>
+      <div class="mobile-trade-data-item mobile-trade-amount13 "></div>
+
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate , 2) : '0'}}</div>
+        <div>本周收益 (USDT)</div>
+      </div>
+      <div class="mobile-trade-data-item mobile-trade-amount12 "></div>
+
     </div>
   </div>
   <!--内容下部-->

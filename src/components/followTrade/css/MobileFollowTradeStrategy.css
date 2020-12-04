@@ -53,7 +53,7 @@
 /*------------ 上部内容  begin -------------*/
 .mobile-trade-top {
   width: 7.5rem;
-  height: 3.08rem;
+  /*height: 3.08rem;*/
   background: #fff;
 }
 .mobile-trade-top-banner {

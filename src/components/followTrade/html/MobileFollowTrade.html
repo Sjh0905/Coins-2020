@@ -55,8 +55,8 @@
       <!--大佬交易详情Start-->
       <div class="details-of-big-brother-transaction flex" @click="goToDocumentary1(item,switchOrder)">
         <div class="accumulated-income">
-          <div class="percentage" v-if="switchOrder == 'SPOT'">{{toFixed(item.rate* 10 * 10 || 0,2) }}%</div>
-          <div class="percentage" v-if="switchOrder == 'CONTRACT'">{{toFixed(item.rate,2) }}</div>
+          <div class="percentage" v-if="switchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{toFixed(item.rate* 10 * 10 || 0,2) }}%</div>
+          <div class="percentage" v-if="switchOrder == 'CONTRACT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{toFixed(item.rate,2) }}</div>
           <div class="padding-bottom color-a2" v-if="switchOrder == 'SPOT'">收益率</div>
           <div class="padding-bottom color-a2" v-if="switchOrder == 'CONTRACT'">收益 (USDT)</div>
           <div class="color-13">{{toFixed(item.sum,2) || '0'}}</div>

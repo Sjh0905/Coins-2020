@@ -99,6 +99,12 @@
   justify-content: space-between;
   cursor: pointer;
 }
+.text-green {
+  color: #86CB12;
+}
+.text-red {
+  color: #F60076;
+}
 .follow-bink {
   color:#172841;
   font-size:22px;
@@ -106,7 +112,6 @@
   font-weight:400;
 }
 .follow-gru {
-  color: #86CB12;
   font-size:22px;
   font-family:Roboto-Regular,Roboto;
   font-weight:400;

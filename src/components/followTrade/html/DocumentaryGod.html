@@ -46,10 +46,15 @@
           </div>
           <!--收益率-->
           <div class="follow-wi">
-            <div class="follow-gru" v-if="isSwitchOrder == 'SPOT'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
-            <div class="follow-gru" v-if="isSwitchOrder == 'CONTRACT'">{{godInfo.rate ? toFixed(godInfo.rate, 2) : '0'}}</div>
+            <div class="follow-gru" v-if="isSwitchOrder == 'SPOT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
+            <div class="follow-gru" v-if="isSwitchOrder == 'CONTRACT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate, 2) : '0'}}</div>
             <div class="follow-gru2" v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
             <div class="follow-gru2" v-if="isSwitchOrder == 'CONTRACT'">收益 (USDT)</div>
+          </div>
+          <!--当前跟单人数-->
+          <div class="follow-wi" v-if="isSwitchOrder == 'CONTRACT'">
+            <div class="follow-bink" :class="godInfo.weekRate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekRate ? toFixed(godInfo.weekRate, 2) : '0'}}</div>
+            <div class="follow-gru2">{{$t('本周收益')}} (USDT)</div>
           </div>
         </div>
 

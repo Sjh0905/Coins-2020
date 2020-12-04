@@ -79,6 +79,12 @@ root.computed.contractType = function () {
 root.computed.isYuan = function () {
   return this.$route.query.isYuan;
 }
+root.computed.isHasGodInfo = function () {
+  if(JSON.stringify(this.godInfo) == '{}') {
+    return false
+  }
+  return true
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/

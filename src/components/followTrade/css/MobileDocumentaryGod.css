@@ -53,7 +53,7 @@
 /*------------ 上部内容  begin -------------*/
 .mobile-trade-top {
   width: 7.5rem;
-  height: 3.08rem;
+  /*height: 3.08rem;*/
   background: #fff;
 }
 .mobile-trade-top-banner {
@@ -90,6 +90,15 @@
   font-weight:400;
   color: #767579;
   text-align: center;
+}
+.mobile-trade-amount1 {
+  flex: 1;
+}
+.mobile-trade-amount12 {
+  flex: 0.4;
+}
+.mobile-trade-amount13 {
+  flex: 0.1;
 }
 .mobile-trade-data {
   /*margin-top: 0.16rem;*/

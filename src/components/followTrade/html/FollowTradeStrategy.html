@@ -62,9 +62,9 @@
         </div>
 
         <div class="trade-data-item" v-if="isSwitchOrder == 'CONTRACT'">
-          <div class="trade-data" :class="godInfo.weekRate >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.weekRate || '0'}}</div>
+          <div class="trade-data" :class="godInfo.weekRate >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{toFixed(godInfo.weekRate,2) || '0'}}</div>
           <!--跟单人数-->
-          <div>{{$t('本周收益')}}</div>
+          <div>{{$t('本周收益')}} (USDT)</div>
         </div>
       </div>
     </div>

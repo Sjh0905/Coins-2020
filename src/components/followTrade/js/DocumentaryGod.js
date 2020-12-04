@@ -72,6 +72,12 @@ root.computed.isSwitchOrder = function () {
 root.computed.isYuan = function () {
   return this.$route.query.isYuan;
 }
+root.computed.isHasGodInfo = function () {
+  if(JSON.stringify(this.godInfo) == '{}') {
+    return false
+  }
+  return true
+}
 
 root.computed.contractType = function () {
 

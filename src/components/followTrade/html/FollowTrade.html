@@ -53,8 +53,8 @@
               <div class="follow-gru2">{{$t('totalDocumentaryNumber')}}</div>
             </div>
             <div class="follow-wi">
-              <div class="follow-gru" v-if="switchOrder == 'SPOT'">{{toFixed(item.rate * 10 * 10 || 0,2)}}%</div>
-              <div class="follow-gru" v-if="switchOrder == 'CONTRACT'">{{toFixed(item.rate,2)}}</div>
+              <div class="follow-gru" v-if="switchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{toFixed(item.rate * 10 * 10 || 0,2)}}%</div>
+              <div class="follow-gru" v-if="switchOrder == 'CONTRACT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{toFixed(item.rate,2)}}</div>
               <!--收益率-->
               <div class="follow-gru2" v-if="switchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
               <div class="follow-gru2" v-if="switchOrder == 'CONTRACT'">收益 (USDT)</div>
