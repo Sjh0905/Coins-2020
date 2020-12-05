@@ -79,7 +79,7 @@
       <div class="mobile-trade-data-item mobile-trade-amount13 "></div>
 
       <div class="mobile-trade-data-item mobile-trade-amount1">
-        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekRate ? toFixed(godInfo.weekRate , 2) : '0'}}</div>
+        <div class="mobile-trade-data" :class="godInfo.weekRate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekRate ? toFixed(godInfo.weekRate , 2) : '0'}}</div>
         <div>本周收益 (USDT)</div>
       </div>
       <div class="mobile-trade-data-item mobile-trade-amount12 "></div>
