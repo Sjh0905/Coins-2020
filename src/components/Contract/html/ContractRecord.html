@@ -29,8 +29,8 @@
 
     <div class="cangwei-zichan">
       <div class="lock-house-sel flex">
-        <div class="title-tab flex-center tab-item-first" :class="propertyType == 'position'?'selected1 text_blue-7':''" @click="clickProperty('position')">仓位</div>
-        <div class="title-tab margin-a-little flex-center tab-item-first" :class="propertyType =='propertyAssets'?'selected1 text_blue-7':''" @click="clickProperty('propertyAssets')">资产</div>
+        <div class="title-tab flex-center pointer" :class="propertyType == 'position'?'selected1 text_blue-7':''" @click="clickProperty('position')">仓位</div>
+        <div class="title-tab margin-a-little flex-center pointer" :class="propertyType =='propertyAssets'?'selected1 text_blue-7':''" @click="clickProperty('propertyAssets')">资产</div>
       </div>
 
       <div v-if="propertyType == 'position'">

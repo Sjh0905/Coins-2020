@@ -96,7 +96,7 @@ root.computed.serverTime = function () {
   return new Date().getTime();
 }
 root.computed.computedRecord = function () {
-  return this.records1C
+  return this.records1C || []
 }
 //保证金余额换算成人民币的估值
 root.computed.valuation = function () {
