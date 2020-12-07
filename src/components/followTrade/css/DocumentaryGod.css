@@ -134,7 +134,8 @@
   border-radius:2px;
 }
 .follow-wi {
-  width: 25%;
+  /*width: 25%;*/
+  margin-right: 10px;
 }
 .follow-btn-box {
   width: 29%;
