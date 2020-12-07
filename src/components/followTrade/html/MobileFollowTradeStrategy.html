@@ -54,7 +54,7 @@
       </div>
 
       <div class="mobile-trade-data-item">
-        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate?toFixed(godInfo.rate*10*10,2):'0'}}%</div>
+        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate*10*10,2) : '0'}}%</div>
         <div>收益率</div>
       </div>
     </div>
