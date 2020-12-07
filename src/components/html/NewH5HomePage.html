@@ -109,9 +109,13 @@
           <span class="homepage-icon-body-item-text">拼团</span>
           <!--          <DetailsOfTheGroup v-if="goGroupLevelss"></DetailsOfTheGroup>-->
         </div>
-        <div @click="gotoFollowTrade" class="homepage-icon-body-item">
-          <img class="homepage-icon-body-item-img" src="../../assets/H5img/follow_icon.png" alt="">
-          <span class="homepage-icon-body-item-text">镜像交易</span>
+<!--        <div @click="gotoFollowTrade" class="homepage-icon-body-item">-->
+<!--          <img class="homepage-icon-body-item-img" src="../../assets/H5img/follow_icon.png" alt="">-->
+<!--          <span class="homepage-icon-body-item-text">镜像交易</span>-->
+<!--        </div>-->
+        <div @click="goToTreasureChest" class="homepage-icon-body-item">
+          <img class="homepage-icon-body-item-img" src="../../assets/H5img/baibaoxiang.png" alt="">
+          <span class="homepage-icon-body-item-text">百宝箱</span>
         </div>
         <div @click="getRegistrationRecord" class="homepage-icon-body-item">
           <img class="homepage-icon-body-item-img" src="../../assets/H5img/trade_mining.png" alt="">
@@ -128,8 +132,8 @@
       </div>
     </div>
 
-    <div class="treasure-chest" @click="goToTreasureChest">
-      <img src="../../assets/banner.png" alt="">
+    <div class="treasure-chest" @click="gotoFollowTrade">
+      <img src="../../assets/H5img/follbanner.png" alt="">
     </div>
 
     <div class="homepage-body">
