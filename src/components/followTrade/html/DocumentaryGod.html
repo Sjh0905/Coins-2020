@@ -29,6 +29,11 @@
 
       <div class="flex">
         <div class="flex follow-buw">
+          <!--累计交易量-->
+          <div class="follow-wi" v-if="isSwitchOrder == 'SPOT'">
+            <div class="follow-bink">{{toFixed(godInfo.sum,2) || '0'}}</div>
+            <div class="follow-gru2">{{$t('totalTransactionVolume')}} (USDT)</div>
+          </div>
           <!--本周收益率-->
           <div class="follow-wi" v-if="isSwitchOrder == 'CONTRACT'">
             <div class="follow-bink" :class="godInfo.weekRate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekRate ? toFixed(godInfo.weekRate, 2) : '0'}}%</div>
@@ -51,11 +56,7 @@
             <div class="follow-bink" :class="godInfo.profit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.profit ? toFixed(godInfo.profit, 2) : '0'}}</div>
             <div class="follow-gru2">{{$t('总收益')}} (USDT)</div>
           </div>
-          <!--累计交易量-->
-          <div class="follow-wi" v-if="isSwitchOrder == 'SPOT'">
-            <div class="follow-bink">{{toFixed(godInfo.sum,2) || '0'}}</div>
-            <div class="follow-gru2">{{$t('totalTransactionVolume')}} (USDT)</div>
-          </div>
+
           <!--交易笔数-->
           <div class="follow-wi" v-if="isSwitchOrder == 'SPOT'">
             <div class="follow-bink">{{godInfo.count ? godInfo.count : '0'}}</div>
