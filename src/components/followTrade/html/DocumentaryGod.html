@@ -51,7 +51,7 @@
             <div class="follow-gru2" v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
             <div class="follow-gru2" v-if="isSwitchOrder == 'CONTRACT'">总收益率</div>
           </div>
-          <!--本周收益-->
+          <!--总收益-->
           <div class="follow-wi" v-if="isSwitchOrder == 'CONTRACT'">
             <div class="follow-bink" :class="godInfo.profit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.profit ? toFixed(godInfo.profit, 2) : '0'}}</div>
             <div class="follow-gru2">{{$t('总收益')}} (USDT)</div>
