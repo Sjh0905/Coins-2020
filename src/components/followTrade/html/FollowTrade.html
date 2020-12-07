@@ -34,13 +34,35 @@
         <img class="follow-data-box-img" src="../assets/big-brother.png" alt="">
         <div class="follow-data-box-img-box">{{item.userId}}</div>
       </div>
-      <div class="flex" v-if="" >
-        <div class="flex" @click="goToDocumentary1(item.userId,item.fee,item.feeType,switchOrder)">
+      <div class="flex weit-fol" v-if="" >
+        <div class="flex weit-fol" @click="goToDocumentary1(item.userId,item.fee,item.feeType,switchOrder)">
           <div class="flex follow-buw">
             <div class="follow-wi">
               <div class="follow-bink">{{toFixed(item.sum || '0',2)}}</div>
               <!--累计交易量-->
               <div class="follow-gru2">{{$t('totalTransactionVolume')}} (USDT)</div>
+            </div>
+            <!--本周收益率-->
+            <div class="follow-wi" v-if="isSwitchOrder == 'CONTRACT'">
+              <div class="follow-bink" :class="item.weekRate >= 0 ? 'text-green' : 'text-red'">{{item.weekRate ? toFixed(item.weekRate, 2) : '0'}}%</div>
+              <div class="follow-gru2">{{$t('本周收益率')}}</div>
+            </div>
+            <!--本周收益-->
+            <div class="follow-wi" v-if="isSwitchOrder == 'CONTRACT'">
+              <div class="follow-bink" :class="item.weekProfit >= 0 ? 'text-green' : 'text-red'">{{item.weekProfit ? toFixed(item.weekProfit, 2) : '0'}}</div>
+              <div class="follow-gru2">{{$t('本周收益')}} (USDT)</div>
+            </div>
+            <!--总收益率-->
+            <div class="follow-wi">
+              <div class="follow-gru" v-if="isSwitchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
+              <div class="follow-gru" v-if="isSwitchOrder == 'CONTRACT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate, 2) : '0'}}%</div>
+              <div class="follow-gru2" v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
+              <div class="follow-gru2" v-if="isSwitchOrder == 'CONTRACT'">总收益率</div>
+            </div>
+            <!--本周收益-->
+            <div class="follow-wi" v-if="isSwitchOrder == 'CONTRACT'">
+              <div class="follow-bink" :class="item.profit >= 0 ? 'text-green' : 'text-red'">{{item.profit ? toFixed(item.profit, 2) : '0'}}</div>
+              <div class="follow-gru2">{{$t('总收益')}} (USDT)</div>
             </div>
             <div class="follow-wi">
               <div class="follow-bink">{{item.count}}</div>
@@ -52,13 +74,7 @@
               <!--当前跟单人数-->
               <div class="follow-gru2">{{$t('totalDocumentaryNumber')}}</div>
             </div>
-            <div class="follow-wi">
-              <div class="follow-gru" v-if="switchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{toFixed(item.rate * 10 * 10 || 0,2)}}%</div>
-              <div class="follow-gru" v-if="switchOrder == 'CONTRACT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{toFixed(item.rate,2)}}</div>
-              <!--收益率-->
-              <div class="follow-gru2" v-if="switchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
-              <div class="follow-gru2" v-if="switchOrder == 'CONTRACT'">收益 (USDT)</div>
-            </div>
+
 
 
           </div>

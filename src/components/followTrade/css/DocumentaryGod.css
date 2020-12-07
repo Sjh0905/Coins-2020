@@ -70,7 +70,7 @@
   font-weight:600;
 }
 .follow-buw {
-  width: 70%;
+  width: 61%;
   justify-content: space-between;
 }
 .follow-bink {
@@ -134,11 +134,11 @@
   border-radius:2px;
 }
 .follow-wi {
-  /*width: 25%;*/
+  width: 25%;
   margin-right: 10px;
 }
 .follow-btn-box {
-  width: 29%;
+  width: 39%;
   text-align: right;
 }
 
