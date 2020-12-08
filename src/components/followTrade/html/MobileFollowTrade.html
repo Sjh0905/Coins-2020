@@ -79,7 +79,7 @@
             <div class="color-a2">{{$t('本周收益')}} (USDT)</div>
           </div>
         </div>
-        <div class="flex with-billboard-xin">
+        <div class="flex with-billboard-xin paddign">
           <div class="flex-din">
             <div class="color-13" v-if="isSwitchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
             <div class="color-13" v-if="isSwitchOrder == 'CONTRACT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate, 2) : '0'}}%</div>
@@ -91,7 +91,7 @@
             <div class="color-a2">{{$t('总收益')}} (USDT)</div>
           </div>
         </div>
-        <div class="flex with-billboard-xin flex-din-bott">
+        <div class="flex with-billboard-xin paddign">
           <div class="flex-din">
             <div class="color-13">{{item.count ? item.count : '0'}}</div>
             <div class="color-a2">总交易笔数</div>
