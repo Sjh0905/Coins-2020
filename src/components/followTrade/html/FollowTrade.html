@@ -36,8 +36,8 @@
       </div>
       <div class="flex weit-fol" v-if="" >
         <div class="flex weit-fol" @click="goToDocumentary1(item.userId,item.fee,item.feeType,switchOrder)">
-          <div class="flex follow-buw">
-            <div class="follow-wi">
+          <div class="flex follow-buw" >
+            <div class="follow-wi" v-if="isSwitchOrder == 'SPOT'">
               <div class="follow-bink">{{toFixed(item.sum || '0',2)}}</div>
               <!--累计交易量-->
               <div class="follow-gru2">{{$t('totalTransactionVolume')}} (USDT)</div>
