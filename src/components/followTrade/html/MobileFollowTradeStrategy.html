@@ -86,7 +86,7 @@
       <div class="mobile-trade-data-item ">
         <div class="mobile-trade-data" v-if="isSwitchOrder == 'SPOT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
         <div class="mobile-trade-data" v-if="isSwitchOrder == 'CONTRACT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate, 2) : '0'}}%</div>
-        <div class="" v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
+        <div class="" v-if="isSwitchOrder == 'SPOT'">收益率</div>
         <div class="" v-if="isSwitchOrder == 'CONTRACT'">总收益率</div>
       </div>
       <!--总收益-->

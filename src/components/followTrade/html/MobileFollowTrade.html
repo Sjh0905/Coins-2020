@@ -72,23 +72,23 @@
         <div class="flex with-billboard-xin" v-if="switchOrder == 'CONTRACT'">
           <div class="flex-din">
             <div class="color-13" :class="item.weekRate >= 0 ? 'text-green' : 'text-red'">{{item.weekRate ? toFixed(item.weekRate, 2) : '0'}}%</div>
-            <div class="color-a2">{{$t('本周收益率')}}</div>
+            <div class="color-a2">本周收益率</div>
           </div>
           <div class="flex-din">
             <div class="color-13" :class="item.weekProfit >= 0 ? 'text-green' : 'text-red'">{{item.weekProfit ? toFixed(item.weekProfit, 2) : '0'}}</div>
-            <div class="color-a2">{{$t('本周收益')}} (USDT)</div>
+            <div class="color-a2">本周收益 (USDT)</div>
           </div>
         </div>
         <div class="flex with-billboard-xin paddign">
           <div class="flex-din">
             <div class="color-13" v-if="isSwitchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
             <div class="color-13" v-if="isSwitchOrder == 'CONTRACT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate, 2) : '0'}}%</div>
-            <div class="color-a2" v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
+            <div class="color-a2" v-if="isSwitchOrder == 'SPOT'">收益率</div>
             <div class="color-a2" v-if="isSwitchOrder == 'CONTRACT'">总收益率</div>
           </div>
           <div class="flex-din">
             <div class="color-13" :class="item.profit >= 0 ? 'text-green' : 'text-red'">{{item.profit ? toFixed(item.profit, 2) : '0'}}</div>
-            <div class="color-a2">{{$t('总收益')}} (USDT)</div>
+            <div class="color-a2">总收益 (USDT)</div>
           </div>
         </div>
         <div class="flex with-billboard-xin paddign">
