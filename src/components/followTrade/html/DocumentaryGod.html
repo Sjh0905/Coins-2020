@@ -165,33 +165,51 @@
       <!-- 跟随者 -->
       <ul class="recordUl1" v-if="fixedFollow == 2">
         <!--历史挖矿记录表头 S-->
-        <li class="application_header">
+        <li class="application_header" v-if="isSwitchOrder == 'CONTRACT'">
           <!--          账号-->
           <div class="application_header_div">{{$t('accountNumber')}}</div>
           <!--          跟单总成交额-->
           <div class="application_header_div">{{$t('本周跟单收益')}} (USDT)</div>
 
           <div class="application_header_div">{{$t('本周跟单利润')}} (USDT)</div>
-          <div class="application_header_div">{{$t('总跟单利润')}} (USDT)</div>
+          <div class="application_header_div">{{$t('followUpIncome')}} (USDT)</div>
           <!--          跟随收益-->
-          <div class="application-header-div-box">{{$t('followUpIncome')}}（USDT）</div>
+          <div class="application-header-div-box">{{$t('总跟单利润')}}（USDT）</div>
+        </li>
+        <li class="application_header" v-if="isSwitchOrder == 'SPOT'">
+          <!--          账号-->
+          <div class="application_header_div">{{$t('accountNumber')}}</div>
+
+          <div class="application_header_div">{{$t('跟单总成交额')}} (USDT)</div>
+          <!--          跟随收益-->
+          <div class="application-header-div-box">{{$t('跟随收益')}}（USDT）</div>
         </li>
         <template>
           <!-- 历史挖矿记录-->
           <template v-if="followUserList.length !== 0">
             <li class="" v-for="(item,index) in followUserList" :key="item.id">
 
-              <div class="flex application_li2">
+              <div class="flex application_li2" v-if="isSwitchOrder == 'CONTRACT'">
                 <!--账号-->
                 <div class="application_header_div ">{{item.userId}}</div>
                 <!--跟单总成交额-->
                 <div class="application_header_div ">{{toFixed(item.weekProfit,2) || '0'}}</div>
                 <div class="application_header_div ">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
-                <div class="application_header_div ">{{toFixed(item.userProfit,2) || '0'}}</div>
+                <div class="application_header_div ">{{toFixed(item.profit,2) || '0'}}</div>
+                <!--跟随收益-->
+                <div class="application-header-div-box">{{toFixed(item.userProfit,2) || '0'}}</div>
+
+              </div>
+              <div class="flex application_li2" v-if="isSwitchOrder == 'SPOT'">
+                <!--账号-->
+                <div class="application_header_div ">{{item.userId}}</div>
+                <!--跟单总成交额-->
+                <div class="application_header_div ">{{toFixed(item.amount,2) || '0'}}</div>
                 <!--跟随收益-->
                 <div class="application-header-div-box">{{toFixed(item.profit,2) || '0'}}</div>
 
               </div>
+
             </li>
 
           </template>
