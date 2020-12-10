@@ -64,7 +64,7 @@
               <div class="follow-bink" :class="item.profit >= 0 ? 'text-green' : 'text-red'">{{item.profit ? toFixed(item.profit, 2) : '0'}}</div>
               <div class="follow-gru2">{{$t('总收益')}} (USDT)</div>
             </div>
-            <div class="follow-wi">
+            <div class="follow-wi" v-if="isSwitchOrder == 'SPOT'">
               <div class="follow-bink">{{item.count}}</div>
               <!--交易笔数-->
               <div class="follow-gru2">{{$t('numberOfTransactions')}}</div>
@@ -83,8 +83,8 @@
         <div class="follow-btn-box" @click="goToDocumentary(item.userId,item.fee,item.feeType,switchOrder)">
           <!--天-->
           <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} USDT/{{days}}{{$t('days')}}费用</div>
-          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'CONTRACT'">跟单利润 {{accAdd(item.fee,20)}}%/周费用</div>
-          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'SPOT'">跟单利润 {{accAdd(item.fee,20)}}%/笔费用</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'CONTRACT'">跟单收益 {{accAdd(item.fee,20)}}%/周费用</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,20)}}%/笔费用</div>
           <!--跟单-->
           <div class="follow-fff" v-if="godList.indexOf(item.userId) < 0">{{$t('documentary')}}</div>
           <!--已跟随-->

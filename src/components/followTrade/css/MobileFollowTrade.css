@@ -338,6 +338,12 @@
 .text-red {
   color: #F60076;
 }
+.mleft {
+  margin-left: 0.6rem;
+}
+.mre {
+  margin-right: 0.6rem;
+}
 .lock-position-confirm-toast-btn-confirm {
   width: 45%;
   background: #3576F5;
