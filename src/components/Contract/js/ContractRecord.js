@@ -341,10 +341,11 @@ root.methods.popClose = function () {
   this.popOpen = false
 }
 
-root.methods.goToContractTransaction = function () {
+root.methods.goToContractTransaction = function (item) {
   // window.location.replace(this.$store.state.domain_url + 'index/sign/login?ani=1&toUrl=c2c_url');
   // window.location.replace(process.env.CONTRACT_URL +'index/tradingHall?symbol=BTC_USDT');
-  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+  let symbol = item.symbol
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=' + symbol);
 
 }
 
