@@ -63,7 +63,9 @@ root.data = function () {
     accounts:[],
     hideZeroAsset: false, //隐藏零资产币种
 
-    otcCurrencyList:[]
+    otcCurrencyList:[],
+    contractSymbolArr:['BTCUSDT','ETHUSDT'], //合约展示币对
+
 
   }
 }
@@ -309,13 +311,13 @@ root.methods.re_getPositionRisk = function (data) {
   if (!data) return
   // console.log('获取记录', data)
   this.records = data.data
+  let aa = []
   this.records.map((v,index)=>{
-    if (v.positionAmt != 0 && v.symbol == 'BTCUSDT') {
-      let aa = []
+    if (v.positionAmt != 0 && this.contractSymbolArr.includes(v.symbol)) {
       aa.push(v)
-      this.records1C = aa
     }
   })
+  this.records1C = aa
 
   if (this.records1.length < this.limit) {
     this.loadingMoreShow = false
