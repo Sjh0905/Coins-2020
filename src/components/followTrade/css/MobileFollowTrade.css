@@ -183,13 +183,15 @@
 
 .details-of-big-brother-transaction {
   width:6.9rem;
-  height:2.78rem;
+  /*height:2.78rem;*/
   /*background:rgba(255,255,255,1);*/
   box-shadow:0rem 0.04rem 0.2rem 0rem rgba(1,1,1,0.06);
   border-radius:0.12rem;
   background-color: #FFFFFF;
   margin: 0 auto;
+  padding: 0.4rem 0;
 }
+
 .accumulated-income {
   width: 50%;
   text-align: center;
@@ -207,12 +209,14 @@
   color: #F60076;
 }
 .color-a2 {
+  width: 100%;
   color: #A2B5D9;
   font-size:0.24rem;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
 }
 .color-13 {
+  width: 100%;
   color: #131F30;
   font-size:0.34rem;
   font-family:PingFangSC-Semibold,PingFang SC;
@@ -314,7 +318,26 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+.flex-din {
+  flex: 1;
+  text-align: center;
+}
+.with-billboard-xin {
+  width: 100%;
 
+}
+.paddign {
+  padding-top: 0.2rem;
+}
+.flex-din-bott {
+  padding-bottom: 0.2rem;
+}
+.text-green {
+  color: #86CB12;
+}
+.text-red {
+  color: #F60076;
+}
 .lock-position-confirm-toast-btn-confirm {
   width: 45%;
   background: #3576F5;

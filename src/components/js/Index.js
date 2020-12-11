@@ -68,7 +68,7 @@ root.created = function () {
 
   this.getUSDThl()
   this.currentInterval1 && clearInterval(this.currentInterval1)
-  this.currentInterval1 = setInterval(this.getUSDThl, 50000)
+  this.currentInterval1 = setInterval(this.getUSDThl, 570000)
   // console.log(this.isClose,'bbb')
 
 }
