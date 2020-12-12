@@ -46,8 +46,8 @@
             <span class="documentary-follow" v-if="godList.indexOf(item.userId) >= 0">已跟随</span>
           </div>
           <div class="interest-rate" v-if="item.feeType == 'LOT'">{{item.fee || '0'}} USDT/{{days || '0'}}天费用</div>
-          <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单利润 {{accAdd(item.fee,20) || '0'}}%/周费用</div>
-          <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单利润 {{accAdd(item.fee,20) || '0'}}%/笔费用</div>
+          <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(item.fee,20) || '0'}}%/周费用</div>
+          <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,20) || '0'}}%/笔费用</div>
         </div>
       </div>
       <!--大佬头像End-->
@@ -70,28 +70,45 @@
 <!--        </div>-->
 
         <div class="flex with-billboard-xin" v-if="switchOrder == 'CONTRACT'">
-          <div class="flex-din">
+          <div class="flex-din mleft">
             <div class="color-13" :class="item.weekRate >= 0 ? 'text-green' : 'text-red'">{{item.weekRate ? toFixed(item.weekRate, 2) : '0'}}%</div>
             <div class="color-a2">本周收益率</div>
           </div>
+
+          <div class="flex-din mre">
+            <div class="color-13" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate, 2) : '0'}}%</div>
+            <div class="color-a2">总收益率</div>
+          </div>
+        </div>
+        <div class="flex with-billboard-xin paddign" v-if="switchOrder == 'CONTRACT'">
           <div class="flex-din">
             <div class="color-13" :class="item.weekProfit >= 0 ? 'text-green' : 'text-red'">{{item.weekProfit ? toFixed(item.weekProfit, 2) : '0'}}</div>
             <div class="color-a2">本周收益 (USDT)</div>
           </div>
-        </div>
-        <div class="flex with-billboard-xin paddign">
-          <div class="flex-din">
-            <div class="color-13" v-if="isSwitchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
-            <div class="color-13" v-if="isSwitchOrder == 'CONTRACT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate, 2) : '0'}}%</div>
-            <div class="color-a2" v-if="isSwitchOrder == 'SPOT'">收益率</div>
-            <div class="color-a2" v-if="isSwitchOrder == 'CONTRACT'">总收益率</div>
-          </div>
+
           <div class="flex-din">
             <div class="color-13" :class="item.profit >= 0 ? 'text-green' : 'text-red'">{{item.profit ? toFixed(item.profit, 2) : '0'}}</div>
             <div class="color-a2">总收益 (USDT)</div>
           </div>
+          <div class="flex-din">
+            <div class="color-13">{{item.followCount ? item.followCount : '0'}}</div>
+            <div class="color-a2">跟单人数</div>
+          </div>
         </div>
-        <div class="flex with-billboard-xin paddign">
+
+
+
+        <div class="flex with-billboard-xin" v-if="switchOrder == 'SPOT'">
+          <div class="flex-din mre">
+            <div class="color-13" v-if="isSwitchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
+            <div class="color-a2" v-if="isSwitchOrder == 'SPOT'">收益率</div>
+          </div>
+          <div class="flex-din">
+            <div class="color-13">{{item.sum ? toFixed(item.sum, 2) : '0'}}</div>
+            <div class="color-a2">累计交易量 (USDT)</div>
+          </div>
+        </div>
+        <div class="flex with-billboard-xin paddign" v-if="switchOrder == 'SPOT'">
           <div class="flex-din">
             <div class="color-13">{{item.count ? item.count : '0'}}</div>
             <div class="color-a2">总交易笔数</div>
@@ -101,7 +118,6 @@
             <div class="color-a2">跟单人数</div>
           </div>
         </div>
-
       </div>
       <!--大佬交易详情End-->
     </div>
