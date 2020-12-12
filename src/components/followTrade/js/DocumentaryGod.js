@@ -11,7 +11,7 @@ root.components = {
 root.data = function () {
   return {
     loading:true,
-    fixedFollow:1,
+    fixedFollow:2,
     followType:'RATE',
     godHistorList:[],
     godInfo:{},

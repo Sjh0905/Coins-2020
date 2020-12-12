@@ -224,18 +224,29 @@
 }
 .mobile-trade-center-follower {
   width: 7.5rem;
+  /*height: 1.38rem;*/
+  padding: 0.3rem 0.3rem 0;
+  border-bottom: 0.02rem solid #F7F8FA;
+}
+.mobile-trade-center-follower1 {
+  width: 7.5rem;
   height: 1.38rem;
   padding: 0.3rem 0.3rem 0;
   border-bottom: 0.02rem solid #F7F8FA;
 }
-.mobile-trader-follower-img {
+.mobile-trader-follower-img1 {
   width: 0.68rem;
   height: 100%;
-  /*background: pink;*/
 }
-.mobile-trader-follower-img img {
+.mobile-trader-follower-img1 img {
   margin-top: 0.06rem;
   width: 0.68rem;
+}
+.mobile-trader-follower-img {
+  margin-top: 0.06rem;
+  width: 0.68rem;
+  vertical-align: middle;
+  margin-bottom: 0.25rem;
 }
 .mobile-trader-follower-content {
   font-size:0.24rem;
@@ -243,6 +254,8 @@
   font-weight:400;
   color: #6A83A8;
   margin-left: 0.3rem;
+}
+.flex1 {
   flex: 1;
 }
 .mobile-trader-follower-content-top {
@@ -250,16 +263,19 @@
   margin-bottom: 0.1rem;
 }
 .mobile-trader-follower-UID {
+  display: inline-block;
   font-size:0.32rem;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color: #172841;
+  margin-left: 0.3rem;
 }
 .mobile-trader-follower-income {
   font-size:0.32rem;
   font-family:Roboto-Regular,Roboto;
   font-weight:400;
   color: #3576F5;
+
 }
 .mobile-trade-no-data {
   width: 7.5rem;
@@ -534,4 +550,14 @@
   width: 14px;
   vertical-align: sub;
   margin-bottom: 2px;
+}
+.mobile-trader-follower-text {
+  flex: 1;
+  font-size: 0.24rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6A83A8;
+}
+.mtop {
+  margin-bottom: 0.3rem;
 }

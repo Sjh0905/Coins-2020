@@ -103,14 +103,14 @@
   <div class="mobile-trade-center" v-if="isTapeList">
     <div class="mobile-trade-center-title  flex">
       <div class="mobile-trade-center-title-only mobile-trade-center-title-history" :class="followType == 1 ? 'mobile-trade-center-title-selected':''" @click="toggleType(1)">
-        操作记录
+        跟随者
       </div>
       <div class="mobile-trade-center-title-line"></div>
       <div class="mobile-trade-center-title-only mobile-trade-center-title-follower" :class="followType == 2 ? 'mobile-trade-center-title-selected':''" @click="toggleType(2)">
-        跟随者
+        操作记录
       </div>
     </div>
-    <div class="mobile-trade-center-content" v-if="followType == 1">
+    <div class="mobile-trade-center-content" v-if="followType == 2">
       <div class="mobile-trade-center-content-item" v-for="(item,index) in godHistorList" :key="index">
         <div class="mobile-trade-item-top flex">
           <div class="mobile-trade-item-top-left">
@@ -139,17 +139,17 @@
             <div class="mobile-trade-money">交易量 (USDT)</div>
           </div>
           <div class="mobile-trade-item-content-container flex">
-            <div class="mobile-trade-price">{{item.price}}</div>
+            <div class="mobile-trade-price">{{toFixed(item.price,4)}}</div>
             <div class="mobile-trade-amount">{{toFixed(item.amount,4)}}</div>
-            <div class="mobile-trade-money">{{toFixed(item.price * item.amount,2)}}</div>
+            <div class="mobile-trade-money">{{toFixed(item.price * item.amount,4)}}</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="mobile-trade-center-content" v-if="followType == 2">
-      <div class="mobile-trade-center-follower flex" v-for="(item,index) in followUserList">
-        <div class="mobile-trader-follower-img">
+    <div class="mobile-trade-center-content" v-if="followType == 1">
+      <div class="mobile-trade-center-follower1 flex" v-if="isSwitchOrder == 'SPOT'" v-for="(item,index) in followUserList">
+        <div class="mobile-trader-follower-img1">
           <img src="../assets/big-brother.png" alt="">
         </div>
         <div class="mobile-trader-follower-content">
@@ -158,10 +158,48 @@
             <div class="mobile-trader-follower-income">{{item.profit}}</div>
           </div>
           <div class="mobile-trader-follower-content-top flex">
-            <div class="mobile-trader-follower-text">跟单总成交额 {{item.amount}} USDT</div>
-            <div class="mobile-trader-follower-text">跟随收益(USDT)</div>
+            <div class="mobile-trader-follower-text">跟单总成交额 {{item.amount ? toFixed(item.amount, 2) : '0'}} USDT</div>
+            <div class="mobile-trader-follower-text s-right">跟随收益(USDT)</div>
           </div>
         </div>
+      </div>
+      <div class="mobile-trade-center-follower" v-if="isSwitchOrder == 'CONTRACT'" v-for="(item,index) in followUserList">
+        <div class="">
+          <img class="mobile-trader-follower-img" src="../assets/big-brother.png" alt="">
+          <span class="mobile-trader-follower-UID">{{item.userId}}</span>
+        </div>
+
+        <div class="flex">
+          <div class="mobile-trader-follower-income flex1">{{toFixed(item.userProfit,2) || '0'}}</div>
+          <div class="mobile-trader-follower-income flex1">{{toFixed(item.profit,2) || '0'}}</div>
+
+        </div>
+        <div class="flex mtop">
+          <div class="mobile-trader-follower-text flex1">总跟单利润（USDT)</div>
+          <div class="mobile-trader-follower-text flex1">总跟单收益（USDT)</div>
+
+        </div>
+        <div class="flex">
+          <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
+          <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekProfit,2) || '0'}}</div>
+
+        </div>
+        <div class="flex mtop">
+          <div class="mobile-trader-follower-text flex1">本周跟单利润（USDT)</div>
+          <div class="mobile-trader-follower-text flex1">本周跟单收益（USDT)</div>
+
+        </div>
+
+        <!--        <div class="mobile-trader-follower-content">-->
+        <!--          <div class="mobile-trader-follower-content-top flex">-->
+        <!--            <div class="mobile-trader-follower-UID">{{item.userId}}</div>-->
+        <!--&lt;!&ndash;            <div class="mobile-trader-follower-income">{{toFixed(item.profit,2) || '0'}}</div>&ndash;&gt;-->
+        <!--          </div>-->
+        <!--&lt;!&ndash;          <div class="mobile-trader-follower-content-top flex">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <div class="mobile-trader-follower-text">总跟单收益 {{toFixed(item.amount,2) || '0'}} USDT</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <div class="mobile-trader-follower-text">总跟单收益(USDT)</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;         </div>&ndash;&gt;-->
+        <!--        </div>-->
       </div>
     </div>
   </div>

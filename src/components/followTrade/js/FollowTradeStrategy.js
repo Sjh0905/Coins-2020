@@ -11,7 +11,7 @@ root.components = {
 root.data = function () {
   return {
     loading:true,
-    followType: 1,
+    followType: 2,
     godInfo:{},
     godHistorList:[],
     followUserList:[],
