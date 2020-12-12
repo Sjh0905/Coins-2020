@@ -928,6 +928,6 @@ root.methods.goToContractTransaction = function (){
     this.$router.push('/index/sign/login')
     return;
   }
-  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall');
 }
 export default root

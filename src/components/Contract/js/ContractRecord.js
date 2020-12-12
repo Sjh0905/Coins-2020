@@ -63,7 +63,9 @@ root.data = function () {
     accounts:[],
     hideZeroAsset: false, //隐藏零资产币种
 
-    otcCurrencyList:[]
+    otcCurrencyList:[],
+    contractSymbolArr:['BTCUSDT','ETHUSDT'], //合约展示币对
+
 
   }
 }
@@ -96,7 +98,7 @@ root.computed.serverTime = function () {
   return new Date().getTime();
 }
 root.computed.computedRecord = function () {
-  return this.records1C
+  return this.records1C || []
 }
 //保证金余额换算成人民币的估值
 root.computed.valuation = function () {
@@ -309,13 +311,13 @@ root.methods.re_getPositionRisk = function (data) {
   if (!data) return
   // console.log('获取记录', data)
   this.records = data.data
+  let aa = []
   this.records.map((v,index)=>{
-    if (v.positionAmt != 0 && v.symbol == 'BTCUSDT') {
-      let aa = []
+    if (v.positionAmt != 0 && this.contractSymbolArr.includes(v.symbol)) {
       aa.push(v)
-      this.records1C = aa
     }
   })
+  this.records1C = aa
 
   if (this.records1.length < this.limit) {
     this.loadingMoreShow = false
@@ -339,10 +341,11 @@ root.methods.popClose = function () {
   this.popOpen = false
 }
 
-root.methods.goToContractTransaction = function () {
+root.methods.goToContractTransaction = function (item) {
   // window.location.replace(this.$store.state.domain_url + 'index/sign/login?ani=1&toUrl=c2c_url');
   // window.location.replace(process.env.CONTRACT_URL +'index/tradingHall?symbol=BTC_USDT');
-  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=KK_USDT');
+  let symbol = item.symbol
+  window.location.replace(this.$store.state.contract_url + 'index/tradingHall?symbol=' + symbol);
 
 }
 

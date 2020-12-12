@@ -29,8 +29,8 @@
 
     <div class="cangwei-zichan">
       <div class="lock-house-sel flex">
-        <div class="title-tab flex-center tab-item-first" :class="propertyType == 'position'?'selected1 text_blue-7':''" @click="clickProperty('position')">仓位</div>
-        <div class="title-tab margin-a-little flex-center tab-item-first" :class="propertyType =='propertyAssets'?'selected1 text_blue-7':''" @click="clickProperty('propertyAssets')">资产</div>
+        <div class="title-tab flex-center pointer" :class="propertyType == 'position'?'selected1 text_blue-7':''" @click="clickProperty('position')">仓位</div>
+        <div class="title-tab margin-a-little flex-center pointer" :class="propertyType =='propertyAssets'?'selected1 text_blue-7':''" @click="clickProperty('propertyAssets')">资产</div>
       </div>
 
       <div v-if="propertyType == 'position'">
@@ -92,7 +92,7 @@
                   </div>
                   <!-- 操作-->
                   <div class="operation">
-                    <button class="pointer" @click="goToContractTransaction()">{{$t('去交易')}}</button>
+                    <button class="pointer" @click="goToContractTransaction(item)">{{$t('去交易')}}</button>
                   </div>
                 </div>
               </li>
