@@ -41,15 +41,14 @@ root.data = function () {
   // });
 // }
 root.created = function () {
+  this.GET_AUTH_STATE()
   if(this.$route.query.isSwitchOrder == 'SPOT'){
     this.switchOrder = 'SPOT'
   }
 
-  this.GET_AUTH_STATE()
-
   this.getBigBrotherList()
   this.currentInterval1 && clearInterval(this.currentInterval1)
-  this.currentInterval1 = setInterval(this.getBigBrotherList, 4000)
+  this.currentInterval1 = setInterval(this.getBigBrotherList, 10000)
 
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({
@@ -136,7 +135,6 @@ root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
 
-
 // 认证状态
 root.methods.GET_AUTH_STATE = function () {
   this.$http.send("GET_AUTH_STATE", {
@@ -179,6 +177,10 @@ root.methods.jumpToBack = function () {
 }
 //跳转个人镜像交易
 root.methods.goToMobileFollowTradeStrategy = function (switchOrder) {
+  if (!this.isLogin) {
+    this.$router.push('/index/sign/login?toUrl=follow_url')
+    return;
+  }
   if (!this.bindIdentify) {
     this.popIdenOpen = true
     return
@@ -196,6 +198,10 @@ root.methods.goToMobileFollowTradeStrategy = function (switchOrder) {
   this.$router.push({name:'mobileFollowTradeStrategy',query:{isSwitchOrder:this.switchOrder}})
 }//跳转个人镜像交易
 root.methods.goToManagementiWthBill = function (switchOrder) {
+  if (!this.isLogin) {
+    this.$router.push('/index/sign/login?toUrl=follow_url')
+    return;
+  }
   if (!this.bindIdentify) {
     this.popIdenOpen = true
     return
@@ -219,6 +225,10 @@ root.methods.goToDocumentary = function (item,switchOrder) {
   //   this.popIdenOpen = true
   //   return
   // }
+  if (!this.isLogin) {
+    this.$router.push('/index/sign/login?toUrl=follow_url')
+    return;
+  }
 
   // H5判断是否绑定谷歌或手机，如果都没绑定
   if (!this.bindGA && !this.bindMobile) {
@@ -248,7 +258,10 @@ root.methods.goToDocumentary = function (item,switchOrder) {
   this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isYuan:this.godList,isSwitchOrder:this.switchOrder}})
 }// 跳转我的镜像交易
 root.methods.goToDocumentary1 = function (item,switchOrder) {
-
+  if (!this.isLogin) {
+    this.$router.push('/index/sign/login?toUrl=follow_url')
+    return;
+  }
   // H5判断是否绑定谷歌或手机，如果都没绑定
   if (!this.bindGA && !this.bindMobile) {
     // this.$eventBus.notify({key: 'BIND_AUTH_POP'})
@@ -274,6 +287,10 @@ root.methods.goToMobileMyFollowOrder = function (switchOrder) {
   //   this.popIdenOpen = true
   //   return
   // }
+  if (!this.isLogin) {
+    this.$router.push('/index/sign/login?toUrl=follow_url')
+    return;
+  }
 
   // H5判断是否绑定谷歌或手机，如果都没绑定
   if (!this.bindGA && !this.bindMobile) {

@@ -42,7 +42,7 @@ root.created = function () {
 
   this.getBigBrotherList()
   this.currentInterval1 && clearInterval(this.currentInterval1)
-  this.currentInterval1 = setInterval(() => { this.getBigBrotherList() }, 4000)
+  this.currentInterval1 = setInterval(() => { this.getBigBrotherList() }, 10000)
 
   if(this.$route.query.isApp) {
     window.postMessage(JSON.stringify({
@@ -201,6 +201,10 @@ root.methods.goTofollowTradeStrategy = function (switchOrder) {
 }
 // 跳转我的镜像交易
 root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
+  if (!this.isLogin) {
+    this.$router.push('/index/sign/login?toUrl=follow_url')
+    return;
+  }
   // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
   if (!this.bindGA && !this.bindMobile) {
     this.popWindowTitle = this.$t('popWindowTitleWithdrawals')
@@ -232,6 +236,10 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
 
 // 跳转我的镜像交易
 root.methods.goToDocumentary1 = function (userId,fee,feeType,switchOrder,isGod) {
+  if (!this.isLogin) {
+    this.$router.push('/index/sign/login?toUrl=follow_url')
+    return;
+  }
   // // PC如果没有绑定谷歌或手机，不允许报名(邮箱注册,手机注册无限制)
   if (!this.bindGA && !this.bindMobile) {
     this.popWindowTitle = this.$t('popWindowTitleWithdrawals')

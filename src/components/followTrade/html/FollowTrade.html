@@ -16,11 +16,11 @@
         <!--数据每小时更新一次-->
 <!--        <div class="follow-xue">{{$t('updatedEveryHour')}}</div>-->
       </div>
-      <div class="follow-my" v-if="isGod">
+      <div class="follow-my" v-if="isGod && isLogin">
         <!--我的镜像交易-->
         <div class="follow-my-bix" @click="goToManagementWithBill(switchOrder,isGod)">{{$t('带单管理')}}</div>
       </div>
-      <div class="follow-my" v-else>
+      <div class="follow-my" v-if="!isGod && isLogin">
         <!--我的镜像交易-->
         <div class="follow-my-bix" @click="goToMyFollowOrder(switchOrder)">{{$t('myFollowOrder')}}</div>
         <!--我要带单-->

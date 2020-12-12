@@ -438,6 +438,10 @@ root.methods.re_commit = function (data) {
       this.GO_CONTRACT();
       // return;
     }
+    if(this.$route.query.toUrl && this.$route.query.toUrl == "follow_url"){
+      this.GO_FOLLOW();
+      return;
+    }
     // 邀请海报跳转过来+type参数
     if(this.$route.query.type && this.$route.query.type == "contract"){
       window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall?type=contract&uid='+ this.$route.query.uid);
@@ -469,6 +473,18 @@ root.methods.GO_CONTRACT = function () {
   // console.log(con_url)
   window.open(con_url);
 }
+// 跳到跟单页面
+root.methods.GO_FOLLOW = function () {
+  let paras = this.$store.state.save_cookie;
+  if (!paras) return;
+  if(!this.isMobile) {
+    this.$router.push({name: 'followTrade'})
+  }else {
+    this.$router.push({name: 'mobileFollowTrade'})
+  }
+
+}
+
 // 跳到GRC页面
 root.methods.GO_GRC = function () {
 

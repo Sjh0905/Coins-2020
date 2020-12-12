@@ -230,7 +230,7 @@ root.routes.push({
   path: '/index/mobileFollowTrade',
   name: 'mobileFollowTrade',
   meta: {
-    requireLogin: true,
+    requireLogin: false,
     pcname: 'followTrade',
     h5name: 'mobileFollowTrade',
   },
@@ -3517,7 +3517,7 @@ root.routes.push({
       path: 'followTrade',
       name: 'followTrade',
       meta: {
-        requireLogin: true,
+        requireLogin: false,
         pcname: 'followTrade',
         h5name: 'mobileFollowTrade',
       },
