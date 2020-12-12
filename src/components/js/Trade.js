@@ -132,7 +132,7 @@ root.methods.initViews = function (lang) {
 			has_weekly_and_monthly: false,
 			has_empty_bars: true,
 			has_no_volume: false,
-			volume_precision: 8,
+			volume_precision: 0,
 			// volume_precision: self.precision,
 			supported_resolutions: ['1', '5', '15', '30', '60','120', '240','360','720', 'D'],
 			// supported_resolutions :['1S',"1","60","D", "2D", "3D"],
@@ -652,10 +652,12 @@ root.methods.initViews = function (lang) {
         'Histogram.color': '#838B99', 'Histogram.linewidth': 1, 'Histogram.transparency': 35,
         'MACD.color': '#86CB12', 'MACD.linewidth': 2, 'MACD.transparency': 35,
         'Signal.color': '#F60076', 'Signal.linewidth': 2, 'Signal.transparency': 35,
+        'precision':0,
       } : {
         'Histogram.color': '#838B99', 'Histogram.linewidth': 1, 'Histogram.transparency': 35,
         'MACD.color': '#86CB12', 'MACD.linewidth': 1, 'MACD.transparency': 35,
         'Signal.color': '#F60076', 'Signal.linewidth': 1, 'Signal.transparency': 35,
+        'precision':0,
       }
 
       let StochasticRSIConfigs = self.$store.state.isMobile ? {
@@ -664,23 +666,27 @@ root.methods.initViews = function (lang) {
         'UpperLimit.color': '#0D111F', 'UpperLimit.linewidth': 0,
         'LowerLimit.color': '#0D111F', 'LowerLimit.linewidth': 0,
         'Hlines Background.color':'#626874',
+        'precision':0,
       } : {
         '%K.color': '#86CB12', '%K.linewidth': 1, '%K.transparency': 35,
         '%D.color': '#F60076', '%D.linewidth': 1, '%D.transparency': 35,
         'UpperLimit.color': '#0D111F', 'UpperLimit.linewidth': 0,
         'LowerLimit.color': '#0D111F', 'LowerLimit.linewidth': 0,
         'Hlines Background.color':'#626874',
+        'precision':0,
       }
       let RelativeStrengthIndexConfigs = self.$store.state.isMobile ? {
         'Plot.color': '#86CB12', 'Plot.linewidth': 2, 'UpperLimit.value': 80, 'LowerLimit.value': 20,
         'UpperLimit.color': '#0D111F', 'UpperLimit.linewidth': 0,
         'LowerLimit.color': '#0D111F', 'LowerLimit.linewidth': 0,
         'Hlines Background.color':'#D8D8D8',
+        'precision':0,
       } : {
         'Plot.color': '#86CB12', 'Plot.linewidth': 1, 'UpperLimit.value': 80, 'LowerLimit.value': 20,
         'UpperLimit.color': '#0D111F', 'UpperLimit.linewidth': 0,
         'LowerLimit.color': '#0D111F', 'LowerLimit.linewidth': 0,
         'Hlines Background.color':'#D8D8D8',
+        'precision':0,
       }
       widget.chart().createStudy('MACD',false, false,[2,33,'close',3],null,MACDConfigs);
       widget.chart().createStudy('Stochastic RSI',false, false,[14,14,2,3],null, StochasticRSIConfigs);
