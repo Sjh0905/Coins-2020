@@ -538,7 +538,7 @@ root.methods.testTransferAmount  = function () {
 
   if(this.assetAccountType == ' currency'){
     if (Number(this.amountInput) > Number(this.transferCurrencyAvailable)) {
-      this.transferAmountWA = this.$t('超出划转可用余额11')
+      this.transferAmountWA = this.$t('超出划转可用余额')
       return false
     }
     return true
