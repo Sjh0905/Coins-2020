@@ -486,7 +486,7 @@ root.methods.openTransfer = function (balance) {
   this.popWindowOpen1 = true
 
   // 合约可用余额
-  this.transferCurrencyOTCAvailable = balance.availableBalance
+  this.transferCurrencyOTCAvailable = balance.walletBalance
   // 我的钱包可用余额
   // this.transferCurrencyAvailable = item.available
   // this.itemInfo = item
@@ -538,13 +538,13 @@ root.methods.testTransferAmount  = function () {
 
   if(this.assetAccountType == ' currency'){
     if (Number(this.amountInput) > Number(this.transferCurrencyAvailable)) {
-      this.transferAmountWA = this.$t('超出划转可用余额')
+      this.transferAmountWA = this.$t('超出划转可用余额11')
       return false
     }
     return true
   }
   if(this.assetAccountType == 'wallet'){
-    if (Number(this.amountInput) > Number(this.transferCurrencyOTCAvailable)) {
+    if (Number(this.amountInput) > Number(this.balance.walletBalance)) {
       this.transferAmountWA = this.$t('超出划转可用余额')
       return false
     }

@@ -352,11 +352,11 @@ root.methods.getUSDThl = function(){
 }
 // 获取账户信息回调
 root.methods.re_getUSDThl = function (data) {
-  console.info('折合人民币1',data)
+  // console.info('折合人民币1',data)
   typeof (data) === 'string' && (data = JSON.parse(data))
-  console.info('折合人民币2',data)
+  // console.info('折合人民币2',data)
   this.$store.commit('changeExchange_rate_dollar', data)
-  console.info('折合人民币3',data)
+  // console.info('折合人民币3',data)
 }
 // 获取账户信息出错
 root.methods.error_getUSDThl = function (err) {
