@@ -326,6 +326,8 @@ root.methods.initSocket = function () {
   this.$socket.emit('unsubscribe', {symbol: this.$store.state.symbol})
   this.$socket.emit('subscribe', {symbol: this.$store.state.symbol})
 
+  let self = this
+
   this.$socket.on({
     key: 'topic_snapshot',
     bind: this,
