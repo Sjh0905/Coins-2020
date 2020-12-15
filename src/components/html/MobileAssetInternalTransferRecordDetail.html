@@ -28,13 +28,13 @@
           <!--姓名-->
           <div class="header-box-state">
             <span class="header-box-state-title">姓名</span>
-            <div class="header-box-state-container">{{rechargeDetailData.fromUserId === userId  ? rechargeDetailData.toName : rechargeDetailData.fromName}}</div>
+            <div class="header-box-state-container">{{rechargeDetailData.fromUserId === userId  ? $globalFunc.formatUserNameS(rechargeDetailData.toName ||'**') : $globalFunc.formatUserNameS(rechargeDetailData.fromName||'**')}}</div>
           </div>
 
           <!--账号-->
           <div class="header-box-state">
             <span class="header-box-state-title">账号</span>
-            <div class="header-box-state-container">{{rechargeDetailData.fromUserId === userId ? rechargeDetailData.toEmail : rechargeDetailData.fromEmail}}</div>
+            <div class="header-box-state-container">{{rechargeDetailData.fromUserId === userId ? $globalFunc.formatUserName(rechargeDetailData.toEmail||'**') : $globalFunc.formatUserName(rechargeDetailData.fromEmail||'**')}}</div>
           </div>
 
           <!--UID-->
