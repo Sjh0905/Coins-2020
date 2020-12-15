@@ -102,14 +102,14 @@
           <!-- 交易对-->
           <div class="application_header_div">{{$t('transactionPair')}}</div>
           <!-- 类型-->
-          <div class="application_header_div">{{$t('type')}}</div>
+<!--          <div class="application_header_div">{{$t('type')}}</div>-->
           <div class="application_header_div" v-if="isSwitchOrder == 'CONTRACT'">{{$t('方向')}}</div>
           <!-- 价格-->
           <div class="application_header_div">{{$t('henchman')}}</div>
           <!-- 数量-->
-          <div class="application_header_div">{{$t('amount')}}</div>
+<!--          <div class="application_header_div"></div>-->
           <!-- 金额-->
-          <div class="application_header_div_right">{{$t('money')}} (USDT)</div>
+          <div class="application_header_div_right">{{$t('amount')}}</div>
         </li>
         <template>
           <!-- 操作记录 -->
@@ -120,16 +120,16 @@
               <!--交易对-->
               <div class="application_header_div">{{item.symbol.replace('_','/')}}</div>
               <!--类型-->
-              <div class="application_header_div"
-                   v-if="isSwitchOrder == 'SPOT'"
-                   :class="item.direction==='BUY_LIMIT' || item.direction==='BUY_MARKET'?'text-green':'text-red'">
-                <!--买入/卖出-->
-                {{contractType[item.orderType]}}
-              </div>
-              <div class="application_header_div" v-if="isSwitchOrder == 'CONTRACT'">
-                <!--买入/卖出-->
-                {{contractType[item.orderType]}}
-              </div>
+<!--              <div class="application_header_div"-->
+<!--                   v-if="isSwitchOrder == 'SPOT'"-->
+<!--                   :class="item.direction==='BUY_LIMIT' || item.direction==='BUY_MARKET'?'text-green':'text-red'">-->
+<!--                &lt;!&ndash;买入/卖出&ndash;&gt;-->
+<!--                {{contractType[item.orderType]}}-->
+<!--              </div>-->
+<!--              <div class="application_header_div" v-if="isSwitchOrder == 'CONTRACT'">-->
+<!--                &lt;!&ndash;买入/卖出&ndash;&gt;-->
+<!--                {{contractType[item.orderType]}}-->
+<!--              </div>-->
               <div class="application_header_div" :class="item.direction==='BUY'?'text-green':'text-red'" v-if="isSwitchOrder == 'CONTRACT'">
                 {{$globalFunc.getOrderSide(item.positionSide,item.direction)}}
               </div>
@@ -137,9 +137,10 @@
               <!--价格-->
               <div class="application_header_div">{{toFixed(item.price,4) || '0'}}</div>
               <!--数量-->
-              <div class="application_header_div">{{toFixed(item.amount,4) || '0'}}</div>
+<!--              <div class="application_header_div"></div>-->
               <!--金额-->
-              <div class="application_header_div_right">{{toFixed(item.price * item.amount,4)}}</div>
+              <div class="application_header_div_right">{{toFixed(item.amount,4) || '0'}}</div>
+<!--              <div class="application_header_div_right">{{toFixed(item.price * item.amount,4)}}</div>-->
             </li>
           </template>
 
