@@ -164,7 +164,12 @@ GlobalFunction.formatUserName = function (src) {
   return `${first}@${emailArr[1]}`
 }
 
-// 列表中格式化用户名
+// 格式化用户名字
+GlobalFunction.formatUserNameS = function (src) {
+  return `${src.slice(0, 1)}****`
+}
+
+// 列表中格式化用户名s
 GlobalFunction.listFormatUserName = function (src) {
   let userNameType = GlobalFunction.emailOrMobile(src)
   if (userNameType === 1) {

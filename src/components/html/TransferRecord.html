@@ -55,12 +55,12 @@
             <div class="flow-code">{{item.transferId}}</div>
 
             <!--收款人 or 付款人-->
-            <div class="name" v-if="item.fromUserId === userId">{{item.toName}}</div>
-            <div class="name" v-else>{{item.fromName}}</div>
+            <div class="name" v-if="item.fromUserId === userId">{{$globalFunc.formatUserNameS(item.toName) || '--'}}</div>
+            <div class="name" v-else>{{$globalFunc.formatUserNameS(item.fromName) || '--'}}</div>
 
             <!--收款人账号 or 付款人账号-->
-            <div class="Payee" v-if="item.fromUserId === userId">{{item.toEmail}}</div>
-            <div class="Payee" v-else>{{item.fromEmail}}</div>
+            <div class="Payee" v-if="item.fromUserId === userId">{{$globalFunc.formatUserName(item.toEmail)}}</div>
+            <div class="Payee" v-else>{{$globalFunc.formatUserName(item.fromEmail)}}</div>
 
             <!--收款人UID or 付款人UID-->
             <div class="uid" v-if="item.fromUserId === userId">{{item.toUserId}}</div>
