@@ -115,15 +115,15 @@
         <div class="mobile-trade-item-top flex">
           <div class="mobile-trade-item-top-left">
             <span>{{item.symbol.replace('_','/')}}</span>
-            <span class="mobile-trade-buy"
-                  v-if="isSwitchOrder == 'SPOT'"
-                  :class="item.direction==='BUY'?'text-green':'text-red'">
-              {{contractType[item.orderType]}}
-            </span>
-            <span class="mobile-trade-buy"
-                  v-if="isSwitchOrder == 'CONTRACT'">
-              {{contractType[item.orderType]}}
-            </span>
+<!--            <span class="mobile-trade-buy"-->
+<!--                  v-if="isSwitchOrder == 'SPOT'"-->
+<!--                  :class="item.direction==='BUY'?'text-green':'text-red'">-->
+<!--              {{contractType[item.orderType]}}-->
+<!--            </span>-->
+<!--            <span class="mobile-trade-buy"-->
+<!--                  v-if="isSwitchOrder == 'CONTRACT'">-->
+<!--              {{contractType[item.orderType]}}-->
+<!--            </span>-->
             <span class="text-color"
                   :class="item.direction==='BUY'?'text-green':'text-red'"
                   v-if="isSwitchOrder == 'CONTRACT'">
@@ -135,13 +135,15 @@
         <div class="mobile-trade-item-content">
           <div class="mobile-trade-item-content-title flex">
             <div class="mobile-trade-price">价格</div>
-            <div class="mobile-trade-amount">数量</div>
-            <div class="mobile-trade-money">交易量 (USDT)</div>
+<!--            <div class="mobile-trade-amount">数量</div>-->
+<!--            <div class="mobile-trade-money">交易量 (USDT)</div>-->
+            <div class="mobile-trade-money">数量</div>
           </div>
           <div class="mobile-trade-item-content-container flex">
             <div class="mobile-trade-price">{{toFixed(item.price,4)}}</div>
-            <div class="mobile-trade-amount">{{toFixed(item.amount,4)}}</div>
-            <div class="mobile-trade-money">{{toFixed(item.price * item.amount,4)}}</div>
+<!--            <div class="mobile-trade-amount">{{toFixed(item.amount,4)}}</div>-->
+<!--            <div class="mobile-trade-money">{{toFixed(item.price * item.amount,4)}}</div>-->
+            <div class="mobile-trade-money">{{toFixed(item.amount,4)}}</div>
           </div>
         </div>
       </div>
