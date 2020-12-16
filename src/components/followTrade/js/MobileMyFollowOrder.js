@@ -82,7 +82,7 @@ root.computed.isAndroid = function () {
 }
 //什么类型的跟单
 root.computed.isSwitchOrder = function () {
-  return this.$route.query.isSwitchOrder;
+  return this.$route.query.isSwitchOrder || this.$route.params.isSwitchOrder;
 }
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
@@ -105,7 +105,7 @@ root.methods.delFollowClose = function () {
 // 点击修改跟单
 root.methods.modifyDocumentary = function (item) {
   this.removeEventPopstate();
-  this.$router.push({name:'mobileDocumentary',query:{item:JSON.stringify(item)}})
+  this.$router.push({name:'mobileDocumentary',query:{isSwitchOrder:this.isSwitchOrder,item:JSON.stringify(item)}})
 }
 
 //我的镜像交易

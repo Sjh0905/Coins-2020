@@ -47,7 +47,7 @@
 /*------------ 打开自动续费  begin -------------*/
 .open-automatic-renew {
   min-height: 3rem;
-  padding: 0.3rem 0.3rem 0.9rem;
+  padding: 0.3rem 0.3rem 0.3rem;
 }
 .open-automatic-renew-top {
   height: 0.6rem;
@@ -57,7 +57,7 @@
   font-weight:500;
   color: #131F30;
   justify-content: space-between;
-  margin-bottom: 0.34rem;
+  margin-bottom: 0.17rem;
 }
 .open-automatic-renew-img img {
   width: 0.9rem;
@@ -80,11 +80,13 @@
 /*------------ 跟单统计  -------------*/
 .follow-statistics{
   width: 100%;
-  height:1.78rem;
+  height:1.56rem;
   /*margin-top: 0.88rem;*/
   /*padding-top: 0.4rem;*/
   /*align-items: center;*/
+  padding-top: 0.3rem;
   border-bottom: 0.1rem solid rgba(247,248,250,1);
+  border-top: 0.1rem solid rgba(247,248,250,1);
 }
 .follow-statistics-item{
   flex: 1;
@@ -100,7 +102,7 @@
   color:rgba(162,181,217,1);
 }
 .follow-statistics-item-money{
-  margin-top: 0.14rem;
+  /*margin-top: 0.14rem;*/
   font-size: 0.36rem;
   font-family: Roboto-Medium;
   color: #172841;
@@ -124,12 +126,14 @@
 }
 .mobile-trade-center-content-item {
   width: 7.5rem;
-  height: 3.68rem;
+  height: 3.4rem;
   padding: 0.3rem;
+  padding-bottom: 0;
   border-bottom: 0.02rem solid #F7F8FA;
+  border-top: 0.02rem solid #F7F8FA;
 }
 .mobile-trade-item-follower{
-  margin-bottom:0.28rem;
+  /*margin-bottom:0.28rem;*/
   align-items: center;
 }
 .mobile-trade-item-follower-info{
@@ -141,7 +145,7 @@
 }
 .mobile-trade-item-follower-uid{
   margin-left: 0.28rem;
-  height:0.44rem;
+  /*height:0.44rem;*/
   line-height:0.44rem;
   font-size:0.32rem;
   font-family:PingFangSC-Semibold,PingFang SC;
@@ -149,11 +153,12 @@
   color:rgba(19,31,48,1);
 }
 .mobile-trade-item-follower-cancle-btn{
-  width:1.56rem;
+  /*width:1.56rem;*/
   height:0.5rem;
+  padding: 0 0.3rem;
   line-height:0.5rem;
   background:rgba(56,111,249,1);
-  border-radius:0.03rem;
+  border-radius:0.04rem;
   text-align: center;
   font-size:0.24rem;
   font-family:PingFangSC-Medium,PingFang SC;

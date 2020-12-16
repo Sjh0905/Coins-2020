@@ -32,7 +32,8 @@
   <div class="mobile-trade-top"  v-if="isSwitchOrder=='SPOT'">
     <div class="mobile-trade-top-banner flex">
       <div class="mobile-trade-top-banner-img">
-        <img src="../assets/management_personal_icon.png" alt="" class="mobile-trade-img">
+<!--        <img src="../assets/management_personal_icon.png" alt="" class="mobile-trade-img">-->
+        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">
       </div>
       <div class="mobile-trade-top-banner-text">{{this.userId}}</div>
     </div>
@@ -65,7 +66,7 @@
   <div class="mobile-trade-top" v-if="isSwitchOrder=='CONTRACT'">
     <div class="mobile-trade-top-banner flex">
       <div class="mobile-trade-top-banner-img">
-        <img src="../assets/management_personal_icon.png" alt="" class="mobile-trade-img">
+        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">
       </div>
       <div class="mobile-trade-top-banner-text">{{this.userId}}</div>
     </div>
@@ -167,7 +168,7 @@
       </div>
       <div class="mobile-trade-center-follower" v-if="isSwitchOrder == 'CONTRACT'" v-for="(item,index) in followUserList">
         <div class="">
-          <img class="mobile-trader-follower-img" src="../assets/big-brother.png" alt="">
+          <img class="mobile-trader-follower-img" src="../assets/big-brother2.png" alt="">
           <span class="mobile-trader-follower-UID">{{item.userId}}</span>
         </div>
 

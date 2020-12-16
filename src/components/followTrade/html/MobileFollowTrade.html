@@ -37,7 +37,7 @@
     <!--大佬头像Start-->
       <div class="big-brother-large-box flex">
         <div>
-          <img class="big-brother-img" src="../assets/big-brother.png" alt="">
+          <img class="big-brother-img" src="../assets/big-brother2.png" alt="">
         </div>
         <div class="big-brother-uid">{{item.userId}}</div>
         <div class="documentary-details">
@@ -76,14 +76,14 @@
           </div>
 
           <div class="flex-din mre">
-            <div class="color-13" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate, 2) : '0'}}%</div>
-            <div class="color-a2">总收益率</div>
+            <div class="color-13" :class="item.weekProfit >= 0 ? 'text-green' : 'text-red'">{{item.weekProfit ? toFixed(item.weekProfit, 2) : '0'}}</div>
+            <div class="color-a2">本周收益 (USDT)</div>
           </div>
         </div>
         <div class="flex with-billboard-xin paddign" v-if="switchOrder == 'CONTRACT'">
           <div class="flex-din">
-            <div class="color-13" :class="item.weekProfit >= 0 ? 'text-green' : 'text-red'">{{item.weekProfit ? toFixed(item.weekProfit, 2) : '0'}}</div>
-            <div class="color-a2">本周收益 (USDT)</div>
+            <div class="color-13" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate, 2) : '0'}}%</div>
+            <div class="color-a2">总收益率</div>
           </div>
 
           <div class="flex-din">
