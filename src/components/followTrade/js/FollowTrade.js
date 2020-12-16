@@ -214,7 +214,7 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
     return
   }
   if(this.userId == userId){
-    // 自己不能跟随自己哦
+    // 自己不能跟单自己哦
     this.openPop(this.$t('canNotFollowMyself'))
     return
   }
@@ -226,8 +226,8 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
   }
 
   if(this.godList.length != 0){
-    // 用户合约跟单只能跟随一个大神
-    this.openPop(this.$t('用户合约跟单只能跟随一个大神'))
+    // 用户合约跟单只能跟单一个大神
+    this.openPop(this.$t('用户合约跟单只能跟单一个大神'))
     return
   }
 
@@ -249,7 +249,7 @@ root.methods.goToDocumentary1 = function (userId,fee,feeType,switchOrder,isGod) 
     return
   }
   if(this.userId == userId){
-    // 自己不能跟随自己哦
+    // 自己不能跟单自己哦
     this.$router.push({name:'followTradeStrategy',query:{isSwitchOrder:this.switchOrder,}})
     return
   }
@@ -259,7 +259,7 @@ root.methods.goToDocumentary1 = function (userId,fee,feeType,switchOrder,isGod) 
 
 
 
-// 返回我的镜像交易，正在跟随
+// 返回我的镜像交易，正在跟单
 root.methods.goToMyFollowOrder = function (switchOrder) {
   // // 如果没有实名认证不允许报名
   // if (!this.bindIdentify) {
@@ -300,8 +300,8 @@ root.methods.re_getBigBrotherList = function (data) {
   this.loading = false
   this.listGod = data.dataMap.list || [] // 大神列表
   this.days = data.dataMap.days || '0'
-  this.godList = data.dataMap.godList || []   // 已跟随大神列表
-  this.isGod = data.dataMap.isGod || ''   // 已跟随大神列表
+  this.godList = data.dataMap.godList || []   // 已跟单大神列表
+  this.isGod = data.dataMap.isGod || ''   // 已跟单大神列表
 }
 root.methods.error_getBigBrotherList = function (err) {
   console.log('err=====',err)

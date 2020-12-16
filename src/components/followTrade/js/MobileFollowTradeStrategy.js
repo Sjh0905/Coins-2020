@@ -91,7 +91,7 @@ root.methods.clickToggleTrue = function () {
   this.BDBInfo = true
 }
 
-// 切换历史跟单和跟随者
+// 切换历史跟单和跟单者
 root.methods.toggleType = function (type) {
   this.followType = type
 }
@@ -143,7 +143,7 @@ root.methods.error_postPersonalrHistory = function (err) {
 }
 
 
-//个人跟随者
+//个人跟单者
 root.methods.postPersonalFollowUser = function () {
   // let params = {
   //   followId: this.userId ,

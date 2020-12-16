@@ -78,7 +78,7 @@ root.mounted = function () {
   //   };
   //
   //   document.onmouseup = function(){
-  //     document.onmousemove = null;    // 解除 鼠标移动div跟随 事件
+  //     document.onmousemove = null;    // 解除 鼠标移动div跟单 事件
   //     document.onmouseup = null;    // 解除鼠标松开事件
   //     oDiv.releaseCapture && oDiv.releaseCapture();    // IE8 及以下 解除强制捕获单击事件
   //   };

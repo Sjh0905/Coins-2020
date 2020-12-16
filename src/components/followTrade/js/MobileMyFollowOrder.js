@@ -42,7 +42,7 @@ root.created = function () {
       }
     }))
   }
-  // 我的跟随
+  // 我的跟单
   this.postMyDocumentary()
 }
 
@@ -93,12 +93,12 @@ root.methods.isFollowId = function (item) {
   // console.info('item====','执行啦几次呢？？?')
   return this.followId = item.followId
 }
-// 取消跟随
+// 取消跟单
 root.methods.delFollow = function (item){
   this.followId = item.followId
   this.delFollowOpen = true
 }
-// 关闭取消跟随弹窗
+// 关闭取消跟单弹窗
 root.methods.delFollowClose = function () {
   this.delFollowOpen = false
 }
@@ -163,7 +163,7 @@ root.methods.error_clickToggle = function (err) {
   console.warn('点击切换自动续费', err)
 }
 
-// 取消跟随
+// 取消跟单
 root.methods.delFollowList = function () {
   this.$http.send('POST_DEL_FOLLOWER', {
     bind: this,
@@ -175,14 +175,14 @@ root.methods.delFollowList = function () {
     errorHandler: this.error_delFollowList
   })
 }
-// 取消跟随
+// 取消跟单
 root.methods.re_delFollowList = function (data) {
   typeof (data) === 'string' && (data = JSON.parse(data))
   if(!data) return
 
 
   if(data.errorCode == 2){
-    this.openPop('用户有仓位，无法取消跟随',0)
+    this.openPop('用户有仓位，无法取消跟单',0)
     return
   }
   if(data.errorCode == 5){
@@ -196,12 +196,12 @@ root.methods.re_delFollowList = function (data) {
     return
   }
   if(data.errorCode == 0){
-    this.openPop('取消跟随成功',1)
+    this.openPop('取消跟单成功',1)
     this.postMyDocumentary()
   }
   this.delFollowClose()
 }
-// 取消跟随
+// 取消跟单
 root.methods.error_delFollowList = function (err) {
   console.warn('点击切换自动续费', err)
 }
@@ -218,7 +218,7 @@ root.methods.closePop = function () {
   this.popOpen = false;
 }
 
-// 切换历史跟单和跟随者
+// 切换历史跟单和跟单者
 root.methods.toggleType = function (type) {
   this.followType = type
 }

@@ -109,7 +109,7 @@ root.methods.clickToggleTrue = function () {
 
 
 
-// 切换历史跟单和跟随者
+// 切换历史跟单和跟单者
 root.methods.toggleType = function (type) {
   this.fixedFollow = type
 }
@@ -124,7 +124,7 @@ root.methods.jumpToFollowTrade = function () {
 // 点击跟单
 root.methods.jumpToFollowDocumentary = function () {
   if(this.isGod){
-    // 自己不能跟随自己哦
+    // 自己不能跟单自己哦
     this.openPop(this.$t('大神不能跟单大神'))
     return
   }
@@ -149,7 +149,7 @@ root.methods.openTapeListDisable = function () {
     return
   }
   if (this.isYuan.length != 0) {
-    this.openPop(this.$t('用户合约跟单只能跟随一个大神'))
+    this.openPop(this.$t('用户合约跟单只能跟单一个大神'))
     return
   }
   this.popWindowOpenContract = true
@@ -229,7 +229,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     data.errorCode == 3 &&  this.openPop(this.$t('canNotFollowMyself'));
     data.errorCode == 4 &&  this.openPop(this.$t('canNotFollowMyself2'));
     data.errorCode == 5 &&  this.openPop(this.$t('大神不能跟单大神'));
-    data.errorCode == 6 &&  this.openPop(this.$t('用户合约跟单只能跟随一个大神'));
+    data.errorCode == 6 &&  this.openPop(this.$t('用户合约跟单只能跟单一个大神'));
     data.errorCode == 7 &&  this.openPop(this.$t('followDetails_4'));
     data.errorCode == 8 &&  this.openPop(this.$t('followDetails_1'));
     data.errorCode == 9 &&  this.openPop(this.$t('followDetails_2'));
@@ -237,7 +237,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     data.errorCode == 11 &&  this.openPop(this.$t('followDetails_5'));
     data.errorCode == 12 &&  this.openPop(this.$t('followDetails_1'));
     data.errorCode == 15 &&  this.openPop(this.$t('followDetails_3'));
-    data.errorCode == 16 &&  this.openPop(this.$t('用户已经有仓位了不能跟随大神'));
+    data.errorCode == 16 &&  this.openPop(this.$t('用户已经有仓位了不能跟单大神'));
     data.errorCode == 17 &&  this.openPop(this.$t('大神有仓位，暂不能跟单'));
     data.errorCode == 18 &&  this.openPop(this.$t('用户和大神的逐全仓模式不一致'));
     data.errorCode == 19 &&  this.openPop(this.$t('用户和大神的单双仓模式不一致'));
@@ -280,7 +280,7 @@ root.methods.error_postBigBrotherHistory = function (err) {
 }
 
 
-//大佬跟随者
+//大佬跟单者
 root.methods.postFollowUser = function () {
   let params = {
     followId: this.$route.query.userId ,

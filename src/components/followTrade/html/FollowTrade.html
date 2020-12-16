@@ -87,7 +87,7 @@
           <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,20)}}%/笔费用</div>
           <!--跟单-->
           <div class="follow-fff" v-if="godList.indexOf(item.userId) < 0">{{$t('documentary')}}</div>
-          <!--已跟随-->
+          <!--已跟单-->
           <div class="following" v-if="godList.indexOf(item.userId) >= 0">{{$t('following')}}</div>
         </div>
       </div>

@@ -96,11 +96,11 @@
 
     <!-- 自己持仓-->
     <div class="record" v-else>
-      <!--   当前持仓/跟随者-->
+      <!--   当前持仓/跟单者-->
       <div class="recordMining borbot">
         <!--操作记录-->
         <div class="record_div pointer" @click="toggleType(2)" :class="{'selected_cardType':followType == 2}">{{$t('henchmaner')}}</div>
-        <!--跟随者-->
+        <!--跟单者-->
         <div class="record_div selected_cardTypeML pointer" @click="toggleType(1)" :class="{'selected_cardType':followType == 1}">{{$t('historicalPosition')}}</div>
       </div>
       <!-- 当前持仓 -->
@@ -179,9 +179,9 @@
 
         </template>
       </ul>
-      <!-- 跟随者 -->
+      <!-- 跟单者 -->
       <ul class="recordUl1" v-if="followType == 2">
-        <!--跟随者 S-->
+        <!--跟单者 S-->
         <li class="flex application_header"  v-if="isSwitchOrder == 'CONTRACT'">
           <!--          账号-->
           <div class="application_header_div">{{$t('accountNumber')}}</div>
@@ -191,7 +191,7 @@
 
 
           <div class="application_header_div">{{$t('总跟单利润')}} (USDT)</div>
-          <!--          跟随收益-->
+          <!--          跟单收益-->
           <div class="application-header-div-box">{{$t('followUpIncome')}} (USDT)</div>
         </li>
         <li class="flex application_header"  v-if="isSwitchOrder == 'SPOT'">
@@ -199,11 +199,11 @@
           <div class="application_header_div">{{$t('accountNumber')}}</div>
           <!--          跟单总成交额-->
           <div class="application_header_div">{{$t('跟单总成交额')}} (USDT)</div>
-          <!--          跟随收益-->
-          <div class="application-header-div-box">{{$t('跟随收益')}} (USDT)</div>
+          <!--          跟单收益-->
+          <div class="application-header-div-box">{{$t('跟单收益')}} (USDT)</div>
         </li>
         <template>
-          <!-- 跟随者-->
+          <!-- 跟单者-->
           <template v-if="followUserList.length !== 0">
             <li class="" v-for="(item,index) in followUserList" :key="item.id">
 
@@ -215,7 +215,7 @@
                 <div class="application_header_div ">{{toFixed(item.weekProfit,2) || '0'}}</div>
 
                 <div class="application_header_div ">{{toFixed(item.userProfit,2) || '0'}}</div>
-                <!--跟随收益-->
+                <!--跟单收益-->
                 <div class="application-header-div-box ">{{toFixed(item.profit,2) || '0'}}</div>
 
               </div>
@@ -224,7 +224,7 @@
                 <div class="application_header_div ">{{item.userId}}</div>
                 <!--跟单总成交额-->
                 <div class="application_header_div ">{{toFixed(item.amount,2) || '0'}}</div>
-                <!--跟随收益-->
+                <!--跟单收益-->
                 <div class="application-header-div-box ">{{toFixed(item.profit,2) || '0'}}</div>
 
               </div>

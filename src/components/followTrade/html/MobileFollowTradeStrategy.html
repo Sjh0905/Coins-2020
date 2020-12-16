@@ -103,7 +103,7 @@
   <div class="mobile-trade-center" v-if="isTapeList">
     <div class="mobile-trade-center-title  flex">
       <div class="mobile-trade-center-title-only mobile-trade-center-title-history" :class="followType == 1 ? 'mobile-trade-center-title-selected':''" @click="toggleType(1)">
-        跟随者
+        跟单者
       </div>
       <div class="mobile-trade-center-title-line"></div>
       <div class="mobile-trade-center-title-only mobile-trade-center-title-follower" :class="followType == 2 ? 'mobile-trade-center-title-selected':''" @click="toggleType(2)">
@@ -161,7 +161,7 @@
           </div>
           <div class="mobile-trader-follower-content-top flex">
             <div class="mobile-trader-follower-text">跟单总成交额 {{item.amount ? toFixed(item.amount, 2) : '0'}} USDT</div>
-            <div class="mobile-trader-follower-text s-right">跟随收益(USDT)</div>
+            <div class="mobile-trader-follower-text s-right">跟单收益(USDT)</div>
           </div>
         </div>
       </div>

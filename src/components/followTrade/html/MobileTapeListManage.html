@@ -42,7 +42,7 @@
     </div>
     <div class="mobile-open-tape-list-text">
       <div>1. 带单开启：需抵押{{godFee}}枚平台币TT作为带单保证金，请预存资产；</div>
-      <div>2. 带单期间：跟随者的跟单费将被冻结；</div>
+      <div>2. 带单期间：跟单者的跟单费将被冻结；</div>
       <div>3. 带单结束：请联系客服，释放保证金，解冻跟单费。</div>
     </div>
     </div>
@@ -52,7 +52,7 @@
         <span class="text_blue">{{countFollower }} 人</span>
         <span>跟单中</span>
 <!--        <span class="text_blue">0 笔</span>-->
-<!--        <span>跟随订单</span>-->
+<!--        <span>跟单订单</span>-->
       </div>
       <div class="mobile-income-describe-display flex">
         <div class="mobile-income-describe-today">
@@ -162,7 +162,7 @@
         </div>
         <div class="mobile-open-tape-pop-window-content-text">
           <div>1. 带单开启：需抵押{{godFee}}枚平台币TT作为带单保证金，请预存资产；</div>
-          <div v-if="fixedAmPr == 1">2. 带单期间：跟随者的跟单费将被冻结；</div>
+          <div v-if="fixedAmPr == 1">2. 带单期间：跟单者的跟单费将被冻结；</div>
           <div v-if="fixedAmPr == 1">3. 带单结束：请联系客服，释放保证金，解冻跟单费。</div>
           <div v-if="fixedAmPr == 2">2. 带单结束：请联系客服，释放保证金。</div>
         </div>

@@ -248,18 +248,18 @@ root.methods.re_postDocumentaryImmediately = function (data) {
   }
   if (data.errorCode) {
     data.errorCode == 1 &&  this.openPop(this.$t('系统错误'));
-    data.errorCode == 3 &&  this.openPop(this.$t('不能自己跟随自己哦'));
+    data.errorCode == 3 &&  this.openPop(this.$t('不能自己跟单自己哦'));
     data.errorCode == 4 &&  this.openPop(this.$t('余额不足'));
     data.errorCode == 5 &&  this.openPop(this.$t('大神不能跟单大神'));
-    data.errorCode == 6 &&  this.openPop(this.$t('用户合约跟单只能跟随一个大神'));
+    data.errorCode == 6 &&  this.openPop(this.$t('用户合约跟单只能跟单一个大神'));
     data.errorCode == 7 &&  this.openPop(this.$t('超出单比额度限制'));
     data.errorCode == 8 &&  this.openPop(this.$t('用户余额不足'));
     data.errorCode == 9 &&  this.openPop(this.$t('转账不能为负值'));
-    data.errorCode == 10 &&  this.openPop(this.$t('跟随失败'));
+    data.errorCode == 10 &&  this.openPop(this.$t('跟单失败'));
     data.errorCode == 11 &&  this.openPop(this.$t('24小时转账金额必须要在范围内'));
     data.errorCode == 12 &&  this.openPop(this.$t('用户余额不足'));
     data.errorCode == 15 &&  this.openPop(this.$t('冻结失败'));
-    data.errorCode == 16 &&  this.openPop(this.$t('用户已经有仓位了不能跟随大神'));
+    data.errorCode == 16 &&  this.openPop(this.$t('用户已经有仓位了不能跟单大神'));
     data.errorCode == 17 &&  this.openPop(this.$t('大神有仓位，暂不能跟单'));
     data.errorCode == 18 &&  this.openPop(this.$t('用户和大神的逐全仓模式不一致'));
     data.errorCode == 19 &&  this.openPop(this.$t('用户和大神的单双仓模式不一致'));

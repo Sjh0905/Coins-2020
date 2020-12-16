@@ -96,7 +96,7 @@ root.methods.clickToggle = function () {
 root.methods.clickToggleTrue = function () {
   this.BDBInfo = true
 }
-// 切换历史跟单和跟随者
+// 切换历史跟单和跟单者
 root.methods.toggleType = function (type) {
   this.followType = type
 }
@@ -110,7 +110,7 @@ root.methods.jumpToFollowTrade = function () {
 root.methods.jumpToFollowDocumentary = function () {
   // this.$router.push({name:'mobileMyFollowOrder'})
   if(this.isGod){
-    // 自己不能跟随自己哦
+    // 自己不能跟单自己哦
     this.openPop(this.$t('大神不能跟单大神'))
     return
   }
@@ -135,12 +135,12 @@ root.methods.popCloseTemporarilyClosedBi = function () {
 
 root.methods.openDocumentaryWindowDisable = function () {
   if(this.isGod){
-    // 自己不能跟随自己哦
+    // 自己不能跟单自己哦
     this.openPop(this.$t('大神不能跟单大神'))
     return
   }
   if (this.isYuan.length != 0) {
-    this.openPop(this.$t('用户合约跟单只能跟随一个大神'))
+    this.openPop(this.$t('用户合约跟单只能跟单一个大神'))
     return
   }
   this.delFollowOpenDisable = true
@@ -181,7 +181,7 @@ root.methods.error_postBigBrotherHistory = function (err) {
 }
 
 
-//大佬跟随者
+//大佬跟单者
 root.methods.postFollowUser = function () {
   let params = {
     followId: this.$route.query.userId ,

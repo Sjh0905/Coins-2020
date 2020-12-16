@@ -79,18 +79,18 @@
           <!--跟单-->
           <div class="follow-fff" v-if="$route.query.isFollow < 0 && isSwitchOrder == 'SPOT'" @click="jumpToFollowDocumentary">{{$t('documentary')}}</div>
           <div class="follow-fff" v-if="$route.query.isFollow < 0 && isSwitchOrder == 'CONTRACT'" @click="openTapeListDisable">{{$t('documentary')}}</div>
-          <!--已跟随-->
+          <!--已跟单-->
           <div class="follow-c" v-if="$route.query.isFollow >= 0">{{$t('following')}}</div>
         </div>
       </div>
     </div>
     <!-- 大神持仓-->
     <div class="record">
-      <!--   当前持仓/跟随者-->
+      <!--   当前持仓/跟单者-->
       <div class="recordMining borbot">
         <!--操作记录-->
         <div class="record_div pointer" @click="toggleType(2)" :class="{'selected_cardType':fixedFollow == 2}">{{$t('henchmaner')}}</div>
-        <!--跟随者-->
+        <!--跟单者-->
         <div class="record_div selected_cardTypeML pointer" @click="toggleType(1)" :class="{'selected_cardType':fixedFollow == 1}">{{$t('historicalPosition')}}</div>
       </div>
       <!-- 当前持仓 -->
@@ -163,7 +163,7 @@
 
         </template>
       </ul>
-      <!-- 跟随者 -->
+      <!-- 跟单者 -->
       <ul class="recordUl1" v-if="fixedFollow == 2">
         <!--历史挖矿记录表头 S-->
         <li class="application_header" v-if="isSwitchOrder == 'CONTRACT'">
@@ -176,7 +176,7 @@
           <div class=" application_header_div">{{$t('总跟单利润')}}（USDT）</div>
 
           <div class=" application-header-div-box">{{$t('followUpIncome')}} (USDT)</div>
-          <!--          跟随收益-->
+          <!--          跟单收益-->
 
         </li>
         <li class="application_header" v-if="isSwitchOrder == 'SPOT'">
@@ -184,8 +184,8 @@
           <div class="application_header_div">{{$t('accountNumber')}}</div>
 
           <div class="application_header_div">{{$t('跟单总成交额')}} (USDT)</div>
-          <!--          跟随收益-->
-          <div class="application-header-div-box">{{$t('跟随收益')}}（USDT）</div>
+          <!--          跟单收益-->
+          <div class="application-header-div-box">{{$t('跟单收益')}}（USDT）</div>
         </li>
         <template>
           <!-- 历史挖矿记录-->
@@ -200,7 +200,7 @@
                 <div class="application_header_div ">{{toFixed(item.weekProfit,2) || '0'}}</div>
                 <div class="application_header_div">{{toFixed(item.userProfit,2) || '0'}}</div>
                 <div class=" application-header-div-box">{{toFixed(item.profit,2) || '0'}}</div>
-                <!--跟随收益-->
+                <!--跟单收益-->
 
 
               </div>
@@ -209,7 +209,7 @@
                 <div class="application_header_div ">{{item.userId}}</div>
                 <!--跟单总成交额-->
                 <div class="application_header_div ">{{toFixed(item.amount,2) || '0'}}</div>
-                <!--跟随收益-->
+                <!--跟单收益-->
                 <div class="application-header-div-box">{{toFixed(item.profit,2) || '0'}}</div>
 
               </div>
@@ -282,11 +282,11 @@
       <div class="remind" v-if="followType == 'LOT'" >
         <!--固定金额跟单：-->
         <div>{{$t('fixedAmountOrders_detail')}}</div>
-        <!--1、例如您设置跟单金额为100USDT，交易员下单时，无论交易员以多少金额下单，您都将以100USDT作为本金以交易员相同的价格跟随下单；-->
+        <!--1、例如您设置跟单金额为100USDT，交易员下单时，无论交易员以多少金额下单，您都将以100USDT作为本金以交易员相同的价格跟单下单；-->
         <div>{{$t('fixedAmountOrders_detail1')}}</div>
         <!--2、交易员每下一次单，您都将以每次100USDT的本金进行跟单操作，当您的可用资产小于100USDT时，此次跟单失败；-->
         <div>{{$t('fixedAmountOrders_detail2')}}</div>
-        <!--3、当交易员撤掉时，您同步跟随的该笔订单将同步被撤销；-->
+        <!--3、当交易员撤掉时，您同步跟单的该笔订单将同步被撤销；-->
         <div>{{$t('fixedAmountOrders_detail3')}}</div>
 <!--        &lt;!&ndash;4、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作；&ndash;&gt;-->
 <!--        <div>{{$t('fixedAmountOrders_detail4')}}</div>-->
@@ -304,7 +304,7 @@
         <div>{{$t('fixedProportionOrders_detail3')}}</div>
         <!--4、跟单时将与带单交易员相同的价格进行下单，直至您的可用资金不足为止；-->
         <div>{{$t('fixedProportionOrders_detail4')}}</div>
-        <!--5、当交易员撤掉时，您同步跟随的该笔订单将同步被撤销；-->
+        <!--5、当交易员撤掉时，您同步跟单的该笔订单将同步被撤销；-->
 <!--        <div>{{$t('fixedProportionOrders_detail5')}}</div>-->
 <!--        &lt;!&ndash;6、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作。&ndash;&gt;-->
 <!--        <div>{{$t('fixedProportionOrders_detail6')}}</div>-->

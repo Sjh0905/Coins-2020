@@ -240,17 +240,17 @@ root.methods.goToDocumentary = function (item,switchOrder) {
   }
 
   if(this.userId == item.userId){
-    this.openPop('不能跟随自己哦')
+    this.openPop('不能跟单自己哦')
     return
   }
   if(this.isGod){
-    // 自己不能跟随自己哦
+    // 自己不能跟单自己哦
     this.openPop('大神不能跟单大神')
     return
   }
   if(this.godList.length != 0){
-    // 用户合约跟单只能跟随一个大神
-    this.openPop(this.$t('用户合约跟单只能跟随一个大神'))
+    // 用户合约跟单只能跟单一个大神
+    this.openPop(this.$t('用户合约跟单只能跟单一个大神'))
     return
   }
 
@@ -281,7 +281,7 @@ root.methods.goToDocumentary1 = function (item,switchOrder) {
 // root.methods.goToDocumentaryGod = function () {
 //   this.$router.push({name: 'mobileDocumentaryGod'})
 // }
-// 返回我的镜像交易，正在跟随
+// 返回我的镜像交易，正在跟单
 root.methods.goToMobileMyFollowOrder = function (switchOrder) {
   // if (!this.bindIdentify) {
   //   this.popIdenOpen = true
@@ -322,8 +322,8 @@ root.methods.re_getBigBrotherList = function (data) {
   this.loading = false
   this.listGod = data.dataMap.list || [] // 大神列表
   this.days = data.dataMap.days || '0'
-  this.godList = data.dataMap.godList || []   // 已跟随大神列表
-  this.isGod = data.dataMap.isGod || ''   // 已跟随大神列表
+  this.godList = data.dataMap.godList || []   // 已跟单大神列表
+  this.isGod = data.dataMap.isGod || ''   // 已跟单大神列表
 }
 root.methods.error_getBigBrotherList = function (err) {
   console.log('err=====',err)

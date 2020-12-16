@@ -65,11 +65,11 @@
 
 
     <div class="follow-asset-content" v-if="followUserList.length != 0">
-      <!--正在跟随-->
+      <!--正在跟单-->
       <div class="follow-asset-content-title">{{$t('Followed')}}</div>
 
       <div class="follow-asset-topic-title flex">
-        <!--正在跟随-->
+        <!--正在跟单-->
         <div class="UID">UID</div>
         <!--时间-->
         <div class="time">{{$t('time')}}</div>
@@ -104,7 +104,7 @@
           <!--修改策略-->
           <span class="btn-size update pointer" v-if="item.status == 'FOLLOWING' || item.status =='START'" @click="openFollowWindow(item)">{{$t('modifyPolicy')}}</span>
           <span class="btn-size1 update" v-else >{{$t('modifyPolicy')}}</span>
-          <!--取消跟随-->
+          <!--取消跟单-->
           <span class="btn-size pointer" v-if="item.status == 'FOLLOWING' || item.status =='START'" @click="delFollow(item)">{{$t('cancelFollowing')}}</span>
           <span class="btn-size1" v-else >{{$t('cancelFollowing')}}</span>
         </div>
@@ -167,11 +167,11 @@
       <div class="remind" v-if="followType == 'LOT'" >
         <!--固定金额跟单：-->
         <div>{{$t('fixedAmountOrders')}}</div>
-        <!--1、例如您设置跟单金额为100USDT，交易员下单时，无论交易员以多少金额下单，您都将以100USDT作为本金以交易员相同的价格跟随下单；-->
+        <!--1、例如您设置跟单金额为100USDT，交易员下单时，无论交易员以多少金额下单，您都将以100USDT作为本金以交易员相同的价格跟单下单；-->
         <div>{{$t('fixedAmountOrders_detail1')}}</div>
         <!--2、交易员每下一次单，您都将以每次100USDT的本金进行跟单操作，当您的可用资产小于100USDT时，此次跟单失败；-->
         <div>{{$t('fixedAmountOrders_detail2')}}</div>
-        <!--3、当交易员撤掉时，您同步跟随的该笔订单将同步被撤销；-->
+        <!--3、当交易员撤掉时，您同步跟单的该笔订单将同步被撤销；-->
         <div>{{$t('fixedAmountOrders_detail3')}}</div>
         <!--4、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作；-->
 <!--        <div>{{$t('fixedAmountOrders_detail4')}}</div>-->
@@ -189,7 +189,7 @@
         <div>{{$t('fixedProportionOrders_detail3')}}</div>
         <!--4、跟单时将与带单交易员相同的价格进行下单，直至您的可用资金不足为止；-->
         <div>{{$t('fixedProportionOrders_detail4')}}</div>
-        <!--5、当交易员撤掉时，您同步跟随的该笔订单将同步被撤销；-->
+        <!--5、当交易员撤掉时，您同步跟单的该笔订单将同步被撤销；-->
 <!--        <div>{{$t('fixedProportionOrders_detail5')}}</div>-->
 <!--        &lt;!&ndash;6、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作。&ndash;&gt;-->
 <!--        <div>{{$t('fixedProportionOrders_detail6')}}</div>-->
@@ -200,27 +200,27 @@
       <div class="documentary-button pointer" @click="commitModify">{{$t('commitUpdate')}}</div>
     </div>
   </PopupWindow>
-  <!--取消跟随弹框-->
+  <!--取消跟单弹框-->
   <PopupPrompt :popOpen="popOpen" :popClose="closePop" :popType="popType" :popText="popText" :waitTime="waitTime" />
 
 
   <PopupWindow :switch="delFollowOpen" @close="delFollowClose">
     <div slot="header">
-      <!--取消跟随-->
+      <!--取消跟单-->
       <span class="update-follow">{{$t('cancelFollowing')}}</span>
     </div>
     <div slot="article" class="cancel-follow-article" v-if="isSwitchOrder == 'SPOT'">
       <!--是否取消对-->
       <div>{{$t('wantToCancel')}}
       <span class="text_blue">{{followId}}</span>
-        <!--的跟随-->
+        <!--的跟单-->
       {{$t('followOf')}}</div>
     </div>
     <div slot="article" class="cancel-follow-article1" v-if="isSwitchOrder == 'CONTRACT'">
       <!--是否取消对-->
       <div>{{$t('wantToCancel')}}
       <span class="text_blue">{{followId}}</span>
-        <!--的跟随-->
+        <!--的跟单-->
       {{$t('followOf')}}?</div>
 
       <div class="fenxiantishi">
