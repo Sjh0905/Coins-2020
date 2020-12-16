@@ -291,6 +291,17 @@
   box-shadow:0rem 0.1rem 0.2rem 0rem rgba(0,0,0,0.1);
   border-radius:0.04rem;
 }
+.forecast-activity-toast-box1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width:6rem;
+  height:6.7rem;
+  background: #fff;
+  box-shadow:0rem 0.1rem 0.2rem 0rem rgba(0,0,0,0.1);
+  border-radius:0.04rem;
+}
 .forecast-activity-toast-title {
   /*margin-top: 8px;*/
   height: 1.04rem;
@@ -327,4 +338,15 @@
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   padding: 0.6rem 0.4rem;
+}
+.del-follow-tex1 {
+  font-size:0.29rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  padding: 0.3rem;
+}
+.fenxiantishi {
+  background: #F5F7FF;
+  padding: 0.3rem;
+  margin-bottom: 0.3rem;
 }

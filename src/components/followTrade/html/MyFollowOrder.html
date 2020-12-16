@@ -102,10 +102,10 @@
         <div class="total-income">{{item.profit.toFixed(2) || '0'}}</div>
         <div class="operation">
           <!--修改策略-->
-          <span class="btn-size update pointer" v-if="item.status == 'FOLLOWING'" @click="openFollowWindow(item)">{{$t('modifyPolicy')}}</span>
+          <span class="btn-size update pointer" v-if="item.status == 'FOLLOWING' || item.status =='START'" @click="openFollowWindow(item)">{{$t('modifyPolicy')}}</span>
           <span class="btn-size1 update" v-else >{{$t('modifyPolicy')}}</span>
           <!--取消跟随-->
-          <span class="btn-size pointer" v-if="item.status == 'FOLLOWING'" @click="delFollow(item)">{{$t('cancelFollowing')}}</span>
+          <span class="btn-size pointer" v-if="item.status == 'FOLLOWING' || item.status =='START'" @click="delFollow(item)">{{$t('cancelFollowing')}}</span>
           <span class="btn-size1" v-else >{{$t('cancelFollowing')}}</span>
         </div>
       </div>
@@ -209,12 +209,24 @@
       <!--取消跟随-->
       <span class="update-follow">{{$t('cancelFollowing')}}</span>
     </div>
-    <div slot="article" class="cancel-follow-article">
+    <div slot="article" class="cancel-follow-article" v-if="isSwitchOrder == 'SPOT'">
       <!--是否取消对-->
       <div>{{$t('wantToCancel')}}
       <span class="text_blue">{{followId}}</span>
         <!--的跟随-->
       {{$t('followOf')}}</div>
+    </div>
+    <div slot="article" class="cancel-follow-article1" v-if="isSwitchOrder == 'CONTRACT'">
+      <!--是否取消对-->
+      <div>{{$t('wantToCancel')}}
+      <span class="text_blue">{{followId}}</span>
+        <!--的跟随-->
+      {{$t('followOf')}}?</div>
+
+      <div class="fenxiantishi">
+        <div>1. “取消跟单”的申请将在带单者无仓位后触发，系统将进行结算，结算三分钟后方可进行后续跟单操作；</div>
+        <div>2. 若“取消跟单”触发时存在“当前委托”，系统将进行全部委托的撤单操作，撤单过程中若存在部分或全部委托成交的情况，由此带来的仓位，系统将进行平仓操作。</div>
+      </div>
     </div>
     <div slot="footer" class="pop-recharge-bottom">
       <!--确 定-->

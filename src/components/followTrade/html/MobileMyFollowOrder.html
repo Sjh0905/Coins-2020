@@ -68,8 +68,8 @@
               <div class="mobile-trade-item-top-right">{{formatDateUitl(item.followTime)}}</div>
             </div>
           </div>
-          <div class="mobile-trade-item-follower-cancle-btn" v-if="item.status == 'FOLLOWING'" @click="delFollow(item)">取消跟随</div>
-          <div class="mobile-trade-item-follower-cancle-btn-hui" v-else>取消跟随</div>
+          <div class="mobile-trade-item-follower-cancle-btn" v-if="item.status == 'FOLLOWING'|| item.status =='START'" @click="delFollow(item)">取消跟单</div>
+          <div class="mobile-trade-item-follower-cancle-btn-hui" v-else>取消跟单</div>
         </div>
 
         <div class="mobile-trade-item-top flex">
@@ -82,7 +82,7 @@
                 <span class="mobile-trade-item-currency-bgd">{{item.type == 'SPOT'?'现货':'合约'}}</span>
               </div>
             </div>
-            <div class="modify" @click="modifyDocumentary(item)" v-if="item.status == 'FOLLOWING'">
+            <div class="modify" @click="modifyDocumentary(item)" v-if="item.status == 'FOLLOWING'|| item.status =='START'">
               修改
               <img class="modify-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
             </div>
@@ -112,15 +112,32 @@
   <PopupPrompt :popOpen="popOpen" :popClose="closePop" :popType="popType" :popText="popText" :waitTime="waitTime" />
 
   <div v-if="delFollowOpen" class="forecast-activity-toast">
-    <div class="forecast-activity-toast-box">
-      <div class="forecast-activity-toast-title">取消跟随
+    <div class="forecast-activity-toast-box" v-if="isSwitchOrder == 'SPOT'">
+      <div class="forecast-activity-toast-title">取消跟单
         <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
           <img class="forecast-activity-toast-close-btn-img" src="../../../components/LuckyDraw/assets/mobileForecastHomePage/close_btn.png" alt="">
         </span>
       </div>
       <div class="del-follow-text">是否取消对
         <span class="text_blue">{{followId}}</span>
-        的跟随
+        的跟单？
+      </div>
+      <div class="forecast-activity-toast-btn" @click='delFollowList'>确 定</div>
+    </div>
+    <div class="forecast-activity-toast-box1">
+      <div class="forecast-activity-toast-title">取消跟单
+        <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
+          <img class="forecast-activity-toast-close-btn-img" src="../../../components/LuckyDraw/assets/mobileForecastHomePage/close_btn.png" alt="">
+        </span>
+      </div>
+      <div class="del-follow-tex1">是否取消对
+        <span class="text_blue">{{followId}}</span>
+        的跟单？
+      </div>
+
+      <div class="fenxiantishi">
+        <div>1. “取消跟单”的申请将在带单者无仓位后触发，系统将进行结算，结算三分钟后方可进行后续跟单操作；</div>
+        <div>2. 若“取消跟单”触发时存在“当前委托”，系统将进行全部委托的撤单操作，撤单过程中若存在部分或全部委托成交的情况，由此带来的仓位，系统将进行平仓操作。</div>
       </div>
       <div class="forecast-activity-toast-btn" @click='delFollowList'>确 定</div>
     </div>
