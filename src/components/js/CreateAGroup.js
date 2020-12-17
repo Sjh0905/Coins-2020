@@ -44,7 +44,7 @@ root.created = function () {
   this.GET_AUTH_STATE()
   this.isAppQuery()
   this.isIOSQuery()
-  console.log('created======',this,this.$route.name)
+  // console.log('created======',this,this.$route.name)
   // this.$router.back()
   // if (this.success == true) {
   //   this.$router.push({name: '/index/home'});

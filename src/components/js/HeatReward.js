@@ -99,9 +99,9 @@ root.methods.re_getFundList = function (data) {
 
   this.fundListLists = data.dataMap.lists
   let rewCycleIndex =  this.fundListLists.rewCycle.indexOf('_')
-  console.info('rewCycleIndex', rewCycleIndex)
+  // console.info('rewCycleIndex', rewCycleIndex)
   let rewCycleIndex1 = this.fundListLists.rewCycle.substring(this.rewCycleIndex+1,this.rewCycleIndex.length)
-  console.info('rewCycleIndex1', rewCycleIndex1)
+  // console.info('rewCycleIndex1', rewCycleIndex1)
   // this.rewCycle = this.fundListLists.rewCycle.split('_')
   // this.fundListLists.map(v=>{
   //   let rewCycleSplit = []

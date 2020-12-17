@@ -239,12 +239,12 @@ root.methods.getFuzzyQuery= function () {
 root.methods.re_getFuzzyQuery = function (data) {
   //检测data数据是JSON字符串转换JS字符串
   typeof data === 'string' && (data = JSON.parse(data))
-  console.log("模糊查询可加入小组=====",data)
+  // console.log("模糊查询可加入小组=====",data)
   this.cities = data.data
   this.citiesMap = {}
   this.cities.map(v=>this.citiesMap[v.gname] = v.groupId)
   this.cities.map(v=>this.citiesMap[v.concat_gname] = v.groupId)
-  console.log('this.getFuzzyQuery',this.getFuzzyQuery)
+  // console.log('this.getFuzzyQuery',this.getFuzzyQuery)
   // this.getCheckGroupDetails()
 }
 
@@ -271,7 +271,7 @@ root.methods.re_getCheckGroupDetails = function (data) {
   //检测data数据是JSON字符串转换JS字符串
   typeof data === 'string' && (data = JSON.parse(data))
 
-  console.log("this.res000000=====",data)
+  // console.log("this.res000000=====",data)
 
   this.deputyAccount = data.data.deputyAccount
   this.priAccount = data.data.priAccount
@@ -377,7 +377,7 @@ root.methods.postJoinGroup = function () {
     glevel: this.glevel,
     account: this.userName
   }
-  console.log("postJoinGroup + params ===== ",params)
+  // console.log("postJoinGroup + params ===== ",params)
 
   this.$http.send('POST_JOIN_GROUP', {
     bind: this,
@@ -390,7 +390,7 @@ root.methods.re_postJoinGroup = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
 
   this.success = data.data.success
-  console.log("re_postJoinGroup + data=====", data)
+  // console.log("re_postJoinGroup + data=====", data)
   if (this.success == true) {
 
     this.popOpen = true

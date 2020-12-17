@@ -139,7 +139,7 @@ root.computed.valuationCon = function () {
 }
 // 计算汇率
 root.computed.computedExchangeRate1 = function () {
-  console.info('保证金余额',this.totalMarginBalance,this.$store.state.exchange_rate_dollar)
+  // console.info('保证金余额',this.totalMarginBalance,this.$store.state.exchange_rate_dollar)
   return this.accMul(this.totalMarginBalance, this.$store.state.exchange_rate_dollar)
 }
 //未实现盈亏换算成人民币的估值

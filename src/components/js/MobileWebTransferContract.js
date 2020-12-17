@@ -202,7 +202,7 @@ root.methods.closePopupPrompt = function () {
 //切换我的钱包和币币账户
 root.methods.changeAssetAccountType = function () {
   this.assetAccountType = this.assetAccountType == 'wallet' ? 'currency':'wallet'
-  console.info('this is assetAccountType',this.assetAccountType)
+  // console.info('this is assetAccountType',this.assetAccountType)
 }
 // 点击全提
 root.methods.allMention = function () {
@@ -287,7 +287,7 @@ root.methods.openTransfer = function (balance) {
   // this.transferCurrencyOTCAvailable = balance.availableBalance
   // this.transferCurrencyOTCAvailable = this.$route.query.balance.availableBalance
   this.transferCurrencyOTCAvailable = this.queryBalance.availableBalance
-  console.info('transferCurrencyOTCAvailabl======',this.queryBalance.availableBalance)
+  // console.info('transferCurrencyOTCAvailabl======',this.queryBalance.availableBalance)
   // 我的钱包可用余额
   // this.transferCurrencyAvailable = item.available
   // this.itemInfo = item

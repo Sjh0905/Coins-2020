@@ -654,7 +654,7 @@ root.methods.tradeMarket = function (popIdenOpen,type) {
         miniVolume = item.miniVolume;
         maxAmount = item.maxAmount;
         baseMinimum = item.baseMinimum;
-        console.info('baseMinimum========',tradingParameters)
+        // console.info('baseMinimum========',tradingParameters)
       }
     }
   }
