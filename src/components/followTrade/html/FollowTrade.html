@@ -83,8 +83,8 @@
         <div class="follow-btn-box">
           <!--天-->
           <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} USDT/{{days}}{{$t('days')}}费用</div>
-          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'CONTRACT'">跟单收益 {{accAdd(item.fee,30)}}%/周费用</div>
-          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,30)}}%/笔费用</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'CONTRACT'">跟单收益 {{accAdd(item.fee,0)}}%/周</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,0)}}%/笔</div>
           <!--跟单-->
           <div class="follow-fff" @click="goToDocumentary(item.userId,item.fee,item.feeType,switchOrder)" v-if="godList.indexOf(item.userId) < 0 && item.canFollow == 1">{{$t('documentary')}}</div>
           <!--已跟单-->

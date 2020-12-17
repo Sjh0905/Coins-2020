@@ -34,10 +34,10 @@
 <!--    第一部分-->
     <div class="flex tape">
       <div class="flex">
-        <div class="tape-flex-bule">{{$t('subscriptionFee')}}：</div>
-        <div class="days" v-if="godInfo.feeType == 'LOT'">{{godInfo.fee}} USDT/{{followDay}}{{$t('days')}}费用</div>
-        <div class="days" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(godInfo.fee,30)}}%/周费用</div>
-        <div class="days" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(godInfo.fee,30)}}%/笔费用</div>
+        <div class="tape-flex-bule">{{$t('subscriptionFee')}}</div>
+        <div class="days" v-if="godInfo.feeType == 'LOT'">{{godInfo.fee}} USDT/{{followDay}}{{$t('days')}}</div>
+        <div class="days" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(godInfo.fee,0)}}%/周</div>
+        <div class="days" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(godInfo.fee,0)}}%/笔</div>
 <!--        <div class="days">{{godInfo.fee}} USDT / {{followDay}}{{$t('days')}}</div>-->
       </div>
       <div class="modify" v-if="isSwitchOrder == 'SPOT'" @click="goToModify(godInfo.fee)">{{$t('update')}}</div>
@@ -168,7 +168,7 @@
             %
           </div>
           <div class="" v-if="isSwitchOrder == 'CONTRACT'">
-            带单收益<span class="follow-order-currency">20%</span>/周
+            跟单收益<span class="follow-order-currency">20%</span>/周
           </div>
         </div>
         <div class="follow-order-item flex">

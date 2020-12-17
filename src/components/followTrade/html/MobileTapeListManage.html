@@ -22,10 +22,10 @@
     <!--没有开启带单-->
     <div v-if="isHasItem" >
       <div class="mobile-open-tape-list-btn-top flex">
-        <div class="mobile-open-tape-list-fee">带单费用：
-          <span class="text_blue" v-if="godInfo.feeType == 'LOT'">{{godInfo.fee}} USDT/{{followDay}}天费用</span>
-          <span class="text_blue" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(godInfo.fee,30)}}%/周费用</span>
-          <span class="text_blue" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(godInfo.fee,30)}}%/笔费用</span>
+        <div class="mobile-open-tape-list-fee"><span class="mobile-tape-list-income-details-title">带单提成</span>
+          <span class="text_blue" v-if="godInfo.feeType == 'LOT'">{{godInfo.fee}} USDT/{{followDay}}天</span>
+          <span class="text_blue" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(godInfo.fee,0)}}%/周</span>
+          <span class="text_blue" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(godInfo.fee,0)}}%/笔</span>
         </div>
         <div class="mobile-open-tape-list-operation" v-if="isSwitchOrder == 'SPOT'" @click="RevisionFee">
           <img src="../assets/single_setting_icon.png" alt="">
@@ -56,18 +56,18 @@
       </div>
       <div class="mobile-income-describe-display flex">
         <div class="mobile-income-describe-today">
-          <div class="mobile-income-describe-text">今日收益（USDT）</div>
+          <div class="mobile-income-describe-text">今日提成（USDT）</div>
           <div class="mobile-income-describe-amount">{{toFixed(todayFee,2)}}</div>
         </div>
         <div class="mobile-income-describe-total">
-          <div class="mobile-income-describe-text">累计收益（USDT）</div>
+          <div class="mobile-income-describe-text">累计提成（USDT）</div>
           <div class="mobile-income-describe-amount">{{toFixed(sumFee,2)}}</div>
         </div>
       </div>
     </div>
     <!--带单收益明细-->
     <div class="mobile-tape-list-income-details">
-      <div class="mobile-tape-list-income-details-title">收益明细</div>
+      <div class="mobile-tape-list-income-details-title">提成明细</div>
 
         <div class="mobile-trade-center-follower flex" v-for="(item,index) in userFollowFees" :key="index" v-if="userFollowFees.length != 0">
           <div class="mobile-tape-list-income-img">
@@ -79,7 +79,7 @@
               <div class="mobile-tape-list-income-time">{{$globalFunc.formatDateUitl(item.createdAt,'MM-DD hh:mm:ss')}}</div>
             </div>
             <div class="mobile-tape-list-income-right">{{item.fee}} USDT
-              <div class="mobile-open-tape-list-text">跟单费用</div></div>
+              <div class="mobile-open-tape-list-text">带单提成</div></div>
 
           </div>
         </div>
@@ -152,13 +152,13 @@
              %
             </div>
             <div class="" v-if="isSwitchOrder == 'CONTRACT'">
-             带单收益<span class="mobile-open-tape-pop-window-content-currency">20%</span>/周
+              跟单收益<span class="mobile-open-tape-pop-window-content-currency">20%</span>/周
             </div>
           </div>
 
           <div class="mobile-open-tape-pop-window-content-item flex">
             <div class="mobile-open-tape-pop-window-content-currency-pair" v-if="isSwitchOrder == 'SPOT'">带单提成(收益/笔)</div>
-            <div class="mobile-open-tape-pop-window-content-currency-pair" v-if="isSwitchOrder == 'CONTRACT'">跟单收益</div>
+            <div class="mobile-open-tape-pop-window-content-currency-pair" v-if="isSwitchOrder == 'CONTRACT'">跟单利润</div>
             <div class="mobile-open-tape-pop-window-content-currency" v-if="!isHasItem && isSwitchOrder == 'SPOT'">{{fixedAmountPr3}} %</div>
             <div class="mobile-open-tape-pop-window-content-currency" v-if="isHasItem && isSwitchOrder == 'SPOT'">{{fixedCurrencyPairFee3}} %</div>
             <div class="" v-if="isSwitchOrder == 'CONTRACT'">跟单收益<span class="mobile-open-tape-pop-window-content-currency">50%</span>/周</div>

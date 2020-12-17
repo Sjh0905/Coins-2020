@@ -86,7 +86,7 @@
     <div class="trade-top-data-two" v-if="!isTapeList">
       <div class="trade-top-data-text">
         <!--该用户未分享交易活动-->
-        <div class="trade-top-data-no">{{$t('notShare')}}</div>
+        <div class="trade-top-data-no"></div>
         <!--开启带单交易，双重获利-->
         <div class="trade-top-data-btn pointer" v-if="isSwitchOrder == 'SPOT'" @click="openTapeList">{{$t('doubleProfit')}}</div>
         <div class="trade-top-data-btn pointer" v-if="isSwitchOrder == 'CONTRACT'" @click="openTapeListDisable">{{$t('doubleProfit')}}</div>
@@ -296,13 +296,13 @@
            %
           </div>
           <div class="" v-if="isSwitchOrder == 'CONTRACT'">
-           带单收益<span class="follow-order-currency">20%</span>/周
+           跟单收益<span class="follow-order-currency">20%</span>/周
           </div>
         </div>
         <div class="follow-order-item flex">
           <!--跟单费用-->
           <div class="follow-order-pair" v-if="isSwitchOrder == 'SPOT'">{{$t('跟单收益(收益/笔)')}}</div>
-          <div class="follow-order-pair" v-if="isSwitchOrder == 'CONTRACT'">{{$t('跟单收益(收益/周)')}}</div>
+          <div class="follow-order-pair" v-if="isSwitchOrder == 'CONTRACT'">{{$t('跟单利润')}}</div>
           <div class="follow-order-currency" v-if="isSwitchOrder == 'SPOT'">{{fixedAmountPr3}}%</div>
           <div class="" v-if="isSwitchOrder == 'CONTRACT'">跟单收益<span class="follow-order-currency">50%</span>/周</div>
         </div>

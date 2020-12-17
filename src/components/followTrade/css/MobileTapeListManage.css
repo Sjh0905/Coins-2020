@@ -52,7 +52,7 @@
 .mobile-open-tape-list-btn-top {
   width: 7.5rem;
   /*background: pink;*/
-  padding: 0.3rem 0.3rem 0;
+  padding: 0.3rem 0rem 0;
   margin-bottom: 0.7rem;
   justify-content: space-between;
 }
@@ -64,6 +64,7 @@
 }
 .mobile-open-tape-list-operation img {
   width: 0.3rem;
+  padding-right: 0.3rem;
   vertical-align: text-top;
 }
 .mobile-open-tape-list-btn {
@@ -136,7 +137,7 @@
   margin-top: 0.3rem;
 }
 .mobile-tape-list-income-details-title {
-  color: #0B0B27;
+  /*color: #0B0B27;*/
   font-size:0.36rem;
   font-family:PingFangSC-Medium,PingFang SC;
   font-weight:500;

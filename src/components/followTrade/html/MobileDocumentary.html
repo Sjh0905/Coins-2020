@@ -74,9 +74,9 @@
   <div :class="!isHasItem ? 'documentary-box' : 'documentary-box-has-item'">
     <div class="mobile-trade-open-exchange-text flex" v-if="!isHasItem">
       <div class="mobile-trade-fee">费用</div>
-      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'LOT'">{{$route.query.fee}} USDT/{{$route.query.days}}天费用</div>
-      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/周费用</div>
-      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/笔费用</div>
+      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'LOT'">{{$route.query.fee}} USDT/{{$route.query.days}}天</div>
+      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,0) || '0'}}%/周</div>
+      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd($route.query.fee,0) || '0'}}%/笔</div>
     </div>
     <div class="documentary-button" @click="openDocumentaryWindow" v-if="!isHasItem">立即跟单</div>
 <!--    <div class="documentary-button" @click="openDocumentaryWindow" v-if="!isHasItem && !follow">跟单中</div>-->
@@ -99,10 +99,10 @@
           费用： 将扣除 <span class="text_blue">{{$route.query.fee}} USDT/7天</span>
         </div>
         <div v-if="followType == 'RATE' && isSwitchOrder == 'CONTRACT'">
-          费用： 每周将扣除跟单收益的 <span class="text_blue">{{accAdd($route.query.fee,30) || '0'}}% </span>作为跟单费
+          费用： 每周将扣除跟单收益的 <span class="text_blue">{{accAdd($route.query.fee,0) || '0'}}% </span>作为跟单费
         </div>
         <div v-if="followType == 'RATE' && isSwitchOrder == 'SPOT'">
-          费用： 将扣除跟单收益 <span class="text_blue">{{accAdd($route.query.fee,30) || '0'}}%/笔</span>
+          费用： 将扣除跟单收益 <span class="text_blue">{{accAdd($route.query.fee,0) || '0'}}%/笔</span>
         </div>
       </div>
       <div class="forecast-activity-toast-btn" v-if="follow" @click="postDocumentaryImmediately">确 定</div>
