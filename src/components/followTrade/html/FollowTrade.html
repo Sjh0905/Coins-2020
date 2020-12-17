@@ -80,15 +80,15 @@
           </div>
 
         </div>
-        <div class="follow-btn-box" @click="goToDocumentary(item.userId,item.fee,item.feeType,switchOrder)">
+        <div class="follow-btn-box">
           <!--天-->
           <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} USDT/{{days}}{{$t('days')}}费用</div>
-          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'CONTRACT'">跟单收益 {{accAdd(item.fee,20)}}%/周费用</div>
-          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,20)}}%/笔费用</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'CONTRACT'">跟单收益 {{accAdd(item.fee,30)}}%/周费用</div>
+          <div class="follow-gde" v-if="item.feeType == 'RATE' && switchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,30)}}%/笔费用</div>
           <!--跟单-->
-          <div class="follow-fff" v-if="godList.indexOf(item.userId) < 0">{{$t('documentary')}}</div>
+          <div class="follow-fff" @click="goToDocumentary(item.userId,item.fee,item.feeType,switchOrder)" v-if="godList.indexOf(item.userId) < 0 && item.canFollow == 1">{{$t('documentary')}}</div>
           <!--已跟单-->
-          <div class="following" v-if="godList.indexOf(item.userId) >= 0">{{$t('following')}}</div>
+          <div class="following" v-if="godList.indexOf(item.userId) >= 0 || item.canFollow == 0">{{godList.indexOf(item.userId) >= 0?$t('following'):'跟单'}}</div>
         </div>
       </div>
 

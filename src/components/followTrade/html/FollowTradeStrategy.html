@@ -290,19 +290,21 @@
         <div class="follow-order-item flex">
           <!--跟单费用-->
           <div class="follow-order-pair" v-if="isSwitchOrder == 'SPOT'">{{$t('带单提成(收益/笔)')}} </div>
-          <div class="follow-order-pair" v-if="isSwitchOrder == 'CONTRACT'">{{$t('带单提成(收益/周)')}} </div>
-          <div class="follow-order-currency">
+          <div class="follow-order-pair" v-if="isSwitchOrder == 'CONTRACT'">{{$t('带单提成')}} </div>
+          <div class="follow-order-currency" v-if="isSwitchOrder == 'SPOT'">
             <input v-model="currencyPair" v-if="!isHasItem" class="currency-account" onkeyup="value = value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''">
            %
+          </div>
+          <div class="" v-if="isSwitchOrder == 'CONTRACT'">
+           带单收益<span class="follow-order-currency">20%</span>/周
           </div>
         </div>
         <div class="follow-order-item flex">
           <!--跟单费用-->
           <div class="follow-order-pair" v-if="isSwitchOrder == 'SPOT'">{{$t('跟单收益(收益/笔)')}}</div>
           <div class="follow-order-pair" v-if="isSwitchOrder == 'CONTRACT'">{{$t('跟单收益(收益/周)')}}</div>
-          <div class="follow-order-currency">
-            {{fixedAmountPr3}}%
-          </div>
+          <div class="follow-order-currency" v-if="isSwitchOrder == 'SPOT'">{{fixedAmountPr3}}%</div>
+          <div class="" v-if="isSwitchOrder == 'CONTRACT'">跟单收益<span class="follow-order-currency">50%</span>/周</div>
         </div>
       </div>
 

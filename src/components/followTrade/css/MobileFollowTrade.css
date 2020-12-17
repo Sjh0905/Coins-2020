@@ -159,6 +159,16 @@
   padding: 0 0.3rem;
   margin-bottom: 0.04rem;
 }
+.documentary-f {
+  display: inline-block;
+  height:0.48rem;
+  line-height: 0.5rem;
+  color: #FFFFFF;
+  background: #A2B5D9;
+  border-radius:0.04rem;
+  padding: 0 0.3rem;
+  margin-bottom: 0.04rem;
+}
 .documentary-follow {
   display: inline-block;
   font-size:0.24rem;

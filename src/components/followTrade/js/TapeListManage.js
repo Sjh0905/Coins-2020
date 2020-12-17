@@ -80,13 +80,13 @@ root.computed.fixedAmountPr1 = function () {
   return this.currencyPairFee || 0
 }
 root.computed.fixedAmountPr2 = function () {
-  return this.toFixed(this.accMul(Number(this.currencyPair), 0.8),2)
+  return this.toFixed(this.accMul(Number(this.currencyPair), 0.7),2)
 }
 root.computed.fixedAmountPr3 = function () {
-  return this.accMinus(80,Number(this.currencyPairFee))
+  return this.accMinus(70,Number(this.currencyPairFee))
 }
 root.computed.fixedAmountPr4 = function () {
-  return this.accMinus(80,Number(this.currencyPairFee))
+  return this.accMinus(70,Number(this.currencyPairFee))
 }
 //什么类型的跟单
 root.computed.isSwitchOrder = function () {
@@ -152,7 +152,7 @@ root.methods.closeMaskWindow = function () {
   this.openMaskWindow = false
 }
 root.methods.testCurrencyPair = function () {
-  if(this.currencyPair == ''){
+  if( this.isSwitchOrder == 'SPOT' && this.currencyPair == ''){
     this.currencyPairText = this.$t('cannotBeBlank')
     return
   }
@@ -161,11 +161,11 @@ root.methods.testCurrencyPair = function () {
 
 //修改大神
 root.methods.postRevisionFee = function () {
-  if (this.fixedAmPr != 1 && this.currencyPairFee == '') {
+  if (this.isSwitchOrder == 'SPOT' &&this.fixedAmPr != 1 && this.currencyPairFee == '') {
     this.openPop(this.$t('modificationFeeCannotBeBlank'))
     return
   }
-  if (this.fixedAmPr == 1 && this.currencyPair == '') {
+  if (this.isSwitchOrder == 'SPOT' &&this.fixedAmPr == 1 && this.currencyPair == '') {
     this.openPop(this.$t('modificationFeeCannotBeBlank'))
     return
   }
@@ -175,7 +175,7 @@ root.methods.postRevisionFee = function () {
   }
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
-    fee:this.fixedAmPr == 1 ? this.currencyPair : this.currencyPairFee,
+    fee:this.fixedAmPr == 1 ? this.currencyPair : this.isSwitchOrder == 'SPOT' ? this.currencyPairFee:20,
     type: this.isSwitchOrder,
   }
   this.$http.send('POST_REVISION_FEE', {
