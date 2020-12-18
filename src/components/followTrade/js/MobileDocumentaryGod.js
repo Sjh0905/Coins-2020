@@ -111,7 +111,7 @@ root.methods.jumpToFollowDocumentary = function () {
   // this.$router.push({name:'mobileMyFollowOrder'})
   if(this.isGod){
     // 自己不能跟单自己哦
-    this.openPop(this.$t('大神不能跟单大神'))
+    this.openPop(this.$t('带单账号不可跟单'))
     return
   }
   this.delFollowOpenDisableBi = true
@@ -136,11 +136,11 @@ root.methods.popCloseTemporarilyClosedBi = function () {
 root.methods.openDocumentaryWindowDisable = function () {
   if(this.isGod){
     // 自己不能跟单自己哦
-    this.openPop(this.$t('大神不能跟单大神'))
+    this.openPop(this.$t('带单账号不可跟单'))
     return
   }
   if (this.isYuan.length != 0) {
-    this.openPop(this.$t('用户合约跟单只能跟单一个大神'))
+    this.openPop(this.$t('不可同时跟随多人'))
     return
   }
   this.delFollowOpenDisable = true

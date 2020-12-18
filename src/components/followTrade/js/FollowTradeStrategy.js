@@ -267,12 +267,12 @@ root.methods.re_postCommitFee = function (data) {
   }
 
   if(data.errorCode == 5) {
-    this.openPop('已经有仓位了，不能成为大神')
+    this.openPop('有持仓不可申请带单')
     return;
   }
 
   if(data.errorCode == 6) {
-    this.openPop('合约跟单中，不能成为大神')
+    this.openPop('跟单账号不可带单')
     return;
   }
   if(data.errorCode != 0) {

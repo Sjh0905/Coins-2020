@@ -245,12 +245,12 @@ root.methods.goToDocumentary = function (item,switchOrder) {
   }
   if(this.isGod){
     // 自己不能跟单自己哦
-    this.openPop('大神不能跟单大神')
+    this.openPop('带单账号不可跟单')
     return
   }
   if(this.godList.length != 0){
     // 用户合约跟单只能跟单一个大神
-    this.openPop(this.$t('用户合约跟单只能跟单一个大神'))
+    this.openPop(this.$t('不可同时跟随多人'))
     return
   }
 

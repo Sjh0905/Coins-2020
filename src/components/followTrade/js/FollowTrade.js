@@ -221,13 +221,13 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
 
   if(this.isGod){
     // 大神不能跟单大神
-    this.openPop(this.$t('大神不能跟单大神'))
+    this.openPop(this.$t('带单账号不可跟单'))
     return
   }
 
   if(this.godList.length != 0){
     // 用户合约跟单只能跟单一个大神
-    this.openPop(this.$t('用户合约跟单只能跟单一个大神'))
+    this.openPop(this.$t('不可同时跟随多人'))
     return
   }
 
