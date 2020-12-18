@@ -77,7 +77,7 @@ root.computed.fixedAmountPr1 = function () {
   return this.currencyPair || 0
 }
 root.computed.fixedAmountPr2 = function () {
-  return this.toFixed(this.accMul(Number(this.currencyPair), 0.8),2)
+  return this.toFixed(this.accMul(Number(this.currencyPair), 0.7),2)
 }
 root.computed.fixedAmountPr3 = function () {
   return this.accMinus(70,Number(this.currencyPair))
@@ -87,7 +87,7 @@ root.computed.fixedCurrencyPairFee = function () {
   return this.currencyPairFee || 0
 }
 root.computed.fixedCurrencyPairFee2 = function () {
-  return this.toFixed(this.accMul(Number(this.currencyPairFee), 0.8),2)
+  return this.toFixed(this.accMul(Number(this.currencyPairFee), 0.7),2)
 }
 root.computed.fixedCurrencyPairFee3 = function () {
   return this.accMinus(70,Number(this.currencyPairFee))
@@ -151,15 +151,15 @@ root.methods.closeMaskWindow = function () {
   this.openMaskWindow = false
 }
 root.methods.testCurrencyPair = function () {
-  if(this.isSwitchOrder == 'SPOT' && this.currencyPair == ''){
-    this.currencyPairText = '请输入费用/提成'
-    return
-  }
+  // if(this.isSwitchOrder == 'SPOT' && this.currencyPair == ''){
+  //   this.currencyPairText = '请输入费用/提成'
+  //   return
+  // }
 }
 
 //成为大神
 root.methods.postCommitFee = function () {
-  if(this.isSwitchOrder == 'SPOT' &&this.currencyPair == ''){
+  if(this.fixedAmPr == 1 &&this.currencyPair == ''){
     this.openPop ('请输入费用/提成')
     return
   }
@@ -169,7 +169,8 @@ root.methods.postCommitFee = function () {
   // }
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
-    fee: this.isSwitchOrder == 'SPOT' ? this.currencyPair : 20,
+    // fee: this.isSwitchOrder == 'SPOT' ? this.currencyPair : 20,
+    fee: this.fixedAmPr == 1 ? this.currencyPair : 20,
     type: this.isSwitchOrder,
   }
   this.$http.send('POST_GOD', {
@@ -241,7 +242,7 @@ root.methods.error_postCommitFee = function (err) {
 
 //修改大神
 root.methods.postRevisionFee = function () {
-  if (this.isSwitchOrder == 'SPOT' && this.currencyPairFee == '') {
+  if (this.fixedAmPr == 1 && this.currencyPairFee == '') {
     this.openPop('请输入费用/提成')
     return
   }
@@ -251,7 +252,7 @@ root.methods.postRevisionFee = function () {
   // }
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
-    fee:this.isSwitchOrder == 'SPOT' ? this.currencyPairFee : 20,
+    fee:this.fixedAmPr == 1 ? this.currencyPairFee : 20,
     type: this.isSwitchOrder,
   }
   this.$http.send('POST_REVISION_FEE', {

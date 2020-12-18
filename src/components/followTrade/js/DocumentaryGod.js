@@ -237,7 +237,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     data.errorCode == 11 &&  this.openPop(this.$t('followDetails_5'));
     data.errorCode == 12 &&  this.openPop(this.$t('followDetails_1'));
     data.errorCode == 15 &&  this.openPop(this.$t('followDetails_3'));
-    data.errorCode == 16 &&  this.openPop(this.$t('用户已经有仓位了不能跟单大神'));
+    data.errorCode == 16 &&  this.openPop(this.$t('您已有仓位，暂不能跟单'));
     data.errorCode == 17 &&  this.openPop(this.$t('大神有仓位，暂不能跟单'));
     data.errorCode == 18 &&  this.openPop(this.$t('用户和大神的逐全仓模式不一致'));
     data.errorCode == 19 &&  this.openPop(this.$t('用户和大神的单双仓模式不一致'));

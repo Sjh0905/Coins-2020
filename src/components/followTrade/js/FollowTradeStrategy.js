@@ -96,7 +96,7 @@ root.computed.fixedAmountPr1 = function () {
   return this.currencyPair || 0
 }
 root.computed.fixedAmountPr2 = function () {
-  return this.toFixed(this.accMul(Number(this.currencyPair), 0.8),2)
+  return this.toFixed(this.accMul(Number(this.currencyPair), 0.7),2)
 }
 root.computed.fixedAmountPr3 = function () {
   return this.accMinus(70,Number(this.currencyPair))
@@ -219,7 +219,7 @@ root.methods.popWindowClose= function () {
 
 //成为大神
 root.methods.postCommitFee = function () {
-  if(this.isSwitchOrder == 'SPOT' && this.currencyPair == ''){
+  if(this.fixedAmPr == 1 && this.currencyPair == ''){
     this.openPop (this.$t('cannotBeBlank'))
     return
   }
@@ -229,7 +229,7 @@ root.methods.postCommitFee = function () {
   // }
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
-    fee: this.isSwitchOrder == 'SPOT'?this.currencyPair:20,
+    fee: this.fixedAmPr == 1?this.currencyPair:20,
     type: this.isSwitchOrder
   }
   this.$http.send('POST_GOD', {

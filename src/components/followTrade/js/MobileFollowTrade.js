@@ -71,7 +71,7 @@ root.computed = {}
 // root.computed.isFollow = function () {
 //   this.godList.forEach(v=>{
 //     if(this.listGod.indexOf(v) >= 0 ) {
-//       console.info('v=======大神uid',v)
+//       console.info('v=======带单者uid',v)
 //       return true
 //     }
 //     return

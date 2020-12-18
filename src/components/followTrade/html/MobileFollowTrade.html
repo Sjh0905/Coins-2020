@@ -19,7 +19,7 @@
   <div class="fund-buy-main">
     <!--顶部banner-->
     <div class="folloe-banner">
-      <img class="folloe-banner-img" src="../assets/with-banner.png" alt="">
+      <img class="folloe-banner-img" src="../assets/banner-h5.png" alt="">
     </div>
 
     <div class="with-list flex">
@@ -47,7 +47,7 @@
           </div>
           <div class="interest-rate" v-if="item.feeType == 'LOT'">{{item.fee || '0'}} USDT/{{days || '0'}}天</div>
           <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(item.fee,30) || '0'}}%/周</div>
-          <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,0) || '0'}}%/笔</div>
+          <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,30) || '0'}}%/笔</div>
         </div>
       </div>
       <!--大佬头像End-->

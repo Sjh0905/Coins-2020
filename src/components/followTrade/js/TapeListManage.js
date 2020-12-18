@@ -152,7 +152,7 @@ root.methods.closeMaskWindow = function () {
   this.openMaskWindow = false
 }
 root.methods.testCurrencyPair = function () {
-  if( this.isSwitchOrder == 'SPOT' && this.currencyPair == ''){
+  if( this.fixedAmPr == 1 && this.currencyPair == ''){
     this.currencyPairText = this.$t('cannotBeBlank')
     return
   }
@@ -161,11 +161,11 @@ root.methods.testCurrencyPair = function () {
 
 //修改大神
 root.methods.postRevisionFee = function () {
-  if (this.isSwitchOrder == 'SPOT' &&this.fixedAmPr != 1 && this.currencyPairFee == '') {
-    this.openPop(this.$t('modificationFeeCannotBeBlank'))
-    return
-  }
-  if (this.isSwitchOrder == 'SPOT' &&this.fixedAmPr == 1 && this.currencyPair == '') {
+  // if (this.fixedAmPr != 1 && this.currencyPairFee == '') {
+  //   this.openPop(this.$t('modificationFeeCannotBeBlank'))
+  //   return
+  // }
+  if (this.fixedAmPr == 1 && this.currencyPair == '') {
     this.openPop(this.$t('modificationFeeCannotBeBlank'))
     return
   }
@@ -175,7 +175,7 @@ root.methods.postRevisionFee = function () {
   }
   let params = {
     feeType: this.fixedAmPr == 1 ? 'LOT' : 'RATE',
-    fee:this.fixedAmPr == 1 ? this.currencyPair : this.isSwitchOrder == 'SPOT' ? this.currencyPairFee:20,
+    fee:this.fixedAmPr == 1 ? this.currencyPair : 20,
     type: this.isSwitchOrder,
   }
   this.$http.send('POST_REVISION_FEE', {
