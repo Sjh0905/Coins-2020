@@ -76,7 +76,7 @@
           <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,30)}}%/周</div>
           <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd($route.query.fee,30)}}%/笔</div>
           <!--跟单-->
-          <div class="follow-fff" v-if="$route.query.isFollow < 0 && isSwitchOrder == 'SPOT'" @click="jumpToFollowDocumentary">{{$t('documentary')}}</div>
+          <div class="follow-fff" v-if="$route.query.isFollow < 0&& godInfo.canFollow == 1 && isSwitchOrder == 'SPOT'" @click="jumpToFollowDocumentary">{{$t('documentary')}}</div>
           <div class="follow-fff" v-if="$route.query.isFollow < 0 && godInfo.canFollow == 1 && isSwitchOrder == 'CONTRACT'" @click="openTapeListDisable">{{$t('documentary')}}</div>
           <!--已跟单-->
           <div class="follow-c" v-if="$route.query.isFollow >= 0 || godInfo.canFollow == 0">{{$route.query.isFollow >= 0?$t('following'):'跟单'}}</div>
