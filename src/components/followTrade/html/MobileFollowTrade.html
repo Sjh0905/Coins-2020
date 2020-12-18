@@ -46,7 +46,7 @@
             <span class="documentary-f" v-if="godList.indexOf(item.userId) >= 0 || item.canFollow == 0"> {{godList.indexOf(item.userId) >= 0?'已跟单':'跟单'}}</span>
           </div>
           <div class="interest-rate" v-if="item.feeType == 'LOT'">{{item.fee || '0'}} USDT/{{days || '0'}}天</div>
-          <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(item.fee,0) || '0'}}%/周</div>
+          <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(item.fee,30) || '0'}}%/周</div>
           <div class="interest-rate" v-if="item.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(item.fee,0) || '0'}}%/笔</div>
         </div>
       </div>

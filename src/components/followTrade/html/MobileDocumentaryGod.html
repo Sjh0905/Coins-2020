@@ -198,7 +198,7 @@
       <div class="mobile-trade-open-exchange-text flex">
         <div class="mobile-trade-fee">费用</div>
         <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT/{{$route.query.days  || '0'}}天</div>
-        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,0) || '0'}}%/周</div>
+        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/周</div>
         <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd($route.query.fee,0) || '0'}}%/笔</div>
       </div>
       <div class="mobile-trade-open-exchange-button" @click="jumpToFollowDocumentary()" v-if="$route.query.isFollow < 0 && isSwitchOrder == 'SPOT'">跟单</div>
