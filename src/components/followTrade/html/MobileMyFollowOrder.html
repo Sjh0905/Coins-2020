@@ -17,7 +17,7 @@
   </div>
 
   <div class="mobile-trade-header-null"></div>
-  <div class="open-automatic-renew">
+  <div class="open-automatic-renew" v-if="isSwitchOrder == 'SPOT'">
     <div class="open-automatic-renew-top flex">
       <div class="open-automatic-renew-title">跟单到期自动续费</div>
       <div class="open-automatic-renew-img">
@@ -82,13 +82,16 @@
                 <span class="mobile-trade-item-currency-bgd">{{item.type == 'SPOT'?'现货':'合约'}}</span>
               </div>
             </div>
-            <div class="modify" @click="modifyDocumentary(item)" v-if="item.status == 'FOLLOWING'|| item.status =='START'">
-              修改
-              <img class="modify-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
+            <div v-if="isSwitchOrder == 'SPOT'">
+              <div class="modify" @click="modifyDocumentary(item)" v-if="item.status == 'FOLLOWING'|| item.status =='START'">
+                修改
+                <img class="modify-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
+              </div>
+              <div class="modify-hui" v-else>
+                修改
+              </div>
             </div>
-            <div class="modify-hui" v-else>
-              修改
-            </div>
+
 <!--            <span class="mobile-trade-buy text-green">买入</span>-->
           </div>
 

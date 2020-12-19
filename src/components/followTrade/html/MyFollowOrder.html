@@ -32,8 +32,9 @@
         </div>
       </div>
 
+      <div class="follow-asset-renewal1" v-if="isSwitchOrder == 'CONTRACT'"></div>
 
-      <div class="follow-asset-renewal">
+      <div class="follow-asset-renewal" v-if="isSwitchOrder == 'SPOT'">
 <!--        <div class="follow-asset-remind pointer" @mouseenter="openRenew()" @mouseleave="closeRenew()">-->
 <!--          <img src="../assets/remind_icon.png" alt="" >-->
 <!--        </div>-->
@@ -64,7 +65,7 @@
 
 
 
-    <div class="follow-asset-content" v-if="followUserList.length != 0">
+    <div class="follow-asset-content">
       <!--正在跟单-->
       <div class="follow-asset-content-title">{{$t('Followed')}}</div>
 
@@ -89,7 +90,7 @@
         <div class="operation">{{$t('operation')}}</div>
       </div>
 
-      <div class="follow-asset-topic-content flex" v-for="(item,index) in followUserList" :key="index">
+      <div class="follow-asset-topic-content flex"  v-if="followUserList.length != 0" v-for="(item,index) in followUserList" :key="index">
         <div class="UID">{{item.followId}}</div>
         <div class="time">{{formatDateUitl(item.followTime)}}</div>
 <!--        <div class="exchange-pair">{{item.symbol.replace('_','/')}}</div>-->
@@ -102,19 +103,22 @@
         <div class="total-income">{{item.profit.toFixed(2) || '0'}}</div>
         <div class="operation">
           <!--修改策略-->
-          <span class="btn-size update pointer" v-if="item.status == 'FOLLOWING' || item.status =='START'" @click="openFollowWindow(item)">{{$t('modifyPolicy')}}</span>
-          <span class="btn-size1 update" v-else >{{$t('modifyPolicy')}}</span>
+          <span v-if="isSwitchOrder == 'SPOT'">
+            <span class="btn-size update pointer" v-if="item.status == 'FOLLOWING' || item.status =='START'" @click="openFollowWindow(item)">{{$t('modifyPolicy')}}</span>
+            <span class="btn-size1 update" v-else >{{$t('modifyPolicy')}}</span>
+          </span>
+
           <!--取消跟单-->
           <span class="btn-size pointer" v-if="item.status == 'FOLLOWING' || item.status =='START'" @click="delFollow(item)">{{$t('cancelFollowing')}}</span>
           <span class="btn-size1" v-else >{{$t('cancelFollowing')}}</span>
         </div>
       </div>
-<!--      <div class="follow-asset-not-data" >-->
-<!--        <div>-->
-<!--          <img src="../../../assets/noOrders.png" alt="">-->
-<!--        </div>-->
-<!--        暂无数据-->
-<!--      </div>-->
+      <div class="follow-asset-not-data" v-if="followUserList.length == 0">
+        <div>
+          <img src="../../../assets/noOrders.png" alt="">
+        </div>
+        暂无跟单
+      </div>
     </div>
   </div>
   <!--修改跟单策略-->
