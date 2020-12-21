@@ -24,6 +24,7 @@ root.data = function () {
     currentInterval:null,
     switchOrder: 'CONTRACT',
     isGod: true,
+    newContract:'',
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -320,6 +321,8 @@ root.methods.re_getBigBrotherList = function (data) {
   typeof(data) == 'string' && (data = JSON.parse(data));
   if(!data && !data.dataMap)return
   this.loading = false
+  this.newContract = new Date().getTime()
+
   this.listGod = data.dataMap.list || [] // 大神列表
   this.days = data.dataMap.days || '0'
   this.godList = data.dataMap.godList || []   // 已跟单大神列表

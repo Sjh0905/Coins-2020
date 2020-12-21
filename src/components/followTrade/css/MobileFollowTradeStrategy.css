@@ -503,3 +503,37 @@
   box-shadow:0rem 0.1rem 0.2rem 0rem rgba(0,0,0,0.1);
   border-radius:0.04rem;
 }
+/*暂无数据*/
+.history-no-data {
+  min-height: 4rem;
+  line-height: 4rem;
+  text-align: center;
+  font-size:0.28rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #8994A5;
+
+}
+
+.mobile-trade-center-not-data {
+  width: 7.5rem;
+  height: 5.68rem;
+  padding-top: 1.3rem;
+}
+.mobile-trade-center-not-data-img {
+  width: 1.76rem;
+  margin: 0 auto;
+}
+.mobile-trade-center-not-data-img img {
+  margin: 0 auto;
+  vertical-align: middle;
+}
+.mobile-trade-center-not-data-text {
+  width: 1.76rem;
+  text-align: center;
+  font-size:0.24rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #6B7DA2;
+  margin: 0 auto;
+}

@@ -15,6 +15,9 @@ root.data = function () {
     profit:'', // 总金额+总收益
     total:'',
     followId:'',
+    weekUserProfit:'',
+    weekProfit:'',
+    userProfit:'',
 
     // 弹框
     popType: 0,
@@ -84,6 +87,10 @@ root.computed.isAndroid = function () {
 root.computed.isSwitchOrder = function () {
   return this.$route.query.isSwitchOrder || this.$route.params.isSwitchOrder;
 }
+
+root.computed.userId = function () {
+  return this.$store.state.authMessage.userId ? this.$store.state.authMessage.userId : 0
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -124,6 +131,9 @@ root.methods.re_postMyDocumentary = function (data) {
   this.followUserList = data.dataMap.list || []
   this.profit = data.dataMap.profit || ''
   this.total = data.dataMap.total || ''
+  this.weekUserProfit = data.dataMap.weekUserProfit || ''
+  this.weekProfit = data.dataMap.weekProfit || ''
+  this.userProfit = data.dataMap.userProfit || ''
   if(data.dataMap.followSetting.autoType=="YES"){
     this.isAutomatic = true
     return

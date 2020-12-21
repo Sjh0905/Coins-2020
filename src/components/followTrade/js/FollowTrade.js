@@ -29,6 +29,7 @@ root.data = function () {
     currentInterval:null,
     switchOrder: 'CONTRACT',
     isGod: true,
+    newContract: '',
 
   }
 }
@@ -297,6 +298,8 @@ root.methods.getBigBrotherList = function () {
 root.methods.re_getBigBrotherList = function (data) {
   typeof(data) == 'string' && (data = JSON.parse(data));
   if(!data && !data.dataMap)return
+  this.newContract = new Date().getTime()
+  // console.info((this.newContract - this.listGod[0].createdAt)/86400000)
   this.loading = false
   this.listGod = data.dataMap.list || [] // 大神列表
   this.days = data.dataMap.days || '0'

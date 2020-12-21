@@ -85,13 +85,11 @@
       </div>
       <!--总收益率-->
       <div class="mobile-trade-data-item ">
-        <div class="mobile-trade-data" v-if="isSwitchOrder == 'SPOT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
-        <div class="mobile-trade-data" v-if="isSwitchOrder == 'CONTRACT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate, 2) : '0'}}%</div>
-        <div class="" v-if="isSwitchOrder == 'SPOT'">收益率</div>
-        <div class="" v-if="isSwitchOrder == 'CONTRACT'">总收益率</div>
+        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate, 2) : '0'}}%</div>
+        <div class="">总收益率</div>
       </div>
       <!--总收益-->
-      <div class="mobile-trade-data-item " v-if="isSwitchOrder == 'CONTRACT'">
+      <div class="mobile-trade-data-item ">
         <div class="mobile-trade-data" :class="godInfo.profit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.profit ? toFixed(godInfo.profit, 2) : '0'}}</div>
         <div class="">{{$t('总收益')}} (USDT)</div>
       </div>
@@ -148,6 +146,13 @@
           </div>
         </div>
       </div>
+<!--      <div class="history-no-data" v-if="godHistorList.length==0 && !loading">暂无数据</div>-->
+      <div class="mobile-trade-center-not-data" v-if="godHistorList.length == 0&& !loading">
+        <div class="mobile-trade-center-not-data-img">
+          <img src="../assets/no_list.png" alt="">
+        </div>
+        <div class="mobile-trade-center-not-data-text">暂无记录</div>
+      </div>
     </div>
 
     <div class="mobile-trade-center-content" v-if="followType == 1">
@@ -178,8 +183,8 @@
 
         </div>
         <div class="flex mtop">
-          <div class="mobile-trader-follower-text flex1">总跟单利润（USDT)</div>
-          <div class="mobile-trader-follower-text flex1">总跟单收益（USDT)</div>
+          <div class="mobile-trader-follower-text flex1">总跟单利润（₮)</div>
+          <div class="mobile-trader-follower-text flex1">总跟单收益（₮)</div>
 
         </div>
         <div class="flex">
@@ -188,8 +193,8 @@
 
         </div>
         <div class="flex mtop">
-          <div class="mobile-trader-follower-text flex1">本周跟单利润（USDT)</div>
-          <div class="mobile-trader-follower-text flex1">本周跟单收益（USDT)</div>
+          <div class="mobile-trader-follower-text flex1">本周跟单利润（₮)</div>
+          <div class="mobile-trader-follower-text flex1">本周跟单收益（₮)</div>
 
         </div>
 
@@ -203,6 +208,18 @@
         <!--&lt;!&ndash;            <div class="mobile-trader-follower-text">总跟单收益(USDT)</div>&ndash;&gt;-->
         <!--&lt;!&ndash;         </div>&ndash;&gt;-->
         <!--        </div>-->
+      </div>
+      <div class="mobile-trade-center-not-data" v-if="followUserList.length==0 && isSwitchOrder == 'SPOT' && !loading">
+        <div class="mobile-trade-center-not-data-img">
+          <img src="../assets/no_list.png" alt="">
+        </div>
+        <div class="mobile-trade-center-not-data-text">暂无记录</div>
+      </div>
+      <div class="mobile-trade-center-not-data" v-if="followUserList.length==0 && isSwitchOrder == 'CONTRACT' && !loading">
+        <div class="mobile-trade-center-not-data-img">
+          <img src="../assets/no_list.png" alt="">
+        </div>
+        <div class="mobile-trade-center-not-data-text">暂无记录</div>
       </div>
     </div>
   </div>

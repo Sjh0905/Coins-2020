@@ -132,6 +132,14 @@
   border-bottom: 0.02rem solid #F7F8FA;
   border-top: 0.02rem solid #F7F8FA;
 }
+.mobile-trade-center-content-item-contract {
+  width: 7.5rem;
+  height: 2.8rem;
+  padding: 0.3rem;
+  padding-bottom: 0;
+  border-bottom: 0.02rem solid #F7F8FA;
+  border-top: 0.02rem solid #F7F8FA;
+}
 .mobile-trade-item-follower{
   /*margin-bottom:0.28rem;*/
   align-items: center;
@@ -272,7 +280,9 @@
   flex: 3;
   text-align: right;
 }
-
+.mobile-trade-price-1 {
+  flex: 1;
+}
 /*------------ 中部内容  end -------------*/
 
 /*弹框样式*/
@@ -354,4 +364,97 @@
   background: #F5F7FF;
   padding: 0.3rem;
   margin-bottom: 0.3rem;
+}
+
+
+.mobile-trade-center-not-data {
+  width: 7.5rem;
+  height: 5.68rem;
+  padding-top: 1.3rem;
+}
+.mobile-trade-center-not-data-img {
+  width: 1.76rem;
+  margin: 0 auto;
+}
+.mobile-trade-center-not-data-img img {
+  margin: 0 auto;
+  vertical-align: middle;
+}
+.mobile-trade-center-not-data-text {
+  width: 1.76rem;
+  text-align: center;
+  font-size:0.24rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #6B7DA2;
+  margin: 0 auto;
+}
+.mobile-trade-top {
+  width: 7.5rem;
+  /*height: 3.08rem;*/
+  background: #fff;
+}
+.mobile-trade-top-banner {
+  width: 7.5rem;
+  height: 2.12rem;
+  background: url("../assets/management_banner.png") no-repeat center;
+  background-size: 100% 100%;
+  padding: 0.56rem 0.3rem;
+}
+.mobile-trade-img {
+  width: 1rem;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+}
+.mobile-trade-top-banner-text {
+  line-height: 1.12rem;
+  font-size:0.32rem;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color: #fff;
+}
+.mobile-trade-top-data {
+  width: 100%;
+  height: 0.96rem;
+  background: #302E34;
+  padding: 0 0.3rem;
+  justify-content: space-between;
+}
+.mobile-trade-data-item {
+  /*width: 1.86rem;*/
+  height: 0.96rem;
+  font-size:0.2rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #767579;
+  text-align: center;
+}
+.mobile-trade-amount1 {
+  /*flex: 1;*/
+}
+.mobile-trade-amount12 {
+  flex: 0.4;
+}
+.mobile-trade-amount13 {
+  flex: 0.1;
+}
+.mobile-trade-data {
+  /*margin-top: 0.16rem;*/
+  font-size:0.28rem;
+  font-family:Roboto-Regular,Roboto;
+  font-weight:400;
+  color: #fff;
+  margin-bottom: 0.04rem;
+}
+.text-green {
+  color: #86CB12;
+}
+.text-red {
+  color: #F60076;
+}
+.text-blue {
+  color: #3576F5;
+}
+.mobile-trade-item-content {
+  margin-top: 0.4rem;
 }

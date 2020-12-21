@@ -186,13 +186,13 @@
           <!--          账号-->
           <div class="application_header_div">{{$t('accountNumber')}}</div>
           <!--          跟单总成交额-->
-          <div class="application_header_div">{{$t('本周跟单利润')}} (USDT)</div>
-          <div class="application_header_div">{{$t('本周跟单收益')}} (USDT)</div>
+          <div class="application-header-div-box">{{$t('本周跟单利润')}} (₮)</div>
+          <div class="application-header-div-box">{{$t('本周跟单收益')}} (₮)</div>
 
 
-          <div class="application_header_div">{{$t('总跟单利润')}} (USDT)</div>
+          <div class="application-header-div-box">{{$t('跟单利润')}} (₮)</div>
           <!--          跟单收益-->
-          <div class="application-header-div-box">{{$t('followUpIncome')}} (USDT)</div>
+          <div class="application-header-div-box">{{$t('跟单收益')}} (₮)</div>
         </li>
         <li class="flex application_header"  v-if="isSwitchOrder == 'SPOT'">
           <!--          账号-->
@@ -211,10 +211,10 @@
                 <!--账号-->
                 <div class="application_header_div ">{{item.userId}}</div>
                 <!--跟单总成交额-->
-                <div class="application_header_div ">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
-                <div class="application_header_div ">{{toFixed(item.weekProfit,2) || '0'}}</div>
+                <div class="application-header-div-box ">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
+                <div class="application-header-div-box ">{{toFixed(item.weekProfit,2) || '0'}}</div>
 
-                <div class="application_header_div ">{{toFixed(item.userProfit,2) || '0'}}</div>
+                <div class="application-header-div-box ">{{toFixed(item.userProfit,2) || '0'}}</div>
                 <!--跟单收益-->
                 <div class="application-header-div-box ">{{toFixed(item.profit,2) || '0'}}</div>
 

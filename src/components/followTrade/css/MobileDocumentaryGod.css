@@ -280,6 +280,7 @@
 .mobile-trade-no-data {
   width: 7.5rem;
   text-align: center;
+  height: 0.01rem;
 }
 .mobile-trade-no-data-text {
   padding-top: 2.78rem;

@@ -40,9 +40,8 @@
       <div>· 由于跟单费用可以随时调整，自动续费金额以将以最新设定费用为准，敬请保持关注。</div>
     </div>
   </div>
-
   <!--跟单统计-->
-  <div class="follow-statistics flex-around">
+  <div class="follow-statistics flex-around" v-if="isSwitchOrder == 'SPOT'">
     <div class="follow-statistics-item">
       <div class="follow-statistics-item-title">累计跟单总交易量 (USDT)</div>
       <div class="follow-statistics-item-money">{{toFixed(total ||'0',2)}}</div>
@@ -54,12 +53,49 @@
   </div>
   <!--跟单统计end-->
 
+  <!--合约内容上部-->
+  <div class="mobile-trade-top" v-if="isSwitchOrder == 'CONTRACT'">
+    <div class="mobile-trade-top-banner flex">
+      <div class="mobile-trade-top-banner-img">
+        <!--        <img src="../assets/management_personal_icon.png" alt="" class="mobile-trade-img">-->
+        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">
+      </div>
+      <div class="mobile-trade-top-banner-text">{{userId}}</div>
+    </div>
+    <div class="mobile-trade-top-data flex">
+      <!--本周收益率-->
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{toFixed(weekUserProfit ||'0',2)}}</div>
+        <div class="">本周跟单利润₮</div>
+      </div>
+      <!--本周收益-->
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{toFixed(weekProfit ||'0',2)}}</div>
+        <div class="">本周跟单收益₮</div>
+      </div>
+      <!--总收益率-->
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{toFixed(userProfit ||'0',2)}}</div>
+        <div class="" >总跟单利润₮</div>
+      </div>
+      <!--总收益-->
+      <div class="mobile-trade-data-item mobile-trade-amount1">
+        <div class="mobile-trade-data">{{toFixed(profit ||'0',2)}}</div>
+        <div class="">总跟单收益₮</div>
+      </div>
+
+    </div>
+  </div>
+  <!--合约内容上部-->
+
+
+
   <!--正在跟单-->
   <div class="mobile-trade-center">
     <div class="mobile-trade-center-title">正在跟单</div>
     <div class="mobile-trade-center-content">
 
-      <div class="mobile-trade-center-content-item" v-for="(item,index) in followUserList" :key="index">
+      <div class="" :class="isSwitchOrder == 'SPOT'?'mobile-trade-center-content-item':'mobile-trade-center-content-item-contract'" v-for="(item,index) in followUserList" :key="index">
         <!--跟单者信息-->
         <div class="mobile-trade-item-follower flex-between">
           <div class="mobile-trade-item-follower-info flex-row">
@@ -72,7 +108,7 @@
           <div class="mobile-trade-item-follower-cancle-btn-hui" v-else>取消跟单</div>
         </div>
 
-        <div class="mobile-trade-item-top flex">
+        <div class="mobile-trade-item-top flex" v-if="isSwitchOrder == 'SPOT'">
           <div class="mobile-trade-item-top-left flex">
             <div class="mobile-trade-item-currency flex">
               <div class="mobile-trade-item-currency-label">
@@ -82,13 +118,10 @@
                 <span class="mobile-trade-item-currency-bgd">{{item.type == 'SPOT'?'现货':'合约'}}</span>
               </div>
             </div>
-            <div v-if="isSwitchOrder == 'SPOT'">
+            <div>
               <div class="modify" @click="modifyDocumentary(item)" v-if="item.status == 'FOLLOWING'|| item.status =='START'">
                 修改
                 <img class="modify-img" src="../../LuckyDraw/assets/mobileForecastHomePage/item_right_icon.png" alt="">
-              </div>
-              <div class="modify-hui" v-else>
-                修改
               </div>
             </div>
 
@@ -96,7 +129,7 @@
           </div>
 
         </div>
-        <div class="mobile-trade-item-content">
+        <div class="" v-if="isSwitchOrder == 'SPOT'">
           <div class="mobile-trade-item-content-title flex">
             <div class="mobile-trade-price">累计笔数</div>
             <div class="mobile-trade-amount">累计跟单交易量 (USDT)</div>
@@ -108,6 +141,22 @@
             <div class="mobile-trade-money">{{toFixed(item.profit,2) || '0'}}</div>
           </div>
         </div>
+        <div class="mobile-trade-item-content" v-if="isSwitchOrder == 'CONTRACT'">
+          <div class="mobile-trade-item-content-title flex">
+            <div class="mobile-trade-price-1">类型</div>
+            <div class="mobile-trade-price-1">跟单收益</div>
+          </div>
+          <div class="mobile-trade-item-content-container flex">
+            <div class="mobile-trade-price-1">{{item.type == 'SPOT'?'现货':'合约'}}</div>
+            <div class="mobile-trade-price-1">{{toFixed(item.profit,2) || '0'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-trade-center-not-data" v-if="followUserList.length == 0">
+        <div class="mobile-trade-center-not-data-img">
+          <img src="../assets/no_list.png" alt="">
+        </div>
+        <div class="mobile-trade-center-not-data-text">暂无记录</div>
       </div>
     </div>
   </div>
