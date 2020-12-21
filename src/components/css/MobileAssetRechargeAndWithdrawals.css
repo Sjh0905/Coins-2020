@@ -633,7 +633,12 @@
   color: #86CB12;
 }
 .hold-order {
+
+
+}
+.hold-order-record {
   padding: 0.3rem;
+  background: #131F30;
   border-bottom: 0.02rem solid #223349;
 }
 .cont-se {

@@ -63,6 +63,7 @@ root.data = function () {
 
     records: [],
     records1:[],
+    contractSymbolArr:['BTCUSDT','ETHUSDT'],
 
     loadingMoreShow: true,
     loadingMoreShowing: false,
@@ -777,14 +778,13 @@ root.methods.re_getPositionRisk = function (data) {
   if (!data) return
   // console.log('获取记录', data)
   this.records = data.data
+  let aa = []
   this.records.map((v,index)=>{
-    if (v.positionAmt != 0 && v.symbol == 'BTCUSDT') {
-      let aa = []
+    if (v.positionAmt != 0 && this.contractSymbolArr.includes(v.symbol)) {
       aa.push(v)
-      this.records1 = aa
     }
   })
-
+  this.records1 = aa
   // if (this.records1.length < this.limit) {
   //   this.loadingMoreShow = false
   // }
