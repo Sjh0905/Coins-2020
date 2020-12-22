@@ -95,16 +95,16 @@
       <!-- 当前持仓 -->
       <ul class="recordUl" v-if="fixedFollow == 1">
         <!--表头 S-->
-        <li class="application_header">
+        <li class="flex application_li">
           <!-- 时间-->
-          <div class="application_header_div">{{$t('time')}}</div>
+          <div class="application_1">{{$t('time')}}</div>
           <!-- 交易对-->
-          <div class="application_header_div">{{$t('transactionPair')}}</div>
+          <div class="application_1">{{$t('transactionPair')}}</div>
           <!-- 类型-->
 <!--          <div class="application_header_div">{{$t('type')}}</div>-->
-          <div class="application_header_div" v-if="isSwitchOrder == 'CONTRACT'">{{$t('方向')}}</div>
+          <div class="application_1" v-if="isSwitchOrder == 'CONTRACT'">{{$t('方向')}}</div>
           <!-- 价格-->
-          <div class="application_header_div">{{$t('henchman')}}</div>
+          <div class="application_1">{{$t('henchman')}}</div>
           <!-- 数量-->
 <!--          <div class="application_header_div"></div>-->
           <!-- 金额-->
@@ -115,9 +115,9 @@
           <template v-if="godHistorList.length !== 0">
             <li class="flex application_li" v-for="(item,index) in godHistorList">
               <!--时间-->
-              <div class="application_header_div">{{$globalFunc.formatDateUitl(Number(item.orderUpdatedAt),'YYYY-MM-DD hh:mm:ss')}}</div>
+              <div class="application_1">{{$globalFunc.formatDateUitl(Number(item.orderUpdatedAt),'YYYY-MM-DD hh:mm:ss')}}</div>
               <!--交易对-->
-              <div class="application_header_div">{{item.symbol.replace('_','/')}}</div>
+              <div class="application_1">{{item.symbol.replace('_','/')}}</div>
               <!--类型-->
 <!--              <div class="application_header_div"-->
 <!--                   v-if="isSwitchOrder == 'SPOT'"-->
@@ -129,12 +129,12 @@
 <!--                &lt;!&ndash;买入/卖出&ndash;&gt;-->
 <!--                {{contractType[item.orderType]}}-->
 <!--              </div>-->
-              <div class="application_header_div" :class="item.direction==='BUY'?'text-green':'text-red'" v-if="isSwitchOrder == 'CONTRACT'">
+              <div class="application_1" :class="item.direction==='BUY'?'text-green':'text-red'" v-if="isSwitchOrder == 'CONTRACT'">
                 {{$globalFunc.getOrderSide(item.positionSide,item.direction)}}
               </div>
 
               <!--价格-->
-              <div class="application_header_div">{{toFixed(item.price,4) || '0'}}</div>
+              <div class="application_1">{{toFixed(item.price,4) || '0'}}</div>
               <!--数量-->
 <!--              <div class="application_header_div"></div>-->
               <!--金额-->
