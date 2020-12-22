@@ -95,7 +95,7 @@
             <div class="color-a2">总收益 (₮)</div>
           </div>
           <div class="flex-din">
-            <div class="color-13">{{Math.round((newContract - item.createdAt) / 86400000)==0 ? '1' : Math.round((newContract - item.createdAt) / 86400000)}}</div>
+            <div class="color-13">第{{Math.floor((newContract - item.createdAt) / 86400000) +1}}天</div>
             <div class="color-a2">入驻天数</div>
           </div>
         </div>

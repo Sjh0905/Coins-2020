@@ -110,7 +110,9 @@
               <div class="follow-gru2">{{$t('totalDocumentaryNumber')}}</div>
             </div>
             <div class="follow-wi">
-              <div class="follow-bink">{{Math.round((newContract - item.createdAt) / 86400000)==0 ? '1' : Math.round((newContract - item.createdAt) / 86400000)}}</div>
+<!--              <div class="follow-bink">{{// Math.round((newContract - item.createdAt) / 86400000)==0 ? Math.round((newContract - item.createdAt) / 86400000)+1 : Math.round((newContract - item.createdAt) / 86400000)}}</div>-->
+              <div class="follow-bink">第{{Math.floor((newContract - item.createdAt) / 1000/60/60/24) + 1}}天</div>
+<!--              <div class="follow-bink">{{// ($globalFunc.formatDateUitl(Number(newContract), 'hh') > 12) ? Math.round((newContract - item.createdAt) / 86400000) : Math.round((newContract - item.createdAt) / 86400000)+1}}</div>-->
               <div class="follow-gru2">入驻天数</div>
             </div>
           </div>
