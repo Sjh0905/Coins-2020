@@ -95,16 +95,16 @@
       <!-- 当前持仓 -->
       <ul class="recordUl" v-if="fixedFollow == 1">
         <!--表头 S-->
-        <li class="flex application_li">
+        <li class=" application_header">
           <!-- 时间-->
-          <div class="application_1">{{$t('time')}}</div>
+          <div class="flex-con">{{$t('time')}}</div>
           <!-- 交易对-->
-          <div class="application_1">{{$t('transactionPair')}}</div>
+          <div class="flex-con">{{$t('transactionPair')}}</div>
           <!-- 类型-->
 <!--          <div class="application_header_div">{{$t('type')}}</div>-->
-          <div class="application_1" v-if="isSwitchOrder == 'CONTRACT'">{{$t('方向')}}</div>
+          <div class="flex-con" v-if="isSwitchOrder == 'CONTRACT'">{{$t('方向')}}</div>
           <!-- 价格-->
-          <div class="application_1">{{$t('henchman')}}</div>
+          <div class="flex-con">{{$t('henchman')}}</div>
           <!-- 数量-->
 <!--          <div class="application_header_div"></div>-->
           <!-- 金额-->
@@ -115,9 +115,9 @@
           <template v-if="godHistorList.length !== 0">
             <li class="flex application_li" v-for="(item,index) in godHistorList">
               <!--时间-->
-              <div class="application_1">{{$globalFunc.formatDateUitl(Number(item.orderUpdatedAt),'YYYY-MM-DD hh:mm:ss')}}</div>
+              <div class="flex-con">{{$globalFunc.formatDateUitl(Number(item.orderUpdatedAt),'YYYY-MM-DD hh:mm:ss')}}</div>
               <!--交易对-->
-              <div class="application_1">{{item.symbol.replace('_','/')}}</div>
+              <div class="flex-con">{{item.symbol.replace('_','/')}}</div>
               <!--类型-->
 <!--              <div class="application_header_div"-->
 <!--                   v-if="isSwitchOrder == 'SPOT'"-->
@@ -129,12 +129,12 @@
 <!--                &lt;!&ndash;买入/卖出&ndash;&gt;-->
 <!--                {{contractType[item.orderType]}}-->
 <!--              </div>-->
-              <div class="application_1" :class="item.direction==='BUY'?'text-green':'text-red'" v-if="isSwitchOrder == 'CONTRACT'">
+              <div class="flex-con" :class="item.direction==='BUY'?'text-green':'text-red'" v-if="isSwitchOrder == 'CONTRACT'">
                 {{$globalFunc.getOrderSide(item.positionSide,item.direction)}}
               </div>
 
               <!--价格-->
-              <div class="application_1">{{toFixed(item.price,4) || '0'}}</div>
+              <div class="flex-con">{{toFixed(item.price,4) || '0'}}</div>
               <!--数量-->
 <!--              <div class="application_header_div"></div>-->
               <!--金额-->
@@ -152,13 +152,6 @@
             </li>
           </template>
 
-          <!--当前记录加载更多  -->
-          <!--            <template v-if="showLoadingMore && godHistorList.length !== 0">-->
-          <!--              <li class="loading-more">-->
-          <!--                <span class="text_blue pointer" v-if="!loadingMoreShow" @click="clickLoadingMore">{{$t('orderPageHistoricalEntrustment.close_10')}}</span>-->
-          <!--                <span class="text_blue" v-else>{{$t('orderPageHistoricalEntrustment.close_11')}}</span>-->
-          <!--              </li>-->
-          <!--            </template>-->
 
         </template>
       </ul>

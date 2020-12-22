@@ -106,7 +106,7 @@
       <!-- 当前持仓 -->
       <ul class="recordUl" v-if="followType == 1">
         <!--表头 S-->
-        <li class="flex application_li">
+        <li class="flex application_header">
           <!--时间-->
           <div class="application-header-div-box2">{{$t('time')}}</div>
           <!--交易对-->
@@ -198,7 +198,7 @@
           <!--          账号-->
           <div class="application_header_div">{{$t('accountNumber')}}</div>
           <!--          跟单总成交额-->
-          <div class="application_header_div">{{$t('跟单总成交额')}} (USDT)</div>
+          <div class="application-header-div-box">{{$t('跟单总成交额')}} (USDT)</div>
           <!--          跟单收益-->
           <div class="application-header-div-box">{{$t('跟单收益')}} (USDT)</div>
         </li>
@@ -223,7 +223,7 @@
                 <!--账号-->
                 <div class="application_header_div ">{{item.userId}}</div>
                 <!--跟单总成交额-->
-                <div class="application_header_div ">{{toFixed(item.amount,2) || '0'}}</div>
+                <div class="application-header-div-box ">{{toFixed(item.amount,2) || '0'}}</div>
                 <!--跟单收益-->
                 <div class="application-header-div-box ">{{toFixed(item.profit,2) || '0'}}</div>
 

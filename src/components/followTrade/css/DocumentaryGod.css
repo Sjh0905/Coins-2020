@@ -204,6 +204,9 @@
   box-sizing: border-box;
   justify-content: space-between;
 }
+.flex-con {
+  flex: 1;
+}
 .recordUl {
   width: 100%;
   min-height: 200px;
