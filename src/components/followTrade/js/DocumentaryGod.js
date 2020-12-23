@@ -37,7 +37,6 @@ root.data = function () {
     strategyInput:30,
     stopStrategyInput:30,
     stopLossInput:30,
-    strategyInput1:0,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/

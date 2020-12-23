@@ -43,7 +43,7 @@
         <div class="trade-data-item" v-if="isSwitchOrder == 'CONTRACT'">
           <div class="trade-data" :class="godInfo.weekProfit >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.weekProfit?toFixed(godInfo.weekProfit,2):'0'}}</div>
           <!--本周收益-->
-          <div>{{$t('本周收益')}} (USDT)</div>
+          <div>{{$t('本周收益')}} (₮)</div>
         </div>
 
         <!--总收益率-->
@@ -57,13 +57,13 @@
         <!--本周收益-->
         <div class="trade-data-item" v-if="isSwitchOrder == 'CONTRACT'">
           <div class="trade-data" :class="godInfo.profit >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.profit?toFixed(godInfo.profit,2): '0'}}</div>
-          <div>{{$t('总收益')}} (USDT)</div>
+          <div>{{$t('总收益')}} (₮)</div>
         </div>
 
         <div class="trade-data-item" v-if="isSwitchOrder == 'SPOT'">
           <div class="trade-data">{{toFixed(godInfo.sum || '0',2)}}</div>
           <!--累计交易量-->
-          <div>{{$t('totalTransactionVolume')}} (USDT)</div>
+          <div>{{$t('totalTransactionVolume')}} (₮)</div>
         </div>
 
         <div class="trade-data-item" v-if="isSwitchOrder == 'SPOT'">
@@ -119,7 +119,7 @@
           <!--数量-->
 <!--          <div class="application_header_div"></div>-->
           <!--金额-->
-<!--          <div class="application_header_div_right">{{$t('money')}} (USDT)</div>-->
+<!--          <div class="application_header_div_right">{{$t('money')}} (₮)</div>-->
           <div class="application_header_div_right">{{$t('amount')}}</div>
         </li>
         <template>
@@ -198,9 +198,9 @@
           <!--          账号-->
           <div class="application_header_div">{{$t('accountNumber')}}</div>
           <!--          跟单总成交额-->
-          <div class="application-header-div-box">{{$t('跟单总成交额')}} (USDT)</div>
+          <div class="application-header-div-box">{{$t('跟单总成交额')}} (₮)</div>
           <!--          跟单收益-->
-          <div class="application-header-div-box">{{$t('跟单收益')}} (USDT)</div>
+          <div class="application-header-div-box">{{$t('跟单收益')}} (₮)</div>
         </li>
         <template>
           <!-- 跟单者-->
@@ -273,14 +273,14 @@
       <div v-if="fixedAmPr == 1">
         <div class="follow-order-item flex">
           <!--跟单费用-->
-          <div class="follow-order-pair">{{$t('跟单费用 (USDT/')}}{{followDay}}天) </div>
+          <div class="follow-order-pair">{{$t('跟单费用 (₮/')}}{{followDay}}天) </div>
           <div class="follow-order-currency">
             <input v-model="currencyPair" v-if="!isHasItem" class="currency-account" onkeyup="value = value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''">
           </div>
         </div>
         <div class="follow-order-item flex">
           <!--跟单费用-->
-          <div class="follow-order-pair">{{$t('带单收入 (USDT/')}}{{followDay}}天)</div>
+          <div class="follow-order-pair">{{$t('带单收入 (₮/')}}{{followDay}}天)</div>
           <div class="follow-order-currency">
             {{fixedAmountPr2}}
           </div>

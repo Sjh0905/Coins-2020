@@ -43,11 +43,11 @@
   <!--跟单统计-->
   <div class="follow-statistics flex-around" v-if="isSwitchOrder == 'SPOT'">
     <div class="follow-statistics-item">
-      <div class="follow-statistics-item-title">累计跟单总交易量 (USDT)</div>
+      <div class="follow-statistics-item-title">累计跟单总交易量 (₮)</div>
       <div class="follow-statistics-item-money">{{toFixed(total ||'0',2)}}</div>
     </div>
     <div class="follow-statistics-item">
-      <div class="follow-statistics-item-title">跟单总收益(USDT)</div>
+      <div class="follow-statistics-item-title">跟单总收益(₮)</div>
       <div class="follow-statistics-item-money">{{toFixed(profit  || '0',2)}}</div>
     </div>
   </div>
@@ -113,7 +113,7 @@
             <div class="mobile-trade-item-currency flex">
               <div class="mobile-trade-item-currency-label">
 <!--                <div>{{item.symbol.replace('_','/')}}</div>-->
-                <span class="mobile-trade-item-currency-bgd" v-if="item.followType == 'LOT'">固定金额：{{item.lot}}USDT</span>
+                <span class="mobile-trade-item-currency-bgd" v-if="item.followType == 'LOT'">固定金额：{{item.lot}}₮</span>
                 <span class="mobile-trade-item-currency-bgd" v-if="item.followType == 'RATE'">固定比例</span>
                 <span class="mobile-trade-item-currency-bgd">{{item.type == 'SPOT'?'现货':'合约'}}</span>
               </div>
@@ -132,7 +132,7 @@
         <div class="" v-if="isSwitchOrder == 'SPOT'">
           <div class="mobile-trade-item-content-title flex">
             <div class="mobile-trade-price">累计笔数</div>
-            <div class="mobile-trade-amount">累计跟单交易量 (USDT)</div>
+            <div class="mobile-trade-amount">累计跟单交易量 (₮)</div>
             <div class="mobile-trade-money">累计收益</div>
           </div>
           <div class="mobile-trade-item-content-container flex">

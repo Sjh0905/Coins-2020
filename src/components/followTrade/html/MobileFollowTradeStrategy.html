@@ -41,7 +41,7 @@
 
       <div class="mobile-trade-data-item">
         <div class="mobile-trade-data">{{ godInfo.sum ? toFixed(godInfo.sum,2):'0'}}</div>
-        <div>累计交易量 (USDT)</div>
+        <div>累计交易量 (₮)</div>
       </div>
 
       <div class="mobile-trade-data-item">
@@ -81,7 +81,7 @@
       <!--本周收益-->
       <div class="mobile-trade-data-item ">
         <div class="mobile-trade-data" :class="godInfo.weekProfit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekProfit ? toFixed(godInfo.weekProfit, 2) : '0'}}</div>
-        <div class="">{{$t('本周收益')}} (USDT)</div>
+        <div class="">{{$t('本周收益')}} (₮)</div>
       </div>
       <!--总收益率-->
       <div class="mobile-trade-data-item ">
@@ -91,7 +91,7 @@
       <!--总收益-->
       <div class="mobile-trade-data-item ">
         <div class="mobile-trade-data" :class="godInfo.profit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.profit ? toFixed(godInfo.profit, 2) : '0'}}</div>
-        <div class="">{{$t('总收益')}} (USDT)</div>
+        <div class="">{{$t('总收益')}} (₮)</div>
       </div>
 
     </div>
@@ -135,7 +135,7 @@
           <div class="mobile-trade-item-content-title flex">
             <div class="mobile-trade-price">价格</div>
 <!--            <div class="mobile-trade-amount">数量</div>-->
-<!--            <div class="mobile-trade-money">交易量 (USDT)</div>-->
+<!--            <div class="mobile-trade-money">交易量 (₮)</div>-->
             <div class="mobile-trade-money">数量</div>
           </div>
           <div class="mobile-trade-item-content-container flex">
@@ -166,8 +166,8 @@
             <div class="mobile-trader-follower-income">{{item.profit}}</div>
           </div>
           <div class="mobile-trader-follower-content-top flex">
-            <div class="mobile-trader-follower-text">跟单总成交额 {{item.amount ? toFixed(item.amount, 2) : '0'}} USDT</div>
-            <div class="mobile-trader-follower-text s-right">跟单收益(USDT)</div>
+            <div class="mobile-trader-follower-text">跟单总成交额 {{item.amount ? toFixed(item.amount, 2) : '0'}} ₮</div>
+            <div class="mobile-trader-follower-text s-right">跟单收益(₮)</div>
           </div>
         </div>
       </div>
@@ -204,8 +204,8 @@
         <!--&lt;!&ndash;            <div class="mobile-trader-follower-income">{{toFixed(item.profit,2) || '0'}}</div>&ndash;&gt;-->
         <!--          </div>-->
         <!--&lt;!&ndash;          <div class="mobile-trader-follower-content-top flex">&ndash;&gt;-->
-        <!--&lt;!&ndash;            <div class="mobile-trader-follower-text">总跟单收益 {{toFixed(item.amount,2) || '0'}} USDT</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;            <div class="mobile-trader-follower-text">总跟单收益(USDT)</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <div class="mobile-trader-follower-text">总跟单收益 {{toFixed(item.amount,2) || '0'}} ₮</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <div class="mobile-trader-follower-text">总跟单收益(₮)</div>&ndash;&gt;-->
         <!--&lt;!&ndash;         </div>&ndash;&gt;-->
         <!--        </div>-->
       </div>

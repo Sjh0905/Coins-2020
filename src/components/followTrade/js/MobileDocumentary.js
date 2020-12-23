@@ -28,6 +28,12 @@ root.data = function () {
     delFollowOpen:false,
     delFollowOpenDisable:false,
     // 确认弹窗
+    strategyType:1,
+    stopStrategyType:1,
+    stopLossType:1,
+    strategyInput:30,
+    stopStrategyInput:30,
+    stopLossInput:30,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -140,6 +146,39 @@ root.computed.isSwitchOrder = function () {
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+root.methods.strategyInputBlur = function () {
+  if (this.strategyInput < 30) {
+    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.strategyInput = 30
+  }
+}
+root.methods.stopStrategyInputBlur = function () {
+  if (this.stopStrategyInput < 30) {
+    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.stopStrategyInput = 30
+  }
+}
+
+root.methods.stopLossInputBlur = function () {
+  if (this.stopLossInput < 30) {
+    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.stopLossInput = 30
+  }
+}
+
+root.methods.clickStrategy = function (type) {
+  this.strategyType = type
+}
+
+root.methods.stopEarningStrategy = function (type) {
+  this.stopStrategyType = type
+}
+root.methods.stopLossStrategy = function (type) {
+  this.stopLossType = type
+}
+
+
 root.methods.openDocumentaryWindow = function () {
   if ( this.followType == 'LOT' && this.fixedAmountLot == '') {
     this.openPop('请输入金额')
@@ -222,11 +261,18 @@ root.methods.postDocumentaryImmediately = function () {
     return
   }
 
-  let params = {
+  let params = this.isSwitchOrder == 'SPOT' ?{
     followId: this.$route.query.userId,
     followType: this.followType ,    //固定金额LOT   固定比例RATE
     val: this.followType == 'LOT' ? this.fixedAmountLot : this.fixedAmountRate,
     type: this.isSwitchOrder,
+  }:{
+    followId: this.$route.query.userId,
+    followType: 'RATE' ,    //固定金额LOT   固定比例RATE
+    type: this.isSwitchOrder,
+    followRate:this.strategyType==1?this.strategyInput:0, //仓位策略
+    stopProfitRate:this.stopStrategyType==1?this.stopStrategyInput:0, //止盈策略
+    stopLossRate:this.stopLossType==1?this.stopLossInput:0, //止损策略
   }
   this.$http.send('POST_ADDFOLLOWER', {
     bind: this,

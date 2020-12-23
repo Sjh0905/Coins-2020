@@ -32,7 +32,7 @@
           <!--累计交易量-->
           <div class="follow-wi" v-if="isSwitchOrder == 'SPOT'">
             <div class="follow-bink">{{toFixed(godInfo.sum,2) || '0'}}</div>
-            <div class="follow-gru2">{{$t('totalTransactionVolume')}} (USDT)</div>
+            <div class="follow-gru2">{{$t('totalTransactionVolume')}} (₮)</div>
           </div>
           <!--本周收益率-->
           <div class="follow-wi" v-if="isSwitchOrder == 'CONTRACT'">
@@ -42,7 +42,7 @@
           <!--本周收益-->
           <div class="follow-wi" v-if="isSwitchOrder == 'CONTRACT'">
             <div class="follow-bink" :class="godInfo.weekProfit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekProfit ? toFixed(godInfo.weekProfit, 2) : '0'}}</div>
-            <div class="follow-gru2">{{$t('本周收益')}} (USDT)</div>
+            <div class="follow-gru2">{{$t('本周收益')}} (₮)</div>
           </div>
           <!--总收益率-->
           <div class="follow-wi">
@@ -54,7 +54,7 @@
           <!--总收益-->
           <div class="follow-wi" v-if="isSwitchOrder == 'CONTRACT'">
             <div class="follow-bink" :class="godInfo.profit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.profit ? toFixed(godInfo.profit, 2) : '0'}}</div>
-            <div class="follow-gru2">{{$t('总收益')}} (USDT)</div>
+            <div class="follow-gru2">{{$t('总收益')}} (₮)</div>
           </div>
 
           <!--交易笔数-->
@@ -72,7 +72,7 @@
         </div>
 
         <div class="follow-btn-box">
-          <div class="follow-gde" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} USDT/{{$route.query.days  || '0'}}{{$t('days')}}</div>
+          <div class="follow-gde" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} ₮/{{$route.query.days  || '0'}}{{$t('days')}}</div>
           <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,30)}}%/周</div>
           <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd($route.query.fee,30)}}%/笔</div>
           <!--跟单-->
@@ -175,9 +175,9 @@
           <!--          账号-->
           <div class="application_header_div">{{$t('accountNumber')}}</div>
 
-          <div class="application-header-div-box">{{$t('跟单总成交额')}} (USDT)</div>
+          <div class="application-header-div-box">{{$t('跟单总成交额')}} (₮)</div>
           <!--          跟单收益-->
-          <div class="application-header-div-box">{{$t('跟单收益')}} (USDT)</div>
+          <div class="application-header-div-box">{{$t('跟单收益')}} (₮)</div>
         </li>
         <template>
           <!-- 历史挖矿记录-->
@@ -255,7 +255,7 @@
       </div>
       <div class="fund-description-amount" v-if="followType == 'LOT'">
         <!--跟单金额-->
-        <div class="fund-description-usdt">{{$t('documentarySum')}}（USDT）</div>
+        <div class="fund-description-usdt">{{$t('documentarySum')}}（₮）</div>
         <div class="fund-description-info-right-input">
           <!--输入金额-->
           <input v-model="fixedAmountLot" :placeholder="this.$t('enterAmount')"
@@ -263,7 +263,7 @@
         </div>
       </div>
       <div class="fund-description-amount" v-if="followType == 'RATE'">
-        <!--        <div class="fund-description-usdt">单位基准(USDT/单位)</div>-->
+        <!--        <div class="fund-description-usdt">单位基准(₮/单位)</div>-->
         <!--        <div class="fund-description-info-right-input">-->
         <!--          <input v-model="fixedAmountRate" placeholder="输入比例"-->
         <!--                 step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"> %-->
@@ -272,15 +272,15 @@
       <div class="remind" v-if="followType == 'LOT'" >
         <!--固定金额跟单：-->
         <div>{{$t('fixedAmountOrders_detail')}}</div>
-        <!--1、例如您设置跟单金额为100USDT，交易员下单时，无论交易员以多少金额下单，您都将以100USDT作为本金以交易员相同的价格跟单下单；-->
+        <!--1、例如您设置跟单金额为100₮，交易员下单时，无论交易员以多少金额下单，您都将以100₮作为本金以交易员相同的价格跟单下单；-->
         <div>{{$t('fixedAmountOrders_detail1')}}</div>
-        <!--2、交易员每下一次单，您都将以每次100USDT的本金进行跟单操作，当您的可用资产小于100USDT时，此次跟单失败；-->
+        <!--2、交易员每下一次单，您都将以每次100₮的本金进行跟单操作，当您的可用资产小于100₮时，此次跟单失败；-->
         <div>{{$t('fixedAmountOrders_detail2')}}</div>
         <!--3、当交易员撤掉时，您同步跟单的该笔订单将同步被撤销；-->
         <div>{{$t('fixedAmountOrders_detail3')}}</div>
 <!--        &lt;!&ndash;4、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作；&ndash;&gt;-->
 <!--        <div>{{$t('fixedAmountOrders_detail4')}}</div>-->
-<!--        &lt;!&ndash;5、买入、卖出均已USDT进行核算，例：以一个BTC10000美金为例，100USDT固定金额相当于 0.01BTC。&ndash;&gt;-->
+<!--        &lt;!&ndash;5、买入、卖出均已₮进行核算，例：以一个BTC10000美金为例，100₮固定金额相当于 0.01BTC。&ndash;&gt;-->
 <!--        <div>{{$t('fixedAmountOrders_detail5')}}</div>-->
       </div>
       <div class="remind" v-if="followType == 'RATE'">
@@ -309,7 +309,7 @@
       <div class="follow-order-con flex">
         <!--跟单币对-->
         <div><span class="shu-contract"></span>{{$t('documentaryCurrencyPair')}}</div>
-        <div class="follow-order-data">BTC ETH LTC BCH</div>
+        <div class="follow-order-data">BTC ETH</div>
       </div>
       <div class="follow-order-con flex">
         <!--跟单币对-->

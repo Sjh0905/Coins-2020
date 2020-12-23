@@ -23,11 +23,11 @@
 
       <div class="follow-asset-total-data flex" v-if="isSwitchOrder == 'SPOT'">
         <div class="follow-asset-total">
-          <div class="follow-monery">累计跟单总交易量（USDT）</div>
+          <div class="follow-monery">累计跟单总交易量（₮）</div>
           <div class="follow-asset-acount">{{toFixed(total ||'0',2)}}</div>
         </div>
         <div class="follow-asset-total">
-          <div class="follow-monery">跟单总收益（USDT）</div>
+          <div class="follow-monery">跟单总收益（₮）</div>
           <div class="follow-asset-acount">{{toFixed(profit ||'0',2)}}</div>
         </div>
       </div>
@@ -100,7 +100,7 @@
         <!--累计笔数-->
         <div class="total-acount">{{$t('totalNumber')}}</div>
         <!--累计金额-->
-        <div class="total-money">{{$t('totalMoney')}} (USDT)</div>
+        <div class="total-money">{{$t('totalMoney')}} (₮)</div>
         <!--累计收益-->
         <div class="total-income">累计收益</div>
         <!--操作-->
@@ -131,7 +131,7 @@
         <!--现货-->
         <div class="type">{{item.type == 'SPOT' ? $t('spot') : $t('合约')}}</div>
         <!--固定金额/固定比例-->
-        <div class="follow-type">{{item.followType == 'LOT'? $t('fixedAmount') +'：' + item.lot || 0 +'USDT' :$t('fixedProportion')}}</div>
+        <div class="follow-type">{{item.followType == 'LOT'? $t('fixedAmount') +'：' + item.lot || 0 +'₮' :$t('fixedProportion')}}</div>
         <div class="total-acount">{{toFixed(item.count,0) || '0'}}</div>
         <div class="total-money">{{toFixed(item.amount,2) || '0'}}</div>
         <div class="total-income">{{item.profit.toFixed(2) || '0'}}</div>
@@ -152,7 +152,7 @@
         <!--现货-->
         <div class="type">{{item.type == 'SPOT' ? $t('spot') : $t('合约')}}</div>
         <!--固定金额/固定比例-->
-<!--        <div class="follow-type">{{item.followType == 'LOT'? $t('fixedAmount') +'：' + item.lot || 0 +'USDT' :$t('fixedProportion')}}</div>-->
+<!--        <div class="follow-type">{{item.followType == 'LOT'? $t('fixedAmount') +'：' + item.lot || 0 +'₮' :$t('fixedProportion')}}</div>-->
 
         <div class="total-income">{{item.profit.toFixed(2) || '0'}}</div>
         <div class="operation">
@@ -214,7 +214,7 @@
       </div>
       <div class="fund-description-amount" v-if="followType == 'LOT' && isSwitchOrder == 'SPOT'">
         <!--跟单金额-->
-        <div class="fund-description-usdt">{{$t('documentarySum')}}（USDT）</div>
+        <div class="fund-description-usdt">{{$t('documentarySum')}}（₮）</div>
         <div class="fund-description-info-right-input">
           <!--输入金额-->
           <input v-model="fixedAmountLot" :placeholder= "this.$t('enterAmount')"
@@ -222,7 +222,7 @@
         </div>
       </div>
       <div class="fund-description-amount" v-if="followType == 'RATE'">
-        <!--        <div class="fund-description-usdt">单位基准(USDT/单位)</div>-->
+        <!--        <div class="fund-description-usdt">单位基准(₮/单位)</div>-->
         <!--        <div class="fund-description-info-right-input">-->
         <!--          <input v-model="fixedAmountRate" placeholder="输入比例"-->
         <!--                 step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"> %-->
@@ -231,15 +231,15 @@
       <div class="remind" v-if="followType == 'LOT'" >
         <!--固定金额跟单：-->
         <div>{{$t('fixedAmountOrders')}}</div>
-        <!--1、例如您设置跟单金额为100USDT，交易员下单时，无论交易员以多少金额下单，您都将以100USDT作为本金以交易员相同的价格跟单下单；-->
+        <!--1、例如您设置跟单金额为100₮，交易员下单时，无论交易员以多少金额下单，您都将以100₮作为本金以交易员相同的价格跟单下单；-->
         <div>{{$t('fixedAmountOrders_detail1')}}</div>
-        <!--2、交易员每下一次单，您都将以每次100USDT的本金进行跟单操作，当您的可用资产小于100USDT时，此次跟单失败；-->
+        <!--2、交易员每下一次单，您都将以每次100₮的本金进行跟单操作，当您的可用资产小于100₮时，此次跟单失败；-->
         <div>{{$t('fixedAmountOrders_detail2')}}</div>
         <!--3、当交易员撤掉时，您同步跟单的该笔订单将同步被撤销；-->
         <div>{{$t('fixedAmountOrders_detail3')}}</div>
         <!--4、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作；-->
 <!--        <div>{{$t('fixedAmountOrders_detail4')}}</div>-->
-<!--        &lt;!&ndash;5、买入、卖出均已USDT进行核算，例：以一个BTC10000美金为例，100USDT固定金额相当于 0.01BTC。&ndash;&gt;-->
+<!--        &lt;!&ndash;5、买入、卖出均已₮进行核算，例：以一个BTC10000美金为例，100₮固定金额相当于 0.01BTC。&ndash;&gt;-->
 <!--        <div>{{$t('fixedAmountOrders_detail5')}}</div>-->
       </div>
       <div class="remind" v-if="followType == 'RATE'">

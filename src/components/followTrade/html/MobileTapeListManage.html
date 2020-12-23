@@ -23,7 +23,7 @@
     <div v-if="isHasItem" >
       <div class="mobile-open-tape-list-btn-top flex">
         <div class="mobile-open-tape-list-fee"><span class="mobile-tape-list-income-details-title">带单提成</span>
-          <span class="text_blue" v-if="godInfo.feeType == 'LOT'">{{toFixed(this.accMul(godInfo.fee,0.7),2)}} USDT/{{followDay}}天</span>
+          <span class="text_blue" v-if="godInfo.feeType == 'LOT'">{{toFixed(this.accMul(godInfo.fee,0.7),2)}} ₮/{{followDay}}天</span>
           <span class="text_blue" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd(godInfo.fee,0)}}%/周</span>
           <span class="text_blue" v-if="godInfo.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd(godInfo.fee,0)}}%/笔</span>
         </div>
@@ -56,11 +56,11 @@
       </div>
       <div class="mobile-income-describe-display flex">
         <div class="mobile-income-describe-today">
-          <div class="mobile-income-describe-text">今日提成（USDT）</div>
+          <div class="mobile-income-describe-text">今日提成（₮）</div>
           <div class="mobile-income-describe-amount">{{toFixed(todayFee,2)}}</div>
         </div>
         <div class="mobile-income-describe-total">
-          <div class="mobile-income-describe-text">累计提成（USDT）</div>
+          <div class="mobile-income-describe-text">累计提成（₮）</div>
           <div class="mobile-income-describe-amount">{{toFixed(sumFee,2)}}</div>
         </div>
       </div>
@@ -78,7 +78,7 @@
               <div class="mobile-tape-list-income-uid">{{item.userId}}</div>
               <div class="mobile-tape-list-income-time">{{$globalFunc.formatDateUitl(item.createdAt,'MM-DD hh:mm:ss')}}</div>
             </div>
-            <div class="mobile-tape-list-income-right">{{item.fee}} USDT
+            <div class="mobile-tape-list-income-right">{{item.fee}} ₮
               <div class="mobile-open-tape-list-text">带单提成</div></div>
 
           </div>
@@ -129,7 +129,7 @@
         </div>
         <div v-if="fixedAmPr == 1">
           <div class="mobile-open-tape-pop-window-content-item flex">
-            <div class="mobile-open-tape-pop-window-content-currency-pair">跟单费用 (USDT/{{followDay}}天)</div>
+            <div class="mobile-open-tape-pop-window-content-currency-pair">跟单费用 (₮/{{followDay}}天)</div>
             <div class="mobile-open-tape-pop-window-content-currency">
               <input v-model="currencyPair" v-if="!isHasItem" class="currency-account" onkeyup="value = value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''">
               <input v-model="currencyPairFee" v-if="isHasItem" class="currency-account" onkeyup="value = value.match(/\d+(\.\d{0,2})?/) ? value.match(/\d+(\.\d{0,2})?/)[0] : ''">
@@ -137,7 +137,7 @@
           </div>
 
           <div class="mobile-open-tape-pop-window-content-item flex">
-            <div class="mobile-open-tape-pop-window-content-currency-pair">跟单提成 (USDT/{{followDay}}天)</div>
+            <div class="mobile-open-tape-pop-window-content-currency-pair">跟单提成 (₮/{{followDay}}天)</div>
             <div class="mobile-open-tape-pop-window-content-currency" v-if="!isHasItem">{{fixedAmountPr2}}</div>
             <div class="mobile-open-tape-pop-window-content-currency" v-if="isHasItem">{{fixedCurrencyPairFee2}}</div>
           </div>

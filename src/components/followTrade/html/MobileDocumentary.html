@@ -14,7 +14,7 @@
   </div>
 
   <!--  跟单主体部分-->
-  <div class="fund-buy-main">
+  <div class="fund-buy-main" v-if="isSwitchOrder == 'SPOT'">
 
     <div class="fund-description-info">
       <div class="fund-description-info-item">
@@ -24,26 +24,24 @@
       </div>
       <div class="fund-description-info-item">
         <div class="fund-description-info-left">带单交易对</div>
-        <div class="fund-description-info-right" v-if="isSwitchOrder == 'SPOT'">BTC ETH LTC BCH</div>
-        <div class="fund-description-info-right" v-if="isSwitchOrder == 'CONTRACT'">BTC ETH</div>
+        <div class="fund-description-info-right">BTC ETH LTC BCH</div>
       </div>
       <div class="fund-description-felx">
         <div class="fund-description-info-left">跟单方式</div>
       </div>
-      <div class="flex" v-if="isSwitchOrder == 'SPOT'">
+      <div class="flex">
         <div class="fixed-amount-proportion" :class="followType == 'LOT' ? 'fixed-amount' : '' " @click="fixedType('LOT')">固定金额</div>
         <div class="fixed-amount-proportion" :class="followType == 'RATE' ? 'fixed-amount' : '' " @click="fixedType('RATE')">固定比例</div>
       </div>
-      <span v-if="isSwitchOrder == 'CONTRACT'" class="fixed-amount-proportion fixed-amount" @click="fixedType('RATE')">固定比例</span>
       <div class="fund-description-amount" v-if="followType == 'LOT'">
-        <div class="fund-description-usdt">跟单金额(USDT)</div>
+        <div class="fund-description-usdt">跟单金额(₮)</div>
         <div class="fund-description-info-right-input">
           <input v-model="fixedAmountLot" placeholder="输入金额"
                  step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">
         </div>
       </div>
       <div class="fund-description-amount" v-if="followType == 'RATE'">
-<!--        <div class="fund-description-usdt">单位基准(USDT/单位)</div>-->
+<!--        <div class="fund-description-usdt">单位基准(₮/单位)</div>-->
 <!--        <div class="fund-description-info-right-input">-->
 <!--          <input v-model="fixedAmountRate" placeholder="输入比例"-->
 <!--                 step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''"> %-->
@@ -52,16 +50,16 @@
       <div class="remind" v-if="followType == 'LOT'" >
         <div>固定金额跟单：</div>
         <div>1. 若选择按照“固定金额”跟单，则跟单者每次跟单的金额会由其自行设定的固定金额确定；</div>
-        <div>2. 若跟单者设置跟单金额为100 USDT，则无论带单者以什么金额下单，跟单者都将以100 USDT作为跟单下单的金额，并以带单者下单的价格，自动跟单下单；</div>
-        <div>3. 若跟单者可用资产小于100USDT，则该次跟单失败。</div>
+        <div>2. 若跟单者设置跟单金额为100₮，则无论带单者以什么金额下单，跟单者都将以100₮作为跟单下单的金额，并以带单者下单的价格，自动跟单下单；</div>
+        <div>3. 若跟单者可用资产小于100₮，则该次跟单失败。</div>
 <!--        <div>4. 在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作；</div>-->
-<!--        <div>5. 买入、卖出均已USDT进行核算，例：以一个BTC10000美金为例，100USDT固定金额相当于 0.01BTC。</div>-->
+<!--        <div>5. 买入、卖出均已₮进行核算，例：以一个BTC10000美金为例，100₮固定金额相当于 0.01BTC。</div>-->
       </div>
       <div class="remind" v-if="followType == 'RATE'">
         <div>固定比例跟单：</div>
         <div>1. 若选择按照“固定比例”跟单，则跟单者每次跟单的仓位占自有总仓位的百分比，将由其跟单的带单者下单时所使用的仓位占带单者自有总仓位的百分比确定；</div>
-        <div>2. 假设带单者总资金为1,000 USDT，跟单者总资金为500 USDT；若带单者以10%的仓位 (即100 USDT) 下单，则跟单者也将以自己10%的仓位 (即50 USDT) 进行自动跟单；</div>
-        <div>3. 假设带单者总资金为1,000 USDT，跟单者总资金为10,000 USDT；若带单者以100%的仓位 (即1,000 USDT) 下单，则跟单者也将以自己100%的仓位 (即10,000 USDT) 进行自动跟单。</div>
+        <div>2. 假设带单者总资金为1,000₮，跟单者总资金为500₮；若带单者以10%的仓位 (即100₮) 下单，则跟单者也将以自己10%的仓位 (即50₮) 进行自动跟单；</div>
+        <div>3. 假设带单者总资金为1,000₮，跟单者总资金为10,000₮；若带单者以100%的仓位 (即1,000₮) 下单，则跟单者也将以自己100%的仓位 (即10,000₮) 进行自动跟单。</div>
         <div>4. 若跟单者可用资产不足最低挂单数量，则该次跟单失败。</div>
 <!--        <div>5. 当交易员撤掉时，您同步跟单的该笔订单将同步被撤销；</div>-->
 <!--        <div>6. 在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作。</div>-->
@@ -69,12 +67,100 @@
 
     </div>
   </div>
+  <div class="fund-buy-main" v-if="isSwitchOrder == 'CONTRACT'">
+
+    <div class="fund-description-info">
+      <div class="fund-description-felx">
+        <div class="fund-description-info-left"><span class="shu-contract-h5"></span>带单者</div>
+        <div class="fund-description-info-right" v-if="!isHasItem">{{$route.query.userId || '--'}}</div>
+        <div class="fund-description-info-right" v-if="isHasItem">{{queryItem.followId || '--'}}</div>
+      </div>
+      <div class="fund-description-felx">
+        <div class="fund-description-info-left"><span class="shu-contract-h5"></span>带单交易对</div>
+        <div class="fund-description-info-right">BTC ETH</div>
+      </div>
+      <div class="fund-description-felx">
+        <div class="fund-description-info-left"><span class="shu-contract-h5"></span>跟单方式</div>
+        <div class="fund-description-info-right">固定比例</div>
+      </div>
+      <div class="fund-description-felx com-s">
+        <div class="fund-description-info-left"><span class="shu-contract-h5"></span>跟单策略</div>
+        <div class="fund-description-info-right"></div>
+      </div>
+      <div>
+        <div class="flex">
+          <div class="gendancelue-color">仓位策略</div>
+          <div class="flex" @click="clickStrategy(1)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="strategyType==2">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="strategyType==1">
+            <!--输入金额-->
+            <div class=" " :class="strategyType==1?'fund-description-info-right-input-contract':'fund-description-info-right-input-contract-sele'">
+              <input v-model="strategyInput" @blur="strategyInputBlur"
+                     onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
+            </div>
+
+          </div>
+          <div class="cnose" :class="strategyType==1?'no-sele':'sele'" @click="clickStrategy(2)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="strategyType==1">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="strategyType==2">
+            完全跟随
+          </div>
+        </div>
+        <div class="explain">
+          跟单仓位比例由此策略与带单仓位比例共同决定。
+          若带单仓位为10%，此跟单仓位策略为80%，则跟单仓位比例为10%*80%=8%
+        </div>
+        <div class="flex">
+          <div class="gendancelue-color">止盈策略</div>
+          <div class="flex" @click="stopEarningStrategy(1)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopStrategyType==2">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopStrategyType==1">
+            <!--输入金额-->
+            <div class=" " :class="stopStrategyType==1?'fund-description-info-right-input-contract':'fund-description-info-right-input-contract-sele'">
+              <input v-model="stopStrategyInput" @blur="stopStrategyInputBlur"
+                     onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
+            </div>
+
+          </div>
+          <div class="cnose" :class="stopStrategyType==1?'no-sele':'sele'" @click="stopEarningStrategy(2)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopStrategyType==1">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopStrategyType==2">
+            完全跟随
+          </div>
+        </div>
+        <div class="explain">
+          跟单仓位或以此策略平仓止盈，具体以此策略与带单止盈策略二者中先触发者为准
+        </div>
+        <div class="flex">
+          <div class="gendancelue-color">止损策略</div>
+          <div class="flex" @click="stopLossStrategy(1)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopLossType==2">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopLossType==1">
+            <!--输入金额-->
+            <div class=" " :class="stopLossType==1?'fund-description-info-right-input-contract':'fund-description-info-right-input-contract-sele'">
+              <input v-model="stopLossInput" @blur="stopLossInputBlur"
+                     onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
+            </div>
+
+          </div>
+          <div class="cnose" :class="stopLossType==1?'no-sele':'sele'" @click="stopLossStrategy(2)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopLossType==1">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopLossType==2">
+            完全跟随
+          </div>
+        </div>
+        <div class="explain">
+          跟单仓位或以此策略平仓止损，具体以此策略与带单止损策略及跟单仓位强平价格三者中先触发者为准
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- 跟单按钮 -->
   <div :class="!isHasItem ? 'documentary-box' : 'documentary-box-has-item'">
     <div class="mobile-trade-open-exchange-text flex" v-if="!isHasItem">
       <div class="mobile-trade-fee">费用</div>
-      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'LOT'">{{$route.query.fee}} USDT/{{$route.query.days}}天</div>
+      <div class="mobile-trade-order-fee text_blue" v-if="followType == 'LOT'">{{$route.query.fee}} ₮/{{$route.query.days}}天</div>
       <div class="mobile-trade-order-fee text_blue" v-if="followType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/周</div>
       <div class="mobile-trade-order-fee text_blue" v-if="followType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/笔</div>
     </div>
@@ -96,7 +182,7 @@
       <div class="del-follow-text">
         <div>跟单：<span class="text_blue">{{$route.query.userId || ''}}</span></div>
         <div v-if="followType == 'LOT'">
-          费用： 将扣除 <span class="text_blue">{{$route.query.fee}} USDT/7天</span>
+          费用： 将扣除 <span class="text_blue">{{$route.query.fee}} ₮/7天</span>
         </div>
         <div v-if="followType == 'RATE' && isSwitchOrder == 'CONTRACT'">
           费用： 每周将扣除跟单收益的 <span class="text_blue">{{accAdd($route.query.fee,30) || '0'}}% </span>作为跟单费

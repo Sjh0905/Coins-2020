@@ -40,7 +40,7 @@
             <div class="follow-wi">
               <div class="follow-bink">{{toFixed(item.sum || '0',2)}}</div>
               <!--累计交易量-->
-              <div class="follow-gru2">{{$t('totalTransactionVolume')}} (USDT)</div>
+              <div class="follow-gru2">{{$t('totalTransactionVolume')}} (₮)</div>
             </div>
             <!--总收益率-->
             <div class="follow-wi">
@@ -62,7 +62,7 @@
         </div>
         <div class="follow-btn-box">
           <!--天-->
-          <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} USDT/{{days}}{{$t('days')}}费用</div>
+          <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} ₮/{{days}}{{$t('days')}}费用</div>
           <div class="follow-gde" v-if="item.feeType == 'RATE'">跟单收益 {{accAdd(item.fee,30)}}%/笔</div>
           <!--跟单-->
           <div class="follow-fff" @click="goToDocumentary(item.userId,item.fee,item.feeType,switchOrder)" v-if="godList.indexOf(item.userId) < 0 && item.canFollow == 1">{{$t('documentary')}}</div>
@@ -120,7 +120,7 @@
         </div>
         <div class="follow-btn-box">
           <!--天-->
-          <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} USDT/{{days}}{{$t('days')}}费用</div>
+          <div class="follow-gde" v-if="item.feeType == 'LOT'">{{item.fee}} ₮/{{days}}{{$t('days')}}费用</div>
           <div class="follow-gde" v-if="item.feeType == 'RATE'">跟单收益 {{accAdd(item.fee,30)}}%/周</div>
           <!--跟单-->
           <div class="follow-fff" @click="goToDocumentary(item.userId,item.fee,item.feeType,switchOrder)" v-if="godList.indexOf(item.userId) < 0 && item.canFollow == 1">{{$t('documentary')}}</div>

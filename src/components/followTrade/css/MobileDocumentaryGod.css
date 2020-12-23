@@ -384,7 +384,7 @@
   left: 50%;
   transform: translate(-50%,-50%);
   width:6rem;
-  height:6.3rem;
+  /*height:6.3rem;*/
   background: #fff;
   box-shadow:0rem 0.1rem 0.2rem 0rem rgba(0,0,0,0.1);
   border-radius:0.04rem;
@@ -483,6 +483,7 @@
   /*padding-right: 30px;*/
   /*margin-bottom: 20px;*/
   padding: 0 0.3rem;
+  padding-bottom: 0.3rem;
 }
 .popWindow-article2 {
   flex: 1;

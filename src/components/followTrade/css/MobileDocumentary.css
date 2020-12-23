@@ -391,3 +391,115 @@ input:-ms-input-placeholder {
   margin-left: 0.35rem;
   cursor: pointer;
 }
+/*合约跟单选择*/
+.shu-contract-h5 {
+  display: inline-block;
+  width: 0.04rem;
+  height: 0.24rem;
+  background: #3576F5;
+  margin-right: 0.12rem;
+  margin-bottom:-1px;
+}
+.gendancelue-color {
+  flex: 1.5;
+  font-size: 0.28rem;
+  /*line-height: 0.32rem;*/
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 400;
+  color: #193662;
+}
+.completely-follow {
+  flex: 1;
+}
+.cnose {
+  margin-left: 0.6rem;
+}
+.cnose-img {
+  vertical-align: text-top;
+  width: 0.32rem;
+  height: 0.32rem;
+  margin-right: 0.12rem;
+  margin-top: 0.04rem;
+}
+
+.fund-description-info-right-input-contract {
+  font-size:0.28rem;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:500;
+  color:#193662;
+  height:0.54rem;
+  /*line-height: 0.54rem;*/
+  margin: auto 0;
+  width: 1.44rem;
+  background:rgba(255,255,255,1);
+  border:1px solid rgba(208,212,233,1);
+  padding-right: 0.16rem;
+  margin-top: -0.06rem;
+  margin-left: 0.08rem;
+}
+.fund-description-info-right-input-contract input {
+  display: inline-block;
+  width: 70%;
+  text-align: left;
+  font-size:0.24rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:#193662;
+  border-radius:2px;
+  padding-left: 0.16rem;
+  box-sizing: border-box;
+  border: 0;
+}
+
+.fund-description-info-right-input-contract-sele {
+  font-size:0.28rem;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:500;
+  color:#193662;
+  height:0.54rem;
+  /*line-height: 0.54rem;*/
+  margin: auto 0;
+  width: 1.44rem;
+  background: #EFF0FF;
+  border:1px solid rgba(208,212,233,1);
+  padding-right: 0.16rem;
+  margin-top: -0.06rem;
+  margin-left: 0.08rem;
+}
+.fund-description-info-right-input-contract-sele input {
+  display: inline-block;
+  width: 70%;
+  text-align: left;
+  font-size:0.24rem;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:#193662;
+  border-radius:2px;
+  padding-left: 0.16rem;
+  box-sizing: border-box;
+  border: 0;
+  background: #EFF0FF;
+}
+.no-sele {
+  font-size: 0.28rem;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #6B7DA2;
+}
+.sele {
+  font-size: 0.28rem;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #0D0E23;
+}
+.com-s {
+  margin-bottom: 0.2rem;
+}
+.explain {
+  font-size: 0.24rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6A83A8;
+  margin-top: 0.16rem;
+  margin-bottom: 0.4rem;
+}
