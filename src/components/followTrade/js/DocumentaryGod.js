@@ -24,7 +24,7 @@ root.data = function () {
     popType: 0,
     popText: '',
     popOpen: false,
-    waitTime: 2000,
+    waitTime: 1000,
 
     fixedAmountLot:'',
 
@@ -37,6 +37,7 @@ root.data = function () {
     strategyInput:30,
     stopStrategyInput:30,
     stopLossInput:30,
+    strategyInput1:0,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -85,6 +86,7 @@ root.computed.isHasGodInfo = function () {
   return true
 }
 
+
 root.computed.contractType = function () {
 
   return {
@@ -103,8 +105,40 @@ root.computed.contractType = function () {
 }
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
+
+// root.watch.strategyInput = function (newVal,oldVal) {
+//
+//   // if (this.strategyInput < 30) {
+//   //   this.strategyInput = 30
+//   // }
+//   this.strategyInput = this.strategyInput < 30 ? this.strategyInput = 30 : newVal
+//
+//   return this.strategyInput
+//   console.info('this.strategyInput',this.strategyInput)
+// }
 /*------------------------------ 方法 -------------------------------*/
 root.methods = {}
+
+root.methods.strategyInputBlur = function () {
+  if (this.strategyInput < 30) {
+    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.strategyInput = 30
+  }
+}
+root.methods.stopStrategyInputBlur = function () {
+  if (this.stopStrategyInput < 30) {
+    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.stopStrategyInput = 30
+  }
+}
+
+root.methods.stopLossInputBlur = function () {
+  if (this.stopLossInput < 30) {
+    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.stopLossInput = 30
+  }
+}
+
 
 root.methods.clickToggle = function () {
   this.BDBInfo = false
@@ -208,11 +242,18 @@ root.methods.postDocumentaryImmediately = function () {
     return
   }
 
-  let params = {
+  let params = this.isSwitchOrder == 'SPOT' ? {
     followId: this.$route.query.userId,
     followType: this.followType ,    //固定金额LOT   固定比例RATE
     val: this.followType == 'LOT' ? this.fixedAmountLot : this.fixedAmountRate,
     type: this.isSwitchOrder,
+  }:{
+    followId: this.$route.query.userId,
+    followType: 'RATE' ,    //固定金额LOT   固定比例RATE
+    type: this.isSwitchOrder,
+    followRate:this.strategyType==1?this.strategyInput:0, //仓位策略
+    stopProfitRate:this.stopStrategyType==1?this.stopStrategyInput:0, //止盈策略
+    stopLossRate:this.stopLossType==1?this.stopLossInput:0, //止损策略
   }
   this.$http.send('POST_ADDFOLLOWER', {
     bind: this,

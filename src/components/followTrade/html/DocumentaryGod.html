@@ -329,9 +329,9 @@
               <img class="cnose-img" src="../assets/nose.png" alt="" v-if="strategyType==2">
               <img class="cnose-img" src="../assets/se.png" alt="" v-if="strategyType==1">
               <!--输入金额-->
-            <div class=" fund-description-info-right-input-contract">
-              <input v-model="strategyInput"
-                     step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
+            <div class=" " :class="strategyType==1?'fund-description-info-right-input-contract':'fund-description-info-right-input-contract-sele'">
+              <input v-model="strategyInput" @blur="strategyInputBlur"
+                     onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
             </div>
 
           </div>
@@ -352,8 +352,8 @@
             <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopStrategyType==2">
             <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopStrategyType==1">
             <!--输入金额-->
-            <div class=" fund-description-info-right-input-contract">
-              <input v-model="stopStrategyInput"
+            <div class="" :class="stopStrategyType==1?'fund-description-info-right-input-contract':'fund-description-info-right-input-contract-sele'">
+              <input v-model="stopStrategyInput" @blur="stopStrategyInputBlur"
                      step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
             </div>
 
@@ -374,8 +374,8 @@
             <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopLossType==2">
             <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopLossType==1">
             <!--输入金额-->
-            <div class=" fund-description-info-right-input-contract">
-              <input v-model="stopLossInput"
+            <div class="" :class="stopLossType==1?'fund-description-info-right-input-contract':'fund-description-info-right-input-contract-sele'">
+              <input v-model="stopLossInput" @blur="stopLossInputBlur"
                      step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
             </div>
 

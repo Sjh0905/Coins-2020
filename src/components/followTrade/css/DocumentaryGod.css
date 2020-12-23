@@ -715,4 +715,34 @@
 .explain-bot {
   margin-bottom: 0px;
 }
+.fund-description-info-right-input-contract-sele {
+  font-size:14px;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:#193662;
+  height:24px;
+  line-height: 24px;
+  margin: auto 0;
+  width: 72px;
+  background: #EFF0FF;
+  border:1px solid rgba(208,212,233,1);
+  padding-right: 8px;
+  margin-top: -2px;
+  margin-left: 4px;
+}
+.fund-description-info-right-input-contract-sele input {
+  display: inline-block;
+  width: 70%;
+  text-align: left;
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:#193662;
+  border-radius:2px;
+  padding-left: 8px;
+  box-sizing: border-box;
+  border: 0;
+  background: #EFF0FF;
+
+}
 /*合约跟单选择*/
