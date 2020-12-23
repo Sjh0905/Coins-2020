@@ -30,6 +30,7 @@ root.data = function () {
     switchOrder: 'CONTRACT',
     isGod: true,
     newContract: '',
+    godListF: false,
 
   }
 }
@@ -228,11 +229,12 @@ root.methods.goToDocumentary = function (userId,fee,feeType,switchOrder) {
 
   if(this.godList.length != 0){
     // 用户合约跟单只能跟单一个大神
+    this.godListF = true
     this.openPop(this.$t('不可同时跟随多人'))
     return
   }
 
-  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isYuan:this.godList,isSwitchOrder:this.switchOrder}})
+  this.$router.push({name:'documentaryGod',query:{userId:userId,feeType:feeType,fee:fee,days:this.days,isFollow:this.godList.indexOf(userId),isYuan:this.godListF,isSwitchOrder:this.switchOrder}})
 }
 
 // 跳转我的镜像交易

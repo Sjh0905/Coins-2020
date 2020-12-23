@@ -22,6 +22,7 @@ root.data = function () {
     delFollowOpenDisableBi:false,
     BDBInfo:true,
     isGod:true,
+    isYuan1:[],
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -42,6 +43,8 @@ root.created = function () {
       }
     }))
   }
+
+  console.info('this.mobileDocumentaryGod',this.isYuan)
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
@@ -120,13 +123,13 @@ root.methods.jumpToFollowDocumentary = function () {
 root.methods.jumpToFollowDocumentaryBi = function () {
   // this.$router.push({name:'mobileMyFollowOrder'})
   this.delFollowOpenDisableBi = false
-  this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,feeType:this.$route.query.feeType,fee:this.$route.query.fee,days:this.$route.query.days,isSwitchOrder:this.$route.query.isSwitchOrder}})
+  this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,feeType:this.$route.query.feeType,fee:this.$route.query.fee,days:this.$route.query.days,isYuan:this.$route.query.isYuan,isSwitchOrder:this.$route.query.isSwitchOrder}})
 }
 // 点击跟单
 root.methods.jumpToFollowDocumentaryHe = function () {
   // this.$router.push({name:'mobileMyFollowOrder'})
   this.delFollowOpenDisable = false
-  this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,feeType:this.$route.query.feeType,fee:this.$route.query.fee,days:this.$route.query.days,isSwitchOrder:this.$route.query.isSwitchOrder}})
+  this.$router.push({name:'mobileDocumentary',query:{userId:this.$route.query.userId,feeType:this.$route.query.feeType,fee:this.$route.query.fee,days:this.$route.query.days,isYuan:this.$route.query.isYuan,isSwitchOrder:this.$route.query.isSwitchOrder}})
 }
 
 root.methods.popCloseTemporarilyClosedBi = function () {
@@ -139,7 +142,7 @@ root.methods.openDocumentaryWindowDisable = function () {
     this.openPop(this.$t('带单账号不可跟单'))
     return
   }
-  if (this.isYuan.length != 0) {
+  if (this.isYuan==true) {
     this.openPop(this.$t('不可同时跟随多人'))
     return
   }

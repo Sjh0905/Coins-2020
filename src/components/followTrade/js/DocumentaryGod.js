@@ -34,7 +34,7 @@ root.data = function () {
     popWindowOpenContractBi:false,//禁用
     BDBInfo:true,//勾选
     isGod:true,//勾选
-    strategyInput:30,
+    strategyInput:100,
     stopStrategyInput:30,
     stopLossInput:30,
   }
@@ -126,14 +126,14 @@ root.methods.strategyInputBlur = function () {
 }
 root.methods.stopStrategyInputBlur = function () {
   if (this.stopStrategyInput < 30) {
-    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.openPop(this.$t('止盈比例不可以小于30%'),0,1000);
     this.stopStrategyInput = 30
   }
 }
 
 root.methods.stopLossInputBlur = function () {
   if (this.stopLossInput < 30) {
-    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.openPop(this.$t('止损比例不可以小于30%'),0,1000);
     this.stopLossInput = 30
   }
 }
@@ -187,7 +187,7 @@ root.methods.openTapeListDisable = function () {
     this.openPop(this.$t('带单账号不可跟单'))
     return
   }
-  if (this.isYuan.length != 0) {
+  if (this.isYuan == true) {
     this.openPop(this.$t('不可同时跟随多人'))
     return
   }

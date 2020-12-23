@@ -25,6 +25,7 @@ root.data = function () {
     switchOrder: 'CONTRACT',
     isGod: true,
     newContract:'',
+    godListF:false,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -251,12 +252,13 @@ root.methods.goToDocumentary = function (item,switchOrder) {
   }
   if(this.godList.length != 0){
     // 用户合约跟单只能跟单一个大神
+    this.godListF = true
     this.openPop(this.$t('不可同时跟随多人'))
     return
   }
 
   // this.$router.push({name:'mobileDocumentary',params: {item:item}})
-  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isYuan:this.godList,isSwitchOrder:this.switchOrder}})
+  this.$router.push({name:'mobileDocumentaryGod',query:{userId:item.userId,feeType:item.feeType,fee:item.fee,days:this.days,isFollow:this.godList.indexOf(item.userId),isYuan:this.godListF,isSwitchOrder:this.switchOrder}})
 }// 跳转我的镜像交易
 root.methods.goToDocumentary1 = function (item,switchOrder) {
   if (!this.isLogin) {

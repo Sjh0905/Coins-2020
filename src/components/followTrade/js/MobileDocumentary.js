@@ -31,7 +31,7 @@ root.data = function () {
     strategyType:1,
     stopStrategyType:1,
     stopLossType:1,
-    strategyInput:30,
+    strategyInput:100,
     stopStrategyInput:30,
     stopLossInput:30,
   }
@@ -142,6 +142,10 @@ root.computed.windowWidth = function () {
 root.computed.isSwitchOrder = function () {
   return this.$route.query.isSwitchOrder;
 }
+//什么类型的跟单
+root.computed.isYuan = function () {
+  return this.$route.query.isYuan;
+}
 /*------------------------------ 观察 -------------------------------*/
 root.watch = {}
 /*------------------------------ 方法 -------------------------------*/
@@ -155,14 +159,14 @@ root.methods.strategyInputBlur = function () {
 }
 root.methods.stopStrategyInputBlur = function () {
   if (this.stopStrategyInput < 30) {
-    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.openPop(this.$t('止盈比例不可以小于30%'),0,1000);
     this.stopStrategyInput = 30
   }
 }
 
 root.methods.stopLossInputBlur = function () {
   if (this.stopLossInput < 30) {
-    this.openPop(this.$t('比例不可以小于30%'),0,1000);
+    this.openPop(this.$t('止损比例不可以小于30%'),0,1000);
     this.stopLossInput = 30
   }
 }
