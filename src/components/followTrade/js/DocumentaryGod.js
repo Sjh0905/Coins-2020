@@ -13,6 +13,9 @@ root.data = function () {
     loading:true,
     fixedFollow:2,
     followType:'RATE',
+    strategyType:1,
+    stopStrategyType:1,
+    stopLossType:1,
     godHistorList:[],
     godInfo:{},
     followUserList:[],
@@ -31,6 +34,9 @@ root.data = function () {
     popWindowOpenContractBi:false,//禁用
     BDBInfo:true,//勾选
     isGod:true,//勾选
+    strategyInput:30,
+    stopStrategyInput:30,
+    stopLossInput:30,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -178,6 +184,16 @@ root.methods.fixedType = function (type) {
   this.followType = type
 }
 
+root.methods.clickStrategy = function (type) {
+  this.strategyType = type
+}
+
+root.methods.stopEarningStrategy = function (type) {
+  this.stopStrategyType = type
+}
+root.methods.stopLossStrategy = function (type) {
+  this.stopLossType = type
+}
 
 //立即跟单postDocumentaryImmediately
 root.methods.postDocumentaryImmediately = function () {

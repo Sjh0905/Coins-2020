@@ -232,7 +232,7 @@
       <span class="update-follow" v-if="isSwitchOrder == 'SPOT'">{{$t('现货跟单')}}</span>
       <span class="update-follow" v-if="isSwitchOrder == 'CONTRACT'">{{$t('合约跟单')}}</span>
     </div>
-    <div slot="article" class="update-follow-article">
+    <div slot="article" class="update-follow-article" v-if="isSwitchOrder == 'SPOT'">
       <div class="follow-order flex">
         <!--跟单-->
         <div>{{$t('documentaryGod')}}</div>
@@ -241,21 +241,19 @@
       <div class="follow-order flex">
         <!--跟单币对-->
         <div>{{$t('documentaryCurrencyPair')}}</div>
-        <div class="follow-order-data" v-if="isSwitchOrder == 'SPOT'">BTC ETH LTC BCH</div>
-        <div class="follow-order-data" v-if="isSwitchOrder == 'CONTRACT'">BTC ETH</div>
+        <div class="follow-order-data">BTC ETH LTC BCH</div>
       </div>
       <div class="follow-order">
         <!--跟单方式-->
         <div class="follow-order-title">{{$t('documentaryMode')}}</div>
-        <div class="flex" v-if="isSwitchOrder == 'SPOT'">
+        <div class="flex">
           <!--固定金额-->
           <div class="fixed-amount-proportion pointer" :class="followType == 'LOT' ? 'fixed-amount' : '' " @click="fixedType('LOT')">{{$t('fixedAmount')}}</div>
           <!--固定比例-->
           <div class="fixed-amount-proportion pointer" :class="followType == 'RATE' ? 'fixed-amount' : '' " @click="fixedType('RATE')">{{$t('fixedProportion')}}</div>
         </div>
-        <span v-if="isSwitchOrder == 'CONTRACT'" class="fixed-amount-proportion fixed-amount" @click="fixedType('RATE')">{{$t('fixedProportion')}}</span>
       </div>
-      <div class="fund-description-amount" v-if="followType == 'LOT' && isSwitchOrder == 'SPOT'">
+      <div class="fund-description-amount" v-if="followType == 'LOT'">
         <!--跟单金额-->
         <div class="fund-description-usdt">{{$t('documentarySum')}}（USDT）</div>
         <div class="fund-description-info-right-input">
@@ -300,6 +298,97 @@
 <!--        <div>{{$t('fixedProportionOrders_detail5')}}</div>-->
 <!--        &lt;!&ndash;6、在交易员未进行撤单操作时，您也可以自行取消该笔跟单操作。&ndash;&gt;-->
 <!--        <div>{{$t('fixedProportionOrders_detail6')}}</div>-->
+      </div>
+    </div>
+    <div slot="article" class="update-follow-article" v-if="isSwitchOrder == 'CONTRACT'">
+      <div class="follow-order-con flex">
+        <!--跟单-->
+        <div><span class="shu-contract"></span>{{$t('documentaryGod')}}</div>
+        <div class="follow-order-data">{{$route.query.userId}}</div>
+      </div>
+      <div class="follow-order-con flex">
+        <!--跟单币对-->
+        <div><span class="shu-contract"></span>{{$t('documentaryCurrencyPair')}}</div>
+        <div class="follow-order-data">BTC ETH LTC BCH</div>
+      </div>
+      <div class="follow-order-con flex">
+        <!--跟单币对-->
+        <div><span class="shu-contract"></span>跟单方式</div>
+        <div class="follow-order-data">固定比例</div>
+      </div>
+      <div class="follow-order-con follow-order-con-10 flex">
+        <!--跟单币对-->
+        <div><span class="shu-contract"></span>跟单策略</div>
+        <div class="follow-order-data"></div>
+      </div>
+      <!-- 仓位策略-->
+      <div class="gendancelue">
+        <div class="flex">
+          <div class="gendancelue-color">仓位策略</div>
+          <div class="flex" @click="clickStrategy(1)">
+              <img class="cnose-img" src="../assets/nose.png" alt="" v-if="strategyType==2">
+              <img class="cnose-img" src="../assets/se.png" alt="" v-if="strategyType==1">
+              <!--输入金额-->
+            <div class=" fund-description-info-right-input-contract">
+              <input v-model="strategyInput"
+                     step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
+            </div>
+
+          </div>
+          <div class="cnose" :class="strategyType==1?'no-sele':'sele'" @click="clickStrategy(2)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="strategyType==1">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="strategyType==2">
+            完全跟随
+          </div>
+        </div>
+        <div class="explain">
+          跟单仓位比例由此策略与带单仓位比例共同决定。
+          若带单仓位为10%，此跟单仓位策略为80%，则跟单仓位比例为10%*80%=8%
+        </div>
+       <!--止盈策略-->
+        <div class="flex">
+          <div class="gendancelue-color">止盈策略</div>
+          <div class="flex" @click="stopEarningStrategy(1)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopStrategyType==2">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopStrategyType==1">
+            <!--输入金额-->
+            <div class=" fund-description-info-right-input-contract">
+              <input v-model="stopStrategyInput"
+                     step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
+            </div>
+
+          </div>
+          <div class="cnose" :class="stopStrategyType==1?'no-sele':'sele'" @click="stopEarningStrategy(2)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopStrategyType==1">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopStrategyType==2">
+            完全跟随
+          </div>
+        </div>
+        <div class="explain">
+          跟单仓位或以此策略平仓止盈，具体以此策略与带单止盈策略二者中先触发者为准
+        </div>
+        <!--止损策略-->
+        <div class="flex">
+          <div class="gendancelue-color">止损策略</div>
+          <div class="flex" @click="stopLossStrategy(1)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopLossType==2">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopLossType==1">
+            <!--输入金额-->
+            <div class=" fund-description-info-right-input-contract">
+              <input v-model="stopLossInput"
+                     step="1"  min="0" onkeyup="this.value= this.value.match(/\d+(\.\d{0,2})?/) ? this.value.match(/\d+(\.\d{0,2})?/)[0] : ''">%
+            </div>
+
+          </div>
+          <div class="cnose" :class="stopLossType==1?'no-sele':'sele'" @click="stopLossStrategy(2)">
+            <img class="cnose-img" src="../assets/nose.png" alt="" v-if="stopLossType==1">
+            <img class="cnose-img" src="../assets/se.png" alt="" v-if="stopLossType==2">
+            完全跟随
+          </div>
+        </div>
+        <div class="explain explain-bot">
+          跟单仓位或以此策略平仓止损，具体以此策略与带单止损策略及跟单仓位强平价格三者中先触发者为准
+        </div>
       </div>
     </div>
     <div slot="footer" class="pop-recharge-bottom">

@@ -407,6 +407,7 @@
   justify-content: space-between;
   margin-bottom: 34px;
 }
+
 .follow-order:last-child {
   margin-bottom: 32px;
 }
@@ -617,3 +618,101 @@
   margin-bottom: 2px;
 }
 /*禁用风险提示*/
+/*合约跟单选择*/
+.shu-contract {
+  display: inline-block;
+  width: 2px;
+  height: 12px;
+  background: #3576F5;
+  margin-right: 6px;
+  margin-bottom:-1px;
+}
+.follow-order-con {
+  color: #193662;
+  font-size:14px;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.follow-order-con-10 {
+  margin-bottom: 10px;
+}
+.gendancelue {
+  background: #F5F6FA;
+  border-radius: 1px;
+  padding: 15px;
+}
+.gendancelue-color {
+  flex: 1.5;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #193662;
+}
+.completely-follow {
+  flex: 1;
+}
+.cnose {
+  margin-left: 30px;
+}
+.cnose-img {
+  vertical-align: text-top;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  margin-top: 2px;
+}
+.no-sele {
+  font-size: 14px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #6B7DA2;
+}
+.sele {
+  font-size: 14px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #0D0E23;
+}
+.fund-description-info-right-input-contract {
+  font-size:14px;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+  color:#193662;
+  height:24px;
+  line-height: 24px;
+  margin: auto 0;
+  width: 72px;
+  background:rgba(255,255,255,1);
+  border:1px solid rgba(208,212,233,1);
+  padding-right: 8px;
+  margin-top: -2px;
+  margin-left: 4px;
+}
+.fund-description-info-right-input-contract input {
+  display: inline-block;
+  width: 70%;
+  text-align: left;
+  font-size:12px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:#193662;
+  border-radius:2px;
+  padding-left: 8px;
+  box-sizing: border-box;
+  border: 0;
+}
+.explain {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6A83A8;
+  margin-top: 12px;
+  margin-bottom: 15px;
+}
+.explain-bot {
+  margin-bottom: 0px;
+}
+/*合约跟单选择*/
