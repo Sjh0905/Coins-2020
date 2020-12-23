@@ -76,7 +76,7 @@
       <!--本周收益率-->
       <div class="mobile-trade-data-item">
         <div class="mobile-trade-data" :class="godInfo.weekRate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekRate ? toFixed(godInfo.weekRate, 2) : '0'}}%</div>
-        <div class="">{{$t('本周收益率')}}</div>
+        <div class="">{{$t('本周收益率')}} (%)</div>
       </div>
       <!--本周收益-->
       <div class="mobile-trade-data-item ">
@@ -86,7 +86,7 @@
       <!--总收益率-->
       <div class="mobile-trade-data-item ">
         <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate, 2) : '0'}}%</div>
-        <div class="">总收益率</div>
+        <div class="">总收益率 (%)</div>
       </div>
       <!--总收益-->
       <div class="mobile-trade-data-item ">

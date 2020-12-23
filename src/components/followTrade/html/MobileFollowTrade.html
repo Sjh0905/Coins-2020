@@ -103,7 +103,7 @@
         <div class="flex with-billboard-xin" v-if="switchOrder == 'SPOT'">
           <div class="flex-din mre">
             <div class="color-13" v-if="isSwitchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
-            <div class="color-a2" v-if="isSwitchOrder == 'SPOT'">收益率</div>
+            <div class="color-a2" v-if="isSwitchOrder == 'SPOT'">收益率 (%)</div>
           </div>
           <div class="flex-din">
             <div class="color-13">{{item.sum ? toFixed(item.sum, 2) : '0'}}</div>
