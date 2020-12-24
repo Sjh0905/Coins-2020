@@ -143,16 +143,16 @@
         </div>
         <div class="mobile-trade-item-content" v-if="isSwitchOrder == 'CONTRACT'">
           <div class="mobile-trade-item-content-title flex">
-            <div class="mobile-trade-price-1">跟单收益 (₮)</div>
             <div class="mobile-trade-price-1">仓位策略</div>
             <div class="mobile-trade-price-1">止盈策略</div>
-            <div class="mobile-trade-price-1-ri">止损策略</div>
+            <div class="mobile-trade-price-1">止损策略</div>
+            <div class="mobile-trade-price-1-ri">跟单收益 (₮)</div>
           </div>
           <div class="mobile-trade-item-content-container flex">
-            <div class="mobile-trade-price-1">{{toFixed(item.profit,2) || '0'}}</div>
             <div class="mobile-trade-price-1">{{item.followRate == 0 ? '完全跟随': item.followRate + '%'}}</div>
             <div class="mobile-trade-price-1">{{item.stopProfitRate == 0 ? '完全跟随': item.stopProfitRate + '%'}}</div>
-            <div class="mobile-trade-price-1-ri">{{item.stopLossRate == 0 ? '完全跟随': item.stopLossRate + '%'}}</div>
+            <div class="mobile-trade-price-1">{{item.stopLossRate == 0 ? '完全跟随': item.stopLossRate + '%'}}</div>
+            <div class="mobile-trade-price-1-ri">{{toFixed(item.profit,2) || '0'}}</div>
           </div>
         </div>
       </div>
