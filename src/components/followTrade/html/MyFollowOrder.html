@@ -119,10 +119,11 @@
         <!--交易方式-->
 <!--        <div class="follow-type">{{$t('transactionMode')}}</div>-->
         <!--累计收益-->
-        <div class="total-income">跟单收益 (₮)</div>
+
         <div class="total-income">仓位策略</div>
         <div class="total-income">止盈策略</div>
-        <div class="total-income">止损策略</div>
+        <div class="total-acount">止损策略</div>
+        <div class="total-acount t-a-r">跟单收益 (₮)</div>
         <!--操作-->
         <div class="operation">{{$t('operation')}}</div>
       </div>
@@ -157,10 +158,10 @@
         <!--固定金额/固定比例-->
 <!--        <div class="follow-type">{{item.followType == 'LOT'? $t('fixedAmount') +'：' + item.lot || 0 +'₮' :$t('fixedProportion')}}</div>-->
 
-        <div class="total-income">{{item.profit.toFixed(2) || '0'}}</div>
         <div class="total-income">{{item.followRate == 0 ? '完全跟随': item.followRate + '%'}}</div>
         <div class="total-income">{{item.stopProfitRate == 0 ? '完全跟随': item.stopProfitRate + '%'}}</div>
-        <div class="total-income">{{item.stopLossRate == 0 ? '完全跟随': item.stopLossRate + '%'}}</div>
+        <div class="total-acount">{{item.stopLossRate == 0 ? '完全跟随': item.stopLossRate + '%'}}</div>
+        <div class="total-acount t-a-r">{{item.profit.toFixed(2) || '0'}}</div>
         <div class="operation">
           <!--修改策略-->
 <!--          <span v-if="isSwitchOrder == 'SPOT'">-->
