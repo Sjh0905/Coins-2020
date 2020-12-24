@@ -199,7 +199,7 @@
 }
 .application_right {
   justify-content:space-between;
-  width: 9%;
+  width: 7%;
   text-align: right;
 }
 .application_header_div_right {
@@ -269,7 +269,7 @@
   text-align: right;
 }
 .application-header-div-box2 {
-  width: 20%;
+  width: 15%;
 }
 
 /*弹框*/
