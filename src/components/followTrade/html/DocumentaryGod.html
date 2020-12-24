@@ -408,7 +408,7 @@
     <div slot="article" class="Internal_siding">
       <div class="Payee Payees"><span class="shu-contract"></span><span class="gray ">带单账号</span><span class="Black">{{$route.query.userId}}</span></div>
       <div class="Payee"><span class="shu-contract"></span><span class="gray">跟单费用</span><span class="Black">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/周</span></div>
-      <div class="Payee"><span class="shu-contract"></span><span class="gray">仓位策略</span><span class="Black">{{strategyType==1?stopStrategyInput + '%':'完全跟随'}}</span></div>
+      <div class="Payee"><span class="shu-contract"></span><span class="gray">仓位策略</span><span class="Black">{{strategyType==1?strategyInput + '%':'完全跟随'}}</span></div>
       <div class="Payee"><span class="shu-contract"></span><span class="gray">止盈策略</span><span class="Black">{{stopStrategyType==1?stopStrategyInput + '%':'完全跟随'}}</span></div>
       <div class="Payee Payees_b"><span class="shu-contract"></span><span class="gray ">止损策略</span><span class="Black">{{stopLossType==1?stopLossInput + '%':'完全跟随'}}</span></div>
 
