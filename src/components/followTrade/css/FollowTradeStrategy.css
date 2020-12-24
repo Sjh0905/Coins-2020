@@ -197,9 +197,14 @@
 .application_header_div {
   width: 9%;
 }
+.application_right {
+  justify-content:space-between;
+  width: 9%;
+  text-align: right;
+}
 .application_header_div_right {
   justify-content:space-between;
-  width: 15%;
+  width: 20%;
   text-align: right;
 }
 .application_li {
