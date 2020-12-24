@@ -43,12 +43,12 @@
   <!--跟单统计-->
   <div class="follow-statistics flex-around" v-if="isSwitchOrder == 'SPOT'">
     <div class="follow-statistics-item">
-      <div class="follow-statistics-item-title">累计跟单总交易量 (₮)</div>
-      <div class="follow-statistics-item-money">{{toFixed(total ||'0',2)}}</div>
+      <div class="follow-statistics-item-title">累计跟单总交易量(₮)</div>
+      <div class="follow-statistics-item-money" :class="total>=0?'text-green':'text-red'">{{toFixed(total ||'0',2)}}</div>
     </div>
     <div class="follow-statistics-item">
       <div class="follow-statistics-item-title">跟单总收益(₮)</div>
-      <div class="follow-statistics-item-money">{{toFixed(profit  || '0',2)}}</div>
+      <div class="follow-statistics-item-money" :class="profit>=0?'text-green':'text-red'">{{toFixed(profit  || '0',2)}}</div>
     </div>
   </div>
   <!--跟单统计end-->
@@ -65,23 +65,23 @@
     <div class="mobile-trade-top-data flex">
       <!--本周收益率-->
       <div class="mobile-trade-data-item mobile-trade-amount1">
-        <div class="mobile-trade-data">{{toFixed(weekUserProfit ||'0',2)}}</div>
-        <div class="">本周跟单利润₮</div>
+        <div class="mobile-trade-data" :class="weekUserProfit>=0?'text-green':'text-red'">{{toFixed(weekUserProfit ||'0',2)}}</div>
+        <div class="">本周跟单利润</div>
       </div>
       <!--本周收益-->
       <div class="mobile-trade-data-item mobile-trade-amount1">
-        <div class="mobile-trade-data">{{toFixed(weekProfit ||'0',2)}}</div>
-        <div class="">本周跟单收益₮</div>
+        <div class="mobile-trade-data" :class="weekProfit>=0?'text-green':'text-red'">{{toFixed(weekProfit ||'0',2)}}</div>
+        <div class="">本周跟单收益</div>
       </div>
       <!--总收益率-->
       <div class="mobile-trade-data-item mobile-trade-amount1">
-        <div class="mobile-trade-data">{{toFixed(userProfit ||'0',2)}}</div>
-        <div class="" >总跟单利润₮</div>
+        <div class="mobile-trade-data" :class="userProfit>=0?'text-green':'text-red'">{{toFixed(userProfit ||'0',2)}}</div>
+        <div class="" >总跟单利润</div>
       </div>
       <!--总收益-->
       <div class="mobile-trade-data-item mobile-trade-amount1">
-        <div class="mobile-trade-data">{{toFixed(profit ||'0',2)}}</div>
-        <div class="">总跟单收益₮</div>
+        <div class="mobile-trade-data" :class="profit>=0?'text-green':'text-red'">{{toFixed(profit ||'0',2)}}</div>
+        <div class="">总跟单收益</div>
       </div>
 
     </div>
@@ -100,7 +100,7 @@
         <div class="mobile-trade-item-follower flex-between">
           <div class="mobile-trade-item-follower-info flex-row">
             <img src="../assets/big-brother2.png" class="mobile-trade-item-follower-avatar">
-            <div class="mobile-trade-item-follower-uid">{{item.followId}}
+            <div class=""><span class="mobile-trade-item-follower-uid">{{item.followId}} </span><span class="xianHue" v-if="isSwitchOrder == 'CONTRACT'">{{item.type == 'SPOT'?'现货':'合约'}}</span>
               <div class="mobile-trade-item-top-right">{{formatDateUitl(item.followTime)}}</div>
             </div>
           </div>
@@ -143,12 +143,16 @@
         </div>
         <div class="mobile-trade-item-content" v-if="isSwitchOrder == 'CONTRACT'">
           <div class="mobile-trade-item-content-title flex">
-            <div class="mobile-trade-price-1">类型</div>
-            <div class="mobile-trade-price-1">跟单收益</div>
+            <div class="mobile-trade-price-1">跟单收益 (₮)</div>
+            <div class="mobile-trade-price-1">仓位策略</div>
+            <div class="mobile-trade-price-1">止盈策略</div>
+            <div class="mobile-trade-price-1-ri">止损策略</div>
           </div>
           <div class="mobile-trade-item-content-container flex">
-            <div class="mobile-trade-price-1">{{item.type == 'SPOT'?'现货':'合约'}}</div>
             <div class="mobile-trade-price-1">{{toFixed(item.profit,2) || '0'}}</div>
+            <div class="mobile-trade-price-1">{{item.followRate == 0 ? '完全跟随': item.followRate + '%'}}</div>
+            <div class="mobile-trade-price-1">{{item.stopProfitRate == 0 ? '完全跟随': item.stopProfitRate + '%'}}</div>
+            <div class="mobile-trade-price-1-ri">{{item.stopLossRate == 0 ? '完全跟随': item.stopLossRate + '%'}}</div>
           </div>
         </div>
       </div>

@@ -207,6 +207,9 @@
 .flex-con {
   flex: 1;
 }
+.flex-con-wis {
+  flex: 0.6;
+}
 .recordUl {
   width: 100%;
   min-height: 200px;
@@ -309,7 +312,12 @@
 }
 .application_header_div_right {
   justify-content:space-between;
-  width: 17%;
+  width: 21%;
+  text-align: right;
+}
+.application_header_wis {
+  justify-content:space-between;
+  width: 13%;
   text-align: right;
 }
 .weit{

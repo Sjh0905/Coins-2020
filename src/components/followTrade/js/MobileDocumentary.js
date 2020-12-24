@@ -32,7 +32,7 @@ root.data = function () {
     stopStrategyType:1,
     stopLossType:1,
     strategyInput:100,
-    stopStrategyInput:30,
+    stopStrategyInput:100,
     stopLossInput:30,
   }
 }
@@ -152,9 +152,13 @@ root.watch = {}
 root.methods = {}
 
 root.methods.strategyInputBlur = function () {
-  if (this.strategyInput < 30) {
-    this.openPop(this.$t('比例不可以小于30%'),0,1000);
-    this.strategyInput = 30
+  if (this.strategyInput < 10) {
+    this.openPop(this.$t('比例不可以小于10%'),0,1000);
+    this.strategyInput = 10
+  }
+  if (this.strategyInput > 100) {
+    this.openPop(this.$t('比例不可以大于100%'),0,1000);
+    this.strategyInput = 100
   }
 }
 root.methods.stopStrategyInputBlur = function () {
@@ -169,6 +173,10 @@ root.methods.stopLossInputBlur = function () {
     this.openPop(this.$t('止损比例不可以小于30%'),0,1000);
     this.stopLossInput = 30
   }
+  // if (this.stopLossInput > 100) {
+  //   this.openPop(this.$t('止损比例不可以小于30%'),0,1000);
+  //   this.stopLossInput = 100
+  // }
 }
 
 root.methods.clickStrategy = function (type) {

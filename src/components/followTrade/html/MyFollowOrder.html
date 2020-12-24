@@ -24,29 +24,29 @@
       <div class="follow-asset-total-data flex" v-if="isSwitchOrder == 'SPOT'">
         <div class="follow-asset-total">
           <div class="follow-monery">累计跟单总交易量（₮）</div>
-          <div class="follow-asset-acount">{{toFixed(total ||'0',2)}}</div>
+          <div class="follow-asset-acount" :class="total>=0?'text-green':'text-red'">{{toFixed(total ||'0',2)}}</div>
         </div>
         <div class="follow-asset-total">
           <div class="follow-monery">跟单总收益（₮）</div>
-          <div class="follow-asset-acount">{{toFixed(profit ||'0',2)}}</div>
+          <div class="follow-asset-acount" :class="profit>=0?'text-green':'text-red'">{{toFixed(profit ||'0',2)}}</div>
         </div>
       </div>
       <div class="follow-asset-total-data flex" v-if="isSwitchOrder == 'CONTRACT'">
         <div class="follow-asset-total">
           <div class="follow-monery">本周跟单利润（₮）</div>
-          <div class="follow-asset-acount">{{toFixed(weekUserProfit ||'0',2)}}</div>
+          <div class="follow-asset-acount" :class="weekUserProfit>=0?'text-green':'text-red'">{{toFixed(weekUserProfit ||'0',2)}}</div>
         </div>
         <div class="follow-asset-total">
           <div class="follow-monery">本周跟单收益（₮）</div>
-          <div class="follow-asset-acount">{{toFixed(weekProfit ||'0',2)}}</div>
+          <div class="follow-asset-acount" :class="weekProfit>=0?'text-green':'text-red'">{{toFixed(weekProfit ||'0',2)}}</div>
         </div>
         <div class="follow-asset-total">
           <div class="follow-monery">总跟单利润（₮）</div>
-          <div class="follow-asset-acount">{{toFixed(userProfit ||'0',2)}}</div>
+          <div class="follow-asset-acount" :class="userProfit>=0?'text-green':'text-red'">{{toFixed(userProfit ||'0',2)}}</div>
         </div>
         <div class="follow-asset-total">
           <div class="follow-monery">总跟单收益（₮）</div>
-          <div class="follow-asset-acount">{{toFixed(profit ||'0',2)}}</div>
+          <div class="follow-asset-acount" :class="profit>=0?'text-green':'text-red'">{{toFixed(profit ||'0',2)}}</div>
         </div>
       </div>
 
@@ -120,6 +120,9 @@
 <!--        <div class="follow-type">{{$t('transactionMode')}}</div>-->
         <!--累计收益-->
         <div class="total-income">跟单收益 (₮)</div>
+        <div class="total-income">仓位策略</div>
+        <div class="total-income">止盈策略</div>
+        <div class="total-income">止损策略</div>
         <!--操作-->
         <div class="operation">{{$t('operation')}}</div>
       </div>
@@ -155,6 +158,9 @@
 <!--        <div class="follow-type">{{item.followType == 'LOT'? $t('fixedAmount') +'：' + item.lot || 0 +'₮' :$t('fixedProportion')}}</div>-->
 
         <div class="total-income">{{item.profit.toFixed(2) || '0'}}</div>
+        <div class="total-income">{{item.followRate == 0 ? '完全跟随': item.followRate + '%'}}</div>
+        <div class="total-income">{{item.stopProfitRate == 0 ? '完全跟随': item.stopProfitRate + '%'}}</div>
+        <div class="total-income">{{item.stopLossRate == 0 ? '完全跟随': item.stopLossRate + '%'}}</div>
         <div class="operation">
           <!--修改策略-->
 <!--          <span v-if="isSwitchOrder == 'SPOT'">-->
