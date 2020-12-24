@@ -30,6 +30,7 @@ root.data = function () {
 
     follow:true,
     popWindowOpen: false,
+    buyTransferDetails: false,
     popWindowOpenContract:false,//禁用
     popWindowOpenContractBi:false,//禁用
     BDBInfo:true,//勾选
@@ -146,7 +147,14 @@ root.methods.stopLossInputBlur = function () {
   // }
 }
 
-
+root.methods.postDocumentaryImmediatelyContract = function () {
+  this.popWindowOpen = false
+  this.buyTransferDetails= true
+}
+// 确认细节
+root.methods.buyTransferDetailsClose = function () {
+  this.buyTransferDetails = false
+}
 root.methods.clickToggle = function () {
   this.BDBInfo = false
 }
@@ -281,6 +289,7 @@ root.methods.re_postDocumentaryImmediately = function (data) {
     this.openPop(this.$t('followSuccess'),1)
     setTimeout(() => {
       this.popWindowOpen = false
+      this.buyTransferDetails = false
       this.postBigBrotherHistory()
       this.postFollowUser()
       this.$route.query.isFollow = true

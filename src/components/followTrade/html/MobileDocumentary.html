@@ -179,16 +179,35 @@
           <img class="forecast-activity-toast-close-btn-img" src="../../../components/LuckyDraw/assets/mobileForecastHomePage/close_btn.png" alt="">
         </span>
       </div>
-      <div class="del-follow-text">
+      <div class="del-follow-text" v-if="isSwitchOrder == 'SPOT'">
         <div>跟单：<span class="text_blue">{{$route.query.userId || ''}}</span></div>
         <div v-if="followType == 'LOT'">
           费用： 将扣除 <span class="text_blue">{{$route.query.fee}} ₮/7天</span>
         </div>
-        <div v-if="followType == 'RATE' && isSwitchOrder == 'CONTRACT'">
-          费用： 每周将扣除跟单收益的 <span class="text_blue">{{accAdd($route.query.fee,30) || '0'}}% </span>作为跟单费
-        </div>
-        <div v-if="followType == 'RATE' && isSwitchOrder == 'SPOT'">
+        <div v-if="followType == 'RATE'">
           费用： 将扣除跟单收益 <span class="text_blue">{{accAdd($route.query.fee,30) || '0'}}%/笔</span>
+        </div>
+      </div>
+      <div class="del-follow-text-contract" v-if="isSwitchOrder == 'CONTRACT'">
+        <div class="fund-description-felx">
+          <div class="fund-description-info-left"><span class="shu-contract-h5"></span>带单账号</div>
+          <div class="fund-description-info-right text_blue">{{$route.query.userId || ''}}</div>
+        </div>
+        <div class="fund-description-felx">
+          <div class="fund-description-info-left"><span class="shu-contract-h5"></span>跟单费用</div>
+          <div class="fund-description-info-right text_blue">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/周</div>
+        </div>
+        <div class="fund-description-felx">
+          <div class="fund-description-info-left"><span class="shu-contract-h5"></span>仓位策略</div>
+          <div class="fund-description-info-right text_blue">{{strategyType==1?stopStrategyInput + '%':'完全跟随'}}</div>
+        </div>
+        <div class="fund-description-felx">
+          <div class="fund-description-info-left"><span class="shu-contract-h5"></span>止盈策略</div>
+          <div class="fund-description-info-right text_blue">{{stopStrategyType==1?stopStrategyInput + '%':'完全跟随'}}</div>
+        </div>
+        <div class="fund-description-felx">
+          <div class="fund-description-info-left"><span class="shu-contract-h5"></span>止损策略</div>
+          <div class="fund-description-info-right text_blue">{{stopLossType==1?stopLossInput + '%':'完全跟随'}}</div>
         </div>
       </div>
       <div class="forecast-activity-toast-btn" v-if="follow" @click="postDocumentaryImmediately">确 定</div>

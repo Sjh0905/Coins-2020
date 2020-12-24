@@ -754,3 +754,54 @@
 
 }
 /*合约跟单选择*/
+
+/*确认细节*/
+
+.zhuanzhang {
+  height: 60px;
+  line-height: 60px;
+  /*margin-top: 80%;*/
+  text-align: left;
+  font-size:18px;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color: #0D0E23;
+  padding-left: 25px;
+  border-bottom: 1px solid #E7EBEE;
+}
+.Internal_siding {
+  /*width: 460px;*/
+  margin: 0 auto;
+  /*background-color: pink;*/
+}
+.Payee {
+  /*height: 42px;*/
+  /*line-height: 42px;*/
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 27px;
+}
+.Payees {
+  padding-top: 30px;
+}
+.Payees_b {
+  padding-bottom: 30px;
+}
+.alse-flex {
+  margin-top: 15px;
+}
+.gray {
+  font-size: 14px;
+  color: #8994A5;
+}
+.Black {
+  /*display: inline-block;*/
+  float: right;
+  font-size: 16px;
+  color: #171A23;
+  /*text-align: right;*/
+}
+.mar-auto {
+  margin-left: 25px;
+}
+/*确认细节*/
