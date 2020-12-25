@@ -859,10 +859,10 @@ root.methods.gotoJiaoyi = function () {
 
 /*---------------------- 跳转合约项目 ---------------------*/
 root.methods.gotoContract = function () {
-  if(!this.isLogin){
-    this.$router.push('/index/sign/login')
-    return;
-  }
+  // if(!this.isLogin){
+  //   this.$router.push('/index/sign/login')
+  //   return;
+  // }
   window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
 }
 

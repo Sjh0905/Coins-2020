@@ -1,5 +1,6 @@
 <div class="mobile-trade-strategy">
   <Loading v-if="loading"/>
+
   <!--ios status栏-->
   <div v-if="(isApp)" class="mobile-status-bar-ios"/>
   <div v-if="(isApp)" class="mobile-status-bar-bg-ios"/>
@@ -18,242 +19,243 @@
 <!--    </div>-->
   </div>
 
-  <div class="mobile-trade-header-null"></div>
+  <div v-if="!loading">
 
-  <!--内容上部-->
-  <div class="mobile-trade-top">
-    <div class="mobile-trade-top-banner flex">
-      <div class="mobile-trade-top-banner-img">
-<!--        <img src="../assets/management_personal_icon.png" alt="" class="mobile-trade-img">-->
-        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">
-      </div>
-      <div class="mobile-trade-top-banner-text">{{godInfo.userId ? godInfo.userId : $route.query.userId}}</div>
-    </div>
-    <div class="mobile-trade-top-data flex" v-if="isSwitchOrder == 'SPOT'">
+    <div class="mobile-trade-header-null"></div>
 
-      <div class="mobile-trade-data-item">
-        <div class="mobile-trade-data">{{toFixed(godInfo.sum,2) || '- -'}}</div>
-        <div>累计交易量 (₮)</div>
-      </div>
-
-      <div class="mobile-trade-data-item">
-        <div class="mobile-trade-data">{{godInfo.count || '0'}}</div>
-        <div>交易笔数</div>
-      </div>
-
-      <div class="mobile-trade-data-item">
-        <div class="mobile-trade-data">{{godInfo.followCount ? godInfo.followCount : '- -'}}</div>
-        <div>当前跟单人数</div>
-      </div>
-
-      <div class="mobile-trade-data-item">
-<!--        <div class="mobile-trade-data text-green">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0,2) : '- -'}}%</div>-->
-        <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0, 2) : '0'}}%</div>
-        <div>收益率 (%)</div>
-      </div>
-    </div>
-    <div class="mobile-trade-top-data flex" v-if="isSwitchOrder == 'CONTRACT'">
-
-      <!--本周收益率-->
-      <div class="mobile-trade-data-item mobile-trade-amount1">
-        <div class="mobile-trade-data" :class="godInfo.weekRate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekRate ? toFixed(godInfo.weekRate, 2) : '0'}}%</div>
-        <div class="">{{$t('本周收益率')}} (%)</div>
-      </div>
-      <!--本周收益-->
-      <div class="mobile-trade-data-item mobile-trade-amount1">
-        <div class="mobile-trade-data" :class="godInfo.weekProfit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekProfit ? toFixed(godInfo.weekProfit, 2) : '0'}}</div>
-        <div class="">{{$t('本周收益')}} (₮)</div>
-      </div>
-      <!--总收益率-->
-      <div class="mobile-trade-data-item mobile-trade-amount1">
-        <div class="mobile-trade-data" v-if="isSwitchOrder == 'SPOT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
-        <div class="mobile-trade-data" v-if="isSwitchOrder == 'CONTRACT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate, 2) : '0'}}%</div>
-        <div class="" v-if="isSwitchOrder == 'SPOT'">收益率 (%)</div>
-        <div class="" v-if="isSwitchOrder == 'CONTRACT'">总收益率 (%)</div>
-      </div>
-      <!--总收益-->
-      <div class="mobile-trade-data-item mobile-trade-amount1" v-if="isSwitchOrder == 'CONTRACT'">
-        <div class="mobile-trade-data" :class="godInfo.profit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.profit ? toFixed(godInfo.profit, 2) : '0'}}</div>
-        <div class="">{{$t('总收益')}} (₮)</div>
-      </div>
-
-    </div>
-  </div>
-  <!--内容下部-->
-
-  <!--内容中部-->
-  <div class="mobile-trade-center" >
-    <div class="mobile-trade-center-title  flex">
-      <div class="mobile-trade-center-title-only mobile-trade-center-title-history" :class="followType == 1 ?'mobile-trade-center-title-selected':''" @click="toggleType(1)">
-        跟单者
-      </div>
-<!--      <div class="mobile-trade-center-title-line"></div>-->
-      <div class="mobile-trade-center-title-only mobile-trade-center-title-follower" :class="followType == 2?'mobile-trade-center-title-selected':''" @click="toggleType(2)">
-        操作记录
-      </div>
-    </div>
-    <div class="mobile-trade-center-content" v-if="followType == 2">
-      <div class="mobile-trade-center-content-item" v-for="(item,index) in godHistorList" :key="index">
-        <div class="mobile-trade-item-top flex">
-          <div class="mobile-trade-item-top-left">
-            <span>{{item.symbol.replace('_','/')}}</span>
-<!--            <span class="mobile-trade-buy"-->
-<!--                  v-if="isSwitchOrder == 'SPOT'"-->
-<!--                  :class="item.direction==='BUY_LIMIT' || item.direction==='BUY_MARKET'?'text-green':'text-red'">-->
-<!--              {{contractType[item.orderType]}}-->
-<!--            </span>-->
-<!--            <span class="mobile-trade-buy"-->
-<!--                  v-if="isSwitchOrder == 'CONTRACT'">-->
-<!--              {{contractType[item.orderType]}}-->
-<!--            </span>-->
-<!--            <span class="mobile-trade-buy"></span>-->
-            <span class="text-color"
-                  :class="item.direction==='BUY'?'text-green':'text-red'"
-                  v-if="isSwitchOrder == 'CONTRACT'">
-              {{$globalFunc.getOrderSide(item.positionSide,item.direction)}}
-            </span>
-          </div>
-          <div class="mobile-trade-item-top-right">{{$globalFunc.formatDateUitl(Number(item.orderUpdatedAt),'MM/DD hh:mm:ss')}}</div>
+    <!--内容上部-->
+    <div class="mobile-trade-top">
+      <div class="mobile-trade-top-banner flex">
+        <div class="mobile-trade-top-banner-img">
+          <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">
         </div>
-        <div class="mobile-trade-item-content">
-          <div class="mobile-trade-item-content-title flex">
-            <div class="mobile-trade-price">价格 (₮)</div>
-<!--            <div class="mobile-trade-amount">数量</div>-->
-<!--            <div class="mobile-trade-money">交易量 (₮)</div>-->
-            <div class="mobile-trade-money">数量</div>
-          </div>
-          <div class="mobile-trade-item-content-container flex">
-            <div class="mobile-trade-price">{{toFixed(item.price,4) || '0'}}</div>
-<!--            <div class="mobile-trade-amount">{{toFixed(item.amount,4) || '0'}}</div>-->
-            <div class="mobile-trade-money">{{toFixed(item.amount,4) || '0'}}</div>
-<!--            <div class="mobile-trade-money">{{toFixed(item.price * item.amount,4)}}</div>-->
-          </div>
+        <div class="mobile-trade-top-banner-text">{{godInfo.userId ? godInfo.userId : $route.query.userId}}</div>
+      </div>
+      <div class="mobile-trade-top-data flex" v-if="isSwitchOrder == 'SPOT'">
+
+        <div class="mobile-trade-data-item">
+          <div class="mobile-trade-data">{{toFixed(godInfo.sum,2) || '- -'}}</div>
+          <div>累计交易量 (₮)</div>
+        </div>
+
+        <div class="mobile-trade-data-item">
+          <div class="mobile-trade-data">{{godInfo.count || '0'}}</div>
+          <div>交易笔数</div>
+        </div>
+
+        <div class="mobile-trade-data-item">
+          <div class="mobile-trade-data">{{godInfo.followCount ? godInfo.followCount : '- -'}}</div>
+          <div>当前跟单人数</div>
+        </div>
+
+        <div class="mobile-trade-data-item">
+          <div class="mobile-trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0, 2) : '0'}}%</div>
+          <div>收益率 (%)</div>
         </div>
       </div>
-      <div class="history-no-data" v-if="godHistorList.length==0 && !loading">暂无数据</div>
-    </div>
-    <div class="mobile-trade-center-content" v-if="followType == 1">
+      <div class="mobile-trade-top-data flex" v-if="isSwitchOrder == 'CONTRACT'">
 
-      <div class="mobile-trade-center-follower1 flex" v-if="isSwitchOrder == 'SPOT'" v-for="(item,index) in followUserList">
-        <div class="mobile-trader-follower-img1">
-          <img src="../assets/big-brother2.png" alt="">
+        <!--本周收益率-->
+        <div class="mobile-trade-data-item mobile-trade-amount1">
+          <div class="mobile-trade-data" :class="godInfo.weekRate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekRate ? toFixed(godInfo.weekRate, 2) : '0'}}%</div>
+          <div class="">{{$t('本周收益率')}} (%)</div>
         </div>
-        <div class="mobile-trader-follower-content flex1">
-          <div class="mobile-trader-follower-content-top flex">
-            <div class="mobile-trader-follower-UID">{{item.userId}}</div>
-            <div class="mobile-trader-follower-income">{{item.profit}}</div>
+        <!--本周收益-->
+        <div class="mobile-trade-data-item mobile-trade-amount1">
+          <div class="mobile-trade-data" :class="godInfo.weekProfit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.weekProfit ? toFixed(godInfo.weekProfit, 2) : '0'}}</div>
+          <div class="">{{$t('本周收益')}} (₮)</div>
+        </div>
+        <!--总收益率-->
+        <div class="mobile-trade-data-item mobile-trade-amount1">
+          <div class="mobile-trade-data" v-if="isSwitchOrder == 'SPOT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
+          <div class="mobile-trade-data" v-if="isSwitchOrder == 'CONTRACT'" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.rate ? toFixed(godInfo.rate, 2) : '0'}}%</div>
+          <div class="" v-if="isSwitchOrder == 'SPOT'">收益率 (%)</div>
+          <div class="" v-if="isSwitchOrder == 'CONTRACT'">总收益率 (%)</div>
+        </div>
+        <!--总收益-->
+        <div class="mobile-trade-data-item mobile-trade-amount1" v-if="isSwitchOrder == 'CONTRACT'">
+          <div class="mobile-trade-data" :class="godInfo.profit >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'">{{godInfo.profit ? toFixed(godInfo.profit, 2) : '0'}}</div>
+          <div class="">{{$t('总收益')}} (₮)</div>
+        </div>
+
+      </div>
+    </div>
+    <!--内容下部-->
+
+    <!--内容中部-->
+    <div class="mobile-trade-center" >
+      <div class="mobile-trade-center-title  flex">
+        <div class="mobile-trade-center-title-only mobile-trade-center-title-history" :class="followType == 1 ?'mobile-trade-center-title-selected':''" @click="toggleType(1)">
+          跟单者
+        </div>
+  <!--      <div class="mobile-trade-center-title-line"></div>-->
+        <div class="mobile-trade-center-title-only mobile-trade-center-title-follower" :class="followType == 2?'mobile-trade-center-title-selected':''" @click="toggleType(2)">
+          操作记录
+        </div>
+      </div>
+      <div class="mobile-trade-center-content" v-if="followType == 2">
+        <div class="mobile-trade-center-content-item" v-for="(item,index) in godHistorList" :key="index">
+          <div class="mobile-trade-item-top flex">
+            <div class="mobile-trade-item-top-left">
+              <span>{{item.symbol.replace('_','/')}}</span>
+  <!--            <span class="mobile-trade-buy"-->
+  <!--                  v-if="isSwitchOrder == 'SPOT'"-->
+  <!--                  :class="item.direction==='BUY_LIMIT' || item.direction==='BUY_MARKET'?'text-green':'text-red'">-->
+  <!--              {{contractType[item.orderType]}}-->
+  <!--            </span>-->
+  <!--            <span class="mobile-trade-buy"-->
+  <!--                  v-if="isSwitchOrder == 'CONTRACT'">-->
+  <!--              {{contractType[item.orderType]}}-->
+  <!--            </span>-->
+  <!--            <span class="mobile-trade-buy"></span>-->
+              <span class="text-color"
+                    :class="item.direction==='BUY'?'text-green':'text-red'"
+                    v-if="isSwitchOrder == 'CONTRACT'">
+                {{$globalFunc.getOrderSide(item.positionSide,item.direction)}}
+              </span>
+            </div>
+            <div class="mobile-trade-item-top-right">{{$globalFunc.formatDateUitl(Number(item.orderUpdatedAt),'MM/DD hh:mm:ss')}}</div>
           </div>
-          <div class="mobile-trader-follower-content-top flex">
-            <div class="">跟单总成交额 {{item.amount ? toFixed(item.amount, 2) : '0'}} ₮</div>
-            <div class="">跟单收益(₮)</div>
+          <div class="mobile-trade-item-content">
+            <div class="mobile-trade-item-content-title flex">
+              <div class="mobile-trade-price">价格 (₮)</div>
+  <!--            <div class="mobile-trade-amount">数量</div>-->
+  <!--            <div class="mobile-trade-money">交易量 (₮)</div>-->
+              <div class="mobile-trade-money">数量</div>
+            </div>
+            <div class="mobile-trade-item-content-container flex">
+              <div class="mobile-trade-price">{{toFixed(item.price,4) || '0'}}</div>
+  <!--            <div class="mobile-trade-amount">{{toFixed(item.amount,4) || '0'}}</div>-->
+              <div class="mobile-trade-money">{{toFixed(item.amount,4) || '0'}}</div>
+  <!--            <div class="mobile-trade-money">{{toFixed(item.price * item.amount,4)}}</div>-->
+            </div>
           </div>
         </div>
+        <div class="history-no-data" v-if="godHistorList.length==0 && !loading">暂无数据</div>
       </div>
-      <div class="mobile-trade-center-follower" v-if="isSwitchOrder == 'CONTRACT'" v-for="(item,index) in followUserList">
-        <div class="">
-          <img class="mobile-trader-follower-img" src="../assets/big-brother2.png" alt="">
-          <span class="mobile-trader-follower-UID">{{item.userId}}</span>
+      <div class="mobile-trade-center-content" v-if="followType == 1">
+
+        <div class="mobile-trade-center-follower1 flex" v-if="isSwitchOrder == 'SPOT'" v-for="(item,index) in followUserList">
+          <div class="mobile-trader-follower-img1">
+            <img src="../assets/big-brother2.png" alt="">
+          </div>
+          <div class="mobile-trader-follower-content flex1">
+            <div class="mobile-trader-follower-content-top flex">
+              <div class="mobile-trader-follower-UID">{{item.userId}}</div>
+              <div class="mobile-trader-follower-income">{{item.profit}}</div>
+            </div>
+            <div class="mobile-trader-follower-content-top flex">
+              <div class="">跟单总成交额 {{item.amount ? toFixed(item.amount, 2) : '0'}} ₮</div>
+              <div class="">跟单收益(₮)</div>
+            </div>
+          </div>
         </div>
+        <div class="mobile-trade-center-follower" v-if="isSwitchOrder == 'CONTRACT'" v-for="(item,index) in followUserList">
+          <div class="">
+            <img class="mobile-trader-follower-img" src="../assets/big-brother2.png" alt="">
+            <span class="mobile-trader-follower-UID">{{item.userId}}</span>
+          </div>
 
-        <div class="flex">
-          <div class="mobile-trader-follower-income flex1">{{toFixed(item.userProfit,2) || '0'}}</div>
-          <div class="mobile-trader-follower-income flex1">{{toFixed(item.profit,2) || '0'}}</div>
+          <div class="flex">
+            <div class="mobile-trader-follower-income flex1">{{toFixed(item.userProfit,2) || '0'}}</div>
+            <div class="mobile-trader-follower-income flex1">{{toFixed(item.profit,2) || '0'}}</div>
 
+          </div>
+          <div class="flex mtop">
+            <div class="mobile-trader-follower-text flex1">总跟单利润（₮)</div>
+            <div class="mobile-trader-follower-text flex1">总跟单收益（₮)</div>
+
+          </div>
+          <div class="flex">
+            <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
+            <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekProfit,2) || '0'}}</div>
+
+          </div>
+          <div class="flex mtop">
+            <div class="mobile-trader-follower-text flex1">本周跟单利润（₮)</div>
+            <div class="mobile-trader-follower-text flex1">本周跟单收益（₮)</div>
+          </div>
         </div>
-        <div class="flex mtop">
-          <div class="mobile-trader-follower-text flex1">总跟单利润（₮)</div>
-          <div class="mobile-trader-follower-text flex1">总跟单收益（₮)</div>
-
-        </div>
-        <div class="flex">
-          <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
-          <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekProfit,2) || '0'}}</div>
-
-        </div>
-        <div class="flex mtop">
-          <div class="mobile-trader-follower-text flex1">本周跟单利润（₮)</div>
-          <div class="mobile-trader-follower-text flex1">本周跟单收益（₮)</div>
-        </div>
-      </div>
-      <div class="history-no-data" v-if="followUserList.length==0 && !loading">暂无数据</div>
-    </div>
-  </div>
-  <!--内容底部-->
-  <div class="mobile-trade-no-data" v-if="!loading">
-
-
-    <div class="mobile-trade-open-exchange" >
-      <div class="mobile-trade-open-exchange-text flex">
-        <div class="mobile-trade-fee">费用</div>
-        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} ₮/{{$route.query.days  || '0'}}天</div>
-        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/周</div>
-        <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/笔</div>
-      </div>
-      <div class="mobile-trade-open-exchange-button" @click="jumpToFollowDocumentary()" v-if="$route.query.isFollow < 0&& godInfo.canFollow==1 && isSwitchOrder == 'SPOT'">跟单</div>
-      <div class="mobile-trade-open-exchange-button" @click="openDocumentaryWindowDisable()" v-if="$route.query.isFollow < 0 && godInfo.canFollow==1 && isSwitchOrder == 'CONTRACT'">跟单</div>
-      <div class="mobile-trade-open-exchange-button-isfollow" v-if="$route.query.isFollow >= 0 || godInfo.canFollow==0">{{$route.query.isFollow >= 0?'已跟单':'跟单'}}</div>
-    </div>
-  </div>
-
-  <!--弹窗-->
-  <div v-if="delFollowOpenDisable" class="forecast-activity-toast">
-    <div class="forecast-activity-toast-box-D">
-      <div class="forecast-activity-toast-title">
-        <img src="../../../assets/pinchakan.png" alt="" class="fenxian-img">
-        跟单提示
-        <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
-        </span>
-      </div>
-      <div class="del-follow-text-D">
-        <div class="fenxian">
-          <!--              关闭按钮 -->
-          <img src="../../../assets/noselect.png" alt="" class="geng-img" @click="clickToggleTrue" v-if="!BDBInfo">
-          <!--              打开按钮-->
-          <img src="../../../assets/select.png" alt="" class="geng-img" @click="clickToggle" v-if="BDBInfo">
-          我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
-        </div>
-        <div class="m-bottom">跟单交易将在带单者无仓位且无委托后开启，跟单后以下功能将被禁用：</div>
-        <div class="div-two">
-          <div class="m-bottom-1"><span class="yuan-span m-f"></span> 仓位模式修改 <span class="yuan-span"></span> 保证金模式修改</div>
-          <div class="m-bottom-1"><span class="yuan-span m-f"></span> 杠杆倍数修改 <span class="yuan-span"></span> 资金划转 </div>
-          <div class="m-bottom-1"><span class="yuan-span m-f"></span> 合约交易 </div>
-        </div>
-      </div>
-
-      <div slot="footer" class="flex footer-btn">
-        <div class="popWindow-article2" @click="popCloseTemporarilyClosed">取消</div>
-        <div class="popWindow-btn" @click="jumpToFollowDocumentaryHe" v-if="BDBInfo">同意</div>
-        <div class="popWindow-btn-hui" v-else>同意</div>
-        <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
+        <div class="history-no-data" v-if="followUserList.length==0 && !loading">暂无数据</div>
       </div>
     </div>
-  </div>
-  <div v-if="delFollowOpenDisableBi" class="forecast-activity-toast">
-    <div class="forecast-activity-toast-box-Bi">
-      <div class="forecast-activity-toast-title">
-        <img src="../../../assets/pinchakan.png" alt="" class="fenxian-img">
-        跟单提示
-        <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
-        </span>
+    <!--内容底部-->
+    <div class="mobile-trade-no-data" v-if="!loading">
+
+
+      <div class="mobile-trade-open-exchange" >
+        <div class="mobile-trade-open-exchange-text flex">
+          <div class="mobile-trade-fee">费用</div>
+          <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} ₮/{{$route.query.days  || '0'}}天</div>
+          <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/周</div>
+          <div class="mobile-trade-order-fee text-blue" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd($route.query.fee,30) || '0'}}%/笔</div>
+        </div>
+        <div class="mobile-trade-open-exchange-button" @click="jumpToFollowDocumentary()" v-if="$route.query.isFollow < 0&& godInfo.canFollow==1 && isSwitchOrder == 'SPOT'">跟单</div>
+        <div class="mobile-trade-open-exchange-button" @click="openDocumentaryWindowDisable()" v-if="$route.query.isFollow < 0 && godInfo.canFollow==1 && isSwitchOrder == 'CONTRACT'">跟单</div>
+        <div class="mobile-trade-open-exchange-button-isfollow" v-if="$route.query.isFollow >= 0 || godInfo.canFollow==0">{{$route.query.isFollow >= 0?'已跟单':'跟单'}}</div>
       </div>
-      <div class="del-follow-text-D">
-        <div class="fenxianBi">
-          <!--              关闭按钮 -->
-          <img src="../../../assets/noselect.png" alt="" class="geng-img" @click="clickToggleTrue" v-if="!BDBInfo">
-          <!--              打开按钮-->
-          <img src="../../../assets/select.png" alt="" class="geng-img" @click="clickToggle" v-if="BDBInfo">
-          我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
+    </div>
+
+    <!--弹窗-->
+    <div v-if="delFollowOpenDisable" class="forecast-activity-toast">
+      <div class="forecast-activity-toast-box-D">
+        <div class="forecast-activity-toast-title">
+          <img src="../../../assets/pinchakan.png" alt="" class="fenxian-img">
+          跟单提示
+          <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
+          </span>
+        </div>
+        <div class="del-follow-text-D">
+          <div class="fenxian">
+            <!--              关闭按钮 -->
+            <img src="../../../assets/noselect.png" alt="" class="geng-img" @click="clickToggleTrue" v-if="!BDBInfo">
+            <!--              打开按钮-->
+            <img src="../../../assets/select.png" alt="" class="geng-img" @click="clickToggle" v-if="BDBInfo">
+            我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
+          </div>
+          <div class="m-bottom">跟单交易将在带单者无仓位且无委托后开启，跟单后以下功能将被禁用：</div>
+          <div class="div-two">
+            <div class="m-bottom-1"><span class="yuan-span m-f"></span> 仓位模式修改 <span class="yuan-span"></span> 保证金模式修改</div>
+            <div class="m-bottom-1"><span class="yuan-span m-f"></span> 杠杆倍数修改 <span class="yuan-span"></span> 资金划转 </div>
+            <div class="m-bottom-1"><span class="yuan-span m-f"></span> 合约交易 </div>
+          </div>
+        </div>
+
+        <div slot="footer" class="flex footer-btn">
+          <div class="popWindow-article2" @click="popCloseTemporarilyClosed">取消</div>
+          <div class="popWindow-btn" @click="jumpToFollowDocumentaryHe" v-if="BDBInfo">同意</div>
+          <div class="popWindow-btn-hui" v-else>同意</div>
+          <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
         </div>
       </div>
+    </div>
+    <div v-if="delFollowOpenDisableBi" class="forecast-activity-toast">
+      <div class="forecast-activity-toast-box-Bi">
+        <div class="forecast-activity-toast-title">
+          <img src="../../../assets/pinchakan.png" alt="" class="fenxian-img">
+          跟单提示
+          <span class="forecast-activity-toast-close-btn" @click="delFollowClose">
+          </span>
+        </div>
+        <div class="del-follow-text-D">
+          <div class="fenxianBi">
+            <!--              关闭按钮 -->
+            <img src="../../../assets/noselect.png" alt="" class="geng-img" @click="clickToggleTrue" v-if="!BDBInfo">
+            <!--              打开按钮-->
+            <img src="../../../assets/select.png" alt="" class="geng-img" @click="clickToggle" v-if="BDBInfo">
+            我已认真阅读并知晓了镜像交易的规则及相关风险，愿意承担风险并同意开通镜像交易。
+          </div>
+        </div>
 
-      <div slot="footer" class="flex footer-btn">
-        <div class="popWindow-article2" @click="popCloseTemporarilyClosedBi">取消</div>
-        <div class="popWindow-btn" @click="jumpToFollowDocumentaryBi" v-if="BDBInfo">同意</div>
-        <div class="popWindow-btn-hui" v-else>同意</div>
-        <!--      <div class="popWindow-btn" @click="openAContract">开通</div>-->
+        <div slot="footer" class="flex footer-btn">
+          <div class="popWindow-article2" @click="popCloseTemporarilyClosedBi">取消</div>
+          <div class="popWindow-btn" @click="jumpToFollowDocumentaryBi" v-if="BDBInfo">同意</div>
+          <div class="popWindow-btn-hui" v-else>同意</div>
+        </div>
       </div>
     </div>
   </div>
   <PopupPrompt :popOpen="popOpen" :popClose="closePop" :popType="popType" :popText="popText" :waitTime="waitTime" />
+
 </div>
 
