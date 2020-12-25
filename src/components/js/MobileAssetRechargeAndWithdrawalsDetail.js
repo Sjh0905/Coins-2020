@@ -858,10 +858,10 @@ root.methods.gotoZichan = function () {
 }
 /*---------------------- 跳入到合约 ---------------------*/
 root.methods.gotoContract = function () {
-  // if(!this.isLogin){
-  //   this.$router.push('/index/sign/login')
-  //   return;
-  // }
+  if(!this.isLogin){
+    this.$router.push('/index/sign/login')
+    return;
+  }
   window.location.replace(this.$store.state.contract_url + 'index/mobileTradingHall');
 }
 
