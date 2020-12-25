@@ -147,20 +147,22 @@
   text-align: center;
   box-sizing: border-box;
   height:0.52rem;
-  margin-right: 0.2rem;
+  /*margin-right: 0.2rem;*/
+  color: #6A83A8;
   line-height:0.52rem;
-  border:1px solid rgba(197,207,213,1);
+  background-color: #EFF0F9;
+  /*border:1px solid rgba(197,207,213,1);*/
 }
 .mobile-trade-center-title-history{
   /*border-right-color: #3576F5;*/
-  border-radius: 0.03rem;
+  border-radius: 0.03rem 0rem 0rem 0.03rem;
 }
 .mobile-trade-center-title-follower{
-  border-radius: 0.03rem;
+  border-radius: 0rem 0.03rem 0.03rem 0rem;
 }
 .mobile-trade-center-title-selected {
-  border-color:#3576F5;
-  color:#3576F5;
+  background-color:#3576F5;
+  color:#FFFFFF;
 }
 .mobile-trade-center-content {
   margin-bottom: 1.8rem;

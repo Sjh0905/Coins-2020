@@ -146,7 +146,7 @@
         </div>
       </div>
 <!--      <div class="history-no-data" v-if="godHistorList.length==0 && !loading">暂无数据</div>-->
-      <div class="mobile-trade-center-not-data" v-if="godHistorList.length == 0&& !loading">
+      <div class="mobile-trade-center-not-data" v-if="godHistorList.length == 0">
         <div class="mobile-trade-center-not-data-img">
           <img src="../assets/no_list.png" alt="">
         </div>
@@ -208,13 +208,13 @@
         <!--&lt;!&ndash;         </div>&ndash;&gt;-->
         <!--        </div>-->
       </div>
-      <div class="mobile-trade-center-not-data" v-if="followUserList.length==0 && isSwitchOrder == 'SPOT' && !loading">
+      <div class="mobile-trade-center-not-data" v-if="followUserList.length==0 && isSwitchOrder == 'SPOT'">
         <div class="mobile-trade-center-not-data-img">
           <img src="../assets/no_list.png" alt="">
         </div>
         <div class="mobile-trade-center-not-data-text">暂无记录</div>
       </div>
-      <div class="mobile-trade-center-not-data" v-if="followUserList.length==0 && isSwitchOrder == 'CONTRACT' && !loading">
+      <div class="mobile-trade-center-not-data" v-if="followUserList.length==0 && isSwitchOrder == 'CONTRACT'">
         <div class="mobile-trade-center-not-data-img">
           <img src="../assets/no_list.png" alt="">
         </div>
