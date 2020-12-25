@@ -424,7 +424,7 @@
   height: 0.96rem;
   background: #302E34;
   padding: 0 0.3rem;
-  margin-top: -1px;
+  margin-top: -0.02rem;
   justify-content: space-between;
 }
 .mobile-trade-data-item {
