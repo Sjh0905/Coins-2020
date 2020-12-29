@@ -24,8 +24,8 @@
     <div class="follow-asset-title-personality" >
       <div class="follow-data-box flex">
         <div class="follow-img">
-          <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="" v-if="godInfo.headImage==''">
-          <img class="follow-data-box-img" :src="godInfo.headImage" alt="" v-else>
+          <img class="follow-data-box-img" :src="godInfo.headImage" alt="" v-if="godInfo.headImage!=''">
+          <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="" v-else>
         </div>
 
         <div class="">
@@ -93,7 +93,7 @@
 
       <!-- 、个性签名-->
       <div class="personality">
-        <div class="personality-flex">{{godInfo.label=='' ? '大神正在看盘中~' : godInfo.label}}</div>
+        <div class="personality-flex">{{godInfo.label ? godInfo.label : '大神正在看盘中~'}}</div>
       </div>
     </div>
     <!-- 大神持仓-->

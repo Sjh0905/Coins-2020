@@ -25,11 +25,30 @@
 
     <!--内容上部-->
     <div class="mobile-trade-top">
-      <div class="mobile-trade-top-banner flex">
-        <div class="mobile-trade-top-banner-img">
-          <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">
+<!--      <div class="mobile-trade-top-banner flex">-->
+<!--        <div class="mobile-trade-top-banner-img">-->
+<!--          <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">-->
+<!--        </div>-->
+<!--        <div class="mobile-trade-top-banner-text">{{godInfo.userId ? godInfo.userId : $route.query.userId}}</div>-->
+<!--      </div>-->
+
+      <div class="mobile-trade-top-background">
+        <div class="mobile-trade-top-banner flex">
+          <div class="mobile-trade-top-banner-img">
+            <!--        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">-->
+            <img class="mobile-trade-img" :src="godInfo.headImage" alt="" v-if="godInfo.headImage!=''">
+            <img class="mobile-trade-img" src="../assets/big-brother2.png" alt="" v-else>
+          </div>
+          <div class="with-img">
+            <div class="mobile-trade-top-banner-text">{{godInfo.nickName ? godInfo.nickName : '大神'}}</div>
+            <div class="big-brother-uid-name">UID：{{godInfo.userId}}</div>
+          </div>
         </div>
-        <div class="mobile-trade-top-banner-text">{{godInfo.userId ? godInfo.userId : $route.query.userId}}</div>
+
+        <div class="big-brother-qian">
+          {{godInfo.label ? godInfo.label : '大神正在看盘中~'}}
+        </div>
+
       </div>
       <div class="mobile-trade-top-data flex" v-if="isSwitchOrder == 'SPOT'">
 

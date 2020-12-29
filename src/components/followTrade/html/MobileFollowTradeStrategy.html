@@ -27,17 +27,47 @@
   </div>
 
   <div class="mobile-trade-header-null"></div>
-
+      <div class="mobile-trade-top-banner flex" v-if="!isTapeList">
+        <div class="mobile-trade-top-banner-img">
+  <!--        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">-->
+          <img class="mobile-trade-img" src="../assets/big-brother2.png" alt="">
+        </div>
+        <div class="mobile-tradetext">{{this.userId}}</div>
+        <!--  <div class="mobile-trade-top-banner-text">{{this.userId}}</div>-->
+      </div>
   <!--现货内容上部-->
   <div class="mobile-trade-top"  v-if="isSwitchOrder=='SPOT'">
-    <div class="mobile-trade-top-banner flex">
-      <div class="mobile-trade-top-banner-img">
-<!--        <img src="../assets/management_personal_icon.png" alt="" class="mobile-trade-img">-->
-        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">
+<!--    <div class="mobile-trade-top-banner flex">-->
+<!--      <div class="mobile-trade-top-banner-img">-->
+<!--&lt;!&ndash;        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">&ndash;&gt;-->
+<!--        <img class="mobile-trade-img" src="../assets/big-brother2.png" alt="" v-if="godInfo.headImage==''">-->
+<!--        <img class="mobile-trade-img" :src="godInfo.headImage" alt="" v-else>-->
+<!--      </div>-->
+<!--      <div class="with-img">-->
+<!--        <div class="mobile-trade-top-banner-text">{{godInfo.nickName=='' ? '大神' : godInfo.nickName}}</div>-->
+<!--        <div class="big-brother-uid-name">{{godInfo.label=='' ? '大神正在看盘中~' : godInfo.label}}</div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;  <div class="mobile-trade-top-banner-text">{{this.userId}}</div>&ndash;&gt;-->
+<!--    </div>-->
+    <div class="mobile-trade-top-background" v-if="isTapeList">
+      <div class="mobile-trade-top-banner flex">
+        <div class="mobile-trade-top-banner-img">
+          <!--        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">-->
+          <img class="mobile-trade-img" :src="godInfo.headImage"  alt="" v-if="godInfo.headImage!=''">
+          <img class="mobile-trade-img" src="../assets/big-brother2.png" alt="" v-else>
+        </div>
+        <div class="with-img">
+          <div class="mobile-trade-top-banner-text">{{godInfo.nickName ? godInfo.nickName :'大神' }}</div>
+          <div class="big-brother-uid-name">UID：{{godInfo.userId}}</div>
+        </div>
       </div>
-      <div class="mobile-trade-top-banner-text">{{this.userId}}</div>
+
+      <div class="big-brother-qian">
+        {{godInfo.label ? godInfo.label : '大神正在看盘中~'}}
+      </div>
+
     </div>
-    <div class="mobile-trade-top-data flex">
+    <div class=" flex" :class="isTapeList?'mobile-trade-top-data':'mobile-trade-top-data-E'">
 
       <div class="mobile-trade-data-item">
         <div class="mobile-trade-data">{{ godInfo.sum ? toFixed(godInfo.sum,2):'0'}}</div>
@@ -64,14 +94,33 @@
 
   <!--合约内容上部-->
   <div class="mobile-trade-top" v-if="isSwitchOrder=='CONTRACT'">
-    <div class="mobile-trade-top-banner flex">
-      <div class="mobile-trade-top-banner-img">
-        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">
+<!--    <div class="mobile-trade-top-banner flex">-->
+<!--      <div class="mobile-trade-top-banner-img">-->
+<!--        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">-->
+<!--      </div>-->
+<!--      <div class="mobile-trade-top-banner-text">{{this.userId}}</div>-->
+<!--    </div>-->
+
+    <div class="mobile-trade-top-background" v-if="isTapeList">
+      <div class="mobile-trade-top-banner flex">
+        <div class="mobile-trade-top-banner-img">
+          <!--        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">-->
+          <img class="mobile-trade-img" :src="godInfo.headImage" alt="" v-if="godInfo.headImage!=''">
+          <img class="mobile-trade-img" src="../assets/big-brother2.png" alt="" v-else>
+        </div>
+        <div class="with-img">
+          <div class="mobile-trade-top-banner-text">{{godInfo.nickName? godInfo.nickName : '大神'}}</div>
+          <div class="big-brother-uid-name">UID：{{godInfo.userId}}</div>
+        </div>
       </div>
-      <div class="mobile-trade-top-banner-text">{{this.userId}}</div>
+
+      <div class="big-brother-qian">
+        {{godInfo.label ? godInfo.label : '大神正在看盘中~'}}
+      </div>
+
     </div>
 
-    <div class="mobile-trade-top-data flex">
+    <div class=" flex" :class="isTapeList?'mobile-trade-top-data':'mobile-trade-top-data-E'">
 
       <!--本周收益率-->
       <div class="mobile-trade-data-item">

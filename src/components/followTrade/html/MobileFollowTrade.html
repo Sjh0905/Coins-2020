@@ -36,10 +36,16 @@
     <div class="big-brother-start" v-if="listGod.length != 0 && !loading" v-for="(item,index) in listGod" >
     <!--大佬头像Start-->
       <div class="big-brother-large-box flex">
-        <div>
-          <img class="big-brother-img" src="../assets/big-brother2.png" alt="">
+        <div class="big-bro-img">
+          <img class="big-brother-img"  :src="item.headImage" alt="" v-if="item.headImage !=''">
+          <img class="big-brother-img" src="../assets/big-brother2.png" alt="" v-else>
         </div>
-        <div class="big-brother-uid">{{item.userId}}</div>
+        <div class="with-img">
+          <div class="big-brother-uid">{{item.nickName ? item.nickName : '大神'  }}</div>
+          <div class="big-nickName">{{item.userId ? item.userId : item.userId  }}</div>
+        </div>
+
+
         <div class="documentary-details">
           <div class="">
             <span class="documentary" v-if="godList.indexOf(item.userId) < 0 && item.canFollow == 1" @click="goToDocumentary(item,switchOrder)">跟单</span>
@@ -51,9 +57,10 @@
         </div>
       </div>
       <!--大佬头像End-->
-
+      <div class="big-brother-uid-name">{{item.label ? item.label: '大神正在看盘中~' }}</div>
       <!--大佬交易详情Start-->
       <div class="details-of-big-brother-transaction" @click="goToDocumentary1(item,switchOrder)">
+
 <!--        <div class="accumulated-income">-->
 <!--          <div class="percentage" v-if="switchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{toFixed(item.rate* 10 * 10 || 0,2) }}%</div>-->
 <!--          <div class="percentage" v-if="switchOrder == 'CONTRACT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{toFixed(item.rate,2) }}</div>-->

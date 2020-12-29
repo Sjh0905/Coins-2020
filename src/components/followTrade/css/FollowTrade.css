@@ -86,7 +86,7 @@
 }
 .follow-data-box-img {
   width: 40px;
-  height: 40px;
+  /*height: 40px;*/
 }
 .follow-data-box-img-box {
   margin-left: 15px;
@@ -264,4 +264,18 @@
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
+}
+.follow-data-box-img-span {
+  display: inline-block;
+  height: 19px;
+  line-height: 19px;
+  background: #E5E7F3;;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6A83A8;
+  padding: 0 10px;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
 }

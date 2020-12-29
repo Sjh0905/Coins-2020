@@ -140,10 +140,27 @@
 }
 .big-brother-uid {
   padding-left: 0.28rem;
-  line-height: 0.8rem;
+  /*line-height: 0.8rem;*/
   font-size:0.32rem;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
+}
+.big-brother-uid-name {
+  width: 82%;
+  padding-left: 0.28rem;
+  height: 0.4rem;
+  font-size: 0.24rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #3E536C;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow: hidden;
+  margin-bottom: 0.16rem;
+}
+.with-img {
+  width: 51%;
+  text-overflow: ellipsis;
 }
 .documentary-details {
   flex: 40;
@@ -449,3 +466,27 @@
   width: 16px;
   vertical-align: sub;
 }
+/*touxiang */
+.big-bro-img {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background: url("../assets/big-brother2.png") center center no-repeat;
+  background-size: 96% 95%;
+  background-position: center;
+}
+.big-nickName {
+  display: inline-block;
+  font-size: 0.2rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6A83A8;
+  height: 0.32rem;
+  line-height: 0.32rem;
+  background: #E5E7F3;
+  border-radius: 0.18rem;
+  padding: 0 0.12rem;
+  margin-left: 0.22rem;
+}
+/*touxiang */

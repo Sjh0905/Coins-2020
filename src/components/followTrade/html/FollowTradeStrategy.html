@@ -85,11 +85,11 @@
       <div class="trade-top-banner flex">
         <div class="flex">
           <div @click="clickPersonality" class="null-name">
-            <img src="../assets/big-brother2.png" alt="" class="trade-img" v-if="godInfo.headImage==''">
-            <img :src="godInfo.headImage" alt="" class="trade-img" v-else>
+            <img :src="godInfo.headImage" alt="" class="trade-img" v-if="godInfo.headImage!=''">
+            <img src="../assets/big-brother2.png"  alt="" class="trade-img" v-else>
           </div>
           <div class="trade-top-banner-text-personality">
-            <div class="personality-love"  @click="clickPersonality">{{godInfo.nickName=='' ? '大神' : godInfo.nickName}} <img class="love-img" src="../assets/change-nickname.png" alt=""></div>
+            <div class="personality-love"  @click="clickPersonality">{{godInfo.nickName ? godInfo.nickName : '大神'}} <img class="love-img" src="../assets/change-nickname.png" alt=""></div>
             <div class="personality-id">UID：{{userId}}</div>
           </div>
         </div>
@@ -130,7 +130,7 @@
       </div>
       <!-- 、个性签名-->
       <div class="personality flex">
-        <div class="personality-flex">{{godInfo.label=='' ? '大神正在看盘中~' : godInfo.label}}</div>
+        <div class="personality-flex">{{godInfo.label ? godInfo.label : '大神正在看盘中~'}}</div>
         <div class="personality-img" @click="clickPersonality"><img src="../assets/settion-Nie.png" alt=""></div>
       </div>
     </div>
@@ -313,8 +313,7 @@
         <div class="image-unify flex-center" :key="1">
           <div class="image-show " id="imgFrontContainer_0" >
 
-            <template v-if="godInfo.headImage===''"></template>
-
+            <template v-if="godInfo.headImage ==''"></template>
             <img :src="godInfo.headImage" alt="" class="re_img" v-else>
           </div>
           <input type="file" ref="imgFront_0" v-on:change="frontOnChange" class="display-none imgFront_0" id="imgFront_0">
