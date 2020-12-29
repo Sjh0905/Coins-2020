@@ -743,6 +743,7 @@
   background: linear-gradient(270deg, #3576F5 0%, #459AF5 100%);
   border-radius: 1px;
   margin-left: 40px;
+  cursor: pointer;
 }
 .cancel-btn {
   flex: 1;
