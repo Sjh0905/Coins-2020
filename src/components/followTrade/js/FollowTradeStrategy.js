@@ -38,6 +38,14 @@ root.data = function () {
     popWindowOpenContract:false,  //带单禁用
     BDBInfo:true,
     popWindowOpenContractBi:false,
+    certificate_positive_url_0: '',
+    frontImgWA_0: '0',
+    frontImgMsg_0: '',
+    popWindowOpenPersonality:false,//昵称弹框
+    textareaNickname:'',
+    textareaPersonality:'',
+    src:'',
+    sendFrontImg: null,
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -106,6 +114,13 @@ root.computed.isSwitchOrder = function () {
   return this.$route.query.isSwitchOrder || this.$store.state.isSwitchOrder;
 }
 
+root.computed.textareaNumber = function () {
+  return 50 - this.textareaPersonality.length
+}
+
+root.computed.textareaNickNumber = function () {
+  return 10 - this.textareaNickname.length
+}
 
 root.computed.contractType = function () {
 
@@ -395,4 +410,182 @@ root.methods.accMinus = function (num1, num2) {
 }
 /*---------------------- 减法运算 end ---------------------*/
 
+
+
+// 点击正面照
+root.methods.click_front = function () {
+  this.$refs.imgFront_0.click()
+
+}
+//身份证正面照
+root.methods.frontOnChange = function () {
+    this.frontImgWA_0 = '0'
+    let file = this.$refs.imgFront_0.files[0]
+    let text = this.testImg(file)
+    console.warn('this is text', text)
+    if (text !== '') {
+
+      this.popType = 0
+      this.popText = text
+      this.popOpen = true
+
+      document.getElementById('imgFrontContainer_0').innerHTML = ''
+      let $file = $(".imgFront_0").eq(0);
+      $file.after($file.clone().val(""));
+      $file.remove();
+      this.frontImgMsg_0 = text
+      console.warn("what", this.frontImgMsg_0)
+      return false
+    }
+    let reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = function (e) {
+      this.src = e.target.result
+
+      let src = e.target.result
+      console.info('src-=======',src)
+      document.getElementById('imgFrontContainer_0').innerHTML = `<img src="${this.result}" width="100%" height="100%">`
+    }
+    this.frontImgMsg_0 = ''
+
+}
+// 检测图片
+root.methods.testImg = function (file) {
+  if (!file) {
+    return this.$t('testImg_1')
+  }
+  if (!/image\/\w+/.test(file.type)) {
+    // alert("请传图片！");
+    return this.$t('testImg_1')
+  }
+  if (file.type.split('/')[1] !== 'jpg' && file.type.split('/')[1] !== 'jpeg' && file.type.split('/')[1] !== 'png') {
+    return this.$t('imageMsg_0')
+  }
+  // console.warn("file type", file.type)
+  // if ((file.size / 1024) > this.imgSize) {
+  //   return this.$t('testImg_2')
+  // }
+  return ''
+
+}
+// 压缩图片！！
+root.methods.handleImg = function (file, callBack) {
+  let that = this
+  let canvas = document.createElement('canvas')
+  let context = canvas.getContext('2d')
+  let img = new Image()
+  img.onload = function () {
+    let originWidth = this.width;
+    let originHeight = this.height;
+
+    canvas.width = originWidth;
+    canvas.height = originWidth * (originHeight / originWidth);
+    context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    // 压缩比例
+    let k = 0.3
+    if (file.size / 1000 > 3000) k = 0.2
+    if (file.size / 1000 > 4000) k = 0.1
+
+    let base64 = canvas.toDataURL(file.type, k)
+    let blob = that.changeBase64(base64)
+    callBack && callBack(blob)
+  }
+  let reader = new FileReader()
+  reader.readAsDataURL(file)
+  reader.onload = function (e) {
+    img.src = e.target.result
+  }
+}
+
+// 转base64
+root.methods.changeBase64 = function (dataURI) {
+  let byteString = window.atob(dataURI.split(',')[1])
+  let ab = new ArrayBuffer(byteString.length)
+  let ia = new Uint8Array(ab)
+  for (let i = 0; i < byteString.length; i++) {
+    ia[i] = byteString.charCodeAt(i)
+  }
+  let bb = new window.Blob([ab])
+  return bb
+}
+
+root.methods.clickPersonality = function () {
+  this.popWindowOpenPersonality = true
+}
+root.methods.popWindowClosePersonality = function () {
+  this.popWindowOpenPersonality = false
+}
+root.methods.deletePicture = function () {
+  document.getElementById('imgFrontContainer_0').innerHTML = ''
+
+}
+
+// 昵称头像签名
+root.methods.postNickname = function () {
+  let frontImg = this.$refs.imgFront_0.files[0]
+  if (this.frontImgWA_0 !== '2') {
+    if ((frontImg.size / 1024) > this.minZipSize) {
+      this.handleImg(frontImg, (data) => {
+        this.sendFrontImg = data
+        // console.warn('压缩前')
+        this.sendInfo()
+      })
+    } else {
+      this.sendFrontImg = frontImg
+      this.sendInfo()
+
+    }
+  }
+
+
+  let formData = new FormData()
+  let frontImgInfo = this.$refs.imgFront_0.value
+  let frontImgTypeArr = frontImgInfo.split('.')
+  let frontImgType = frontImgTypeArr[frontImgTypeArr.length - 1].toLocaleLowerCase()
+  console.info('1111',('headImage', this.sendFrontImg))
+
+  formData.append('identityStr', JSON.stringify({
+    'nickName': this.textareaNickname,
+    'label': this.textareaPersonality,
+    'type': this.isSwitchOrder,
+  }))
+
+  this.sendFrontImg && formData.append('file', this.sendFrontImg, 'certificate_positive.' + frontImgType)
+
+  this.$http.sendFile('POST_NICKNAME', formData, {
+    bind: this,
+    callBack: this.re_postNickname,
+    errorHandler: this.error_postNickname
+  })
+
+}
+root.methods.re_postNickname = function (data) {
+  typeof data === 'string' && (data = JSON.parse(data))
+  if(!data && !data.dataMap) return
+  this.godFee = data.dataMap.godFee || 0
+}
+root.methods.error_postNickname = function (err) {
+  console.log('err===',err)
+}
+
+
+root.methods.sendInfo = function () {
+
+  let canSend = true
+  if (this.sendFrontImg && this.sendFrontImg.size / 1024 > this.imgSize) {
+    this.frontImgMsg_0 = this.$t('testImg_2')
+    canSend = false
+  }
+  if (this.sendFrontImg && this.sendFrontImg.size / 1024 > this.minZipSize) {
+    this.frontImgMsg_1 = this.$t('testImg_2')
+    canSend = false
+  }
+  let formData = new FormData()
+  let frontImgInfo = this.$refs.imgFront_0.value
+  let frontImgTypeArr = frontImgInfo.split('.')
+  let frontImgType = frontImgTypeArr[frontImgTypeArr.length - 1].toLocaleLowerCase()
+  this.sendFrontImg && formData.append('file', this.sendFrontImg, 'certificate_positive.' + frontImgType)
+  // console.info('444',('headImage', this.sendFrontImg))
+}
 export default root

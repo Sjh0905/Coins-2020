@@ -19,7 +19,7 @@
   </div>
 
   <div class="follow-asset" v-if="!loading">
-    <div class="follow-asset-title">
+    <div class="follow-asset-title" v-if="!isTapeList">
       <div class="trade-top-banner flex">
         <div class="flex">
           <div>
@@ -78,8 +78,59 @@
           <div>{{$t('totalDocumentaryNumber')}}</div>
         </div>
 
+      </div>
 
+    </div>
+    <div class="follow-asset-title-personality" v-if="isTapeList && isSwitchOrder == 'CONTRACT'">
+      <div class="trade-top-banner flex">
+        <div class="flex">
+          <div @click="clickPersonality">
+            <img src="../assets/big-brother2.png" alt="" class="trade-img">
+          </div>
+          <div class="trade-top-banner-text-personality">
+            <div class="personality-love"  @click="clickPersonality">爱fen <img class="love-img" src="../assets/change-nickname.png" alt=""></div>
+            <div class="personality-id">UID：{{userId}}</div>
+          </div>
+        </div>
 
+        <div class="follow-management pointer" @click="goToTapeListManage(isSwitchOrder)" v-if="isTapeList">
+          <img src="../assets/setting_icon.png" alt="">
+          <!--带单管理-->
+          <span>{{$t('tapeListManagement')}}</span>
+        </div>
+      </div>
+      <div class="trade-top-data flex">
+        <div class="trade-data-item">
+          <div class="trade-data" :class="godInfo.weekRate >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.weekRate?toFixed(godInfo.weekRate,2):'0'}}%</div>
+          <!--本周收益率-->
+          <div>{{$t('本周收益率')}} (%)</div>
+        </div>
+
+        <div class="trade-data-item">
+          <div class="trade-data" :class="godInfo.weekProfit >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.weekProfit?toFixed(godInfo.weekProfit,2):'0'}}</div>
+          <!--本周收益-->
+          <div>{{$t('本周收益')}} (₮)</div>
+        </div>
+
+        <!--总收益率-->
+        <div class="trade-data-item">
+          <div class="trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'" v-if="isSwitchOrder == 'SPOT'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10,2): '0'}}%</div>
+          <div class="trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'" v-if="isSwitchOrder == 'CONTRACT'">{{godInfo.rate?toFixed(godInfo.rate,2):'0'}}%</div>
+          <div v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
+          <div v-if="isSwitchOrder == 'CONTRACT'">总收益率 (%)</div>
+        </div>
+
+        <!--本周收益-->
+        <div class="trade-data-item">
+          <div class="trade-data" :class="godInfo.profit >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.profit?toFixed(godInfo.profit,2): '0'}}</div>
+          <div>{{$t('总收益')}} (₮)</div>
+        </div>
+
+      </div>
+      <!-- 、个性签名-->
+      <div class="personality flex">
+        <div class="personality-flex">暂无签名……</div>
+        <div class="personality-img" @click="clickPersonality"><img src="../assets/settion-Nie.png" alt=""></div>
       </div>
     </div>
 
@@ -247,6 +298,58 @@
     </div>
   </div>
 
+
+   <!--  昵称-->
+  <PopupWindow :switch="popWindowOpenPersonality" @close="popWindowClosePersonality">
+    <div slot="header">
+      <!--开启镜像交易-->
+      <!--      <span class="update-follow">{{$t('openStrategyDocumentary')}}</span>-->
+      <span class="update-follow">修改个人信息</span>
+    </div>
+    <div slot="article" class="update-follow-article-personality">
+      <div class="flex">
+<!--       <div class="box1"></div>-->
+        <div class="image-unify flex-center" :key="1">
+          <div class="image-show " id="imgFrontContainer_0" >
+
+            <template v-if="certificate_positive_url_0===''"></template>
+
+            <img :src="certificate_positive_url_0" alt="" class="re_img" v-else>
+          </div>
+          <input type="file" ref="imgFront_0" v-on:change="frontOnChange" class="display-none imgFront_0" id="imgFront_0">
+<!--          <div class="image-prompt">-->
+<!--            <span v-if="frontImgWA_0 ==='0'" class="wrong-msg">{{frontImgMsg_0}}</span>-->
+<!--          </div>-->
+  <!--              <span class="image-title">{{$t('front_china')}}</span>-->
+        </div>
+
+
+        <div class="box2">
+         <div class="box2-personality">最大上传2m大小图片</div>
+         <div class="flex box2-btn">
+           <div class="box2-personality-btn" @click="click_front">上传新头像</div>
+           <div class="box2-personality-btn-delete" @click="deletePicture">删除</div>
+         </div>
+       </div>
+      </div>
+      <div>
+        <div class="Nickname">昵称</div>
+        <div class="Nickname-input flex">
+          <input type="text" placeholder="最多可输入10个字符" maxlength="10"  v-model="textareaNickname">
+          <div class="limit-input">{{textareaNickNumber}}</div>
+        </div>
+        <div class="Nickname">个性签名</div>
+        <div class="Nickname-textarea">
+          <textarea name="" v-model="textareaPersonality" maxlength="50" id="" ></textarea>
+          <div class="limit">{{textareaNumber}}</div>
+        </div>
+      </div>
+    </div>
+    <div slot="footer" class="pop-recharge-bottom flex">
+      <div class="cancel-btn"> <div class="btn-cursor" @click="popWindowClosePersonality">取消</div></div>
+      <div class="confirm-btn" @click="postNickname">确认</div>
+    </div>
+  </PopupWindow>
   <!--开启镜像交易弹框-->
   <PopupWindow :switch="popWindowOpen" @close="popWindowClose">
     <div slot="header">

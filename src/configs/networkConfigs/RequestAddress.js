@@ -527,6 +527,7 @@ requestAddress.POST_GOD_BY_USERID= {url: urlHead+'/follow/godByUserId', method: 
 requestAddress.POST_REVISION_FEE= {url: urlHead+'/follow/updateFee', method: 'post'}  //修改带单费用
 requestAddress.POST_MANAGE = {url: urlHead+'/follow/followManage', method: 'post'}  //修改带单费用
 requestAddress.POST_GOD_FEE = {url: urlHead+'/follow/godFee', method: 'post'}  //跟单保证金
+requestAddress.POST_NICKNAME = {url: urlHead+'/follow/updateGodInfo', method: 'post'}  //昵称头像签名
 
 
 

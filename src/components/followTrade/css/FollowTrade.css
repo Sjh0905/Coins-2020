@@ -244,3 +244,15 @@
   color: #A2B5D9;
   padding-top: 7px;
 }
+.follow-data-box-nime {
+  /*height: 40px;*/
+  /*line-height: 40px;*/
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+.follow-data-box-nime-text {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #A2B5D9;
+}
