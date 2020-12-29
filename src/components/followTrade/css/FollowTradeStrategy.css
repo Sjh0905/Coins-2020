@@ -773,4 +773,7 @@
   vertical-align: middle;
   margin-right: 15px;
   cursor: pointer;
+  background: url("../assets/big-brother2.png") center center no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
 }

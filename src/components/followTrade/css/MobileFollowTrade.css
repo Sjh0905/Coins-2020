@@ -473,7 +473,7 @@
   border-radius: 50%;
   overflow: hidden;
   background: url("../assets/big-brother2.png") center center no-repeat;
-  background-size: 96% 95%;
+  background-size: 100% 100%;
   background-position: center;
 }
 .big-nickName {

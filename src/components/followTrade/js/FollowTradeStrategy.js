@@ -512,8 +512,8 @@ root.methods.changeBase64 = function (dataURI) {
 
 root.methods.clickPersonality = function () {
   this.popWindowOpenPersonality = true
-  this.textareaNickname = this.godInfo.nickName
-  this.textareaPersonality = this.godInfo.label
+  this.textareaNickname = this.godInfo.nickName?this.godInfo.nickName:''
+  this.textareaPersonality = this.godInfo.label?this.godInfo.label:''
 }
 root.methods.popWindowClosePersonality = function () {
   this.popWindowOpenPersonality = false
