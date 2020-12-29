@@ -256,3 +256,12 @@
   font-weight: 400;
   color: #A2B5D9;
 }
+.headImage-img {
+  background: url("../assets/big-brother2.png") center center no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}

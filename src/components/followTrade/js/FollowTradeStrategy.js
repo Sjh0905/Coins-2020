@@ -42,8 +42,8 @@ root.data = function () {
     frontImgWA_0: '0',
     frontImgMsg_0: '',
     popWindowOpenPersonality:false,//昵称弹框
-    textareaNickname:'',
-    textareaPersonality:'',
+    textareaNickname: '',
+    textareaPersonality: '',
     src:'',
     sendFrontImg: null,
   }
@@ -115,7 +115,7 @@ root.computed.isSwitchOrder = function () {
 }
 
 root.computed.textareaNumber = function () {
-  return 50 - this.textareaPersonality.length
+  return 60 - this.textareaPersonality.length
 }
 
 root.computed.textareaNickNumber = function () {
@@ -512,6 +512,8 @@ root.methods.changeBase64 = function (dataURI) {
 
 root.methods.clickPersonality = function () {
   this.popWindowOpenPersonality = true
+  this.textareaNickname = this.godInfo.nickName
+  this.textareaPersonality = this.godInfo.label
 }
 root.methods.popWindowClosePersonality = function () {
   this.popWindowOpenPersonality = false

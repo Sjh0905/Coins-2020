@@ -81,14 +81,15 @@
       </div>
 
     </div>
-    <div class="follow-asset-title-personality" v-if="isTapeList && isSwitchOrder == 'CONTRACT'">
+    <div class="follow-asset-title-personality" v-if="isTapeList">
       <div class="trade-top-banner flex">
         <div class="flex">
-          <div @click="clickPersonality">
-            <img src="../assets/big-brother2.png" alt="" class="trade-img">
+          <div @click="clickPersonality" class="null-name">
+            <img src="../assets/big-brother2.png" alt="" class="trade-img" v-if="godInfo.headImage==''">
+            <img :src="godInfo.headImage" alt="" class="trade-img" v-else>
           </div>
           <div class="trade-top-banner-text-personality">
-            <div class="personality-love"  @click="clickPersonality">爱fen <img class="love-img" src="../assets/change-nickname.png" alt=""></div>
+            <div class="personality-love"  @click="clickPersonality">{{godInfo.nickName=='' ? '大神' : godInfo.nickName}} <img class="love-img" src="../assets/change-nickname.png" alt=""></div>
             <div class="personality-id">UID：{{userId}}</div>
           </div>
         </div>
@@ -129,7 +130,7 @@
       </div>
       <!-- 、个性签名-->
       <div class="personality flex">
-        <div class="personality-flex">暂无签名……</div>
+        <div class="personality-flex">{{godInfo.label=='' ? '大神正在看盘中~' : godInfo.label}}</div>
         <div class="personality-img" @click="clickPersonality"><img src="../assets/settion-Nie.png" alt=""></div>
       </div>
     </div>
@@ -312,9 +313,9 @@
         <div class="image-unify flex-center" :key="1">
           <div class="image-show " id="imgFrontContainer_0" >
 
-            <template v-if="certificate_positive_url_0===''"></template>
+            <template v-if="godInfo.headImage===''"></template>
 
-            <img :src="certificate_positive_url_0" alt="" class="re_img" v-else>
+            <img :src="godInfo.headImage" alt="" class="re_img" v-else>
           </div>
           <input type="file" ref="imgFront_0" v-on:change="frontOnChange" class="display-none imgFront_0" id="imgFront_0">
 <!--          <div class="image-prompt">-->
@@ -340,7 +341,7 @@
         </div>
         <div class="Nickname">个性签名</div>
         <div class="Nickname-textarea">
-          <textarea name="" v-model="textareaPersonality" maxlength="50" id="" ></textarea>
+          <textarea name="" v-model="textareaPersonality" maxlength="60" id="" ></textarea>
           <div class="limit">{{textareaNumber}}</div>
         </div>
       </div>

@@ -47,6 +47,19 @@
   margin-top: 25px;
   /*cursor: pointer;*/
 }
+.follow-asset-title-personality {
+  margin-top: 25px;
+  width:100%;
+  height:210px;
+  background:#fff;
+  border-radius:3px;
+  padding: 25px 25px 0;
+  font-size:16px;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  margin-bottom: 15px;
+  justify-content: space-between;
+}
 /*.follow-data:hover {*/
 /*  position: relative;*/
 /*  top:-10px;*/
@@ -62,7 +75,24 @@
   width: 40px;
   height: 40px;
 }
+.follow-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: url("../assets/big-brother2.png") center center no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+}
 .follow-data-box-img-box {
+  margin-left: 15px;
+  line-height: 28px;
+  color:#131F30;
+  font-size:18px;
+  font-family:PingFangSC-Semibold,PingFang SC;
+  font-weight:600;
+}
+.follow-data-box-img-box- {
   margin-left: 15px;
   color:#131F30;
   font-size:18px;
@@ -140,6 +170,12 @@
 .follow-btn-box {
   width: 39%;
   text-align: right;
+}
+
+.follow-btn-box-16px {
+  width: 39%;
+  text-align: right;
+  margin-top: -16px;
 }
 
 .record {
@@ -804,5 +840,27 @@
 .mar-auto {
   margin-left: 25px;
 }
+.follow-label {
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #A2B5D9;
+  margin-left: 15px;
+  line-height: 13px;
 
+}
 /*确认细节*/
+.personality {
+  width: 100%;
+  height: 41px;
+  line-height: 41px;
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6B7DA2;
+  padding-left: 30px;
+  margin-top: 29px;
+  background: #FFFFFF;
+  box-shadow: 0px -3px 9px 0px rgba(0, 0, 0, 0.06);
+  border-radius: 15px 15px 0px 0px;
+}

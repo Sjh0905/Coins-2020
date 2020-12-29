@@ -21,10 +21,18 @@
 
   <div class="documentary-conter">
     <!-- 大神信息-->
-    <div class="follow-data" >
+    <div class="follow-asset-title-personality" >
       <div class="follow-data-box flex">
-        <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="">
-        <div class="follow-data-box-img-box">{{godInfo.userId ? godInfo.userId : $route.query.userId}}</div>
+        <div class="follow-img">
+          <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="" v-if="godInfo.headImage==''">
+          <img class="follow-data-box-img" :src="godInfo.headImage" alt="" v-else>
+        </div>
+
+        <div class="">
+          <div class="follow-data-box-img-box">{{godInfo.nickName ? godInfo.nickName : '大神'}}</div>
+          <div class="follow-label">UID：{{godInfo.userId ? godInfo.userId : $route.query.userId}}</div>
+<!--          <div class="follow-label">{{godInfo.label ? godInfo.label : '他很懒，什么都没有留下'}}</div>-->
+        </div>
       </div>
 
       <div class="flex">
@@ -71,7 +79,7 @@
 
         </div>
 
-        <div class="follow-btn-box">
+        <div class="follow-btn-box-16px">
           <div class="follow-gde" v-if="$route.query.feeType == 'LOT'">{{$route.query.fee || '0'}} ₮/{{$route.query.days  || '0'}}{{$t('days')}}</div>
           <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'CONTRACT'">跟单收益 {{accAdd($route.query.fee,30)}}%/周</div>
           <div class="follow-gde" v-if="$route.query.feeType == 'RATE' && isSwitchOrder == 'SPOT'">跟单收益 {{accAdd($route.query.fee,30)}}%/笔</div>
@@ -81,6 +89,11 @@
           <!--已跟单-->
           <div class="follow-c" v-if="$route.query.isFollow >= 0 || godInfo.canFollow == 0">{{$route.query.isFollow >= 0?$t('following'):'跟单'}}</div>
         </div>
+      </div>
+
+      <!-- 、个性签名-->
+      <div class="personality">
+        <div class="personality-flex">{{godInfo.label=='' ? '大神正在看盘中~' : godInfo.label}}</div>
       </div>
     </div>
     <!-- 大神持仓-->

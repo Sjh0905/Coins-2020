@@ -30,9 +30,19 @@
 
     <div class="follow-data" v-if="listGod.length != 0 && isSwitchOrder == 'SPOT'" v-for="(item,index) in listGod">
 
-      <div class="follow-data-box flex" @click="goToDocumentary1(item.userId,item.fee,item.feeType,switchOrder)">
-        <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="">
-        <div class="follow-data-box-img-box">{{item.userId}}</div>
+      <div class="follow-data-box-nime flex" @click="goToDocumentary1(item.userId,item.fee,item.feeType,switchOrder)">
+<!--        <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="">-->
+<!--        <div class="follow-data-box-img-box">{{item.userId}}</div>-->
+        <div class="headImage-img">
+          <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="" v-if="item.headImage==''">
+          <img class="follow-data-box-img" :src="item.headImage" alt="" v-else>
+        </div>
+
+        <!--        <div class="follow-data-box-img-box">{{item.userId}}</div>-->
+        <div class="follow-data-box-img-box">
+          <div>{{item.nickName == '' ? '大神' : item.nickName}}</div>
+          <div class="follow-data-box-nime-text">{{item.label==''?'大神正在看盘中~':item.label}}</div>
+        </div>
       </div>
       <div class="flex weit-fol" v-if="" >
         <div class="flex weit-fol" @click="goToDocumentary1(item.userId,item.fee,item.feeType,switchOrder)">
@@ -77,11 +87,15 @@
     <div class="follow-data" v-if="listGod.length != 0 && isSwitchOrder == 'CONTRACT'" v-for="(item,index) in listGod">
 
       <div class="follow-data-box-nime flex" @click="goToDocumentary1(item.userId,item.fee,item.feeType,switchOrder)">
-        <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="">
+        <div class="headImage-img">
+          <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="" v-if="item.headImage==''">
+          <img class="follow-data-box-img" :src="item.headImage" alt="" v-else>
+        </div>
+
 <!--        <div class="follow-data-box-img-box">{{item.userId}}</div>-->
         <div class="follow-data-box-img-box">
-          <div>{{item.userId}}</div>
-          <div class="follow-data-box-nime-text">爱晒哈佛爱上佛i啊师傅i哦啊还是佛哈送if还哦神佛i啊</div>
+          <div>{{item.nickName == '' ? '大神' : item.nickName}}</div>
+          <div class="follow-data-box-nime-text">{{item.label==''?'大神正在看盘中~':item.label}}</div>
         </div>
       </div>
       <div class="flex weit-fol">
