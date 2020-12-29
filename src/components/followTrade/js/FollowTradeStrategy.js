@@ -563,7 +563,10 @@ root.methods.postNickname = function () {
 root.methods.re_postNickname = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   if(!data && !data.dataMap) return
-  this.godFee = data.dataMap.godFee || 0
+  if (data.errorCode == 0) {
+    this.popWindowOpenPersonality = false
+    this.postPersonalrHistory()
+  }
 }
 root.methods.error_postNickname = function (err) {
   console.log('err===',err)
