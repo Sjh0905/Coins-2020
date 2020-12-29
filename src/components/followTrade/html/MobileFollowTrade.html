@@ -43,6 +43,7 @@
         <div class="with-img">
           <div class="big-brother-uid">{{item.nickName ? item.nickName : '大神'  }}</div>
           <div class="big-nickName">{{item.userId ? item.userId : item.userId  }}</div>
+          <div class="big-brother-uid-name">{{item.label ? item.label: '大神正在看盘中~' }}</div>
         </div>
 
 
@@ -57,7 +58,7 @@
         </div>
       </div>
       <!--大佬头像End-->
-      <div class="big-brother-uid-name">{{item.label ? item.label: '大神正在看盘中~' }}</div>
+
       <!--大佬交易详情Start-->
       <div class="details-of-big-brother-transaction" @click="goToDocumentary1(item,switchOrder)">
 
@@ -110,23 +111,14 @@
         <div class="flex with-billboard-xin" v-if="switchOrder == 'SPOT'">
           <div class="flex-din mre">
             <div class="color-13" v-if="isSwitchOrder == 'SPOT'" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
-            <div class="color-a2" v-if="isSwitchOrder == 'SPOT'">收益率 (%)</div>
-          </div>
-          <div class="flex-din">
-            <div class="color-13">{{item.sum ? toFixed(item.sum, 2) : '0'}}</div>
-            <div class="color-a2">累计交易量 (₮)</div>
-          </div>
-        </div>
-        <div class="flex with-billboard-xin paddign" v-if="switchOrder == 'SPOT'">
-          <div class="flex-din">
-            <div class="color-13">{{item.count ? item.count : '0'}}</div>
-            <div class="color-a2">总交易笔数</div>
+            <div class="color-a2" v-if="isSwitchOrder == 'SPOT'">总收益率 (%)</div>
           </div>
           <div class="flex-din">
             <div class="color-13">{{item.followCount ? item.followCount : '0'}}</div>
             <div class="color-a2">跟单人数</div>
           </div>
         </div>
+
       </div>
       <!--大佬交易详情End-->
     </div>

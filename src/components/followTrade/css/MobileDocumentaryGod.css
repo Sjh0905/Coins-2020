@@ -87,6 +87,7 @@
 }
 .mobile-trade-data-item {
   /*width: 1.86rem;*/
+  flex: 1;
   height: 0.96rem;
   font-size:0.2rem;
   font-family:PingFangSC-Regular,PingFang SC;
@@ -108,7 +109,7 @@
   font-size:0.28rem;
   font-family:Roboto-Regular,Roboto;
   font-weight:400;
-  color: #fff;
+  color: #3E536C;
   margin-bottom: 0.04rem;
 }
 .text-green {

@@ -49,21 +49,21 @@
       <div class="flex weit-fol" v-if="" >
         <div class="flex weit-fol" @click="goToDocumentary1(item.userId,item.fee,item.feeType,switchOrder)">
           <div class="flex follow-buw" >
-            <div class="follow-wi">
-              <div class="follow-bink">{{toFixed(item.sum || '0',2)}}</div>
-              <!--累计交易量-->
-              <div class="follow-gru2">{{$t('totalTransactionVolume')}} (₮)</div>
-            </div>
+<!--            <div class="follow-wi">-->
+<!--              <div class="follow-bink">{{toFixed(item.sum || '0',2)}}</div>-->
+<!--              &lt;!&ndash;累计交易量&ndash;&gt;-->
+<!--              <div class="follow-gru2">{{$t('totalTransactionVolume')}} (₮)</div>-->
+<!--            </div>-->
             <!--总收益率-->
             <div class="follow-wi">
               <div class="follow-gru" :class="item.rate >= 0 ? 'text-green' : 'text-red'">{{item.rate ? toFixed(item.rate * 10 * 10 || 0 , 2) : '0'}}%</div>
-              <div class="follow-gru2">{{$t('totalIncomeRate')}}</div>
+              <div class="follow-gru2">总{{$t('totalIncomeRate')}} (%)</div>
             </div>
-            <div class="follow-wi">
-              <div class="follow-bink">{{item.count}}</div>
-              <!--交易笔数-->
-              <div class="follow-gru2">{{$t('numberOfTransactions')}}</div>
-            </div>
+<!--            <div class="follow-wi">-->
+<!--              <div class="follow-bink">{{item.count}}</div>-->
+<!--              &lt;!&ndash;交易笔数&ndash;&gt;-->
+<!--              <div class="follow-gru2">{{$t('numberOfTransactions')}}</div>-->
+<!--            </div>-->
             <div class="follow-wi">
               <div class="follow-bink">{{item.followCount || '0'}}</div>
               <!--当前跟单人数-->

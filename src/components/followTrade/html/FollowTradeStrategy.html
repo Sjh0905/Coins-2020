@@ -100,29 +100,32 @@
           <span>{{$t('tapeListManagement')}}</span>
         </div>
       </div>
-      <div class="trade-top-data flex">
-        <div class="trade-data-item">
+      <div class="trade-top-data flex" >
+        <div class="trade-data-item" v-if="isSwitchOrder == 'CONTRACT'">
           <div class="trade-data" :class="godInfo.weekRate >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.weekRate?toFixed(godInfo.weekRate,2):'0'}}%</div>
           <!--本周收益率-->
           <div>{{$t('本周收益率')}} (%)</div>
         </div>
 
-        <div class="trade-data-item">
+        <div class="trade-data-item" v-if="isSwitchOrder == 'CONTRACT'">
           <div class="trade-data" :class="godInfo.weekProfit >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.weekProfit?toFixed(godInfo.weekProfit,2):'0'}}</div>
           <!--本周收益-->
           <div>{{$t('本周收益')}} (₮)</div>
         </div>
 
         <!--总收益率-->
-        <div class="trade-data-item">
+        <div class="trade-data-item" >
           <div class="trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'" v-if="isSwitchOrder == 'SPOT'">{{godInfo.rate ? toFixed(godInfo.rate * 10 * 10,2): '0'}}%</div>
           <div class="trade-data" :class="godInfo.rate >= 0 || !isHasGodInfo ? 'text-green' : 'text-red'" v-if="isSwitchOrder == 'CONTRACT'">{{godInfo.rate?toFixed(godInfo.rate,2):'0'}}%</div>
-          <div v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>
-          <div v-if="isSwitchOrder == 'CONTRACT'">总收益率 (%)</div>
+<!--          <div v-if="isSwitchOrder == 'SPOT'">{{$t('totalIncomeRate')}}</div>-->
+          <div>总收益率 (%)</div>
         </div>
-
+        <div class="trade-data-item" v-if="isSwitchOrder == 'SPOT'">
+          <div class="trade-data">{{godInfo.followCount ? godInfo.followCount : '0'}}</div>
+          <div class="">{{$t('totalDocumentaryNumber')}}</div>
+        </div>
         <!--本周收益-->
-        <div class="trade-data-item">
+        <div class="trade-data-item" v-if="isSwitchOrder == 'CONTRACT'">
           <div class="trade-data" :class="godInfo.profit >= 0 || !isHasGodInfo ?'text-green':'text-red'">{{godInfo.profit?toFixed(godInfo.profit,2): '0'}}</div>
           <div>{{$t('总收益')}} (₮)</div>
         </div>

@@ -132,7 +132,7 @@
   width: 100%;
   height: 0.8rem;
   /*background-color: pink;*/
-  margin: 0.3rem 0 0.2rem 0;
+  margin: 0.3rem 0 0.8rem 0;
   padding: 0 0.3rem;
 }
 .big-brother-img {
@@ -146,7 +146,7 @@
   font-weight:600;
 }
 .big-brother-uid-name {
-  width: 82%;
+  width: 100%;
   padding-left: 0.28rem;
   height: 0.4rem;
   font-size: 0.24rem;
@@ -156,7 +156,7 @@
   text-overflow:ellipsis;
   white-space:nowrap;
   overflow: hidden;
-  margin-bottom: 0.16rem;
+  margin-top: 0.02rem;
 }
 .with-img {
   width: 51%;

@@ -164,7 +164,7 @@
   border-radius:2px;
 }
 .follow-wi {
-  width: 25%;
+  width: 31%;
   margin-right: 10px;
 }
 .follow-btn-box {
@@ -863,4 +863,7 @@
   background: #FFFFFF;
   box-shadow: 0px -3px 9px 0px rgba(0, 0, 0, 0.06);
   border-radius: 15px 15px 0px 0px;
+}
+.follow-wi-spot- {
+  margin-left: 68px;
 }
