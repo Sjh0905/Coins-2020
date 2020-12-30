@@ -778,4 +778,12 @@
   background: url("../assets/big-brother2.png") center center no-repeat;
   background-size: 100% 100%;
   background-position: center;
+  position: relative;
+}
+.xiugai-img {
+  position: relative;
+  width: 16px;
+  left: -28px;
+  top: 47%;
+  z-index: 99;
 }
