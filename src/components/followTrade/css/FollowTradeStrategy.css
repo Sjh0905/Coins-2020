@@ -763,7 +763,7 @@
   cursor: pointer;
 }
 .limit {
-  margin-top: 15px;
+  /*margin-top: 15px;*/
   color: #3576F5;
   text-align: right;
 }
