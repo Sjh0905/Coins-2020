@@ -73,6 +73,20 @@ root.created = function () {
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
+root.mounted = function () {
+  // 监听键盘事件
+  document.onkeydown = (event) => {
+    if (event.keyCode === 13) {
+      return
+    }
+  }
+}
+root.beforeDestroy = function () {
+  // 取消监听键盘事件
+  document.onkeydown = (event) => {
+  }
+}
+
 /*------------------------------ 计算 -------------------------------*/
 root.computed = {}
 
@@ -608,5 +622,11 @@ root.methods.sendInfo = function () {
   // let frontImgType = frontImgTypeArr[frontImgTypeArr.length - 1].toLocaleLowerCase()
   // this.sendFrontImg && formData.append('file', this.sendFrontImg, 'certificate_positive.' + frontImgType)
   // console.info('444',('headImage', this.sendFrontImg))
+}
+
+root.methods.prevent = function (e) {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+  }
 }
 export default root
