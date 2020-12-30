@@ -132,11 +132,12 @@
   width: 100%;
   height: 0.8rem;
   /*background-color: pink;*/
-  margin: 0.3rem 0 0.8rem 0;
+  margin: 0.3rem 0 0.7rem 0;
   padding: 0 0.3rem;
 }
 .big-brother-img {
   width: 0.8rem;
+  height: 0.8rem;
 }
 .big-brother-uid {
   padding-left: 0.28rem;
