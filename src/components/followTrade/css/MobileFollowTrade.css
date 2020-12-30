@@ -132,7 +132,7 @@
   width: 100%;
   height: 0.8rem;
   /*background-color: pink;*/
-  margin: 0.3rem 0 0.7rem 0;
+  margin: 0.3rem 0 0.3rem 0;
   padding: 0 0.3rem;
 }
 .big-brother-img {
@@ -140,28 +140,34 @@
   height: 0.8rem;
 }
 .big-brother-uid {
-  padding-left: 0.28rem;
+  padding-left: 0.2rem;
   /*line-height: 0.8rem;*/
   font-size:0.32rem;
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
 }
 .big-brother-uid-name {
-  width: 100%;
-  padding-left: 0.28rem;
+  /*width: 100%;*/
+  flex: 1;
+  padding-left: 0.2rem;
   height: 0.4rem;
-  font-size: 0.24rem;
+  font-size: 0.22rem;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #3E536C;
   text-overflow:ellipsis;
   white-space:nowrap;
   overflow: hidden;
-  margin-top: 0.02rem;
+  /*margin-top: 0.02rem;*/
 }
 .with-img {
-  width: 51%;
+  width: 38%;
+  flex: 1;
+  margin-left: 0.8rem;
   text-overflow: ellipsis;
+}
+.felex-ces {
+  margin-top: -0.3rem;
 }
 .documentary-details {
   flex: 40;
@@ -174,7 +180,7 @@
   color: #FFFFFF;
   background: #386FF9;
   border-radius:0.04rem;
-  padding: 0 0.3rem;
+  padding: 0 0.2rem;
   margin-bottom: 0.04rem;
 }
 .documentary-f {
@@ -184,7 +190,7 @@
   color: #FFFFFF;
   background: #A2B5D9;
   border-radius:0.04rem;
-  padding: 0 0.3rem;
+  padding: 0 0.2rem;
   margin-bottom: 0.04rem;
 }
 .documentary-follow {
@@ -204,6 +210,7 @@
   font-size:0.22rem;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
+  padding-left: 0.5rem;
 }
 .big-brother-start {
   margin-bottom: 0.6rem;
@@ -217,7 +224,7 @@
   border-radius:0.12rem;
   background-color: #FFFFFF;
   margin: 0 auto;
-  padding: 0.5rem 0;
+  padding: 0.4rem 0;
 }
 
 .accumulated-income {
@@ -247,8 +254,8 @@
   width: 100%;
   color: #131F30;
   font-size:0.34rem;
-  font-family:PingFangSC-Semibold,PingFang SC;
-  font-weight:600;
+  font-family: 'Roboto-Regular';
+  font-weight:500;
 }
 .padding-bottom {
   padding-bottom: 0.26rem;
@@ -347,15 +354,25 @@
   margin-bottom: 20px;
 }
 .flex-din {
-  flex: 1;
-  text-align: center;
+  flex: 1.4;
+  text-align: left;
+  padding-left: 15px;
+}
+.flex-din-right {
+  flex: 0.7;
+  text-align: right;
+  padding-right: 15px;
+}
+.flex-din-center {
+  flex: 1.2;
+  text-align: left;
 }
 .with-billboard-xin {
   width: 100%;
 
 }
 .paddign {
-  padding-top: 0.24rem;
+  padding-top: 0.3rem;
 }
 .flex-din-bott {
   padding-bottom: 0.2rem;
@@ -488,6 +505,7 @@
   background: #E5E7F3;
   border-radius: 0.18rem;
   padding: 0 0.12rem;
-  margin-left: 0.22rem;
+  margin-left: 0.12rem;
+  margin-top: 0.06rem;
 }
 /*touxiang */
