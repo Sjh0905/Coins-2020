@@ -34,6 +34,10 @@
         </div>
         <div class="mobile-tradetext">{{this.userId}}</div>
         <!--  <div class="mobile-trade-top-banner-text">{{this.userId}}</div>-->
+
+
+
+
       </div>
   <!--现货内容上部-->
   <div class="mobile-trade-top"  v-if="isSwitchOrder=='SPOT'">
@@ -113,6 +117,15 @@
           <div class="big-brother-uid-name">UID：{{godInfo.userId}}</div>
         </div>
       </div>
+
+
+      <!--相册-->
+      <div>
+        <input type="file" id='image' accept="image/*" capture='camera' name="file">
+        <input type="file" name="file" style="margin-top:20px;">
+      </div>
+
+      <!--相册-->
 
       <div class="big-brother-qian">
         {{godInfo.label ? godInfo.label : '大神正在看盘中~'}}
