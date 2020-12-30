@@ -45,6 +45,7 @@ root.data = function () {
     textareaNickname: '',
     textareaPersonality: '',
     src:'',
+    godInfoImg:'',
     sendFrontImg: null,
   }
 }
@@ -348,6 +349,7 @@ root.methods.re_postPersonalrHistory = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   this.loading = false
   this.godInfo = data.dataMap.godInfo || {}
+  this.godInfoImg = data.dataMap.godInfo.headImage || {}
   this.godHistorList = data.dataMap.list || []
 }
 root.methods.error_postPersonalrHistory = function (err) {
@@ -520,40 +522,54 @@ root.methods.popWindowClosePersonality = function () {
 }
 root.methods.deletePicture = function () {
   document.getElementById('imgFrontContainer_0').innerHTML = ''
-
+  this.godInfoImg = ''
 }
 
 // 昵称头像签名
 root.methods.postNickname = function () {
-  let frontImg = this.$refs.imgFront_0.files[0]
-  if (this.frontImgWA_0 !== '2') {
-    if ((frontImg.size / 1024) > this.minZipSize) {
-      this.handleImg(frontImg, (data) => {
-        this.sendFrontImg = data
-        // console.warn('压缩前')
-        this.sendInfo()
-      })
-    } else {
-      this.sendFrontImg = frontImg
-      this.sendInfo()
 
+
+  let frontImg = this.$refs.imgFront_0.files[0]
+  let formData = new FormData()
+  if (frontImg) {
+    if (this.frontImgWA_0 !== '2') {
+      if ((frontImg.size / 1024) > this.minZipSize) {
+        this.handleImg(frontImg, (data) => {
+          this.sendFrontImg = data
+          // console.warn('压缩前')
+          this.sendInfo()
+        })
+      } else {
+        this.sendFrontImg = frontImg
+        this.sendInfo()
+
+      }
     }
   }
+    console.info('frontImg=====',frontImg)
 
 
-  let formData = new FormData()
+
+
+
+  // let formData = new FormData()
   let frontImgInfo = this.$refs.imgFront_0.value
   let frontImgTypeArr = frontImgInfo.split('.')
   let frontImgType = frontImgTypeArr[frontImgTypeArr.length - 1].toLocaleLowerCase()
   console.info('1111',('headImage', this.sendFrontImg))
-
+  !frontImg?formData.append('identityStr', JSON.stringify({
+      'nickName': this.textareaNickname,
+      'label': this.textareaPersonality,
+      'type': this.isSwitchOrder,
+      'headImage': this.godInfoImg || '',
+    })):
   formData.append('identityStr', JSON.stringify({
     'nickName': this.textareaNickname,
     'label': this.textareaPersonality,
     'type': this.isSwitchOrder,
   }))
 
-  this.sendFrontImg && formData.append('file', this.sendFrontImg, 'certificate_positive.' + frontImgType)
+  !frontImg?'':this.sendFrontImg && formData.append('file', this.sendFrontImg, 'certificate_positive.' + frontImgType)
 
   this.$http.sendFile('POST_NICKNAME', formData, {
     bind: this,
@@ -586,11 +602,11 @@ root.methods.sendInfo = function () {
     this.frontImgMsg_1 = this.$t('testImg_2')
     canSend = false
   }
-  let formData = new FormData()
-  let frontImgInfo = this.$refs.imgFront_0.value
-  let frontImgTypeArr = frontImgInfo.split('.')
-  let frontImgType = frontImgTypeArr[frontImgTypeArr.length - 1].toLocaleLowerCase()
-  this.sendFrontImg && formData.append('file', this.sendFrontImg, 'certificate_positive.' + frontImgType)
+  // let formData = new FormData()
+  // let frontImgInfo = this.$refs.imgFront_0.value
+  // let frontImgTypeArr = frontImgInfo.split('.')
+  // let frontImgType = frontImgTypeArr[frontImgTypeArr.length - 1].toLocaleLowerCase()
+  // this.sendFrontImg && formData.append('file', this.sendFrontImg, 'certificate_positive.' + frontImgType)
   // console.info('444',('headImage', this.sendFrontImg))
 }
 export default root
