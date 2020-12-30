@@ -89,7 +89,7 @@
             <img src="../assets/big-brother2.png"  alt="" class="trade-img" v-else>
           </div>
           <div>
-            <img src="../assets/xiugai.png" alt="" class="xiugai-img">
+            <img @click="clickPersonality" src="../assets/xiugai.png" alt="" class="xiugai-img">
           </div>
           <div class="trade-top-banner-text-personality">
             <div class="personality-love"  @click="clickPersonality">{{godInfo.nickName ? godInfo.nickName : '大神'}} <img class="love-img" src="../assets/change-nickname.png" alt=""></div>
