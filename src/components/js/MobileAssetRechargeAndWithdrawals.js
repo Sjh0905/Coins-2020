@@ -63,7 +63,7 @@ root.data = function () {
 
     records: [],
     records1:[],
-    contractSymbolArr:['BTCUSDT','ETHUSDT'],
+    contractSymbolArr:['BTCUSDT','ETHUSDT','LTCUSDT'],
 
     loadingMoreShow: true,
     loadingMoreShowing: false,

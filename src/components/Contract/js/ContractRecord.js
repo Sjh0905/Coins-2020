@@ -64,7 +64,7 @@ root.data = function () {
     hideZeroAsset: false, //隐藏零资产币种
 
     otcCurrencyList:[],
-    contractSymbolArr:['BTCUSDT','ETHUSDT'], //合约展示币对
+    contractSymbolArr:['BTCUSDT','ETHUSDT','LTCUSDT'], //合约展示币对
 
 
   }

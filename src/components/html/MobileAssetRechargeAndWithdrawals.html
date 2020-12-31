@@ -132,7 +132,7 @@
     </div>
 
     <div v-if="assetAccountType == 'contract'">
-      <div class="hold-order aa" v-if="selectType == 'hold'" >
+      <div v-if="selectType == 'hold'" >
 
         <div class="hold-order-record" v-if="computedRecord != 0" v-for="(item,index) in computedRecord" :key="item.id">
           <div class="flex">
