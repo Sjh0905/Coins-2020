@@ -41,7 +41,7 @@
           </div>
           <div class="with-img">
             <div class="mobile-trade-top-banner-text">{{godInfo.nickName ? godInfo.nickName : '大神'}}</div>
-            <div class="big-brother-uid-name">UID：{{godInfo.userId}}</div>
+            <div class="big-brother-uid-name"> <span class="big-brother-uid-name-span">{{godInfo.userId}}</span>  <span class="big-brother-uid-name-span margin-01">{{Math.floor((newContract - godInfo.createdAt) / 1000/60/60/24) + 1}}天</span> </div>
           </div>
         </div>
 
@@ -176,23 +176,27 @@
           </div>
 
           <div class="flex">
-            <div class="mobile-trader-follower-income flex1">{{toFixed(item.userProfit,2) || '0'}}</div>
+<!--            <div class="mobile-trader-follower-income flex1">{{toFixed(item.userProfit,2) || '0'}}</div>-->
             <div class="mobile-trader-follower-income flex1">{{toFixed(item.profit,2) || '0'}}</div>
-
-          </div>
-          <div class="flex mtop">
-            <div class="mobile-trader-follower-text flex1">总跟单利润（₮)</div>
-            <div class="mobile-trader-follower-text flex1">总跟单收益（₮)</div>
-
-          </div>
-          <div class="flex">
-            <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
             <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekProfit,2) || '0'}}</div>
 
           </div>
           <div class="flex mtop">
-            <div class="mobile-trader-follower-text flex1">本周跟单利润（₮)</div>
+<!--            <div class="mobile-trader-follower-text flex1">总跟单利润（₮)</div>-->
+            <div class="mobile-trader-follower-text flex1">总跟单收益（₮)</div>
             <div class="mobile-trader-follower-text flex1">本周跟单收益（₮)</div>
+
+          </div>
+          <div class="flex">
+            <div class="mobile-trader-follower-income flex1">{{toFixed(item.userProfit,2) || '0'}}</div>
+            <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
+
+
+          </div>
+          <div class="flex mtop">
+            <div class="mobile-trader-follower-text flex1">总跟单利润（₮)</div>
+            <div class="mobile-trader-follower-text flex1">本周跟单利润（₮)</div>
+
           </div>
         </div>
         <div class="history-no-data" v-if="followUserList.length==0 && !loading">暂无数据</div>

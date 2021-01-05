@@ -28,9 +28,9 @@
           <img class="follow-data-box-img" src="../assets/big-brother2.png" alt="" v-else>
         </div>
 
-        <div class="">
+        <div class="margin-top-2">
           <div class="follow-data-box-img-box">{{godInfo.nickName ? godInfo.nickName : '大神'}}</div>
-          <div class="follow-label">UID：{{godInfo.userId ? godInfo.userId : $route.query.userId}}</div>
+          <div><span class="follow-data-box-img-span">{{godInfo.userId ? godInfo.userId : $route.query.userId}}</span></div>
 <!--          <div class="follow-label">{{godInfo.label ? godInfo.label : '他很懒，什么都没有留下'}}</div>-->
         </div>
       </div>

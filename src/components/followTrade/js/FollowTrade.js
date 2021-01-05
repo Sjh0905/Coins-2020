@@ -197,6 +197,12 @@ root.methods.goTofollowTradeStrategy = function (switchOrder) {
     this.popWindowOpenShiM = true
     return
   }
+  if(this.godList.length != 0){
+    // 用户合约跟单只能跟单一个大神
+    this.godListF = true
+    this.openPop(this.$t('跟单账号不可带单'))
+    return
+  }
   // this.$router.push({'path':'/index/followTradeStrategy'})
   this.$router.push({name:'followTradeStrategy',query:{isSwitchOrder:this.switchOrder,}})
 

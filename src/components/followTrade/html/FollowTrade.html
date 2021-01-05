@@ -41,7 +41,7 @@
         <div class="follow-data-box-img-box">
           <div class="flex">
             <div>{{item.nickName ? item.nickName : '大神'}}</div>
-            <div class="follow-data-box-img-span">UID：{{item.userId ? item.userId : item.userId}}</div>
+            <div class="follow-data-box-img-span">{{item.userId ? item.userId : item.userId}}</div>
           </div>
           <div class="follow-data-box-nime-text">{{item.label ? item.label : '大神正在看盘中~'}}</div>
         </div>
@@ -98,7 +98,8 @@
         <div class="follow-data-box-img-box">
           <div class="flex">
             <div>{{item.nickName ? item.nickName : '大神'}}</div>
-            <div class="follow-data-box-img-span">UID：{{item.userId ? item.userId : item.userId}}</div>
+            <div class="follow-data-box-img-span">{{item.userId ? item.userId : item.userId}}</div>
+            <div class="follow-data-box-img-span">{{Math.floor((newContract - item.createdAt) / 1000/60/60/24) + 1}}天</div>
           </div>
           <div class="follow-data-box-nime-text">{{item.label?item.label:'大神正在看盘中~'}}</div>
         </div>
@@ -109,12 +110,12 @@
             <!--本周收益率-->
             <div class="follow-wi">
               <div class="follow-bink" :class="item.weekRate >= 0 ? 'text-green' : 'text-red'">{{item.weekRate ? toFixed(item.weekRate, 2) : '0'}}%</div>
-              <div class="follow-gru2">{{$t('本周收益率')}} (%)</div>
+              <div class="follow-gru2">本周收益率 (%)</div>
             </div>
             <!--本周收益-->
             <div class="follow-wi">
               <div class="follow-bink" :class="item.weekProfit >= 0 ? 'text-green' : 'text-red'">{{item.weekProfit ? toFixed(item.weekProfit, 2) : '0'}}</div>
-              <div class="follow-gru2">{{$t('本周收益')}} (₮)</div>
+              <div class="follow-gru2">本周收益 (₮)</div>
             </div>
             <!--总收益率-->
             <div class="follow-wi">
@@ -124,7 +125,17 @@
             <!--本周收益-->
             <div class="follow-wi">
               <div class="follow-bink" :class="item.profit >= 0 ? 'text-green' : 'text-red'">{{item.profit ? toFixed(item.profit, 2) : '0'}}</div>
-              <div class="follow-gru2">{{$t('总收益')}} (₮)</div>
+              <div class="follow-gru2">总收益 (₮)</div>
+            </div>
+            <!--胜率-->
+            <div class="follow-wi">
+              <div class="follow-bink text-green">{{(item.dpCount / item.dCount)?toFixed(item.dpCount / item.dCount,2):0}}</div>
+              <div class="follow-gru2">胜率 (%)</div>
+            </div>
+            <!--交易笔数-->
+            <div class="follow-wi">
+              <div class="follow-bink">{{item.count ? item.count : '0'}}</div>
+              <div class="follow-gru2">交易笔数</div>
             </div>
 
             <div class="follow-wi">
@@ -132,12 +143,7 @@
               <!--当前跟单人数-->
               <div class="follow-gru2">{{$t('totalDocumentaryNumber')}}</div>
             </div>
-            <div class="follow-wi">
-<!--              <div class="follow-bink">{{// Math.round((newContract - item.createdAt) / 86400000)==0 ? Math.round((newContract - item.createdAt) / 86400000)+1 : Math.round((newContract - item.createdAt) / 86400000)}}</div>-->
-              <div class="follow-bink">{{Math.floor((newContract - item.createdAt) / 1000/60/60/24) + 1}}</div>
-<!--              <div class="follow-bink">{{// ($globalFunc.formatDateUitl(Number(newContract), 'hh') > 12) ? Math.round((newContract - item.createdAt) / 86400000) : Math.round((newContract - item.createdAt) / 86400000)+1}}</div>-->
-              <div class="follow-gru2">入驻天数</div>
-            </div>
+
           </div>
 
         </div>

@@ -79,7 +79,7 @@
   font-family:PingFangSC-Semibold,PingFang SC;
   font-weight:600;
   color: #fff;
-  margin-top: 0.1rem;
+  margin-top: 0.04rem;
 }
 .mobile-tradetext {
   line-height: 1.12rem;
@@ -595,3 +595,28 @@
 }
 
 /*头像*/
+.big-brother-uid-name-span {
+  display: inline-block;
+  font-size: 0.2rem;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6A83A8;
+  height: 0.32rem;
+  line-height: 0.32rem;
+  background: #302E34;
+  border-radius: 0.18rem;
+  padding: 0 0.18rem;
+  margin-top: 0.06rem;
+  border: 0.02rem solid #6A83A8;
+}
+.margin-01 {
+  margin-left: 0.1rem;
+}
+.goTo-32 {
+  width: 32px;
+  padding-right: 0.14rem;
+  margin-top: 0.15rem;
+}
+.with-img {
+  flex: 1;
+}

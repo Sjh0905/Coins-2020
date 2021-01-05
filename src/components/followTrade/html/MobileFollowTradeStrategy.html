@@ -32,7 +32,7 @@
   <!--        <img src="../assets/big-brother2.png" alt="" class="mobile-trade-img">-->
           <img class="mobile-trade-img" src="../assets/big-brother2.png" alt="">
         </div>
-        <div class="mobile-tradetext">{{this.userId}}</div>
+        <div class="mobile-tradetext"> <span class="big-brother-uid-name-span">{{this.userId}}</span></div>
         <!--  <div class="mobile-trade-top-banner-text">{{this.userId}}</div>-->
 
 
@@ -62,8 +62,10 @@
         </div>
         <div class="with-img">
           <div class="mobile-trade-top-banner-text">{{godInfo.nickName ? godInfo.nickName :'大神' }}</div>
-          <div class="big-brother-uid-name">UID：{{godInfo.userId}}</div>
+          <div class="big-brother-uid-name"> <span class="big-brother-uid-name-span">{{godInfo.userId}}</span></div>
+
         </div>
+
       </div>
 
       <div class="big-brother-qian">
@@ -114,8 +116,12 @@
         </div>
         <div class="with-img">
           <div class="mobile-trade-top-banner-text">{{godInfo.nickName? godInfo.nickName : '大神'}}</div>
-          <div class="big-brother-uid-name">UID：{{godInfo.userId}}</div>
+          <div class="big-brother-uid-name"> <span class="big-brother-uid-name-span">{{godInfo.userId}}</span>  <span class="big-brother-uid-name-span margin-01">{{Math.floor((newContract - godInfo.createdAt) / 1000/60/60/24) + 1}}天</span></div>
         </div>
+<!--        <div>-->
+<!--          &lt;!&ndash;前往个人信息&ndash;&gt;-->
+<!--          <img class="goTo-32" src="../assets/go-to.png" alt="" @click="goToPersonalInformation">-->
+<!--        </div>-->
       </div>
 
 
@@ -237,38 +243,22 @@
           <img class="mobile-trader-follower-img" src="../assets/big-brother2.png" alt="">
           <span class="mobile-trader-follower-UID">{{item.userId}}</span>
         </div>
-
+        <div class="flex">
+          <div class="mobile-trader-follower-income flex1">{{toFixed(item.profit,2) || '0'}}</div>
+          <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekProfit,2) || '0'}}</div>
+        </div>
+        <div class="flex mtop">
+          <div class="mobile-trader-follower-text flex1">总跟单收益（₮)</div>
+          <div class="mobile-trader-follower-text flex1">本周跟单收益（₮)</div>
+        </div>
         <div class="flex">
           <div class="mobile-trader-follower-income flex1">{{toFixed(item.userProfit,2) || '0'}}</div>
-          <div class="mobile-trader-follower-income flex1">{{toFixed(item.profit,2) || '0'}}</div>
-
+          <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
         </div>
         <div class="flex mtop">
           <div class="mobile-trader-follower-text flex1">总跟单利润（₮)</div>
-          <div class="mobile-trader-follower-text flex1">总跟单收益（₮)</div>
-
-        </div>
-        <div class="flex">
-          <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekUserProfit,2) || '0'}}</div>
-          <div class="mobile-trader-follower-income flex1">{{toFixed(item.weekProfit,2) || '0'}}</div>
-
-        </div>
-        <div class="flex mtop">
           <div class="mobile-trader-follower-text flex1">本周跟单利润（₮)</div>
-          <div class="mobile-trader-follower-text flex1">本周跟单收益（₮)</div>
-
         </div>
-
-        <!--        <div class="mobile-trader-follower-content">-->
-        <!--          <div class="mobile-trader-follower-content-top flex">-->
-        <!--            <div class="mobile-trader-follower-UID">{{item.userId}}</div>-->
-        <!--&lt;!&ndash;            <div class="mobile-trader-follower-income">{{toFixed(item.profit,2) || '0'}}</div>&ndash;&gt;-->
-        <!--          </div>-->
-        <!--&lt;!&ndash;          <div class="mobile-trader-follower-content-top flex">&ndash;&gt;-->
-        <!--&lt;!&ndash;            <div class="mobile-trader-follower-text">总跟单收益 {{toFixed(item.amount,2) || '0'}} ₮</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;            <div class="mobile-trader-follower-text">总跟单收益(₮)</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;         </div>&ndash;&gt;-->
-        <!--        </div>-->
       </div>
       <div class="mobile-trade-center-not-data" v-if="followUserList.length==0 && isSwitchOrder == 'SPOT'">
         <div class="mobile-trade-center-not-data-img">

@@ -41,8 +41,9 @@
             <img class="big-brother-img"  :src="item.headImage" alt="" v-if="item.headImage !=''">
             <img class="big-brother-img" src="../assets/big-brother2.png" alt="" v-else>
           </div>
-          <div class="big-brother-uid">{{item.nickName ? item.nickName : '大神'  }}</div>
-          <div class="big-nickName">{{item.userId ? item.userId : item.userId  }}</div>
+          <div class="big-brother-uid">{{item.nickName ? item.nickName : '大神'}}</div>
+          <div class="big-nickName">{{item.userId ? item.userId : item.userId}}</div>
+          <div class="big-nickName">{{item.followCount ? item.followCount : '0'}}人</div>
 
 
 
@@ -98,8 +99,8 @@
             <div class="color-a2">本周收益 (₮)</div>
           </div>
           <div class="flex-din-right">
-            <div class="color-13">{{item.followCount ? item.followCount : '0'}}</div>
-            <div class="color-a2">跟单人数</div>
+            <div class="color-13 text-green">{{(item.dpCount / item.dCount)?toFixed(item.dpCount / item.dCount,2):0}}</div>
+            <div class="color-a2">胜率 (%)</div>
           </div>
         </div>
         <div class="flex with-billboard-xin paddign" v-if="switchOrder == 'CONTRACT'">
@@ -113,9 +114,13 @@
             <div class="color-a2">总收益 (₮)</div>
           </div>
           <div class="flex-din-right">
-            <div class="color-13">{{Math.floor((newContract - item.createdAt) / 86400000) +1}}</div>
-            <div class="color-a2">入驻天数</div>
+            <div class="color-13">{{item.count ? item.count : '0'}}</div>
+            <div class="color-a2">交易笔数</div>
           </div>
+<!--          <div class="flex-din-right">-->
+<!--            <div class="color-13">{{Math.floor((newContract - item.createdAt) / 86400000) +1}}</div>-->
+<!--            <div class="color-a2">入驻天数</div>-->
+<!--          </div>-->
         </div>
 
         <div class="flex with-billboard-xin" v-if="switchOrder == 'SPOT'">

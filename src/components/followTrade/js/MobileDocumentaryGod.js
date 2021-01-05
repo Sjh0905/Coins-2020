@@ -23,6 +23,7 @@ root.data = function () {
     BDBInfo:true,
     isGod:true,
     isYuan1:[],
+    newContract: '',
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -44,7 +45,7 @@ root.created = function () {
     }))
   }
 
-  console.info('this.mobileDocumentaryGod',this.isYuan)
+  // console.info('this.mobileDocumentaryGod',this.isYuan)
 }
 root.mounted = function () {}
 root.beforeDestroy = function () {}
@@ -142,7 +143,7 @@ root.methods.openDocumentaryWindowDisable = function () {
     this.openPop(this.$t('带单账号不可跟单'))
     return
   }
-  if (this.isYuan==true) {
+  if (this.isYuan==true || this.isYuan!='') {
     this.openPop(this.$t('不可同时跟随多人'))
     return
   }
@@ -174,6 +175,7 @@ root.methods.postBigBrotherHistory = function () {
 root.methods.re_postBigBrotherHistory = function (data) {
   // console.log("this.res=====",data)
   typeof data === 'string' && (data = JSON.parse(data))
+  this.newContract = new Date().getTime()
   // console.info('data',data)
   this.loading = false
   this.godInfo = data.dataMap.godInfo || {}

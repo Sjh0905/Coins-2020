@@ -1,0 +1,52 @@
+<div class="mobile-trade-tape-manage">
+  <Loading v-if="loading"></Loading>
+  <!--ios status栏-->
+  <div v-if="(isApp)" class="mobile-status-bar-ios"/>
+  <div v-if="(isApp)" class="mobile-status-bar-bg-ios"/>
+
+  <!--顶部标题-->
+  <div :class="(isApp) ? 'mobile-header-ios' : 'mobile-trade-header-title' ">
+    <!--返回按钮-->
+    <div class="mobile-trade-header-title-back-icon" @click="postNickname()">
+      <img class="mobile-trade-header-title-back-icon-img" src="../../LuckyDraw/assets/mobileForecastHomePage/back_icon.png" alt="">
+    </div>
+    <!--UID标题-->
+    <!--    <div class="fund-buy-header-title-text">带单管理</div>-->
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'SPOT'">现货个人信息</div>
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'CONTRACT'">合约个人信息</div>
+  </div>
+
+  <div class="mobile-trade-header-null-data"></div>
+
+  <!-- 头像 -->
+  <div class="head-portrait flex">
+    <div class="head-text">头像</div>
+    <div class="head-portrait-img">
+      <div class="image-unify flex-center" :key="1">
+        <div class="image-show " id="imgFrontContainer_0" @click="click_front">
+          <template v-if="godInfo.headImage ==''"></template>
+          <img :src="godInfo.headImage" alt="" class="re_img" v-else>
+        </div>
+        <input type="file" ref="imgFront_0" v-on:change="frontOnChange" class="display-none imgFront_0" id="imgFront_0">
+      </div>
+    </div>
+
+    <img class="head-portrait-img2" src="../assets/go-to2.png" alt="">
+  </div>
+  <!-- 昵称 -->
+  <div class="head-portrait margin-top-16 flex" @click="goToNickName">
+    <div class="head-text">昵称</div>
+    <div class="nickname">{{godInfo.nickName ? godInfo.nickName :'大神'}}</div>
+    <img class="head-portrait-img2" src="../assets/go-to2.png" alt="">
+  </div>
+  <!-- 个性签名 -->
+  <div class="nickname-head-portrait margin-top-16 flex" @click="goToPersonalSignature">
+    <div class="head-text">个性签名</div>
+    <img class="head-portrait-img2" src="../assets/go-to2.png" alt="">
+  </div>
+
+  <div class="nickname-text">
+    {{godInfo.label ? godInfo.label : '大神正在看盘中~'}}
+  </div>
+
+</div>

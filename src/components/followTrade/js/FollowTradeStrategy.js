@@ -459,7 +459,7 @@ root.methods.frontOnChange = function () {
       this.src = e.target.result
 
       let src = e.target.result
-      console.info('src-=======',src)
+      // console.info('src-=======',src)
       document.getElementById('imgFrontContainer_0').innerHTML = `<img src="${this.result}" width="100%" height="100%">`
     }
     this.frontImgMsg_0 = ''
@@ -560,17 +560,13 @@ root.methods.postNickname = function () {
       }
     }
   }
-    console.info('frontImg=====',frontImg)
-
-
-
-
+    // console.info('frontImg=====',frontImg)
 
   // let formData = new FormData()
   let frontImgInfo = this.$refs.imgFront_0.value
   let frontImgTypeArr = frontImgInfo.split('.')
   let frontImgType = frontImgTypeArr[frontImgTypeArr.length - 1].toLocaleLowerCase()
-  console.info('1111',('headImage', this.sendFrontImg))
+  // console.info('1111',('headImage', this.sendFrontImg))
   !frontImg?formData.append('identityStr', JSON.stringify({
       'nickName': this.textareaNickname,
       'label': this.textareaPersonality,

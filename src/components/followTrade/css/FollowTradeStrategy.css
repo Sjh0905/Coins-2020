@@ -788,3 +788,16 @@
   z-index: 99;
   cursor: pointer;
 }
+.follow-data-box-img-span {
+  display: block;
+  height: 16px;
+  line-height: 16px;
+  background: #E5E7F3;
+  font-size: 12px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #6A83A8;
+  padding: 0px 6px;
+  border-radius: 10px;
+  /*margin-left: 11px;*/
+}

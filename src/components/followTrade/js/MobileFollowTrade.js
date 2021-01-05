@@ -196,6 +196,12 @@ root.methods.goToMobileFollowTradeStrategy = function (switchOrder) {
     this.popOpen = true;
     return
   }
+  if(this.godList.length != 0){
+    // 用户合约跟单只能跟单一个大神
+    this.godListF = true
+    this.openPop(this.$t('跟单账号不可带单'))
+    return
+  }
 
   this.$router.push({name:'mobileFollowTradeStrategy',query:{isSwitchOrder:this.switchOrder}})
 }//跳转个人镜像交易
@@ -217,7 +223,12 @@ root.methods.goToManagementiWthBill = function (switchOrder) {
     this.popOpen = true;
     return
   }
-
+  if(this.godList.length != 0){
+    // 用户合约跟单只能跟单一个大神
+    this.godListF = true
+    this.openPop(this.$t('跟单账号不可带单'))
+    return
+  }
   this.$router.push({name:'mobileTapeListManage',query:{isSwitchOrder:this.switchOrder}})
 }
 // 跳转我的镜像交易

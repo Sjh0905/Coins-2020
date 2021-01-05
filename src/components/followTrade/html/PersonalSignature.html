@@ -1,0 +1,29 @@
+<div class="mobile-trade-tape-manage">
+  <Loading v-if="loading"></Loading>
+  <!--ios status栏-->
+  <div v-if="(isApp)" class="mobile-status-bar-ios"/>
+  <div v-if="(isApp)" class="mobile-status-bar-bg-ios"/>
+
+  <!--顶部标题-->
+  <div :class="(isApp) ? 'mobile-header-ios' : 'mobile-trade-header-title' ">
+    <!--返回按钮-->
+    <div class="mobile-trade-header-title-back-icon" @click="jumpToFollowTradeStrategy()">
+      <img class="mobile-trade-header-title-back-icon-img" src="../../LuckyDraw/assets/mobileForecastHomePage/back_icon.png" alt="">
+    </div>
+    <!--UID标题-->
+    <!--    <div class="fund-buy-header-title-text">带单管理</div>-->
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'SPOT'">现货个性签名</div>
+    <div class="fund-buy-header-title-text" v-if="isSwitchOrder == 'CONTRACT'">合约个性签名</div>
+    <div class="queren" @click="postNickname">确认</div>
+  </div>
+
+  <div class="mobile-trade-header-null-data"></div>
+
+
+  <div class="box1">
+    <div class="box2">
+      <textarea class="textarea-text" name="" v-model="textareaPersonality" cols="20" rows="3" @keydown="prevent" maxlength="60" id="" ></textarea>
+      <div class="limit">{{textareaNumber}}</div>
+    </div>
+  </div>
+</div>

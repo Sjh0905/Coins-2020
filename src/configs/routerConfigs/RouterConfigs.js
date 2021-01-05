@@ -297,6 +297,42 @@ root.routes.push({
   caseSensitive: true,
   component: resolve => require(['@/components/followTrade/vue/MobileMyFollowOrder'], resolve)
 })
+//H5  个人信息
+root.routes.push({
+  path: '/index/personalInformation',
+  name: 'personalInformation',
+  meta: {
+    requireLogin: true,
+    pcname: '',
+    h5name: 'personalInformation',
+  },
+  caseSensitive: true,
+  component: resolve => require(['@/components/followTrade/vue/PersonalInformation'], resolve)
+})
+//H5  昵称
+root.routes.push({
+  path: '/index/changeNickName',
+  name: 'changeNickName',
+  meta: {
+    requireLogin: true,
+    pcname: '',
+    h5name: 'changeNickName',
+  },
+  caseSensitive: true,
+  component: resolve => require(['@/components/followTrade/vue/ChangeNickName'], resolve)
+})
+//H5  个性签名
+root.routes.push({
+  path: '/index/personalSignature',
+  name: 'personalSignature',
+  meta: {
+    requireLogin: true,
+    pcname: '',
+    h5name: 'personalSignature',
+  },
+  caseSensitive: true,
+  component: resolve => require(['@/components/followTrade/vue/PersonalSignature'], resolve)
+})
 /*-----------------  跟单H5 end  ------------------------*/
 //H5  划转
 root.routes.push({

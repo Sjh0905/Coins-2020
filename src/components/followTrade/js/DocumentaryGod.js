@@ -203,7 +203,7 @@ root.methods.openTapeListDisable = function () {
     this.openPop(this.$t('带单账号不可跟单'))
     return
   }
-  if (this.isYuan == true) {
+  if (this.isYuan == true || this.isYuan != '') {
     this.openPop(this.$t('不可同时跟随多人'))
     return
   }

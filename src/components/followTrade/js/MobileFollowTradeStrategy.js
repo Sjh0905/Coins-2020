@@ -15,6 +15,7 @@ root.data = function () {
     delFollowOpenDisable:false,
     delFollowOpenDisableBi:false,
     BDBInfo:true,
+    newContract: '',
   }
 }
 /*------------------------------ 生命周期 -------------------------------*/
@@ -135,6 +136,7 @@ root.methods.postPersonalrHistory = function () {
 root.methods.re_postPersonalrHistory = function (data) {
   typeof data === 'string' && (data = JSON.parse(data))
   this.loading = false
+  this.newContract = new Date().getTime()
   this.godInfo = data.dataMap.godInfo || {}
   this.godHistorList = data.dataMap.list || []
 }
@@ -199,6 +201,17 @@ root.methods.popCloseTemporarilyClosed = function () {
 root.methods.popCloseTemporarilyClosedBi = function () {
   this.delFollowOpenDisableBi = false
 }
+
+
+//前往个人信息
+root.methods.goToPersonalInformation = function () {
+  this.$router.push({name:'personalInformation',query:{isSwitchOrder:this.isSwitchOrder}})
+
+}
+
+
+
+
 
 /*---------------------- 保留小数 begin ---------------------*/
 root.methods.toFixed = function (num, acc = 8) {
